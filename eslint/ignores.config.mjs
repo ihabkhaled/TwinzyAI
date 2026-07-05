@@ -15,6 +15,7 @@ export default [
       'apps/web/next-env.d.ts',
       'apps/web/public/**',
       '.husky/**',
+      '.claude/**',
     ],
   },
 ];

@@ -30,3 +30,6 @@ Thumbs.db
 # Temp
 tmp/
 .tmp/
+
+# Agent worktrees / local tooling state
+.claude/

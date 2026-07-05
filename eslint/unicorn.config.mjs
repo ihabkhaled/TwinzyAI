@@ -22,4 +22,12 @@ export default [
       ],
     },
   },
+  {
+    // React hooks are conventionally camelCase (useXxx.ts) — mandated by
+    // the frontend architecture spec. Documented in docs/eslint-architecture.md.
+    files: ['**/hooks/use*.ts', '**/hooks/use*.tsx'],
+    rules: {
+      'unicorn/filename-case': ['error', { cases: { camelCase: true } }],
+    },
+  },
 ];
