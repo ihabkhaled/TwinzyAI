@@ -68,9 +68,9 @@ This repository may expose the same policy through multiple tool-facing files, b
 
 ## NestJS Engineering Operating System (The Concrete "How")
 
-This file is the **stack-agnostic governance brain**: it defines *which phases, artifacts, and gates* every change must pass through. Layered on top of it is a **concrete NestJS engineering operating system** that defines *exactly how the code must be written* for any NestJS backend. The two are complementary and both binding: governance decides whether you may ship; the engineering OS decides whether the code is correct, clean, layered, and safe.
+This file is the **stack-agnostic governance brain**: it defines *which phases, artifacts, and gates* every change must pass through. Layered on top of it is a **concrete engineering operating system** that defines *exactly how the code must be written* — for the NestJS backend in `apps/api` and the Next.js frontend in `apps/web`. The two are complementary and both binding: governance decides whether you may ship; the engineering OS decides whether the code is correct, clean, layered, and safe.
 
-For any NestJS backend work, these layers are authoritative for implementation and are mechanically enforced by [`eslint.config.mjs`](eslint.config.mjs) (including a custom architecture plugin under [`eslint/`](eslint/)), [`tsconfig.json`](tsconfig.json), and the Husky hooks under [`.husky/`](.husky/):
+For any backend work in `apps/api`, these layers are authoritative for implementation and are mechanically enforced by [`eslint.config.mjs`](eslint.config.mjs) (including a custom architecture plugin under [`eslint/`](eslint/)), [`tsconfig.base.json`](tsconfig.base.json) + per-workspace tsconfigs, and the Husky hooks under [`.husky/`](.husky/):
 
 | Layer | Location | Authority |
 | --- | --- | --- |
@@ -82,7 +82,7 @@ For any NestJS backend work, these layers are authoritative for implementation a
 | Testing standards | [`testing/`](testing/README.md) | Engineering test strategy, layers, coverage, fixtures, gates |
 | Lint/architecture enforcement | [`eslint/`](eslint/) | The modular ESLint configs + custom layer-boundary plugin |
 
-The canonical architecture (one-way layered dependencies, mechanically enforced):
+The canonical backend architecture (one-way layered dependencies, mechanically enforced; rooted at `apps/api/src`):
 
 ```
 Controller (api/*.controller.ts — thin, one delegation per method)
@@ -90,12 +90,29 @@ Controller (api/*.controller.ts — thin, one delegation per method)
     → Domain (domain/ — policies, entities, state machines, pure)
       → Persistence (infrastructure/*.repository.ts — parameterized, bounded)
         → Integration (adapters/*.adapter.ts — every external library wrapped)
-Cross-cutting: src/core (logger, errors+exception filter, guards, interceptors, pipes, events) · src/config · src/shared
+Cross-cutting: src/core (logger, errors+exception filter, validation, rate-limit, openapi, http types)
+             · src/config (typed, zod-validated, fail-fast) · src/bootstrap (Fastify app assembly)
+             · packages/shared (cross-side constants/enums/schemas/types/utils)
 ```
+
+The frontend operating system (`apps/web`) is `Component → Hook → Service → Gateway`: TSX is pure composition, state/effects live in hooks, logic in `features/*/lib`, HTTP only through the gateway/client wrapper, every user-facing string through i18n. Full bodies: `rules/02`–`rules/04`, `rules/12`, `rules/13`.
 
 Precedence within the engineering OS: [`context/architecture-map.md`](context/architecture-map.md) and [`rules/00-non-negotiable-rules.md`](rules/00-non-negotiable-rules.md) are the engineering canon; if any other engineering doc contradicts them, those two win. If any engineering guidance contradicts this `claude.md` governance policy, `claude.md` wins. When two rules overlap, the stricter one applies. New permanent engineering rules update `rules/` (and the mirrors per the canonical-file rules above); new lifecycle/governance rules update this file.
 
 Before NestJS implementation: read this `claude.md`, then [`context/architecture-map.md`](context/architecture-map.md), [`rules/00-non-negotiable-rules.md`](rules/00-non-negotiable-rules.md), the layer rule(s) you are touching, and the matching skill — then write tests first and keep every gate green (`npm run lint` · `npm run typecheck` · `npm run test:coverage` · `npm run build`).
+
+## Twinzy Product Constraints (Domain Non-Negotiables)
+
+These are product-defining and can never be relaxed by any request, ticket, or prompt:
+
+1. **The game is free.** Never add payment, subscription, or monetization logic.
+2. **No face recognition, no identity matching, no biometric anything.** Twinzy suggests playful public style/vibe matches from **written traits only** — never exact-lookalike, identity, or facial-similarity claims.
+3. **No image persistence.** Uploaded images live in memory only, are wiped in `finally`, and are never logged, stored, embedded, or returned.
+4. **Only the trait-extraction prompt sees the image.** Candidate and judge prompts receive text only (traits JSON / candidates JSON).
+5. **`GEMINI_MODEL` comes from `.env`** — never hardcode a model name.
+6. **Every AI response is Zod-validated and safety-filtered** before use; forbidden wording is rejected or sanitized (see `packages/shared/src/constants/safety.constants.ts`).
+7. **No TypeScript `enum` keyword** anywhere in this repository — `as const` objects + derived types (stricter than the generic engineering OS; the stricter rule wins).
+8. **File uploads are backend-verified**: consent flag, single file, size/MIME/extension/consistency/magic-bytes/decode checks, optional ClamAV failing closed in production (rules/15).
 
 ## Standing Instruction To Claude Or Any AI Coding Agent
 
@@ -179,7 +196,7 @@ If implementation work is completed in the same response, also include:
 ## Mandatory Repository Structure
 
 ```text
-/claude.md
+/claude.md (CLAUDE.md on this filesystem — same file, canonical)
 /AGENTS.md
 /codex.md
 /cursor.md
@@ -192,6 +209,10 @@ If implementation work is completed in the same response, also include:
 /architecture/adrs/
 /release-notes/
 /support/
+/rules/  /skills/  /agents/  /memory/  /context/  /testing/  /eslint/
+/apps/api/       (NestJS backend — the engineering OS target)
+/apps/web/       (Next.js frontend)
+/packages/shared (cross-side constants/enums/schemas/types/utils)
 ```
 
 The canonical request artifacts are:

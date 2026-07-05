@@ -7,6 +7,9 @@
   "engines": {
     "node": ">=22"
   },
+  "overrides": {
+    "multer": "^2.2.0"
+  },
   "workspaces": [
     "packages/tsconfig",
     "packages/eslint-config",
