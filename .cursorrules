@@ -1,0 +1,18 @@
+# Twinzy — Cursor Rules (compact mirror)
+
+Canonical entry: AGENTS.md. Full rules: rules/ (rules win conflicts). Guides: skills/. Decisions: memory/.
+
+Non-negotiables (short form — do not duplicate full bodies here):
+- No any, no eslint-disable, no @ts-ignore, no non-null assertion.
+- No TypeScript enum keyword; use as-const objects + derived types.
+- No inline domain types/interfaces/constants/DTOs/schemas.
+- TSX = pure JSX composition; hooks own state; lib owns logic.
+- Backend: Controller -> Manager -> Service -> Repository (controllers delegate one manager call).
+- Frontend: Component -> Hook -> Service -> Gateway.
+- Wrap every third-party library; no raw SDK/fetch/axios/storage in business code.
+- No process.env outside config modules.
+- No face recognition / identity matching / biometrics / image storage.
+- Image goes only to the trait-extraction prompt; candidate/judge prompts are text-only.
+- GEMINI_MODEL comes from .env; never hardcode a model name.
+- The game is free; never add payments.
+- Do not commit/push unless asked.

@@ -1,0 +1,22 @@
+# Development compose: runs both apps from source with hot reload.
+# Usage: docker compose -f docker-compose.dev.yml up
+services:
+  dev:
+    image: node:24-alpine
+    working_dir: /workspace
+    command: sh -c "npm ci && npm run dev"
+    ports:
+      - '3000:3000'
+      - '3001:3001'
+    environment:
+      NODE_ENV: development
+      API_PORT: 3001
+      CORS_ALLOWED_ORIGINS: http://localhost:3000
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-}
+    volumes:
+      - .:/workspace
+      - dev_node_modules:/workspace/node_modules
+
+volumes:
+  dev_node_modules:

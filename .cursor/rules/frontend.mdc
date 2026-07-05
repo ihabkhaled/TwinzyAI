@@ -1,0 +1,10 @@
+---
+description: Frontend architecture rules
+globs: ["apps/web/**"]
+---
+- Flow: Component → Hook → Service → Gateway → Backend.
+- TSX files: pure composition; a single local `XxxProps` interface is the only allowed declaration.
+- Hooks own state/handlers, stay thin; complex logic goes to `features/*/lib` helpers.
+- Services orchestrate; gateways do HTTP only via the shared HTTP client wrapper.
+- All strings via `@/i18n` `t()`. Mobile-first (320px+), dark/light, reduced motion, a11y labels.
+- Never store the uploaded image in localStorage/sessionStorage/IndexedDB. Revoke object URLs.

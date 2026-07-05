@@ -1,0 +1,9 @@
+---
+description: Known pitfalls
+alwaysApply: false
+---
+- Windows paths: architecture lint rules normalize backslashes — keep using path-utils helpers.
+- Vitest + Nest DI needs the SWC plugin (esbuild drops decorator metadata).
+- Shared package must be built before typecheck/tests (`npm run build:shared`).
+- exactOptionalPropertyTypes: don't assign `undefined` to optional props; omit the key instead.
+- Zod v4: use z.strictObject / z.enum(tuple); avoid deprecated nativeEnum.

@@ -1,0 +1,8 @@
+---
+description: Testing rules
+globs: ["**/*.test.*", "**/tests/**", "apps/web/e2e/**"]
+---
+- Tests first for new behavior; tests assert behavior, not implementation details.
+- Unit: Vitest (api-unit/web-unit/shared-unit). Integration: api-integration (supertest).
+- E2E: Playwright with mocked backend by default; never call real Gemini in CI.
+- Never skip/focus tests to pass a gate. Coverage runs in pre-push.

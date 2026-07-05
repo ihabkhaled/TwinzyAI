@@ -1,0 +1,8 @@
+---
+description: File upload security rules
+globs: ["apps/api/src/modules/file-security/**", "apps/web/src/features/game/**"]
+---
+- Checks in order: consent → exactly one file → size → MIME allowlist → extension allowlist →
+  MIME/extension consistency → magic bytes → structural decode → optional virus scan.
+- Allowed: jpg/jpeg/png/webp. HEIC rejected (no safe decoder — documented).
+- Temp buffers wiped in finally on success AND failure. No persistent upload storage anywhere.

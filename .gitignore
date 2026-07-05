@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+
+# Env — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Test artifacts
+playwright-report/
+test-results/
+blob-report/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Temp
+tmp/
+.tmp/

@@ -1,0 +1,11 @@
+{
+  "name": "@twinzy/eslint-config",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Composed ESLint flat config for the Twinzy monorepo. Thin re-export of the root /eslint config set.",
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs"
+  }
+}

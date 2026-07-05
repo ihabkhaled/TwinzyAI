@@ -1,0 +1,9 @@
+---
+description: Twinzy rule index — read first
+alwaysApply: true
+---
+# Cursor Rules Index
+
+Canonical entry: `AGENTS.md`. Full rules in `rules/` (rules win conflicts). Guides in `skills/`.
+Rule files here: non-negotiables, frontend, backend, security, ai-safety, file-upload-security,
+testing, eslint, pitfalls.

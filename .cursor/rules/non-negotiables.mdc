@@ -1,0 +1,13 @@
+---
+description: Non-negotiable engineering rules
+alwaysApply: true
+---
+- Strict TS + strict ESLint. No `any`, no `eslint-disable`, no `@ts-ignore`, no `@ts-expect-error`, no `!` assertion.
+- No TS `enum` — as-const objects + derived types. No magic strings for domain values.
+- No inline types/interfaces/constants/DTOs/schemas/config maps — dedicated folders only.
+- TSX = pure JSX composition. No hooks/handlers/logic in components. Pages are composition only.
+- Backend: Controller → Manager → Service → Repository. Frontend: Component → Hook → Service → Gateway.
+- All third-party libraries wrapped. No direct SDK imports outside adapters. No `process.env` outside config.
+- No raw fetch/axios outside the HTTP wrapper. No raw browser storage outside the storage wrapper.
+- All user-facing strings via i18n. Tests first. Never weaken rules to pass.
+- The game is FREE — no payments, ever.

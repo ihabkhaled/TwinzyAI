@@ -1,0 +1,8 @@
+---
+description: Security rules
+alwaysApply: true
+---
+- Backend validates everything; frontend validation is UX only.
+- Uploads: consent required, one file, size/MIME/extension/magic-byte/decode checks, optional ClamAV (fail closed in prod).
+- Images: memory only, zero-fill buffer in finally, never log/persist/return image bytes.
+- Secrets backend-only; safe error envelope; helmet+CORS+rate limits on; logs redacted.

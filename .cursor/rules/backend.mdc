@@ -1,0 +1,10 @@
+---
+description: Backend architecture rules
+globs: ["apps/api/**"]
+---
+- Flow: Controller → Manager → Service → Repository. Adapters wrap external SDKs.
+- Controllers: HTTP binding only, exactly one manager call, no logic/SDK/env/repository access.
+- Managers orchestrate services; never touch DB/SDK/HTTP directly.
+- Services: one focused capability, small methods, no raw SDK, no process.env.
+- Only `GeminiAdapter` may import the Gemini SDK. Only config module reads process.env.
+- Map all errors to DomainException; never leak provider errors or stack traces.

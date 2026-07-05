@@ -1,0 +1,7 @@
+---
+description: ESLint rules
+globs: ["eslint/**", "eslint.config.mjs"]
+---
+- Flat config split by concern in /eslint, composed in eslint/index.mjs; prettier config last.
+- Custom architecture plugin enforces layer boundaries, SDK/env/library wrapping, TSX purity.
+- Never add eslint-disable; fix the code. Plugin relaxations must be documented in docs/eslint-architecture.md.

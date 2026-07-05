@@ -1,0 +1,19 @@
+{
+  "name": "Twinzy — Find your public vibe match",
+  "short_name": "Twinzy",
+  "description": "Upload a photo and get a fun style/vibe result based on visible traits. No face recognition. No photo storage.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#13111c",
+  "theme_color": "#6d28d9",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
