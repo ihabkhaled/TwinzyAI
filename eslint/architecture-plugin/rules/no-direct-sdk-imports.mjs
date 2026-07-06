@@ -1,17 +1,22 @@
-import { isInFolder, isTestFile } from '../shared/path-utils.mjs';
-import { SDK_PACKAGES } from '../shared/policy-utils.mjs';
-import { getImportSource } from '../shared/source-utils.mjs';
+import {
+  isAdapterFile,
+  isInFolder,
+  isTestFile,
+} from "../shared/path-utils.mjs";
+import { SDK_PACKAGES } from "../shared/policy-utils.mjs";
+import { getImportSource } from "../shared/source-utils.mjs";
 
 /**
- * Provider SDKs (Gemini etc.) may only be imported inside adapter files.
- * Everything else uses the adapter through its interface, so the provider
- * can be swapped and mocked in one place.
+ * Provider SDKs (Gemini etc.) may only be imported inside adapter files —
+ * an adapters/ folder or a *.adapter.ts file (suffix-based so the rule holds
+ * during the folder migration). Everything else uses the adapter through its
+ * interface, so the provider can be swapped and mocked in one place.
  */
 export default {
   meta: {
-    type: 'problem',
+    type: "problem",
     docs: {
-      description: 'Provider SDK imports are only allowed inside adapters.',
+      description: "Provider SDK imports are only allowed inside adapters.",
     },
     schema: [],
     messages: {
@@ -22,7 +27,11 @@ export default {
   create(context) {
     const filename = context.filename;
 
-    if (isInFolder(filename, 'adapters') || isTestFile(filename)) {
+    if (
+      isInFolder(filename, "adapters") ||
+      isAdapterFile(filename) ||
+      isTestFile(filename)
+    ) {
       return {};
     }
 
@@ -33,8 +42,12 @@ export default {
           return;
         }
 
-        if (SDK_PACKAGES.some((sdk) => source === sdk || source.startsWith(`${sdk}/`))) {
-          context.report({ node, messageId: 'noSdk', data: { source } });
+        if (
+          SDK_PACKAGES.some(
+            (sdk) => source === sdk || source.startsWith(`${sdk}/`),
+          )
+        ) {
+          context.report({ node, messageId: "noSdk", data: { source } });
         }
       },
     };

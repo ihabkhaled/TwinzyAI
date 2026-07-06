@@ -1,4 +1,4 @@
-import security from 'eslint-plugin-security';
+import security from "eslint-plugin-security";
 
 /**
  * Node security rules. `detect-object-injection` is disabled: it flags
@@ -8,19 +8,30 @@ import security from 'eslint-plugin-security';
 export default [
   {
     ...security.configs.recommended,
-    files: ['**/*.ts', '**/*.tsx', '**/*.mjs'],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mjs"],
     rules: {
       ...security.configs.recommended.rules,
-      'security/detect-object-injection': 'off',
+      "security/detect-object-injection": "off",
     },
   },
   {
-    // The prompt loader resolves files from a hardcoded candidate list and
-    // a constant key→filename map — no user input can reach the path.
+    // The prompt-template repository resolves files from a hardcoded candidate
+    // list and a constant key→filename map — no user input can reach the path.
     // Documented in docs/eslint-architecture.md.
-    files: ['apps/api/src/modules/ai/prompts/prompt-loader.service.ts'],
+    files: [
+      "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+    ],
     rules: {
-      'security/detect-non-literal-fs-filename': 'off',
+      "security/detect-non-literal-fs-filename": "off",
+    },
+  },
+  {
+    // The vendor-boundary policy engine compiles regexes from the static
+    // pattern lists in eslint/package-boundaries.config.mjs — no user input
+    // can reach the RegExp constructor. Documented in docs/eslint-architecture.md.
+    files: ["eslint/architecture-plugin/shared/policy-utils.mjs"],
+    rules: {
+      "security/detect-non-literal-regexp": "off",
     },
   },
 ];

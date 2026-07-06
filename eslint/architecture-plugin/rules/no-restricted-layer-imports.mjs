@@ -1,23 +1,38 @@
-import { isApiFile, isTestFile, isWebFile } from '../shared/path-utils.mjs';
+import {
+  isApiFile,
+  isTestFile,
+  isWebFile,
+  srcRelativePath,
+} from "../shared/path-utils.mjs";
 import {
   API_LAYER_FOLDERS,
   FORBIDDEN_API_LAYER_IMPORTS,
   FORBIDDEN_WEB_LAYER_IMPORTS,
-} from '../shared/policy-utils.mjs';
-import { getImportSource, getLayerFolder, importTargetsFolder } from '../shared/source-utils.mjs';
+} from "../shared/policy-utils.mjs";
+import {
+  getImportSource,
+  getLayerFolder,
+  importTargetsFolder,
+} from "../shared/source-utils.mjs";
 
 const WEB_LAYER_FOLDERS = Object.keys(FORBIDDEN_WEB_LAYER_IMPORTS);
 
 /**
  * Enforces the one-directional layer flow on both sides:
- * API: Controller → Manager → Service → Repository (adapters are leaves).
+ * API (legacy): Controller → Manager → Service → Repository (adapters leaves).
+ * API (canonical anatomy): api/ never imports infrastructure/ or adapters/
+ * directly; dto/ never imports application/ or infrastructure/.
  * Web: Component → Hook → Service → Gateway.
+ *
+ * API layers are detected on the src-relative path so the "api" layer folder
+ * never collides with the apps/api workspace segment.
  */
 export default {
   meta: {
-    type: 'problem',
+    type: "problem",
     docs: {
-      description: 'Forbid imports that break the layered architecture direction.',
+      description:
+        "Forbid imports that break the layered architecture direction.",
     },
     schema: [],
     messages: {
@@ -33,19 +48,18 @@ export default {
     }
 
     let policy;
-    let layerFolders;
+    let fromLayer;
 
     if (isApiFile(filename)) {
       policy = FORBIDDEN_API_LAYER_IMPORTS;
-      layerFolders = API_LAYER_FOLDERS;
+      fromLayer = getLayerFolder(srcRelativePath(filename), API_LAYER_FOLDERS);
     } else if (isWebFile(filename)) {
       policy = FORBIDDEN_WEB_LAYER_IMPORTS;
-      layerFolders = WEB_LAYER_FOLDERS;
+      fromLayer = getLayerFolder(filename, WEB_LAYER_FOLDERS);
     } else {
       return {};
     }
 
-    const fromLayer = getLayerFolder(filename, layerFolders);
     if (fromLayer === undefined) {
       return {};
     }
@@ -63,7 +77,7 @@ export default {
           if (importTargetsFolder(filename, source, target)) {
             context.report({
               node,
-              messageId: 'forbidden',
+              messageId: "forbidden",
               data: { fromLayer, toLayer: target },
             });
           }

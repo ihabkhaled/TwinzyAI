@@ -1,19 +1,24 @@
-import { isInFolder, isTestFile } from '../shared/path-utils.mjs';
-import { RAW_HTTP_PACKAGES, WRAPPED_LIBRARIES } from '../shared/policy-utils.mjs';
-import { getImportSource } from '../shared/source-utils.mjs';
+import { isInFolder, isTestFile } from "../shared/path-utils.mjs";
+import {
+  RAW_HTTP_PACKAGES,
+  WRAPPED_LIBRARIES,
+} from "../shared/policy-utils.mjs";
+import { getImportSource } from "../shared/source-utils.mjs";
 
 /**
  * Third-party libraries with a wrapper policy must be imported only inside
- * their wrapper homes (lib/, infrastructure/, adapters/, gateways/).
+ * their wrapper homes (lib/, infrastructure/, adapters/, gateways/, core/ —
+ * core/logger and core/http own their vendors on the api side).
  * Business code imports the wrapper, never the raw package.
  */
-const WRAPPER_HOMES = ['lib', 'infrastructure', 'adapters', 'gateways'];
+const WRAPPER_HOMES = ["lib", "infrastructure", "adapters", "gateways", "core"];
 
 export default {
   meta: {
-    type: 'problem',
+    type: "problem",
     docs: {
-      description: 'Raw wrapped-library imports are only allowed inside wrapper folders.',
+      description:
+        "Raw wrapped-library imports are only allowed inside wrapper folders.",
     },
     schema: [],
     messages: {
@@ -26,7 +31,10 @@ export default {
   create(context) {
     const filename = context.filename;
 
-    if (isTestFile(filename) || WRAPPER_HOMES.some((home) => isInFolder(filename, home))) {
+    if (
+      isTestFile(filename) ||
+      WRAPPER_HOMES.some((home) => isInFolder(filename, home))
+    ) {
       return {};
     }
 
@@ -37,13 +45,21 @@ export default {
           return;
         }
 
-        if (RAW_HTTP_PACKAGES.some((pkg) => source === pkg || source.startsWith(`${pkg}/`))) {
-          context.report({ node, messageId: 'noRawHttp', data: { source } });
+        if (
+          RAW_HTTP_PACKAGES.some(
+            (pkg) => source === pkg || source.startsWith(`${pkg}/`),
+          )
+        ) {
+          context.report({ node, messageId: "noRawHttp", data: { source } });
           return;
         }
 
-        if (WRAPPED_LIBRARIES.some((pkg) => source === pkg || source.startsWith(`${pkg}/`))) {
-          context.report({ node, messageId: 'noRawLibrary', data: { source } });
+        if (
+          WRAPPED_LIBRARIES.some(
+            (pkg) => source === pkg || source.startsWith(`${pkg}/`),
+          )
+        ) {
+          context.report({ node, messageId: "noRawLibrary", data: { source } });
         }
       },
     };

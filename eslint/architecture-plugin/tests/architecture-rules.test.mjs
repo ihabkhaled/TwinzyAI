@@ -1,13 +1,18 @@
-import tsParser from '@typescript-eslint/parser';
-import { RuleTester } from 'eslint';
-import { describe, expect, it } from 'vitest';
+import tsParser from "@typescript-eslint/parser";
+import { RuleTester } from "eslint";
+import { describe, expect, it } from "vitest";
 
-import typescriptConfig from '../../typescript.config.mjs';
-import controllerNoLogic from '../rules/controller-no-logic.mjs';
-import noDirectEnvAccess from '../rules/no-direct-env-access.mjs';
-import noDirectSdkImports from '../rules/no-direct-sdk-imports.mjs';
-import noInlineDomainDefinitions from '../rules/no-inline-domain-definitions.mjs';
-import tsxPureComposition from '../rules/tsx-pure-composition.mjs';
+import { vendorBoundaryRuleOptions } from "../../package-boundaries.config.mjs";
+import typescriptConfig from "../../typescript.config.mjs";
+import applicationLayerBoundaries from "../rules/application-layer-boundaries.mjs";
+import controllerNoLogic from "../rules/controller-no-logic.mjs";
+import noDirectEnvAccess from "../rules/no-direct-env-access.mjs";
+import noDirectSdkImports from "../rules/no-direct-sdk-imports.mjs";
+import noInlineDomainDefinitions from "../rules/no-inline-domain-definitions.mjs";
+import noRestrictedLayerImports from "../rules/no-restricted-layer-imports.mjs";
+import noRestrictedVendorImports from "../rules/no-restricted-vendor-imports.mjs";
+import repositoryPersistenceOnly from "../rules/repository-persistence-only.mjs";
+import tsxPureComposition from "../rules/tsx-pure-composition.mjs";
 
 RuleTester.describe = describe;
 RuleTester.it = it;
@@ -17,39 +22,208 @@ const tester = new RuleTester({
   languageOptions: {
     parser: tsParser,
     ecmaVersion: 2023,
-    sourceType: 'module',
+    sourceType: "module",
     parserOptions: { ecmaFeatures: { jsx: true } },
   },
 });
 
-const CONTROLLER_FILE = '/repo/apps/api/src/modules/game/controllers/game.controller.ts';
-const SERVICE_FILE = '/repo/apps/api/src/modules/game/services/game.service.ts';
-const ADAPTER_FILE = '/repo/apps/api/src/modules/ai/adapters/gemini.adapter.ts';
-const CONFIG_FILE = '/repo/apps/api/src/config/app-config.service.ts';
-const COMPONENT_FILE = '/repo/apps/web/src/features/game/ui/UploadCard.tsx';
+// Legacy layout (pre-migration) fixtures.
+const CONTROLLER_FILE =
+  "/repo/apps/api/src/modules/game/controllers/game.controller.ts";
+const SERVICE_FILE = "/repo/apps/api/src/modules/game/services/game.service.ts";
+const ADAPTER_FILE = "/repo/apps/api/src/modules/ai/adapters/gemini.adapter.ts";
+const CONFIG_FILE = "/repo/apps/api/src/config/app-config.service.ts";
+const COMPONENT_FILE = "/repo/apps/web/src/features/game/ui/UploadCard.tsx";
 
-// TEST_CASES #31 — controller with logic fails lint
-tester.run('controller-no-logic', controllerNoLogic, {
+// Canonical anatomy (post-migration) fixtures.
+const API_CONTROLLER_FILE =
+  "/repo/apps/api/src/modules/game/api/game.controller.ts";
+const USE_CASE_FILE =
+  "/repo/apps/api/src/modules/game/application/analyze-image.use-case.ts";
+const APPLICATION_SERVICE_FILE =
+  "/repo/apps/api/src/modules/game/application/game.service.ts";
+const INFRA_REPOSITORY_FILE =
+  "/repo/apps/api/src/modules/game/infrastructure/game-session.repository.ts";
+const CORE_LOGGER_FILE = "/repo/apps/api/src/core/logger/app-logger.service.ts";
+const BOOTSTRAP_FILE = "/repo/apps/api/src/bootstrap/create-app.ts";
+const MODULE_LIB_FILE =
+  "/repo/apps/api/src/modules/game/lib/trait-formatting.ts";
+const WEB_SERVICE_FILE =
+  "/repo/apps/web/src/features/game/services/game.service.ts";
+
+// TEST_CASES #31 — controllers must be single-return delegations.
+// Suffix-targeted: any apps/api file ending in .controller.ts, any folder.
+tester.run("controller-no-logic", controllerNoLogic, {
   valid: [
     {
       filename: CONTROLLER_FILE,
-      code: 'class GameController { analyze(file, body) { return this.gameManager.analyze(file, body); } }',
+      code: "class GameController { analyze(file, body) { return this.gameManager.analyze(file, body); } }",
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { async analyze(body) { return await this.analyzeImageUseCase.execute(body); } }",
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: 'class GameController { constructor(private readonly useCase) { this.ready = true; this.log(); } health() { return this.status; } version() { return "1.0"; } }',
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { find(id) { return this.useCase?.execute(id); } }",
+    },
+    {
+      // Not a *.controller.ts file — untargeted even inside a controllers/ folder.
+      filename: "/repo/apps/api/src/modules/game/controllers/helpers.ts",
+      code: "class Helper { compute(a) { const b = a + 1; return b; } }",
+    },
+    {
+      // Web files are never targeted.
+      filename:
+        "/repo/apps/web/src/features/game/services/upload.controller.ts",
+      code: "class UploadController { run(a) { const b = a + 1; return b; } }",
     },
   ],
   invalid: [
     {
       filename: CONTROLLER_FILE,
-      code: 'class GameController { analyze(file) { if (!file) { return null; } return this.gameManager.analyze(file); } }',
-      errors: 2,
+      code: "class GameController { analyze(file) { if (!file) { return null; } return this.gameManager.analyze(file); } }",
+      errors: [{ messageId: "singleReturnOnly" }],
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { analyze(body) { const dto = this.map(body); return this.useCase.execute(dto); } }",
+      errors: [{ messageId: "singleReturnOnly" }],
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { analyze(body) { return { ok: this.useCase.execute(body) }; } }",
+      errors: [{ messageId: "invalidReturn" }],
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { analyze(body) { return this.a.run(body) ?? this.b.run(body); } }",
+      errors: [{ messageId: "invalidReturn" }],
+    },
+  ],
+});
+
+// Application layer (use cases + services) never reaches back into api/
+// and never touches provider SDKs. Downward imports are allowed.
+tester.run("application-layer-boundaries", applicationLayerBoundaries, {
+  valid: [
+    {
+      filename: USE_CASE_FILE,
+      code: "import { GameSessionRepository } from '../infrastructure/game-session.repository';",
+    },
+    {
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import { GeminiAdapter } from '../adapters/gemini.adapter';",
+    },
+    {
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import { GameSession } from '../domain/game-session';",
+    },
+    {
+      filename: USE_CASE_FILE,
+      code: "import { TraitMap } from '../model/trait-map';",
+    },
+    {
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import { formatTraits } from '../lib/trait-formatting';",
+    },
+    {
+      // Web services are out of scope.
+      filename: WEB_SERVICE_FILE,
+      code: "import { GoogleGenAI } from '@google/genai';",
+    },
+    {
+      // Non-application api files are out of scope for this rule.
+      filename: MODULE_LIB_FILE,
+      code: "import { AnalyzeRequestDto } from '../api/dto/analyze-request.dto';",
+    },
+  ],
+  invalid: [
+    {
+      filename: USE_CASE_FILE,
+      code: "import { AnalyzeRequestDto } from '../api/dto/analyze-request.dto';",
+      errors: [{ messageId: "noApiImport" }],
+    },
+    {
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import { GameController } from '../api/game.controller';",
+      errors: [{ messageId: "noApiImport" }],
+    },
+    {
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import { GoogleGenAI } from '@google/genai';",
+      errors: [{ messageId: "noSdk" }],
+    },
+    {
+      // Legacy services/ folder files end in .service.ts, so still covered.
+      filename: SERVICE_FILE,
+      code: "import OpenAI from 'openai';",
+      errors: [{ messageId: "noSdk" }],
+    },
+  ],
+});
+
+// Repositories: infrastructure/ folder or *.repository.ts suffix.
+tester.run("repository-persistence-only", repositoryPersistenceOnly, {
+  valid: [
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { GameSession } from '../domain/game-session';",
+    },
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { Injectable } from '@nestjs/common';",
+    },
+    {
+      // The apps/api workspace segment must never read as an api/ layer import.
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { TraitMap } from '../model/trait-map';",
+    },
+    {
+      // Suffix match outside infrastructure/ still counts as a repository.
+      filename:
+        "/repo/apps/api/src/modules/game/repositories/game.repository.ts",
+      code: "import { GameSession } from '../models/game-session';",
+    },
+  ],
+  invalid: [
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { AnalyzeRequestDto } from '../api/dto/analyze-request.dto';",
+      errors: [{ messageId: "noUpwardImport" }],
+    },
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { AnalyzeImageUseCase } from '../application/analyze-image.use-case';",
+      errors: [{ messageId: "noUpwardImport" }],
+    },
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { GeminiAdapter } from '../adapters/gemini.adapter';",
+      errors: [{ messageId: "noUpwardImport" }],
+    },
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "import { GoogleGenAI } from '@google/genai';",
+      errors: [{ messageId: "noSdk" }],
     },
   ],
 });
 
 // TEST_CASES #32 — Gemini SDK import outside adapters fails lint
-tester.run('no-direct-sdk-imports', noDirectSdkImports, {
+tester.run("no-direct-sdk-imports", noDirectSdkImports, {
   valid: [
     {
       filename: ADAPTER_FILE,
+      code: "import { GoogleGenAI } from '@google/genai';",
+    },
+    {
+      // *.adapter.ts suffix is an adapter home wherever it lives.
+      filename: "/repo/apps/api/src/modules/ai/gemini.adapter.ts",
       code: "import { GoogleGenAI } from '@google/genai';",
     },
   ],
@@ -63,10 +237,15 @@ tester.run('no-direct-sdk-imports', noDirectSdkImports, {
 });
 
 // TEST_CASES #33 — process.env outside config fails lint
-tester.run('no-direct-env-access', noDirectEnvAccess, {
+tester.run("no-direct-env-access", noDirectEnvAccess, {
   valid: [
     {
       filename: CONFIG_FILE,
+      code: "const port = process.env['API_PORT'];",
+    },
+    {
+      // Bootstrap wires the process before DI exists.
+      filename: BOOTSTRAP_FILE,
       code: "const port = process.env['API_PORT'];",
     },
   ],
@@ -79,34 +258,94 @@ tester.run('no-direct-env-access', noDirectEnvAccess, {
   ],
 });
 
-// TEST_CASES #35 — inline DTO/interface in a controller/service fails lint
-tester.run('no-inline-domain-definitions', noInlineDomainDefinitions, {
+// TEST_CASES #35 — inline DTO/interface in a layer file fails lint
+tester.run("no-inline-domain-definitions", noInlineDomainDefinitions, {
   valid: [
     {
       filename: COMPONENT_FILE,
-      code: 'interface UploadCardProps { onPick: () => void }',
+      code: "interface UploadCardProps { onPick: () => void }",
+    },
+    {
+      // domain/ is a definition home in the canonical anatomy.
+      filename: "/repo/apps/api/src/modules/game/domain/game-session.ts",
+      code: "export interface GameSession { id: string }",
+    },
+    {
+      // api/dto is the DTO home — declarations belong there.
+      filename:
+        "/repo/apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
+      code: "export interface AnalyzeRequestDto { consent: boolean }",
     },
   ],
   invalid: [
     {
       filename: CONTROLLER_FILE,
-      code: 'interface AnalyzeRequestDto { consent: boolean }',
+      code: "interface AnalyzeRequestDto { consent: boolean }",
       errors: 1,
     },
     {
       filename: SERVICE_FILE,
-      code: 'type TraitMap = Record<string, string>;',
+      code: "type TraitMap = Record<string, string>;",
+      errors: 1,
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "interface AnalyzeRequestDto { consent: boolean }",
+      errors: 1,
+    },
+    {
+      filename: USE_CASE_FILE,
+      code: "type TraitMap = Record<string, string>;",
+      errors: 1,
+    },
+    {
+      filename: INFRA_REPOSITORY_FILE,
+      code: "interface Row { id: string }",
       errors: 1,
     },
   ],
 });
 
+// Layer-direction map: canonical anatomy additions.
+tester.run("no-restricted-layer-imports", noRestrictedLayerImports, {
+  valid: [
+    {
+      // api/ may import the application layer.
+      filename: API_CONTROLLER_FILE,
+      code: "import { AnalyzeImageUseCase } from '../application/analyze-image.use-case';",
+    },
+    {
+      // Files without a layer folder (e.g. core/) are untargeted.
+      filename: CORE_LOGGER_FILE,
+      code: "import pino from 'pino';",
+    },
+  ],
+  invalid: [
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "import { GameSessionRepository } from '../infrastructure/game-session.repository';",
+      errors: [{ messageId: "forbidden" }],
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "import { GeminiAdapter } from '../adapters/gemini.adapter';",
+      errors: [{ messageId: "forbidden" }],
+    },
+    {
+      filename:
+        "/repo/apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
+      code: "import { AnalyzeImageUseCase } from '../../application/analyze-image.use-case';",
+      errors: [{ messageId: "forbidden" }],
+    },
+  ],
+});
+
 // TSX purity — built-in hooks banned in component files
-tester.run('tsx-pure-composition', tsxPureComposition, {
+tester.run("tsx-pure-composition", tsxPureComposition, {
   valid: [
     {
       filename: COMPONENT_FILE,
-      code: 'export const Card = (props) => { const controller = useGameController(); return null; };',
+      code: "export const Card = (props) => { const controller = useGameController(); return null; };",
     },
   ],
   invalid: [
@@ -118,14 +357,134 @@ tester.run('tsx-pure-composition', tsxPureComposition, {
   ],
 });
 
+// Config-driven vendor boundaries (fed from package-boundaries.config.mjs).
+tester.run("no-restricted-vendor-imports", noRestrictedVendorImports, {
+  valid: [
+    {
+      // allowIn pass: the owning module may import its vendor.
+      filename: CORE_LOGGER_FILE,
+      code: "import pino from 'pino';",
+      options: [vendorBoundaryRuleOptions],
+    },
+    {
+      filename: BOOTSTRAP_FILE,
+      code: "import helmet from 'helmet';",
+      options: [vendorBoundaryRuleOptions],
+    },
+    {
+      filename: "/repo/apps/api/src/modules/ai/adapters/gemini.adapter.ts",
+      code: "import { GoogleGenAI } from '@google/genai';",
+      options: [vendorBoundaryRuleOptions],
+    },
+    {
+      // Unlisted vendors pass anywhere in scope.
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import { z } from 'zod';",
+      options: [vendorBoundaryRuleOptions],
+    },
+    {
+      // restrictedAccess allowIn: config may read process.env.
+      filename: CONFIG_FILE,
+      code: "const port = process.env['API_PORT'];",
+      options: [vendorBoundaryRuleOptions],
+    },
+    {
+      // restrictedAccess allowIn: tooling config files may read process.env.
+      filename: "/repo/vitest.config.ts",
+      code: "const ci = process.env.CI;",
+      options: [vendorBoundaryRuleOptions],
+    },
+    {
+      // `from` scoping: a policy with `from` only fires on matching files.
+      filename: CORE_LOGGER_FILE,
+      code: "import { render } from 'ink';",
+      options: [
+        {
+          policies: [
+            {
+              from: ["/apps/web/"],
+              forbid: ["^ink$"],
+              message: "Web-only policy.",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  invalid: [
+    {
+      // Policy match: vendor imported outside its owning module.
+      filename: APPLICATION_SERVICE_FILE,
+      code: "import pino from 'pino';",
+      options: [vendorBoundaryRuleOptions],
+      errors: [{ messageId: "forbiddenImport" }],
+    },
+    {
+      // Forbidden everywhere in scope: decorator validation vendors.
+      filename:
+        "/repo/apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
+      code: "import { IsBoolean } from 'class-validator';",
+      options: [vendorBoundaryRuleOptions],
+      errors: [{ messageId: "forbiddenImport" }],
+    },
+    {
+      // Throttler stays inside core/rate-limit — controllers use re-exports.
+      filename: API_CONTROLLER_FILE,
+      code: "import { Throttle } from '@nestjs/throttler';",
+      options: [vendorBoundaryRuleOptions],
+      errors: [{ messageId: "forbiddenImport" }],
+    },
+    {
+      // Raw HTTP clients have no owning adapter yet.
+      filename: MODULE_LIB_FILE,
+      code: "import axios from 'axios';",
+      options: [vendorBoundaryRuleOptions],
+      errors: [{ messageId: "forbiddenImport" }],
+    },
+    {
+      // Fastify never leaks outside bootstrap — not even in tests.
+      filename: "/repo/apps/api/src/tests/app.integration.test.ts",
+      code: "import fastify from 'fastify';",
+      options: [vendorBoundaryRuleOptions],
+      errors: [{ messageId: "forbiddenImport" }],
+    },
+    {
+      // restrictedAccess: process.env outside the allowed homes.
+      filename: APPLICATION_SERVICE_FILE,
+      code: "const key = process.env['GEMINI_API_KEY'];",
+      options: [vendorBoundaryRuleOptions],
+      errors: [{ messageId: "restrictedAccess" }],
+    },
+    {
+      // `from` scoping: fires when the file matches.
+      filename: "/repo/apps/web/src/features/game/services/game.service.ts",
+      code: "import { render } from 'ink';",
+      options: [
+        {
+          policies: [
+            {
+              from: ["/apps/web/"],
+              forbid: ["^ink$"],
+              message: "Web-only policy.",
+            },
+          ],
+        },
+      ],
+      errors: [{ messageId: "forbiddenImport" }],
+    },
+  ],
+});
+
 // TEST_CASES #34 — `any` is banned via typescript-eslint strict config
-describe('typescript config bans any', () => {
-  it('sets @typescript-eslint/no-explicit-any to error', () => {
-    const flatEntries = typescriptConfig.filter((entry) => entry.rules !== undefined);
+describe("typescript config bans any", () => {
+  it("sets @typescript-eslint/no-explicit-any to error", () => {
+    const flatEntries = typescriptConfig.filter(
+      (entry) => entry.rules !== undefined,
+    );
     const severity = flatEntries
-      .map((entry) => entry.rules['@typescript-eslint/no-explicit-any'])
+      .map((entry) => entry.rules["@typescript-eslint/no-explicit-any"])
       .findLast((value) => value !== undefined);
 
-    expect(severity).toBe('error');
+    expect(severity).toBe("error");
   });
 });

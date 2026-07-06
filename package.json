@@ -8,7 +8,9 @@
     "node": ">=22"
   },
   "overrides": {
-    "multer": "^2.2.0"
+    "@nestjs/platform-fastify": {
+      "fastify": "$fastify"
+    }
   },
   "workspaces": [
     "packages/tsconfig",
@@ -47,16 +49,11 @@
     "docker:logs": "docker compose logs -f",
     "docker:rebuild": "docker compose build --no-cache",
     "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
-    "audit": "npm audit --omit dev"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,mjs,js}": [
-      "eslint --fix --no-warn-ignored",
-      "prettier --write"
-    ],
-    "*.{json,md,css,yml,yaml}": [
-      "prettier --write"
-    ]
+    "audit": "npm audit --omit dev",
+    "security:scan": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" --exit-code 1 --severity HIGH,CRITICAL .",
+    "security:scan:full": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" .",
+    "deps:check": "npm-check-updates --workspaces --root",
+    "deps:upgrade": "npm-check-updates --workspaces --root -u && npm install"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -84,6 +81,13 @@
     "prettier": "^3.6.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.62.1",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.9",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260705.1",
+    "npm-check-updates": "^22.2.9"
+  },
+  "dependencies": {
+    "fastify": "^5.10.0"
   }
 }
