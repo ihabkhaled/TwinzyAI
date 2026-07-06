@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
 import { ClamAvAdapter } from './adapters/clamav.adapter';
-import { FileSecurityService } from './services/file-security.service';
-import { FileValidationService } from './services/file-validation.service';
-import { ImageDecodeValidationService } from './services/image-decode-validation.service';
-import { MagicByteValidationService } from './services/magic-byte-validation.service';
-import { TemporaryFileCleanupService } from './services/temporary-file-cleanup.service';
-import { VirusScanService } from './services/virus-scan.service';
+import { FileSecurityService } from './application/file-security.service';
+import { FileValidationService } from './application/file-validation.service';
+import { ImageDecodeValidationService } from './application/image-decode-validation.service';
+import { MagicByteValidationService } from './application/magic-byte-validation.service';
+import { TemporaryFileCleanupService } from './application/temporary-file-cleanup.service';
+import { VirusScanService } from './application/virus-scan.service';
 
 @Module({
   providers: [

@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 
-import { PrivacyModule } from '../privacy/privacy.module';
+import { PrivacyModule } from '../privacy';
 
 import { GeminiAdapter } from './adapters/gemini.adapter';
-import { AI_PROVIDER_ADAPTER } from './interfaces/ai-provider-adapter.interface';
-import { PromptLoaderService } from './prompts/prompt-loader.service';
-import { AiSafetyService } from './services/ai-safety.service';
-import { CandidateGenerationService } from './services/candidate-generation.service';
-import { CandidateJudgeService } from './services/candidate-judge.service';
-import { TraitExtractionService } from './services/trait-extraction.service';
+import { AiSafetyService } from './application/ai-safety.service';
+import { CandidateGenerationService } from './application/candidate-generation.service';
+import { CandidateJudgeService } from './application/candidate-judge.service';
+import { TraitExtractionService } from './application/trait-extraction.service';
+import { PromptTemplateRepository } from './infrastructure/prompt-template.repository';
+import { AI_PROVIDER_ADAPTER } from './model/ai-provider-adapter.types';
 
 /**
  * AI module. The provider is bound behind the AI_PROVIDER_ADAPTER port —
@@ -19,7 +19,7 @@ import { TraitExtractionService } from './services/trait-extraction.service';
   imports: [PrivacyModule],
   providers: [
     { provide: AI_PROVIDER_ADAPTER, useClass: GeminiAdapter },
-    PromptLoaderService,
+    PromptTemplateRepository,
     AiSafetyService,
     TraitExtractionService,
     CandidateGenerationService,

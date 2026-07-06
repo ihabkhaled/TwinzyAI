@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { HealthResponseSchema } from '@twinzy/shared';
 
-import { API_SERVICE_NAME } from '../constants/health.constants';
-import { HealthService } from '../services/health.service';
+import { HealthService } from '../application/health.service';
+import { API_SERVICE_NAME } from '../model/health.constants';
 
 describe('HealthService', () => {
   it('returns a payload matching the shared health schema', () => {

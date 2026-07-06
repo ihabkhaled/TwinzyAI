@@ -3,16 +3,9 @@ import { Socket } from 'node:net';
 import { Injectable } from '@nestjs/common';
 
 import { AppConfigService } from '../../../config/app-config.service';
-import { LoggerService } from '../../../infrastructure/logger/logger.service';
-import {
-  CLAMAV_CHUNK_SIZE_BYTES,
-  CLAMAV_TIMEOUT_MS,
-} from '../constants/file-security.constants';
-
-export interface ClamAvScanResult {
-  clean: boolean;
-  signature?: string;
-}
+import { AppLogger } from '../../../core/logger';
+import type { ClamAvScanResult } from '../model/clamav.types';
+import { CLAMAV_CHUNK_SIZE_BYTES, CLAMAV_TIMEOUT_MS } from '../model/file-security.constants';
 
 const LOG_CONTEXT = 'ClamAvAdapter';
 
@@ -26,12 +19,14 @@ const LOG_CONTEXT = 'ClamAvAdapter';
 export class ClamAvAdapter {
   public constructor(
     private readonly config: AppConfigService,
-    private readonly logger: LoggerService,
-  ) {}
+    private readonly logger: AppLogger,
+  ) {
+    this.logger.setContext(LOG_CONTEXT);
+  }
 
   public async scanBuffer(buffer: Buffer): Promise<ClamAvScanResult> {
     const response = await this.sendInstream(buffer);
-    this.logger.debug(LOG_CONTEXT, `clamd verdict: ${response}`);
+    this.logger.debug(`clamd verdict: ${response}`);
 
     if (response.includes('OK') && !response.includes('FOUND')) {
       return { clean: true };

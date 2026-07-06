@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { ResultAggregationService } from './services/result-aggregation.service';
+import { ResultAggregationService } from './application/result-aggregation.service';
 
 @Module({
   providers: [ResultAggregationService],

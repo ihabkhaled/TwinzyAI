@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { LogRedactionService } from './services/log-redaction.service';
+import { LogRedactionService } from './application/log-redaction.service';
 
 /**
  * Privacy module: log redaction and the no-persistence guarantee.

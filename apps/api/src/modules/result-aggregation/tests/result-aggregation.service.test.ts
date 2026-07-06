@@ -7,17 +7,15 @@ import {
   buildJudgedResultPayload,
   buildTraitsPayload,
 } from '../../../tests/fixtures/fake-ai-adapter';
-import { buildLoggerStub } from '../../../tests/fixtures/stubs';
-import { ResultAggregationService } from '../services/result-aggregation.service';
+import { buildAppLoggerStub } from '../../../tests/fixtures/stubs';
+import { ResultAggregationService } from '../application/result-aggregation.service';
 
 const traits = buildTraitsPayload() as Traits;
 
 const buildService = (): ResultAggregationService =>
-  new ResultAggregationService(buildLoggerStub().logger);
+  new ResultAggregationService(buildAppLoggerStub().logger);
 
-const buildJudgeResponse = (
-  results: Record<string, unknown>[],
-): CandidateJudgeResponse =>
+const buildJudgeResponse = (results: Record<string, unknown>[]): CandidateJudgeResponse =>
   ({
     results,
     fallbackMessage: '',

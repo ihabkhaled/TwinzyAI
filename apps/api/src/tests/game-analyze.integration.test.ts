@@ -1,15 +1,17 @@
 import type { Server } from 'node:http';
 
 import type { INestApplication } from '@nestjs/common';
-import { VersioningType } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 
-import { API_GLOBAL_PREFIX, FinalGameResultSchema, RESULT_DISCLAIMER } from '@twinzy/shared';
+import { FinalGameResultSchema, RESULT_DISCLAIMER } from '@twinzy/shared';
 
 import { AppModule } from '../app.module';
-import { AI_PROVIDER_ADAPTER } from '../modules/ai/interfaces/ai-provider-adapter.interface';
+import { createTestApp } from '../bootstrap/create-test-app';
+import { AI_PROVIDER_ADAPTER } from '../modules/ai';
+import { ClamAvAdapter } from '../modules/file-security/adapters/clamav.adapter';
+import { UPLOAD_HARD_CAP_BYTES } from '../modules/game/model/game.constants';
 
 import {
   buildCandidatesJson,
@@ -18,6 +20,7 @@ import {
   FakeAiAdapter,
 } from './fixtures/fake-ai-adapter';
 import { buildJpegBuffer, buildPngBuffer } from './fixtures/image-fixtures';
+import { buildCleanClamAvStub } from './fixtures/stubs';
 
 const ANALYZE_PATH = '/api/v1/game/analyze';
 
@@ -31,12 +34,11 @@ describe('POST /api/v1/game/analyze (integration)', () => {
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(AI_PROVIDER_ADAPTER)
       .useValue(adapter)
+      .overrideProvider(ClamAvAdapter)
+      .useValue(buildCleanClamAvStub())
       .compile();
 
-    app = moduleRef.createNestApplication();
-    app.setGlobalPrefix(API_GLOBAL_PREFIX);
-    app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
-    await app.init();
+    app = await createTestApp(moduleRef);
   });
 
   afterEach(() => {
@@ -48,7 +50,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
     await app.close();
   });
 
-  const server = (): Server => app.getHttpServer() as Server;
+  const server = (): Server => app.getHttpServer();
 
   it('returns a schema-valid final result on the happy path', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
@@ -118,9 +120,21 @@ describe('POST /api/v1/game/analyze (integration)', () => {
       .attach('image', buildJpegBuffer(), { filename: 'b.jpg', contentType: 'image/jpeg' })
       .expect(400);
 
-    expect((response.body as { errorCode: string }).errorCode).toBe(
-      'MULTIPLE_FILES_NOT_ALLOWED',
-    );
+    expect((response.body as { errorCode: string }).errorCode).toBe('MULTIPLE_FILES_NOT_ALLOWED');
+  });
+
+  it('rejects an upload above the transport hard cap with the FILE_TOO_LARGE envelope', async () => {
+    const oversizeBuffer = Buffer.alloc(UPLOAD_HARD_CAP_BYTES + 1024, 0x41);
+
+    const response = await request(server())
+      .post(ANALYZE_PATH)
+      .field('consent', 'true')
+      .attach('image', oversizeBuffer, { filename: 'huge.jpg', contentType: 'image/jpeg' })
+      .expect(413);
+
+    expect((response.body as { errorCode: string }).errorCode).toBe('FILE_TOO_LARGE');
+    expect((response.body as { messageKey: string }).messageKey).toBeDefined();
+    expect(adapter.imageCalls).toHaveLength(0);
   });
 
   it('returns a safe error envelope when the provider fails', async () => {

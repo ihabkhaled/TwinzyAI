@@ -1,10 +1,13 @@
-import { HttpStatus } from '@nestjs/common';
 import { describe, expect, it } from 'vitest';
 
 import type { Traits } from '@twinzy/shared';
 
-import { ErrorCode } from '../../../common/constants/error-codes.constant';
-import { DomainException } from '../../../common/exceptions/domain.exception';
+import {
+  AppError,
+  ERROR_MESSAGE_KEY_BY_CODE,
+  ErrorCode,
+  IntegrationError,
+} from '../../../core/errors';
 import {
   buildCandidatePayload,
   buildCandidatesJson,
@@ -15,12 +18,12 @@ import {
   FakeAiAdapter,
 } from '../../../tests/fixtures/fake-ai-adapter';
 import { buildJpegBuffer } from '../../../tests/fixtures/image-fixtures';
-import { buildConfigStub, buildLoggerStub } from '../../../tests/fixtures/stubs';
-import { PromptLoaderService } from '../prompts/prompt-loader.service';
-import { AiSafetyService } from '../services/ai-safety.service';
-import { CandidateGenerationService } from '../services/candidate-generation.service';
-import { CandidateJudgeService } from '../services/candidate-judge.service';
-import { TraitExtractionService } from '../services/trait-extraction.service';
+import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stubs';
+import { AiSafetyService } from '../application/ai-safety.service';
+import { CandidateGenerationService } from '../application/candidate-generation.service';
+import { CandidateJudgeService } from '../application/candidate-judge.service';
+import { TraitExtractionService } from '../application/trait-extraction.service';
+import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 
 interface Pipeline {
   adapter: FakeAiAdapter;
@@ -31,24 +34,21 @@ interface Pipeline {
 
 const buildPipeline = (): Pipeline => {
   const adapter = new FakeAiAdapter();
-  const { logger } = buildLoggerStub();
-  const promptLoader = new PromptLoaderService(buildConfigStub(), logger);
+  const { logger } = buildAppLoggerStub();
+  const promptTemplate = new PromptTemplateRepository(buildConfigStub(), logger);
   const safety = new AiSafetyService(logger);
 
   return {
     adapter,
-    traitExtraction: new TraitExtractionService(adapter, promptLoader, safety, logger),
-    candidateGeneration: new CandidateGenerationService(adapter, promptLoader, safety, logger),
-    candidateJudge: new CandidateJudgeService(adapter, promptLoader, safety, logger),
+    traitExtraction: new TraitExtractionService(adapter, promptTemplate, safety, logger),
+    candidateGeneration: new CandidateGenerationService(adapter, promptTemplate, safety, logger),
+    candidateJudge: new CandidateJudgeService(adapter, promptTemplate, safety, logger),
   };
 };
 
 const traits = buildTraitsPayload() as Traits;
 
-const expectDomainRejection = async (
-  action: Promise<unknown>,
-  errorCode: string,
-): Promise<void> => {
+const expectRejection = async (action: Promise<unknown>, errorCode: string): Promise<void> => {
   let caught: unknown;
   try {
     await action;
@@ -56,8 +56,8 @@ const expectDomainRejection = async (
     caught = error;
   }
 
-  expect(caught).toBeInstanceOf(DomainException);
-  expect((caught as DomainException).errorCode).toBe(errorCode);
+  expect(caught).toBeInstanceOf(AppError);
+  expect((caught as AppError).errorCode).toBe(errorCode);
 };
 
 describe('TraitExtractionService', () => {
@@ -76,7 +76,7 @@ describe('TraitExtractionService', () => {
     const { adapter, traitExtraction } = buildPipeline();
     adapter.queueImageResponse('this is not json at all');
 
-    await expectDomainRejection(
+    await expectRejection(
       traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
       ErrorCode.AiResponseInvalid,
     );
@@ -90,7 +90,7 @@ describe('TraitExtractionService', () => {
     delete payload.traits['faceShape'];
     adapter.queueImageResponse(JSON.stringify(payload));
 
-    await expectDomainRejection(
+    await expectRejection(
       traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
       ErrorCode.AiResponseInvalid,
     );
@@ -104,7 +104,7 @@ describe('TraitExtractionService', () => {
     payload.traits['smuggledField'] = 'extra';
     adapter.queueImageResponse(JSON.stringify(payload));
 
-    await expectDomainRejection(
+    await expectRejection(
       traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
       ErrorCode.AiResponseInvalid,
     );
@@ -118,7 +118,7 @@ describe('TraitExtractionService', () => {
     payload.traits['faceShape'] = 'looks exactly like a famous actor';
     adapter.queueImageResponse(JSON.stringify(payload));
 
-    await expectDomainRejection(
+    await expectRejection(
       traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
       ErrorCode.AiResponseUnsafe,
     );
@@ -132,7 +132,7 @@ describe('TraitExtractionService', () => {
     payload.safetyCheck['containsIdentityClaim'] = true;
     adapter.queueImageResponse(JSON.stringify(payload));
 
-    await expectDomainRejection(
+    await expectRejection(
       traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
       ErrorCode.AiResponseInvalid,
     );
@@ -141,10 +141,14 @@ describe('TraitExtractionService', () => {
   it('propagates a provider timeout as AI_TIMEOUT', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     adapter.queueImageResponse(
-      new DomainException(ErrorCode.AiTimeout, 'timeout', HttpStatus.GATEWAY_TIMEOUT),
+      new IntegrationError(
+        'timeout',
+        ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiTimeout],
+        ErrorCode.AiTimeout,
+      ),
     );
 
-    await expectDomainRejection(
+    await expectRejection(
       traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
       ErrorCode.AiTimeout,
     );
@@ -188,7 +192,7 @@ describe('CandidateGenerationService (text only)', () => {
       ),
     );
 
-    await expectDomainRejection(
+    await expectRejection(
       candidateGeneration.generateCandidates(traits),
       ErrorCode.AiResponseInvalid,
     );
@@ -246,9 +250,6 @@ describe('CandidateJudgeService (text only)', () => {
     const { adapter, candidateJudge } = buildPipeline();
     adapter.queueTextResponse(JSON.stringify({ results: 'not-an-array' }));
 
-    await expectDomainRejection(
-      candidateJudge.judgeCandidates(traits, []),
-      ErrorCode.AiResponseInvalid,
-    );
+    await expectRejection(candidateJudge.judgeCandidates(traits, []), ErrorCode.AiResponseInvalid);
   });
 });

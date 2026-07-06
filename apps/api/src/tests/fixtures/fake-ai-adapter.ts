@@ -1,7 +1,7 @@
 import { TRAIT_KEYS } from '@twinzy/shared';
 
-import type { AiProviderAdapter } from '../../modules/ai/interfaces/ai-provider-adapter.interface';
-import type { AiImageInput } from '../../modules/ai/types/gemini.types';
+import type { AiProviderAdapter } from '../../modules/ai/model/ai-provider-adapter.types';
+import type { AiImageInput } from '../../modules/ai/model/gemini.types';
 
 export interface RecordedImageCall {
   prompt: string;

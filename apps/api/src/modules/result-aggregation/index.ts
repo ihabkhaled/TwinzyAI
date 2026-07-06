@@ -1,2 +1,2 @@
-export * from './result-aggregation.module';
-export * from './services/result-aggregation.service';
+export { ResultAggregationService } from './application/result-aggregation.service';
+export { ResultAggregationModule } from './result-aggregation.module';

@@ -1,10 +1,5 @@
-import { Global, Module } from '@nestjs/common';
-
-import { AppConfigService } from './app-config.service';
-
-@Global()
-@Module({
-  providers: [AppConfigService],
-  exports: [AppConfigService],
-})
-export class AppConfigModule {}
+/**
+ * @deprecated Compatibility re-export kept while modules migrate their
+ * imports. The canonical module lives in ./config.module.
+ */
+export { AppConfigModule } from './config.module';

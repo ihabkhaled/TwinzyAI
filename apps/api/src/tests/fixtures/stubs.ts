@@ -1,34 +1,51 @@
 import { vi } from 'vitest';
 
 import type { AppConfigService } from '../../config/app-config.service';
-import type { LoggerService } from '../../infrastructure/logger/logger.service';
+import type { AppLogger } from '../../core/logger/app-logger.service';
+import type { ClamAvAdapter } from '../../modules/file-security/adapters/clamav.adapter';
 
-export interface LoggerStub {
-  logger: LoggerService;
+export interface AppLoggerStub {
+  logger: AppLogger;
   messages: () => string[];
 }
 
-export const buildLoggerStub = (): LoggerStub => {
+export const buildAppLoggerStub = (): AppLoggerStub => {
   const calls: string[] = [];
-  const record = (_context: string, message: string): void => {
+  const record = (message: string): void => {
     calls.push(message);
   };
 
   const logger = {
-    log: vi.fn(record),
+    setContext: vi.fn(),
+    debug: vi.fn(record),
+    info: vi.fn(record),
     warn: vi.fn(record),
     error: vi.fn(record),
-    debug: vi.fn(record),
-  } as unknown as LoggerService;
+  } as unknown as AppLogger;
 
   return { logger, messages: () => [...calls] };
 };
 
+/**
+ * Deterministic ClamAV replacement for integration boots: always reports a
+ * clean scan so test results never depend on the ambient ENABLE_CLAMAV
+ * setting or a reachable clamd daemon (real scanners are never hit in tests).
+ */
+export const buildCleanClamAvStub = (): ClamAvAdapter =>
+  ({
+    scanBuffer: vi.fn(() => Promise.resolve({ clean: true })),
+  }) as unknown as ClamAvAdapter;
+
 const CONFIG_DEFAULTS = {
   nodeEnv: 'test',
   isProduction: false,
+  isDevelopment: false,
   apiPort: 3001,
   corsAllowedOrigins: ['http://localhost:3000'],
+  logLevel: 'info',
+  swaggerEnabled: false,
+  rateLimitTtlMs: 60_000,
+  rateLimitMax: 30,
   geminiApiKey: 'test-key',
   geminiModel: 'test-model',
   geminiTimeoutMs: 5000,
