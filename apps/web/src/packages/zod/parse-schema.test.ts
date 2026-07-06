@@ -6,6 +6,16 @@ import { parseSchema, safeParseSchema, SchemaParseError } from './parse-schema';
 
 const schema = z.object({ name: z.string(), age: z.number() });
 
+function captureError(action: () => void): unknown {
+  try {
+    action();
+  } catch (error) {
+    return error;
+  }
+
+  throw new Error('Expected the action to throw');
+}
+
 describe('parseSchema', () => {
   it('returns parsed data for valid input', () => {
     expect(parseSchema(schema, { name: 'Ada', age: 30 }, 'person')).toStrictEqual({
@@ -14,19 +24,17 @@ describe('parseSchema', () => {
     });
   });
 
-  it('throws a SchemaParseError (also an Error) for invalid input', () => {
-    expect.assertions(3);
+  it('throws a SchemaParseError (also an Error) carrying issues for invalid input', () => {
+    const error = captureError(() => parseSchema(schema, { name: 123, age: 'x' }, 'person'));
 
-    try {
-      parseSchema(schema, { name: 123, age: 'x' }, 'person');
-    } catch (error) {
-      expect(error).toBeInstanceOf(SchemaParseError);
-      expect(error).toBeInstanceOf(Error);
+    expect(error).toBeInstanceOf(SchemaParseError);
+    expect(error).toBeInstanceOf(Error);
 
-      if (error instanceof SchemaParseError) {
-        expect(error.issues.length).toBeGreaterThan(0);
-      }
+    if (!(error instanceof SchemaParseError)) {
+      throw new Error('Expected a SchemaParseError');
     }
+
+    expect(error.issues.length).toBeGreaterThan(0);
   });
 });
 
@@ -43,9 +51,11 @@ describe('safeParseSchema', () => {
 
     expect(result.success).toBe(false);
 
-    if (!result.success) {
-      expect(result.issues.every((issue) => typeof issue.message === 'string')).toBe(true);
+    if (result.success) {
+      throw new Error('Expected a failure result');
     }
+
+    expect(result.issues.every((issue) => typeof issue.message === 'string')).toBe(true);
   });
 
   it('joins nested issue paths with dots', () => {
@@ -54,8 +64,10 @@ describe('safeParseSchema', () => {
 
     expect(result.success).toBe(false);
 
-    if (!result.success) {
-      expect(result.issues[0]?.path).toBe('user.email');
+    if (result.success) {
+      throw new Error('Expected a failure result');
     }
+
+    expect(result.issues[0]?.path).toBe('user.email');
   });
 });

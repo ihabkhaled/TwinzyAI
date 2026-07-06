@@ -1,6 +1,6 @@
-import 'server-only';
-
 import { parseSchema, z } from '@/packages/zod';
+
+import 'server-only';
 
 /**
  * Server-only environment facade. The `server-only` import guarantees this

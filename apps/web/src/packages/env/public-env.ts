@@ -8,7 +8,7 @@ import { parseSchema, z } from '@/packages/zod';
  * inside a feature. This module is the ONLY sanctioned reader of `process.env`
  * on the client side.
  */
-const publicEnvSchema = z.object({
+export const publicEnvSchema = z.object({
   appEnv: z.enum(['local', 'test', 'staging', 'production']).default('local'),
   apiBaseUrl: z.url().default('http://localhost:4000'),
 });

@@ -58,11 +58,7 @@ describe('web-storage', () => {
     expect(readStorageJson('local', 'temp', profileSchema)).toBeNull();
   });
 
-  it('returns false when the underlying write throws', () => {
-    vi.spyOn(globalThis.localStorage, 'setItem').mockImplementation(() => {
-      throw new Error('quota exceeded');
-    });
-
-    expect(writeStorageJson('local', 'x', { id: 'd', score: 0 })).toBe(false);
+  it('returns false when the value cannot be serialized', () => {
+    expect(writeStorageJson('local', 'x', { unserializable: 10n })).toBe(false);
   });
 });

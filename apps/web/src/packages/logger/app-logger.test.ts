@@ -4,7 +4,7 @@ import { appLogger } from './app-logger';
 
 const { envState } = vi.hoisted(() => ({
   envState: {
-    appEnv: 'local' as 'local' | 'test' | 'staging' | 'production',
+    appEnv: 'local',
     apiBaseUrl: 'http://localhost:4000',
   },
 }));
