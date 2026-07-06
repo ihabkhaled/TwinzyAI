@@ -1,6 +1,11 @@
-import type { VerdictValue } from '@twinzy/shared';
+import type { GameStreamStageValue, VerdictValue } from '@twinzy/shared';
 
 import type { TranslationKey } from '@/i18n';
+
+/** Progress callbacks the streaming analyze request drives as events arrive. */
+export interface GameStreamHandlers {
+  onStage: (stage: GameStreamStageValue) => void;
+}
 
 /** One extracted trait prepared for display. */
 export interface TraitView {
@@ -31,6 +36,4 @@ export interface GameResultView {
 }
 
 /** Client-side file validation outcome (UX only; backend re-validates). */
-export type FileValidationResult =
-  | { ok: true }
-  | { ok: false; errorKey: TranslationKey };
+export type FileValidationResult = { ok: true } | { ok: false; errorKey: TranslationKey };

@@ -10,3 +10,6 @@ export interface AiCallMetadata {
   model: string;
   durationMs: number;
 }
+
+/** One attempt against a specific model; throws the raw provider error to classify. */
+export type ModelCall = (model: string) => Promise<string>;

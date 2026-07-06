@@ -27,7 +27,7 @@ export const GameScreen = (): ReactNode => {
   const controller = useGameController();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <h1 className="text-3xl font-bold">{t('game.title')}</h1>
 
       {controller.phase === GamePhase.Setup && (
@@ -48,7 +48,9 @@ export const GameScreen = (): ReactNode => {
         </>
       )}
 
-      {controller.phase === GamePhase.Processing && <ProcessingCard />}
+      {controller.phase === GamePhase.Processing && (
+        <ProcessingCard stageLabel={controller.processingStageLabel} />
+      )}
 
       {controller.phase === GamePhase.Error && controller.errorMessage !== undefined && (
         <>
@@ -65,7 +67,7 @@ export const GameScreen = (): ReactNode => {
           />
           <TraitList traits={controller.result.traits} />
           <ResultDisclaimer disclaimer={controller.result.disclaimer} />
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             {controller.result.results.length > 0 && (
               <ShareResultButton
                 onShare={controller.onShareResult}

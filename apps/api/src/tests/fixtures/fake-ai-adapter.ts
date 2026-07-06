@@ -1,6 +1,9 @@
 import { TRAIT_KEYS } from '@twinzy/shared';
 
-import type { AiProviderAdapter } from '../../modules/ai/model/ai-provider-adapter.types';
+import type {
+  AiProviderAdapter,
+  AiStreamChunkListener,
+} from '../../modules/ai/model/ai-provider-adapter.types';
 import type { AiImageInput } from '../../modules/ai/model/gemini.types';
 
 export interface RecordedImageCall {
@@ -38,6 +41,33 @@ export class FakeAiAdapter implements AiProviderAdapter {
   public generateFromText(prompt: string): Promise<string> {
     this.textCalls.push(prompt);
     return this.dequeue(this.textResponses);
+  }
+
+  public async generateFromImageStream(
+    prompt: string,
+    image: AiImageInput,
+    onChunk?: AiStreamChunkListener,
+  ): Promise<string> {
+    this.imageCalls.push({ prompt, image });
+    return this.streamDequeue(this.imageResponses, onChunk);
+  }
+
+  public async generateFromTextStream(
+    prompt: string,
+    onChunk?: AiStreamChunkListener,
+  ): Promise<string> {
+    this.textCalls.push(prompt);
+    return this.streamDequeue(this.textResponses, onChunk);
+  }
+
+  /** Delivers the queued response as a single chunk so onChunk fires once. */
+  private async streamDequeue(
+    queue: (string | Error)[],
+    onChunk?: AiStreamChunkListener,
+  ): Promise<string> {
+    const text = await this.dequeue(queue);
+    onChunk?.(text);
+    return text;
   }
 
   private dequeue(queue: (string | Error)[]): Promise<string> {

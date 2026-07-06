@@ -39,7 +39,7 @@ export class CandidateJudgeService {
       [PromptPlaceholder.CandidatesJson]: JSON.stringify({ candidates }, null, 2),
     });
 
-    const rawText = await this.aiProvider.generateFromText(prompt);
+    const rawText = await this.aiProvider.generateFromTextStream(prompt);
     const response = parseAiJsonResponse(rawText, CandidateJudgeResponseSchema);
 
     const safeResults = this.aiSafety.filterJudgedResults(response.results);

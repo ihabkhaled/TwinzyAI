@@ -48,10 +48,13 @@ const CONFIG_DEFAULTS = {
   rateLimitMax: 30,
   geminiApiKey: 'test-key',
   geminiModel: 'test-model',
+  geminiFallbackModels: [] as readonly string[],
+  geminiModelChain: ['test-model'] as readonly string[],
   geminiTimeoutMs: 5000,
+  geminiStreamIdleTimeoutMs: 60_000,
   maxImageSizeBytes: 5_242_880,
   enableClamAv: false,
-  clamAvHost: 'localhost',
+  clamAvHosts: ['localhost'] as readonly string[],
   clamAvPort: 3310,
 };
 

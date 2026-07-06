@@ -9,6 +9,9 @@ export const GEMINI_RESPONSE_MIME_TYPE = 'application/json';
 export const AI_UNAVAILABLE_MESSAGE =
   'The vibe engine is unavailable right now. Please try again in a moment.';
 
+export const AI_RATE_LIMITED_MESSAGE =
+  'The vibe engine is busy right now (usage limit reached). Please try again in a minute.';
+
 export const AI_TIMEOUT_MESSAGE = 'The vibe engine took too long. Please try again.';
 
 export const AI_INVALID_RESPONSE_MESSAGE =

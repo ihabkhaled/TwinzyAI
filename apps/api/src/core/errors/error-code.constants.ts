@@ -15,6 +15,7 @@ export const ErrorCode = {
   MultipleFilesNotAllowed: 'MULTIPLE_FILES_NOT_ALLOWED',
   VirusScanFailed: 'VIRUS_SCAN_FAILED',
   AiProviderUnavailable: 'AI_PROVIDER_UNAVAILABLE',
+  AiRateLimited: 'AI_RATE_LIMITED',
   AiResponseInvalid: 'AI_RESPONSE_INVALID',
   AiResponseUnsafe: 'AI_RESPONSE_UNSAFE',
   AiTimeout: 'AI_TIMEOUT',

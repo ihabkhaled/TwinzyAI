@@ -30,6 +30,7 @@ export default [
             "expect",
             "expectRejection",
             "expectDomainRejection",
+            "expectErrorCode",
           ],
         },
       ],

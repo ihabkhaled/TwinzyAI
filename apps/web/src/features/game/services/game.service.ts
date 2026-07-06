@@ -1,6 +1,8 @@
+import type { GameStreamStageValue } from '@twinzy/shared';
+
 import { t } from '@/i18n';
 
-import { analyzeImageRequest } from '../gateways/game.gateway';
+import { analyzeImageRequest, analyzeImageStreamRequest } from '../gateways/game.gateway';
 import { mapFinalResultToView } from '../lib/game.mappers';
 import { validateImageFile } from '../lib/game.validators';
 import type { FileValidationResult, GameResultView } from '../model/game.types';
@@ -12,13 +14,30 @@ import type { FileValidationResult, GameResultView } from '../model/game.types';
  * backend regardless.
  */
 export const analyzeImage = async (file: File): Promise<GameResultView> => {
+  assertValid(file);
+  const result = await analyzeImageRequest(file);
+  return mapFinalResultToView(result);
+};
+
+/**
+ * Streaming variant used by the UI: reports each pipeline stage through
+ * onStage as it happens (so the long call shows live progress and never
+ * appears frozen) and resolves with the mapped view model.
+ */
+export const analyzeImageStreaming = async (
+  file: File,
+  onStage: (stage: GameStreamStageValue) => void,
+): Promise<GameResultView> => {
+  assertValid(file);
+  const result = await analyzeImageStreamRequest(file, { onStage });
+  return mapFinalResultToView(result);
+};
+
+const assertValid = (file: File): void => {
   const validation = validateImageFile(file);
   if (!validation.ok) {
     throw new Error(t(validation.errorKey));
   }
-
-  const result = await analyzeImageRequest(file);
-  return mapFinalResultToView(result);
 };
 
 export const validateFileForUpload = (file: File | undefined): FileValidationResult =>

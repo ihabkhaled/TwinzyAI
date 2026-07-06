@@ -4,12 +4,15 @@ import { useMutation } from '@tanstack/react-query';
 import type { ChangeEvent } from 'react';
 import { useCallback, useState } from 'react';
 
+import type { GameStreamStageValue } from '@twinzy/shared';
+
 import { toFriendlyErrorMessage } from '../lib/game.guards';
+import { stageLabel } from '../lib/game.stage';
 import type { GamePhaseValue } from '../model/game.enums';
 import { GamePhase } from '../model/game.enums';
 import { GAME_MUTATION_KEY } from '../model/game.query-keys';
 import type { GameResultView } from '../model/game.types';
-import { analyzeImage } from '../services/game.service';
+import { analyzeImageStreaming } from '../services/game.service';
 
 import type { GameResultController } from './useGameResultController';
 import { useGameResultController } from './useGameResultController';
@@ -26,15 +29,12 @@ export interface GameController {
   onShareResult: () => void;
   result: GameResultView | undefined;
   errorMessage: string | undefined;
+  processingStageLabel: string;
   upload: ImageUploadController;
   share: GameResultController;
 }
 
-const resolvePhase = (
-  isPending: boolean,
-  isSuccess: boolean,
-  isError: boolean,
-): GamePhaseValue => {
+const resolvePhase = (isPending: boolean, isSuccess: boolean, isError: boolean): GamePhaseValue => {
   if (isPending) {
     return GamePhase.Processing;
   }
@@ -56,10 +56,11 @@ export const useGameController = (): GameController => {
   const upload = useImageUploadController();
   const share = useGameResultController();
   const [consentGiven, setConsentGiven] = useState(false);
+  const [stage, setStage] = useState<GameStreamStageValue | undefined>();
 
   const mutation = useMutation<GameResultView, unknown, File>({
     mutationKey: GAME_MUTATION_KEY,
-    mutationFn: analyzeImage,
+    mutationFn: (file) => analyzeImageStreaming(file, setStage),
   });
 
   const onConsentInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -68,12 +69,14 @@ export const useGameController = (): GameController => {
 
   const onAnalyze = useCallback(() => {
     if (upload.file !== undefined && consentGiven && !mutation.isPending) {
+      setStage(undefined);
       mutation.mutate(upload.file);
     }
   }, [upload.file, consentGiven, mutation]);
 
   const onRetry = useCallback(() => {
     mutation.reset();
+    setStage(undefined);
     upload.clearFile();
     share.resetShareFeedback();
   }, [mutation, upload, share]);
@@ -93,6 +96,7 @@ export const useGameController = (): GameController => {
     onShareResult,
     result: mutation.data,
     errorMessage: mutation.isError ? toFriendlyErrorMessage(mutation.error) : undefined,
+    processingStageLabel: stageLabel(stage),
     upload,
     share,
   };

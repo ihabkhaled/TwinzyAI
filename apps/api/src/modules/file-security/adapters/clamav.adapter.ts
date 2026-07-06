@@ -5,11 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { AppConfigService } from '../../../config/app-config.service';
 import { AppLogger } from '../../../core/logger';
 import type { ClamAvScanResult } from '../model/clamav.types';
-import {
-  CLAMAV_CHUNK_SIZE_BYTES,
-  CLAMAV_FALLBACK_HOSTS,
-  CLAMAV_TIMEOUT_MS,
-} from '../model/file-security.constants';
+import { CLAMAV_CHUNK_SIZE_BYTES, CLAMAV_TIMEOUT_MS } from '../model/file-security.constants';
 
 const LOG_CONTEXT = 'ClamAvAdapter';
 
@@ -19,10 +15,10 @@ const LOG_CONTEXT = 'ClamAvAdapter';
  * parses the OK/FOUND verdict. Errors are thrown raw; the VirusScanService
  * decides the fail-open/fail-closed policy.
  *
- * Reachability: the configured host is tried first, then the well-known
- * fallback hosts, so the same config works whether the API runs inside the
- * docker-compose network (`clamav`) or on the host (127.0.0.1) against a
- * ClamAV container's published port. The first reachable host is cached.
+ * Reachability: the ordered CLAMAV_HOSTS list is tried in turn, so the same
+ * config works whether the API runs inside the docker-compose network
+ * (`clamav`) or on the host (127.0.0.1) against a ClamAV container's published
+ * port. The first reachable host is cached and tried first next time.
  */
 @Injectable()
 export class ClamAvAdapter {
@@ -47,9 +43,9 @@ export class ClamAvAdapter {
   }
 
   private candidateHosts(): readonly string[] {
-    return [
-      ...new Set([this.reachableHost, this.config.clamAvHost, ...CLAMAV_FALLBACK_HOSTS]),
-    ].filter((host): host is string => host !== undefined);
+    return [...new Set([this.reachableHost, ...this.config.clamAvHosts])].filter(
+      (host): host is string => host !== undefined,
+    );
   }
 
   private async streamToReachableHost(buffer: Buffer): Promise<string> {

@@ -36,13 +36,24 @@ export const EnvSchema = z.object({
   RATE_LIMIT_MAX: z.coerce.number().int().min(1).max(10_000).default(30),
   GEMINI_API_KEY: z.string().default(''),
   GEMINI_MODEL: z.string().default(''),
+  // Comma-separated ordered fallback model ids. If the primary GEMINI_MODEL is
+  // rate-limited (429), overloaded, or unavailable, the adapter retries the
+  // same call down this list before giving up — so one model's quota does not
+  // take the game down.
+  GEMINI_FALLBACK_MODELS: z.string().default(''),
   GEMINI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(120_000).default(30_000),
+  // Idle (inter-chunk) timeout for streaming Gemini calls. The stream is only
+  // aborted after this long with NO new token — as long as the model keeps
+  // producing output the call is never cut off, so the pipeline "listens and
+  // waits" instead of racing a fixed total deadline.
+  GEMINI_STREAM_IDLE_TIMEOUT_MS: z.coerce.number().int().min(1000).max(300_000).default(60_000),
   MAX_IMAGE_SIZE_BYTES: z.coerce.number().int().min(1024).default(5_242_880),
   ENABLE_CLAMAV: booleanFromString,
-  // Primary clamd host tried first. The adapter automatically falls back to the
-  // other well-known host (clamav service name / 127.0.0.1) if this one is not
-  // reachable, so ClamAV works whether the API runs inside Docker or on the host.
-  CLAMAV_HOST: z.string().default('clamav'),
+  // Comma-separated ordered clamd hosts. The adapter tries each in turn and
+  // caches the first reachable one, so the same config works whether the API
+  // runs inside the docker-compose network (`clamav`) or on the host
+  // (`127.0.0.1`) against a published clamd port — no hardcoded fallback list.
+  CLAMAV_HOSTS: z.string().default('127.0.0.1,clamav'),
   CLAMAV_PORT: z.coerce.number().int().min(1).max(65_535).default(3310),
 });
 

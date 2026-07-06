@@ -36,6 +36,7 @@ export const ERROR_MESSAGE_KEY_BY_CODE: Readonly<Record<ErrorCodeValue, ErrorMes
   [ErrorCode.MultipleFilesNotAllowed]: 'errors.upload.multipleFilesNotAllowed',
   [ErrorCode.VirusScanFailed]: 'errors.upload.virusScanFailed',
   [ErrorCode.AiProviderUnavailable]: 'errors.ai.providerUnavailable',
+  [ErrorCode.AiRateLimited]: 'errors.ai.rateLimited',
   [ErrorCode.AiResponseInvalid]: 'errors.ai.responseInvalid',
   [ErrorCode.AiResponseUnsafe]: 'errors.ai.responseUnsafe',
   [ErrorCode.AiTimeout]: 'errors.ai.timeout',

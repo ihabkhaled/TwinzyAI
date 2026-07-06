@@ -37,7 +37,7 @@ export class CandidateGenerationService {
       [PromptPlaceholder.TraitsJson]: JSON.stringify({ traits }, null, 2),
     });
 
-    const rawText = await this.aiProvider.generateFromText(prompt);
+    const rawText = await this.aiProvider.generateFromTextStream(prompt);
     const response = parseAiJsonResponse(rawText, CandidateGenerationResponseSchema);
 
     const safeCandidates = this.aiSafety.filterCandidates(response.candidates);

@@ -9,5 +9,6 @@ export { ForbiddenError } from './forbidden.error';
 export { IntegrationError } from './integration.error';
 export { NotFoundError } from './not-found.error';
 export { PayloadTooLargeError } from './payload-too-large.error';
+export { TooManyRequestsError } from './too-many-requests.error';
 export { UnauthorizedError } from './unauthorized.error';
 export { ValidationError } from './validation.error';

@@ -5,13 +5,17 @@ import { isProcessEnvAccess } from "../shared/source-utils.mjs";
  * process.env may only be read inside the config/bootstrap layer:
  * - apps/api/src/config/** (AppConfigService and its env loader/schema)
  * - apps/api/src/bootstrap/** (process wiring before DI is available)
- * - apps/web/src/lib/config/** (public env wrapper)
+ * - apps/web/src/lib/config/** (legacy public env wrapper)
+ * - apps/web/src/packages/env/** (canonical public/server env facade in the
+ *   frontend package anatomy; governed by the frontend
+ *   no-process-env-outside-config rule)
  * - build/test tooling files (next.config, vitest/playwright configs, scripts)
  */
 const ALLOWED_PATH_PATTERNS = [
   "/apps/api/src/config/",
   "/apps/api/src/bootstrap/",
   "/apps/web/src/lib/config/",
+  "/apps/web/src/packages/env/",
   "/scripts/",
   "/e2e/",
 ];

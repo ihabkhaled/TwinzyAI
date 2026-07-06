@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const E2E_PORT = 3100;
+// Defaults to a dedicated port; set E2E_PORT=3000 to reuse an already-running
+// `next dev` (the mocked backend is intercepted in the browser either way).
+const E2E_PORT = Number(process.env['E2E_PORT'] ?? '3100');
 
 const BASE_URL = `http://localhost:${E2E_PORT}`;
 

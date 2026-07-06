@@ -42,6 +42,48 @@ function isTargetFile(sourcePath) {
   );
 }
 
+function reportInlineConsts(context, node) {
+  if (node.kind !== "const") {
+    return;
+  }
+
+  for (const declaration of node.declarations) {
+    if (isFunctionValue(declaration.init)) {
+      continue;
+    }
+    if (declaration.init && declaration.init.type === "CallExpression") {
+      continue;
+    }
+
+    const name =
+      declaration.id.type === "Identifier" ? declaration.id.name : "(pattern)";
+
+    if (APPROVED_CONST_NAMES.has(name)) {
+      continue;
+    }
+
+    context.report({
+      node: declaration,
+      messageId: "inlineConst",
+      data: { name },
+    });
+  }
+}
+
+function reportInlineType(context, node, kind) {
+  context.report({ node, messageId: "inlineType", data: { kind } });
+}
+
+function componentBodyVisitors(context) {
+  const report = (node) =>
+    context.report({ node, messageId: "componentBodyDeclaration" });
+  return {
+    "FunctionDeclaration BlockStatement > VariableDeclaration": report,
+    "ArrowFunctionExpression BlockStatement > VariableDeclaration": report,
+    "FunctionExpression BlockStatement > VariableDeclaration": report,
+  };
+}
+
 export default {
   meta: {
     type: "problem",
@@ -66,96 +108,21 @@ export default {
       return {};
     }
 
-    const componentFile = isComponentFile(sourcePath);
-
-    function checkModuleLevelConst(node) {
-      if (node.kind !== "const") {
-        return;
-      }
-
-      for (const declaration of node.declarations) {
-        if (isFunctionValue(declaration.init)) {
-          continue;
-        }
-
-        if (declaration.init && declaration.init.type === "CallExpression") {
-          continue;
-        }
-
-        const name =
-          declaration.id.type === "Identifier"
-            ? declaration.id.name
-            : "(pattern)";
-
-        if (APPROVED_CONST_NAMES.has(name)) {
-          continue;
-        }
-
-        context.report({
-          node: declaration,
-          messageId: "inlineConst",
-          data: { name },
-        });
-      }
-    }
+    const checkConst = (node) => reportInlineConsts(context, node);
 
     return {
-      TSEnumDeclaration(node) {
-        context.report({
-          node,
-          messageId: "inlineType",
-          data: { kind: "enum" },
-        });
-      },
-      "Program > TSInterfaceDeclaration"(node) {
-        context.report({
-          node,
-          messageId: "inlineType",
-          data: { kind: "interface" },
-        });
-      },
-      "Program > ExportNamedDeclaration > TSInterfaceDeclaration"(node) {
-        context.report({
-          node,
-          messageId: "inlineType",
-          data: { kind: "interface" },
-        });
-      },
-      "Program > TSTypeAliasDeclaration"(node) {
-        context.report({
-          node,
-          messageId: "inlineType",
-          data: { kind: "type alias" },
-        });
-      },
-      "Program > ExportNamedDeclaration > TSTypeAliasDeclaration"(node) {
-        context.report({
-          node,
-          messageId: "inlineType",
-          data: { kind: "type alias" },
-        });
-      },
-      "Program > VariableDeclaration"(node) {
-        checkModuleLevelConst(node);
-      },
-      "Program > ExportNamedDeclaration > VariableDeclaration"(node) {
-        checkModuleLevelConst(node);
-      },
-      ...(componentFile
-        ? {
-            "FunctionDeclaration BlockStatement > VariableDeclaration"(node) {
-              context.report({ node, messageId: "componentBodyDeclaration" });
-            },
-            "ArrowFunctionExpression BlockStatement > VariableDeclaration"(
-              node,
-            ) {
-              context.report({ node, messageId: "componentBodyDeclaration" });
-            },
-            "FunctionExpression BlockStatement > VariableDeclaration"(node) {
-              context.report({ node, messageId: "componentBodyDeclaration" });
-            },
-          }
-        : {}),
+      TSEnumDeclaration: (node) => reportInlineType(context, node, "enum"),
+      "Program > TSInterfaceDeclaration": (node) =>
+        reportInlineType(context, node, "interface"),
+      "Program > ExportNamedDeclaration > TSInterfaceDeclaration": (node) =>
+        reportInlineType(context, node, "interface"),
+      "Program > TSTypeAliasDeclaration": (node) =>
+        reportInlineType(context, node, "type alias"),
+      "Program > ExportNamedDeclaration > TSTypeAliasDeclaration": (node) =>
+        reportInlineType(context, node, "type alias"),
+      "Program > VariableDeclaration": checkConst,
+      "Program > ExportNamedDeclaration > VariableDeclaration": checkConst,
+      ...(isComponentFile(sourcePath) ? componentBodyVisitors(context) : {}),
     };
   },
 };

@@ -84,80 +84,83 @@ export default {
     }
 
     return {
-      FunctionDeclaration(node) {
-        if (
-          node.parent.type !== "Program" &&
-          node.parent.type !== "ExportNamedDeclaration"
-        ) {
-          context.report({ node, messageId: "inlineFunction" });
-        }
-      },
-      "JSXAttribute > JSXExpressionContainer > ArrowFunctionExpression"(node) {
-        context.report({ node, messageId: "inlineHandler" });
-      },
-      "JSXAttribute > JSXExpressionContainer > FunctionExpression"(node) {
-        context.report({ node, messageId: "inlineHandler" });
-      },
-      CallExpression(node) {
-        if (
-          isInsideJsxTree(node) &&
-          node.callee.type === "MemberExpression" &&
-          node.callee.property.type === "Identifier" &&
-          TRANSFORM_METHODS.has(node.callee.property.name)
-        ) {
-          context.report({
-            node,
-            messageId: "inlineTransform",
-            data: { method: node.callee.property.name },
-          });
-        }
-      },
-      ConditionalExpression(node) {
-        if (
-          node.parent.type === "ConditionalExpression" ||
-          node.consequent.type === "ConditionalExpression" ||
-          node.alternate.type === "ConditionalExpression"
-        ) {
-          context.report({ node, messageId: "nestedTernary" });
-        }
-      },
-      NewExpression(node) {
-        if (node.callee.type === "Identifier" && node.callee.name === "Date") {
-          context.report({
-            node,
-            messageId: "inlineComputation",
-            data: { what: "new Date()" },
-          });
-        }
-      },
-      MemberExpression(node) {
-        if (node.object.type === "Identifier" && node.object.name === "Intl") {
-          context.report({
-            node,
-            messageId: "inlineComputation",
-            data: { what: "Intl.*" },
-          });
-        }
-      },
-      Literal(node) {
-        if (node.regex && isInsideJsxTree(node)) {
-          context.report({
-            node,
-            messageId: "inlineComputation",
-            data: { what: "a regex literal" },
-          });
-        }
-      },
-      ObjectExpression(node) {
-        if (isInsideJsxAttribute(node)) {
-          context.report({ node, messageId: "inlineConfigObject" });
-        }
-      },
-      ArrayExpression(node) {
-        if (isInsideJsxAttribute(node)) {
-          context.report({ node, messageId: "inlineConfigObject" });
-        }
-      },
+      ...structuralVisitors(context),
+      ...jsxComputationVisitors(context),
     };
   },
 };
+
+function structuralVisitors(context) {
+  return {
+    FunctionDeclaration(node) {
+      if (
+        node.parent.type !== "Program" &&
+        node.parent.type !== "ExportNamedDeclaration"
+      ) {
+        context.report({ node, messageId: "inlineFunction" });
+      }
+    },
+    "JSXAttribute > JSXExpressionContainer > ArrowFunctionExpression"(node) {
+      context.report({ node, messageId: "inlineHandler" });
+    },
+    "JSXAttribute > JSXExpressionContainer > FunctionExpression"(node) {
+      context.report({ node, messageId: "inlineHandler" });
+    },
+    ConditionalExpression(node) {
+      if (
+        node.parent.type === "ConditionalExpression" ||
+        node.consequent.type === "ConditionalExpression" ||
+        node.alternate.type === "ConditionalExpression"
+      ) {
+        context.report({ node, messageId: "nestedTernary" });
+      }
+    },
+  };
+}
+
+function jsxComputationVisitors(context) {
+  const reportComputation = (node, what) =>
+    context.report({ node, messageId: "inlineComputation", data: { what } });
+
+  return {
+    CallExpression(node) {
+      if (
+        isInsideJsxTree(node) &&
+        node.callee.type === "MemberExpression" &&
+        node.callee.property.type === "Identifier" &&
+        TRANSFORM_METHODS.has(node.callee.property.name)
+      ) {
+        context.report({
+          node,
+          messageId: "inlineTransform",
+          data: { method: node.callee.property.name },
+        });
+      }
+    },
+    NewExpression(node) {
+      if (node.callee.type === "Identifier" && node.callee.name === "Date") {
+        reportComputation(node, "new Date()");
+      }
+    },
+    MemberExpression(node) {
+      if (node.object.type === "Identifier" && node.object.name === "Intl") {
+        reportComputation(node, "Intl.*");
+      }
+    },
+    Literal(node) {
+      if (node.regex && isInsideJsxTree(node)) {
+        reportComputation(node, "a regex literal");
+      }
+    },
+    ObjectExpression(node) {
+      if (isInsideJsxAttribute(node)) {
+        context.report({ node, messageId: "inlineConfigObject" });
+      }
+    },
+    ArrayExpression(node) {
+      if (isInsideJsxAttribute(node)) {
+        context.report({ node, messageId: "inlineConfigObject" });
+      }
+    },
+  };
+}

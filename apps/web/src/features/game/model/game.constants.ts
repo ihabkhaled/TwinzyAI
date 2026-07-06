@@ -1,4 +1,5 @@
-import type { TraitKey } from '@twinzy/shared';
+import type { GameStreamStageValue, TraitKey } from '@twinzy/shared';
+import { GameStreamStage } from '@twinzy/shared';
 
 import type { TranslationKey } from '@/i18n';
 
@@ -7,9 +8,22 @@ export {
   ALLOWED_IMAGE_MIME_TYPES,
   DEFAULT_MAX_IMAGE_SIZE_BYTES,
   GAME_ANALYZE_PATH,
+  GAME_ANALYZE_STREAM_PATH,
 } from '@twinzy/shared';
 
 export const UPLOAD_INPUT_ACCEPT = 'image/jpeg,image/png,image/webp';
+
+/** Camera input accepts any image so mobile OSes open the camera app directly. */
+export const CAMERA_INPUT_ACCEPT = 'image/*';
+
+/** i18n label key for each streamed pipeline stage, shown as live progress. */
+export const STAGE_LABEL_KEYS: Record<GameStreamStageValue, TranslationKey> = {
+  [GameStreamStage.Validating]: 'game.stage.validating',
+  [GameStreamStage.ExtractingTraits]: 'game.stage.extractingTraits',
+  [GameStreamStage.GeneratingCandidates]: 'game.stage.generatingCandidates',
+  [GameStreamStage.Judging]: 'game.stage.judging',
+  [GameStreamStage.Aggregating]: 'game.stage.aggregating',
+} as const;
 
 /** i18n label key for each of the 15 trait fields, in display order. */
 export const TRAIT_LABEL_KEYS: Record<TraitKey, TranslationKey> = {

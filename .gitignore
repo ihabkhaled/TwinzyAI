@@ -33,3 +33,6 @@ tmp/
 
 # Agent worktrees / local tooling state
 .claude/
+
+# Parallel frontend-anatomy migration WIP (other agent, incomplete, not wired into the app)
+.migration-wip/

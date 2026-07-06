@@ -1,4 +1,8 @@
-import { isInFolder, isTestFile } from "../shared/path-utils.mjs";
+import {
+  isInFolder,
+  isTestFile,
+  normalizePath,
+} from "../shared/path-utils.mjs";
 import {
   RAW_HTTP_PACKAGES,
   WRAPPED_LIBRARIES,
@@ -12,6 +16,14 @@ import { getImportSource } from "../shared/source-utils.mjs";
  * Business code imports the wrapper, never the raw package.
  */
 const WRAPPER_HOMES = ["lib", "infrastructure", "adapters", "gateways", "core"];
+
+/**
+ * The frontend vendor-wrapper anatomy (apps/web/src/packages/<vendor>/) is the
+ * web-side equivalent of the backend wrapper homes. Exact vendor ownership
+ * there is enforced by the frontend `no-raw-package-imports` rule, so this
+ * backend rule defers to it instead of double-flagging.
+ */
+const FRONTEND_PACKAGE_HOME = "/apps/web/src/packages/";
 
 export default {
   meta: {
@@ -33,6 +45,7 @@ export default {
 
     if (
       isTestFile(filename) ||
+      normalizePath(filename).includes(FRONTEND_PACKAGE_HOME) ||
       WRAPPER_HOMES.some((home) => isInFolder(filename, home))
     ) {
       return {};

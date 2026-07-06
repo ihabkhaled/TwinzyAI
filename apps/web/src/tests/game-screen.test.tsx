@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { GameScreen } from '@/features/game';
-import { analyzeImageRequest } from '@/features/game/gateways/game.gateway';
+import { analyzeImageStreamRequest } from '@/features/game/gateways/game.gateway';
 import { en } from '@/i18n/en';
 import { HttpClientError } from '@/lib/http';
 
@@ -12,9 +12,12 @@ import { buildFinalResult, buildImageFile } from './fixtures/game-fixtures';
 
 vi.mock('@/features/game/gateways/game.gateway', () => ({
   analyzeImageRequest: vi.fn(),
+  analyzeImageStreamRequest: vi.fn(),
 }));
 
-const mockedAnalyze = vi.mocked(analyzeImageRequest);
+// The game UI uses the streaming request; the mock returns the final result
+// directly (the intermediate stage events are exercised by the gateway tests).
+const mockedAnalyze = vi.mocked(analyzeImageStreamRequest);
 
 const renderGameScreen = (): void => {
   const client = new QueryClient({
@@ -29,7 +32,10 @@ const renderGameScreen = (): void => {
 
 const selectValidFileAndConsent = async (): Promise<void> => {
   const user = userEvent.setup();
-  await user.upload(screen.getByLabelText(en['game.uploadLabel'], { exact: false }), buildImageFile());
+  await user.upload(
+    screen.getByLabelText(en['game.uploadLabel'], { exact: false }),
+    buildImageFile(),
+  );
   await user.click(screen.getByRole('checkbox', { name: en['game.consentLabel'] }));
 };
 

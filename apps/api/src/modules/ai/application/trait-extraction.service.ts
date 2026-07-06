@@ -33,7 +33,7 @@ export class TraitExtractionService {
   public async extractTraits(imageBuffer: Buffer, mimeType: string): Promise<Traits> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.TraitExtraction, {});
 
-    const rawText = await this.aiProvider.generateFromImage(prompt, {
+    const rawText = await this.aiProvider.generateFromImageStream(prompt, {
       mimeType,
       base64Data: imageBuffer.toString('base64'),
     });

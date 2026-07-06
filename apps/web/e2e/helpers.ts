@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 
-export const ANALYZE_ROUTE = '**/api/v1/game/analyze';
+/** The UI uses the streaming endpoint; the glob covers /analyze and /analyze/stream. */
+export const ANALYZE_ROUTE = '**/api/v1/game/analyze/stream';
 
 const TRAIT_KEYS = [
   'faceShape',
@@ -40,21 +41,42 @@ export const buildSuccessBody = (): Record<string, unknown> => ({
   disclaimer: DISCLAIMER,
 });
 
+/** Serializes messages into an SSE event-stream body. */
+const toEventStream = (messages: Record<string, unknown>[]): string =>
+  messages
+    .map((message) => `event: ${String(message['event'])}\ndata: ${JSON.stringify(message)}\n\n`)
+    .join('');
+
+const SUCCESS_STREAM = (): Record<string, unknown>[] => [
+  { event: 'accepted' },
+  { event: 'stage', stage: 'validating' },
+  { event: 'stage', stage: 'extracting-traits' },
+  { event: 'stage', stage: 'generating-candidates' },
+  { event: 'stage', stage: 'judging' },
+  { event: 'stage', stage: 'aggregating' },
+  { event: 'result', result: buildSuccessBody() },
+];
+
 export const mockAnalyzeSuccess = async (page: Page): Promise<void> => {
   await page.route(ANALYZE_ROUTE, async (route) => {
-    await route.fulfill({ status: 200, json: buildSuccessBody() });
+    await route.fulfill({
+      status: 200,
+      contentType: 'text/event-stream',
+      body: toEventStream(SUCCESS_STREAM()),
+    });
   });
 };
 
-export const mockAnalyzeFailure = async (page: Page, status = 502): Promise<void> => {
+export const mockAnalyzeFailure = async (page: Page): Promise<void> => {
   await page.route(ANALYZE_ROUTE, async (route) => {
     await route.fulfill({
-      status,
-      json: {
-        statusCode: status,
-        errorCode: 'AI_PROVIDER_UNAVAILABLE',
-        message: 'unavailable',
-      },
+      status: 200,
+      contentType: 'text/event-stream',
+      body: toEventStream([
+        { event: 'accepted' },
+        { event: 'stage', stage: 'validating' },
+        { event: 'error', errorCode: 'AI_PROVIDER_UNAVAILABLE', message: 'unavailable' },
+      ]),
     });
   });
 };
@@ -62,8 +84,8 @@ export const mockAnalyzeFailure = async (page: Page, status = 502): Promise<void
 /** Minimal structurally-valid JPEG the client-side validator accepts. */
 export const buildJpegPayload = (): { name: string; mimeType: string; buffer: Buffer } => {
   const bytes = [
-    0xff, 0xd8, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x01, 0xe0, 0x02, 0x80, 0x03, 0x01, 0x22, 0x00,
-    0x02, 0x11, 0x01, 0x03, 0x11, 0x01, 0xff, 0xd9,
+    0xff, 0xd8, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x01, 0xe0, 0x02, 0x80, 0x03, 0x01, 0x22, 0x00, 0x02,
+    0x11, 0x01, 0x03, 0x11, 0x01, 0xff, 0xd9,
   ];
   return { name: 'photo.jpg', mimeType: 'image/jpeg', buffer: Buffer.from(bytes) };
 };

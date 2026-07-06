@@ -64,8 +64,27 @@ export class AppConfigService {
     return this.configService.get('GEMINI_MODEL', { infer: true });
   }
 
+  /** Fallback model ids, in priority order (may be empty). */
+  public get geminiFallbackModels(): readonly string[] {
+    return this.toList(this.configService.get('GEMINI_FALLBACK_MODELS', { infer: true }));
+  }
+
+  /**
+   * The ordered model chain the adapter tries: the primary model first, then
+   * each configured fallback, de-duplicated and empty entries removed.
+   */
+  public get geminiModelChain(): readonly string[] {
+    return [...new Set([this.geminiModel, ...this.geminiFallbackModels])].filter(
+      (model) => model.length > 0,
+    );
+  }
+
   public get geminiTimeoutMs(): number {
     return this.configService.get('GEMINI_TIMEOUT_MS', { infer: true });
+  }
+
+  public get geminiStreamIdleTimeoutMs(): number {
+    return this.configService.get('GEMINI_STREAM_IDLE_TIMEOUT_MS', { infer: true });
   }
 
   public get maxImageSizeBytes(): number {
@@ -76,11 +95,19 @@ export class AppConfigService {
     return this.configService.get('ENABLE_CLAMAV', { infer: true });
   }
 
-  public get clamAvHost(): string {
-    return this.configService.get('CLAMAV_HOST', { infer: true });
+  /** Ordered clamd hosts to try; the adapter caches the first reachable one. */
+  public get clamAvHosts(): readonly string[] {
+    return this.toList(this.configService.get('CLAMAV_HOSTS', { infer: true }));
   }
 
   public get clamAvPort(): number {
     return this.configService.get('CLAMAV_PORT', { infer: true });
+  }
+
+  private toList(value: string): string[] {
+    return value
+      .split(',')
+      .map((entry) => entry.trim())
+      .filter((entry) => entry.length > 0);
   }
 }
