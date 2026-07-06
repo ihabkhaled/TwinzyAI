@@ -2,6 +2,8 @@
 
 Date: 2026-07-06 · Build: main @ d7efd51 · Operator: AI-assisted delivery (Claude)
 
+> **Addendum 2026-07-07 (build @ 81b48ba)** — see "Streaming, camera & resilience" at the bottom.
+
 ## Scope validated
 
 Full product: Twinzy monorepo — Next.js 16 web (App Router, PWA), NestJS 11 api on Fastify,
@@ -66,3 +68,52 @@ headers (30/min global, 10/min analyze).
 - E2E runs against a mocked backend by default; real-Gemini runs are manual
   (docs/docker-local-dev.md).
 - Trivy 0.72 available (0.71 installed) — routine tool bump.
+
+---
+
+## Addendum — Streaming, camera & resilience (2026-07-07, build @ 81b48ba)
+
+### What changed
+- **No-timeout streaming analyze.** New `POST /api/v1/game/analyze/stream` returns
+  `text/event-stream` and emits `accepted` → `stage` (validating → extracting-traits →
+  generating-candidates → judging → aggregating) → `result` / `error`, plus keep-alive
+  heartbeats. The Gemini adapter now uses `generateContentStream` with an **idle
+  (inter-chunk) timeout** (`GEMINI_STREAM_IDLE_TIMEOUT_MS`) instead of a fixed total
+  deadline, so a long generation is never cut off while the model is still producing.
+  The frontend consumes the stream with a `fetch` + `ReadableStream` reader (no client
+  timeout) and shows live per-stage progress. Same safety guarantees preserved (image
+  only in trait extraction, buffer wiped in `finally`, text-only after; error events use
+  the identical safe envelope as JSON errors).
+- **Gemini rate-limit + model fallback.** A pure classifier maps provider errors to
+  rate-limited / unavailable / fatal. Each call is retried down the model chain
+  (`GEMINI_MODEL` + `GEMINI_FALLBACK_MODELS`) on 429/overload/model-not-found; when every
+  model is rate-limited the request fails with a new `429 AI_RATE_LIMITED` the UI invites
+  a retry on. Non-retryable errors stop immediately.
+- **Camera capture.** A "Take a photo" control (`<input capture="environment">`) sits
+  beside upload, feeding the same validation/preview/analyze flow (native camera on mobile).
+- **UI spacing.** Results actions and the game page gained bottom padding / breathing room
+  so buttons no longer stick to the viewport bottom.
+- **ClamAV hosts to env.** The hardcoded fallback host list became the `CLAMAV_HOSTS`
+  env array (`.env`, `.env.example`, `docker-compose.yml`).
+
+### Validation (all on build @ 81b48ba)
+| Gate | Result |
+| --- | --- |
+| `npm run lint` | PASS — 0 errors, 0 warnings |
+| `npm run typecheck` (tsgo for api) | PASS — 0 errors |
+| Unit + integration | PASS — **290/290** tests (37 files; +36 new) |
+| Coverage | PASS — 98.94% stmts / 96.98% branches / 100% funcs / 98.92% lines |
+| Build (shared → api → web) | PASS |
+| E2E (Playwright, SSE mocks) | PASS — 11/11 |
+| Live SSE smoke (real API :4000) | PASS — streamed `accepted`/`stage`/`error` frames, safe message, no timeout, no leak |
+
+### Known gaps / notes
+- **Parallel frontend-anatomy migration WIP.** Another agent left `apps/web/src/shared`
+  and `apps/web/src/packages` (a strict `Component→Hook→Service→Gateway` anatomy) as
+  **untracked, incomplete** files not imported by the running app. They are excluded from
+  typecheck (`apps/web/tsconfig.json`), tests (`vitest.config.ts` web-unit), and lint
+  (`eslint/ignores.config.mjs`) until finished, and are intentionally left uncommitted.
+- **Live Gemini outcome depends on the key's quota/model availability.** The streaming +
+  fallback infrastructure is proven and unit-tested; a successful end-to-end match
+  requires at least one reachable, non-exhausted model in `GEMINI_MODEL` /
+  `GEMINI_FALLBACK_MODELS`. The live smoke surfaced a provider-unavailable error safely.
