@@ -1,86 +1,95 @@
 # Stack & Toolchain
 
-> The exact runtime, build, lint, and test toolchain this workspace ships. The configuration files referenced here are real and live at the repo root — drop them into a NestJS project (or start from this repo) and you inherit the whole strict setup. The business stack (ORM, DB, cache, broker) is intentionally left to the project; everything else is opinionated and locked.
+> The exact runtime, build, lint, and test toolchain this monorepo ships. Everything here is real and lives at the repo root or in the workspace `package.json` files. The stack is opinionated and locked: zod everywhere, every vendor wrapped, no database by design.
+
+## Monorepo layout (npm workspaces)
+
+- **`apps/api`** — `@twinzy/api`, NestJS 11 backend.
+- **`apps/web`** — Next.js frontend (summary below).
+- **`packages/shared`** — `@twinzy/shared`: zod schemas, constants, as-const enums, types, utils. Consumed as **built dist** via a workspace dependency (`main`/`types` → `dist/`), **no TS path alias** — which is why every root script that compiles or tests runs `npm run build:shared` first.
+- **`packages/tsconfig`**, **`packages/eslint-config`** — shared config workspaces.
 
 ## Runtime & language
 
-- **Node.js 20+** (`engines.node >= 20`, `npm >= 10`).
-- **TypeScript 6** (`typescript 6.0.3`) for editor/types, type-checked & built with the toolchain below.
-- **tsgo** — `@typescript/native-preview`, the native TypeScript compiler used for fast type-checking (`npm run typecheck` → `tsgo --noEmit`). It type-checks; it does not run `.ts`.
-- **NestJS 11** on the **Fastify** platform (`@nestjs/platform-fastify`); `@nestjs/platform-express` is also installed so a project can switch platforms.
+- **Node.js >= 22** (`engines.node >= 22`; developed on Node 24).
+- **TypeScript ~6.0.3**, maximally strict via [`tsconfig.base.json`](../tsconfig.base.json): `strict` plus `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noImplicitReturns`, `noImplicitOverride`, `noPropertyAccessFromIndexSignature`, `noUnusedLocals`, `noUnusedParameters`, `useUnknownInCatchVariables`, `noFallthroughCasesInSwitch`, `allowUnreachableCode: false`, `noEmitOnError`, `noUncheckedSideEffectImports`, `isolatedModules`. These flags are why "no `any`", "no `!`", and "handle every nullable" are mechanically true here.
+- **Typecheck** is per-workspace behind `npm run typecheck` (root builds shared first): the **api** workspace type-checks with **tsgo** (`@typescript/native-preview`, the native TypeScript compiler — fast `--noEmit` checking only), the **web** workspace with regular `tsc`.
 
-## Framework & libraries (shipped)
+## Backend libraries (apps/api)
 
-- **@nestjs/common / core** 11.1.x — framework.
-- **@nestjs/config** — typed, validated configuration.
-- **@nestjs/swagger** — OpenAPI.
-- **@nestjs/throttler** — rate limiting.
-- **@nestjs/jwt + @nestjs/passport + passport-jwt** — auth building blocks.
-- **@nestjs/throttler** — rate limiting, owned by [`src/core/rate-limit`](../src/core/rate-limit).
-- **class-validator + class-transformer** — DTO validation (primary), owned by [`src/core/validation`](../src/core/validation); DTOs use its re-exports. Zod is supported via a custom pipe (see [`/rules/05-dto-and-validation.md`](../rules/05-dto-and-validation.md)).
-- **nestjs-pino + pino + pino-http** — structured logging for every request (redaction, 4xx→`warn` / 5xx→`error`), owned by [`src/core/logger`](../src/core/logger); everything else logs through `AppLogger`. `pino-pretty` for dev.
-- **@fastify/helmet + @fastify/cors + @fastify/cookie** — security headers, CORS, cookie parsing; the HTTP platform vendor is owned by [`src/bootstrap`](../src/bootstrap).
-- **reflect-metadata, rxjs, tslib** — framework runtime.
+- **NestJS 11** (`@nestjs/common`, `@nestjs/core`) on **Fastify 5** — `@nestjs/platform-fastify` with `@fastify/helmet`, `@fastify/cors`, `@fastify/cookie`, `@fastify/multipart`. A **root `overrides` entry dedupes fastify to a single version** across the tree so plugin/adapter version skew cannot occur. Platform assembly (bounded body limit, `trustProxy`, UUID `genReqId`) is owned by `src/bootstrap`.
+- **nestjs-pino + pino + pino-http** (+ `pino-pretty` in dev) — structured request logging behind the `AppLogger` port in `src/core/logger`; redaction built in.
+- **@nestjs/config** — typed configuration, validated fail-fast by the zod `EnvSchema` in `src/config`.
+- **@nestjs/swagger** — OpenAPI, **flag-gated** via `src/core/openapi` + bootstrap (off unless enabled by config).
+- **@nestjs/throttler** — rate limiting, owned by `src/core/rate-limit` (analyze route: 10/min).
+- **zod 4** — the only validation vendor, everywhere (DTOs, env, AI responses). class-validator is banned.
+- **@google/genai** — the Gemini SDK, importable **only** inside `modules/ai/adapters/gemini.adapter.ts`; model name always from `GEMINI_MODEL` env.
 
-> **Vendor ownership is ESLint-enforced** ([`eslint/package-boundaries.config.mjs`](../eslint/package-boundaries.config.mjs)): each package above is importable only inside its owning module, so swapping any vendor touches exactly one folder. Dependencies are kept at **latest with `^` ranges** — `npm run deps:check` reports drift, `npm run deps:upgrade` bumps + reinstalls (then run every gate).
+> **Vendor ownership is ESLint-enforced**: each library is importable only inside its owning folder (`architecture/no-direct-sdk-imports`, `architecture/no-raw-library-imports`, `architecture/no-restricted-vendor-imports` + `eslint/package-boundaries.config.mjs`), so swapping any vendor touches exactly one place.
 
-> **Not shipped on purpose (you choose):** ORM/database driver, cache/queue client, mailer, object storage, APM. Add them behind an **adapter** (rules/12) so the rest of the codebase never imports the vendor directly. The reference module under [`../src/modules/articles`](../src/modules/articles) uses an in-memory repository so the starter runs with zero external services.
+## Frontend (apps/web) — summary
 
-## Lint & format toolchain
+Next.js (App Router) + React with Tailwind CSS, TanStack Query, React Hook Form, and zod, following the Component → Hook → Service → Gateway layering ([rules/02](../rules/02-frontend-components-tsx.md)–[04](../rules/04-frontend-services-gateways.md)); all HTTP/storage/share/theme access goes through wrappers in `apps/web/src/lib`, contracts come from `@twinzy/shared`, unit tests run in the `web-unit` vitest project (jsdom), and e2e tests use Playwright. Details live in the frontend rules and `docs/frontend-architecture.md`.
 
-- **ESLint 10 flat config** ([`eslint.config.mjs`](../eslint.config.mjs)) composed from modular files under [`/eslint`](../eslint), including a **custom architecture plugin** that enforces the layered architecture. Target: **0 errors AND 0 warnings**.
-  - typescript-eslint `recommendedTypeChecked` + `strictTypeChecked` + `stylisticTypeChecked`
-  - plugins: import-x, simple-import-sort, unused-imports, promise, regexp, security, sonarjs, unicorn, prettier
-  - custom: `architecture/controller-no-logic`, `architecture/no-restricted-layer-imports`
-- **Prettier 3** ([`.prettierrc`](../.prettierrc)) — single quotes, trailing commas, `printWidth: 80`, `arrowParens: avoid`. Run through ESLint (`prettier/prettier`) so formatting is a lint error.
+## Lint & format
+
+- **ESLint 9 flat config** ([`eslint.config.mjs`](../eslint.config.mjs)) composed from modular files under [`/eslint`](../eslint/index.mjs): base → typescript → imports → promise/security/sonarjs/unicorn/regexp → react/react-hooks/next → **architecture** → test overrides → prettier last. Target: **0 errors AND 0 warnings**.
+  - typescript-eslint strict type-checked presets; plugins: import-x, simple-import-sort, unused-imports, promise, regexp, security, sonarjs, unicorn, jsx-a11y, react, react-hooks, @next/next, testing-library, playwright, vitest.
+  - **Custom architecture plugin** ([`eslint/architecture-plugin`](../eslint/architecture-plugin/rules/controller-no-logic.mjs), config [`eslint/architecture.config.mjs`](../eslint/architecture.config.mjs)) — the mechanical enforcement of [architecture-map.md](./architecture-map.md) §6, with its own vitest project (`lint-rules`).
+- **Prettier 3** ([`.prettierrc.json`](../.prettierrc.json)) — single quotes, trailing commas, `printWidth: 100`, `arrowParens: always`, LF line endings.
 
 ## Test toolchain
 
-- **Vitest 4** ([`vitest.config.mts`](../vitest.config.mts)) — runner. Coverage via **@vitest/coverage-istanbul**.
-- **@nestjs/testing + supertest** — module-level unit tests and HTTP integration/e2e tests.
-- **Coverage gate:** statements / branches / functions / lines at the workspace floor (95%). Touched modules should aim higher (critical paths near 100%). See [`/testing/coverage-policy.md`](../testing/coverage-policy.md).
+- **Vitest 4 multi-project** ([`vitest.config.ts`](../vitest.config.ts)): `api-unit` and `api-integration` (node env, SWC transform for Nest decorator metadata), `web-unit` (jsdom), `shared-unit`, and `lint-rules` (the architecture plugin's own tests). Naming: `*.test.ts` (unit) / `*.integration.test.ts` (api integration).
+- **@nestjs/testing + supertest** — module-level unit tests and HTTP integration tests against the real Fastify app (`await app.getHttpAdapter().getInstance().ready()` before requests).
+- **Playwright** — web e2e (`npm run test:e2e`).
+- **Coverage: @vitest/coverage-v8** with thresholds **95 statements / 90 branches / 95 functions / 95 lines** on a **gated scope** — an explicit `include`/`exclude` set that measures logic-bearing source and excludes composition roots (e.g. `main.ts`, `apps/web/src/app`), test scaffolding, and declaration files.
 
 ## Commit & git-hook toolchain
 
-- **Husky 9** ([`.husky/`](../.husky)) git hooks:
-  - **pre-commit** → `lint-staged` (eslint --fix on staged) + `typecheck` (project-wide).
-  - **commit-msg** → `commitlint` (Conventional Commits, [`commitlint.config.cjs`](../commitlint.config.cjs)).
+- **Husky 9** ([`.husky/`](../.husky/pre-commit)):
+  - **pre-commit** → `lint-staged` (eslint --fix on staged) + `typecheck` (workspace-wide).
+  - **commit-msg** → `commitlint` (Conventional Commits, `@commitlint/config-conventional`).
   - **pre-push** → `test:coverage` + `build`.
-- **lint-staged** ([`.lintstagedrc.cjs`](../.lintstagedrc.cjs)) — lint+fix only staged files, then re-stage.
-- Never bypass hooks (`--no-verify`) without a recorded, approved emergency exception (see the SDLC policy in [`/claude.md`](../claude.md)).
+- Never bypass hooks (`--no-verify`).
 
-## npm scripts
+## Security & dependency hygiene
 
-| Script | Command | Purpose |
-| --- | --- | --- |
-| `start:dev` | `nest start --watch` | Dev server with reload |
-| `build` | `nest build -p tsconfig.build.json` | Production build to `dist/` |
-| `start:prod` | `node dist/src/main` | Run the compiled build |
-| `typecheck` | `tsgo --pretty --noEmit --incremental false` | Project-wide type check |
-| `lint` / `lint:fix` | `eslint` / `eslint --fix` | Lint (0 errors/0 warnings) |
-| `format` / `format:check` | `prettier --write .` / `--check .` | Format / verify |
-| `test` / `test:watch` | `vitest run` / `vitest` | Tests |
-| `test:coverage` | `vitest run --coverage` | Tests + coverage gate |
+- **Trivy** — `npm run security:scan` (gate: HIGH/CRITICAL vulns, secrets, misconfig — includes dev deps, exits non-zero) and `npm run security:scan:full` (full report, every severity).
+- **npm-check-updates** — `npm run deps:check` reports drift, `npm run deps:upgrade` bumps + reinstalls (then run every gate).
+- `npm run audit` — production-dependency audit.
 
-## Security scanning (Trivy)
+## Docker
 
-- **Trivy** (Aqua Security) scans the lockfile for CVEs plus secrets and misconfigurations. Install once (`winget install AquaSecurity.Trivy` / `brew install trivy` / [release binaries](https://github.com/aquasecurity/trivy/releases)), then:
-  - `npm run security:scan` — the gate: HIGH/CRITICAL findings (incl. dev deps) exit non-zero. Run before release and in CI.
-  - `npm run security:scan:full` — full report at every severity.
+- `Dockerfile.api` + `Dockerfile.web`, orchestrated by `docker-compose.yml` (plus `docker-compose.dev.yml`); ClamAV runs as a compose service. Scripts: `docker:up`, `docker:down`, `docker:logs`, `docker:rebuild`. See [docs/docker-local-dev.md](../docs/docker-local-dev.md).
+
+## npm scripts (root)
+
+| Script | Purpose |
+| --- | --- |
+| `dev` / `dev:api` / `dev:web` | Run both apps (concurrently) or one |
+| `build` | `build:shared` → `build:api` → `build:web` |
+| `lint` / `lint:fix` | ESLint flat config, whole repo (0/0 target) |
+| `typecheck` | Build shared, then per-workspace typecheck (tsgo for api, tsc for web) |
+| `test` / `test:watch` | All vitest projects |
+| `test:unit` | `api-unit` + `web-unit` + `shared-unit` + `lint-rules` |
+| `test:integration` | `api-integration` |
+| `test:e2e` | Playwright (web) |
+| `test:coverage` | Coverage with thresholds on the gated scope |
+| `test:security` / `test:file-security` / `test:ai` / `test:pwa` | Focused suites |
+| `validate` | lint + typecheck + test:coverage + build |
+| `security:scan` / `security:scan:full` | Trivy |
+| `deps:check` / `deps:upgrade` | npm-check-updates |
+| `docker:*` | Compose lifecycle |
 
 ## Quality gates (all green before "done")
 
 ```bash
 npm run lint            # 0 errors AND 0 warnings
-npm run typecheck       # tsgo --noEmit, project-wide
-npm run test            # vitest
-npm run test:coverage   # coverage thresholds met
-npm run build           # compiles clean
-npm run security:scan   # trivy: no HIGH/CRITICAL vulns, secrets, or misconfig
+npm run typecheck       # shared build + per-workspace check
+npm run test:unit       # unit projects
+npm run test:coverage   # thresholds 95/90/95/95 on the gated scope
+npm run build           # shared → api → web compiles clean
 ```
 
-A green build is **not** proof of correctness — walk the [review checklist](../rules/15-review-checklist.md) and prove behavior with tests.
-
-## TypeScript strictness (highlights from [`tsconfig.json`](../tsconfig.json))
-
-`strict` + every additional safety flag: `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noImplicitOverride`, `noImplicitReturns`, `noPropertyAccessFromIndexSignature`, `noUnusedLocals`, `noUnusedParameters`, `useUnknownInCatchVariables`, `noFallthroughCasesInSwitch`, `allowUnreachableCode: false`, `isolatedModules`, plus `emitDecoratorMetadata` + `experimentalDecorators` for NestJS DI. These flags are why "no `any`", "no `!`", and "handle every nullable" are mechanically true here.
+A green build is **not** proof of correctness — walk [rules/23](../rules/23-review-checklist.md) and prove behavior with tests before [rules/24](../rules/24-release-gate.md).

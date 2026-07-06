@@ -1,6 +1,37 @@
-# AGENTS.md — Canonical Agent Entry Point
+# AGENTS.md — Agent Bootstrap
 
-Read this first. If anything conflicts, **`rules/` wins**.
+**Root [`CLAUDE.md`](CLAUDE.md) is the canonical operating policy for this repository** — the
+enterprise SDLC governance brain plus the concrete engineering operating system. Read it fully
+before doing any work: analysis, planning, implementation, review, testing, documentation, or
+release. This file only bootstraps you into it; it never overrides it.
+
+Precedence when files differ: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` > `CODEX.md` /
+`cursor.md` > `.cursorrules` (legacy shim). When two rules overlap, the **stricter** one applies.
+
+## Mandatory first actions
+
+Before changing anything:
+
+1. Read root `CLAUDE.md` end to end.
+2. Read the request artifacts under `docs/features/<feature-slug>/` if they exist for your task.
+3. Read the permanent baselines under `docs/sdlc/`.
+4. Read the code **and the tests** you are going to touch, before editing them.
+5. Read `memory/known-pitfalls.md` (plus any other `memory/` decisions relevant to your task).
+
+No one may modify code they have not read.
+
+## Canonical operating rules
+
+- Never skip an SDLC phase; never jump straight to implementation.
+- Every request writes or updates its artifacts under `docs/features/<feature-slug>/`.
+- No implementation before phases `00`–`13` are documented. Depth scales with request size;
+  phase existence and gates never disappear.
+- Tests and documentation ship in the same delivery stream as the behavior they cover
+  (tests first for new behavior).
+- Coverage is measured on **touched modules, per file** — not on repository-wide averages.
+- When a permanent rule, gate, standard, or constraint appears, update `CLAUDE.md` first, then
+  keep every mirror (this file, `CODEX.md`, `cursor.md`, `.cursor/rules/`, `.cursorrules`)
+  aligned in the same delivery stream.
 
 ## Project purpose
 
@@ -13,56 +44,72 @@ matching, or serious facial similarity analysis.
 
 The app NEVER stores: uploaded images, face embeddings, biometric templates, or raw image bytes.
 
-There are NO payments. Do not add payment logic.
+There are NO payments. The game is free forever — never add payment, subscription, or
+monetization logic.
 
 ## Stack
 
 - Frontend: Next.js (App Router) + React + Tailwind CSS + TanStack Query + React Hook Form + Zod
-- Backend: NestJS + Zod + Google Gemini via `GeminiAdapter` only
-- Shared: `packages/shared` (constants/types/enums/interfaces/schemas/utils)
-- Tooling: TypeScript strict, ESLint flat config + custom architecture plugin, Prettier, Husky,
-  lint-staged, Vitest, Playwright, Docker + Docker Compose, npm workspaces
-
-## Mandatory workflow
-
-1. Read the relevant `rules/` files before changing code (start: `rules/00-non-negotiable-rules.md`).
-2. Use `skills/` guides for repeatable tasks (create feature, controller, hook, tests...).
-3. Check `memory/` for decisions already made; do not re-litigate them silently.
-4. Write/update tests with the change (tests first for new behavior).
-5. Run quality gates before claiming done.
+- Backend: NestJS 11 on Fastify + Zod validation (class-validator is forbidden) + Google Gemini
+  via its adapter only
+- Shared: `packages/shared` (cross-side constants/enums/schemas/types/utils)
+- Tooling: TypeScript strict, ESLint flat config + custom architecture plugin (`eslint/`),
+  Prettier, Husky + lint-staged + commitlint, Vitest, Playwright, Docker + Docker Compose,
+  npm workspaces
 
 ## Quality gates
 
 ```bash
-npm run lint
+npm run lint           # 0 errors / 0 warnings
 npm run typecheck
 npm run test:unit
-npm run test:coverage
+npm run test:coverage  # touched modules per file: 95 statements / 90 branches / 95 functions / 95 lines
 npm run build
+npm run security:scan
 ```
 
 All must pass. Never weaken a rule, skip a test, or loosen tsconfig/eslint to get green.
 
-## Non-negotiable rules (summary — full text in rules/)
-
-- No `any`, no `eslint-disable`, no `@ts-ignore`, no `@ts-expect-error`, no non-null assertion `!`.
-- No TypeScript `enum` — use `as const` objects + derived types.
-- No inline domain types/interfaces/constants/DTOs/schemas — dedicated folders.
-- TSX is pure JSX composition: no `useState`/`useEffect`/handlers/logic in components.
-- Backend: `Controller → Manager → Service → Repository`. Controllers delegate one manager call.
-- Frontend: `Component → Hook → Service → Gateway → Backend`.
-- Every third-party library is wrapped (adapter/lib). No raw SDK/`fetch`/`axios`/storage in business code.
-- No `process.env` outside the config module (`apps/api/src/config`, `apps/web/src/lib/config`).
-- All user-facing strings go through i18n (`apps/web/src/i18n`).
-
 ## Architecture map
 
+Backend anatomy (`apps/api/src` — one-way layered dependencies, mechanically enforced):
+
 ```
-apps/web  — Next.js UI  (app/ components/ features/ hooks/ services/ gateways/ lib/ i18n/ ...)
-apps/api  — NestJS API  (modules/{health,game,ai,file-security,result-aggregation,privacy} config/ common/ infrastructure/)
-packages/shared — cross-side constants/types/enums/interfaces/schemas/utils
-eslint/   — split flat config + custom architecture plugin
-docs/ rules/ skills/ memory/ context/ — knowledge base
+modules/<feature>/
+  api/             controllers + dto — thin, exactly one delegation per handler
+  application/     *.use-case.ts (orchestration) + *.service.ts (focused capabilities)
+  domain/          pure policies, entities, state machines
+  infrastructure/  *.repository.ts — persistence only, parameterized, bounded
+  adapters/        *.adapter.ts — every external SDK wrapped (Gemini only via its adapter)
+  model/           feature-owned types/constants
+  lib/             named helpers (mappers, builders, formatters)
+src/core/          AppLogger (pino), AppError + exception filter (messageKey errors.<feature>.<key>),
+                   zod validation pipe, rate-limit (throttler), openapi, http types
+src/config/        typed, zod-validated, fail-fast — the only place that reads process.env
+src/bootstrap/     Fastify app assembly
+```
+
+Frontend OS (`apps/web`): `Component → Hook → Service → Gateway`. TSX is pure composition;
+state/effects/handlers live in hooks; logic lives in `features/*/lib`; HTTP only through the
+gateway/HTTP client wrapper; every user-facing string through `apps/web/src/i18n`.
+
+Knowledge folders:
+
+```
+rules/                 engineering rule bodies (start: rules/00-non-negotiable-rules.md)
+skills/                step-by-step task playbooks
+context/               architecture map, stack/toolchain, task router, reference patterns
+memory/                durable decisions + memory/known-pitfalls.md
+agents/                specialist review roles (architecture, security, tests, release, ...)
+testing/               test strategy, layers, coverage policy, fixtures, gates
+eslint/                split flat config + custom architecture/boundary plugin
+docs/sdlc/             permanent company baselines
+docs/features/<slug>/  request-specific phase artifacts (00-intake ... 27-retrospective)
+test-cases/            reusable detailed test cases
+runbooks/              operational procedures
+architecture/adrs/     architecture decision records
+release-notes/         release communication
+support/               support-facing guidance
 ```
 
 ## AI-safety rules
@@ -82,10 +129,13 @@ docs/ rules/ skills/ memory/ context/ — knowledge base
 
 ## Release checklist
 
-See `rules/24-release-gate.md` and `docs/release-checklist.md`. Short form: all quality gates
-green, Docker up/down clean, no forbidden wording in UI, no secrets in frontend bundle, docs
-updated.
+See the release gate in `rules/`, the baselines in `docs/sdlc/`, and the templates under
+`runbooks/` and `release-notes/`. Short form: all quality gates green, Docker up/down clean,
+no forbidden wording in UI, no secrets in frontend bundle, docs updated, rollback defined.
 
 ## Git etiquette
 
-Do not commit or push unless explicitly asked.
+- Conventional commits, enforced through the Husky hooks (pre-commit lint-staged, commit-msg
+  commitlint, pre-push validation) — one commit per reviewable slice.
+- Never bypass hooks with `--no-verify`.
+- Do not commit or push unless explicitly asked.

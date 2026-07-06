@@ -2,9 +2,14 @@
 description: Backend architecture rules
 globs: ["apps/api/**"]
 ---
-- Flow: Controller → Manager → Service → Repository. Adapters wrap external SDKs.
-- Controllers: HTTP binding only, exactly one manager call, no logic/SDK/env/repository access.
-- Managers orchestrate services; never touch DB/SDK/HTTP directly.
-- Services: one focused capability, small methods, no raw SDK, no process.env.
-- Only `GeminiAdapter` may import the Gemini SDK. Only config module reads process.env.
-- Map all errors to DomainException; never leak provider errors or stack traces.
+- Anatomy (apps/api/src): `modules/<feature>/{api/{controller,dto},application/{use-case,service},domain/,infrastructure/,adapters/,model/,lib/}`
+  plus cross-cutting `src/core` (logger, errors, validation, rate-limit, openapi, http), `src/config`, `src/bootstrap` (Fastify assembly).
+- One-way flow: Controller → Application (use-case/service) → Domain → Infrastructure/Adapters.
+- Controllers (`api/*.controller.ts`): HTTP binding only, exactly one delegation per handler — no logic/SDK/env/repository access.
+- Use-cases orchestrate services + transactions; services stay focused and small; domain stays pure.
+- Repositories (`infrastructure/*.repository.ts`): persistence only, parameterized, bounded.
+- Adapters wrap every external SDK. Only `GeminiAdapter` may import the Gemini SDK.
+- Validation via the shared Zod pipe at the boundary (class-validator forbidden).
+- Errors: typed `AppError` with messageKey `errors.<feature>.<key>`; global exception filter sanitizes — never leak provider errors or stack traces.
+- Logging via `AppLogger` (pino) from `src/core` only. Rate limiting via the throttler in `src/core`.
+- Only `src/config` (zod-validated, fail-fast) reads `process.env`.

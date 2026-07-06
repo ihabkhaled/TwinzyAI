@@ -21,38 +21,38 @@ Design quality before implementation starts.
 
 ### Unit
 
-[Describe the logic units, validation rules, calculations, guards, or helpers that need direct tests.]
+[Describe the logic units, validation rules, guards, or helpers that need direct tests. Vitest, colocated `*.test.ts`, run via `npm run test:unit`. Standard: `testing/unit-testing-standard.md`.]
 
 ### Integration / API
 
-[Describe service-to-service, database, queue, contract, or API flow tests.]
+[Describe API flow, module-boundary, and contract tests. Vitest `*.integration.test.ts` (api-integration project), run via `npm run test:integration`. Standard: `testing/integration-testing-standard.md`.]
 
 ### UI / UX
 
-[Describe component, state, accessibility, and workflow tests.]
+[Describe component, state, accessibility, and workflow tests in `apps/web` (Testing Library under Vitest).]
 
 ### End-to-End
 
-[Describe real user flows from entry point to outcome.]
+[Describe real user flows from entry point to outcome. Playwright in `apps/web`, run via `npm run test:e2e`. Standard: `testing/e2e-testing-standard.md`.]
 
 ### Security
 
-[Describe auth, authz, tenant isolation, abuse, validation, and sensitive-data test needs.]
+[Describe consent, upload-chain, abuse, validation, forbidden-wording, and data-leakage test needs. Automated suites: `npm run test:security` and `npm run test:file-security`.]
 
 ### Regression
 
 [Describe adjacent flows that must be re-tested.]
 
-### Migration / Rollback
+### Rollback
 
-[Describe migration verification, backfill validation, rollback triggers, and rollback checks.]
+[Describe rollback triggers and post-rollback checks. There are no DB migrations in this repository — rollback is `git revert` + redeploy, validated by the release smoke test (`runbooks/release-smoke-test.md`).]
 
 ## Environment and Data Needs
 
-- Test environments needed:
-- Seed data needed:
-- External dependency stubs or sandboxes needed:
-- Monitoring evidence needed:
+- Test environments needed (local dev, `docker compose up --build`):
+- Fixture data needed (synthetic image fixtures — see `apps/api/src/tests/fixtures/` and `testing/test-data-and-fixtures.md`; never real people's photos):
+- External dependency stubs needed (the AI provider adapter is always stubbed in unit/integration tests — no live Gemini calls in CI):
+- Monitoring evidence needed (structured log entries, request-id correlation):
 
 ## Linked Test Case Files
 
@@ -89,5 +89,5 @@ Do not close this phase if:
 
 - only happy paths are covered
 - requirements are not mapped to test layers
-- security, permissions, migration, or rollback tests are omitted without explanation
+- security, consent, or rollback tests are omitted without explanation
 - the team still cannot say what evidence will prove the change works

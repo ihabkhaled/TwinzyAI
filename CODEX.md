@@ -1,21 +1,30 @@
-# CODEX.md — Compact Mirror
+# CODEX.md — Codex Bootstrap Mirror
 
-Canonical entry point: **`AGENTS.md`**. Full rule bodies: **`rules/`** (rules win all conflicts).
-Task guides: **`skills/`**. Past decisions: **`memory/`**. Orientation: **`context/`**.
+**Root `CLAUDE.md` is the canonical operating policy and is binding.** Read it fully before any
+work. This file is only a Codex-compatible pointer; if it ever diverges, `CLAUDE.md` wins.
 
-Do not duplicate rule bodies here. Short form of the non-negotiables:
+Precedence: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` > `CODEX.md` / `cursor.md` >
+`.cursorrules`. When two rules overlap, the stricter one applies.
 
-- No `any`, no `eslint-disable`, no `@ts-ignore`, no non-null assertion `!`.
-- No TypeScript `enum` — `as const` objects + derived types.
-- No inline domain definitions (types/interfaces/constants/DTOs/schemas live in dedicated folders).
-- TSX is pure composition — state/effects/handlers live in hooks, logic in lib/services.
-- Backend: Controller → Manager → Service → Repository. Controllers delegate exactly one manager call.
-- Frontend: Component → Hook → Service → Gateway.
-- All libraries wrapped; no raw SDK/fetch/axios/storage imports in business code.
-- No `process.env` outside config modules.
-- No face recognition, no identity matching, no biometric anything, no image storage.
-- Only the trait-extraction prompt sees the image; candidate/judge prompts are text-only.
-- `GEMINI_MODEL` comes from `.env` — never hardcode.
-- The game is free — never add payment logic.
-- Do not commit or push unless asked.
-- Quality gates before "done": `npm run lint && npm run typecheck && npm run test:unit && npm run build`.
+## Mandatory first actions
+
+1. Read root `CLAUDE.md` end to end (SDLC governance + engineering OS).
+2. Read `AGENTS.md` (agent bootstrap: architecture map, product constraints, gates).
+3. Read the request artifacts under `docs/features/<feature-slug>/` if they exist.
+4. Read the baselines under `docs/sdlc/`, then the code and tests you will touch.
+5. Read `memory/known-pitfalls.md`.
+
+## Non-negotiable shape
+
+- No phase skipping; no implementation before phases `00`–`13` are documented.
+- Tests + docs ship in the same delivery stream as behavior (tests first).
+- Coverage on touched modules, per file: 95 statements / 90 branches / 95 functions / 95 lines.
+- Twinzy is a free game: no payments, no biometrics/identity matching, no image storage;
+  only the trait-extraction prompt sees the image; `GEMINI_MODEL` from `.env`.
+- Conventional commits via Husky hooks; never `--no-verify`; do not commit/push unless asked.
+
+## Quality gates (all green before "done")
+
+```bash
+npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
+```

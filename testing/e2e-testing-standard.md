@@ -1,341 +1,164 @@
-# API End-to-End Testing Standard
+# End-to-End Testing Standard
 
-> The house standard for end-to-end (E2E) tests: boot the **whole Nest application** and drive real HTTP journeys with `supertest` against a real test datastore, asserting status, body contract, persisted state, side effects, and security boundaries. Implements the canon in [/context/architecture-map.md](../context/architecture-map.md), [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), and [/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md). For the step-by-step authoring recipe see the skill [/skills/write-e2e-tests.md](../skills/write-e2e-tests.md).
+> The house standard for end-to-end (E2E) testing — **two tracks**: (A) API journeys through the fully booted Nest application via the Vitest **`api-integration`** project, and (B) browser journeys through the real web UI via **Playwright** inside `apps/web`. Implements the canon in [/context/architecture-map.md](../context/architecture-map.md), [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), and [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md). For the step-by-step authoring recipe see [/skills/write-e2e-tests.md](../skills/write-e2e-tests.md).
 
-E2E is **backend API** testing, not browser testing. We do not drive a UI; we drive HTTP. The "user" is a real HTTP client (`supertest`) calling the assembled application exactly as a production caller would: through the global `ValidationPipe`, the global exception filter, every guard, every interceptor, and the same module wiring `bootstrap/` ships.
+E2E is the slowest, highest-confidence layer, so keep it **few and journey-focused**. Everything a lower layer can prove stays at the lower layer ([testing-strategy.md](./testing-strategy.md)).
 
 ---
 
-## 1. What E2E proves (and what it doesn't)
+## 1. The two tracks
 
-E2E proves a **complete request flow through the assembled system** behaves correctly: authenticate → authorize → validate → act → persist → emit → respond. It is the slowest, highest-confidence layer, so keep it **few and journey-focused**.
-
-| Layer | Scope | Datastore | Globals run | Use for |
+| Track | Runner | Lives in | Drives | Doubles |
 | --- | --- | --- | --- | --- |
-| Unit ([standard](./unit-testing-standard.md)) | one class, deps mocked | none | no | branch logic, policies, mappers |
-| Integration ([standard](./integration-testing-standard.md)) | one slice (controller + real repo) | real, scoped | partial | a controller against its real persistence |
-| **E2E (this file)** | the real `AppModule` over HTTP | real, scoped | **yes** | the journeys that matter end to end |
+| **A — API e2e** | Vitest, `api-integration` project ([vitest.config.ts](../vitest.config.ts)) | `apps/api/src/tests/*.integration.test.ts` | real HTTP against the booted `AppModule` via supertest | only `AI_PROVIDER_ADAPTER` → `FakeAiAdapter` |
+| **B — Browser e2e** | Playwright ([playwright.config.ts](../apps/web/playwright.config.ts)) | `apps/web/e2e/*.spec.ts` | a real Chromium against the dev server (port 3100) | the backend, mocked at the network edge with `page.route` |
 
-> An E2E test that mocks the repository and the service is a slow unit test. Keep the **inside real**; mock only true externals (§5).
+The tracks are deliberately separate: Playwright is **not** a Vitest project, and no Vitest project ever picks up `apps/web/e2e/**` (the `web-unit` project excludes it). Real Gemini is called by neither track — every suite passes offline.
+
+```bash
+npm run test:integration   # Track A — API journeys
+npm run test:e2e           # Track B — Playwright (apps/web workspace)
+```
+
+> An e2e test that fakes a service or a use-case is a slow unit test. Keep the **inside real**; double only the true external edge (the AI provider for Track A, the whole backend for Track B).
 
 ---
 
-## 2. Boot the real application
+## 2. Pitfall: a misnamed test file silently never runs
 
-Compile the genuine `AppModule` and re-apply the **same global setup as [`bootstrap/`](../context/architecture-map.md)** so the running app is production-faithful. Drifting from `bootstrap/` validates a system that doesn't ship.
+Every runner selects files by pattern. A file whose name or location matches **no** project's include pattern is not an error — it is *silence*: the suite stays green while the journey it "covers" is never executed. Check the reported test-file count whenever you add a file.
 
-```ts
-// DO — real app, production-faithful globals, real datastore
-import { Test, type TestingModule } from '@nestjs/testing';
-import { type INestApplication, ValidationPipe } from '@nestjs/common';
-import { AppModule } from '@app/app.module';
-import { AllExceptionsFilter } from '@core/errors';
-import { OrderRepository } from '@modules/order';
-import request from 'supertest';
+| You write | What actually happens |
+| --- | --- |
+| `apps/api/src/tests/game-analyze.integration.test.ts` | runs in `api-integration` — correct |
+| `apps/api/src/modules/game/tests/analyze-game.use-case.test.ts` | runs in `api-unit` — correct |
+| `apps/api/src/tests/game.e2e-spec.ts` | matches **nothing** — silently never runs |
+| `apps/api/src/tests/game.e2e.test.ts` | matches `src/**/*.test.ts` → runs in **`api-unit`**, the wrong project |
+| `packages/shared/src/schemas.test.ts` | `shared-unit` includes only `tests/**` — silently never runs; move it to `packages/shared/tests/` |
+| `apps/web/e2e/game-flow.spec.ts` | Playwright — correct |
+| `apps/web/src/features/game/game-flow.spec.tsx` | Playwright's `testDir` is `e2e/`; `web-unit` includes only `*.test.{ts,tsx}` — silently never runs |
 
-let app: INestApplication;
-let http: ReturnType<typeof request>;
-let orders: OrderRepository;
-
-beforeAll(async () => {
-  const moduleRef: TestingModule = await Test.createTestingModule({
-    imports: [AppModule],
-  }).compile();
-
-  app = moduleRef.createNestApplication();
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-  app.useGlobalFilters(app.get(AllExceptionsFilter));
-  await app.init();
-  await app.getHttpAdapter().getInstance().ready(); // Fastify only: ready before first request
-
-  http = request(app.getHttpServer());
-  orders = moduleRef.get(OrderRepository); // read persisted truth through the repo
-});
-
-afterAll(async () => {
-  await app.close(); // release connections; without it the run hangs
-});
-```
-
-```ts
-// DON'T — hand-wire only the controller; globals never run, so the test lies
-const app = (await Test.createTestingModule({
-  controllers: [OrderController],
-  providers: [{ provide: OrderService, useValue: fakeService }],
-}).compile()).createNestApplication();
-// no ValidationPipe, no exception filter, fake service → proves nothing about the real flow
-```
-
-**Boot rules**
-
-- Import `AppModule` — never hand-assemble controllers + fake providers.
-- Mirror `bootstrap/` exactly (pipe options, exception filter, global interceptors/guards).
-- On Fastify, `await getHttpAdapter().getInstance().ready()` once after `init()`.
-- `await app.close()` in `afterAll` every suite — leaked connections hang or flake the run.
+Rules of thumb: Vitest files end in `.test.ts` (`.integration.test.ts` for the booted-app pass) and live under a `tests/` folder; Playwright files end in `.spec.ts` and live only in `apps/web/e2e/`. Nothing else exists.
 
 ---
 
-## 3. Identity comes from a real token
+## 3. Track A — API journeys
 
-Authentication is part of the journey. Drive the genuine sign-in path and capture the issued token; **never** forge an `Authorization` header or pass a `userId` in the body — that hides IDOR and broken-guard bugs ([rules 33–35](../rules/00-non-negotiable-rules.md), [/skills/add-guard-and-permission.md](../skills/add-guard-and-permission.md)).
+Boot mechanics, fixtures, and the full assertion catalog live in the [integration standard](./integration-testing-standard.md) — Track A **is** the `api-integration` project, exercised as complete journeys rather than single seams. A journey covers the caller's whole experience: consent → upload → pipeline → schema-valid result, plus every rejection a real client can trigger.
 
-```ts
-let ownerToken: string; // seeded principal who owns the resource
-let viewerToken: string; // valid token, lacks the write permission
-
-beforeAll(async () => {
-  const res = await http.post('/auth/login').send({ email: seededEmail, password: seededSecret });
-  expect(res.status).toBe(200);
-  ownerToken = (res.body as { accessToken: string }).accessToken;
-});
-
-const asOwner = (): request.Test => http.get('/orders').set('Authorization', `Bearer ${ownerToken}`);
-```
-
-If the identity provider is itself an external adapter, seed a deterministic verified principal in the test datastore and still route issuance through the app — do not hand-mint tokens.
-
----
-
-## 4. Required journey matrix (per feature)
-
-Cover **journeys, not endpoints** — a sequence a real caller performs. Every feature ships at minimum these buckets; each maps to one or more named `it(...)`.
+### Required journey matrix (the analyze pipeline)
 
 | Journey | Proves | Expected |
 | --- | --- | --- |
-| Happy path | authenticated + authorized + owns the resource | 2xx, row persisted, event emitted |
-| Read-after-write | the write is durable and readable | GET returns the persisted shape |
-| Validation — missing required | DTO rejects | 400, field error, nothing persisted |
-| Validation — wrong type / bad enum | DTO + enum guard reject | 400, lists valid values |
-| Validation — boundary | min/max length & numeric bounds | at-limit passes, over-limit 400 |
-| Validation — unknown property | `whitelist: true` strips/rejects extras | extra field never persisted |
-| AuthN — no / invalid / expired token | request never reaches the handler | 401 |
-| AuthZ — valid token, missing permission | RBAC guard blocks | 403 |
-| Ownership / tenant isolation | another principal's id is invisible | 404 or 403, no cross-tenant leak |
-| Not found | unknown id | 404 with the not-found `messageKey` |
-| Conflict | duplicate of a unique resource | 409 with the conflict `messageKey` |
-| Pagination bounds | list clamps to the hard max (100) | bounded result, no unbounded scan |
-| Idempotency | safe retry of the same operation | no duplicate effect (§6) |
+| Happy path | consent + safe file + 3-step pipeline | 201; body parses with `FinalGameResultSchema`; disclaimer present |
+| Image containment | privacy invariant across the whole flow | exactly 1 `imageCalls` entry; text-only steps carry no image |
+| No consent | the gate stops the pipeline first | 400 `CONSENT_REQUIRED`; zero provider calls |
+| No file | upload validation | 400 `FILE_MISSING` |
+| Disallowed type | MIME/extension policy | 415 `FILE_TYPE_NOT_ALLOWED` |
+| Renamed bytes | magic-byte check | 422 `FILE_INVALID` |
+| Corrupt image | decode check | 422 `FILE_INVALID` |
+| Two files | single-file policy | 400 `MULTIPLE_FILES_NOT_ALLOWED` |
+| Oversized file | the configured size cap | rejected; pipeline never starts |
+| Virus-scan unavailable (prod-mode config) | ClamAV fail-closed | rejected, never silently skipped |
+| Provider failure | error sanitization | 5xx envelope with `errorCode`; no `apiKey`, no `stack` |
+| Provider timeout | timeout mapping | `AI_TIMEOUT` envelope |
+| Empty candidates | fallback branch | schema-valid fallback result, not a crash |
+| Rate limit | the analyze throttle | 429 past the per-route limit |
+| Unsafe provider output | safety filtering | `AI_RESPONSE_UNSAFE` or sanitized result — forbidden wording never reaches the client |
 
-Negative cases get equal weight with the happy path. A green happy path alone is not adequate validation ([rule 42](../rules/00-non-negotiable-rules.md)).
+Negative cases get equal weight with the happy path. A green happy path alone is not adequate validation ([/rules/09-testing-coverage.md](../rules/09-testing-coverage.md)).
+
+### Contract assertions — the three checks per journey
+
+There is no datastore, so "persisted truth" does not exist here; the observable truths are the response, the recorded provider traffic, and the logs.
+
+1. **Response contract** — status code, and the body parsed with the `@twinzy/shared` zod schema (success) or pinned to `{ errorCode }` (failure). Assert the `ErrorCode` member, never a translated/loose message string, so tests hold when wording changes.
+2. **Provider traffic** — `adapter.imageCalls` / `adapter.textCalls` prove which pipeline steps ran and that the image stayed contained.
+3. **Failure hygiene** — on every failure: nothing sensitive in the body (`expect(bodyText).not.toContain('apiKey')`, no stack), and the pipeline stopped where it should (no further provider calls).
+
+```typescript
+it('completes the full journey: consent → upload → schema-valid result', async () => {
+  adapter.queueImageResponse(buildTraitExtractionJson());
+  adapter.queueTextResponse(buildCandidatesJson());
+  adapter.queueTextResponse(buildJudgeJson());
+
+  const response = await request(server())
+    .post('/api/v1/game/analyze')
+    .field('consent', 'true')
+    .attach('image', buildJpegBuffer(), { filename: 'photo.jpg', contentType: 'image/jpeg' })
+    .expect(201);
+
+  expect(FinalGameResultSchema.safeParse(response.body).success).toBe(true);
+  expect((response.body as { disclaimer: string }).disclaimer).toBe(RESULT_DISCLAIMER);
+  expect(adapter.imageCalls).toHaveLength(1);
+  expect(adapter.textCalls).toHaveLength(2);
+});
+```
+
+### Retry semantics
+
+The analyze operation is intentionally **non-idempotent and stateless**: nothing is stored, so a repeated upload simply runs the pipeline again (and burns a throttle slot). The journeys must document that explicitly: a retry after a 4xx is a fresh request; a retry storm hits the 429 boundary. There are no idempotency keys and no duplicate-row hazards — do not invent them.
 
 ---
 
-## 5. Mock only true externals
+## 4. Track B — browser journeys (Playwright)
 
-Everything **inside the application boundary stays real** — controllers, use cases, services, domain, repositories, the datastore. Override **only** the integration adapters that would otherwise leave the box: an email provider, an SMS gateway, a payment provider, object storage, a third-party HTTP client.
+Track B lives in `apps/web` and is **owned by the web workstream** — API-side changes never touch it, but API engineers must know its contract because the QA report ([17-qa-report.md](../docs/features/_template/17-qa-report.md)) draws from both tracks.
 
-```ts
-// DO — override the adapter (your interface), not the vendor SDK
-const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
-  .overrideProvider(EmailAdapter)
-  .useValue({ send: vi.fn().mockResolvedValue(undefined) })
-  .compile();
-```
-
-```ts
-// DON'T — mock the repository/service in an E2E; now you're testing nothing real
-.overrideProvider(OrderRepository).useValue(fakeRepo) // ✗ this is a unit test wearing an E2E costume
-```
-
-Override at the **adapter** seam because that is the documented swap surface ([rules/12](../rules/12-library-wrapping-and-adapters.md), [/skills/add-library-adapter.md](../skills/add-library-adapter.md)). Never let a real external call escape a test.
-
----
-
-## 6. Contract assertions — the four checks per write
-
-A `2xx` is not success. For every state-changing journey assert all four:
-
-### 6.1 Response contract
-
-Status code per the table below, and the response body shape (fields + types). Read-after-write proves durability: GET the resource back and compare key fields.
-
-| Operation | Success | Not found | Validation | AuthN | AuthZ |
-| --- | --- | --- | --- | --- | --- |
-| GET one | 200 | 404 | — | 401 | 403 |
-| GET list | 200 | — | 400 (bad query) | 401 | 403 |
-| POST | 201 | — | 400 | 401 | 403 |
-| PUT / PATCH | 200 | 404 | 400 | 401 | 403 |
-| DELETE | 200 or 204 | 404 | — | 401 | 403 |
-
-### 6.2 Persisted state
-
-Read the row back **through the repository**, not the response, and assert the stored shape — including that ownership/tenant came from the token, and enum columns hold enum members.
-
-```ts
-it('creates an order, returns 201, and persists it for the owner', async () => {
-  const res = await http
-    .post('/orders')
-    .set('Authorization', `Bearer ${ownerToken}`)
-    .send({ sku: 'SKU-1', quantity: 2 });
-
-  expect(res.status).toBe(201);
-  const { id } = res.body as { id: string };
-
-  const persisted = await orders.findById(id);   // truth on disk, not the HTTP body
-  expect(persisted?.ownerId).toBe(seededUserId); // identity came from the token, not the body
-  expect(persisted?.status).toBe(OrderStatus.DRAFT); // enum member, never the string 'DRAFT'
-});
-```
-
-### 6.3 Emitted side effects
-
-If the flow should publish a domain event or enqueue a notification, prove it — spy on the publisher/adapter and assert payload. Also prove fail-safety: a delivery failure must **not** break the user-facing response ([rule 38](../rules/00-non-negotiable-rules.md), [/skills/add-event-handler.md](../skills/add-event-handler.md)).
-
-```ts
-it('emits OrderCreated after commit and survives a delivery failure', async () => {
-  const emit = vi.spyOn(app.get(EventPublisher), 'publish');
-
-  const ok = await http.post('/orders').set('Authorization', `Bearer ${ownerToken}`).send({ sku: 'SKU-2', quantity: 1 });
-  expect(ok.status).toBe(201);
-  expect(emit).toHaveBeenCalledWith(
-    expect.objectContaining({ name: OrderEvent.CREATED, payload: expect.objectContaining({ id: (ok.body as { id: string }).id }) }),
-  );
-
-  emit.mockRejectedValueOnce(new Error('broker down'));
-  const stillOk = await http.post('/orders').set('Authorization', `Bearer ${ownerToken}`).send({ sku: 'SKU-3', quantity: 1 });
-  expect(stillOk.status).toBe(201); // side-effect failure never blocks the workflow
-});
-```
-
-### 6.4 Failure boundary — status AND messageKey, no leakage
-
-Every guard and typed `AppError` has an observable HTTP contract. Pin the status **and** the sanitized `messageKey` the exception filter returns, confirm nothing was persisted on failure, and confirm **no stack / SQL / secret leaks** ([rules 26, 36](../rules/00-non-negotiable-rules.md), [/rules/18-error-handling-and-exceptions.md](../rules/18-error-handling-and-exceptions.md)).
-
-```ts
-it('returns 404 for another tenant’s order without leaking it', async () => {
-  const res = await http.get(`/orders/${otherTenantOrderId}`).set('Authorization', `Bearer ${ownerToken}`);
-  expect(res.status).toBe(404);
-  expect(res.body).toMatchObject({ messageKey: 'errors.order.notFound' });
-  expect(JSON.stringify(res.body)).not.toMatch(/at \w+\.|select .* from/i); // no stack, no SQL
-});
-
-it('returns 400 and persists nothing on a malformed body', async () => {
-  const res = await http.post('/orders').set('Authorization', `Bearer ${ownerToken}`).send({ quantity: -1 });
-  expect(res.status).toBe(400);
-  await expect(orders.findBySku('SKU-bad')).resolves.toHaveLength(0);
-});
-```
-
-The `messageKey` is locale-agnostic (`errors.<feature>.<key>`); assert the key, never a translated string, so the test holds across every supported locale ([/rules/16-i18n-and-messaging.md](../rules/16-i18n-and-messaging.md)).
-
----
-
-## 7. Idempotency and safe retry
-
-Network clients retry. E2E must document and prove the intended retry semantics for each state-changing journey.
-
-- **Idempotent operations** (PUT/PATCH/DELETE, or POST guarded by an idempotency key/unique constraint): repeating the identical request produces the **same end state and no duplicate effect** — no second row, no second event, same status.
-- **Non-idempotent creates**: state the expectation explicitly (a duplicate create yields a second resource, or a 409 if a uniqueness rule applies). Don't leave it implicit.
-
-```ts
-it('treats a repeated update as idempotent — same state, no extra event', async () => {
-  const emit = vi.spyOn(app.get(EventPublisher), 'publish');
-  const body = { status: OrderStatus.CONFIRMED };
-
-  const first = await http.patch(`/orders/${orderId}`).set('Authorization', `Bearer ${ownerToken}`).send(body);
-  const second = await http.patch(`/orders/${orderId}`).set('Authorization', `Bearer ${ownerToken}`).send(body);
-
-  expect(first.status).toBe(200);
-  expect(second.status).toBe(200);
-  const persisted = await orders.findById(orderId);
-  expect(persisted?.status).toBe(OrderStatus.CONFIRMED);
-  expect(emit).toHaveBeenCalledTimes(1); // the no-op repeat emits no second event
-});
-
-it('rejects a duplicate of a unique resource with 409', async () => {
-  await http.post('/accounts').set('Authorization', `Bearer ${ownerToken}`).send({ email: uniqueEmail });
-  const dup = await http.post('/accounts').set('Authorization', `Bearer ${ownerToken}`).send({ email: uniqueEmail });
-  expect(dup.status).toBe(409);
-  expect(dup.body).toMatchObject({ messageKey: 'errors.account.alreadyExists' });
-});
-```
-
-For concurrent retries (same request fired in parallel), assert no lost writes and no `500` — exactly one succeeds where a uniqueness rule applies; reach for concurrency only at the HTTP edge of a test, never inside a service ([rules/09](../rules/09-performance-and-scalability.md)).
-
----
-
-## 8. Pagination bounds
-
-Every list endpoint clamps to the hard max (default cap 100). Prove an over-limit request is bounded rather than an unbounded scan ([rule 37](../rules/00-non-negotiable-rules.md)).
-
-```ts
-it('clamps take to the hard max', async () => {
-  const res = await http.get('/orders?take=10000').set('Authorization', `Bearer ${ownerToken}`);
-  expect(res.status).toBe(200);
-  expect((res.body as { items: unknown[] }).items.length).toBeLessThanOrEqual(MAX_LIST_LIMIT);
-});
-```
-
-Also cover: a page past the end returns an empty array (not an error), and a negative/zero page is a 400.
-
----
-
-## 9. Fixtures, isolation, and determinism
-
-The datastore is **shared across cases in a suite**. Treat isolation as a contract, not a hope. See [/testing/test-data-and-fixtures.md](./test-data-and-fixtures.md) for the canonical fixture conventions.
-
-- **Unique inputs per run.** Derive collision-proof values (`e2e-${Date.now()}@example.test`, unique SKUs) so reruns don't trip unique constraints.
-- **Clean up your own rows** via the repository (parameterized) in `afterAll`; never raw-interpolate ids into cleanup SQL ([/skills/sql-injection-review.md](../skills/sql-injection-review.md)).
-- **Reset spies** between cases (`afterEach(() => vi.restoreAllMocks())`).
-- **Control time** with `vi.useFakeTimers()` for any TTL/expiry-sensitive journey.
-- **Seed deterministically** — a fixed admin/owner/viewer principal set, created once, documented in the fixtures module.
-- **No external network.** All adapters are overridden (§5); a test must pass offline.
-
-```ts
-const runId = Date.now();
-const seededEmail = `e2e-${runId}@example.test`; // unique → no constraint collisions
-afterEach(() => vi.restoreAllMocks());
-afterAll(async () => {
-  await orders.deleteByOwner(seededUserId); // your rows only, via the repo
-});
-```
-
----
-
-## 10. Location, naming, and execution
-
-- **Location:** E2E specs live apart from source so they run as their own pass — `test/e2e/<feature>.e2e-spec.ts`.
-- **Naming:** `describe('<Feature> API (e2e)')`; each `it` names the journey and outcome (`'returns 403 when the caller lacks the permission'`) so a failure explains itself.
-- **One boot per suite** in `beforeAll`; isolate state per case, not per boot (booting the app per test is too slow).
+- **Location & naming:** `apps/web/e2e/<journey>.spec.ts` (`game-flow.spec.ts`, `mobile-theme.spec.ts`, `pwa-a11y.spec.ts`), helpers in `apps/web/e2e/helpers.ts`.
+- **Server:** Playwright starts the dev server on **port 3100** (`npm run dev:e2e`) via the `webServer` block in [playwright.config.ts](../apps/web/playwright.config.ts).
+- **Backend mocked at the edge:** suites intercept API calls with `page.route` — real Gemini is never called; runs are deterministic and offline. Running against a real backend is an explicit, opt-in mode documented in [docs/docker-local-dev.md](../docs/docker-local-dev.md).
+- **Scope:** the upload→consent→result journey, mobile viewport/theming, PWA installability, and axe accessibility checks ([/rules/13-accessibility.md](../rules/13-accessibility.md)).
+- **Discipline:** same determinism rules as everywhere — no fixed sleeps (use Playwright's auto-waiting and `expect` polling), no real user data, no real photographs in fixtures.
 
 ```bash
-# the file you are writing
-npx vitest run test/e2e/order.e2e-spec.ts
-# the full e2e pass + coverage (what pre-push exercises)
-npm run test:coverage
+npm run test:e2e     # from the repo root — runs Playwright in apps/web
 ```
 
 ---
 
-## 11. Coverage and the gate
+## 5. Fixtures, isolation, and determinism
 
-E2E contributes to the workspace coverage floor; it does not replace unit/integration coverage. The critical journeys — auth, authorization, ownership, money/state transitions — should be near 100% ([/testing/coverage-policy.md](./coverage-policy.md)). Drive every change through the full gate ([/testing/quality-gates.md](./quality-gates.md)):
+Canonical fixture conventions: [test-data-and-fixtures.md](./test-data-and-fixtures.md).
+
+- **Synthetic images only.** `buildJpegBuffer()` / `buildPngBuffer()` / `buildWebpBuffer()` / `buildCorruptJpegBuffer()` — never a real photograph, in either track.
+- **Queue exactly what the journey consumes.** A leftover `FakeAiAdapter` queue entry poisons the next test; reset recorded calls and queues in `afterEach`.
+- **One boot per suite** (`beforeAll`), `await app.close()` in `afterAll` — leaked handles hang the run.
+- **Control time** with `vi.useFakeTimers()` only where a journey is time-sensitive; restore in `afterEach`.
+- **No external network** in any track; a test must pass offline.
+
+---
+
+## 6. Coverage and the gate
+
+Track A contributes to the coverage thresholds; Track B does not (Playwright is outside the Vitest coverage scope, and `apps/web` is excluded under the recorded waiver — see [coverage-policy.md](./coverage-policy.md)). The critical journeys — consent, the file-security chain, safety filtering, the 429 boundary, error sanitization — should sit near 100%. Drive every change through the full gate ([quality-gates.md](./quality-gates.md)):
 
 ```bash
 npm run lint            # 0 errors AND 0 warnings
-npm run typecheck       # tsgo --noEmit, project-wide
-npm run test            # vitest
-npm run test:coverage   # statements/branches/functions/lines ≥ 95% (critical journeys ~100%)
-npm run build           # compiles clean
+npm run typecheck       # tsc --noEmit in every workspace
+npm run test:unit       # all unit projects
+npm run test:coverage   # thresholds met (95/90/95/95)
+npm run build           # shared + api + web compile clean
+npm run security:scan   # trivy — 0 HIGH/CRITICAL
 ```
 
-Never bypass a hook with `--no-verify`. A green run is not proof of correctness — confirm each journey asserts persisted state, side effects, and the failure boundary, not just the response code. A bug that escaped to production becomes a failing E2E first, then a fix ([/testing/bug-triage-and-retest.md](./bug-triage-and-retest.md), [/skills/investigate-production-bug.md](../skills/investigate-production-bug.md)).
+Never bypass a hook with `--no-verify`. A green run is not proof of correctness — confirm each journey asserts the response contract, the provider traffic, and the failure hygiene, not just the status code. A bug that escaped becomes a failing journey test first, then a fix ([bug-triage-and-retest.md](./bug-triage-and-retest.md)).
 
 ---
 
 ## Checklist
 
-- [ ] Boots the real `AppModule`; globals mirror `bootstrap/` (pipe, exception filter, interceptors, guards)
-- [ ] Fastify `ready()` awaited after `init()`; `app.close()` in `afterAll`
-- [ ] Identity comes from a token the app issued — no forged header, no `userId` in the body
-- [ ] Only integration **adapters** overridden; controllers/services/repositories/datastore stay real
-- [ ] Required journey matrix covered: happy, read-after-write, validation, AuthN, AuthZ, ownership, not-found, conflict, pagination, idempotency
-- [ ] Every write asserts: response contract, persisted state (via repo), emitted side effects, failure boundary
-- [ ] Failures assert status **and** `messageKey`; no stack / SQL / secret leaks; nothing persisted on failure
-- [ ] Idempotency / safe-retry semantics asserted and documented per state-changing journey
-- [ ] List endpoints clamp to the hard max (100); empty page and bad page handled
-- [ ] Inputs unique per run; own rows cleaned via the repo; spies reset; no external network
-- [ ] No `any`, no `!`, `===`/`!==` only; enum members and named constants, never raw literals
-- [ ] `lint` / `typecheck` / `test` / `test:coverage` / `build` all green; no `--no-verify`
+- [ ] Track A files named `*.integration.test.ts` under `apps/api/src/tests/`; Track B files named `*.spec.ts` under `apps/web/e2e/` — nothing else
+- [ ] New test file actually appears in the runner's reported file count (the silent-skip check)
+- [ ] Track A boots the real `AppModule`; only the AI adapter is faked; globals mirror `main.ts`
+- [ ] Journey matrix covered: happy, containment, consent, every upload rejection, provider failure/timeout, fallback, 429, unsafe output
+- [ ] Success bodies parse with the shared zod schema; disclaimer asserted verbatim
+- [ ] Failures pin status **and** `ErrorCode`; no stack / secret / vendor detail in any body
+- [ ] Provider traffic asserted per journey (`imageCalls` / `textCalls`)
+- [ ] Retry semantics stated: stateless re-run, bounded by the throttle
+- [ ] Track B mocks the backend at the network edge; no real Gemini, no real photos
+- [ ] Adapter queues reset per case; `app.close()` per suite; no sleeps
+- [ ] No `any`, no non-null `!`; `as const` members and named constants, never raw literals
+- [ ] `lint` / `typecheck` / `test:unit` / `test:coverage` / `build` / `security:scan` all green; no `--no-verify`
 
-**Related:** [/testing/testing-strategy.md](./testing-strategy.md) · [/testing/integration-testing-standard.md](./integration-testing-standard.md) · [/testing/unit-testing-standard.md](./unit-testing-standard.md) · [/testing/coverage-policy.md](./coverage-policy.md) · [/testing/test-data-and-fixtures.md](./test-data-and-fixtures.md) · [/testing/quality-gates.md](./quality-gates.md) · [/skills/write-e2e-tests.md](../skills/write-e2e-tests.md) · [/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md) · [/rules/07-security-authn-authz.md](../rules/07-security-authn-authz.md)
+**Related:** [/testing/testing-strategy.md](./testing-strategy.md) · [/testing/integration-testing-standard.md](./integration-testing-standard.md) · [/testing/unit-testing-standard.md](./unit-testing-standard.md) · [/testing/coverage-policy.md](./coverage-policy.md) · [/testing/test-data-and-fixtures.md](./test-data-and-fixtures.md) · [/testing/quality-gates.md](./quality-gates.md) · [/skills/write-e2e-tests.md](../skills/write-e2e-tests.md) · [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) · [/rules/06-security.md](../rules/06-security.md) · [/rules/14-ai-safety.md](../rules/14-ai-safety.md)

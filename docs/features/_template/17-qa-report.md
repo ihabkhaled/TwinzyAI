@@ -21,7 +21,7 @@ Capture independent QA validation results.
 
 ## API Validation
 
-[List APIs tested, request variants, auth variants, and results.]
+[List endpoints tested (`/api/v1/health`, `/api/v1/game/analyze`, ...), request variants (consent present/missing, file size/type variants, malformed multipart), and results — expected status codes and `ApiErrorResponse` envelopes.]
 
 ## UI Validation
 
@@ -29,7 +29,7 @@ Capture independent QA validation results.
 
 ## End-to-End Workflow Validation
 
-[Describe full user workflows tested from entry to persisted outcome.]
+[Describe full player workflows tested from photo selection through consent to the displayed result — nothing is persisted in this product, so validate the displayed outcome and the logs.]
 
 ## QA Findings
 

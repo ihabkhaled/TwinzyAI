@@ -1,0 +1,24 @@
+---
+description: DevOps, CI/CD, release, rollback, runbook, and observability readiness rules
+alwaysApply: true
+---
+# DevOps, Release, And Operations Rules
+
+Treat infrastructure, deployment, pipeline, runtime, and operational work as production code.
+
+- CI/CD and local gates run the same authoritative npm scripts (`lint`, `typecheck`, `test:*`,
+  `build`, `security:scan`); required checks are enforced, never silently optional.
+- Husky pre-commit / commit-msg (commitlint, conventional) / pre-push gates must never be
+  bypassed (`--no-verify` requires a documented emergency approval).
+- Configuration changes update `.env.example`, config schemas, Docker/compose definitions, and
+  docs together; secrets are never committed or baked into images.
+- New services, jobs, or integrations ship with health checks, logging (AppLogger), metrics,
+  alerts, runbook coverage, and support context before release.
+- Release is blocked when rollback, monitoring, smoke tests, or go/no-go approval are missing;
+  rollback triggers are defined before release, and rollback stays feasible until stability is
+  confirmed.
+- Use the templates: `runbooks/` (incident response, release smoke test, rollback),
+  `release-notes/`, `support/`. Update them whenever behavior or operations change.
+- Docker must come up and down cleanly (`npm run docker:up` / `docker:down`); containers run
+  non-root with no persistent upload volumes.
+- Hypercare and retrospective are mandatory parts of delivery, not optional cleanup.

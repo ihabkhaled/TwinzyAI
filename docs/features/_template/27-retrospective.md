@@ -30,9 +30,9 @@ Capture what the organization learned from the delivery whether it succeeded per
 | --- | --- | --- | --- |
 | | | | open |
 
-## Claude Policy Updates Needed
+## Permanent Policy Updates Needed
 
-[Describe whether `claude.md` should change permanently based on this learning.]
+[Describe whether `rules/`, `memory/`, or the `CLAUDE.md` / `AGENTS.md` mirrors should change permanently based on this learning.]
 
 ## Evidence And References To Attach
 

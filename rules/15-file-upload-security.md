@@ -1,5 +1,7 @@
 # 15 — File Upload Security
 
+> Related: [00-non-negotiable-rules.md](./00-non-negotiable-rules.md) (rules 33, 44, 47) · [06-security.md](./06-security.md) · [08-reliability-durability.md](./08-reliability-durability.md) (fail-closed, wipe in finally) · [26-error-handling-and-exceptions.md](./26-error-handling-and-exceptions.md) (PayloadTooLargeError 413) · [/skills/secure-file-upload.md](../skills/secure-file-upload.md) · [/memory/privacy-decisions.md](../memory/privacy-decisions.md)
+
 Order of checks (FileSecurityService orchestration):
 1. consent flag is true
 2. exactly one file

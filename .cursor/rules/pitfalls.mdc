@@ -2,6 +2,8 @@
 description: Known pitfalls
 alwaysApply: false
 ---
+Full living log: `memory/known-pitfalls.md` (read it before debugging tooling issues).
+
 - Windows paths: architecture lint rules normalize backslashes — keep using path-utils helpers.
 - Vitest + Nest DI needs the SWC plugin (esbuild drops decorator metadata).
 - Shared package must be built before typecheck/tests (`npm run build:shared`).

@@ -1,18 +1,24 @@
-# Twinzy — Cursor Rules (compact mirror)
+# Twinzy — legacy Cursor shim
 
-Canonical entry: AGENTS.md. Full rules: rules/ (rules win conflicts). Guides: skills/. Decisions: memory/.
+This file exists only for legacy Cursor compatibility. The active ruleset is .cursor/rules/*.mdc.
+Root CLAUDE.md is the canonical operating policy and always wins.
+Precedence: CLAUDE.md > .cursor/rules > AGENTS.md > CODEX.md/cursor.md > this file. Stricter wins.
 
-Non-negotiables (short form — do not duplicate full bodies here):
-- No any, no eslint-disable, no @ts-ignore, no non-null assertion.
-- No TypeScript enum keyword; use as-const objects + derived types.
-- No inline domain types/interfaces/constants/DTOs/schemas.
-- TSX = pure JSX composition; hooks own state; lib owns logic.
-- Backend: Controller -> Manager -> Service -> Repository (controllers delegate one manager call).
-- Frontend: Component -> Hook -> Service -> Gateway.
-- Wrap every third-party library; no raw SDK/fetch/axios/storage in business code.
-- No process.env outside config modules.
-- No face recognition / identity matching / biometrics / image storage.
-- Image goes only to the trait-extraction prompt; candidate/judge prompts are text-only.
-- GEMINI_MODEL comes from .env; never hardcode a model name.
-- The game is free; never add payments.
-- Do not commit/push unless asked.
+Compact non-negotiables:
+- No any, no eslint-disable, no @ts-ignore/@ts-expect-error, no non-null assertion `!`.
+- No TypeScript enum keyword; as-const objects + derived types.
+- Zero inline domain definitions: no inline types/interfaces/constants/DTOs/schemas/config maps.
+- TSX is pure composition; state/effects/handlers in hooks; logic in features/*/lib.
+- Backend layers one-way: api -> application -> domain -> infrastructure/adapters; controllers
+  delegate exactly one application call per handler.
+- Validation is Zod only (zod pipe at the boundary); class-validator is forbidden.
+- Vendor ownership: every third-party library wrapped behind an adapter/wrapper; no raw
+  SDK/fetch/axios/storage imports in business code (eslint package-boundaries enforced).
+- No process.env outside config/bootstrap. Logging via AppLogger (pino) only; never console.*.
+- Errors are typed AppError with messageKey errors.<feature>.<key>; never leak stacks/provider errors.
+- The game is FREE — no payments, ever.
+- No face recognition / identity matching / biometrics / image storage; image goes only to the
+  trait-extraction prompt; GEMINI_MODEL from .env; AI outputs Zod-validated + safety-filtered.
+- Tests first; coverage on touched modules 95/90/95/95 (stmts/branches/funcs/lines).
+- Gates green before done: lint (0/0), typecheck, test:unit, test:coverage, build, security:scan.
+- Conventional commits via Husky hooks; never --no-verify; do not commit/push unless asked.

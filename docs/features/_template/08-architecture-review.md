@@ -6,10 +6,10 @@ Verify that the planned solution fits the current architecture or intentionally 
 
 ## Step-by-Step Workflow
 
-1. Re-read architecture docs, domain boundaries, workflows, and service ownership.
-2. Compare the proposed design to current patterns and constraints.
+1. Re-read the architecture canon: `context/architecture-map.md`, `rules/01-architecture.md`, `rules/16-backend-architecture.md`, and existing ADRs in `architecture/adrs/`.
+2. Compare the proposed design to current patterns and constraints (layered anatomy, wrapped vendors, shared zod contracts).
 3. Identify contract, ownership, data-flow, or topology changes.
-4. Decide whether ADRs are required.
+4. Decide whether ADRs are required (new ADRs go in `architecture/adrs/`).
 
 ## Current Architecture Context
 

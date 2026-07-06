@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Confirm the request makes sense commercially, strategically, and contractually.
+Confirm the request makes sense strategically for Twinzy. The game is free by invariant — there is no pricing, billing, or upsell dimension — so "commercial impact" here means growth, engagement, brand trust, sponsor commitments, and cost (e.g., AI provider usage).
 
 ## Step-by-Step Workflow
 
@@ -14,7 +14,7 @@ Confirm the request makes sense commercially, strategically, and contractually.
 
 ## Commercial Value
 
-[Explain whether this request helps retention, growth, compliance, cost reduction, upsell, differentiation, or strategic positioning.]
+[Explain whether this request helps retention, growth, compliance, cost reduction (e.g., fewer wasted AI calls), differentiation, or strategic positioning. Twinzy has no revenue lever — never justify a request with payment or monetization plans.]
 
 ## Target Segment or Accounts
 
@@ -31,11 +31,10 @@ Confirm the request makes sense commercially, strategically, and contractually.
 
 ## Rollout Audience
 
-- [ ] Internal only
-- [ ] Pilot customers
-- [ ] Single tenant or account
+- [ ] Internal only (local/staging)
+- [ ] Pilot testers
 - [ ] Beta cohort
-- [ ] All customers
+- [ ] All players
 - [ ] Region-specific rollout
 
 ## Adoption Risks

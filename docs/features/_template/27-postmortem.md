@@ -44,7 +44,7 @@ Use this document when the request caused or intersected with an incident, serio
 
 ## Policy and Process Changes
 
-[Describe what must change in standards, testing, release process, or `claude.md`.]
+[Describe what must change in standards, testing, release process, `rules/`, `memory/`, or the `CLAUDE.md` / `AGENTS.md` mirrors.]
 
 ## Evidence And References To Attach
 

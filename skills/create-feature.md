@@ -9,4 +9,4 @@
 5. Hooks: useNameController owning state/handlers; call the service; return one props object.
 6. ui/: pure TSX components; container calls the controller hook and spreads props.
 7. Wire the route in app/ as pure composition. 8. Strings via i18n. 9. Tests first (web-unit).
-Gate: npm run lint && npm run typecheck && npm run test:unit && npm run build
+Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan

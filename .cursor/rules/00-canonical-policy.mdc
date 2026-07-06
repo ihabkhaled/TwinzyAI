@@ -1,0 +1,26 @@
+---
+description: Canonical policy bootstrap and file precedence for this repository
+alwaysApply: true
+---
+# Canonical Policy Bootstrap
+
+This repository has one canonical long-form operating policy: root `CLAUDE.md` (SDLC governance
+brain + engineering operating system).
+
+Before doing analysis, planning, implementation, review, testing, release work, or documentation
+work, read `CLAUDE.md` and follow it as binding company policy.
+
+File precedence:
+
+1. `CLAUDE.md` — canonical long-form policy.
+2. `.cursor/rules/*.mdc` — the active Cursor ruleset (must stay aligned with `CLAUDE.md`).
+3. `AGENTS.md` — the agent bootstrap file.
+4. `CODEX.md` / `cursor.md` — tool-facing bootstrap mirrors.
+5. `.cursorrules` — legacy compatibility shim only.
+
+If any of these files ever differ, `CLAUDE.md` wins. When two rules overlap, the stricter one
+applies.
+
+Whenever a new permanent rule, workflow, quality gate, architecture constraint, testing
+expectation, release rule, or operational rule is discovered, update `CLAUDE.md` first, then keep
+all mirror files aligned in the same delivery stream.

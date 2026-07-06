@@ -1,664 +1,480 @@
-# Reference Patterns — Copy-Ready NestJS by Layer
+# Reference Patterns — Copy-Ready Code by Layer
 
-> The canonical, copy-ready code for every layer and cross-cutting concern in this workspace. One tight, strict-TypeScript snippet per concern; each obeys the layer/import/lint rules. This implements [`architecture-map.md`](./architecture-map.md) and [`/rules/00-non-negotiable-rules.md`](../rules/00-non-negotiable-rules.md) — when in doubt, those win. Replace `<feature>` with your bounded feature; `Article` is used illustratively only.
+> The canonical, copy-ready code for every layer and cross-cutting concern in `apps/api` (plus the shared-contract pattern both apps use). One tight, strict-TypeScript snippet per concern; each obeys the layer/import/lint rules. This implements [architecture-map.md](./architecture-map.md) and [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) — when in doubt, those win. Replace `<feature>` with your bounded feature.
 
-Every snippet here is **strict TS** (no `any`, no `!`, no inline declarations, explicit return types) and respects the one-way dependency rule and `architecture/*` ESLint rules. Use these as scaffolding starting points; generate new files with the [`/skills`](../skills/README.md).
-
----
-
-## 1. Bootstrap — `main.ts` + app assembly
-
-`bootstrap/` and `config/` are the **only** places allowed to read `process.env`. Boot order: build the app on the Fastify adapter → global pipes → global filter → Swagger → listen. Keep the assembly functions small and individually testable.
-
-```ts
-// src/main.ts
-import { bootstrap } from '@app/bootstrap/bootstrap';
-
-void bootstrap();
-```
-
-```ts
-// src/bootstrap/bootstrap.ts  (process.env permitted here)
-import { ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
-import {
-  FastifyAdapter,
-  type NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-
-import { AppModule } from '@app/app.module';
-import { AppExceptionFilter } from '@core/errors/app-exception.filter';
-import { AppLogger } from '@core/logger/app-logger.service';
-import type { AppConfig } from '@config/app.config';
-import { BODY_LIMIT_BYTES, LISTEN_HOST } from './bootstrap.constants';
-import { setupSwagger } from './swagger';
-
-export async function createApp(): Promise<NestFastifyApplication> {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter({ bodyLimit: BODY_LIMIT_BYTES }),
-    { bufferLogs: true },
-  );
-  app.useLogger(app.get(AppLogger));
-  app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, transform: true }),
-  );
-  app.useGlobalFilters(app.get(AppExceptionFilter));
-  setupSwagger(app);
-  return app;
-}
-
-export async function bootstrap(): Promise<void> {
-  const app = await createApp();
-  const config = app.get(ConfigService<AppConfig, true>);
-  await app.listen(config.get('app.port', { infer: true }), LISTEN_HOST);
-}
-```
-
-```ts
-// src/bootstrap/swagger.ts
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import type { INestApplication } from '@nestjs/common';
-
-import { SWAGGER_AUTH_NAME, SWAGGER_PATH } from './bootstrap.constants';
-
-export function setupSwagger(app: INestApplication): void {
-  const config = new DocumentBuilder()
-    .setTitle('Service API')
-    .setDescription('OpenAPI surface for this service')
-    .setVersion('1.0.0')
-    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, SWAGGER_AUTH_NAME)
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup(SWAGGER_PATH, app, document, {
-    swaggerOptions: { persistAuthorization: true },
-  });
-}
-```
-
-> **Do** keep `whitelist: true` (strips unknown props) and `transform: true` (DTO class instances). **Don't** sprinkle `app.use(...)` business logic in `bootstrap.ts` — it is assembly only.
+Every snippet is **strict TS**: no `any`, no TypeScript `enum`, no non-null `!`, no inline domain definitions, explicit return types, zod (never class-validator). Generate new files with the [`/skills`](../skills/README.md).
 
 ---
 
-## 2. Configuration — typed namespace + fail-fast validation
+## 1. As-const enum + `*_VALUES` + derived type
 
-Read config through `ConfigService`, never `process.env`, outside `config/`/`bootstrap/`. Validate at startup so invalid env crashes the boot, not a request three hours later.
+The only enum shape allowed anywhere in the repo. Lives in `packages/shared/src/enums/` when both apps need it, or a module's `model/` when local.
 
 ```ts
-// src/config/app.config.ts  (process.env permitted here)
+// packages/shared/src/enums/verdict.enum.ts
+export const Verdict = {
+  Strong: 'strong',
+  Medium: 'medium',
+  Weak: 'weak',
+} as const;
+
+export const VERDICT_VALUES = [Verdict.Strong, Verdict.Medium, Verdict.Weak] as const;
+
+export type VerdictValue = (typeof VERDICT_VALUES)[number];
+```
+
+> `*_VALUES` feeds zod (`z.enum(VERDICT_VALUES)`) and iteration; the derived type replaces the banned `enum` keyword. See [/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md).
+
+---
+
+## 2. Zod DTO at the HTTP boundary
+
+The DTO is a **strict** zod schema in `api/dto/`, backed by `@twinzy/shared` building blocks. `z.strictObject` rejects unknown keys — the whitelist behavior other stacks get from `whitelist: true`.
+
+```ts
+// apps/api/src/modules/game/api/dto/analyze-request.dto.ts
+import { z } from 'zod';
+
+/**
+ * Multipart body of POST /api/v1/game/analyze. Multipart fields arrive as
+ * strings; consent must be the literal string "true" (or boolean true from
+ * JSON clients) — anything else is not consent.
+ */
+export const AnalyzeRequestBodySchema = z.strictObject({
+  consent: z.union([z.literal('true'), z.literal(true)]).optional(),
+});
+
+export type AnalyzeRequestBody = z.infer<typeof AnalyzeRequestBodySchema>;
+
+export const isConsentGiven = (body: unknown): boolean => {
+  const parsed = AnalyzeRequestBodySchema.safeParse(body);
+  return parsed.success && parsed.data.consent !== undefined;
+};
+```
+
+```ts
+// Response contracts come from packages/shared — never redeclared locally.
+import { FinalGameResultSchema, type FinalGameResult } from '@twinzy/shared';
+```
+
+> Request parsing runs through the zod pipe in `core/validation` (issues flattened + logged, mapped to `ValidationError`). See [/rules/21-dto-validation.md](../rules/21-dto-validation.md) and [create-dto-validation.md](../skills/create-dto-validation.md).
+
+---
+
+## 3. Controller — exactly one delegation
+
+A controller method is **one** `return` of a single application-layer call. No branching, no transformation (`architecture/controller-no-logic`).
+
+```ts
+// apps/api/src/modules/game/api/game.controller.ts
+import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
+
+import type { FinalGameResult } from '@twinzy/shared';
+
+import { ImageUploadInterceptor } from '../../../core/http/image-upload.interceptor';
+import type { UploadedImageFile } from '../../file-security/model/upload-file.types';
+import { AnalyzeGameUseCase } from '../application/analyze-game.use-case';
+import { ANALYZE_THROTTLE } from '../model/throttle.constants';
+
+@Controller('game')
+export class GameController {
+  public constructor(private readonly analyzeGame: AnalyzeGameUseCase) {}
+
+  @Post('analyze')
+  @Throttle(ANALYZE_THROTTLE)
+  @UseInterceptors(ImageUploadInterceptor)
+  public analyze(
+    @UploadedFile() file: UploadedImageFile | undefined,
+    @Body() body: unknown,
+  ): Promise<FinalGameResult> {
+    return this.analyzeGame.execute(file, body);
+  }
+}
+```
+
+> Throttle values live in `model/`, upload plumbing in `core/http`. See [/rules/18-routes-controllers.md](../rules/18-routes-controllers.md) and [create-controller.md](../skills/create-controller.md).
+
+---
+
+## 4. Application service — focused capability (≤20 lines/method)
+
+One job, small methods, collaborators injected, declarations extracted.
+
+```ts
+// apps/api/src/modules/result-aggregation/application/result-aggregation.service.ts
+import { Injectable } from '@nestjs/common';
+
+import type { FinalGameResult, JudgedCandidate, Traits } from '@twinzy/shared';
+
+import { keepDisplayable, toFinalResult } from '../lib/result-aggregation.filters';
+import { RESULT_DISCLAIMER } from '../model/result-aggregation.constants';
+
+@Injectable()
+export class ResultAggregationService {
+  public aggregate(traits: Traits, judged: readonly JudgedCandidate[]): FinalGameResult {
+    const displayable = keepDisplayable(judged);
+    if (displayable.length === 0) {
+      return this.buildFallback(traits);
+    }
+    return toFinalResult(traits, displayable, RESULT_DISCLAIMER);
+  }
+
+  public buildFallback(traits: Traits): FinalGameResult {
+    return toFinalResult(traits, [], RESULT_DISCLAIMER);
+  }
+}
+```
+
+> Filtering/shaping lives in `lib/`, the disclaimer constant in `model/`. See [/rules/19-services-application-layer.md](../rules/19-services-application-layer.md) and [create-service-layer.md](../skills/create-service-layer.md).
+
+---
+
+## 5. Use case — ordered orchestration + buffer-wipe `finally`
+
+The escalation shape: one operation sequencing several modules while owning a resource lifecycle. The image lives exactly as long as trait extraction needs it — zero-filled in `finally` on success **and** failure.
+
+```ts
+// apps/api/src/modules/game/application/analyze-game.use-case.ts
+import { Injectable } from '@nestjs/common';
+
+import type { FinalGameResult, Traits } from '@twinzy/shared';
+
+import { AppLogger } from '../../../core/logger/app-logger.service';
+import { CandidateGenerationService } from '../../ai/application/candidate-generation.service';
+import { CandidateJudgeService } from '../../ai/application/candidate-judge.service';
+import { TraitExtractionService } from '../../ai/application/trait-extraction.service';
+import { FileSecurityService } from '../../file-security/application/file-security.service';
+import { TemporaryFileCleanupService } from '../../file-security/application/temporary-file-cleanup.service';
+import type { UploadedImageFile } from '../../file-security/model/upload-file.types';
+import { ResultAggregationService } from '../../result-aggregation/application/result-aggregation.service';
+import { isConsentGiven } from '../api/dto/analyze-request.dto';
+import { ANALYZE_LOG_CONTEXT } from '../model/game.constants';
+
+@Injectable()
+export class AnalyzeGameUseCase {
+  public constructor(
+    private readonly fileSecurity: FileSecurityService,
+    private readonly cleanup: TemporaryFileCleanupService,
+    private readonly traitExtraction: TraitExtractionService,
+    private readonly candidateGeneration: CandidateGenerationService,
+    private readonly candidateJudge: CandidateJudgeService,
+    private readonly resultAggregation: ResultAggregationService,
+    private readonly logger: AppLogger,
+  ) {}
+
+  public async execute(file: UploadedImageFile | undefined, body: unknown): Promise<FinalGameResult> {
+    const traits = await this.extractTraitsAndDestroyImage(file, isConsentGiven(body));
+
+    const candidates = await this.candidateGeneration.generateCandidates(traits);
+    if (candidates.length === 0) {
+      this.logger.warn(ANALYZE_LOG_CONTEXT, 'No safe candidates — returning fallback');
+      return this.resultAggregation.buildFallback(traits);
+    }
+
+    const judged = await this.candidateJudge.judgeCandidates(traits, candidates);
+    return this.resultAggregation.aggregate(traits, judged);
+  }
+
+  private async extractTraitsAndDestroyImage(
+    file: UploadedImageFile | undefined,
+    consent: boolean,
+  ): Promise<Traits> {
+    try {
+      const safeFile = await this.fileSecurity.assertSafeImage(file, consent);
+      return await this.traitExtraction.extractTraits(safeFile.buffer, safeFile.mimetype);
+    } finally {
+      this.cleanup.wipe(file);
+    }
+  }
+}
+```
+
+> Use cases call services; services never call use cases. See [/rules/17-manager-layer.md](../rules/17-manager-layer.md) and [create-manager-use-case.md](../skills/create-manager-use-case.md).
+
+---
+
+## 6. Port + adapter — wrap every vendor behind an interface
+
+The port (interface + `Symbol` token) lives in `model/`; the adapter is the **only** file importing the vendor SDK (`architecture/no-direct-sdk-imports`). This mirrors the AI provider port, whose two-method split is the AI-safety boundary in type form.
+
+```ts
+// apps/api/src/modules/ai/model/ai-provider.port.ts
+import type { AiImageInput } from './gemini.types';
+
+/**
+ * Port for AI providers. Only generateFromImage can carry an image, and only
+ * the trait-extraction service is allowed to call it. Text-only pipeline
+ * steps (candidates, judge) cannot leak an image by construction.
+ */
+export interface AiProviderAdapter {
+  generateFromImage(prompt: string, image: AiImageInput): Promise<string>;
+  generateFromText(prompt: string): Promise<string>;
+}
+
+/** Injection token binding the port to the configured provider adapter. */
+export const AI_PROVIDER_ADAPTER = Symbol('AI_PROVIDER_ADAPTER');
+```
+
+```ts
+// Binding in the module:
+// providers: [{ provide: AI_PROVIDER_ADAPTER, useClass: GeminiAdapter }]
+
+// Consuming through the port (never the vendor):
+import { Inject, Injectable } from '@nestjs/common';
+
+import { AI_PROVIDER_ADAPTER, type AiProviderAdapter } from '../model/ai-provider.port';
+
+@Injectable()
+export class CandidateGenerationService {
+  public constructor(
+    @Inject(AI_PROVIDER_ADAPTER) private readonly aiProvider: AiProviderAdapter,
+  ) {}
+}
+```
+
+> The adapter maps every vendor failure to an `IntegrationError` (502) and enforces the configured timeout; the model name comes from `GEMINI_MODEL` env, never hardcoded. See [/rules/10-library-modularization.md](../rules/10-library-modularization.md), [/rules/14-ai-safety.md](../rules/14-ai-safety.md), and [add-ai-provider.md](../skills/add-ai-provider.md).
+
+---
+
+## 7. Typed config — `registerAs` namespace + zod fail-fast
+
+`env.schema.ts` is the single source of truth for every env var. Validation runs at boot; invalid env crashes startup, not a request three hours later. `process.env` is legal only in `src/config` and `src/bootstrap`.
+
+```ts
+// apps/api/src/config/env.schema.ts (excerpt — zod, fail-fast)
+import { z } from 'zod';
+
+export const NODE_ENVIRONMENTS = ['development', 'test', 'production'] as const;
+
+export const EnvSchema = z.object({
+  NODE_ENV: z.enum(NODE_ENVIRONMENTS).default('development'),
+  API_PORT: z.coerce.number().int().min(1).max(65_535).default(3001),
+  GEMINI_API_KEY: z.string().default(''),
+  GEMINI_MODEL: z.string().default(''),
+  GEMINI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(120_000).default(30_000),
+});
+
+export type ParsedEnv = z.infer<typeof EnvSchema>;
+
+export const validateEnv = (raw: Record<string, unknown>): ParsedEnv => {
+  const parsed = EnvSchema.safeParse(raw);
+  if (!parsed.success) {
+    throw new Error(`Invalid environment: ${z.prettifyError(parsed.error)}`);
+  }
+  return parsed.data;
+};
+```
+
+```ts
+// apps/api/src/config/gemini.config.ts (process.env permitted here)
 import { registerAs } from '@nestjs/config';
 
-import { DEFAULT_PORT } from './config.constants';
-import type { AppNamespaceConfig } from './config.types';
+import type { GeminiConfig } from './config.types';
 
-export const appConfig = registerAs(
-  'app',
-  (): AppNamespaceConfig => ({
-    port: Number(process.env['PORT'] ?? DEFAULT_PORT),
-    nodeEnv: process.env['NODE_ENV'] ?? 'development',
+export const geminiConfig = registerAs(
+  'gemini',
+  (): GeminiConfig => ({
+    apiKey: process.env['GEMINI_API_KEY'] ?? '',
+    model: process.env['GEMINI_MODEL'] ?? '',
+    timeoutMs: Number(process.env['GEMINI_TIMEOUT_MS'] ?? 30_000),
   }),
 );
-
-export interface AppConfig {
-  app: AppNamespaceConfig;
-}
 ```
 
-```ts
-// src/config/env.validation.ts  (process.env permitted here)
-import { plainToInstance } from 'class-transformer';
-import { IsEnum, IsInt, Max, Min, validateSync } from 'class-validator';
-
-import { NodeEnv } from '@shared/enums';
-
-class EnvironmentVariables {
-  @IsEnum(NodeEnv) readonly NODE_ENV!: NodeEnv;
-  @IsInt() @Min(1) @Max(65535) readonly PORT!: number;
-}
-
-export function validateEnv(raw: Record<string, unknown>): EnvironmentVariables {
-  const parsed = plainToInstance(EnvironmentVariables, raw, {
-    enableImplicitConversion: true,
-  });
-  const errors = validateSync(parsed, { skipMissingProperties: false });
-  if (errors.length > 0) {
-    throw new Error(`Invalid environment: ${errors.toString()}`);
-  }
-  return parsed;
-}
-```
-
-> Wire both into the root module: `ConfigModule.forRoot({ isGlobal: true, load: [appConfig], validate: validateEnv })`. See [`/rules/17-configuration-and-environment.md`](../rules/17-configuration-and-environment.md) and [`/skills/add-config-value.md`](../skills/add-config-value.md).
+> Wire into the root: `ConfigModule.forRoot({ isGlobal: true, load: [geminiConfig], validate: validateEnv, envFilePath: [...] })`. Business code injects the typed `AppConfigService` getter surface — never `ConfigService` raw strings, never `process.env`.
 
 ---
 
-## 3. Errors — typed `AppError` base + a subclass
+## 8. Errors — `AppError` subclass + `messageKey` + filter mapping
 
-Every user-facing failure is a typed `AppError` carrying a `messageKey` of the form `errors.<feature>.<key>`. The filter maps it to status + sanitized body; never throw raw `Error` across the HTTP boundary.
+Every user-facing failure is a typed `AppError` carrying `messageKey = errors.<feature>.<key>` and a stable legacy `ErrorCode`. The global filter returns the sanitized envelope compatible with `ApiErrorResponse` (adds `messageKey` additively).
 
 ```ts
-// src/core/errors/app-error.ts
+// apps/api/src/core/errors/validation.error.ts
 import { HttpStatus } from '@nestjs/common';
 
+import { AppError } from './app-error';
+import { ErrorCode } from './error-code.constants';
 import type { ErrorMessageKey } from './error.types';
 
-export abstract class AppError extends Error {
-  abstract readonly status: HttpStatus;
+export class ValidationError extends AppError {
+  public readonly status = HttpStatus.BAD_REQUEST;
+  public readonly errorCode = ErrorCode.ValidationFailed;
 
-  protected constructor(
-    message: string,
-    readonly messageKey: ErrorMessageKey,
-    readonly details?: Readonly<Record<string, unknown>>,
-  ) {
-    super(message);
-    this.name = new.target.name;
+  public constructor(message: string, messageKey: ErrorMessageKey) {
+    super(message, messageKey);
   }
 }
 ```
 
 ```ts
-// src/core/errors/not-found.error.ts
-import { HttpStatus } from '@nestjs/common';
+// apps/api/src/core/errors/app-exception.filter.ts (shape)
+import { Catch, HttpStatus, type ArgumentsHost, type ExceptionFilter } from '@nestjs/common';
 
+import type { HttpReplyLike } from '../http/http-reply.types';
+import { AppLogger } from '../logger/app-logger.service';
 import { AppError } from './app-error';
-import type { ErrorMessageKey } from './error.types';
-
-export class NotFoundError extends AppError {
-  readonly status = HttpStatus.NOT_FOUND;
-
-  constructor(resource: string, messageKey: ErrorMessageKey) {
-    super(`${resource} was not found`, messageKey);
-  }
-}
-```
-
-> Mirror this for `ValidationError` (400), `UnauthorizedError` (401), `ForbiddenError` (403), `ConflictError` (409), `IntegrationError` (502). New keys get an entry per supported locale ([`/rules/16-i18n-and-messaging.md`](../rules/16-i18n-and-messaging.md), [`/skills/create-error.md`](../skills/create-error.md)).
-
----
-
-## 4. Global exception filter
-
-One filter sanitizes every throw. Known `AppError` → its status + `{ messageKey }`. Unknown error → 500 with a generic key; full detail logged server-side only. Never leak stacks, SQL, or secrets.
-
-```ts
-// src/core/errors/app-exception.filter.ts
-import {
-  Catch,
-  HttpStatus,
-  type ArgumentsHost,
-  type ExceptionFilter,
-} from '@nestjs/common';
-import type { FastifyReply } from 'fastify';
-
-import { AppError } from './app-error';
-import { GENERIC_ERROR_KEY } from './error.constants';
+import { GENERIC_ERROR_BODY } from './error-body.constants';
 import { toErrorBody } from './error-body.mapper';
-import { AppLogger } from '@core/logger/app-logger.service';
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {
-  constructor(private readonly logger: AppLogger) {}
+  public constructor(private readonly logger: AppLogger) {}
 
-  catch(exception: unknown, host: ArgumentsHost): void {
-    const reply = host.switchToHttp().getResponse<FastifyReply>();
+  public catch(exception: unknown, host: ArgumentsHost): void {
+    const reply = host.switchToHttp().getResponse<HttpReplyLike>();
     if (exception instanceof AppError) {
-      this.logger.warn('handled.app_error', { messageKey: exception.messageKey });
+      this.logger.warn('AppExceptionFilter', `handled: ${exception.messageKey}`);
       void reply.status(exception.status).send(toErrorBody(exception));
       return;
     }
-    this.logger.error('unhandled.exception', { error: exception });
-    void reply
-      .status(HttpStatus.INTERNAL_SERVER_ERROR)
-      .send({ messageKey: GENERIC_ERROR_KEY });
+    this.logger.error('AppExceptionFilter', 'unhandled exception', exception);
+    void reply.status(HttpStatus.INTERNAL_SERVER_ERROR).send(GENERIC_ERROR_BODY);
   }
 }
 ```
 
-> See [`/rules/18-error-handling-and-exceptions.md`](../rules/18-error-handling-and-exceptions.md). Register globally in bootstrap (above) or as an `APP_FILTER` provider.
+> Subclasses: `ValidationError` 400, `UnauthorizedError` 401, `ForbiddenError` 403, `NotFoundError` 404, `ConflictError` 409, `PayloadTooLargeError` 413, `IntegrationError` 502. The envelope never contains provider errors, stacks, or file contents. `HttpReplyLike` is the structural reply type in `core/http` — no raw Fastify types in business code.
 
 ---
 
-## 5. Logger adapter — port + provider
+## 9. Logging — `AppLogger` usage
 
-The logger is wrapped behind an app-owned port; business code depends on the interface, never on `pino`/`winston`/`console`. Swap the implementation in one place.
-
-```ts
-// src/core/logger/app-logger.port.ts
-export interface LogContext {
-  readonly [key: string]: unknown;
-}
-
-export interface AppLoggerPort {
-  info(message: string, context?: LogContext): void;
-  warn(message: string, context?: LogContext): void;
-  error(message: string, context?: LogContext): void;
-  debug(message: string, context?: LogContext): void;
-}
-```
+nestjs-pino behind the `AppLogger` port. Context string first, message second, optional structured payload last; redaction happens inside the wrapper.
 
 ```ts
-// src/core/logger/app-logger.service.ts
-import { Injectable, type LoggerService } from '@nestjs/common';
-
-import { redact } from './log-redaction.helper';
-import type { AppLoggerPort, LogContext } from './app-logger.port';
-
-@Injectable()
-export class AppLogger implements AppLoggerPort, LoggerService {
-  info(message: string, context?: LogContext): void {
-    this.write('info', message, context);
-  }
-  warn(message: string, context?: LogContext): void {
-    this.write('warn', message, context);
-  }
-  error(message: string, context?: LogContext): void {
-    this.write('error', message, context);
-  }
-  debug(message: string, context?: LogContext): void {
-    this.write('debug', message, context);
-  }
-
-  private write(level: string, message: string, context?: LogContext): void {
-    // Delegate to the wrapped logging library here; redact before emit.
-    process.stdout.write(`${JSON.stringify({ level, message, ...redact(context) })}\n`);
-  }
-}
-```
-
-> Never `console.*`. Redact secrets/PII at the boundary. See [`/rules/14-observability-and-logging.md`](../rules/14-observability-and-logging.md).
-
----
-
-## 6. Controller — thin transport
-
-A controller method is **one** delegation: parse via DTO/decorators → call one application method → return it. No branching, no transformation, no repository imports (`architecture/controller-no-logic`, `architecture/no-restricted-layer-imports`).
-
-```ts
-// src/modules/article/api/article.controller.ts
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-
-import { ArticleService } from '../application/article.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { ArticleResponseDto } from './dto/article-response.dto';
-import { CurrentUser } from '@core/decorators/current-user.decorator';
-import { RequirePermissions } from '@core/decorators/require-permissions.decorator';
-import { AuthGuard } from '@core/guards/auth.guard';
-import { PermissionsGuard } from '@core/guards/permissions.guard';
-import { Permission } from '@shared/enums';
-import type { AuthenticatedUser } from '@shared/types';
-
-@Controller('articles')
-@UseGuards(AuthGuard, PermissionsGuard)
-export class ArticleController {
-  constructor(private readonly articleService: ArticleService) {}
-
-  @Get(':id')
-  @RequirePermissions(Permission.ArticleRead)
-  getById(
-    @Param('id') id: string,
-    @CurrentUser() user: AuthenticatedUser,
-  ): Promise<ArticleResponseDto> {
-    return this.articleService.getById(id, user);
-  }
-
-  @Post()
-  @RequirePermissions(Permission.ArticleCreate)
-  create(
-    @Body() dto: CreateArticleDto,
-    @CurrentUser() user: AuthenticatedUser,
-  ): Promise<ArticleResponseDto> {
-    return this.articleService.create(dto, user);
-  }
-}
-```
-
-> Identity comes from `@CurrentUser()` (the verified token), never the request body. See [`/rules/02-controllers-and-http-transport.md`](../rules/02-controllers-and-http-transport.md).
-
----
-
-## 7. DTOs — request + response (class-validator primary)
-
-Validation lives in the DTO, not the service. `whitelist: true` strips unknown props; bound every string and list. Zod via a `ZodValidationPipe` is the documented alternative ([`/rules/05-dto-and-validation.md`](../rules/05-dto-and-validation.md)).
-
-```ts
-// src/modules/article/api/dto/create-article.dto.ts
-import { IsEnum, IsString, MaxLength, MinLength } from 'class-validator';
-
-import { ArticleCategory } from '../../model/article.enums';
-import { ARTICLE_TITLE_MAX, ARTICLE_TITLE_MIN } from '../../model/article.constants';
-
-export class CreateArticleDto {
-  @IsString()
-  @MinLength(ARTICLE_TITLE_MIN)
-  @MaxLength(ARTICLE_TITLE_MAX)
-  readonly title!: string;
-
-  @IsEnum(ArticleCategory)
-  readonly category!: ArticleCategory;
-}
-```
-
-```ts
-// src/modules/article/api/dto/article-response.dto.ts
-import type { ArticleCategory } from '../../model/article.enums';
-
-export class ArticleResponseDto {
-  readonly id!: string;
-  readonly title!: string;
-  readonly category!: ArticleCategory;
-  readonly createdAt!: string;
-}
-```
-
-> DTOs are pure shapes — never import services/repositories/infrastructure (`architecture/no-restricted-layer-imports`).
-
----
-
-## 8. Service — focused capability (≤20 lines/method)
-
-A service orchestrates one capability: extract inputs → check preconditions → delegate to domain/repo/adapter → return a typed result. No inline declarations; no `Promise.all` (lint-enforced); ≤20 lines/method.
-
-```ts
-// src/modules/article/application/article.service.ts
 import { Injectable } from '@nestjs/common';
 
-import { ArticleRepository } from '../infrastructure/article.repository';
-import { toArticleResponse } from '../lib/article.mappers';
-import { assertCanView } from '../domain/article.policy';
-import { CreateArticleDto } from '../api/dto/create-article.dto';
-import { ArticleResponseDto } from '../api/dto/article-response.dto';
-import { NotFoundError } from '@core/errors/not-found.error';
-import { ARTICLE_NOT_FOUND_KEY } from '../model/article.constants';
-import type { AuthenticatedUser } from '@shared/types';
+import { AppLogger } from '../../../core/logger/app-logger.service';
 
 @Injectable()
-export class ArticleService {
-  constructor(private readonly articleRepo: ArticleRepository) {}
+export class VirusScanService {
+  public constructor(private readonly logger: AppLogger) {}
 
-  async getById(id: string, user: AuthenticatedUser): Promise<ArticleResponseDto> {
-    const article = await this.articleRepo.findById(id);
-    if (article === null) {
-      throw new NotFoundError('Article', ARTICLE_NOT_FOUND_KEY);
+  public reportOutcome(clean: boolean): void {
+    if (clean) {
+      this.logger.log('VirusScanService', 'scan clean');
+      return;
     }
-    assertCanView(article, user);
-    return toArticleResponse(article);
-  }
-
-  async create(dto: CreateArticleDto, user: AuthenticatedUser): Promise<ArticleResponseDto> {
-    const created = await this.articleRepo.create({ ...dto, ownerId: user.id });
-    return toArticleResponse(created);
+    this.logger.warn('VirusScanService', 'scan rejected upload');
   }
 }
 ```
 
-> Ownership/tenant is a precondition (`assertCanView`), defense-in-depth behind the guard. Mapping/formatting lives in `lib/`. See [`/rules/03-application-services-and-use-cases.md`](../rules/03-application-services-and-use-cases.md) and [`/skills/create-service.md`](../skills/create-service.md).
+> Never `console.*`, never raw `pino` imports outside `core/logger`, never image bytes/prompts/PII in log payloads. See [/rules/22-observability-logging.md](../rules/22-observability-logging.md).
 
 ---
 
-## 9. Use case — multi-entity work under one transaction
+## 10. Bounded in-memory list (cap 100)
 
-Escalate to a use case only for the exceptional shape: multiple entities mutated under one transaction/invariant **and** ordered post-commit events. Use cases call services; services never call use cases. Reads/decisions hoist before the `try`; events fire **after** commit.
+There is no database by design — any in-memory accumulation must be hard-capped so memory cannot grow unbounded.
 
 ```ts
-// src/modules/article/application/publish-article.use-case.ts
-import { Injectable } from '@nestjs/common';
+// model/
+export const MAX_TRACKED_ENTRIES = 100;
 
-import { UnitOfWork } from '@core/persistence/unit-of-work';
-import { DomainEventBus } from '@core/events/domain-event-bus';
-import { ArticleService } from './article.service';
-import { ReviewService } from '../../review/index';
-import { buildPublishedEvent } from '../lib/article.events';
-import type { ArticleResponseDto } from '../api/dto/article-response.dto';
-import type { AuthenticatedUser } from '@shared/types';
-
-@Injectable()
-export class PublishArticleUseCase {
-  constructor(
-    private readonly uow: UnitOfWork,
-    private readonly articles: ArticleService,
-    private readonly reviews: ReviewService,
-    private readonly events: DomainEventBus,
-  ) {}
-
-  async execute(id: string, user: AuthenticatedUser): Promise<ArticleResponseDto> {
-    const published = await this.uow.run(async tx => {
-      const article = await this.articles.markPublished(id, user, tx);
-      await this.reviews.closeOpenReviews(id, tx);
-      return article;
-    });
-    await this.events.publish(buildPublishedEvent(published, user));
-    return published;
-  }
-}
+// lib/bounded-list.util.ts
+export const appendBounded = <T>(
+  list: readonly T[],
+  entry: T,
+  cap: number = MAX_TRACKED_ENTRIES,
+): readonly T[] => {
+  const next = [...list, entry];
+  return next.length > cap ? next.slice(next.length - cap) : next;
+};
 ```
 
-> The unit of work owns connect/begin/commit/rollback/release internally so the leak-safe transaction shape lives in one tested place — see [`/rules/04-repositories-and-persistence.md`](../rules/04-repositories-and-persistence.md) and [`/memory/reliability-patterns.md`](../memory/reliability-patterns.md).
+> Every list an endpoint or service produces has a hard max; the game pipeline itself caps at 5 candidates / 4 displayed results. See [/rules/07-performance-scalability.md](../rules/07-performance-scalability.md).
 
 ---
 
-## 10. Repository — ORM-agnostic, parameterized, bounded
+## 11. Unit test — Vitest + `@nestjs/testing` (`*.test.ts`)
 
-Repositories only persist: find/save/update/delete/query, always parameterized, always bounded (hard max list limit 100). No business policy, no controller/service imports. The ORM (TypeORM / Prisma / Mongoose / Sequelize) is an interchangeable detail behind this boundary.
-
-```ts
-// src/modules/article/infrastructure/article.repository.ts
-import { Injectable } from '@nestjs/common';
-
-import { DataStore } from '@core/persistence/data-store';
-import { clampLimit } from '@shared/utils/pagination.util';
-import type { Article } from '../domain/article.entity';
-import type { CreateArticleData, ListArticlesQuery } from '../model/article.types';
-
-@Injectable()
-export class ArticleRepository {
-  constructor(private readonly store: DataStore<Article>) {}
-
-  findById(id: string): Promise<Article | null> {
-    return this.store.findOne({ where: { id } });
-  }
-
-  create(data: CreateArticleData): Promise<Article> {
-    return this.store.insert(data);
-  }
-
-  list(query: ListArticlesQuery): Promise<readonly Article[]> {
-    return this.store.find({
-      where: { ownerId: query.ownerId },
-      take: clampLimit(query.limit),
-      skip: query.offset,
-    });
-  }
-}
-```
-
-> `clampLimit` enforces the 100-cap; every list is paginated. Swap the ORM by changing only `DataStore`. See [`/rules/08-database-and-injection-safety.md`](../rules/08-database-and-injection-safety.md) and [`/skills/create-repository.md`](../skills/create-repository.md).
-
----
-
-## 11. Module wiring + public surface
-
-The module wires controllers + providers and declares its public surface via `index.ts`. Other modules import only through `index.ts` — never reach into internals.
+Unit tests are `*.test.ts` inside the module's `tests/` folder (vitest project `api-unit`). Mock at the boundary — ports and injected collaborators — and always assert the failure path.
 
 ```ts
-// src/modules/article/article.module.ts
-import { Module } from '@nestjs/common';
-
-import { ArticleController } from './api/article.controller';
-import { ArticleService } from './application/article.service';
-import { PublishArticleUseCase } from './application/publish-article.use-case';
-import { ArticleRepository } from './infrastructure/article.repository';
-
-@Module({
-  controllers: [ArticleController],
-  providers: [ArticleService, PublishArticleUseCase, ArticleRepository],
-  exports: [ArticleService],
-})
-export class ArticleModule {}
-```
-
-```ts
-// src/modules/article/index.ts  (public surface — what other modules may import)
-export { ArticleModule } from './article.module';
-export { ArticleService } from './application/article.service';
-export type { ArticleResponseDto } from './api/dto/article-response.dto';
-```
-
-> See [`/skills/create-module.md`](../skills/create-module.md) and [`/rules/01-architecture-and-module-boundaries.md`](../rules/01-architecture-and-module-boundaries.md).
-
----
-
-## 12. Guards + `@RequirePermissions` decorator
-
-Every protected route chains an auth guard → a permissions (RBAC) guard → an ownership/tenant check. Identity comes from the verified token; the permissions guard reads required permissions from decorator metadata.
-
-```ts
-// src/core/decorators/require-permissions.decorator.ts
-import { SetMetadata } from '@nestjs/common';
-
-import { REQUIRE_PERMISSIONS_KEY } from '@core/guards/guard.constants';
-import type { Permission } from '@shared/enums';
-
-export function RequirePermissions(
-  ...permissions: readonly Permission[]
-): MethodDecorator {
-  return SetMetadata(REQUIRE_PERMISSIONS_KEY, permissions);
-}
-```
-
-```ts
-// src/core/guards/permissions.guard.ts
-import { Injectable, type CanActivate, type ExecutionContext } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import type { FastifyRequest } from 'fastify';
-
-import { REQUIRE_PERMISSIONS_KEY } from './guard.constants';
-import { ForbiddenError } from '@core/errors/forbidden.error';
-import { FORBIDDEN_KEY } from './guard.constants';
-import { hasAllPermissions } from './permission.helper';
-import type { Permission } from '@shared/enums';
-import type { AuthenticatedUser } from '@shared/types';
-
-@Injectable()
-export class PermissionsGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
-
-  canActivate(context: ExecutionContext): boolean {
-    const required = this.reflector.getAllAndOverride<readonly Permission[]>(
-      REQUIRE_PERMISSIONS_KEY,
-      [context.getHandler(), context.getClass()],
-    );
-    if (required === undefined || required.length === 0) {
-      return true;
-    }
-    const request = context.switchToHttp().getRequest<FastifyRequest>();
-    const user = request.user as AuthenticatedUser | undefined;
-    if (user === undefined || !hasAllPermissions(user, required)) {
-      throw new ForbiddenError('Missing required permissions', FORBIDDEN_KEY);
-    }
-    return true;
-  }
-}
-```
-
-> The `AuthGuard` runs first and attaches the verified `user`. See [`/rules/07-security-authn-authz.md`](../rules/07-security-authn-authz.md), [`/skills/add-guard-and-permission.md`](../skills/add-guard-and-permission.md), and reviewer [`/agents/backend-security-reviewer.md`](../agents/backend-security-reviewer.md).
-
----
-
-## 13. Outbound adapter — wrap every external library
-
-Wrap each external library/SDK behind a typed, app-owned interface. Business code depends on the port, never the vendor. Centralizes config, error mapping, retries, and test doubles; only adapters may import the vendor (lint-enforced).
-
-```ts
-// src/core/email/email.port.ts
-import type { SendEmailCommand } from './email.types';
-
-export interface EmailPort {
-  send(command: SendEmailCommand): Promise<void>;
-}
-
-export const EMAIL_PORT = Symbol('EMAIL_PORT');
-```
-
-```ts
-// src/adapters/email/provider-email.adapter.ts  (the ONLY place the vendor SDK is imported)
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-// import { ProviderClient } from 'email-provider-sdk';
-
-import { IntegrationError } from '@core/errors/integration.error';
-import { EMAIL_SEND_FAILED_KEY } from './email-adapter.constants';
-import { toProviderPayload } from './email-payload.mapper';
-import type { EmailPort } from '@core/email/email.port';
-import type { SendEmailCommand } from '@core/email/email.types';
-import type { AppConfig } from '@config/app.config';
-
-@Injectable()
-export class ProviderEmailAdapter implements EmailPort {
-  constructor(private readonly config: ConfigService<AppConfig, true>) {}
-
-  async send(command: SendEmailCommand): Promise<void> {
-    try {
-      const payload = toProviderPayload(command);
-      await Promise.resolve(payload); // replace with the wrapped SDK call
-    } catch (cause) {
-      throw new IntegrationError('Email send failed', EMAIL_SEND_FAILED_KEY, { cause });
-    }
-  }
-}
-```
-
-> Bind the port to the adapter in a module: `{ provide: EMAIL_PORT, useClass: ProviderEmailAdapter }`. See [`/rules/12-library-wrapping-and-adapters.md`](../rules/12-library-wrapping-and-adapters.md) and [`/skills/add-library-adapter.md`](../skills/add-library-adapter.md).
-
----
-
-## 14. Unit spec — Vitest + `@nestjs/testing`
-
-Write/adjust tests first. Build the unit under test with `Test.createTestingModule`, mock at the boundary (repository/adapter ports), and assert behavior including the failure path. Coverage floor 95%; critical paths near 100%.
-
-```ts
-// src/modules/article/application/article.service.spec.ts
+// apps/api/src/modules/result-aggregation/tests/result-aggregation.service.test.ts
 import { Test } from '@nestjs/testing';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import { ArticleService } from './article.service';
-import { ArticleRepository } from '../infrastructure/article.repository';
-import { NotFoundError } from '@core/errors/not-found.error';
-import { buildArticle, buildUser } from '@shared/testing/factories';
+import { ResultAggregationService } from '../application/result-aggregation.service';
+import { buildJudgedCandidate, buildTraits } from '../../../tests/fixtures/stubs';
 
-describe('ArticleService', () => {
-  let service: ArticleService;
-  const repo = { findById: vi.fn(), create: vi.fn() };
+describe('ResultAggregationService', () => {
+  let service: ResultAggregationService;
 
   beforeEach(async () => {
-    vi.clearAllMocks();
     const moduleRef = await Test.createTestingModule({
-      providers: [ArticleService, { provide: ArticleRepository, useValue: repo }],
+      providers: [ResultAggregationService],
     }).compile();
-    service = moduleRef.get(ArticleService);
+    service = moduleRef.get(ResultAggregationService);
   });
 
-  it('returns the mapped article when it exists', async () => {
-    const article = buildArticle({ id: 'a1' });
-    repo.findById.mockResolvedValue(article);
+  it('aggregates judged candidates into a final result with the disclaimer', () => {
+    const result = service.aggregate(buildTraits(), [buildJudgedCandidate({ score: 88 })]);
 
-    const result = await service.getById('a1', buildUser({ id: article.ownerId }));
-
-    expect(result.id).toBe('a1');
-    expect(repo.findById).toHaveBeenCalledWith('a1');
+    expect(result.results.length).toBeGreaterThan(0);
+    expect(result.disclaimer.length).toBeGreaterThan(0);
   });
 
-  it('throws NotFoundError when the article is missing', async () => {
-    repo.findById.mockResolvedValue(null);
+  it('returns the fallback when nothing survives filtering', () => {
+    const result = service.aggregate(buildTraits(), []);
 
-    await expect(service.getById('missing', buildUser())).rejects.toBeInstanceOf(
-      NotFoundError,
-    );
+    expect(result.results).toHaveLength(0);
+    expect(result.disclaimer.length).toBeGreaterThan(0);
   });
 });
 ```
 
-> See [`/testing/unit-testing-standard.md`](../testing/unit-testing-standard.md), [`/testing/test-data-and-fixtures.md`](../testing/test-data-and-fixtures.md), and [`/skills/write-unit-tests.md`](../skills/write-unit-tests.md). For HTTP-level tests use `supertest` ([`/testing/e2e-testing-standard.md`](../testing/e2e-testing-standard.md)).
+---
+
+## 12. Integration test — supertest on Fastify with `.ready()`
+
+Integration tests are `*.integration.test.ts` under `apps/api/src/tests/` (vitest project `api-integration`). Boot the real app on the Fastify adapter, swap only the outermost ports (the fake AI adapter), and **await `.ready()`** before hitting routes.
+
+```ts
+// apps/api/src/tests/health.integration.test.ts (skeleton)
+import type { NestFastifyApplication } from '@nestjs/platform-fastify';
+import { Test } from '@nestjs/testing';
+import request from 'supertest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+
+import { AppModule } from '../app.module';
+import { createFastifyAdapter } from '../bootstrap/fastify-adapter';
+import { AI_PROVIDER_ADAPTER } from '../modules/ai/model/ai-provider.port';
+import { FakeAiAdapter } from './fixtures/fake-ai-adapter';
+
+describe('GET /api/v1/health', () => {
+  let app: NestFastifyApplication;
+
+  beforeAll(async () => {
+    const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
+      .overrideProvider(AI_PROVIDER_ADAPTER)
+      .useClass(FakeAiAdapter)
+      .compile();
+
+    app = moduleRef.createNestApplication<NestFastifyApplication>(createFastifyAdapter());
+    app.setGlobalPrefix('api');
+    app.enableVersioning();
+    await app.init();
+    await app.getHttpAdapter().getInstance().ready(); // Fastify must be ready before requests
+  });
+
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('responds 200 with a status payload', async () => {
+    const response = await request(app.getHttpServer()).get('/api/v1/health');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchObject({ status: 'ok' });
+  });
+});
+```
+
+> Fixtures live in `apps/api/src/tests/fixtures/` (fake AI adapter, image fixtures, stubs). Real Gemini/ClamAV are never hit in tests. See [write-unit-tests.md](../skills/write-unit-tests.md) and [write-integration-tests.md](../skills/write-integration-tests.md).
 
 ---
 
@@ -666,28 +482,23 @@ describe('ArticleService', () => {
 
 | Concern | Snippet | Rule | Skill |
 | --- | --- | --- | --- |
-| Bootstrap | §1 | [02](../rules/02-controllers-and-http-transport.md) | — |
-| Config | §2 | [17](../rules/17-configuration-and-environment.md) | [add-config-value](../skills/add-config-value.md) |
-| Errors + filter | §3–4 | [18](../rules/18-error-handling-and-exceptions.md) | [create-error](../skills/create-error.md) |
-| Logger | §5 | [14](../rules/14-observability-and-logging.md) | — |
-| Controller | §6 | [02](../rules/02-controllers-and-http-transport.md) | [create-controller](../skills/create-controller.md) |
-| DTO | §7 | [05](../rules/05-dto-and-validation.md) | [create-dto-validation](../skills/create-dto-validation.md) |
-| Service | §8 | [03](../rules/03-application-services-and-use-cases.md) | [create-service](../skills/create-service.md) |
-| Use case | §9 | [03](../rules/03-application-services-and-use-cases.md) | [create-use-case](../skills/create-use-case.md) |
-| Repository | §10 | [04](../rules/04-repositories-and-persistence.md) | [create-repository](../skills/create-repository.md) |
-| Module | §11 | [01](../rules/01-architecture-and-module-boundaries.md) | [create-module](../skills/create-module.md) |
-| Guards | §12 | [07](../rules/07-security-authn-authz.md) | [add-guard-and-permission](../skills/add-guard-and-permission.md) |
-| Adapter | §13 | [12](../rules/12-library-wrapping-and-adapters.md) | [add-library-adapter](../skills/add-library-adapter.md) |
-| Unit spec | §14 | [11](../rules/11-testing-and-coverage.md) | [write-unit-tests](../skills/write-unit-tests.md) |
+| As-const enum | §1 | [05](../rules/05-types-enums-constants.md) | — |
+| Zod DTO | §2 | [21](../rules/21-dto-validation.md) | [create-dto-validation](../skills/create-dto-validation.md) |
+| Controller | §3 | [18](../rules/18-routes-controllers.md) | [create-controller](../skills/create-controller.md) |
+| Service | §4 | [19](../rules/19-services-application-layer.md) | [create-service-layer](../skills/create-service-layer.md) |
+| Use case | §5 | [17](../rules/17-manager-layer.md) | [create-manager-use-case](../skills/create-manager-use-case.md) |
+| Port + adapter | §6 | [10](../rules/10-library-modularization.md), [14](../rules/14-ai-safety.md) | [add-ai-provider](../skills/add-ai-provider.md), [add-library](../skills/add-library.md) |
+| Typed config | §7 | [00](../rules/00-non-negotiable-rules.md), [16](../rules/16-backend-architecture.md) | — |
+| Errors + filter | §8 | [16](../rules/16-backend-architecture.md) | — |
+| Logger | §9 | [22](../rules/22-observability-logging.md) | — |
+| Bounded list | §10 | [07](../rules/07-performance-scalability.md) | — |
+| Unit test | §11 | [09](../rules/09-testing-coverage.md) | [write-unit-tests](../skills/write-unit-tests.md) |
+| Integration test | §12 | [09](../rules/09-testing-coverage.md) | [write-integration-tests](../skills/write-integration-tests.md) |
 
 Before calling any of these done, run the quality gates:
 
 ```bash
-npm run lint            # 0 errors AND 0 warnings
-npm run typecheck       # tsgo --noEmit, project-wide
-npm run test            # vitest
-npm run test:coverage   # coverage thresholds met
-npm run build           # compiles clean
+npm run lint && npm run typecheck && npm run test:unit && npm run build
 ```
 
-Related: [`architecture-map.md`](./architecture-map.md) · [`codebase-navigation.md`](./codebase-navigation.md) · [`glossary.md`](./glossary.md) · [`stack-and-toolchain.md`](./stack-and-toolchain.md) · [`/rules/00-non-negotiable-rules.md`](../rules/00-non-negotiable-rules.md) · [`/memory/known-pitfalls.md`](../memory/known-pitfalls.md)
+Related: [architecture-map.md](./architecture-map.md) · [codebase-navigation.md](./codebase-navigation.md) · [glossary.md](./glossary.md) · [stack-and-toolchain.md](./stack-and-toolchain.md) · [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) · [/memory/known-pitfalls.md](../memory/known-pitfalls.md)

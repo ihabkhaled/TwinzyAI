@@ -11,8 +11,9 @@ Classify the request before solutioning begins.
 3. Classify the request type.
 4. Identify affected domains and systems.
 5. Assess severity, urgency, and whether the request is standard track or hotfix track.
-6. Flag critical-risk areas such as auth, money flow, privacy, tenant isolation, reporting, or external integrations.
+6. Flag critical-risk areas such as privacy, AI safety, the upload security chain, trait/result wording, or external integrations (the AI provider).
 7. Assign accountable owners.
+8. Reject at intake anything that violates a product invariant: Twinzy is free (no payments), has no auth, no database, no biometrics, and never persists images.
 
 ## Request Record
 
@@ -32,18 +33,16 @@ Classify the request before solutioning begins.
 
 ## Affected Domains
 
-- [ ] Frontend
-- [ ] Backend
-- [ ] Mobile
-- [ ] Database
-- [ ] DevOps / platform
-- [ ] Security
-- [ ] Analytics / BI
-- [ ] AI / model behavior
+- [ ] Frontend (`apps/web`)
+- [ ] Backend (`apps/api`)
+- [ ] Shared contracts (`packages/shared`)
+- [ ] DevOps / platform (Docker, CI, hooks, ESLint architecture plugin)
+- [ ] Security / privacy
+- [ ] AI / model behavior (prompts, safety filtering, Gemini adapter)
 - [ ] Integrations
-- [ ] Support / customer operations
+- [ ] Support / player operations
 - [ ] Legal / compliance
-- [ ] Documentation
+- [ ] Documentation (rules, memory, runbooks, release notes)
 
 ## Criticality and Delivery Track
 
@@ -52,9 +51,9 @@ Classify the request before solutioning begins.
 | Severity | |
 | Urgency | |
 | Standard or hotfix track | |
-| Customer-facing | yes / no |
-| Revenue or money flow impact | yes / no |
-| Auth or permission impact | yes / no |
+| Player-facing | yes / no |
+| Consent or upload-chain impact | yes / no |
+| AI behavior or prompt impact | yes / no |
 | Privacy or regulated data impact | yes / no |
 | External integration impact | yes / no |
 | Production incident related | yes / no |

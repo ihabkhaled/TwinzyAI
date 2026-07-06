@@ -2,6 +2,10 @@
 
 Living checklist of behaviors under test. Every case maps to at least one automated test.
 
+> Detailed reusable test cases live in [`test-cases/`](test-cases/) (unit / integration / e2e /
+> security / business). Test standards, layers, and the coverage policy live in
+> [`testing/`](testing/). This file is the compact behavioral matrix.
+
 ## File security (api-unit / api-integration)
 
 | # | Case | Expectation |

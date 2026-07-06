@@ -29,12 +29,12 @@ Record the actual production deployment and its immediate outcome.
 
 ## Production Checks
 
-- Logs healthy:
-- Metrics healthy:
-- Traces healthy:
-- Database changes verified:
-- External integrations verified:
-- Rollback still ready:
+- Logs healthy (no unexplained 5xx `error` entries; 4xx map to expected `warn` entries):
+- Health endpoint returns 200 with security headers:
+- Analyze flow verified end to end:
+- No persistence introduced (no volumes, no image bytes on disk):
+- External integration verified (AI provider reachable):
+- Rollback still ready (release slice revertible):
 
 ## Issues During Release
 

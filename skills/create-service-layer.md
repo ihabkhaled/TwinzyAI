@@ -6,4 +6,4 @@
 2. Validate inputs (model/schemas), call the gateway, map DTO -> view model via lib/mappers.
 3. Surface typed errors the hook can translate to i18n messages.
 4. Unit-test with a mocked gateway.
-Gate: npm run lint && npm run typecheck && npm run test:unit && npm run build
+Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan

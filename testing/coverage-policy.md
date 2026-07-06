@@ -1,42 +1,110 @@
 # Coverage Policy
 
-> The coverage contract for this workspace: a **95% floor on every touched module** (critical paths near 100%), measured **per file** with Vitest 4 (v8 provider), and enforced at **pre-push**. This implements the canon — [/context/architecture-map.md](../context/architecture-map.md), [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), and [/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md) — and is tied to the live [vitest.config.mts](../vitest.config.mts).
+> The coverage contract for this workspace: **statements 95% / branches 90% / functions 95% / lines 95%** on the gated scope, measured with Vitest 4 and the **v8 provider** (`@vitest/coverage-v8`), and enforced at **pre-push**. This implements the canon — [/context/architecture-map.md](../context/architecture-map.md), [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), and [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) — and is tied to the live root [vitest.config.ts](../vitest.config.ts).
 
-Coverage is a hard gate, not a vanity metric. A green coverage run proves *which lines executed*, not that behavior is correct — pair it with the scenario discipline in [coverage-policy](./coverage-policy.md)'s sibling standards ([unit](./unit-testing-standard.md), [integration](./integration-testing-standard.md), [e2e](./e2e-testing-standard.md)).
+Coverage is a hard gate, not a vanity metric. A green coverage run proves *which lines executed*, not that behavior is correct — pair it with the scenario discipline in the sibling standards ([unit](./unit-testing-standard.md), [integration](./integration-testing-standard.md), [e2e](./e2e-testing-standard.md)).
 
 ---
 
 ## 1. The thresholds
 
-| Metric | Floor (every touched module) | Target for critical logic |
+| Metric | Floor (gated scope) | Target for critical logic |
 | --- | --- | --- |
 | `statements` | 95% | near 100% |
 | `branches` | 90% (see note) | near 100% of **real** branches |
 | `functions` | 95% | near 100% |
 | `lines` | 95% | near 100% |
 
-> **Branch-floor note.** The decorator downlevel transform injects one uncoverable synthetic branch on every `@Injectable`/`@Catch` class-declaration line, under both the istanbul and v8 providers ([known-pitfalls §I3](../memory/known-pitfalls.md)). The 90% branch floor absorbs only that artifact; every **real** branch in changed code must still be covered — reviewers check the per-file table, and lowering any threshold to absorb untested logic remains forbidden (§6).
+> **Branch-floor note.** The decorator downlevel transform (the SWC pass the API projects need for Nest DI metadata) injects one uncoverable synthetic branch on every `@Injectable`/`@Catch` class-declaration line ([known-pitfalls](../memory/known-pitfalls.md)). The 90% branch floor exists **only** to absorb that artifact; every **real** branch in changed code must still be covered — reviewers check the per-file table, and lowering any threshold to absorb untested logic remains forbidden (§6).
 
-**Critical logic** = domain policies, state machines, money/auth/permission/tenant code, and any path whose failure is unsafe. These aim for near-100% with rich scenario coverage (happy path + every validation/forbidden/conflict/boundary branch), not just a high number. A high percentage with shallow assertions is still inadequate.
+**Critical logic** here = the file-security chain, AI safety filtering, the buffer-wipe guarantee, consent gating, rate limiting, and error sanitization — any path whose failure is a privacy or safety incident. These aim for near-100% with rich scenario coverage (happy path + every rejection/boundary branch), not just a high number. A high percentage with shallow assertions is still inadequate.
 
-These four numbers live in `coverage.thresholds` in [vitest.config.mts](../vitest.config.mts). Do **not** edit them down to make a red run pass — that is a silent waiver and is forbidden (see §6).
+The four numbers live in the coverage configuration of the root [vitest.config.ts](../vitest.config.ts). Do **not** edit them down to make a red run pass — that is a silent waiver and is forbidden (§6).
 
 ---
 
-## 2. Per-module, not just global
+## 2. The gated scope — what the floor applies to
 
-A repository-wide average hides thin, untested files behind well-tested ones. This policy measures the **module you touched**, not the whole tree.
+The denominator is a **logic-bearing allowlist**, not "all of `src`". `coverage.include` names exactly the files whose behavior the floor guards (mirror of the live [vitest.config.ts](../vitest.config.ts) `include`):
 
-- **Mechanically:** run the gate scoped to the files in your change. `coverage.all: true` means even files with zero tests count against the floor, so a new untested file cannot ride on the global average.
-- **In practice:** before you call work done, confirm the changed `*.service.ts`, `*.use-case.ts`, `*.repository.ts`, `domain/*`, and `lib/*` files each clear 95% on all four metrics — read the per-file table, not the summary line.
-- **Per-file enforcement (recommended):** flip `thresholds.perFile: true` in [vitest.config.mts](../vitest.config.mts) so each source file must individually clear the floor. This makes "per touched module" mechanical instead of a code-review honor system. When `perFile` is on, the only way to pass is for every non-excluded file to stand on its own.
+| In scope | Why |
+| --- | --- |
+| `apps/api/src/core/errors/error-body.mapper.ts` | maps any throw to the sanitized envelope — leak prevention is logic |
+| `apps/api/src/core/errors/app-exception.filter.ts` | the global filter that catches and sanitizes every error |
+| `apps/api/src/core/logger/app-logger.service.ts` | redaction/formatting behavior |
+| `apps/api/src/core/logger/http-logging.options.ts` | request-log shaping + redaction options |
+| `apps/api/src/core/validation/validation-exception.factory.ts` | turns validation failures into typed errors |
+| `apps/api/src/core/validation/zod-issue.mapper.ts` | maps zod issues to the client message shape |
+| `apps/api/src/core/http/multipart-upload.parser.ts` | parses the multipart upload — bounded, branch-heavy |
+| `apps/api/src/core/http/uploaded-image.interceptor.ts` | single-file / consent gate before the handler |
+| `apps/api/src/modules/**/application/**/*.ts` | use-cases + services — orchestration, the buffer-wipe guarantee, business logic |
+| `apps/api/src/modules/**/infrastructure/**/*.ts` | repositories — parameterized, bounded data access |
+| `apps/api/src/modules/**/lib/**/*.ts` | sanitizers, guards, parsers, mappers — pure logic |
+| `packages/shared/src/utils/**/*.ts` | the cross-side pure utilities |
+
+**Excluded from the denominator** — not in the allowlist because they carry no branchable logic or wrap an un-runnable external boundary exercised only through integration stubs. The vitest `exclude` list also strips `**/tests/**`, `**/*.test.ts(x)`, `**/*.d.ts`, and `**/index.ts` barrels outright:
+
+| Excluded | Why |
+| --- | --- |
+| `apps/api/src/modules/**/adapters/**` | wrap the un-runnable Gemini SDK / clamd TCP socket — exercised via integration stubs |
+| `model/`, enums, constants, `types/` | declarations carry no branches |
+| `dto/` (zod schema declarations) | schema shapes; their *logic* is proven by contract tests, not counted here |
+| error subclasses (`*.error.ts` — one-line status) | a status field + super call, no branch to assert |
+| `*.vendor.ts` re-exports | vendor pass-through, no logic |
+| `bind-app-logger.ts` + `**/*.module.ts` wiring | DI wiring, no branch logic |
+| `apps/api/src/bootstrap/**`, `apps/api/src/main.ts` | app assembly; exercised by the integration boot |
+| `apps/api/src/core/openapi/**` | Swagger surface, no branch logic |
+| `**/index.ts` barrels | re-exports only |
+| `**/tests/**`, `**/*.test.ts(x)`, `**/*.d.ts` | the tests, fixtures, and type declarations themselves |
+| **`apps/web/src/**`** | **waived to the web workstream — outside the allowlist until that workstream adopts the gate. Web code is still tested (`web-unit`, Playwright); it is not yet threshold-gated.** |
+
+> **Strategic consequence:** keeping types/enums/constants in dedicated declaration files (an architecture rule — [/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md)) also keeps them out of the coverage denominator. Clean architecture and a clean gate are the same move.
+
+Never move an `application/` use-case or service, an `infrastructure/` repository, or a `lib/` file out of the allowlist (or into the exclude list) to dodge the gate.
+
+---
+
+## 3. How it is measured (Vitest 4 + v8)
+
+The provider is **`@vitest/coverage-v8`**. Coverage is configured once, at the root config, across all Vitest projects (abridged):
 
 ```ts
-// Do — make the floor stand per file, so a thin file can't hide
 coverage: {
-  thresholds: { perFile: true, branches: 95, functions: 95, lines: 95, statements: 95 },
+  provider: 'v8',
+  reporter: ['text', 'lcov'],
+  reportsDirectory: 'coverage',
+  include: [/* the logic-bearing allowlist — §2 */],
+  exclude: [/* tests, *.d.ts, index.ts barrels — §2 */],
 }
 ```
+
+- `text` → human-readable per-file table in the terminal — the table reviewers read.
+- `lcov` → artifact for the PR coverage view.
+
+Run it:
+
+```bash
+npm run test:coverage   # build:shared, then vitest run --coverage across all projects
+```
+
+The `build:shared` step matters: `@twinzy/shared` is consumed as built `dist`, so a stale build measures yesterday's contract. The root script already chains it — do not bypass the script with a bare `npx vitest`.
+
+---
+
+## 4. Per-file, not just global
+
+A tree-wide average hides thin, untested files behind well-tested ones. This policy measures the **files you touched**, not the summary line.
+
+- **In practice:** before you call work done, confirm each changed `application/` use-case or service, `infrastructure/` repository, `lib/` helper, and in-scope `core/` file clears the floor on all four metrics — read the per-file table, not the total. (Adapters are outside the gated scope; prove them via their unit and integration stubs.)
+- **Focused runs** make this cheap:
+
+```bash
+npm run test:file-security   # the upload chain
+npm run test:ai              # ai + game + result-aggregation
+npm run test:security        # file-security + privacy + common
+```
+
+- A new file with zero tests must never ride in on the global average — its per-file row is the review evidence.
 
 ```ts
 // Don't — lower the floor to silence a red run
@@ -45,58 +113,9 @@ coverage: { thresholds: { lines: 80 } } // unrecorded waiver — forbidden
 
 ---
 
-## 3. How it is measured (Vitest 4 + istanbul)
-
-The provider is **`@vitest/coverage-istanbul`** (not v8) for stable per-line, per-branch attribution. Config (abridged from [vitest.config.mts](../vitest.config.mts)):
-
-```ts
-coverage: {
-  all: true,                 // count files with zero tests against the floor
-  provider: 'istanbul',
-  reporter: ['text', 'json-summary', 'lcov'],
-  include: ['src/**/*.ts'],
-  exclude: [ /* declarative / non-logic — see §4 */ ],
-  thresholds: { branches: 95, functions: 95, lines: 95, statements: 95 },
-}
-```
-
-- `text` → human-readable per-file table in the terminal.
-- `json-summary` → machine-readable totals for CI/agents to parse.
-- `lcov` → upload artifact for the PR coverage view.
-
-Run it:
-
-```bash
-npm run test:coverage   # vitest run --coverage — fails the process if any threshold is unmet
-```
-
-Aliases (`@core`, `@modules`, `@shared`, …) are mirrored from `tsconfig.json` into [vitest.config.mts](../vitest.config.mts); keep both in sync or coverage will mis-resolve modules.
-
----
-
-## 4. What is excluded (and why)
-
-Coverage measures **logic**. Declarative, generated, and bootstrap files carry no behavior to assert, so they are removed from the denominator. The exclude list in [vitest.config.mts](../vitest.config.mts):
-
-| Excluded glob | Why |
-| --- | --- |
-| `src/**/*.module.ts` | DI wiring, no branch logic |
-| `src/**/*.dto.ts` | Validation lives in decorators; covered via controller/e2e tests |
-| `src/**/index.ts` | Public-surface barrels — re-exports only |
-| `src/**/*.spec.ts`, `test/**` | The tests themselves |
-| `src/main.ts` | Entrypoint; bootstrap is exercised by e2e |
-
-Extend the exclude list (consistent with the canon's "zero inline declarations") for pure declaration files when your project adds them: `*.types.ts`, `*.enums.ts`, `*.constants.ts`, `*.interface.ts`, and `src/shared/{enums,constants,types}/**` / `src/modules/**/model/**`. ORM entity files (`*.entity.ts`) may need exclusion too — decorator metadata injects synthetic, uncoverable branches on every property; test their real hooks elsewhere.
-
-> **Strategic consequence:** extracting types/enums/constants into their proper `model/` and `@shared` files (an architecture rule — [/rules/06-types-enums-constants.md](../rules/06-types-enums-constants.md)) also *removes them from the coverage denominator*. Keeping declarations out of logic files is both clean architecture and a coverage strategy — your real logic files reach the floor more easily.
-
-Never add a `*.service.ts`, `*.use-case.ts`, `*.repository.ts`, or `domain/` file to the exclude list to dodge the gate.
-
----
-
 ## 5. How it is enforced (pre-push)
 
-The floor is enforced where it cannot be skipped: the **Husky pre-push hook** (see [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md)).
+The floor is enforced where it cannot be skipped: the **Husky pre-push hook** (see [quality-gates.md](./quality-gates.md)).
 
 | Gate | Hook | Runs | Blocks |
 | --- | --- | --- | --- |
@@ -106,7 +125,7 @@ The floor is enforced where it cannot be skipped: the **Husky pre-push hook** (s
 
 A red suite or a coverage dip below any threshold makes `npm run test:coverage` exit non-zero, which fails pre-push and stops the push. CI re-runs the same command in a clean environment so the gate cannot be a local-only illusion.
 
-- **Never** bypass with `git push --no-verify` (or `git commit --no-verify`) — banned by [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) and the SDLC policy in [/claude.md](../claude.md).
+- **Never** bypass with `git push --no-verify` (or `git commit --no-verify`) — banned by [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) and the SDLC policy in [/docs/sdlc/company-sdlc-policy.md](../docs/sdlc/company-sdlc-policy.md).
 - The local hook and CI use the **same** `npm run test:coverage` entrypoint — no divergent shadow steps.
 
 ---
@@ -117,36 +136,38 @@ The floor is the default; a waiver is the rare, recorded exception.
 
 A waiver is only valid when **all** of the following hold:
 
-1. **Genuinely unreachable defensive code** — e.g. a fall-through arm that an earlier guard already made impossible, or framework-injected synthetic branches. Not "I ran out of time."
-2. **Narrowly scoped** with an istanbul hint *and* a one-line justification comment, attached to the smallest possible region:
+1. **Genuinely unreachable defensive code** — e.g. a fall-through arm that an earlier guard already made impossible, or the synthetic decorator branches described in §1. Not "I ran out of time."
+2. **Narrowly scoped** with a v8 ignore hint *and* a one-line justification comment, attached to the smallest possible region:
    ```ts
-   /* istanbul ignore next -- unreachable: prior guard rejects every other status */
-   throw new UnexpectedStatusError(status);
+   /* v8 ignore next -- unreachable: the magic-byte stage rejects every other format first */
+   throw new InvalidImageError('Unsupported format'); // 422, errorCode FILE_INVALID
    ```
-3. **Recorded as a decision** in [/memory/testing-strategy.md](../memory/testing-strategy.md) (or the request's `12-coverage-plan.md` under [/docs/sdlc/](../docs/sdlc/)) with: what was waived, why it is unreachable/unsafe-to-test, who approved it, and the residual risk.
-4. **Approved** by a reviewer with authority over the area — security/auth/money/tenant code requires the relevant security reviewer ([/agents/backend-security-reviewer.md](../agents/backend-security-reviewer.md)).
+3. **Recorded as a decision** in [/memory/testing-strategy.md](../memory/testing-strategy.md) (or the feature's [12-coverage-plan.md](../docs/features/_template/12-coverage-plan.md) under `docs/features/<slug>/`) with: what was waived, why it is unreachable/unsafe-to-test, who approved it, and the residual risk.
+4. **Approved** by a reviewer with authority over the area — privacy/safety/upload/AI-output code requires the security reviewer ([/agents/backend-security-reviewer.md](../agents/backend-security-reviewer.md)).
 
-What is **not** a waiver: lowering a `thresholds.*` number, adding a logic file to `coverage.exclude`, deleting assertions to make a branch "covered", or `--no-verify`. Each of those is an unrecorded, blanket waiver and is forbidden.
+The one standing waiver: **`apps/web` is outside the gated scope until the web workstream adopts the gate** (owner: web workstream, recorded here and in [/memory/testing-strategy.md](../memory/testing-strategy.md)). It expires when that workstream turns the gate on — new API or shared code cannot cite it.
 
-> Prefer **refactoring for testability** over a waiver. An untestable branch usually signals a design smell — extract the policy to `domain/`, the side effect to an adapter, or the orchestration to a use case. See [/skills/decompose-large-file.md](../skills/decompose-large-file.md).
+What is **not** a waiver: lowering a threshold, adding a logic file to the exclude list, deleting assertions to make a branch "covered", or `--no-verify`. Each of those is an unrecorded, blanket waiver and is forbidden.
+
+> Prefer **refactoring for testability** over a waiver. An untestable branch usually signals a design smell — extract the decision to a `lib/` helper, the vendor call to an adapter, or the orchestration to a use-case. See [/skills/decompose-large-file.md](../skills/decompose-large-file.md).
 
 ---
 
 ## 7. Workflow checklist
 
-Tests come **first** ([/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md)): write/adjust the failing test, implement the minimal change, then prove the floor.
+Tests come **first** ([/rules/09-testing-coverage.md](../rules/09-testing-coverage.md)): write/adjust the failing test, implement the minimal change, then prove the floor.
 
 - [ ] Wrote/updated tests **before** the implementation change.
 - [ ] `npm run test:coverage` is green — process exit 0, all four thresholds met.
-- [ ] Each **touched** logic file (service / use-case / repository / domain / lib) clears 95% on statements, branches, functions, lines — checked the per-file table, not the global summary.
-- [ ] Critical logic (auth, permissions, tenant, money, state machines) is near 100% with branch-level scenarios, not just a high number.
-- [ ] Security surface tested where applicable: 401 unauthenticated, 403 unauthorized, IDOR/tenant isolation, 400 on malformed input, parameterized queries ([/testing/integration-testing-standard.md](./integration-testing-standard.md)).
-- [ ] No threshold lowered, no logic file added to `exclude`, no deleted assertions to fake a branch.
-- [ ] Any waiver is istanbul-scoped, justified inline, **and** recorded + approved per §6.
+- [ ] Each **touched** logic file (use-case / service / repository / lib / filter / shared) clears the floor — checked the per-file table, not the global summary.
+- [ ] Critical logic (consent, file security, safety filtering, buffer wipe, throttle, error sanitization) is near 100% with branch-level scenarios, not just a high number.
+- [ ] Security surface tested where applicable: consent 400, upload rejections (400/413/415/422), 429 past the throttle, no leakage on failure ([/testing/integration-testing-standard.md](./integration-testing-standard.md)).
+- [ ] No threshold lowered, no logic file added to the exclude list, no deleted assertions to fake a branch.
+- [ ] Any waiver is v8-ignore-scoped, justified inline, **and** recorded + approved per §6.
 - [ ] Pre-push gate (`test:coverage` + `build`) passes without `--no-verify`.
 
 ---
 
 ## Related
 
-[/testing/quality-gates.md](./quality-gates.md) · [/testing/testing-strategy.md](./testing-strategy.md) · [/testing/unit-testing-standard.md](./unit-testing-standard.md) · [/testing/integration-testing-standard.md](./integration-testing-standard.md) · [/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md) · [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md) · [vitest.config.mts](../vitest.config.mts) · [/memory/testing-strategy.md](../memory/testing-strategy.md)
+[/testing/quality-gates.md](./quality-gates.md) · [/testing/testing-strategy.md](./testing-strategy.md) · [/testing/unit-testing-standard.md](./unit-testing-standard.md) · [/testing/integration-testing-standard.md](./integration-testing-standard.md) · [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) · [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md) · [vitest.config.ts](../vitest.config.ts) · [/memory/testing-strategy.md](../memory/testing-strategy.md) · [/memory/known-pitfalls.md](../memory/known-pitfalls.md)

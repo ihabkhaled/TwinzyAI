@@ -22,29 +22,26 @@ Prepare the team and the system to implement safely.
 
 ### Flags and Configuration
 
-- [ ] Feature flag plan documented
-- [ ] Config changes identified
+- [ ] Feature flag plan documented (if any)
+- [ ] Env/config changes identified (`.env` variables, config module updates)
 - [ ] Secret changes identified
 
-### Data and Migration
+### Contracts and Rollback
 
-- [ ] Migration plan documented
-- [ ] Rollback plan documented
-- [ ] Backfill or seed plan documented
+- [ ] Shared contract changes (`packages/shared`) planned with web-client compatibility
+- [ ] Rollback plan documented (`git revert` of the slice + redeploy — no DB migrations exist)
 
 ### Observability
 
-- [ ] Logs identified
-- [ ] Metrics identified
-- [ ] Traces identified
-- [ ] Dashboards planned
-- [ ] Alerts planned
+- [ ] Log entries identified (structured, request-id correlated, redacted)
+- [ ] Error codes / message keys identified
+- [ ] Log inspection path confirmed (docker compose logs / pino JSON)
 
 ### Quality and Review
 
-- [ ] Test scaffolding ready
-- [ ] Review checklist ready
-- [ ] CI checks known
+- [ ] Test scaffolding ready (`*.test.ts` / `*.integration.test.ts` files planned)
+- [ ] Review checklist ready (`docs/sdlc/code-review-checklist.md`, `rules/23-review-checklist.md`)
+- [ ] Gates known: `npm run lint` · `npm run typecheck` · `npm run test:unit` · `npm run test:coverage` · `npm run build` · `npm run security:scan`
 
 ### Release Control
 

@@ -1,0 +1,31 @@
+---
+description: Mandatory SDLC phases, artifacts, and hard delivery gates
+alwaysApply: true
+---
+# SDLC And Artifact Rules
+
+This repository enforces the strict enterprise SDLC defined in root `CLAUDE.md`.
+
+- Never skip a phase; never jump directly to implementation.
+- No implementation before phases `00` through `13` are documented.
+- Depth may scale with request size, but phase existence and hard gates never disappear.
+- Every request writes or updates artifacts (`00-intake.md` … `27-retrospective.md`) under
+  `docs/features/<feature-slug>/`.
+- Tests and docs ship in the same delivery stream as the behavior they cover.
+- Every release-facing change must be reviewed, tested, documented, observable, and reversible.
+
+Locations:
+
+- `docs/sdlc/` — permanent company baselines
+- `docs/features/<feature-slug>/` — request-specific phase artifacts
+- `test-cases/` — detailed reusable test cases
+- `architecture/adrs/` — architecture decisions
+- `runbooks/` — operational procedures
+- `release-notes/` — release communication
+- `support/` — support-facing guidance
+
+Do not merge or release when any of the following is true: required artifacts missing; tests for
+changed behavior missing; docs stale; touched-module coverage below threshold without waiver;
+lint / typecheck / test / build / security gates failing; architecture impact undocumented;
+rollback undefined; observability undefined for material risk; required QA / security / business
+approvals missing.

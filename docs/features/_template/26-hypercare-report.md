@@ -18,10 +18,11 @@ Track production behavior during the hypercare window.
 | Signal | Observation | Status |
 | --- | --- | --- |
 | Incidents | | normal / elevated |
-| Error rate | | normal / elevated |
-| Latency | | normal / elevated |
-| Retries / queue health | | normal / elevated |
-| Support tickets | | normal / elevated |
+| Error rate (5xx `error` log entries) | | normal / elevated |
+| Upload rejection rate (4xx `warn` entries: consent, size, type, scan) | | normal / elevated |
+| AI provider failures (`AI_*` error codes / `errors.ai.*` keys) | | normal / elevated |
+| Analyze-flow latency | | normal / elevated |
+| Player reports / support contacts | | normal / elevated |
 | Adoption / KPI trend | | normal / elevated |
 
 ## Actions Taken

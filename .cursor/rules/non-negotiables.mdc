@@ -4,10 +4,17 @@ alwaysApply: true
 ---
 - Strict TS + strict ESLint. No `any`, no `eslint-disable`, no `@ts-ignore`, no `@ts-expect-error`, no `!` assertion.
 - No TS `enum` — as-const objects + derived types. No magic strings for domain values.
-- No inline types/interfaces/constants/DTOs/schemas/config maps — dedicated folders only.
+- Zero inline definitions: no inline types/interfaces/constants/DTOs/schemas/config maps — dedicated folders only.
 - TSX = pure JSX composition. No hooks/handlers/logic in components. Pages are composition only.
-- Backend: Controller → Manager → Service → Repository. Frontend: Component → Hook → Service → Gateway.
-- All third-party libraries wrapped. No direct SDK imports outside adapters. No `process.env` outside config.
-- No raw fetch/axios outside the HTTP wrapper. No raw browser storage outside the storage wrapper.
+- Backend layers one-way: api → application (use-case/service) → domain → infrastructure/adapters.
+  Controllers delegate exactly one application call per handler.
+- Frontend: Component → Hook → Service → Gateway.
+- Validation is Zod only (zod pipe at the boundary); class-validator is forbidden.
+- Vendor ownership: every third-party library wrapped. No direct SDK imports outside adapters.
+  No raw fetch/axios outside the HTTP wrapper. No raw browser storage outside the storage wrapper.
+- No `process.env` outside config/bootstrap. Logging via `AppLogger` (pino) only — never `console.*`.
+- Errors are typed `AppError` with messageKey `errors.<feature>.<key>`; never leak stacks/provider errors.
+- The game is FREE — no payments, ever. No biometrics/identity matching/image storage.
 - All user-facing strings via i18n. Tests first. Never weaken rules to pass.
-- The game is FREE — no payments, ever.
+- Gates green before done: lint (0/0) · typecheck · test:unit · test:coverage · build · security:scan.
+- Conventional commits via Husky hooks; never `--no-verify`.

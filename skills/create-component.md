@@ -7,4 +7,4 @@
 3. Render props only: no hooks, handlers, computations, fetches, or nested ternaries.
 4. Accessibility: label/role/alt; touch target min-h-12 for actions; both themes.
 5. Strings via t(). 6. Render test asserting behavior (visible text, roles, attributes).
-Gate: npm run lint && npm run typecheck && npm run test:unit && npm run build
+Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan

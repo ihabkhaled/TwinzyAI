@@ -4,6 +4,13 @@ alwaysApply: true
 ---
 # Cursor Rules Index
 
-Canonical entry: `AGENTS.md`. Full rules in `rules/` (rules win conflicts). Guides in `skills/`.
-Rule files here: non-negotiables, frontend, backend, security, ai-safety, file-upload-security,
-testing, eslint, pitfalls.
+Read-first order: root `CLAUDE.md` (canonical operating policy — SDLC governance + engineering
+OS) → `AGENTS.md` (agent bootstrap) → these rules → `rules/` full bodies (start:
+`rules/00-non-negotiable-rules.md`) → `skills/` guides → `memory/known-pitfalls.md`.
+
+Precedence: `CLAUDE.md` > `.cursor/rules` > `AGENTS.md` > `CODEX.md`/`cursor.md` >
+`.cursorrules`. Stricter wins.
+
+Rule files here: 00-canonical-policy, 10-sdlc-and-artifacts, 30-devops-release-and-ops,
+40-nestjs-engineering-os, non-negotiables, frontend, backend, security, ai-safety,
+file-upload-security, testing, eslint, pitfalls.

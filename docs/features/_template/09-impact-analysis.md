@@ -14,18 +14,17 @@ Reveal the full blast radius so no team or system is surprised later.
 
 | System / area | Impact summary | Owner | Action required |
 | --- | --- | --- | --- |
-| Frontend | | | |
-| Backend | | | |
-| Mobile | | | |
-| Database | | | |
-| Analytics / BI | | | |
-| DevOps / platform | | | |
-| QA automation | | | |
-| Security | | | |
-| Search / indexing | | | |
-| Support / CS | | | |
-| Documentation | | | |
-| Monitoring / on-call | | | |
+| Frontend (`apps/web`) | | | |
+| Backend (`apps/api`) | | | |
+| Shared contracts (`packages/shared`) | | | |
+| AI pipeline (prompts, safety filter, provider adapter) | | | |
+| Upload security chain | | | |
+| DevOps / platform (Docker, CI, hooks) | | | |
+| QA automation (Vitest, Playwright) | | | |
+| Security / privacy | | | |
+| Support | | | |
+| Documentation (rules, memory, runbooks) | | | |
+| Monitoring / logs | | | |
 
 ## Backward Compatibility
 
@@ -33,7 +32,7 @@ Reveal the full blast radius so no team or system is surprised later.
 
 ## Data Migration Needs
 
-[Describe schema migration, backfill, retention, or reprocessing needs.]
+[Twinzy has no database — there are never schema migrations or backfills. Describe instead any contract migration in `packages/shared`, env/config changes, or cache/PWA invalidation needs. If truly nothing, write `Not applicable — no persistence in this product`.]
 
 ## Monitoring Impact
 

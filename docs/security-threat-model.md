@@ -7,7 +7,8 @@ Threats and mitigations:
   structural decode bounds + optional ClamAV (fail closed in prod).
 - Data exfiltration via logs: LoggerService policy — no image bytes, no keys; redaction helpers.
 - Provider error/response injection: Zod schema validation + forbidden-wording filter; raw
-  provider errors never reach clients (DomainException envelope).
+  provider errors never reach clients (mapped to a typed AppError; the global filter emits only
+  the sanitized `{ statusCode, errorCode, message, messageKey }` envelope).
 - Abuse/DoS: global throttling + stricter analyze route limit + upload size cap + timeouts.
 - Secret leakage: keys only in backend env; images built without secrets; frontend bundle
   contains only NEXT_PUBLIC_* values.

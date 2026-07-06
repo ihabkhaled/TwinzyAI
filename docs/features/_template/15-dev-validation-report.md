@@ -8,12 +8,14 @@ Record the implementation team's proof that the change works before independent 
 
 | Area | Result | Evidence |
 | --- | --- | --- |
-| Lint | pass / fail | |
-| Type checks | pass / fail | |
-| Static analysis | pass / fail | |
-| Unit tests | pass / fail | |
-| Integration tests | pass / fail | |
-| E2E tests | pass / fail / n-a | |
+| Lint (`npm run lint`, 0 errors / 0 warnings) | pass / fail | |
+| Type checks (`npm run typecheck`) | pass / fail | |
+| Unit tests (`npm run test:unit`) | pass / fail | |
+| Integration tests (`npm run test:integration`) | pass / fail | |
+| Coverage (`npm run test:coverage`, ≥ 95/90/95/95) | pass / fail | |
+| Build (`npm run build`) | pass / fail | |
+| Security scan (`npm run security:scan`, 0 HIGH/CRITICAL) | pass / fail | |
+| E2E tests (`npm run test:e2e`) | pass / fail / n-a | |
 | Manual validation | pass / fail | |
 
 ## Step-by-Step Validation Log
@@ -30,11 +32,10 @@ Record the implementation team's proof that the change works before independent 
 
 ## Operational Validation
 
-- Logs checked:
-- Metrics checked:
-- Queue or job behavior checked:
-- DB writes or state transitions checked:
-- External integrations checked:
+- Logs checked (structured entries, request-id present, nothing sensitive leaked):
+- Error envelopes checked (correct status, error code, message key):
+- In-memory state and non-persistence checked (no image bytes written anywhere):
+- External integration checked (AI provider call or stub behavior):
 
 ## Acceptance Criteria Validation
 

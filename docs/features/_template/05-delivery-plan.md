@@ -20,12 +20,11 @@ Convert the request into a practical delivery plan with milestones, sequencing, 
 
 | Workstream | Scope | Owner | Notes |
 | --- | --- | --- | --- |
-| Backend | | | |
-| Frontend | | | |
-| Mobile | | | |
-| Data / migration | | | |
+| Backend (`apps/api`) | | | |
+| Frontend (`apps/web`) | | | |
+| Shared contracts (`packages/shared`) | | | |
 | QA | | | |
-| Security | | | |
+| Security / privacy | | | |
 | Docs | | | |
 | Release / ops | | | |
 | Support enablement | | | |
@@ -46,9 +45,11 @@ Convert the request into a practical delivery plan with milestones, sequencing, 
 
 - Feature flag needed: [yes / no]
 - Staged rollout needed: [yes / no]
-- Migration or backfill needed: [yes / no]
-- Tenant or region scoping needed: [yes / no]
+- Contract change in `packages/shared` needed: [yes / no — if yes, note web-client compatibility]
+- Env/config change needed: [yes / no — list variables]
 - Communication plan needed: [yes / no]
+
+(There are no database migrations or backfills in this repository — Twinzy has no database.)
 
 ## Required Approvals
 

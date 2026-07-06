@@ -1,0 +1,51 @@
+---
+description: NestJS engineering operating system — layered architecture, strict TypeScript, and the non-negotiable code contracts enforced by ESLint, tsconfig, and Husky
+globs: ["apps/api/**/*.ts"]
+---
+# NestJS Engineering Operating System
+
+Root `CLAUDE.md` defines the SDLC governance (phases and gates). This rule defines how NestJS
+backend code must be written. It is mechanically enforced by `eslint.config.mjs` (custom
+architecture plugin under `eslint/`), `tsconfig.base.json` + per-workspace tsconfigs, and the
+Husky hooks in `.husky/`. Full detail lives in `rules/`, `skills/`, `context/`, `memory/`,
+`agents/`, and `testing/`.
+
+## Canonical architecture (one-way dependencies, apps/api/src)
+
+Controller (`modules/<feature>/api/*.controller.ts` — thin, exactly one delegation per handler)
+→ Application (`application/*.use-case.ts` orchestration + transactions; `*.service.ts` focused)
+→ Domain (`domain/` — policies, entities, state machines, pure)
+→ Persistence (`infrastructure/*.repository.ts` — parameterized, bounded)
+→ Integration (`adapters/*.adapter.ts` — every external library wrapped).
+Feature-owned types/constants in `model/`; named helpers in `lib/`.
+Cross-cutting: `src/core` (AppLogger, AppError + exception filter, zod validation pipe,
+rate-limit/throttler, openapi, http types) · `src/config` (typed, zod-validated, fail-fast) ·
+`src/bootstrap` (Fastify app assembly) · `packages/shared` (cross-side contracts).
+
+Read `context/architecture-map.md` and `rules/00-non-negotiable-rules.md` before writing code.
+
+## Non-negotiable code contracts
+
+- Strict TypeScript: no `any`, no `!` non-null assertion, no `eslint-disable`/`@ts-ignore`;
+  resolve types at the root cause. No TS `enum` — as-const objects + derived types.
+- Zero inline declarations: no inline types/interfaces/constants/DTOs/schemas/config maps in
+  controllers, use-cases, services, repositories, or adapters — extract to `model/`,
+  `packages/shared`, `api/dto/`, or `lib/`.
+- Validate at the boundary with Zod DTOs through the shared zod pipe (class-validator forbidden).
+- Every user-facing error is a typed `AppError` with messageKey `errors.<feature>.<key>`; the
+  global exception filter sanitizes output — never leak stacks, SQL, provider errors, or secrets.
+- Typed config only; never read `process.env` outside `src/config`/`src/bootstrap`.
+- Logging via `AppLogger` (pino) only; never `console.*`; never log image bytes or secrets.
+- Vendor boundaries: every external library behind an adapter/wrapper (package-boundaries lint);
+  only `GeminiAdapter` may import the Gemini SDK; `GEMINI_MODEL` comes from `.env`.
+- No behavior change without tests (written first) and docs in the same change; touched-module
+  coverage 95 statements / 90 branches / 95 functions / 95 lines, per file.
+
+## Gates (all green before done)
+
+`npm run lint` (0/0) · `npm run typecheck` · `npm run test:unit` · `npm run test:coverage` ·
+`npm run build` · `npm run security:scan`. Never bypass Husky hooks with `--no-verify`. Fix lint
+at the root cause; never disable a rule.
+
+If anything here conflicts with `CLAUDE.md`, `CLAUDE.md` wins. When two rules overlap, the
+stricter one applies.

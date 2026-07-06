@@ -1,5 +1,7 @@
 # 02 — Frontend Components (TSX)
 
+> Related: [00-non-negotiable-rules.md](./00-non-negotiable-rules.md) (rule 48, `architecture/tsx-pure-composition`) · [03-frontend-hooks.md](./03-frontend-hooks.md) · [05-types-enums-constants.md](./05-types-enums-constants.md) · [13-accessibility.md](./13-accessibility.md)
+
 - TSX equals pure JSX composition. No useState/useEffect/useMemo/useCallback/useRef/useReducer.
 - No handlers defined in TSX; receive them as props from hooks.
 - No computed values, API calls, mutations, or nested ternaries.

@@ -50,15 +50,15 @@ Translate business intent into testable product requirements.
 
 ## Error States
 
-[Define how the system should behave on validation failures, dependency failures, permission denial, empty states, and partial failure conditions.]
+[Define how the system should behave on validation failures, upload rejections (consent, size, type, scan), AI provider failures/timeouts, empty states, and partial failure conditions. Errors surface through the `ApiErrorResponse` envelope and friendly i18n copy.]
 
 ## Permission Model Expectations
 
-[Define who can see, do, edit, approve, retry, or administer the feature.]
+[Twinzy has no accounts, roles, or auth — every surface is public. Define instead: what requires explicit consent, what is rate-limited, and what must never be exposed (image bytes, provider internals). If a request appears to need auth, escalate — it likely violates a product invariant.]
 
 ## Localization / Content Expectations
 
-[Define language, formatting, locale, or content-governance needs.]
+[All user-facing strings go through i18n (`apps/web/src/i18n`). Define wording constraints here — playful style/vibe language only; no identity, biometric, or "exact lookalike" phrasing anywhere in copy.]
 
 ## Analytics / Notification Expectations
 

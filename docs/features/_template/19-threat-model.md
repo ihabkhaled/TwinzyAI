@@ -10,8 +10,14 @@ Identify credible threats, abuse paths, and trust-boundary risks introduced or c
 
 ## Assets to Protect
 
-- [Asset 1]
-- [Asset 2]
+Twinzy's standing assets (extend per request):
+
+- the uploaded image bytes (in memory, request lifetime only)
+- the privacy promise itself (no persistence, no biometrics, no identity claims)
+- `GEMINI_API_KEY` and other secrets
+- the integrity of the upload security chain and safety filter
+- service availability of the analyze flow
+- [Request-specific asset]
 
 ## Trust Boundaries
 
@@ -27,8 +33,13 @@ Identify credible threats, abuse paths, and trust-boundary risks introduced or c
 
 ## Abuse Cases
 
-- [Abuse case 1]
-- [Abuse case 2]
+Standing examples for this product (extend per request):
+
+- hostile or polyglot files smuggled past MIME/extension checks
+- oversize payloads or upload floods against the expensive AI path
+- crafted images attempting to steer AI output into forbidden identity wording
+- attempts to extract provider internals or secrets via error responses
+- [Request-specific abuse case]
 
 ## Security Assumptions
 

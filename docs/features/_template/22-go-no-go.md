@@ -14,10 +14,11 @@ Record the formal release gate decision.
 | Security sign-off | green / amber / red | |
 | UAT sign-off | green / amber / red | |
 | Client approval | green / amber / red | |
-| Rollback readiness | green / amber / red | |
-| Monitoring readiness | green / amber / red | |
+| Automated gates (lint / typecheck / tests / coverage / build / security scan) | green / amber / red | |
+| Rollback readiness (git revert + redeploy) | green / amber / red | |
+| Monitoring readiness (structured logs, request-id correlation) | green / amber / red | |
 | Support readiness | green / amber / red | |
-| Migration readiness | green / amber / red | |
+| Env/config readiness (`.env` values verified) | green / amber / red | |
 | Compliance / risk | green / amber / red | |
 
 ## Remaining Risks

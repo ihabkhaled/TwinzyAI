@@ -8,17 +8,18 @@ List every documentation update completed for this request.
 
 | Document | Why it changed | Updated by | Date |
 | --- | --- | --- | --- |
-| `claude.md` | | | |
-| Architecture docs | | | |
-| API docs | | | |
-| Runbooks | | | |
-| QA docs | | | |
-| Security docs | | | |
-| Support docs | | | |
-| Onboarding docs | | | |
-| Migration docs | | | |
-| Release notes | | | |
-| User docs | | | |
+| `CLAUDE.md` / `AGENTS.md` | | | |
+| `rules/` | | | |
+| `memory/` | | | |
+| `context/` (architecture map, code map) | | | |
+| ADRs (`architecture/adrs/`) | | | |
+| API contract docs (`packages/shared`) | | | |
+| Runbooks (`runbooks/`) | | | |
+| QA docs / test cases (`test-cases/`, `testing/`) | | | |
+| Security docs (`docs/sdlc/security-baseline.md`, `SECURITY.md`) | | | |
+| Support docs (`support/`) | | | |
+| Release notes (`release-notes/`) | | | |
+| User-facing docs / copy | | | |
 
 ## Documentation Gaps
 

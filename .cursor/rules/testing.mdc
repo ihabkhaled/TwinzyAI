@@ -3,6 +3,10 @@ description: Testing rules
 globs: ["**/*.test.*", "**/tests/**", "apps/web/e2e/**"]
 ---
 - Tests first for new behavior; tests assert behavior, not implementation details.
-- Unit: Vitest (api-unit/web-unit/shared-unit). Integration: api-integration (supertest).
+- Naming: `*.test.ts` / `*.test.tsx`, colocated under the module's `tests/` folder.
+- Vitest projects: api-unit / web-unit / shared-unit / lint-rules; integration: api-integration (supertest).
 - E2E: Playwright with mocked backend by default; never call real Gemini in CI.
-- Never skip/focus tests to pass a gate. Coverage runs in pre-push.
+- Coverage on touched modules, per file: 95 statements / 90 branches / 95 functions / 95 lines
+  (critical paths near 100%). See testing/coverage-policy.md.
+- Never skip/focus tests or lower thresholds to pass a gate. Coverage runs in pre-push.
+- Standards live in testing/; reusable case matrices in test-cases/.

@@ -1,8 +1,10 @@
 # Unit Testing Standard
 
-> The house standard for unit tests in this workspace: **Vitest 4 + `@nestjs/testing`**, one unit in isolation, mocked at every layer boundary, AAA structure, deterministic, branch-complete. Implements the testing canon in [/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md) and the strategy in [testing-strategy.md](./testing-strategy.md); the recipe for writing them is [/skills/write-unit-tests.md](../skills/write-unit-tests.md).
+> The house standard for unit tests in this workspace: **Vitest 4 + `@nestjs/testing`**, one unit in isolation, mocked at every layer boundary, AAA structure, deterministic, branch-complete. Implements the testing canon in [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) and the strategy in [testing-strategy.md](./testing-strategy.md); the recipe for writing them is [/skills/write-unit-tests.md](../skills/write-unit-tests.md).
 
-A unit test proves **one unit** — a service, use case, domain policy, mapper, guard, pipe, or interceptor — with every collaborator across a layer line replaced by a double. It never opens a real database, cache, broker, HTTP server, clock, or external API. It is the fastest feedback loop and carries the bulk of the 95% coverage floor. The layer above is the [integration standard](./integration-testing-standard.md) (the real Nest pipeline via supertest); above that, the [e2e standard](./e2e-testing-standard.md).
+A unit test proves **one unit** — a use-case, service, adapter, `lib/` helper, zod DTO schema, or the exception filter — with every collaborator across a layer line replaced by a double. It never opens a real network connection, real clock, real AI provider, or real virus scanner. It is the fastest feedback loop and carries the bulk of the coverage floor. The layer above is the [integration standard](./integration-testing-standard.md) (the full Nest app via supertest); above that, the [e2e standard](./e2e-testing-standard.md).
+
+Unit tests run in the **`api-unit`** project (API), **`shared-unit`** (`packages/shared`), **`web-unit`** (web, owned by that workstream), and **`lint-rules`** (the architecture ESLint plugin) — all defined in the root [vitest.config.ts](../vitest.config.ts). The API projects run through an SWC plugin because esbuild cannot emit the decorator metadata Nest DI relies on; you get that for free by matching the file-name patterns (`src/**/*.test.ts`, colocated under a `tests/` folder — never `*.spec.ts`, which no Vitest project picks up).
 
 A function without a test is unfinished work, not a future task. 100% line coverage with zero scenario coverage is paperwork — see [coverage-policy.md](./coverage-policy.md).
 
@@ -14,45 +16,46 @@ The unit is the **system under test (SUT)**. Everything it calls across a layer 
 
 | Unit under test | Mock these (boundaries) | Never mock |
 | --- | --- | --- |
-| `<feature>.service.ts` | repository, adapters, other modules' public surface, logger | the domain policies it calls |
-| `<action>.use-case.ts` | the services it orchestrates, transaction runner, event publisher | — |
-| `domain/*.policy.ts` (entities, state machines) | nothing — pure input → output | everything |
-| `lib/` mapper / formatter / helper | nothing if pure | — |
-| guard / pipe / interceptor | reflector, the service it queries | the framework itself |
-| `adapters/<vendor>.adapter.ts` | the vendor SDK (doubled inside the adapter) | the adapter's own mapping/error translation |
+| `application/<action>.use-case.ts` | the services it orchestrates, cleanup service, logger | — |
+| `application/<name>.service.ts` | adapters, sibling services' public surface, logger, config (via stubs) | the pure `lib/` helpers it calls |
+| `adapters/<vendor>.adapter.ts` (Gemini, ClamAV) | the vendor SDK / socket (doubled inside the adapter) | the adapter's own mapping/error/timeout translation |
+| `lib/*.ts`, sanitizers, guards | nothing — pure input → output | everything |
+| `dto/*.dto.ts` zod schemas | nothing — parse input, assert result | — |
+| `core/errors/app-exception.filter.ts` | the host/reply objects | the mapping logic itself |
+| `packages/shared/src` schemas/utils | nothing — pure | — |
 
-**Mock at the right depth.** A service test doubles the repository and exercises the real service + real domain policy. If you mock the domain policy too, the test asserts nothing about the decision it claims to verify.
+**Mock at the right depth.** A service test doubles the AI adapter and exercises the real service + real sanitizer/guard `lib/` helpers. If you mock the safety guard too, the test asserts nothing about the decision it claims to verify.
 
 ---
 
 ## 2. Build the SUT with the NestJS testing module
 
-Wire DI exactly as production with `Test.createTestingModule`, overriding each boundary with a **typed** double. Never `new Service(...)` with an untyped blob — you lose DI parity and silently miss provider-wiring bugs.
+Wire DI exactly as production with `Test.createTestingModule`, overriding each boundary with a **typed** double. Never `new Service(...)` with an untyped blob — you lose DI parity and silently miss provider-wiring bugs. Use the shared stubs ([test-data-and-fixtures.md](./test-data-and-fixtures.md)) for the logger and config.
 
 ```typescript
-// DO — real SUT, doubled boundary, typed mocks, reset between cases
+// DO — real SUT, doubled boundary, typed fakes, reset between cases
 import { Test } from '@nestjs/testing';
-import { OrderService } from './order.service';
-import { OrderRepository } from '../infrastructure/order.repository';
-import { AppLogger } from '@core/logger';
-import { OrderStatus } from '../model/order.enums';
+import { afterEach, beforeEach, describe, vi } from 'vitest';
 
-type Mocked<T> = { [K in keyof T]: ReturnType<typeof vi.fn> };
+import { AppLogger } from '../../../core/logger/app-logger.service';
+import { AI_PROVIDER_ADAPTER, TraitExtractionService } from '../../ai';
+import { FakeAiAdapter } from '../../../tests/fixtures/fake-ai-adapter';
+import { buildAppLoggerStub } from '../../../tests/fixtures/stubs';
 
-describe('OrderService', () => {
-  let service: OrderService;
-  let repo: Mocked<OrderRepository>;
+describe('TraitExtractionService', () => {
+  let service: TraitExtractionService;
+  let adapter: FakeAiAdapter;
 
   beforeEach(async () => {
-    repo = { findById: vi.fn(), save: vi.fn(), list: vi.fn() } as Mocked<OrderRepository>;
+    adapter = new FakeAiAdapter();
     const moduleRef = await Test.createTestingModule({
       providers: [
-        OrderService,
-        { provide: OrderRepository, useValue: repo },
-        { provide: AppLogger, useValue: { info: vi.fn(), error: vi.fn() } },
+        TraitExtractionService,
+        { provide: AI_PROVIDER_ADAPTER, useValue: adapter },
+        { provide: AppLogger, useValue: buildAppLoggerStub().logger },
       ],
     }).compile();
-    service = moduleRef.get(OrderService);
+    service = moduleRef.get(TraitExtractionService);
   });
 
   afterEach(() => vi.clearAllMocks()); // reset impls + call history every test
@@ -61,17 +64,16 @@ describe('OrderService', () => {
 
 ```typescript
 // DON'T — no DI, untyped blob, leaks state, uses `any`
-const service = new OrderService({ findById: () => null } as any); // banned
+const service = new TraitExtractionService({ generateFromImage: () => '' } as any); // banned
 ```
 
-Pure domain policies need no module at all — instantiate or call directly. These are the cheapest, most valuable tests.
+Pure `lib/` helpers and zod schemas need no module at all — call them directly. These are the cheapest, most valuable tests.
 
 ```typescript
-// DO — pure policy: feed inputs, assert outputs and thrown invariants
-it('rejects an illegal state transition', () => {
-  expect(() => assertTransition(OrderStatus.CLOSED, OrderStatus.DRAFT)).toThrow(
-    InvalidTransitionError,
-  );
+// DO — pure schema: feed inputs, assert accept/reject
+it('treats anything but the literal "true" as no consent', () => {
+  expect(isConsentGiven({ consent: 'yes' })).toBe(false);
+  expect(isConsentGiven({ consent: 'true' })).toBe(true);
 });
 ```
 
@@ -82,48 +84,53 @@ it('rejects an illegal state transition', () => {
 Every `it` follows **Arrange → Act → Assert**, separated by blank lines, with exactly one behavior under test. Assert both the **return value** and the **collaborator interaction** — never only that a function ran.
 
 ```typescript
-// DO — clear AAA, asserts the result AND the call
-it('returns the order for its owner', async () => {
+// DO — clear AAA, asserts the result AND the recorded provider call
+it('sends the image to the provider exactly once with the trait prompt', async () => {
   // Arrange
-  const order = { id: 'order-1', ownerId: 'user-1', status: OrderStatus.DRAFT };
-  repo.findById.mockResolvedValue(order);
+  adapter.queueImageResponse(buildTraitExtractionJson());
+  const buffer = buildJpegBuffer();
 
   // Act
-  const result = await service.getOwned('order-1', 'user-1');
+  const traits = await service.extractTraits(buffer, 'image/jpeg');
 
   // Assert
-  expect(result.status).toBe(OrderStatus.DRAFT); // enum member, never 'DRAFT'
-  expect(repo.findById).toHaveBeenCalledWith('order-1');
+  expect(Object.keys(traits)).toHaveLength(TRAIT_KEYS.length); // named constant, never 15
+  expect(adapter.imageCalls).toHaveLength(1);
 });
 ```
 
-Keep fixtures minimal and realistic. Factor shared fixtures into builders ([test-data-and-fixtures.md](./test-data-and-fixtures.md)); never share **mutable** state between tests.
+Keep fixtures minimal and realistic. Factor shared fixtures into the builders under `apps/api/src/tests/fixtures/` ([test-data-and-fixtures.md](./test-data-and-fixtures.md)); never share **mutable** state between tests.
 
 ---
 
-## 4. Assert typed errors — class AND messageKey
+## 4. Assert typed errors — class, errorCode, AND messageKey
 
-Every `AppError` branch (not-found, forbidden, conflict, validation, business-rule) gets a dedicated case pinning both the **error class** and its **`messageKey`** of the form `errors.<feature>.<key>`. Assert rejections with `rejects.toBeInstanceOf(...)`, never bare truthiness.
+Every typed-error branch (consent, file rejection, unsafe response, provider failure) throws an **`AppError` subclass** (the shared `ValidationError` / `PayloadTooLargeError` / `IntegrationError` … from `apps/api/src/core/errors`, or a module-local one like file-security's `InvalidImageError` / `UnsupportedImageTypeError`). `DomainException` is gone. Each branch gets a dedicated case pinning the **error class**, its stable **`errorCode`** (an `ErrorCode` member from `apps/api/src/core/errors/error-code.constants.ts`), its **`messageKey`** (from `ERROR_MESSAGE_KEY_BY_CODE`), and — where the HTTP mapping matters — the status. Assert rejections with `rejects.toBeInstanceOf(...)` / `rejects.toMatchObject(...)`, never bare truthiness.
 
 ```typescript
-// DO — type and messageKey both pinned
-it('throws OrderNotFoundError when the order is missing', async () => {
-  repo.findById.mockResolvedValue(null);
+// DO — class, errorCode, and messageKey all pinned via named members (never a raw string)
+it('throws InvalidImageError when the bytes do not decode as the declared type', async () => {
+  const file = buildUploadFile({ buffer: buildCorruptJpegBuffer() });
 
-  await expect(service.getOwned('missing', 'user-1')).rejects.toBeInstanceOf(OrderNotFoundError);
-  await expect(service.getOwned('missing', 'user-1')).rejects.toMatchObject({
-    messageKey: 'errors.order.notFound',
+  await expect(fileSecurity.assertSafeImage(file, true)).rejects.toBeInstanceOf(InvalidImageError);
+  await expect(fileSecurity.assertSafeImage(file, true)).rejects.toMatchObject({
+    errorCode: ErrorCode.FileInvalid, // FILE_INVALID (422)
+    messageKey: ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.FileInvalid],
   });
 });
 
-it('throws OrderForbiddenError on cross-owner access', async () => {
-  repo.findById.mockResolvedValue({ id: 'order-1', ownerId: 'user-2', status: OrderStatus.DRAFT });
-
-  await expect(service.getOwned('order-1', 'user-1')).rejects.toBeInstanceOf(OrderForbiddenError);
+it('throws ValidationError (CONSENT_REQUIRED) before touching the file when consent is absent', async () => {
+  await expect(fileSecurity.assertSafeImage(buildUploadFile(), false)).rejects.toBeInstanceOf(
+    ValidationError,
+  );
+  await expect(fileSecurity.assertSafeImage(buildUploadFile(), false)).rejects.toMatchObject({
+    errorCode: ErrorCode.ConsentRequired,
+    messageKey: ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.ConsentRequired],
+  });
 });
 ```
 
-See [/skills/create-error.md](../skills/create-error.md) and [/rules/18-error-handling-and-exceptions.md](../rules/18-error-handling-and-exceptions.md).
+Raw provider or filesystem errors must be **mapped** into a typed `AppError` (e.g. `IntegrationError` for a provider failure) before leaving a service — a unit test that sees a bare `Error` escape a service is a failing test ([/rules/19-services-application-layer.md](../rules/19-services-application-layer.md), [/rules/26-error-handling-and-exceptions.md](../rules/26-error-handling-and-exceptions.md)). The global filter ([`core/errors/app-exception.filter.ts`](../apps/api/src/core/errors/app-exception.filter.ts)) then renders any `AppError` as the sanitized `{ statusCode, errorCode, message, messageKey }` envelope.
 
 ---
 
@@ -131,66 +138,64 @@ See [/skills/create-error.md](../skills/create-error.md) and [/rules/18-error-ha
 
 Line coverage is a side effect; **branch + scenario coverage** is the goal. Exercise both sides of every `if`, `else`, `switch` arm, ternary, `??`, `?.`, and guard clause. A function can hit 100% lines with one happy-path call and still leave every error path untested — that is where the bugs live.
 
-Aim for **≥ 10 cases per service / use case**. Each suite must include these unless explicitly justified in review:
+Aim for **≥ 10 cases per service / use-case**. Each suite must include these unless explicitly justified in review:
 
 | Scenario | What to assert |
 | --- | --- |
-| Happy path | expected return; correct collaborator args |
-| Validation / business rule | invalid state/transition rejects the typed error |
-| Not found | repo returns `null` → typed not-found `AppError` |
-| Ownership / tenant (IDOR) | actor A cannot read/mutate actor B's resource by id |
-| Permission / RBAC | authenticated-but-unauthorized path rejects |
-| Boundary: at / below / above limits | off-by-one correct; the hard list cap (100) enforced |
-| Empty / null | `[]` returns `[]` (not null, not a crash); null handled |
-| Idempotent / no-op | the path that skips a query (same value, already applied) |
-| Branch flag true/false | e.g. `includeArchived` on vs off — assert the arg to the repo |
-| Optional field present/absent | `undefined` stripped vs included |
-| Collaborator failure | repo/adapter rejects → propagated, wrapped, or swallowed as designed |
+| Happy path | expected return; correct collaborator args; response shape |
+| Validation / rejection branch | each file-security stage rejects with its own `ErrorCode` |
+| Consent gate | pipeline never proceeds without consent; zero adapter calls |
+| Safety filtering | forbidden wording or a flagged safety check → rejected/sanitized ([/rules/14-ai-safety.md](../rules/14-ai-safety.md)) |
+| Privacy invariant | buffer zero-filled in `finally`; image only ever in `imageCalls`, never `textCalls` |
+| Boundary: at / below / above limits | size cap, minimum dimensions, empty candidate list → fallback |
+| Empty / null / optional | absent optional fields handled; `[]` triggers the fallback branch, not a crash |
+| Branch flag true/false | e.g. ClamAV enabled vs disabled via `buildConfigStub({ enableClamAv: true })` |
+| Collaborator failure | adapter rejects / times out → mapped `AI_PROVIDER_UNAVAILABLE` / `AI_TIMEOUT` |
+| Malformed vendor output | non-JSON, schema-invalid, or truncated provider response → `AI_RESPONSE_INVALID` |
 
-Per-unit thresholds and exclusions (`*.types.ts`, `*.enums.ts`, `*.constants.ts`, barrels, `model/**`, migrations) live in [coverage-policy.md](./coverage-policy.md). Don't pad data-only files — spend the effort on logic.
+Per-file thresholds and the exclusion list (wiring-only files, type-only files) live in [coverage-policy.md](./coverage-policy.md). Don't pad data-only files — spend the effort on logic.
 
 ---
 
-## 6. Repositories never throw; services decide
+## 6. Adapters: double the vendor, prove the translation
 
-Repository unit tests verify **query shape and pass-through**, not real database behavior — the ORM driver (TypeORM / Prisma / Mongoose / Sequelize are interchangeable examples) is doubled. The contract: a repository returns data on hit, returns `null` / `[]` on miss, and **never throws**; the service decides what a miss means.
+Adapter unit tests verify **request mapping, timeout behavior, and error translation**, not vendor behavior — the SDK (or socket, for ClamAV) is doubled. The contract: the adapter returns clean domain-shaped data on success and throws a mapped `AppError` (typically `IntegrationError`) on failure; no vendor error, header, or key ever escapes it ([/rules/10-library-modularization.md](../rules/10-library-modularization.md)). Adapters sit outside the gated coverage scope (they wrap an un-runnable external boundary — [coverage-policy.md](./coverage-policy.md)), but their mapping is still unit-proven here and exercised through the integration stubs.
 
 ```typescript
-// DO — repository returns null on miss, never throws; query stays bounded
-it('returns null when the order is not found', async () => {
-  driver.findOne.mockResolvedValue(null);
+// DO — vendor timeout becomes a typed, safe error
+it('maps a provider timeout to AI_TIMEOUT without leaking the raw error', async () => {
+  sdk.generateContent.mockRejectedValue(new Error('deadline exceeded; apiKey=abc123'));
 
-  await expect(repo.findById('order-1')).resolves.toBeNull();
-});
-
-it('caps a list query at the hard maximum of 100', async () => {
-  driver.find.mockResolvedValue([]);
-
-  await repo.list({ limit: 5000 });
-
-  expect(driver.find).toHaveBeenCalledWith(expect.objectContaining({ take: MAX_LIST_LIMIT }));
+  await expect(adapter.generateFromText('prompt')).rejects.toMatchObject({
+    errorCode: ErrorCode.AiTimeout,
+  });
+  await expect(adapter.generateFromText('prompt')).rejects.not.toMatchObject({
+    message: expect.stringContaining('apiKey'),
+  });
 });
 ```
 
-Proving the query actually executes against a real engine is an **integration** concern — see [integration-testing-standard.md](./integration-testing-standard.md) and [/rules/04-repositories-and-persistence.md](../rules/04-repositories-and-persistence.md).
+The model name comes from config (`GEMINI_MODEL` via the config stub) — a test that hardcodes a real model string is wrong twice.
 
 ---
 
 ## 7. Fail-safe side effects and async discipline
 
-A fire-and-forget handler (event subscriber, notification) must **swallow its own error** and never reject the caller. Prove it.
+A fire-and-forget side effect (cleanup, logging) must **never reject the caller** — and safety-critical cleanup must run on every path. Prove both directions.
 
 ```typescript
-// DO — side-effect failure is logged and swallowed, workflow keeps going
-it('swallows a notification failure and resolves without rejecting', async () => {
-  notifier.send.mockRejectedValue(new Error('provider down'));
+// DO — the wipe happens even when the pipeline fails
+it('wipes the buffer when trait extraction rejects', async () => {
+  adapter.queueImageResponse(new Error('provider down'));
+  const file = buildUploadFile();
 
-  await expect(handler.onOrderPlaced(orderPlacedEvent)).resolves.toBeUndefined();
-  expect(logger.error).toHaveBeenCalled();
+  await expect(analyzeGame.analyze(file, { consent: 'true' })).rejects.toBeInstanceOf(AppError);
+
+  expect(file.buffer.every((byte) => byte === 0)).toBe(true);
 });
 ```
 
-Always `await` the promise under test and drive sequential reads with `mockResolvedValueOnce` chains; assert call **order and arguments**, not only counts. See [/rules/19-async-events-and-jobs.md](../rules/19-async-events-and-jobs.md) and [/rules/10-reliability-and-durability.md](../rules/10-reliability-and-durability.md).
+Always `await` the promise under test and drive sequential provider calls with queued responses (`queueTextResponse` twice for candidates + judge); assert call **order and arguments** via the recorded calls, not only counts. See [/rules/08-reliability-durability.md](../rules/08-reliability-durability.md).
 
 ---
 
@@ -199,13 +204,13 @@ Always `await` the promise under test and drive sequential reads with `mockResol
 Never rerun-until-green, never paper over timing with `sleep`. Control everything non-deterministic.
 
 - **Time:** `vi.useFakeTimers()` / `vi.setSystemTime(...)`; restore in `afterEach`. Never assert against live `Date.now()`.
-- **Randomness:** inject the id/token generator and stub it; never assert against real `randomUUID` / `Math.random`.
-- **No real I/O:** no network, real clock, or real DB in a unit test — those belong to integration/e2e behind a controlled instance.
-- **Isolation:** `vi.clearAllMocks()` in `beforeEach`/`afterEach`. A test that passes only after another test is broken.
+- **Provider:** `FakeAiAdapter` rejects when its queue is empty — an unqueued call fails loudly instead of hanging or flaking.
+- **No real I/O:** no network, real clock, real Gemini, or real ClamAV in a unit test — those live behind doubles.
+- **Isolation:** `vi.clearAllMocks()` in `afterEach`; rebuild the fake adapter in `beforeEach`. A test that passes only after another test is broken.
 
 ```typescript
 // DO — frozen clock, restored afterwards
-beforeEach(() => vi.useFakeTimers().setSystemTime(new Date('2025-01-01T00:00:00Z')));
+beforeEach(() => vi.useFakeTimers().setSystemTime(new Date('2026-01-01T00:00:00Z')));
 afterEach(() => vi.useRealTimers());
 ```
 
@@ -213,16 +218,16 @@ afterEach(() => vi.useRealTimers());
 
 ## 9. Naming
 
-Format: `should [do X] when [condition Y]` — readable as a behavior from the description alone. `describe` blocks nest **class → method**.
+Format: the `it` reads as a behavior — `[does X] when [condition Y]`. `describe` blocks nest **class → method**.
 
 ```typescript
 // GOOD
-describe('OrderService', () => {
-  describe('getOwned', () => {
-    it('returns the order when it exists and belongs to the caller', () => {});
-    it('throws OrderNotFoundError when the order does not exist', () => {});
-    it('throws OrderForbiddenError when the order belongs to another user', () => {});
-    it('caps the list at 100 when a larger limit is requested', () => {});
+describe('FileSecurityService', () => {
+  describe('assertSafeImage', () => {
+    it('accepts a structurally valid JPEG within the size cap', () => {});
+    it('rejects a file larger than the configured maximum', () => {});
+    it('rejects a renamed file whose magic bytes do not match the declared type', () => {});
+    it('fails closed when ClamAV is enabled but unreachable', () => {});
   });
 });
 
@@ -240,22 +245,22 @@ A test description that lies about its assertion is worse than no test: it manuf
 
 ```typescript
 // FAKE 1 — testing the mock: asserts a call happened, nothing about the result or logic
-it('calls the repository', async () => {
-  await service.getOwned('order-1', 'user-1');
-  expect(repo.findById).toHaveBeenCalled(); // proves you called a function, not behavior
+it('calls the provider', async () => {
+  await service.extractTraits(buffer, 'image/jpeg');
+  expect(adapter.imageCalls).toHaveLength(1); // proves you called a function, not behavior
 });
 
-// FAKE 2 — pure pass-through: mock returns X, assert X back; no branch exercised
-it('returns the order', async () => {
-  repo.findById.mockResolvedValue(theOrder);
-  expect(await service.getOwned('order-1', 'user-1')).toBe(theOrder); // ownership check never tested
+// FAKE 2 — pure pass-through: queue X, assert X back; no branch exercised
+it('returns traits', async () => {
+  adapter.queueImageResponse(traitsJson);
+  expect(await service.extractTraits(buffer, 'image/jpeg')).toBeDefined(); // safety check never tested
 });
 
-// FAKE 3 — happy-path-only on a method with five error paths
-it('creates an order', async () => {
-  repo.save.mockResolvedValue(created);
-  expect(await service.create(dto, 'user-1')).toBe(created);
-  // missing: duplicate, invalid state, forbidden, validation, persistence failure
+// FAKE 3 — happy-path-only on a method with five rejection paths
+it('analyzes an image', async () => {
+  queueHappyPipeline(adapter);
+  expect(await analyzeGame.analyze(buildUploadFile(), { consent: 'true' })).toBeDefined();
+  // missing: no consent, bad file, unsafe response, provider failure, empty candidates
 });
 ```
 
@@ -265,12 +270,13 @@ The fix is always **more scenarios at the right boundary**, never a lower thresh
 
 ## File placement & banned tokens
 
-- Tests live beside the SUT: `<name>.spec.ts` next to `<name>.ts` (mirrors the module anatomy in [/context/architecture-map.md](../context/architecture-map.md)).
-- Type doubles to the collaborator interface; **never** `any`, `@ts-ignore`, `!`, or `eslint-disable` — strict TS and the non-negotiable rules ([/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md)) hold in tests too.
+- Tests live in the nearest `tests/` folder beside the SUT: `apps/api/src/modules/<feature>/tests/<name>.test.ts`; shared-package tests in `packages/shared/tests/<name>.test.ts` (mirrors the layout in [/context/architecture-map.md](../context/architecture-map.md)).
+- Naming is `*.test.ts` — a `*.spec.ts` file under `apps/api` or `packages/shared` matches **no** Vitest project and silently never runs.
+- Type doubles to the collaborator interface (e.g. `FakeAiAdapter implements AiProviderAdapter`); **never** `any`, `@ts-ignore`, non-null `!`, or `eslint-disable` — strict TS and the non-negotiables ([/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), [/rules/11-eslint-typescript.md](../rules/11-eslint-typescript.md)) hold in tests too. No TypeScript `enum` in fixtures — `as const` objects only ([/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md)).
 
 ```text
-DON'T:  jest / jest.mock / jest.fn / jest.spyOn / ts-jest / @jest/globals / tsc --noEmit / any / @ts-ignore / eslint-disable
-DO:     vi.mock / vi.fn / vi.spyOn / vi.hoisted / vi.useFakeTimers / npm run test* / tsgo --noEmit
+DON'T:  jest / jest.mock / jest.fn / jest.spyOn / ts-jest / @jest/globals / *.spec.ts / any / @ts-ignore / eslint-disable
+DO:     vi.mock / vi.fn / vi.spyOn / vi.hoisted / vi.useFakeTimers / *.test.ts under tests/ / npm run test:unit
 ```
 
 ---
@@ -279,17 +285,18 @@ DO:     vi.mock / vi.fn / vi.spyOn / vi.hoisted / vi.useFakeTimers / npm run tes
 
 ```bash
 npm run lint            # 0 errors AND 0 warnings
-npm run typecheck       # tsgo --noEmit, project-wide
-npm run test            # vitest run — full suite
-npm run test:coverage   # statements/branches/functions/lines ≥ 95% (critical paths ~100%)
+npm run typecheck       # tsc --noEmit in every workspace
+npm run test:unit       # api-unit + web-unit + shared-unit + lint-rules
+npm run test:coverage   # statements/functions/lines ≥ 95%, branches ≥ 90%
 npm run build           # compiles clean
 ```
 
-Narrow coverage to the unit you touched to see the exact metrics the gate enforces, then close every uncovered branch:
+Narrow a run to the module you touched to see the exact metrics the gate enforces, then close every uncovered branch (the focused scripts wrap this for the critical areas):
 
 ```bash
-npx vitest run src/modules/order/application/order.service.spec.ts \
-  --coverage --coverage.include="src/modules/order/application/order.service.ts"
+npm run test:file-security          # the upload chain, unit + integration
+npm run test:ai                     # ai + game + result-aggregation
+npx vitest run --project api-unit modules/game   # ad-hoc path filter
 ```
 
 Never bypass a hook with `--no-verify`. A green run is not proof of correctness — confirm each branch and each `AppError` path has its own assertion.
@@ -300,15 +307,15 @@ Never bypass a hook with `--no-verify`. A green run is not proof of correctness 
 
 - [ ] Test written/updated **first**; bug fixes ship a reproducing regression test
 - [ ] SUT built via `Test.createTestingModule` with typed provider overrides — no `new Service()` blob
-- [ ] Mocked at the **boundary**; never the SUT, never the pure domain policy under test
-- [ ] AAA structure; one behavior per `it`; asserts return value **and** collaborator call
-- [ ] Every `AppError` branch pins the error **class** and its `messageKey`
-- [ ] Scenarios cover happy + validation + not-found + ownership + permission + boundary + empty/null + failure
-- [ ] Repository tests prove null/`[]` on miss (never throw) and the hard list cap (100)
-- [ ] Fire-and-forget handlers asserted to swallow their own errors
-- [ ] Deterministic: time and randomness controlled; `vi.clearAllMocks()` per test; zero arbitrary sleeps
-- [ ] Enum members / named constants in assertions — no raw literals
-- [ ] Touched-module coverage ≥ 95% (critical paths near 100%)
-- [ ] `npm run lint` / `typecheck` / `test` / `test:coverage` / `build` all green
+- [ ] Mocked at the **boundary**; never the SUT, never the pure util under test
+- [ ] AAA structure; one behavior per `it`; asserts return value **and** collaborator interaction
+- [ ] Every typed-error branch pins the `AppError` **subclass**, its `errorCode`, and its `messageKey`
+- [ ] Scenarios cover happy + validation + consent + safety + privacy + boundary + failure/timeout
+- [ ] Adapter tests prove mapping, timeout, and that no vendor detail (key, stack) escapes
+- [ ] Buffer-wipe and other `finally` guarantees asserted on success **and** failure paths
+- [ ] Deterministic: time controlled; adapter queues reset; `vi.clearAllMocks()` per test; zero sleeps
+- [ ] `as const` members / named constants in assertions — no raw literals
+- [ ] Touched-file coverage clears the floor (privacy/safety paths near 100%)
+- [ ] `npm run lint` / `typecheck` / `test:unit` / `test:coverage` / `build` all green
 
-**Related:** [testing-strategy.md](./testing-strategy.md) · [integration-testing-standard.md](./integration-testing-standard.md) · [e2e-testing-standard.md](./e2e-testing-standard.md) · [coverage-policy.md](./coverage-policy.md) · [test-data-and-fixtures.md](./test-data-and-fixtures.md) · [quality-gates.md](./quality-gates.md) · [/rules/11-testing-and-coverage.md](../rules/11-testing-and-coverage.md) · [/skills/write-unit-tests.md](../skills/write-unit-tests.md) · [/memory/testing-strategy.md](../memory/testing-strategy.md)
+**Related:** [testing-strategy.md](./testing-strategy.md) · [integration-testing-standard.md](./integration-testing-standard.md) · [e2e-testing-standard.md](./e2e-testing-standard.md) · [coverage-policy.md](./coverage-policy.md) · [test-data-and-fixtures.md](./test-data-and-fixtures.md) · [quality-gates.md](./quality-gates.md) · [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) · [/skills/write-unit-tests.md](../skills/write-unit-tests.md) · [/memory/testing-strategy.md](../memory/testing-strategy.md)
