@@ -1,6 +1,6 @@
 # Runbooks — Twinzy
 
-Operational procedures an engineer or on-call owner can execute during release, incident response, rollback, recovery, or degraded service for the Twinzy stack (Docker Compose: `api` on 3001, `web` on 3000, optional `clamav` profile on 3310).
+Operational procedures an engineer or on-call owner can execute during release, incident response, rollback, recovery, or degraded service for the Twinzy stack (Docker Compose: `api` on 4000, `web` on 3000, optional `clamav` profile on 3310).
 
 ## Concrete runbooks
 

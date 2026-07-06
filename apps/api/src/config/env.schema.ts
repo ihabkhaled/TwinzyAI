@@ -28,7 +28,7 @@ const optionalBooleanFromString = z
  */
 export const EnvSchema = z.object({
   NODE_ENV: z.enum(NODE_ENVIRONMENTS).default('development'),
-  API_PORT: z.coerce.number().int().min(1).max(65_535).default(3001),
+  API_PORT: z.coerce.number().int().min(1).max(65_535).default(4000),
   CORS_ALLOWED_ORIGINS: z.string().default('http://localhost:3000'),
   LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
   ENABLE_SWAGGER: optionalBooleanFromString,
@@ -39,6 +39,9 @@ export const EnvSchema = z.object({
   GEMINI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(120_000).default(30_000),
   MAX_IMAGE_SIZE_BYTES: z.coerce.number().int().min(1024).default(5_242_880),
   ENABLE_CLAMAV: booleanFromString,
+  // Primary clamd host tried first. The adapter automatically falls back to the
+  // other well-known host (clamav service name / 127.0.0.1) if this one is not
+  // reachable, so ClamAV works whether the API runs inside Docker or on the host.
   CLAMAV_HOST: z.string().default('clamav'),
   CLAMAV_PORT: z.coerce.number().int().min(1).max(65_535).default(3310),
 });

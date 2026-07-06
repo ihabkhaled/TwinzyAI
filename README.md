@@ -19,7 +19,7 @@ no biometric comparison, and your photo is never stored.
 ```bash
 cp .env.example .env       # fill GEMINI_API_KEY and GEMINI_MODEL
 npm install
-npm run dev                # web on :3000, api on :3001
+npm run dev                # web on :3000, api on :4000
 ```
 
 ## Docker

@@ -249,7 +249,7 @@ export const NODE_ENVIRONMENTS = ['development', 'test', 'production'] as const;
 
 export const EnvSchema = z.object({
   NODE_ENV: z.enum(NODE_ENVIRONMENTS).default('development'),
-  API_PORT: z.coerce.number().int().min(1).max(65_535).default(3001),
+  API_PORT: z.coerce.number().int().min(1).max(65_535).default(4000),
   GEMINI_API_KEY: z.string().default(''),
   GEMINI_MODEL: z.string().default(''),
   GEMINI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(120_000).default(30_000),

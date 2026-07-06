@@ -11,7 +11,7 @@
 1. **Full strict TypeScript.** Every strict flag in `tsconfig.base.json` is on (incl. `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`). The file is frozen — fix code, never flags. (rules/11)
 2. **Full strict ESLint.** `npm run lint` must be **0 errors AND 0 warnings**; `/eslint` is never weakened to pass.
 3. **No `any`.** Use `unknown` + narrowing or a real type (`@typescript-eslint/no-explicit-any` is `error`).
-4. **No `eslint-disable`.** Fix the root cause; suppressions rot silently.
+4. **No inline ESLint suppression — absolute, no exceptions.** Inline ESLint suppression is forbidden with no exceptions. Never write `eslint-disable`, `eslint-disable-line`, `eslint-disable-next-line`, or `eslint-enable` — anywhere, for any reason. There is no "documented exception", no "clean it up later", no approval that permits it. A lint rule firing means the code is wrong or in the wrong layer: fix the root cause or move the code; never silence the linter. Mechanically enforced by `eslint-comments/no-use: error` ([`eslint/eslint-comments.config.mjs`](../eslint/eslint-comments.config.mjs)) plus `reportUnusedDisableDirectives: error`, so writing a directive comment is itself a lint error and the build fails.
 5. **No `@ts-ignore`.** Resolve the type.
 6. **No `@ts-expect-error`** unless justified in [docs/package-decisions.md](../docs/package-decisions.md) (`ban-ts-comment` requires a description).
 7. **No non-null assertion (`!`).** Use guards, `??`, or `?.`.

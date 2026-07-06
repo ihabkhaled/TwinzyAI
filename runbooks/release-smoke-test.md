@@ -8,13 +8,13 @@ Prerequisite: a small valid test image on hand (e.g. `fixture.jpg`, a synthetic 
 
 ```bash
 docker compose up -d --build
-docker compose ps          # api (3001) and web (3000) Up; clamav too if the profile is enabled
+docker compose ps          # api (4000) and web (3000) Up; clamav too if the profile is enabled
 ```
 
 ## 2. Health + security headers
 
 ```bash
-curl -i http://localhost:3001/api/v1/health
+curl -i http://localhost:4000/api/v1/health
 ```
 
 Expected:
@@ -25,7 +25,7 @@ Expected:
 ## 3. Analyze happy path (fixture image)
 
 ```bash
-curl -i -X POST http://localhost:3001/api/v1/game/analyze \
+curl -i -X POST http://localhost:4000/api/v1/game/analyze \
   -F "consent=true" \
   -F "file=@fixture.jpg;type=image/jpeg"
 ```
@@ -37,7 +37,7 @@ Expected: `200` with a valid game result payload (traits/match content and the d
 ### 4a. 400 — missing consent
 
 ```bash
-curl -i -X POST http://localhost:3001/api/v1/game/analyze \
+curl -i -X POST http://localhost:4000/api/v1/game/analyze \
   -F "file=@fixture.jpg;type=image/jpeg"
 ```
 
@@ -46,7 +46,7 @@ Expected: `400`, envelope with the consent-required error code and a friendly me
 ### 4b. 404 — unknown route
 
 ```bash
-curl -i http://localhost:3001/api/v1/nope
+curl -i http://localhost:4000/api/v1/nope
 ```
 
 Expected: `404` in the standard envelope — no stack trace, no framework HTML page.
@@ -56,7 +56,7 @@ Expected: `404` in the standard envelope — no stack trace, no framework HTML p
 ```bash
 # Create a >5 MB dummy file (over MAX_IMAGE_SIZE_BYTES default 5242880)
 dd if=/dev/zero of=big.jpg bs=1M count=6
-curl -i -X POST http://localhost:3001/api/v1/game/analyze \
+curl -i -X POST http://localhost:4000/api/v1/game/analyze \
   -F "consent=true" \
   -F "file=@big.jpg;type=image/jpeg"
 ```

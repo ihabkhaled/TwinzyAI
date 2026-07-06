@@ -3,7 +3,7 @@
 Local (no Docker):
     cp .env.example .env   # set GEMINI_API_KEY, GEMINI_MODEL
     npm install
-    npm run dev            # web :3000, api :3001
+    npm run dev            # web :3000, api :4000
 
 Docker (production images):
     npm run docker:up      # builds Dockerfile.web + Dockerfile.api, starts compose

@@ -1,3 +1,5 @@
+> Superseded for apps/web by the frontend engineering track in [rules/frontend/](frontend/README.md). Retained for backend/monorepo cross-reference.
+
 # 02 — Frontend Components (TSX)
 
 > Related: [00-non-negotiable-rules.md](./00-non-negotiable-rules.md) (rule 48, `architecture/tsx-pure-composition`) · [03-frontend-hooks.md](./03-frontend-hooks.md) · [05-types-enums-constants.md](./05-types-enums-constants.md) · [13-accessibility.md](./13-accessibility.md)

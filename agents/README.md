@@ -115,3 +115,52 @@ No role may relax these. Full text in [/rules/00-non-negotiable-rules.md](../rul
 - [ ] A clear **PASS / FAIL** verdict with specific, file-anchored findings
 
 **Related:** [/rules/23-review-checklist.md](../rules/23-review-checklist.md) · [/skills/final-validation.md](../skills/final-validation.md) · [/testing/quality-gates.md](../testing/quality-gates.md) · [/memory/known-pitfalls.md](../memory/known-pitfalls.md) · [/context/architecture-map.md](../context/architecture-map.md)
+
+---
+
+## Frontend reviewers (Twinzy frontend — `apps/web`)
+
+The roles above govern the **NestJS backend** (`apps/api`), reading the flat root canon
+([/rules/](../rules/README.md), [/context/](../context/README.md), [/testing/](../testing/README.md)).
+The Twinzy frontend (`apps/web`, Next.js 16) is a **parallel, independent track** with its own
+canon: the module-first architecture rules in [`rules/frontend/`](../rules/frontend/), the frontend
+context in [`context/frontend/`](../context/frontend/architecture-map.md), the frontend memory in
+[`memory/frontend/`](../memory/frontend/README.md), and the frontend testing standards in
+[`testing/frontend/`](../testing/frontend/README.md). Neither track imports the other's code; the
+frontend reaches the backend only through the same-origin BFF gateway (`app/api/gateway/[...path]`).
+
+These nine briefs live flat in this folder alongside the `backend-*` roles. Each keeps the same
+shape (mission · when to invoke · read-first · checklist · verdict) and closes with one verdict:
+`APPROVE` / `APPROVE WITH NITS` / `REQUEST CHANGES` / `BLOCK` (the release gatekeeper uses
+`GO` / `NO-GO`). Findings are listed as `severity | file:line | rule reference | one-line defect`.
+
+| Brief | Scope |
+| --- | --- |
+| [frontend-architect](./frontend-architect.md) | Module/layer boundaries, one-way imports, public `index.ts` surfaces |
+| [next-app-router-reviewer](./next-app-router-reviewer.md) | `apps/web/src/app` conventions, server/client boundaries, metadata, route handlers |
+| [react-performance-reviewer](./react-performance-reviewer.md) | Client-boundary bloat, memo discipline, virtualization, TanStack Query config |
+| [frontend-security-reviewer](./frontend-security-reviewer.md) | CSP/nonce, env separation, storage, deps, error leakage, image-privacy absolutes |
+| [accessibility-reviewer](./accessibility-reviewer.md) | Axe results, keyboard paths, focus, semantics, forms — LTR + RTL |
+| [frontend-test-engineer](./frontend-test-engineer.md) | TDD enforcement, coverage (95/100), MSW usage, test quality |
+| [eslint-boundary-reviewer](./eslint-boundary-reviewer.md) | The 13 `frontend-architecture` plugin rules, boundary maps, exception audit |
+| [i18n-rtl-reviewer](./i18n-rtl-reviewer.md) | `en`/`ar` catalog parity, no raw copy, direction correctness, logical properties |
+| [frontend-release-gatekeeper](./frontend-release-gatekeeper.md) | Runs the full `apps/web` gate set, blocks on any red gate, writes release notes |
+
+### Frontend quality gates (run in `apps/web`)
+
+```bash
+npm run lint            # eslint . --max-warnings=0 (incl. the frontend-architecture plugin)
+npm run typecheck       # tsgo over app + test + node tsconfigs
+npm run test:coverage   # Vitest 4 + RTL + jsdom + MSW v2 — 95% global / 100% pure logic
+npm run build           # Next.js production build
+npm run test:e2e        # Playwright *.e2e.ts (mocked BFF gateway)
+npm run test:a11y       # Playwright *.a11y.ts (@axe-core: 0 serious/critical)
+npm run test:visual     # Playwright *.visual.ts (screenshot diffs)
+npm run quality:dead-code   # knip
+npm run quality:circular    # madge
+npm run security:scan   # Trivy fs scan
+npm run security:audit  # npm audit
+```
+
+> When a diff spans backend and frontend, run the relevant roles from **both** rosters and merge
+> verdicts by worst-case: any `BLOCK`/`NO-GO` wins, then `REQUEST CHANGES`, then `APPROVE WITH NITS`.

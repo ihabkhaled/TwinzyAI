@@ -13,7 +13,7 @@ Severity: `SEV-1` (the analyze flow is the product). Assign an incident owner im
 docker compose ps
 
 # Health probe (from the host)
-curl -i http://localhost:3001/api/v1/health
+curl -i http://localhost:4000/api/v1/health
 ```
 
 Interpretation:
@@ -64,7 +64,7 @@ The API logs structured pino JSON, one object per line. How to read it:
 
 1. Preserve evidence first: `docker compose logs api > api-outage-$(date +%Y%m%d-%H%M).log`
 2. Restart the service: `docker compose restart api` (or `docker compose up -d --build api` if the image is suspect).
-3. Re-probe: `curl -i http://localhost:3001/api/v1/health` → expect 200 and `x-content-type-options: nosniff`.
+3. Re-probe: `curl -i http://localhost:4000/api/v1/health` → expect 200 and `x-content-type-options: nosniff`.
 4. Exercise the real path once (analyze happy path — see [`release-smoke-test.md`](./release-smoke-test.md) step 3).
 5. If the outage started with a recent release, roll back: `git revert` the release slice + `docker compose up -d --build` ([`rollback-template.md`](./rollback-template.md)). There are no DB migrations to unwind — code-level revert is always sufficient.
 

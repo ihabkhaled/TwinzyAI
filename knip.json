@@ -1,0 +1,51 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreBinaries": ["trivy"],
+  "ignoreDependencies": [
+    "@nestjs/schematics",
+    "@typescript-eslint/parser",
+    "@vitejs/plugin-react",
+    "unplugin-swc"
+  ],
+  "ignoreUnresolved": ["src/tests/setup.ts"],
+  "rules": {
+    "files": "warn",
+    "dependencies": "warn",
+    "devDependencies": "warn",
+    "optionalPeerDependencies": "warn",
+    "exports": "warn",
+    "nsExports": "warn",
+    "types": "warn",
+    "nsTypes": "warn",
+    "enumMembers": "warn",
+    "classMembers": "warn",
+    "duplicates": "warn"
+  },
+  "workspaces": {
+    ".": {
+      "project": ["eslint/**/*.mjs", "*.{ts,mjs,cjs}"]
+    },
+    "apps/api": {
+      "entry": [
+        "src/main.ts",
+        "src/**/*.test.ts",
+        "src/**/*.integration.test.ts",
+        "src/tests/**/*.ts"
+      ],
+      "project": ["src/**/*.ts"]
+    },
+    "apps/web": {
+      "entry": [
+        "e2e/**/*.spec.ts",
+        "e2e/helpers.ts",
+        "src/**/*.test.{ts,tsx}",
+        "src/tests/**/*.{ts,tsx}"
+      ],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/shared": {
+      "entry": ["src/index.ts", "tests/**/*.test.ts"],
+      "project": ["src/**/*.ts"]
+    }
+  }
+}

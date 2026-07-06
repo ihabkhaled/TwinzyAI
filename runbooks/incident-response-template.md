@@ -15,7 +15,7 @@
 ## Diagnostics
 
 - Container status: `docker compose ps`
-- Health: `curl -i http://localhost:3001/api/v1/health`
+- Health: `curl -i http://localhost:4000/api/v1/health`
 - Key logs: `docker compose logs -f api` — structured pino JSON; filter by `req.id` to follow one request; 4xx appear as `warn` with an error code / message key, 5xx as `error` with stack
 - Env/config: verify `.env` values the change depends on (`GEMINI_API_KEY`, `GEMINI_MODEL`, `GEMINI_TIMEOUT_MS`, `MAX_IMAGE_SIZE_BYTES`, `CORS_ALLOWED_ORIGINS`, `ENABLE_CLAMAV`)
 

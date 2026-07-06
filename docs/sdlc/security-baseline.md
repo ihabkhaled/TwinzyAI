@@ -64,7 +64,7 @@ Twinzy has no authentication, no accounts, and no tenants — every endpoint is 
 ### Infrastructure and Deployment
 
 - Docker images are built from the repo Dockerfiles; the api service runs with no volumes (upload non-persistence by construction).
-- Review exposed ports and ingress on any deployment change (api 3001, web 3000, clamav 3310 internal).
+- Review exposed ports and ingress on any deployment change (api 4000, web 3000, clamav 3310 internal).
 - Validate rollback safety (git revert + redeploy — no data migrations exist) and secret handling during release.
 
 ## Security Evidence Expectations

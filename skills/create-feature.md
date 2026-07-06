@@ -1,12 +1,20 @@
-# Skill: Create a Frontend Feature
+# Skill: Create a Frontend Feature → moved
 
-> Applies rules/01, 02, 03, 04. Feature = self-contained folder under apps/web/src/features.
+The strict frontend operating system replaces the old `features/NAME/{ui,hooks,services,...}` layout
+with the module architecture under `apps/web/src/modules/<feature>/`.
 
-1. Scaffold features/NAME/{ui,hooks,services,gateways,model,lib,index.ts}.
-2. model/ first: constants, enums (as-const), types, interfaces, schemas, query-keys.
-3. Gateway: HTTP only via lib/http wrapper; validate responses with shared Zod schemas.
-4. Service: orchestrate gateway + mapping (lib/mappers).
-5. Hooks: useNameController owning state/handlers; call the service; return one props object.
-6. ui/: pure TSX components; container calls the controller hook and spreads props.
-7. Wire the route in app/ as pure composition. 8. Strings via i18n. 9. Tests first (web-unit).
-Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
+**Use [create-module-frontend.md](./create-module-frontend.md)** to scaffold a feature module
+(types → enums/constants → api/schemas → gateway → mapper → service → query keys → queries/mutations
+→ store → hooks → components → container, behind a single `index.ts` public surface).
+
+Supporting skills for the individual layers:
+[create-component.md](./create-component.md) ·
+[create-container.md](./create-container.md) ·
+[create-hook.md](./create-hook.md) ·
+[create-service-frontend.md](./create-service-frontend.md) ·
+[create-query.md](./create-query.md) ·
+[create-mutation.md](./create-mutation.md) ·
+[create-zustand-store.md](./create-zustand-store.md) ·
+[add-route.md](./add-route.md).
+
+Frontend skill index: [README-frontend.md](./README-frontend.md).

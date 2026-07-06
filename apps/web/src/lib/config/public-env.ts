@@ -1,4 +1,4 @@
-const DEFAULT_API_BASE_URL = 'http://localhost:3001';
+const DEFAULT_API_BASE_URL = 'http://localhost:4000';
 
 /**
  * The only place the web app reads environment values. NEXT_PUBLIC_* vars

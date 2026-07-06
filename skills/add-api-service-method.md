@@ -1,13 +1,27 @@
-# Skill: Add an API Service Method (backend)
+# Skill: Add an API Service Method → routed
 
-> Applies rules/19. One focused capability per service.
+Adding one capability to an existing service is a layer-specific task. Pick the side you are on:
 
-1. Add the method to the owning service in `application/`; keep it ≤ 20 lines; extract
-   helpers to `lib/`.
-2. Types/DTOs in their folders (`model/`, `api/dto/`); validate external input with Zod
-   before use.
-3. Map failures to a typed `AppError` with a stable `messageKey` (`errors.NAME.<key>`).
-4. Unit test (mock collaborators) covering success + each failure path.
-5. If the flow changes, update the owning use case and its tests too.
+## Frontend (`apps/web`)
 
-Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
+Extend a module's data layer, not a giant service:
+
+- Add a **read** → [create-query.md](./create-query.md) (query-key builder + `useAppQuery` + service
+  use-case).
+- Add a **write** → [create-mutation.md](./create-mutation.md) (`useAppMutation` + exact-scope
+  invalidation helper).
+- Add a React-free **use-case** to a module `services/` file →
+  [create-service-frontend.md](./create-service-frontend.md) (gateway → mapper → domain, one verb
+  function, errors propagated).
+
+Frontend skill index: [README-frontend.md](./README-frontend.md).
+
+## Backend (`apps/api`)
+
+Extend a focused NestJS `application/` service (method ≤ 20 lines, helpers to `lib/`, Zod-validated
+input, typed `AppError` with a stable `messageKey`, unit test per path):
+
+- One capability on an existing service → [create-service.md](./create-service.md).
+- Multi-step orchestration → [create-use-case.md](./create-use-case.md).
+
+Backend skill index: [README.md](./README.md).

@@ -28,6 +28,14 @@ export const CLAMAV_TIMEOUT_MS = 10_000;
 
 export const CLAMAV_CHUNK_SIZE_BYTES = 65_536;
 
+/**
+ * Well-known clamd hosts the adapter falls back through, in order, when the
+ * configured host is unreachable. Covers both runtimes with one config: the
+ * `clamav` docker-compose service name (API inside the compose network) and
+ * 127.0.0.1 (API on the host reaching a ClamAV container's published port).
+ */
+export const CLAMAV_FALLBACK_HOSTS = ['clamav', '127.0.0.1'] as const;
+
 export const UPLOAD_FIELD_NAME = 'image';
 
 /** Friendly, safe user messages per rejection. */

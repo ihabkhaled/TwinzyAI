@@ -53,11 +53,21 @@
     "security:scan": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" --exit-code 1 --severity HIGH,CRITICAL .",
     "security:scan:full": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" .",
     "deps:check": "npm-check-updates --workspaces --root",
-    "deps:upgrade": "npm-check-updates --workspaces --root -u && npm install"
+    "deps:upgrade": "npm-check-updates --workspaces --root -u && npm install",
+    "quality:dead-code": "knip",
+    "quality:circular": "madge apps/web/src apps/api/src --circular --extensions ts,tsx",
+    "test:a11y": "npm run test:e2e --workspace apps/web -- --project=a11y --pass-with-no-tests",
+    "test:visual": "npm run test:e2e --workspace apps/web -- --project=visual --pass-with-no-tests",
+    "quality:frontend": "npm run lint && npm run typecheck && npm run test:e2e"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
     "@eslint/js": "^9.39.4",
     "@next/eslint-plugin-next": "^16.2.10",
+    "@tanstack/eslint-plugin-query": "^5.101.2",
+    "@typescript/native-preview": "^7.0.0-dev.20260705.1",
     "@vitest/coverage-v8": "^4.1.9",
     "@vitest/eslint-plugin": "^1.6.21",
     "concurrently": "^9.2.0",
@@ -77,15 +87,15 @@
     "eslint-plugin-unicorn": "^63.0.0",
     "eslint-plugin-unused-imports": "^4.4.1",
     "husky": "^9.1.7",
+    "knip": "^6.24.0",
     "lint-staged": "^16.1.0",
+    "madge": "^8.0.0",
+    "npm-check-updates": "^22.2.9",
     "prettier": "^3.6.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.62.1",
-    "vitest": "^4.1.9",
-    "@commitlint/cli": "^21.2.0",
-    "@commitlint/config-conventional": "^21.2.0",
-    "@typescript/native-preview": "^7.0.0-dev.20260705.1",
-    "npm-check-updates": "^22.2.9"
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.9"
   },
   "dependencies": {
     "fastify": "^5.10.0"

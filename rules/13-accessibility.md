@@ -1,3 +1,5 @@
+> Superseded for apps/web by the frontend engineering track in [rules/frontend/](frontend/README.md). Retained for backend/monorepo cross-reference.
+
 # 13 — Accessibility
 
 > Related: [00-non-negotiable-rules.md](./00-non-negotiable-rules.md) (rule 50) · [02-frontend-components-tsx.md](./02-frontend-components-tsx.md) · [12-i18n.md](./12-i18n.md) (RTL) · [09-testing-coverage.md](./09-testing-coverage.md) (e2e) · [/skills/accessibility-review.md](../skills/accessibility-review.md)

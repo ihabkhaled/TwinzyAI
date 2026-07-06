@@ -10,7 +10,7 @@ Severity: usually `SEV-2` (the game is degraded, nothing is lost — see Mitigat
 
 ```bash
 # API itself healthy?
-curl -i http://localhost:3001/api/v1/health     # expect 200
+curl -i http://localhost:4000/api/v1/health     # expect 200
 
 # What are the errors?
 docker compose logs --tail=300 api

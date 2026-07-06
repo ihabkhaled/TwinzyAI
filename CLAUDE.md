@@ -893,7 +893,7 @@ These rules are intentionally language-agnostic. Use the equivalent enforcement 
 
 1. Do not introduce unsafe typing or unchecked dynamic behavior when a safer contract is available.
 2. In typed languages, avoid `any`-style escape hatches except in tightly justified boundaries.
-3. Do not disable linters, static analyzers, or security checks without explicit justification and approval.
+3. Do not disable static analyzers or security checks without explicit justification and approval — and for ESLint there is no such justification: inline ESLint suppression is forbidden with no exceptions. Never write `eslint-disable`, `eslint-disable-line`, `eslint-disable-next-line`, or `eslint-enable` anywhere, for any reason; there is no "documented exception", no "clean it up later", and no approval that permits it. A lint rule firing means the code is wrong or in the wrong layer — fix the root cause or move the code; never silence the linter. This is mechanically enforced by `eslint-comments/no-use: error` (in `eslint/eslint-comments.config.mjs`) plus `reportUnusedDisableDirectives: error`, so writing a directive comment is itself a lint error and the build fails. The same absolute ban already applies to `@ts-ignore`, `@ts-expect-error`, and `@ts-nocheck` via `@typescript-eslint/ban-ts-comment`.
 4. Do not compare domain values with ad hoc raw strings when shared enums, constants, schemas, or value objects exist.
 5. Do not leak secrets, tokens, credentials, or protected data to logs, clients, analytics, traces, or error messages.
 6. Do not scatter environment reads throughout business logic; use a validated configuration layer or equivalent.
@@ -1787,6 +1787,7 @@ For hotfixes:
 - No merge when touched-module coverage is below threshold unless a documented waiver is approved.
 - No merge if lint, static analysis, type checks, builds, tests, or security checks fail.
 - No bypass of required commit hooks, pre-push hooks, or CI gates without an approved and documented exception.
+- No inline ESLint suppression, ever — `eslint-disable`, `eslint-disable-line`, `eslint-disable-next-line`, and `eslint-enable` are banned with no exceptions (mechanically enforced by `eslint-comments/no-use: error` + `reportUnusedDisableDirectives: error`; the same ban covers `@ts-ignore`/`@ts-expect-error`/`@ts-nocheck`). Fix the root cause or move the code; never silence the linter.
 - No merge if architecture impact is undocumented.
 - No release without QA sign-off.
 - No release without security validation when applicable.

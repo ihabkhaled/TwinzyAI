@@ -2,7 +2,7 @@
 
 > The complete lint + type gate and how to pass it. When this doc and the config disagree, **the config wins** — then fix this doc.
 >
-> **Zero-tolerance gate.** `npm run lint` MUST print **0 errors AND 0 warnings**; `npm run typecheck` MUST pass — both before any commit (Husky pre-commit enforces them; pre-push runs coverage + build; never `--no-verify`). No `eslint-disable`, no `@ts-ignore`; `@ts-expect-error` only with a description and an entry in [docs/package-decisions.md](../docs/package-decisions.md). See rules 1–7 of [00-non-negotiable-rules.md](./00-non-negotiable-rules.md).
+> **Zero-tolerance gate.** `npm run lint` MUST print **0 errors AND 0 warnings**; `npm run typecheck` MUST pass — both before any commit (Husky pre-commit enforces them; pre-push runs coverage + build; never `--no-verify`). No inline ESLint suppression (absolute — see below), no `@ts-ignore`; `@ts-expect-error` only with a description and an entry in [docs/package-decisions.md](../docs/package-decisions.md). See rules 1–7 of [00-non-negotiable-rules.md](./00-non-negotiable-rules.md).
 
 ```bash
 npm run lint        # eslint .        → must be 0/0
@@ -11,6 +11,14 @@ npm run typecheck   # builds shared, then per-workspace checks; apps/api type-ch
 ```
 
 > `apps/api` type-checks with **tsgo** (`@typescript/native-preview`), not plain `tsc`. Relaxations of any lint rule require a documented entry in [docs/eslint-architecture.md](../docs/eslint-architecture.md).
+
+---
+
+## No inline suppression (absolute)
+
+**Inline ESLint suppression is forbidden with no exceptions.** Never write `eslint-disable`, `eslint-disable-line`, `eslint-disable-next-line`, or `eslint-enable` — anywhere, for any reason. There is no "documented exception", no "clean it up later", no approval that permits it. A lint rule firing means the code is wrong or in the wrong layer: **fix the root cause or move the code; never silence the linter.**
+
+This is mechanically enforced by `eslint-comments/no-use: error` (in [`eslint/eslint-comments.config.mjs`](../eslint/eslint-comments.config.mjs)) plus `reportUnusedDisableDirectives: error`, so writing a directive comment is itself a lint error and the build fails. The same absolute ban already applies to `@ts-ignore`, `@ts-expect-error`, and `@ts-nocheck` via `@typescript-eslint/ban-ts-comment`. Config relaxations (a rule tuned in an `eslint/*.config.mjs` file) are a separate, reviewed concern — an inline directive comment in source is never one of them.
 
 ---
 
@@ -105,7 +113,7 @@ Fix the cause, never the symptom — disabling a rule is a non-negotiable violat
 ## Checklist
 
 - [ ] `npm run lint` is 0/0; `npm run typecheck` passes (tsgo for api)
-- [ ] No `eslint-disable` / `@ts-ignore`; `@ts-expect-error` only with a documented decision
+- [ ] No inline ESLint suppression at all (`eslint-disable*` / `eslint-enable` are an absolute, no-exception ban) / no `@ts-ignore`; `@ts-expect-error` only with a documented decision
 - [ ] No `any`, no `!`, every nullable narrowed; no TS `enum`
 - [ ] Architecture rules green: thin controllers, no inline declarations, layer imports respected, vendors in their owners
 - [ ] No `.only` in tests; `console.*` replaced by `AppLogger`

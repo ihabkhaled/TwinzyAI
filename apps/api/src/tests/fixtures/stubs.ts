@@ -40,7 +40,7 @@ const CONFIG_DEFAULTS = {
   nodeEnv: 'test',
   isProduction: false,
   isDevelopment: false,
-  apiPort: 3001,
+  apiPort: 4000,
   corsAllowedOrigins: ['http://localhost:3000'],
   logLevel: 'info',
   swaggerEnabled: false,

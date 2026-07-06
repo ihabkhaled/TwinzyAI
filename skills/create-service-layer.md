@@ -1,9 +1,15 @@
-# Skill: Create a Frontend Service
+# Skill: Create a Frontend Service → moved
 
-> Applies rules/04.
+The strict frontend operating system defines the React-free service layer under a module's
+`services/` folder (gateway → mapper → domain), composed by TanStack Query and consumed by hooks.
 
-1. features/NAME/services/NAME.service.ts — plain functions/objects, no React imports.
-2. Validate inputs (model/schemas), call the gateway, map DTO -> view model via lib/mappers.
-3. Surface typed errors the hook can translate to i18n messages.
-4. Unit-test with a mocked gateway.
-Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
+**Use [create-service-frontend.md](./create-service-frontend.md)** for the full playbook (wire
+types + Zod schema + gateway via `@/packages/axios` + mapper + one exported use-case per function,
+domain types only, errors propagated for the hook layer to translate).
+
+Related layers:
+[create-query.md](./create-query.md) (reads) ·
+[create-mutation.md](./create-mutation.md) (writes) ·
+[create-hook.md](./create-hook.md) (view models).
+
+Frontend skill index: [README-frontend.md](./README-frontend.md).
