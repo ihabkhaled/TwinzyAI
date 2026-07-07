@@ -102,6 +102,29 @@ export interface GameResultView {
  */
 export type FileValidationResult = { ok: true } | { ok: false; errorKey: ErrorMessageKey };
 
+/**
+ * One analyze run's isolation context sent alongside the file: a per-run
+ * correlation id and the AbortSignal that cancels this run (aborting closes the
+ * SSE socket, which the backend treats as a disconnect and stops the pipeline).
+ */
+export interface AnalyzeRunInput {
+  file: File;
+  requestId: string;
+  signal: AbortSignal;
+}
+
+/** Per-run correlation + cancel controls threaded to the streaming gateway. */
+export interface AnalyzeStreamOptions {
+  requestId: string;
+  signal: AbortSignal;
+}
+
+/** The run-control surface: start a fresh analyze run, or cancel the in-flight one. */
+export interface AnalyzeRunControl {
+  beginRun: (file: File) => void;
+  cancelRun: () => void;
+}
+
 /** The narrowed analyze-mutation surface the orchestrator hook consumes. */
 export interface AnalyzeGameMutation {
   data: FinalGameResult | undefined;
@@ -109,7 +132,7 @@ export interface AnalyzeGameMutation {
   isPending: boolean;
   isSuccess: boolean;
   isError: boolean;
-  analyze: (file: File) => void;
+  analyze: (input: AnalyzeRunInput) => void;
   reset: () => void;
 }
 

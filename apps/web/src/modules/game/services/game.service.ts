@@ -6,7 +6,11 @@ import { analyzeImageRequest } from '../gateway/game.gateway';
 import { analyzeImageStreamRequest } from '../gateway/game-stream.gateway';
 import { translateResultRequest } from '../gateway/game-translate.gateway';
 import { validateImageFile } from '../helpers/game-validation.helper';
-import type { FileValidationResult, GameStreamHandlers } from '../model/game.types';
+import type {
+  AnalyzeStreamOptions,
+  FileValidationResult,
+  GameStreamHandlers,
+} from '../model/game.types';
 
 /** UX-only file validation reused by the upload hook and {@link analyzeImage}. */
 export const validateFileForUpload = (file: File | undefined): FileValidationResult =>
@@ -45,9 +49,10 @@ export const analyzeImageStream = async (
   file: File,
   languageCode: LanguageCodeValue,
   handlers: GameStreamHandlers,
+  options: AnalyzeStreamOptions,
 ): Promise<FinalGameResult> => {
   assertValidFile(file);
-  return analyzeImageStreamRequest(file, languageCode, handlers);
+  return analyzeImageStreamRequest(file, languageCode, handlers, options);
 };
 
 /**

@@ -80,6 +80,7 @@ export const GAME_ERROR_MESSAGE_KEYS = {
   multipleFiles: 'errors.multipleFiles',
   consentRequired: 'errors.consentRequired',
   rateLimited: 'errors.rateLimited',
+  serverBusy: 'errors.serverBusy',
   aiUnavailable: 'errors.aiUnavailable',
   network: 'errors.network',
 } as const;
@@ -97,6 +98,7 @@ export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   MULTIPLE_FILES_NOT_ALLOWED: GAME_ERROR_MESSAGE_KEYS.multipleFiles,
   RATE_LIMITED: GAME_ERROR_MESSAGE_KEYS.rateLimited,
   AI_RATE_LIMITED: GAME_ERROR_MESSAGE_KEYS.rateLimited,
+  SERVER_BUSY: GAME_ERROR_MESSAGE_KEYS.serverBusy,
   AI_PROVIDER_UNAVAILABLE: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
   AI_TIMEOUT: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
   AI_RESPONSE_INVALID: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,

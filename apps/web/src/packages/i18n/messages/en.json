@@ -438,6 +438,7 @@
     "generic": "Something went wrong. Please try again.",
     "network": "We could not reach the game server. Check your connection and try again.",
     "rateLimited": "Too many tries in a short time. Please wait a moment.",
+    "serverBusy": "The vibe engine is busy right now. Please try again in a moment.",
     "aiUnavailable": "The vibe engine is unavailable right now. Please try again in a moment.",
     "timeout": "That took too long to respond. Please try again.",
     "notFound": "We could not find what you were looking for.",

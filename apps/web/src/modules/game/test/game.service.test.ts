@@ -19,6 +19,11 @@ vi.mock('@/packages/axios', async (importActual) => {
 const postMultipartMock = vi.mocked(axiosPackage.postMultipart);
 const streamMultipartMock = vi.mocked(axiosPackage.streamMultipart);
 
+const streamOptions = (): { requestId: string; signal: AbortSignal } => ({
+  requestId: '99999999-9999-4999-8999-999999999999',
+  signal: new AbortController().signal,
+});
+
 describe('analyzeImage', () => {
   beforeEach(() => {
     postMultipartMock.mockReset();
@@ -55,18 +60,28 @@ describe('analyzeImageStream', () => {
     const stages: GameStreamStageValue[] = [];
 
     await expect(
-      analyzeImageStream(buildImageFile(), 'en', {
-        onStage: (stage: GameStreamStageValue): void => {
-          stages.push(stage);
+      analyzeImageStream(
+        buildImageFile(),
+        'en',
+        {
+          onStage: (stage: GameStreamStageValue): void => {
+            stages.push(stage);
+          },
         },
-      }),
+        streamOptions(),
+      ),
     ).resolves.toEqual(result);
     expect(stages).toEqual([GameStreamStage.Judging]);
   });
 
   it('throws an AppError for an invalid file without opening the stream', async () => {
     await expect(
-      analyzeImageStream(buildImageFile('bad.gif', 'image/gif'), 'en', { onStage: vi.fn() }),
+      analyzeImageStream(
+        buildImageFile('bad.gif', 'image/gif'),
+        'en',
+        { onStage: vi.fn() },
+        streamOptions(),
+      ),
     ).rejects.toBeInstanceOf(AppError);
     expect(streamMultipartMock).not.toHaveBeenCalled();
   });

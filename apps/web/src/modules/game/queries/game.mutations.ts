@@ -4,6 +4,7 @@ import { useAppMutation } from '@/packages/query';
 
 import type {
   AnalyzeGameMutation,
+  AnalyzeRunInput,
   GameStreamHandlers,
   TranslateResultInput,
   TranslateResultMutation,
@@ -26,7 +27,11 @@ export const useAnalyzeGameMutation = (
 ): AnalyzeGameMutation => {
   const mutation = useAppMutation({
     mutationKey: GAME_MUTATION_KEY,
-    mutationFn: (file: File) => analyzeImageStream(file, languageCode, handlers),
+    mutationFn: (input: AnalyzeRunInput) =>
+      analyzeImageStream(input.file, languageCode, handlers, {
+        requestId: input.requestId,
+        signal: input.signal,
+      }),
   });
 
   return {

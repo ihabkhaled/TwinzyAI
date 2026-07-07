@@ -39,6 +39,15 @@ export function prefersReducedMotion(): boolean {
   return matchesMediaQuery('(prefers-reduced-motion: reduce)');
 }
 
+/**
+ * Centralized access to the platform crypto UUID generator (WHATWG `crypto`,
+ * available on `globalThis` in browsers and the Node/edge runtime). Kept here so
+ * the one sanctioned globals facade owns it rather than scattering `crypto` reads.
+ */
+export function randomUuid(): string {
+  return globalThis.crypto.randomUUID();
+}
+
 export async function copyTextToClipboard(text: string): Promise<boolean> {
   const safeWindow = getSafeWindow();
 

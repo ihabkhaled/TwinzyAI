@@ -11,6 +11,17 @@ const EVENT_STREAM_CONTENT_TYPE = 'text/event-stream';
 export type SseDataListener = (data: string) => void;
 
 /**
+ * Per-request controls for a streaming POST: an `AbortSignal` to cancel the
+ * open connection (aborting the fetch closes the socket, which the server
+ * treats as a disconnect and stops the pipeline) and extra request `headers`
+ * (never `content-type` — the multipart boundary must stay auto-generated).
+ */
+export interface StreamRequestOptions {
+  readonly signal?: AbortSignal;
+  readonly headers?: Record<string, string>;
+}
+
+/**
  * The one place in the app allowed to open a streaming `fetch`. POSTs the
  * multipart body and reads the Server-Sent-Events response frame by frame,
  * forwarding each `data:` payload as it arrives. There is deliberately NO
@@ -25,8 +36,9 @@ export async function streamMultipart(
   path: string,
   formData: FormData,
   onData: SseDataListener,
+  options?: StreamRequestOptions,
 ): Promise<void> {
-  const response = await openStream(path, formData);
+  const response = await openStream(path, formData, options);
 
   const contentType = response.headers.get('content-type') ?? '';
   if (!response.ok || !contentType.includes(EVENT_STREAM_CONTENT_TYPE)) {
@@ -40,9 +52,18 @@ export async function streamMultipart(
   await readStream(response.body, onData);
 }
 
-async function openStream(path: string, formData: FormData): Promise<Response> {
+async function openStream(
+  path: string,
+  formData: FormData,
+  options?: StreamRequestOptions,
+): Promise<Response> {
   try {
-    return await fetch(`${publicEnv.apiBaseUrl}${path}`, { method: 'POST', body: formData });
+    return await fetch(`${publicEnv.apiBaseUrl}${path}`, {
+      method: 'POST',
+      body: formData,
+      ...(options?.signal === undefined ? {} : { signal: options.signal }),
+      ...(options?.headers === undefined ? {} : { headers: options.headers }),
+    });
   } catch {
     throw new HttpError('network', 'Streaming request failed', null, null);
   }

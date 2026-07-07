@@ -17,6 +17,7 @@ import { mapFinalResultToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
 import { useAnalyzeGameMutation } from '../queries/game.mutations';
 
+import { useAnalyzeRunControl } from './useAnalyzeRunControl.hook';
 import { useCameraCapture } from './useCameraCapture.hook';
 import { useImageUpload } from './useImageUpload.hook';
 import { useResultTranslation } from './useResultTranslation.hook';
@@ -45,6 +46,7 @@ export const useGame = (): GameViewModel => {
   );
   const translation = useResultTranslation(data);
   const [consentGiven, setConsentGiven] = useState(false);
+  const { beginRun, cancelRun } = useAnalyzeRunControl(analyze);
 
   const onConsentChange = useCallback((checked: boolean): void => {
     setConsentGiven(checked);
@@ -55,26 +57,26 @@ export const useGame = (): GameViewModel => {
   const onAnalyze = useCallback((): void => {
     if (file !== undefined && consentGiven && !isPending) {
       progress.reset();
-      analyze(file);
+      beginRun(file);
     }
-  }, [file, consentGiven, isPending, analyze, progress]);
+  }, [file, consentGiven, isPending, beginRun, progress]);
 
   const onRetry = useCallback((): void => {
+    cancelRun();
     reset();
     clearFile();
     resetFeedback();
     progress.reset();
-  }, [reset, clearFile, resetFeedback, progress]);
+  }, [cancelRun, reset, clearFile, resetFeedback, progress]);
 
   const resultView: GameResultView | undefined =
     translation.displayResult === undefined
       ? undefined
       : mapFinalResultToView(translation.displayResult, translate);
 
-  const shareText = resultView?.shareText ?? '';
   const onShareResult = useCallback((): void => {
-    void onShare(shareText);
-  }, [onShare, shareText]);
+    void onShare(resultView?.shareText ?? '');
+  }, [onShare, resultView]);
 
   return {
     phase: resolvePhase(isPending, isSuccess, isError),
