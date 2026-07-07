@@ -21,18 +21,16 @@ export const CONSENT_FIELD_VALUE = 'true';
 /** DOM ids that wire the labels/inputs together for the setup form. */
 export const PHOTO_INPUT_ID = 'game-photo-input';
 
-export const CAMERA_INPUT_ID = 'game-camera-input';
-
 export const CONSENT_INPUT_ID = 'game-consent';
 
 /** File-picker `accept` allow-list; mirrors the server's accepted MIME types. */
 export const UPLOAD_INPUT_ACCEPT = 'image/jpeg,image/png,image/webp';
 
-/** Camera input accepts any image so mobile OSes open the camera app directly. */
-export const CAMERA_INPUT_ACCEPT = 'image/*';
+/** i18n message key the live-camera capture hook stores when the stream fails. */
+export const CAMERA_ERROR_MESSAGE_KEY = 'game.cameraError';
 
-/** Rear-camera capture hint for the camera input on mobile. */
-export const CAMERA_CAPTURE_MODE = 'environment';
+/** `kind` for the silent captions track that satisfies <video> a11y (no audio). */
+export const CAPTIONS_TRACK_KIND = 'captions';
 
 /** i18n key shown as feedback after share text is copied to the clipboard. */
 export const SHARE_COPIED_MESSAGE_KEY = 'result.shareCopied';
@@ -79,6 +77,7 @@ export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   FILE_INVALID: GAME_ERROR_MESSAGE_KEYS.fileTypeNotAllowed,
   MULTIPLE_FILES_NOT_ALLOWED: GAME_ERROR_MESSAGE_KEYS.multipleFiles,
   RATE_LIMITED: GAME_ERROR_MESSAGE_KEYS.rateLimited,
+  AI_RATE_LIMITED: GAME_ERROR_MESSAGE_KEYS.rateLimited,
   AI_PROVIDER_UNAVAILABLE: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
   AI_TIMEOUT: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
   AI_RESPONSE_INVALID: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,

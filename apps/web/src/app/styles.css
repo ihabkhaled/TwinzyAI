@@ -1,0 +1,117 @@
+@import 'tailwindcss';
+
+/*
+ * Dark variant is driven by the `data-theme` attribute the ui-preferences
+ * module mirrors onto <html>. `@custom-variant dark` lets components use the
+ * `dark:` prefix while the source of truth stays the attribute, not the OS.
+ */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Role tokens consumed by the ui-primitives + module components (bg-primary,
+ * text-foreground, bg-surface, text-muted-foreground, border-border,
+ * outline-ring, bg-danger, ...). Light is the default in :root; the dark
+ * overrides apply either explicitly via [data-theme='dark'] or implicitly via
+ * the OS preference unless the user has pinned light. Values map the current
+ * Twinzy violet/pink palette onto semantic role names.
+ */
+:root {
+  --color-background: #f8f7fc;
+  --color-foreground: #1c1a27;
+  --color-surface: #ffffff;
+  --color-muted: #f1eff8;
+  --color-muted-foreground: #5c5870;
+  --color-primary: #6d28d9;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #db2777;
+  --color-border: #dcd8ea;
+  --color-ring: #6d28d9;
+  --color-danger: #b91c1c;
+  --color-danger-foreground: #ffffff;
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-background: #13111c;
+    --color-foreground: #f2f0fa;
+    --color-surface: #1c1927;
+    --color-muted: #262233;
+    --color-muted-foreground: #a8a3bd;
+    --color-primary: #a78bfa;
+    --color-primary-foreground: #1c1927;
+    --color-accent: #f472b6;
+    --color-border: #37324a;
+    --color-ring: #a78bfa;
+    --color-danger: #f87171;
+    --color-danger-foreground: #ffffff;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-background: #13111c;
+  --color-foreground: #f2f0fa;
+  --color-surface: #1c1927;
+  --color-muted: #262233;
+  --color-muted-foreground: #a8a3bd;
+  --color-primary: #a78bfa;
+  --color-primary-foreground: #1c1927;
+  --color-accent: #f472b6;
+  --color-border: #37324a;
+  --color-ring: #a78bfa;
+  --color-danger: #f87171;
+  --color-danger-foreground: #ffffff;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+}
+
+/*
+ * `inline` maps each Tailwind color/font utility to the runtime variable above,
+ * so `bg-primary` etc. resolve to the active theme without re-emitting values.
+ */
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-surface: var(--color-surface);
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-accent: var(--color-accent);
+  --color-border: var(--color-border);
+  --color-ring: var(--color-ring);
+  --color-danger: var(--color-danger);
+  --color-danger-foreground: var(--color-danger-foreground);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

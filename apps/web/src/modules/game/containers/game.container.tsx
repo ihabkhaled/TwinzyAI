@@ -9,6 +9,7 @@ import { ErrorState } from '@/shared/components/feedback/error-state.component';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 import { buildIndexedTestId } from '@/shared/testing/test-id.helper';
 
+import { CameraCapture } from '../components/camera-capture.component';
 import { PrivacyNotice } from '../components/privacy-notice.component';
 import { ProcessingCard } from '../components/processing-card.component';
 import { ResultCard } from '../components/result-card.component';
@@ -22,17 +23,33 @@ import { UploadCard } from '../components/upload-card.component';
 import { UploadConsent } from '../components/upload-consent.component';
 import { buildGameScreenLabels } from '../helpers/game-display.helper';
 import { useGame } from '../hooks/useGame.hook';
-import {
-  CAMERA_CAPTURE_MODE,
-  CAMERA_INPUT_ACCEPT,
-  UPLOAD_INPUT_ACCEPT,
-} from '../model/game.constants';
+import { UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
 import { GamePhase } from '../model/game.enums';
 import type { GameResultView, GameScreenLabels, GameViewModel } from '../model/game.types';
 
 import { gameTitleClass } from './game.container.variants';
 
+const renderCamera = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
+  <CameraCapture
+    title={labels.camera.title}
+    previewLabel={labels.camera.previewLabel}
+    startingLabel={labels.camera.starting}
+    captureButton={labels.camera.captureButton}
+    cancelButton={labels.camera.cancelButton}
+    isStarting={vm.camera.isStarting}
+    errorMessage={vm.camera.errorMessage}
+    videoRef={vm.camera.videoRef}
+    onCapture={vm.camera.onCapture}
+    onCancel={vm.camera.onCancel}
+    testId={TEST_IDS.cameraCard}
+  />
+);
+
 const renderSetup = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => {
+  if (vm.camera.isOpen) {
+    return renderCamera(vm, labels);
+  }
+
   const onFileInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     vm.upload.onFileChange(event.target.files);
   };
@@ -52,9 +69,8 @@ const renderSetup = (vm: GameViewModel, labels: GameScreenLabels): ReactElement 
         previewUrl={vm.upload.previewUrl}
         fileError={vm.upload.fileError}
         uploadAccept={UPLOAD_INPUT_ACCEPT}
-        cameraAccept={CAMERA_INPUT_ACCEPT}
-        cameraCapture={CAMERA_CAPTURE_MODE}
         onFileInputChange={onFileInputChange}
+        onOpenCamera={vm.camera.onOpen}
         testId={TEST_IDS.uploadCard}
       />
       <UploadConsent

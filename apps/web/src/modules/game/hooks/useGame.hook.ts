@@ -13,6 +13,7 @@ import { mapFinalResultToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
 import { useAnalyzeGameMutation } from '../queries/game.mutations';
 
+import { useCameraCapture } from './useCameraCapture.hook';
 import { useImageUpload } from './useImageUpload.hook';
 import { useShareResult } from './useShareResult.hook';
 
@@ -26,7 +27,8 @@ export const useGame = (): GameViewModel => {
   const t = useAppTranslation();
   const translate = useCallback<TranslateMessage>((key, values) => t(key, values), [t]);
 
-  const { file, previewUrl, fileErrorKey, onFileChange, clearFile } = useImageUpload();
+  const { file, previewUrl, fileErrorKey, onFileChange, acceptFile, clearFile } = useImageUpload();
+  const camera = useCameraCapture(acceptFile);
   const { feedbackKey, onShare, resetFeedback } = useShareResult();
   const [currentStage, setCurrentStage] = useState<GameStreamStageValue | undefined>();
   const onStage = useCallback((stage: GameStreamStageValue): void => {
@@ -81,6 +83,15 @@ export const useGame = (): GameViewModel => {
       fileError: fileErrorKey === undefined ? undefined : translate(fileErrorKey),
       onFileChange,
       clearFile,
+    },
+    camera: {
+      isOpen: camera.isOpen,
+      isStarting: camera.isStarting,
+      errorMessage: camera.errorKey === undefined ? undefined : translate(camera.errorKey),
+      videoRef: camera.videoRef,
+      onOpen: camera.open,
+      onCancel: camera.cancel,
+      onCapture: camera.capture,
     },
     share: {
       feedback: feedbackKey === undefined ? undefined : translate(feedbackKey),

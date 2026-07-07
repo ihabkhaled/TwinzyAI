@@ -5,7 +5,8 @@
     "subtitle": "Upload a photo and get a fun style/vibe result based on visible traits.",
     "description": "A free, playful game. No face recognition, no identity matching, and your photo is never stored.",
     "themeToggle": "Switch theme",
-    "footerNote": "Twinzy is a free game for entertainment only."
+    "footerNote": "Twinzy is a free game for entertainment only.",
+    "loading": "Loading…"
   },
   "nav": {
     "home": "Home",
@@ -35,7 +36,13 @@
       "generatingCandidates": "Finding public style/vibe matches...",
       "judging": "Scoring and filtering the matches...",
       "aggregating": "Preparing your result..."
-    }
+    },
+    "cameraTitle": "Take a photo",
+    "cameraPreviewLabel": "Live camera preview",
+    "cameraStarting": "Starting the camera…",
+    "cameraCaptureButton": "Capture photo",
+    "cameraCancelButton": "Cancel",
+    "cameraError": "We could not open your camera. Check permissions or upload a photo instead."
   },
   "upload": {
     "consentLabel": "I understand this is only a fun style/vibe game and my photo is not stored.",
@@ -125,7 +132,15 @@
     "generic": "Something went wrong. Please try again.",
     "network": "We could not reach the game server. Check your connection and try again.",
     "rateLimited": "Too many tries in a short time. Please wait a moment.",
-    "aiUnavailable": "The vibe engine is unavailable right now. Please try again in a moment."
+    "aiUnavailable": "The vibe engine is unavailable right now. Please try again in a moment.",
+    "timeout": "That took too long to respond. Please try again.",
+    "notFound": "We could not find what you were looking for.",
+    "unauthorized": "You are not authorized to do that.",
+    "forbidden": "You do not have permission to do that.",
+    "server": "The game server hit a problem. Please try again in a moment.",
+    "validation": "Some of the details were not valid. Please check and try again.",
+    "upload": "That photo could not be uploaded. Please try a different one.",
+    "safety": "That photo could not be used for a safe, playful result. Please try another."
   },
   "notFound": {
     "title": "Page not found",

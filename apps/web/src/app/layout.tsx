@@ -1,33 +1,82 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
-import { APP_METADATA, APP_VIEWPORT } from '@/constants/app-metadata.constants';
-import { t } from '@/i18n';
+import {
+  AppIntlProvider,
+  DEFAULT_LOCALE,
+  getLocaleDirection,
+  getServerLocale,
+  getServerTranslations,
+  isSupportedLocale,
+} from '@/packages/i18n';
+import { AppToaster } from '@/packages/toast';
+import { SkipLink } from '@/shared/components/primitives/skip-link.component';
+import { interFont } from '@/shared/fonts/app-fonts';
+import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
+import { bodyClassName } from './layout.variants';
 import { Providers } from './providers';
 
-import '@/styles/globals.css';
-
-export const metadata: Metadata = APP_METADATA;
-
-export const viewport: Viewport = APP_VIEWPORT;
+import './styles.css';
 
 interface RootLayoutProps {
   children: ReactNode;
 }
 
-const RootLayout = ({ children }: RootLayoutProps): ReactNode => (
-  <html lang="en" suppressHydrationWarning>
-    <body className="bg-background text-text antialiased">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-surface focus:px-3 focus:py-2"
-      >
-        {t('nav.skipToContent')}
-      </a>
-      <Providers>{children}</Providers>
-    </body>
-  </html>
-);
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslations('app');
+
+  return {
+    title: buildPageTitle(t('tagline')),
+    description: t('subtitle'),
+    applicationName: t('name'),
+    manifest: '/manifest.webmanifest',
+    appleWebApp: {
+      capable: true,
+      title: t('name'),
+      statusBarStyle: 'default',
+    },
+    icons: {
+      icon: '/icons/icon.svg',
+    },
+  };
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f8f7fc' },
+    { media: '(prefers-color-scheme: dark)', color: '#13111c' },
+  ],
+};
+
+const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => {
+  const resolvedLocale = await getServerLocale();
+  const locale = isSupportedLocale(resolvedLocale) ? resolvedLocale : DEFAULT_LOCALE;
+  const direction = getLocaleDirection(locale);
+  const t = await getServerTranslations();
+
+  return (
+    <html
+      lang={locale}
+      dir={direction}
+      data-theme="light"
+      className={interFont.variable}
+      suppressHydrationWarning
+    >
+      <body className={bodyClassName}>
+        <AppIntlProvider locale={locale}>
+          <Providers>
+            <SkipLink targetHref="#main-content" label={t('nav.skipToContent')} />
+            <main id="main-content">{children}</main>
+            <AppToaster />
+          </Providers>
+        </AppIntlProvider>
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;

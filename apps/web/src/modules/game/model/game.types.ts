@@ -1,3 +1,5 @@
+import type { RefObject } from 'react';
+
 import type { FinalGameResult, GameStreamStageValue, VerdictValue } from '@twinzy/shared';
 
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
@@ -7,6 +9,32 @@ import type { GamePhaseValue } from './game.enums';
 /** Progress callbacks the streaming analyze request drives as events arrive. */
 export interface GameStreamHandlers {
   onStage: (stage: GameStreamStageValue) => void;
+}
+
+/**
+ * The live-camera controller surface the capture hook exposes. Holds the raw
+ * error KEY (not translated copy) so the hook stays React-i18n-free, mirroring
+ * {@link UploadController}; the orchestrator translates it at the boundary.
+ */
+export interface CameraController {
+  isOpen: boolean;
+  isStarting: boolean;
+  errorKey: string | undefined;
+  videoRef: RefObject<HTMLVideoElement | null>;
+  open: () => void;
+  cancel: () => void;
+  capture: () => void;
+}
+
+/** The live-camera sub-view the container renders (error already translated). */
+export interface CameraViewModel {
+  isOpen: boolean;
+  isStarting: boolean;
+  errorMessage: string | undefined;
+  videoRef: RefObject<HTMLVideoElement | null>;
+  onOpen: () => void;
+  onCancel: () => void;
+  onCapture: () => void;
 }
 
 /**
@@ -68,6 +96,9 @@ export interface UploadController {
   previewUrl: string | undefined;
   fileErrorKey: ErrorMessageKey | undefined;
   onFileChange: (files: FileList | null) => void;
+  /** Accept a single already-obtained File (from the camera) through the same
+   * validation + preview path as a picked upload. */
+  acceptFile: (file: File) => void;
   clearFile: () => void;
 }
 
@@ -103,6 +134,15 @@ export interface UploadLabels {
   previewAlt: string;
 }
 
+/** Translated copy for the live-camera capture card. */
+export interface CameraLabels {
+  title: string;
+  previewLabel: string;
+  starting: string;
+  captureButton: string;
+  cancelButton: string;
+}
+
 /** Translated copy for the results view (dynamic values come from the DTO). */
 export interface ResultLabels {
   title: string;
@@ -125,6 +165,7 @@ export interface GameScreenLabels {
   processingHint: string;
   privacyNotice: string;
   upload: UploadLabels;
+  camera: CameraLabels;
   result: ResultLabels;
 }
 
@@ -153,5 +194,6 @@ export interface GameViewModel {
   /** Live progress copy for the streamed pipeline; the generic text until a stage arrives. */
   stageLabel: string;
   upload: UploadViewModel;
+  camera: CameraViewModel;
   share: ShareViewModel;
 }

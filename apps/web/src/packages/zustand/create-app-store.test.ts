@@ -11,7 +11,7 @@ describe('createAppStore', () => {
   it('creates a typed store whose actions update state', () => {
     const useCounter = createAppStore<CounterState>()((set) => ({
       count: 0,
-      increment: () => {
+      increment: (): void => {
         set((state) => ({ count: state.count + 1 }));
       },
     }));
@@ -24,7 +24,7 @@ describe('createAppStore', () => {
   it('notifies subscribers on change and stops after unsubscribe', () => {
     const useCounter = createAppStore<CounterState>()((set) => ({
       count: 0,
-      increment: () => {
+      increment: (): void => {
         set((state) => ({ count: state.count + 1 }));
       },
     }));

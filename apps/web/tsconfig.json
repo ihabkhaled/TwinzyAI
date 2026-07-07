@@ -16,6 +16,5 @@
     "src/**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "comment:exclude": "src/shared, src/packages, src/modules are an incomplete parallel frontend-anatomy migration (not wired into the app). Excluded from typecheck until finished. See docs/final-validation-report.md.",
   "exclude": ["node_modules", ".next", "e2e"]
 }

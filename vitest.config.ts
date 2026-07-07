@@ -74,15 +74,7 @@ export default defineConfig({
           root: path.resolve(rootDir, 'apps/web'),
           environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
-          // src/shared, src/packages, src/modules: incomplete parallel
-          // frontend-anatomy migration WIP, excluded until finished.
-          exclude: [
-            NODE_MODULES_GLOB,
-            'e2e/**',
-            'src/shared/**',
-            'src/packages/**',
-            'src/modules/**',
-          ],
+          exclude: [NODE_MODULES_GLOB, 'e2e/**'],
           setupFiles: ['src/tests/setup.ts'],
         },
       },

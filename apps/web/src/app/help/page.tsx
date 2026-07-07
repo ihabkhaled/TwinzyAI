@@ -1,33 +1,55 @@
-import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import type { ReactElement } from 'react';
 
-import { t } from '@/i18n';
+import { getServerTranslations } from '@/packages/i18n';
+import { PageContainer, Stack } from '@/packages/ui-primitives';
+import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
-const HelpPage = (): ReactNode => (
-  <main id="main-content" className="mx-auto max-w-xl px-4 py-10">
-    <h1 className="mb-4 text-3xl font-bold">{t('help.title')}</h1>
-    <dl className="space-y-5">
-      <div>
-        <dt className="font-semibold">{t('help.q1')}</dt>
-        <dd className="mt-1 text-text-muted">{t('help.a1')}</dd>
-      </div>
-      <div>
-        <dt className="font-semibold">{t('help.q2')}</dt>
-        <dd className="mt-1 text-text-muted">{t('help.a2')}</dd>
-      </div>
-      <div>
-        <dt className="font-semibold">{t('help.q3')}</dt>
-        <dd className="mt-1 text-text-muted">{t('help.a3')}</dd>
-      </div>
-      <div>
-        <dt className="font-semibold">{t('help.q4')}</dt>
-        <dd className="mt-1 text-text-muted">{t('help.a4')}</dd>
-      </div>
-      <div>
-        <dt className="font-semibold">{t('help.q5')}</dt>
-        <dd className="mt-1 text-text-muted">{t('help.a5')}</dd>
-      </div>
-    </dl>
-  </main>
-);
+import {
+  contentDefinitionListClass,
+  contentDescriptionClass,
+  contentTermClass,
+  contentTitleClass,
+} from '../content.variants';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslations('help');
+
+  return { title: buildPageTitle(t('title')) };
+}
+
+const HelpPage = async (): Promise<ReactElement> => {
+  const t = await getServerTranslations('help');
+
+  return (
+    <PageContainer>
+      <Stack gap="md">
+        <h1 className={contentTitleClass}>{t('title')}</h1>
+        <dl className={contentDefinitionListClass}>
+          <div>
+            <dt className={contentTermClass}>{t('q1')}</dt>
+            <dd className={contentDescriptionClass}>{t('a1')}</dd>
+          </div>
+          <div>
+            <dt className={contentTermClass}>{t('q2')}</dt>
+            <dd className={contentDescriptionClass}>{t('a2')}</dd>
+          </div>
+          <div>
+            <dt className={contentTermClass}>{t('q3')}</dt>
+            <dd className={contentDescriptionClass}>{t('a3')}</dd>
+          </div>
+          <div>
+            <dt className={contentTermClass}>{t('q4')}</dt>
+            <dd className={contentDescriptionClass}>{t('a4')}</dd>
+          </div>
+          <div>
+            <dt className={contentTermClass}>{t('q5')}</dt>
+            <dd className={contentDescriptionClass}>{t('a5')}</dd>
+          </div>
+        </dl>
+      </Stack>
+    </PageContainer>
+  );
+};
 
 export default HelpPage;

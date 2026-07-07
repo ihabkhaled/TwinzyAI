@@ -39,20 +39,9 @@ export const useImageUpload = (): UploadController => {
     resetSelection();
   }, [revokePreview, resetSelection]);
 
-  const onFileChange = useCallback(
-    (files: FileList | null): void => {
+  const acceptFile = useCallback(
+    (selected: File): void => {
       revokePreview();
-
-      if (files !== null && files.length > 1) {
-        resetSelection(ERROR_MESSAGE_KEYS.validation);
-        return;
-      }
-
-      const selected = files?.[0];
-      if (selected === undefined) {
-        resetSelection();
-        return;
-      }
 
       const validation = validateFileForUpload(selected);
       if (!validation.ok) {
@@ -69,5 +58,25 @@ export const useImageUpload = (): UploadController => {
     [revokePreview, resetSelection],
   );
 
-  return { file, previewUrl, fileErrorKey, onFileChange, clearFile };
+  const onFileChange = useCallback(
+    (files: FileList | null): void => {
+      if (files !== null && files.length > 1) {
+        revokePreview();
+        resetSelection(ERROR_MESSAGE_KEYS.validation);
+        return;
+      }
+
+      const selected = files?.[0];
+      if (selected === undefined) {
+        revokePreview();
+        resetSelection();
+        return;
+      }
+
+      acceptFile(selected);
+    },
+    [acceptFile, revokePreview, resetSelection],
+  );
+
+  return { file, previewUrl, fileErrorKey, onFileChange, acceptFile, clearFile };
 };

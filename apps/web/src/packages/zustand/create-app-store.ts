@@ -1,5 +1,3 @@
-import { create } from 'zustand';
-
 /**
  * The app's only owner of zustand. Client global-state stores are created
  * through this facade so the vendor stays swappable and boundary-enforced
@@ -9,4 +7,5 @@ import { create } from 'zustand';
  * Reminder (rules/frontend/06): stores hold CLIENT global state only — server
  * data lives in the TanStack Query cache (`@/packages/query`), never here.
  */
-export const createAppStore = create;
+
+export { create as createAppStore } from 'zustand';

@@ -1,18 +1,35 @@
-import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import type { ReactElement } from 'react';
 
-import { t } from '@/i18n';
+import { getServerTranslations } from '@/packages/i18n';
+import { PageContainer, Stack } from '@/packages/ui-primitives';
+import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
-const TermsPage = (): ReactNode => (
-  <main id="main-content" className="mx-auto max-w-xl px-4 py-10">
-    <h1 className="mb-4 text-3xl font-bold">{t('terms.title')}</h1>
-    <ul className="list-disc space-y-3 ps-5 text-text-muted">
-      <li>{t('terms.entertainment')}</li>
-      <li>{t('terms.noSeriousUse')}</li>
-      <li>{t('terms.permission')}</li>
-      <li>{t('terms.mayBeWrong')}</li>
-      <li>{t('terms.noHarassment')}</li>
-    </ul>
-  </main>
-);
+import { contentListClass, contentTitleClass } from '../content.variants';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslations('terms');
+
+  return { title: buildPageTitle(t('title')) };
+}
+
+const TermsPage = async (): Promise<ReactElement> => {
+  const t = await getServerTranslations('terms');
+
+  return (
+    <PageContainer>
+      <Stack gap="md">
+        <h1 className={contentTitleClass}>{t('title')}</h1>
+        <ul className={contentListClass}>
+          <li>{t('entertainment')}</li>
+          <li>{t('noSeriousUse')}</li>
+          <li>{t('permission')}</li>
+          <li>{t('mayBeWrong')}</li>
+          <li>{t('noHarassment')}</li>
+        </ul>
+      </Stack>
+    </PageContainer>
+  );
+};
 
 export default TermsPage;

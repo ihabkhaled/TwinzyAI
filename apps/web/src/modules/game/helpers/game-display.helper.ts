@@ -76,6 +76,13 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
     consentLabel: translate('upload.consentLabel'),
     previewAlt: translate('upload.previewAlt'),
   },
+  camera: {
+    title: translate('game.cameraTitle'),
+    previewLabel: translate('game.cameraPreviewLabel'),
+    starting: translate('game.cameraStarting'),
+    captureButton: translate('game.cameraCaptureButton'),
+    cancelButton: translate('game.cameraCancelButton'),
+  },
   result: {
     title: translate('result.title'),
     traitsTitle: translate('result.traitsTitle'),

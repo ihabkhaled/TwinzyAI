@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import { AppImage } from '@/packages/image';
 import { Alert, Card } from '@/packages/ui-primitives';
 
-import { CAMERA_INPUT_ID, PHOTO_INPUT_ID, PREVIEW_IMAGE_SIZE } from '../model/game.constants';
+import { PHOTO_INPUT_ID, PREVIEW_IMAGE_SIZE } from '../model/game.constants';
 import type { UploadCardProps } from '../model/game-component.types';
 
 import {
@@ -32,9 +32,8 @@ export function UploadCard({
   previewUrl,
   fileError,
   uploadAccept,
-  cameraAccept,
-  cameraCapture,
   onFileInputChange,
+  onOpenCamera,
   testId,
 }: Readonly<UploadCardProps>): ReactElement {
   return (
@@ -54,18 +53,10 @@ export function UploadCard({
           />
         </label>
 
-        <label htmlFor={CAMERA_INPUT_ID} className={uploadSourceButtonClass}>
+        <button type="button" onClick={onOpenCamera} className={uploadSourceButtonClass}>
           <span className={uploadSourceTitleClass}>{cameraLabel}</span>
           <span className={uploadSourceHintClass}>{cameraHint}</span>
-          <input
-            id={CAMERA_INPUT_ID}
-            type="file"
-            accept={cameraAccept}
-            capture={cameraCapture}
-            onChange={onFileInputChange}
-            className={uploadSrOnlyClass}
-          />
-        </label>
+        </button>
       </div>
 
       {previewUrl !== undefined && (

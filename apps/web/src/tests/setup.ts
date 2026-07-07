@@ -20,6 +20,24 @@ Object.assign(URL, {
   revokeObjectURL: objectUrlMocks.revoke,
 });
 
+// jsdom does not implement matchMedia; the ui-preferences effects call it to
+// resolve `system` theme and subscribe to OS scheme changes. Return a stable,
+// non-matching MediaQueryList so mounting those effects never throws.
+const createMediaQueryList = (query: string): MediaQueryList => ({
+  matches: false,
+  media: query,
+  onchange: null,
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+  addListener: vi.fn(),
+  removeListener: vi.fn(),
+  dispatchEvent: vi.fn(() => false),
+});
+
+if (typeof globalThis.matchMedia !== 'function') {
+  Object.assign(globalThis, { matchMedia: vi.fn(createMediaQueryList) });
+}
+
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();

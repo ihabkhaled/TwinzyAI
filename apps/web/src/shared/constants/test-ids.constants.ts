@@ -8,6 +8,7 @@ export const TEST_IDS = {
   playCta: 'play-cta',
   uploadCard: 'upload-card',
   uploadInput: 'upload-input',
+  cameraCard: 'camera-card',
   consentCheckbox: 'consent-checkbox',
   analyzeButton: 'analyze-button',
   processing: 'processing',

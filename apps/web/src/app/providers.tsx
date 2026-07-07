@@ -1,14 +1,18 @@
 'use client';
+// client-boundary-reason: hosts the React Query cache and mounts the UI-preferences DOM/persistence effects, both browser-only.
 
-import { QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 
-import { getQueryClient } from '@/lib/react-query';
+import { UiPreferencesEffects } from '@/modules/ui-preferences';
+import { AppQueryProvider } from '@/packages/query';
 
 interface ProvidersProps {
   children: ReactNode;
 }
 
 export const Providers = ({ children }: ProvidersProps): ReactNode => (
-  <QueryClientProvider client={getQueryClient()}>{children}</QueryClientProvider>
+  <AppQueryProvider>
+    <UiPreferencesEffects />
+    {children}
+  </AppQueryProvider>
 );

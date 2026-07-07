@@ -16,14 +16,8 @@ export default [
       "apps/web/public/**",
       ".husky/**",
       ".claude/**",
-      // Incomplete parallel frontend-anatomy migration WIP: untracked, not
-      // wired into the app, excluded from all gates until finished (also
-      // excluded in apps/web/tsconfig.json and vitest.config.ts).
-      // See docs/final-validation-report.md.
+      // Scratch dir for any throwaway migration experiments; never linted.
       ".migration-wip/**",
-      "apps/web/src/shared/**",
-      "apps/web/src/packages/**",
-      "apps/web/src/modules/**",
     ],
   },
 ];

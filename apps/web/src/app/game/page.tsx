@@ -1,11 +1,21 @@
-import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import type { ReactElement } from 'react';
 
-import { GameScreen } from '@/features/game';
+import { GameContainer } from '@/modules/game';
+import { getServerTranslations } from '@/packages/i18n';
+import { PageContainer } from '@/packages/ui-primitives';
+import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
-const GamePage = (): ReactNode => (
-  <main id="main-content" className="mx-auto max-w-xl px-4 py-8 pb-[env(safe-area-inset-bottom)]">
-    <GameScreen />
-  </main>
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslations('game');
+
+  return { title: buildPageTitle(t('title')) };
+}
+
+const GamePage = (): ReactElement => (
+  <PageContainer>
+    <GameContainer />
+  </PageContainer>
 );
 
 export default GamePage;

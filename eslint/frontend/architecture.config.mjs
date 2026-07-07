@@ -3,23 +3,25 @@
  * frontend-architecture plugin and supplies the one-way layer policy table
  * for the `apps/web/src` module/package/shared anatomy.
  *
- * STRANGLER-FIG SCOPE: these rules only run on the NEW canonical folders
- * (see FRONTEND_ARCH_FILES). The parallel pre-migration frontend code under
- * apps/web/src/{app,components,features,hooks,services,gateways,lib,i18n} is
- * deliberately untouched so the repo stays lint-green during migration.
+ * SCOPE: the app-shell cutover completed the migration — the whole
+ * apps/web/src anatomy now runs on modules/packages/shared, so the strict
+ * rules govern the app routes and the request proxy too (see FRONTEND_ARCH_FILES).
+ * The pre-migration folders (features/components/lib/i18n/constants/styles) were
+ * deleted in the same cutover.
  */
 
 import { frontendArchitecturePlugin } from "../frontend-architecture-plugin.mjs";
 
 /**
- * Glob scope shared by every frontend-architecture config file. Widen this
- * (add `apps/web/src/app/**`, then migrate features) only once apps/web adopts
- * the anatomy — see the note in eslint/index.mjs.
+ * Glob scope shared by every frontend-architecture config file. Covers the full
+ * canonical anatomy plus the App Router routes and the Next.js request proxy.
  */
 export const FRONTEND_ARCH_FILES = [
   "apps/web/src/modules/**/*.{ts,tsx}",
   "apps/web/src/packages/**/*.{ts,tsx}",
   "apps/web/src/shared/**/*.{ts,tsx}",
+  "apps/web/src/app/**/*.{ts,tsx}",
+  "apps/web/src/proxy.ts",
 ];
 
 /**
@@ -194,7 +196,17 @@ export default [
           ],
         },
       ],
-      "frontend-architecture/no-direct-browser-api-outside-packages": "error",
+      "frontend-architecture/no-direct-browser-api-outside-packages": [
+        "error",
+        {
+          allowedPrefixes: [
+            "src/packages/browser/",
+            "src/packages/storage/",
+            "src/packages/camera/",
+            "src/proxy.ts",
+          ],
+        },
+      ],
       "frontend-architecture/no-inline-query-keys": "error",
       "frontend-architecture/no-raw-i18n-text": "error",
       "frontend-architecture/no-inline-classname-outside-design-system":

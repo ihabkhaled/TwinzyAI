@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, ReactNode } from 'react';
+import type { ChangeEventHandler, ReactNode, RefObject } from 'react';
 
 import type { ResultLabels, ResultView } from './game.types';
 
@@ -26,7 +26,7 @@ export interface PrivacyNoticeProps {
   testId?: string;
 }
 
-/** Props for the upload/camera source card. */
+/** Props for the upload / open-camera source card. */
 export interface UploadCardProps {
   uploadLabel: string;
   changeButton: string;
@@ -37,9 +37,24 @@ export interface UploadCardProps {
   previewUrl: string | undefined;
   fileError: string | undefined;
   uploadAccept: string;
-  cameraAccept: string;
-  cameraCapture: 'environment';
   onFileInputChange: ChangeEventHandler<HTMLInputElement>;
+  /** Opens the live getUserMedia camera (NOT a file input — see rules/12). */
+  onOpenCamera: () => void;
+  testId?: string;
+}
+
+/** Props for the live-camera capture card (pure: ref + handlers in, JSX out). */
+export interface CameraCaptureProps {
+  title: string;
+  previewLabel: string;
+  startingLabel: string;
+  captureButton: string;
+  cancelButton: string;
+  isStarting: boolean;
+  errorMessage: string | undefined;
+  videoRef: RefObject<HTMLVideoElement | null>;
+  onCapture: () => void;
+  onCancel: () => void;
   testId?: string;
 }
 

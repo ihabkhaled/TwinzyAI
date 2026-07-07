@@ -1,21 +1,40 @@
-import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import type { ReactElement } from 'react';
 
-import { t } from '@/i18n';
+import { PrivacyNotice } from '@/modules/game';
+import { getServerTranslations } from '@/packages/i18n';
+import { PageContainer, Stack } from '@/packages/ui-primitives';
+import { TEST_IDS } from '@/shared/constants/test-ids.constants';
+import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
-const PrivacyPage = (): ReactNode => (
-  <main id="main-content" className="mx-auto max-w-xl px-4 py-10">
-    <h1 className="mb-4 text-3xl font-bold">{t('privacy.title')}</h1>
-    <p className="mb-4 text-text-muted">{t('privacy.intro')}</p>
-    <ul className="list-disc space-y-3 ps-5 text-text-muted">
-      <li>{t('privacy.photoNotStored')}</li>
-      <li>{t('privacy.traitsOnly')}</li>
-      <li>{t('privacy.noFaceRecognition')}</li>
-      <li>{t('privacy.noTemplates')}</li>
-      <li>{t('privacy.geminiNote')}</li>
-      <li>{t('privacy.funOnly')}</li>
-      <li>{t('privacy.freeNote')}</li>
-    </ul>
-  </main>
-);
+import { contentLeadClass, contentListClass, contentTitleClass } from '../content.variants';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslations('privacy');
+
+  return { title: buildPageTitle(t('title')) };
+}
+
+const PrivacyPage = async (): Promise<ReactElement> => {
+  const t = await getServerTranslations('privacy');
+
+  return (
+    <PageContainer>
+      <Stack gap="md">
+        <h1 className={contentTitleClass}>{t('title')}</h1>
+        <p className={contentLeadClass}>{t('intro')}</p>
+        <PrivacyNotice message={t('photoNotStored')} testId={TEST_IDS.privacyNotice} />
+        <ul className={contentListClass}>
+          <li>{t('traitsOnly')}</li>
+          <li>{t('noFaceRecognition')}</li>
+          <li>{t('noTemplates')}</li>
+          <li>{t('geminiNote')}</li>
+          <li>{t('funOnly')}</li>
+          <li>{t('freeNote')}</li>
+        </ul>
+      </Stack>
+    </PageContainer>
+  );
+};
 
 export default PrivacyPage;
