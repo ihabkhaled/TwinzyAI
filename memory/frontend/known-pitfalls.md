@@ -113,6 +113,23 @@ Adapted from the reference frontend OS for Twinzy (`apps/web`).
 - **RHF `formState` is a lazy proxy:** read `formState.errors` during render (inside the hook under
   test) or subscriptions never fire and assertions see stale state.
 
+## Layer file discipline (lint-enforced)
+
+- **No inline types/consts in layer files.** Reusable declarations must live in dedicated files, never
+  inline in logic/presentation files: types/interfaces/enums → `types/` (or `model/`, `enums/`);
+  reusable value/config consts and `as const` maps → `constants/` (or `model/`). Enforced by
+  `frontend-architecture/no-inline-declarations`, which bans module-level types/interfaces/enums and
+  non-function consts in component/container/hook/service/gateway/query/route files. The one approved
+  home for class strings is `*.variants.ts` design-system bundles. (Backend has the parallel
+  `architecture/no-inline-domain-definitions`, which also bans module-level value/config consts in
+  `apps/api` layer files.)
+- **Split components before a god-component forms.** `*.component.tsx` / `*.container.tsx` are capped
+  tighter than the repo-wide 300/80 base — `max-lines` 130, `max-lines-per-function` 60, plus
+  `react/jsx-max-depth` (via `eslint/frontend/component-size.config.mjs`). A `.component.tsx` is pure
+  JSX: it may not call hooks (`no-hooks-in-components`) nor hold logic/`.map()`/inline handlers
+  (`no-inline-component-logic`). When a view must map lists or hold body vars it becomes a CONTAINER
+  (e.g. `game-result.container`, `game-processing.container`), which may map.
+
 ## MSW / test-runner pitfalls
 
 - **`vi.mock('next/navigation')` / `vi.mock('sonner')` do not intercept externalized vendor modules.**

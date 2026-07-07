@@ -1,6 +1,6 @@
 # 00 — Non-Negotiable Rules
 
-These 20 rules are the contract of the `apps/web` frontend. They are never waived in review, never
+These 21 rules are the contract of the `apps/web` frontend. They are never waived in review, never
 "cleaned up later", and never bypassed with an `eslint-disable`. Inline ESLint suppression is
 forbidden with no exceptions — `eslint-disable`, `eslint-disable-line`, `eslint-disable-next-line`,
 and `eslint-enable` are banned anywhere, for any reason, and no [docs/exceptions/](../../docs/exceptions/)
@@ -26,7 +26,11 @@ Twinzy product non-negotiable overlap, the stricter one wins.
 
 4. **No inline declarations.** Objects, arrays, functions, and config literals declared inside JSX or
    component bodies create unstable references and hide reusable values. Declare them in constants,
-   variants, or helper files. Enforced by: `no-inline-declarations`.
+   variants, or helper files. The same rule also bans module-level types, interfaces, enums, and
+   non-function consts sitting inline in any layer file (component, container, hook, service, gateway,
+   query, route): types, interfaces, and enums live in `types/` (or `model/`, `enums/`), and reusable
+   value/config consts and `as const` maps live in `constants/` (or `model/`) — the sole exception being
+   `*.variants.ts` design-system class bundles. Enforced by: `no-inline-declarations`.
 
 5. **No TypeScript `enum` keyword.** `enum` emits runtime code, breaks `isolatedModules` patterns, and
    erases values under `verbatimModuleSyntax`. Use the `as const` object + derived type pattern shown in
@@ -113,3 +117,13 @@ Twinzy product non-negotiable overlap, the stricter one wins.
     build) plus the security scripts must be green before a PR is opened — CI is a verifier, not a
     debugger. Enforced by: [.husky/pre-commit](../../.husky/), [.husky/pre-push](../../.husky/), and
     CI per [19-release-gates.md](19-release-gates.md).
+
+21. **Components split into small chunks.** A `*.component.tsx` or `*.container.tsx` that keeps growing
+    becomes a god-component nobody can review, test, or reuse; split it into sub-components and
+    sub-containers before it forms. A `.component.tsx` stays pure JSX — it may not call hooks or hold
+    logic, `.map()`, or inline handlers; a view that must map lists or hold body vars is a container
+    (e.g. `game-result.container`, `game-processing.container`). Enforced by: `max-lines` (130),
+    `max-lines-per-function` (60), and `react/jsx-max-depth` in
+    [eslint/frontend/component-size.config.mjs](../../eslint/frontend/component-size.config.mjs) —
+    tighter than the repo-wide 300/80 base — plus `no-hooks-in-components` and
+    `no-inline-component-logic`.

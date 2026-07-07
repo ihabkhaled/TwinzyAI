@@ -48,7 +48,7 @@ Standard rules can't express "one delegation per controller method". The plugin 
 | --- | --- |
 | `architecture/controller-no-logic` | A controller method is exactly one delegation — no branching/transformation ([18-routes-controllers.md](./18-routes-controllers.md)) |
 | `architecture/no-restricted-layer-imports` | One-way layer imports; cross-module access via `index.ts` only ([01-architecture.md](./01-architecture.md)) |
-| `architecture/no-inline-domain-definitions` | Zero inline types/enum-maps/constants/DTOs in layer files ([05-types-enums-constants.md](./05-types-enums-constants.md)) |
+| `architecture/no-inline-domain-definitions` | Zero inline types/enum-maps/constants/DTOs in `apps/api` layer files — now **also** bans module-level value/config `const` (exempt: function-valued consts, `new`/call-expression DI/factory wiring, the single approved `LOG_CONTEXT`/`LOG_PREFIX`); scoped to `apps/api` so web `*.variants.ts` class bundles stay valid ([05-types-enums-constants.md](./05-types-enums-constants.md)) |
 | `architecture/no-raw-library-imports` / `architecture/no-direct-sdk-imports` | Vendor packages only inside their owner ([10-library-modularization.md](./10-library-modularization.md)) |
 | `architecture/no-direct-env-access` | `process.env` only in `config/`/`bootstrap/` ([25-configuration-and-environment.md](./25-configuration-and-environment.md)) |
 | `architecture/repository-persistence-only` | Repositories/infrastructure hold no business logic ([20-repositories-database.md](./20-repositories-database.md)) |
@@ -56,6 +56,18 @@ Standard rules can't express "one delegation per controller method". The plugin 
 | `architecture/tsx-pure-composition` | TSX holds no state/effects/handlers ([02-frontend-components-tsx.md](./02-frontend-components-tsx.md)) |
 
 Companion `no-restricted-syntax` bans `Promise.all|allSettled|any|race` inside `*.service.ts`; `max-lines-per-function` caps service methods at ~20 lines.
+
+---
+
+## Frontend architecture & component-size (`apps/web`)
+
+`apps/web` carries its own boundary + size gates (the `frontend-architecture` plugin + [`eslint/frontend/component-size.config.mjs`](../eslint/frontend/component-size.config.mjs)):
+
+| Rule | Enforces |
+| --- | --- |
+| `frontend-architecture/no-inline-declarations` | No module-level types/interfaces/enums or non-function `const` in component/container/hook/service/gateway/query/route files — extract to `types/`·`model/`·`constants/`; `*.variants.ts` is the approved home for design-system class-string bundles ([02-frontend-components-tsx.md](./02-frontend-components-tsx.md)) |
+| `no-hooks-in-components` / `no-inline-component-logic` | A `.component.tsx` is pure JSX — no hooks, no logic/`.map()`/inline handlers; a view that maps lists or holds body vars is a `.container.tsx` (e.g. `game-result.container` / `game-processing.container`) |
+| `max-lines` (130) · `max-lines-per-function` (60) · `react/jsx-max-depth` | Split `*.component.tsx`/`*.container.tsx` into sub-components/containers before a god-component forms — tighter than the repo-wide 300/80 base |
 
 ---
 

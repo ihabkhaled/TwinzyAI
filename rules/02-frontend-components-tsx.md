@@ -12,3 +12,15 @@
 - A feature container component may call its feature controller hook (useXxxController) and
   spread the returned props downward. That is the only wiring point.
 - Reuse components/ui primitives; never re-style raw controls ad hoc.
+
+## Keep components small
+
+- Component and container files stay single-responsibility; split into sub-components or
+  sub-containers before a god-component forms.
+- `*.component.tsx` and `*.container.tsx` are capped by `max-lines` (130),
+  `max-lines-per-function` (60), and `react/jsx-max-depth` — tighter than the repo-wide
+  300/80 base (see `eslint/frontend/component-size.config.mjs`).
+- A `.component.tsx` is pure JSX: it may not call hooks (`no-hooks-in-components`) or hold
+  logic, `.map()`, or inline handlers (`no-inline-component-logic`). A view that must map
+  lists or keep body vars is a CONTAINER (e.g. game-result.container, game-processing.container),
+  which may map.

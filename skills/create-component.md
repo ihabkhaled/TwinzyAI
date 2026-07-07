@@ -56,6 +56,14 @@ ESLint rules (`no-hooks-in-components`, `no-inline-component-logic`, `no-inline-
    tap targets are ≥ 44px (`min-h-12`). Add a unit test in
    `apps/web/src/modules/<feature>/test/` asserting user-visible behavior only (rendered text,
    roles, test ids) per [testing/unit-testing-standard.md](../testing/unit-testing-standard.md).
+9. Keep the file small and single-responsibility — split into sub-components before a god-component
+   forms. `*.component.tsx` (and `*.container.tsx`) files are capped tighter than the repo-wide
+   300/80 base: `max-lines` (130), `max-lines-per-function` (60), and `react/jsx-max-depth`, via
+   [eslint/frontend/component-size.config.mjs](../eslint/frontend/component-size.config.mjs). A
+   component stays pure JSX (`no-hooks-in-components`, `no-inline-component-logic`); the moment a view
+   must `.map()` a list or hold body variables it is a CONTAINER, which may map — see
+   `game-result.container` / `game-processing.container` in
+   `apps/web/src/modules/game/containers/`.
 
 ## Forbidden
 

@@ -84,6 +84,21 @@ the only place `.map()` from view models to child elements happens.
 - Rendering raw query objects (`query.isPending` checks belong in the hook's state resolution).
 - Making the page itself a client component to avoid a container.
 
+## Size and inline limits
+
+- Container files are capped tighter than the 300/80 repo base: `max-lines` (130),
+  `max-lines-per-function` (60), and `react/jsx-max-depth` (via
+  `eslint/frontend/component-size.config.mjs`). Split into sub-containers before a god-container
+  forms.
+- Never declare reusable structure inline here — `frontend-architecture/no-inline-declarations` bans
+  module-level types/interfaces/enums and non-function consts in container/component/hook/service/
+  gateway/query/route files. Put types in `types/` (or `model/`, `enums/`), reusable value/config
+  consts and `as const` maps in `constants/` (or `model/`); design-system class strings live only in
+  `*.variants.ts`.
+- The container is where lists map because a `.component.tsx` cannot: pure JSX may not call hooks
+  (`no-hooks-in-components`) or hold logic, `.map()`, or inline handlers
+  (`no-inline-component-logic`). When a view must iterate or hold body vars, it belongs here.
+
 ## Validation (gate)
 
 ```bash

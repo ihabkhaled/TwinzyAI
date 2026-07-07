@@ -37,6 +37,32 @@ frontend rules, each documented in [docs/eslint/](../../docs/eslint/):
 | [require-client-component-reason](../../docs/eslint/require-client-component-reason.md)                     | Every `'use client'` needs a `// client-boundary-reason:` comment.                                                                               |
 | [no-server-only-import-in-client](../../docs/eslint/no-server-only-import-in-client.md)                     | Server-only modules (e.g. `@/packages/env/server`) never reach client code.                                                                      |
 
+## No inline declarations in layer files
+
+Reusable structure must live in a dedicated file, never inline in a logic or presentation file — this
+extends `no-inline-declarations` past objects/arrays/functions to the type-level itself. Types,
+interfaces, and enums belong in `types/` (or `model/`/`enums/`); reusable value/config consts and
+`as const` maps belong in `constants/` (or `model/`). On the frontend,
+`frontend-architecture/no-inline-declarations` bans module-level types/interfaces/enums and
+non-function consts in component/container/hook/service/gateway/query/route files; the one approved
+home for class strings stays a `*.variants.ts` design-system bundle. The backend mirrors this via
+`architecture/no-inline-domain-definitions`, which now also bans module-level value/config `const` in
+`apps/api` layer files (controllers, services, use-cases, repositories, adapters, and the
+api/application/infrastructure roots) — function-valued consts, `new`/call-expression wiring
+(DI/factories), and the single approved `LOG_CONTEXT`/`LOG_PREFIX` are exempt. The `apps/api` scope is
+deliberate so web `*.variants.ts` class-string bundles stay valid.
+
+## Components split into small chunks
+
+`*.component.tsx` and `*.container.tsx` files stay small and single-responsibility: split into
+sub-components/sub-containers before a god-component forms.
+[eslint/frontend/component-size.config.mjs](../../eslint/frontend/component-size.config.mjs) enforces
+this with `max-lines` (130), `max-lines-per-function` (60), and `react/jsx-max-depth` — tighter than
+the repo-wide 300/80 base. A `.component.tsx` is pure JSX: it may not call hooks
+(`no-hooks-in-components`) or hold logic, `.map()`, or inline handlers (`no-inline-component-logic`).
+When a view must map a list or hold body variables it becomes a container (e.g.
+`game-result.container`, `game-processing.container`), which may map.
+
 ## TypeScript: strict family, all on
 
 [apps/web/tsconfig.json](../../apps/web/tsconfig.json) extends the shared

@@ -9,4 +9,18 @@ globs: ["eslint/**", "eslint.config.mjs"]
   purity (tsx-pure-composition).
 - Vendor ownership is enforced via the package-boundaries registry (no-direct-sdk-imports +
   no-raw-library-imports): every third-party package maps to exactly one owning wrapper/adapter.
+- Reusable definitions never live inline: types/interfaces/enums go to types/ (or model/, enums/),
+  reusable value/config consts and `as const` maps go to constants/ (or model/).
+- `no-inline-domain-definitions` now ALSO bans module-level value/config `const` in apps/api layer
+  files (controllers, services, use-cases, repositories, adapters; api/application/infrastructure);
+  exempt: function-valued consts, `new`/call-expression wiring (DI/factories), and the single
+  approved `LOG_CONTEXT`/`LOG_PREFIX`. Scoped to apps/api so web `*.variants.ts` class bundles stay valid.
+- Frontend mirrors this via `frontend-architecture/no-inline-declarations`: no module-level
+  types/interfaces/enums or non-function consts in component/container/hook/service/gateway/query/route
+  files; `*.variants.ts` is the approved home for design-system class-string bundles.
+- Component splitting is enforced on `*.component.tsx`/`*.container.tsx` by `max-lines` (130),
+  `max-lines-per-function` (60), and `react/jsx-max-depth` (eslint/frontend/component-size.config.mjs) —
+  tighter than the repo-wide 300/80 base — so views split before a god-component forms. A `.component.tsx`
+  is pure JSX: `no-hooks-in-components` + `no-inline-component-logic` forbid hooks, logic, `.map()`, and
+  inline handlers; a view that must map lists or hold body vars is a CONTAINER instead.
 - Never add eslint-disable; fix the code. Plugin relaxations must be documented in docs/eslint-architecture.md.

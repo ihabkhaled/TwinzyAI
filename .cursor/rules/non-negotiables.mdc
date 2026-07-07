@@ -5,7 +5,9 @@ alwaysApply: true
 - Strict TS + strict ESLint. No `any`, no `eslint-disable`, no `@ts-ignore`, no `@ts-expect-error`, no `!` assertion.
 - No TS `enum` — as-const objects + derived types. No magic strings for domain values.
 - Zero inline definitions: no inline types/interfaces/constants/DTOs/schemas/config maps — dedicated folders only.
+  Enforced by `architecture/no-inline-domain-definitions` (backend — now also bans module-level value/config `const` in apps/api layer files; exempt: function consts, `new`/call wiring, `LOG_CONTEXT`/`LOG_PREFIX`) and `frontend-architecture/no-inline-declarations` (web). `*.variants.ts` is the only home for design-system class strings.
 - TSX = pure JSX composition. No hooks/handlers/logic in components. Pages are composition only.
+- Split components into small chunks: `*.component.tsx`/`*.container.tsx` capped by `max-lines` (130) · `max-lines-per-function` (60) · `react/jsx-max-depth` — tighter than the 300/80 base. A `.component.tsx` is pure JSX (no hooks via `no-hooks-in-components`; no logic/`.map()`/inline handlers via `no-inline-component-logic`); views that map lists or hold body vars are `.container.tsx`.
 - Backend layers one-way: api → application (use-case/service) → domain → infrastructure/adapters.
   Controllers delegate exactly one application call per handler.
 - Frontend: Component → Hook → Service → Gateway.

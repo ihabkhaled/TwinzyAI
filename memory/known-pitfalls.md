@@ -190,6 +190,16 @@
 - **Fix:** named values live in the owning constants module and are imported; no inline domain
   definitions (types/interfaces/constants/DTOs/schemas live in dedicated folders). Extend the
   existing owner before creating a parallel constants file.
+- **Enforced (backend):** `architecture/no-inline-domain-definitions` (apps/api only) now ALSO
+  bans module-level value/config `const` in layer files — controllers, services, use-cases,
+  repositories, adapters, and `api`/`application`/`infrastructure`. Exempt: function-valued
+  consts, `new`/call-expression wiring (DI/factories), and the single approved
+  `LOG_CONTEXT`/`LOG_PREFIX`. Scoped to apps/api so web `*.variants.ts` class-string bundles
+  stay valid.
+- **Enforced (frontend):** `frontend-architecture/no-inline-declarations` bans module-level
+  types/interfaces/enums and non-function consts in component/container/hook/service/gateway/
+  query/route files; `*.variants.ts` design-system bundles are the approved home for class
+  strings.
 
 ### F4. Logging payloads instead of identifiers
 
@@ -387,6 +397,30 @@
   path (e.g. `…/prompts/prompt-loader.service.ts` after fs access moved to
   `…/infrastructure/prompt-template.repository.ts`).
 - **Fix:** update the override's `files` glob in the same change that relocates the file.
+
+---
+
+## J. Frontend component discipline (web workstream)
+
+### J1. God-component grows past the tight web size limits
+
+- **Symptom:** a `*.component.tsx` / `*.container.tsx` accretes body vars, `.map()`s, and inline
+  handlers until it is an unreviewable god-component.
+- **Cause:** letting one view file do more than compose; web view files carry limits tighter
+  than the repo-wide 300/80 base.
+- **Fix:** split into sub-components / sub-containers *before* the file grows. `max-lines` (130),
+  `max-lines-per-function` (60), and `react/jsx-max-depth` are enforced on `*.component.tsx` /
+  `*.container.tsx` via
+  [`eslint/frontend/component-size.config.mjs`](../eslint/frontend/component-size.config.mjs).
+
+### J2. A `.component.tsx` holding hooks or logic
+
+- **Symptom:** a `.component.tsx` calls a hook, maps a list, or defines an inline handler.
+- **Cause:** a view that needs state or iteration modeled as a component instead of a container.
+- **Fix:** `.component.tsx` is pure JSX — no hooks (`no-hooks-in-components`) and no
+  logic/`.map()`/inline handlers (`no-inline-component-logic`). When a view must map lists or
+  hold body vars it is a CONTAINER (e.g. `game-result.container` / `game-processing.container`),
+  which may map.
 
 **Related:** [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) ·
 [backend-stack.md](./backend-stack.md) · [testing-strategy.md](./testing-strategy.md) ·

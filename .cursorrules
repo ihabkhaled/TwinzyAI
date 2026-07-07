@@ -7,8 +7,12 @@ Precedence: CLAUDE.md > .cursor/rules > AGENTS.md > CODEX.md/cursor.md > this fi
 Compact non-negotiables:
 - No any, no eslint-disable, no @ts-ignore/@ts-expect-error, no non-null assertion `!`.
 - No TypeScript enum keyword; as-const objects + derived types.
-- Zero inline domain definitions: no inline types/interfaces/constants/DTOs/schemas/config maps.
-- TSX is pure composition; state/effects/handlers in hooks; logic in features/*/lib.
+- Zero inline domain definitions: no inline types/interfaces/constants/DTOs/schemas/config maps —
+  incl. module-level value consts in layer files (backend architecture/no-inline-domain-definitions;
+  frontend frontend-architecture/no-inline-declarations). Definitions live in types/enums/constants/model.
+- TSX is pure composition; state/effects/handlers in hooks; logic in modules/<feature> helpers/mappers.
+- Components stay small: *.component.tsx / *.container.tsx capped at 130 lines / 60 per function /
+  jsx-max-depth (eslint/frontend/component-size.config.mjs); split into sub-components before the cap.
 - Backend layers one-way: api -> application -> domain -> infrastructure/adapters; controllers
   delegate exactly one application call per handler.
 - Validation is Zod only (zod pipe at the boundary); class-validator is forbidden.

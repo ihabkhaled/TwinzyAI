@@ -60,6 +60,22 @@ Containers MUST:
 - Never import services or gateways directly (layer policy: containers consume hooks/queries only).
 - Never compute or translate anything — that already happened in the hook.
 
+## Size limits: split before a god-component forms
+
+Both file kinds stay small and single-responsibility — carve out sub-components or sub-containers
+before a god-file forms. This is mechanically enforced on `*.component.tsx` and `*.container.tsx` by
+[eslint/frontend/component-size.config.mjs](../../eslint/frontend/component-size.config.mjs), tighter
+than the repo-wide 300/80 base:
+
+- `max-lines` (130) — per file.
+- `max-lines-per-function` (60) — per component/render function.
+- `react/jsx-max-depth` — caps JSX nesting.
+
+Outgrowing a limit is the signal to extract. The split also decides the layer: since a
+`*.component.tsx` may neither hold body-level variables nor `.map()` a list (`no-inline-component-logic`,
+`no-hooks-in-components`), any view that must map a list or stage local vars is a **container** —
+e.g. `game-result.container`, `game-processing.container` — the layer permitted to map.
+
 ## The view-model contract
 
 Hooks return a discriminated-union view model (`state: 'loading' | 'error' | 'empty' | 'ready'`)

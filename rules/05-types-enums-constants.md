@@ -93,6 +93,12 @@ export const GAME_MESSAGE_KEYS = {
 - Literals that do **not** need extraction: throwaway numerics `0`, `1`, `-1`, `100`; regex; the file-local `LOG_PREFIX`; test descriptions.
 - Cross-side values (allowed MIME types, result caps, forbidden-wording lists) live in `packages/shared/src/constants` so web and api can never drift.
 
+### Mechanical enforcement (the `const` half)
+
+`architecture/no-inline-domain-definitions` now also rejects **any module-level value/config `const`** — not only types and enum-maps — inside `apps/api` layer files (controllers, services, use-cases, repositories, adapters, and everything under `api/`, `application/`, `infrastructure/`). Move it to the owning `*.constants.ts` or `model/`. Exempt: function-valued consts, `new`/call-expression wiring (DI providers, factory instances), and the single approved `LOG_CONTEXT` / `LOG_PREFIX`. The rule is scoped to `apps/api`, so web `*.variants.ts` class-string bundles stay valid.
+
+Frontend counterpart: `frontend-architecture/no-inline-declarations` bans module-level types/interfaces/enums **and** non-function consts in component/container/hook/service/gateway/query/route files — `*.variants.ts` design-system class bundles are the one approved home for inline class strings.
+
 ---
 
 ## 4. No magic strings, no domain string comparisons (rule 9)

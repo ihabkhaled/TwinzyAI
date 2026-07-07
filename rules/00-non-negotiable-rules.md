@@ -24,7 +24,7 @@
 
 10. **No inline types/interfaces** → `model/<feature>.types.ts` or `packages/shared/src/types`. (Documented exception: one `XxxProps` interface per TSX component file.)
 11. **No inline enum-maps** → `packages/shared/src/enums` (barrel `index.ts`, each with a `*_VALUES` array) or `model/<feature>.enums.ts`.
-12. **No inline constants** (incl. single values: TTLs, timeouts, size caps, retry params, message keys, URLs, headers, limits) → `*.constants.ts`. The only permitted file-local literal is a `LOG_PREFIX` label.
+12. **No inline constants** (incl. single values: TTLs, timeouts, size caps, retry params, message keys, URLs, headers, limits) → `*.constants.ts`. In `apps/api`, `architecture/no-inline-domain-definitions` now **also bans module-level value/config `const`** across every layer file (controllers, services, use cases, repositories, adapters; the `api`/`application`/`infrastructure` layers) — the only exemptions are function-valued consts, `new`/call-expression wiring (DI/factories), and the approved `LOG_CONTEXT`/`LOG_PREFIX` label. Scoped to `apps/api` so web `*.variants.ts` class-string bundles stay valid; the frontend mirror is `frontend-architecture/no-inline-declarations` (module-level types/interfaces/enums + non-function consts in component/container/hook/service/gateway/query/route files, with `*.variants.ts` the approved home for design-system class strings).
 13. **No inline DTOs or zod schemas** → `api/dto/<name>.dto.ts`, backed by `packages/shared/src/schemas` when both sides need the shape. (rules/21)
 14. **No inline request/response shapes or config/permission/state maps** → `api/dto/`, `model/`, or shared constants.
 15. **Search-then-extend.** Before creating any new `*.constants.ts`/`*.types.ts`/`*.util.ts`/helper, find the file that already owns that concern and extend it — never ship a parallel duplicate.
@@ -76,11 +76,12 @@
 46. **AI outputs are zod-validated and safety-filtered.** No sensitive inference (ethnicity, religion, health, income, …); forbidden-wording guard applied; model `safetyCheck` flags must all be false; disclaimer enforced server-side. (rules/14)
 47. **Consent is mandatory** — the pipeline rejects any request without the consent flag before touching the file.
 
-## Frontend discipline (48–50)
+## Frontend discipline (48–51)
 
 48. **TSX is pure composition.** No state/effects/handlers/computed values in components — they live in hooks; complex logic in `lib/`/services (`architecture/tsx-pure-composition`). (rules/02)
 49. **Hooks are thin orchestrators that call services; gateways are the only HTTP surface** — through the `lib/http` wrapper, zod-validating responses; browser storage only via the `lib/storage` wrapper. (rules/03, rules/04)
 50. **Accessible and RTL-ready by default:** jsx-a11y rules are errors; start/end utilities, not left/right; reuse UI primitives — never re-style raw controls ad hoc. (rules/13)
+51. **Split components into small chunks — never let a god-component form.** `*.component.tsx` and `*.container.tsx` are capped tighter than the repo-wide 300/80 base — `max-lines` 130, `max-lines-per-function` 60, plus `react/jsx-max-depth` ([`eslint/frontend/component-size.config.mjs`](../eslint/frontend/component-size.config.mjs)) — so extract sub-components/sub-containers before the limit hits. A `.component.tsx` is **pure JSX**: it may not call hooks (`no-hooks-in-components`) or hold logic/`.map()`/inline handlers (`no-inline-component-logic`); a view that must map lists or hold body vars is a **container** (e.g. `game-result.container`, `game-processing.container`), which may map. (rules/02)
 
 ---
 
@@ -98,6 +99,6 @@
 - [ ] Upload chain ordered + fail-closed; consent checked first (rules 33, 47)
 - [ ] Image in memory only, wiped in `finally`, never logged; candidate/judge prompts text-only (rules 44, 45)
 - [ ] AI output zod-validated + safety-filtered; no payments; no biometrics (rules 42, 43, 46)
-- [ ] TSX pure; hooks thin; HTTP only in gateways; strings via i18n (rules 29, 48–50)
+- [ ] TSX pure; hooks thin; components split small (`*.component`/`*.container` size caps); HTTP only in gateways; strings via i18n (rules 29, 48–51)
 - [ ] Fail-safe side effects; timeouts + terminal states everywhere (rules 36, 37)
 - [ ] Tests written first; docs updated; gates green; hooks never bypassed (rules 40, 41)

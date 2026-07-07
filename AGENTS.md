@@ -89,9 +89,16 @@ src/config/        typed, zod-validated, fail-fast — the only place that reads
 src/bootstrap/     Fastify app assembly
 ```
 
-Frontend OS (`apps/web`): `Component → Hook → Service → Gateway`. TSX is pure composition;
-state/effects/handlers live in hooks; logic lives in `features/*/lib`; HTTP only through the
-gateway/HTTP client wrapper; every user-facing string through `apps/web/src/i18n`.
+Frontend OS (`apps/web`): `Component → Hook → Service → Gateway` on the
+`app → modules/<feature> → shared → packages/<vendor>` anatomy. TSX is pure composition;
+state/effects/handlers live in hooks; logic lives in module helpers/mappers; HTTP only through
+the gateway/`packages/axios` wrapper; every user-facing string through `packages/i18n`.
+Standing rules (mechanically enforced): no inline interface/type/reusable-const in any layer
+file — definitions live in `types/`/`enums/`/`constants/`/`model/` (backend
+`architecture/no-inline-domain-definitions` incl. module-level value consts; frontend
+`frontend-architecture/no-inline-declarations`); and components stay small —
+`*.component.tsx`/`*.container.tsx` capped at 130 lines / 60 per function / jsx-max-depth
+(`eslint/frontend/component-size.config.mjs`) — split before the cap hits.
 
 Knowledge folders:
 

@@ -55,6 +55,17 @@ Module-scoped names follow the same shape in `apps/web/src/modules/<feature>/con
 (`ARTICLE_ENDPOINTS`), message keys (`ARTICLE_MESSAGE_KEYS`), style bundles
 (`article-style.constants.ts`), defaults (`ARTICLES_DEFAULT_PAGE_SIZE`).
 
+## No inline declarations in layer files
+
+The catalogs only hold if nothing bypasses them. Module-level types, interfaces, enums, and
+non-function `const` values are banned inside component, container, hook, service, gateway, query,
+and route files — types/interfaces/enums belong in `types/` (or `model/`, `enums/`), and reusable
+values and `as const` maps belong in `constants/` (or `model/`). This is mechanically enforced by
+`frontend-architecture/no-inline-declarations`. The one sanctioned exception is a `*.variants.ts`
+design-system bundle, the approved home for inline class strings, which the rule exempts. (The
+backend counterpart, `architecture/no-inline-domain-definitions`, is scoped to `apps/api` — one
+reason web `*.variants.ts` bundles stay valid.)
+
 ## Rules
 
 - Every catalog is `as const`; values are typed string literals, never `string`.

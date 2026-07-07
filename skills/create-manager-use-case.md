@@ -61,4 +61,13 @@ export class AnalyzeGameUseCase {
 4. Unit-test order-of-operations, every short-circuit, and the cleanup guarantee: make any
    step throw and assert the wipe still ran (write-unit-tests.md).
 
+## Keep definitions out of the use-case file
+
+No reusable definition lives inline in a service or use-case file. Types, interfaces, and
+enums belong in `types/`, `model/`, or `enums/`; reusable value/config consts and `as const`
+maps belong in `constants/` or `model/`. ESLint `architecture/no-inline-domain-definitions`
+enforces this across `apps/api` layer files and now also bans module-level value/config
+`const` in them. Exempt: function-valued consts, `new`/call-expression DI/factory wiring, and
+the single approved `LOG_CONTEXT`/`LOG_PREFIX`.
+
 Gate: npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
