@@ -10,14 +10,13 @@ import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../..
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import type { PromptKeyValue } from '../model/prompt-version.constants';
 import {
+  GENERIC_PROMPT_ERROR,
   PROMPT_FILES,
   PromptPlaceholder,
   REQUIRED_PLACEHOLDERS,
 } from '../model/prompt-version.constants';
 
 const LOG_CONTEXT = 'PromptLoader';
-
-const GENERIC_PROMPT_ERROR = 'The game is temporarily unavailable. Please try again.';
 
 /**
  * __dirname exists in the CJS build (nest build output and SWC-transformed
@@ -37,8 +36,10 @@ const moduleDir = ((): string | undefined => {
  * are copied verbatim to dist by nest-cli. This repository lives one folder
  * deeper (infrastructure/), so the primary candidate resolves ../prompts
  * relative to the compiled file; cwd-based candidates cover pure-ESM runners.
+ * Computed once here (not a shared constant) because it depends on this file's
+ * own module directory.
  */
-const PROMPT_DIR_CANDIDATES: readonly string[] = [
+const buildPromptDirCandidates = (): readonly string[] => [
   ...(moduleDir === undefined ? [] : [path.join(moduleDir, '..', 'prompts')]),
   path.resolve(process.cwd(), 'src/modules/ai/prompts'),
   path.resolve(process.cwd(), 'apps/api/src/modules/ai/prompts'),
@@ -54,6 +55,8 @@ const PROMPT_DIR_CANDIDATES: readonly string[] = [
 @Injectable()
 export class PromptTemplateRepository {
   private readonly cache = new Map<PromptKeyValue, string>();
+
+  private readonly promptDirCandidates = buildPromptDirCandidates();
 
   public constructor(
     private readonly config: AppConfigService,
@@ -95,7 +98,7 @@ export class PromptTemplateRepository {
     }
 
     const fileName = PROMPT_FILES[key];
-    const directory = PROMPT_DIR_CANDIDATES.find((candidate) =>
+    const directory = this.promptDirCandidates.find((candidate) =>
       existsSync(path.join(candidate, fileName)),
     );
     if (directory === undefined) {

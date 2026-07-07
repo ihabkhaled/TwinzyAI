@@ -7,27 +7,20 @@ import { useAppTranslation } from '@/packages/i18n';
 import { Button, Stack } from '@/packages/ui-primitives';
 import { ErrorState } from '@/shared/components/feedback/error-state.component';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
-import { buildIndexedTestId } from '@/shared/testing/test-id.helper';
 
 import { CameraCapture } from '../components/camera-capture.component';
 import { PrivacyNotice } from '../components/privacy-notice.component';
 import { ProcessingCard } from '../components/processing-card.component';
-import { ResultCard } from '../components/result-card.component';
-import { ResultDisclaimer } from '../components/result-disclaimer.component';
-import { ResultList } from '../components/result-list.component';
-import { RetryButton } from '../components/retry-button.component';
-import { ShareButton } from '../components/share-button.component';
-import { TraitItem } from '../components/trait-item.component';
-import { TraitList } from '../components/trait-list.component';
 import { UploadCard } from '../components/upload-card.component';
 import { UploadConsent } from '../components/upload-consent.component';
 import { buildGameScreenLabels } from '../helpers/game-display.helper';
 import { useGame } from '../hooks/useGame.hook';
 import { UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
 import { GamePhase } from '../model/game.enums';
-import type { GameResultView, GameScreenLabels, GameViewModel } from '../model/game.types';
+import type { GameScreenLabels, GameViewModel } from '../model/game.types';
 
 import { gameTitleClass } from './game.container.variants';
+import { GameResult } from './game-result.container';
 
 const renderCamera = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
   <CameraCapture
@@ -103,61 +96,6 @@ const renderError = (message: string, retryLabel: string, onRetry: () => void): 
   />
 );
 
-const renderResult = (
-  view: GameResultView,
-  vm: GameViewModel,
-  labels: GameScreenLabels,
-): ReactElement => {
-  const traitNodes = view.traits.map((trait, index) => (
-    <TraitItem
-      key={trait.key}
-      label={trait.label}
-      value={trait.value}
-      testId={buildIndexedTestId(TEST_IDS.traitItem, index)}
-    />
-  ));
-  const resultNodes = view.results.map((result) => (
-    <ResultCard
-      key={result.rank}
-      result={result}
-      labels={labels.result}
-      testId={buildIndexedTestId(TEST_IDS.resultCard, result.rank)}
-    />
-  ));
-  return (
-    <Stack gap="md">
-      <ResultList
-        title={labels.result.title}
-        fallbackTitle={labels.result.fallbackTitle}
-        fallbackMessage={view.fallbackMessage}
-        hasResults={view.hasResults}
-        testId={TEST_IDS.resultList}
-      >
-        {resultNodes}
-      </ResultList>
-      <TraitList title={labels.result.traitsTitle} testId={TEST_IDS.traitList}>
-        {traitNodes}
-      </TraitList>
-      <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
-      <Stack direction="row" gap="sm" align="center" wrap="wrap">
-        {view.hasResults ? (
-          <ShareButton
-            label={labels.result.shareButton}
-            feedback={vm.share.feedback}
-            onShare={vm.onShareResult}
-            testId={TEST_IDS.shareButton}
-          />
-        ) : null}
-        <RetryButton
-          label={labels.result.retryButton}
-          onRetry={vm.onRetry}
-          testId={TEST_IDS.retryButton}
-        />
-      </Stack>
-    </Stack>
-  );
-};
-
 /**
  * The documented wiring point for the game flow. Calls the orchestrator hook,
  * resolves static copy once, switches on the phase, and maps the view-model
@@ -178,9 +116,15 @@ export const GameContainer = (): ReactElement => {
       {vm.phase === GamePhase.Error &&
         vm.errorMessage !== undefined &&
         renderError(vm.errorMessage, labels.result.retryButton, vm.onRetry)}
-      {vm.phase === GamePhase.Success &&
-        vm.resultView !== undefined &&
-        renderResult(vm.resultView, vm, labels)}
+      {vm.phase === GamePhase.Success && vm.resultView !== undefined && (
+        <GameResult
+          view={vm.resultView}
+          labels={labels.result}
+          shareFeedback={vm.share.feedback}
+          onShare={vm.onShareResult}
+          onRetry={vm.onRetry}
+        />
+      )}
     </Stack>
   );
 };

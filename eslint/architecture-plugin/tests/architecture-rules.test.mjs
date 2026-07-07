@@ -276,6 +276,26 @@ tester.run("no-inline-domain-definitions", noInlineDomainDefinitions, {
         "/repo/apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
       code: "export interface AnalyzeRequestDto { consent: boolean }",
     },
+    {
+      // model/ is a definition home — value constants belong there.
+      filename: "/repo/apps/api/src/modules/game/model/game.constants.ts",
+      code: "export const MAX_TRAITS = 15;",
+    },
+    {
+      // Function-valued consts are collaborators, not definitions.
+      filename: SERVICE_FILE,
+      code: "const buildKey = (id) => `game:${id}`;",
+    },
+    {
+      // `new`/call wiring is DI/collaborator setup, not a definition.
+      filename: SERVICE_FILE,
+      code: "const schema = z.object({ id: z.string() });",
+    },
+    {
+      // The approved logging-context constant is the single allowed value const.
+      filename: SERVICE_FILE,
+      code: "const LOG_CONTEXT = 'GameService';",
+    },
   ],
   invalid: [
     {
@@ -287,6 +307,18 @@ tester.run("no-inline-domain-definitions", noInlineDomainDefinitions, {
       filename: SERVICE_FILE,
       code: "type TraitMap = Record<string, string>;",
       errors: 1,
+    },
+    {
+      // A module-level value/config const in a layer file must move to constants/.
+      filename: SERVICE_FILE,
+      code: "const RETRY_LIMIT = 3;",
+      errors: [{ messageId: "inlineConst" }],
+    },
+    {
+      // `as const` config maps are exactly what must live in constants/.
+      filename: SERVICE_FILE,
+      code: "const STATUS = { ok: 'ok' } as const;",
+      errors: [{ messageId: "inlineConst" }],
     },
     {
       filename: API_CONTROLLER_FILE,

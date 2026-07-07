@@ -1,6 +1,6 @@
 import type { ChangeEventHandler, ReactNode, RefObject } from 'react';
 
-import type { ResultLabels, ResultView } from './game.types';
+import type { GameResultView, ResultLabels, ResultView } from './game.types';
 
 /** Props for the landing hero (badge, headline, sub-copy, CTA label). */
 export interface LandingHeroProps {
@@ -95,6 +95,15 @@ export interface ResultCardProps {
   result: ResultView;
   labels: ResultLabels;
   testId?: string;
+}
+
+/** Props for the success-phase result view (ranked matches + traits + actions). */
+export interface GameResultProps {
+  view: GameResultView;
+  labels: ResultLabels;
+  shareFeedback: string | undefined;
+  onShare: () => void;
+  onRetry: () => void;
 }
 
 /** Props for the safety disclaimer footer. */

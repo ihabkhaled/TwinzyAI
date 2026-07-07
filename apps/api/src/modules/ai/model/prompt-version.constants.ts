@@ -4,6 +4,9 @@
  */
 export const PROMPT_VERSION = '1.0.0';
 
+/** Safe, user-facing fallback surfaced when prompt loading/building fails. */
+export const GENERIC_PROMPT_ERROR = 'The game is temporarily unavailable. Please try again.';
+
 export const PromptKey = {
   TraitExtraction: 'trait-extraction',
   CandidateGeneration: 'candidate-generation',
