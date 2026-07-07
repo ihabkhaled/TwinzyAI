@@ -129,6 +129,14 @@ describe('stream correlation ids', () => {
     expect(resolveCorrelationId('not-a-uuid')).not.toBe(resolveCorrelationId('not-a-uuid'));
   });
 
+  it('re-mints a hex-shaped but non-RFC id so the client never rejects our frames', () => {
+    // Variant nibble 'c' is 8-4-4-4-12 hex but fails the shared z.uuid() contract.
+    const nonRfc = '12345678-1234-1234-c234-1234567890ab';
+    const resolved = resolveCorrelationId(nonRfc);
+    expect(resolved).not.toBe(nonRfc);
+    expect(resolved).toMatch(UUID_PATTERN);
+  });
+
   it('mints a valid uuid for each stream', () => {
     expect(randomStreamId()).toMatch(UUID_PATTERN);
     expect(randomStreamId()).not.toBe(randomStreamId());

@@ -26,14 +26,22 @@ import { FinalGameResultSchema } from './game-result.schema';
  */
 
 /**
+ * The canonical correlation-id shape (an RFC uuid). Both sides validate against
+ * this exact schema — the server when it echoes a client-supplied id and the
+ * client when it parses a frame — so the server's acceptance can never be looser
+ * than the client's validation (which would silently drop the run's frames).
+ */
+export const CorrelationIdSchema = z.uuid();
+
+/**
  * The per-frame correlation envelope. `tabId`/`requestId` originate on the
  * client and ride in on request headers; `streamId` is minted server-side per
  * connection; `status` is the lifecycle marker (see `StreamStatus`).
  */
 export const streamEnvelopeShape = {
-  tabId: z.uuid().optional(),
-  requestId: z.uuid().optional(),
-  streamId: z.uuid().optional(),
+  tabId: CorrelationIdSchema.optional(),
+  requestId: CorrelationIdSchema.optional(),
+  streamId: CorrelationIdSchema.optional(),
   status: z.enum(STREAM_STATUS_VALUES).optional(),
 } as const;
 
@@ -119,9 +127,9 @@ export type GameStreamMessage = z.infer<typeof GameStreamMessageSchema>;
  * no-op so one tab can never cancel another tab's (or another user's) run.
  */
 export const CancelAnalysisRequestSchema = z.strictObject({
-  tabId: z.uuid(),
-  requestId: z.uuid(),
-  streamId: z.uuid(),
+  tabId: CorrelationIdSchema,
+  requestId: CorrelationIdSchema,
+  streamId: CorrelationIdSchema,
 });
 
 export type CancelAnalysisRequest = z.infer<typeof CancelAnalysisRequestSchema>;
