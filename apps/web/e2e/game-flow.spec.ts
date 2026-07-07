@@ -9,9 +9,7 @@ import {
 } from './helpers';
 
 test.describe('game flow (mocked backend)', () => {
-  test('happy path: land, consent, upload, analyze, results with disclaimer', async ({
-    page,
-  }) => {
+  test('happy path: land, consent, upload, analyze, results with disclaimer', async ({ page }) => {
     await mockAnalyzeSuccess(page);
 
     await page.goto('/');
@@ -33,7 +31,15 @@ test.describe('game flow (mocked backend)', () => {
     await expect(page.getByText('Sample Star')).toBeVisible();
     await expect(page.getByText('Style/vibe fit: 87%')).toBeVisible();
     await expect(page.getByText(DISCLAIMER)).toBeVisible();
-    await expect(page.getByText('observed faceShape')).toBeVisible();
+    // V2: the compact summary chips + trait count render immediately…
+    await expect(page.getByText('clear oval face')).toBeVisible();
+    await expect(page.getByTestId('trait-count')).toBeVisible();
+    // …and the detailed traits reveal lazily through the accessible accordion.
+    const firstCategory = page.getByRole('button', { name: 'Overall face' });
+    await expect(page.getByText('observed overallFaceShape')).toBeHidden();
+    await firstCategory.click();
+    await expect(firstCategory).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.getByText('observed overallFaceShape')).toBeVisible();
   });
 
   test('invalid upload shows a friendly error and analyze stays disabled', async ({ page }) => {
@@ -45,7 +51,9 @@ test.describe('game flow (mocked backend)', () => {
       buffer: Buffer.from('MZ-not-an-image'),
     });
 
-    await expect(page.getByText('Please use a JPG, PNG, or WebP photo.')).toBeVisible();
+    await expect(
+      page.getByText('That photo could not be uploaded. Please try a different one.'),
+    ).toBeVisible();
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeDisabled();
   });
 

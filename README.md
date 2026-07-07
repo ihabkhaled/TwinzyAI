@@ -2,17 +2,24 @@
 
 A **free**, mobile-first, privacy-safe AI game. Upload a photo, get playful public style/vibe
 matches based on **written visible traits only** — no face recognition, no identity matching,
-no biometric comparison, and your photo is never stored.
+no biometric comparison, and your photo is never stored. Fully localized in English and Arabic.
 
 ## How it works
 
-1. The frontend uploads one image + a consent flag to `POST /api/v1/game/analyze`.
+1. The frontend uploads one image + a consent flag + the selected language (`en`/`ar`) to
+   `POST /api/v1/game/analyze`.
 2. The backend validates the file (size, MIME, extension, magic bytes, decode, optional ClamAV).
-3. Gemini extracts **15 visible, non-identifying traits** from the image (`use-1st-prompt`).
+3. Gemini extracts **advanced grouped visible, non-identifying traits** from the image — 221 named
+   fields across 16 categories, targeting **100+ traits** when image quality allows
+   (`use-1st-prompt`).
 4. The image buffer is destroyed immediately after.
-5. Gemini receives the **written traits only** and suggests 1–5 playful candidates (`use-2nd-prompt`).
-6. A judge pass re-scores and filters (`use-3rd-prompt`) — max 4 safe final results.
-7. The frontend shows traits, results, and a permanent disclaimer.
+5. Gemini receives the **written traits only** and suggests up to 5 playful candidates from a
+   **global public-figure pool** (`use-2nd-prompt`).
+6. A judge pass re-scores and filters (`use-3rd-prompt`) — up to 5 safe final results.
+7. The frontend shows traits, results, and a permanent disclaimer — all dynamic output is
+   localized (en/ar).
+8. Switching language calls `POST /api/v1/game/translate-result`, which translates the existing
+   result only — the image is never re-uploaded or re-analyzed.
 
 ## Quick start
 

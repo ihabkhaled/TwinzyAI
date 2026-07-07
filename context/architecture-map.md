@@ -79,20 +79,28 @@ apps/api/src/
     │   ├── api/health.controller.ts
     │   ├── application/health.service.ts
     │   └── model/health.constants.ts
-    ├── game/                            # POST /api/v1/game/analyze (multipart, throttled 10/min)
-    │   ├── api/game.controller.ts
+    ├── game/                            # POST /api/v1/game/{analyze, analyze/stream, translate-result}
+    │   ├── api/game.controller.ts       # three thin routes, each throttled 10/min
+    │   ├── api/game-stream.presenter.ts # owns the hijacked SSE reply for analyze/stream
     │   ├── api/dto/analyze-request.dto.ts
-    │   ├── application/analyze-game.use-case.ts
-    │   └── model/                       # throttle + upload constants
+    │   ├── application/                 # analyze-game + analyze-game-stream use-cases,
+    │   │                                #   translate-result.use-case (language switch — the image
+    │   │                                #   path is never re-entered), style-match.service
+    │   │                                #   (shared text-only candidates → judge → aggregation phase)
+    │   ├── lib/                         # consent guard, request-language resolver,
+    │   │                                #   stream emitter/sink, stream CORS
+    │   └── model/                       # throttle + upload constants, stream types
     ├── ai/
     │   ├── adapters/gemini.adapter.ts   # the ONLY file importing @google/genai
-    │   ├── application/                 # trait-extraction, candidate-generation,
-    │   │                                #   candidate-judge, ai-safety services
+    │   ├── application/                 # trait-extraction, candidate-generation, candidate-judge,
+    │   │                                #   result-translation (localizes text fields, re-imposes
+    │   │                                #   every canonical field server-side), ai-safety services
     │   ├── infrastructure/prompt-template.repository.ts  # bounded read-only template store (fs lives here)
-    │   ├── prompts/                     # use-1st/2nd/3rd-prompt.md — module resources
-    │   ├── model/                       # constants, enums, types, prompt version,
+    │   ├── prompts/                     # use-1st/2nd/3rd-prompt.md + translate-result-prompt.md
+    │   ├── model/                       # constants, enums, types, prompt version + keys,
     │   │                                #   AI provider port + injection token
-    │   └── lib/                         # forbidden-wording.guard, ai-response-sanitizer, json-response.util
+    │   └── lib/                         # forbidden-wording.guard, ai-response-sanitizer,
+    │                                    #   json-response/provider-error utils, trait-text.util
     ├── file-security/
     │   ├── application/                 # file-security, file-validation, magic-byte-validation,
     │   │                                #   image-decode-validation, virus-scan, temporary-file-cleanup
@@ -143,7 +151,7 @@ apps/api/src/modules/<feature>/
 ### Service vs. use case — when to escalate
 
 - **Default = Service.** A focused capability that does one thing: validate a file, extract traits, judge candidates, aggregate results. A service may inject repositories and adapters. Methods stay ≤ ~20 lines.
-- **Escalate to a Use case** only for the exceptional shape: **one operation that orchestrates multiple modules in a mandatory order and owns a resource lifecycle.** The canonical example is `analyze-game.use-case.ts`: consent check → file-security chain → trait extraction (the only image-facing step) → **image buffer wipe in `finally`** → text-only candidate generation → judge → aggregation with fallback. There are no DB transactions here; the escalation trigger is ordered cross-module orchestration plus guaranteed cleanup.
+- **Escalate to a Use case** only for the exceptional shape: **one operation that orchestrates multiple modules in a mandatory order and owns a resource lifecycle.** The canonical example is `analyze-game.use-case.ts`: consent + language resolution → file-security chain → trait extraction (the only image-facing step) → **image buffer wipe in `finally`** → text-only style match (candidate generation → judge → aggregation with fallback) via `style-match.service.ts`, which the SSE stream use-case shares. There are no DB transactions here; the escalation trigger is ordered cross-module orchestration plus guaranteed cleanup.
 - **Use cases call services; services never call use cases** (one-way). Pass-through tiers are banned: if a class only forwards a call (as the old health "manager" did), dissolve it and let the controller delegate straight to the service.
 
 ---
@@ -174,8 +182,10 @@ apps/api/src/modules/<feature>/
 - **Domain values:** no TypeScript `enum` keyword — as-const objects + `*_VALUES` arrays + derived types, in `model/` or `packages/shared`. ([rules/05](../rules/05-types-enums-constants.md))
 - **Zero inline domain definitions:** no types/interfaces/enums/constants/DTOs/schemas declared inside controllers/services/use-cases/adapters/repositories — they live in `model/`, `api/dto/`, `lib/`, or `packages/shared`. ([rules/05](../rules/05-types-enums-constants.md))
 - **Vendor wrapping:** every external library sits behind an adapter or wrapper; `@google/genai` is imported **only** by `gemini.adapter.ts`, ClamAV is reached only through `clamav.adapter.ts`. Swapping a vendor touches exactly one folder. ([rules/10](../rules/10-library-modularization.md))
-- **Bounded lists:** every list an endpoint or service produces is hard-capped (max 100 items; the game pipeline itself caps at 5 candidates / 4 displayed results). No unbounded accumulation in the in-memory stores. ([rules/07](../rules/07-performance-scalability.md))
-- **AI safety:** only the trait-extraction step sees the image; candidate/judge prompts are text-only; responses are zod-validated then safety-filtered; the image buffer is wiped in `finally`. No face recognition, no identity matching, no biometrics, no image storage — ever. ([rules/14](../rules/14-ai-safety.md), [rules/15](../rules/15-file-upload-security.md))
+- **Bounded lists:** every list an endpoint or service produces is hard-capped (max 100 items; the game pipeline itself caps at 5 candidates / up to 5 displayed final results). No unbounded accumulation in the in-memory stores. ([rules/07](../rules/07-performance-scalability.md))
+- **AI safety:** only the trait-extraction step sees the image; candidate/judge/translation prompts are text-only; responses are strict-zod-validated (bounded arrays/strings, `promptVersion` literal) then safety-filtered across every free-text leaf; the image buffer is wiped in `finally`. A language switch goes through `POST /game/translate-result` and never re-uploads or re-analyzes the image. No face recognition, no identity matching, no biometrics, no image storage — ever. ([rules/14](../rules/14-ai-safety.md), [rules/15](../rules/15-file-upload-security.md))
+- **Trait taxonomy (single source):** the advanced grouped visible-trait taxonomy — 16 nested categories, 221 named non-identifying fields, targeting 100+ filled traits when image quality allows (unclear fields stay honestly "unclear", localized) — is defined once in `packages/shared/src/constants/trait-category.constants.ts`; the zod schemas, the Prompt 1 JSON template, and the frontend accordion labels all derive from it, and a unit test asserts every field appears in `use-1st-prompt.md` so schema and prompt can never drift. ([rules/14](../rules/14-ai-safety.md))
+- **Localization (en/ar):** `languageCode` flows end-to-end — frontend locale → multipart field → DTO normalization → every prompt → schema-enforced echo in every response. All dynamic AI text is localized (names keep their common public spelling); the result disclaimer and no-match fallback are server-side constants (`RESULT_DISCLAIMER_BY_LANGUAGE` / `NO_MATCH_FALLBACK_BY_LANGUAGE`) — model text is never trusted for them. ([rules/12](../rules/12-i18n.md))
 - **Tests + docs:** no behavior change ships without updated tests and docs. ([rules/09](../rules/09-testing-coverage.md), [rules/00](../rules/00-non-negotiable-rules.md))
 
 ---
@@ -203,25 +213,29 @@ Boundary policy lives in the config files (`architecture.config.mjs`, `package-b
 
 ```
 HTTP request (Fastify: helmet/CORS, bounded body, trustProxy, UUID genReqId, pino request log)
-  → Throttler guard      per-route limits (analyze: 10/min)          (core/rate-limit)
-  → Upload interceptor   multipart image + consent field             (core/http)
+  → Throttler guard      per-route limits (analyze, analyze/stream,
+                         translate-result: each 10/min)              (core/rate-limit)
+  → Upload interceptor   multipart image + consent + languageCode    (core/http)
   → Zod pipe             strict schema parse, issues flattened+logged (core/validation)
   → Controller           one delegation                              (api/*.controller.ts)
   → Use case / Service   analyze-game orchestration:
-                         consent → file-security chain → trait
-                         extraction (only image-facing step) →
-                         buffer wipe in finally → candidate gen →
-                         judge → aggregation + fallback              (application/*)
+                         consent + language resolve → file-security
+                         chain → trait extraction (only image-facing
+                         step) → buffer wipe in finally → text-only
+                         style match: candidate gen → judge →
+                         aggregation + fallback                      (application/*)
   → Adapters             Gemini (text/image), ClamAV (fail-closed)   (adapters/*)
   ← Exception filter     on throw: AppError → sanitized envelope
                          { statusCode, errorCode, message, messageKey } (core/errors)
 ```
 
+`analyze/stream` runs the same pipeline over SSE with staged progress (`scanning` → file security → traits carrying `traitCount` + `compactTraitSummary` → candidate progress → result). `translate-result` is a JSON-only strict-zod route (unknown keys rejected, no file slot) that localizes an existing result — the image path is never re-entered.
+
 ---
 
 ## 8. Frontend operating system (summary only)
 
-`apps/web` (Next.js App Router) follows the same philosophy with its own layer chain: **Component → Hook → Service → Gateway** ([rules/02](../rules/02-frontend-components-tsx.md), [rules/03](../rules/03-frontend-hooks.md), [rules/04](../rules/04-frontend-services-gateways.md)). TSX is pure composition — state, effects, and handlers live in hooks; logic lives in `lib`/services; all HTTP goes through wrapped gateways using `@twinzy/shared` schemas; no raw `fetch`/storage/SDK imports in business code. Deep web internals are documented in the frontend rules and `docs/frontend-architecture.md`, not here.
+`apps/web` (Next.js App Router) follows the same philosophy with its own layer chain: **Component → Hook → Service → Gateway** ([rules/02](../rules/02-frontend-components-tsx.md), [rules/03](../rules/03-frontend-hooks.md), [rules/04](../rules/04-frontend-services-gateways.md)). TSX is pure composition — state, effects, and handlers live in hooks; logic lives in `lib`/services; all HTTP goes through wrapped gateways using `@twinzy/shared` schemas; no raw `fetch`/storage/SDK imports in business code. In the game module, `useResultTranslation.hook.ts` owns the language-switch call to `translate-result` (a failed translation keeps the previous result), and the result view composes `result-summary` / `trait-details` / `image-quality` containers over the shared accessible `AccordionItem` primitive in `packages/ui-primitives` — the 15 trait-detail categories render lazily inside it. Deep web internals are documented in the frontend rules and `docs/frontend-architecture.md`, not here.
 
 ---
 

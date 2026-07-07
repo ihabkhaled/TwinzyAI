@@ -27,41 +27,87 @@ Living checklist of behaviors under test. Every case maps to at least one automa
 | 15 | Image never persisted | no fs writes |
 | 16 | Image never logged | log output contains no image bytes |
 
+## Shared contracts — advanced-global-traits-v2 (shared-unit)
+
+| # | Case | Expectation |
+| --- | --- | --- |
+| 17 | Trait taxonomy size | 16 nested categories, 221 named trait fields (asserted ≥100) |
+| 18 | `promptVersion` literal | anything but `advanced-global-traits-v2` rejected |
+| 19 | `languageCode` | `en`/`ar` accepted; unknown code or missing field rejected |
+| 20 | Missing trait category | rejected (strict schema) |
+| 21 | Missing single category field | rejected |
+| 22 | Extra field smuggled into a category | rejected (`strictObject`) |
+| 23 | Trait value over 300 chars | rejected |
+| 24 | `compactTraitSummary` bounds | 1–35 entries; 36th rejected |
+| 25 | `uncertaintyNotes` bounds | 4 fixed lists, each ≤10 entries; 11th rejected |
+| 26 | Missing `traitCount` | rejected |
+| 27 | `candidateCount` consistency | count ≠ candidates list length rejected |
+| 28 | Candidate list bounds | empty list and >5 candidates rejected |
+| 29 | Judge results bound | up to 5 accepted; 6th rejected |
+| 30 | `removedCandidates` bound | ≤5; 6th rejected; missing disclaimer rejected |
+| 31 | Final results bound | 5 accepted, 6 rejected; empty list + fallback message accepted |
+| 32 | Translate request strictness | unknown keys (e.g. an `image` slot) rejected; unsupported target language rejected |
+
 ## AI pipeline (api-unit)
 
 | # | Case | Expectation |
 | --- | --- | --- |
-| 17 | Gemini timeout | mapped to safe `AI_TIMEOUT` error |
-| 18 | Invalid JSON from Gemini | rejected `AI_RESPONSE_INVALID` |
-| 19 | Unsafe trait response | rejected `AI_RESPONSE_UNSAFE` |
-| 20 | Unsafe candidate response | rejected/sanitized |
-| 21 | Unsafe judge response | rejected/sanitized |
-| 22 | Candidate prompt receives no image | adapter called text-only |
-| 23 | Judge prompt receives no image | adapter called text-only |
-| 24 | Exactly 15 traits required | 14 or 16 rejected |
-| 25 | >5 candidates | rejected by schema (documented behavior) |
-| 26 | Final results capped at 4 | 5th dropped |
-| 27 | Weak/should-not-display matches removed | filtered out |
-| 28 | No valid candidates | fallback message returned |
-| 29 | Disclaimer always present | in every success response |
-| 30 | Provider error | generic safe message, no raw error leaked |
+| 33 | Gemini timeout | mapped to safe `AI_TIMEOUT` error |
+| 34 | Invalid JSON from Gemini | rejected `AI_RESPONSE_INVALID` |
+| 35 | Unsafe trait response | rejected `AI_RESPONSE_UNSAFE` |
+| 36 | Unsafe candidate response | rejected/sanitized (unsafe candidates dropped) |
+| 37 | Unsafe judge response | rejected/sanitized (unsafe judged results dropped) |
+| 38 | Candidate prompt receives no image | adapter called text-only (traits + summary embedded as text) |
+| 39 | Judge prompt receives no image | adapter called text-only |
+| 40 | Full advanced taxonomy required | missing category/field or smuggled extra field rejected |
+| 41 | Prompt–taxonomy lock-step | every taxonomy field appears in the Prompt 1 template |
+| 42 | Requested `languageCode` injected | language placeholder replaced in the prompt |
+| 43 | Wrong-language response | rejected |
+| 44 | Model self-reports a safety violation | rejected |
+| 45 | >5 candidates | rejected by schema (documented behavior) |
+| 46 | Final results capped at 5 | re-ranked by score; extras dropped |
+| 47 | Weak/should-not-display matches removed | weak verdicts, low scores, non-displayable filtered out |
+| 48 | No valid candidates | localized server-side fallback message returned |
+| 49 | Disclaimer always present | fixed server-side disclaimer in the requested language, never model text |
+| 50 | `removedCandidates` never public | judge removal list dropped from the aggregated payload |
+| 51 | Trait payload carried through | traits + `compactTraitSummary` + `traitCount` on the final response |
+| 52 | Provider error | generic safe message, no raw error leaked |
+
+## Translate result (api-integration) — `POST /api/v1/game/translate-result`
+
+| # | Case | Expectation |
+| --- | --- | --- |
+| 53 | Text-only proof | translation never touches the image pipeline; no file slot exists |
+| 54 | Canonical fields preserved | names, scores, ranks, verdicts restored from the original even if the model changed them |
+| 55 | Renamed candidate | rejected `AI_RESPONSE_INVALID` (no new matching possible) |
+| 56 | Server disclaimer enforced | localized fixed disclaimer overwrites model text |
+| 57 | Unsupported target language / unknown keys | strict 400 |
+| 58 | Result payload off-contract | strict 400 |
+| 59 | Prompt version echoed | `advanced-global-traits-v2` on the translated payload |
 
 ## Architecture (eslint)
 
 | # | Case | Expectation |
 | --- | --- | --- |
-| 31 | Controller with logic | `architecture/controller-no-logic` error |
-| 32 | Gemini SDK import outside adapter | `architecture/no-direct-sdk-imports` error |
-| 33 | `process.env` outside config | `architecture/no-direct-env-access` error |
-| 34 | `any` usage | `@typescript-eslint/no-explicit-any` error |
-| 35 | Inline DTO/schema in controller/service | `architecture/no-inline-domain-definitions` error |
+| 60 | Controller with logic | `architecture/controller-no-logic` error |
+| 61 | Gemini SDK import outside adapter | `architecture/no-direct-sdk-imports` error |
+| 62 | `process.env` outside config | `architecture/no-direct-env-access` error |
+| 63 | `any` usage | `@typescript-eslint/no-explicit-any` error |
+| 64 | Inline DTO/schema in controller/service | `architecture/no-inline-domain-definitions` error |
 
 ## Frontend (web-unit)
 
 Landing renders; game page renders; privacy notice visible; consent required before analyze;
 upload accessible; client-side type/size validation messages; preview object URL created and
-revoked; no image in localStorage/sessionStorage/IndexedDB; loading state; results + traits render;
-no forbidden wording; friendly API error; retry resets flow; disclaimer visible; share text safe.
+revoked; no image in localStorage/sessionStorage/IndexedDB; loading state; result view renders
+compact summary chips + localized trait count; accordion maps the 15 detail categories
+(imageQuality has its own section) with translated titles and field rows; only non-empty
+uncertainty groups shown with translated labels; up to 5 result cards render score, verdict,
+confidence, and category labels; live processing shows the streamed trait summary and candidate
+names; language switch translates the existing result through the text-only endpoint — never
+re-uploading or re-analyzing the image; translation exposes a loading state and a failure keeps
+the previous result visible with an error message; no forbidden wording; friendly API error;
+retry resets flow; disclaimer visible; share text safe.
 
 ## E2E (Playwright, mocked backend)
 

@@ -422,6 +422,53 @@
   hold body vars it is a CONTAINER (e.g. `game-result.container` / `game-processing.container`),
   which may map.
 
+---
+
+## K. Feature-discovered traps (advanced-global-traits-v2)
+
+### K1. `languageCode` is lenient on analyze (multipart) but strict on translate (JSON) — both are intentional
+
+- **Symptom:** the same concept validates two ways — `/game/analyze` accepts any ≤35-char
+  `languageCode` string, while `/game/translate-result` rejects anything but a supported code —
+  and "unifying" either direction breaks tests.
+- **Cause:** two different boundaries. Multipart fields are always strings and the analyze
+  locale is a best-effort hint: absent/junk/unsupported values are NORMALIZED to a supported
+  code (default `en`) by `normalizeLanguageCode` via `game/lib/request-language.ts`, so the
+  game stays playable (friendly UX at the form-data edge). Translate is a JSON API whose whole
+  point is the target language — silently defaulting a bad `targetLanguageCode` would return
+  the wrong product outcome, so `TranslateResultRequestSchema` is `z.strictObject` with the
+  strict `LanguageCodeSchema` (`z.enum`, unknown keys rejected).
+- **Fix:** keep both behaviors. Normalize free-form hints at lenient multipart edges; reject
+  strictly when the field IS the request's meaning. Do not "clean up" one to match the other.
+
+### K2. Changing `REQUIRED_PLACEHOLDERS` breaks every test that stubs a template
+
+- **Symptom:** after adding a placeholder to `REQUIRED_PLACEHOLDERS` (e.g. `[LANGUAGE_CODE]`
+  in v2), prompt-template unit tests fail with "missing required placeholder" / "Missing
+  replacement" even though the real prompt files are correct.
+- **Cause:** `PromptTemplateRepository` enforces the contract on EVERY template — loaded or
+  stubbed: `assertRequiredPlaceholdersExist` at load, a missing-replacement throw at build,
+  and `assertNoUnreplacedPlaceholders` scanning the FULL `PromptPlaceholder` set. Tests stub
+  `readFileSync` with inline template strings, which face the same asserts.
+- **Fix:** when `REQUIRED_PLACEHOLDERS` changes, sweep the tests in the same change: every
+  stubbed template must include every required placeholder for its key, and every
+  `buildPrompt` call must supply the new replacement. Compose stubs from `PromptPlaceholder`
+  members, never hand-typed `[BRACKET]` strings.
+
+### K3. Hand-listing trait fields instead of deriving from the shared taxonomy
+
+- **Symptom:** a fixture, prompt snippet, or label list "works" until the taxonomy changes,
+  then schema validation, the prompt-sync test, or i18n label coverage fails — or drifts
+  silently until review catches it.
+- **Cause:** the 221-field / 16-category taxonomy is defined ONCE as `TRAIT_CATEGORY_FIELDS`
+  in `packages/shared/src/constants/trait-category.constants.ts`. The zod traits schema,
+  Prompt 1's JSON template (a unit test asserts every field appears in the built prompt),
+  api/web/shared test fixtures, and the en+ar i18n label keys ALL derive from it — a
+  hand-written field list is a second source of truth waiting to drift.
+- **Fix:** always iterate `TRAIT_CATEGORY_FIELDS` (fixtures generate a value per field,
+  labels key per field, prompts/schemas are built from it). Never enumerate trait field
+  names by hand anywhere.
+
 **Related:** [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) ·
 [backend-stack.md](./backend-stack.md) · [testing-strategy.md](./testing-strategy.md) ·
 [ai-context-map.md](./ai-context-map.md)
