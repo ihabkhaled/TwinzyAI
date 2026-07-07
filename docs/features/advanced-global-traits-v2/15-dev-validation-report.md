@@ -111,3 +111,26 @@ Do not close this phase if:
 - known defects were discovered but not logged — none were found; the empty phase `16` log records that outcome.
 
 Phase 15 closed on 2026-07-07 by Ihab with one explicitly recorded open item: browser-based manual UAT pending (tracked into phases 17/20); e2e and security-scan evidence recorded separately in the release gates.
+
+## Live provider probe (post-ship, 2026-07-07 22:53 +0300)
+
+Executed one real end-to-end analyze against the live Gemini API on an isolated
+API instance (port 4100, snapshot dist) with a generated 128x128 PNG:
+
+- `gemini-3.5-flash` returned 429 — free-tier quota exhausted
+  (`generate_content_free_tier_requests, limit: 20`) after the day's testing.
+- The model fallback chain engaged; `gemini-3.1-flash-lite` served every
+  pipeline step. Result: **HTTP 201 in 11.4s** with a fully schema-valid
+  `advanced-global-traits-v2` payload — all 221 strict fields present,
+  `promptVersion` echoed, `languageCode: en`, honest `traitCount: 0` with
+  every field "unclear" and uncertainty notes ("Abstract color gradient",
+  "No human subject visible"), empty results with the SERVER-side localized
+  fallback message and disclaimer.
+- Conclusion: live model complies with the strict V2 contract; the
+  "vibe engine unavailable" error observed in dev was transient free-tier
+  quota pressure on the primary model (plus, separately, a local dual
+  dev-instance race deleting `apps/api/dist` — both instances killed; a
+  single `npm run dev` is the supported flow).
+- Follow-up shipped: `parseAiJsonResponse` now logs a bounded, paths-only
+  schema-issue summary (never values, never raw model text) via each
+  service's logger, so future live mismatches are diagnosable.

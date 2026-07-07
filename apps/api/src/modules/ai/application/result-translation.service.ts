@@ -53,7 +53,9 @@ export class ResultTranslationService {
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt);
-    const translated = parseAiJsonResponse(rawText, FinalGameResultSchema);
+    const translated = parseAiJsonResponse(rawText, FinalGameResultSchema, (issues) => {
+      this.logger.warn(`Translated result schema mismatch: ${issues}`);
+    });
 
     const preserved = this.preserveCanonicalFields(original, translated, targetLanguageCode);
     this.assertTranslatedTextSafe(preserved);

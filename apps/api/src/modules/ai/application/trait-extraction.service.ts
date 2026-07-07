@@ -49,7 +49,9 @@ export class TraitExtractionService {
       base64Data: imageBuffer.toString('base64'),
     });
 
-    const response = parseAiJsonResponse(rawText, TraitExtractionResponseSchema);
+    const response = parseAiJsonResponse(rawText, TraitExtractionResponseSchema, (issues) => {
+      this.logger.warn(`Trait response schema mismatch: ${issues}`);
+    });
     this.assertRequestedLanguage(response.languageCode, languageCode);
     this.aiSafety.assertTraitTextSafe(collectExtractionTextValues(response));
 

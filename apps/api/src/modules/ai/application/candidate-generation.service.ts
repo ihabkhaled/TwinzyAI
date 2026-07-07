@@ -47,7 +47,9 @@ export class CandidateGenerationService {
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt);
-    const response = parseAiJsonResponse(rawText, CandidateGenerationResponseSchema);
+    const response = parseAiJsonResponse(rawText, CandidateGenerationResponseSchema, (issues) => {
+      this.logger.warn(`Candidate response schema mismatch: ${issues}`);
+    });
 
     const safeCandidates = this.aiSafety.filterCandidates(response.candidates);
     const ranked = safeCandidates.toSorted((a, b) => b.styleVibeFitScore - a.styleVibeFitScore);

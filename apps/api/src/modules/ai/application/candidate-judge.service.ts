@@ -43,7 +43,9 @@ export class CandidateJudgeService {
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt);
-    const response = parseAiJsonResponse(rawText, CandidateJudgeResponseSchema);
+    const response = parseAiJsonResponse(rawText, CandidateJudgeResponseSchema, (issues) => {
+      this.logger.warn(`Judge response schema mismatch: ${issues}`);
+    });
 
     const safeResults = this.aiSafety.filterJudgedResults(response.results);
 
