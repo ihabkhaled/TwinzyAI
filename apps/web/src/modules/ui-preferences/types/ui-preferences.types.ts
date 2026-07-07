@@ -1,3 +1,4 @@
+import type { AppLocale } from '@/packages/i18n';
 import type { AppDirectionValue } from '@/shared/enums/app-direction.enum';
 import type { AppTheme, AppThemeValue } from '@/shared/enums/app-theme.enum';
 
@@ -31,5 +32,18 @@ export interface UiPreferencesState {
 export interface ThemeToggleController {
   theme: AppThemeValue;
   isDark: boolean;
+  /** False until the client has hydrated from storage; gates theme-dependent
+   * rendering so the server and first client paint agree (no hydration mismatch). */
+  hasHydrated: boolean;
   onToggleTheme: () => void;
+}
+
+/**
+ * View-model returned by `useLocaleSwitcher` for the header language control:
+ * the active locale, the locale a click switches to, and the switch handler.
+ */
+export interface LocaleSwitcherController {
+  activeLocale: AppLocale;
+  nextLocale: AppLocale;
+  onSwitchLocale: () => void;
 }

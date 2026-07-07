@@ -1,10 +1,20 @@
 import { getRootAttribute, matchesMediaQuery } from '@/packages/browser';
+import type { AppLocale } from '@/packages/i18n';
 import type { AppDirectionValue } from '@/shared/enums/app-direction.enum';
 import { AppDirection } from '@/shared/enums/app-direction.enum';
 import type { AppThemeValue } from '@/shared/enums/app-theme.enum';
 import { AppTheme } from '@/shared/enums/app-theme.enum';
 
 import type { ResolvedColorScheme } from '../types/ui-preferences.types';
+
+/**
+ * i18n message key for each locale's endonym (the language name in its own
+ * script), shown on the switcher button as the locale it will switch to.
+ */
+export const LOCALE_LABEL_KEYS: Record<AppLocale, string> = {
+  en: 'app.localeEnglish',
+  ar: 'app.localeArabic',
+};
 
 /**
  * Attribute names mirrored onto the document root (<html>). `data-theme`

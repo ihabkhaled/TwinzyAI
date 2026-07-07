@@ -5,6 +5,9 @@
     "subtitle": "Upload a photo and get a fun style/vibe result based on visible traits.",
     "description": "A free, playful game. No face recognition, no identity matching, and your photo is never stored.",
     "themeToggle": "Switch theme",
+    "localeSwitch": "Change language",
+    "localeEnglish": "English",
+    "localeArabic": "العربية",
     "footerNote": "Twinzy is a free game for entertainment only.",
     "loading": "Loading…"
   },

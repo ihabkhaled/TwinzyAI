@@ -4,8 +4,12 @@
 import { useEffect } from 'react';
 
 import { getSafeWindow, setRootAttribute } from '@/packages/browser';
-import { readStorageJson, writeStorageJson } from '@/packages/storage';
+import { readStorageJson, writeCookie, writeStorageJson } from '@/packages/storage';
 import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constants';
+import {
+  THEME_COOKIE_MAX_AGE_SECONDS,
+  THEME_COOKIE_NAME,
+} from '@/shared/constants/theme-cookie.constants';
 import { AppTheme } from '@/shared/enums/app-theme.enum';
 
 import {
@@ -63,8 +67,14 @@ export function useUiPreferencesEffects(): void {
     }
 
     const applyToDom = (): void => {
-      setRootAttribute(UI_PREFERENCE_DOM_ATTRIBUTES.theme, resolveThemeAttribute(theme));
+      const resolvedScheme = resolveThemeAttribute(theme);
+      setRootAttribute(UI_PREFERENCE_DOM_ATTRIBUTES.theme, resolvedScheme);
       setRootAttribute(UI_PREFERENCE_DOM_ATTRIBUTES.direction, direction);
+      // Mirror the resolved scheme into a cookie so the next server render sets
+      // data-theme correctly on the first paint (no flash / hydration mismatch).
+      writeCookie(THEME_COOKIE_NAME, resolvedScheme, {
+        maxAgeSeconds: THEME_COOKIE_MAX_AGE_SECONDS,
+      });
     };
 
     applyToDom();

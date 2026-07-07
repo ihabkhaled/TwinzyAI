@@ -22,6 +22,7 @@ export const TEST_IDS = {
   disclaimer: 'disclaimer',
   privacyNotice: 'privacy-notice',
   skipLink: 'skip-link',
+  homeLink: 'home-link',
   localeSwitch: 'locale-switch',
   themeToggle: 'theme-toggle',
 } as const;

@@ -12,6 +12,7 @@ export {
   Check as CheckIcon,
   X as CloseIcon,
   Globe as GlobeIcon,
+  House as HomeIcon,
   Image as ImageIcon,
   Info as InfoIcon,
   Loader2 as LoaderIcon,

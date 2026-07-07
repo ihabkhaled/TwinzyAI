@@ -19,11 +19,12 @@ import type { ThemeToggleController } from '../types/ui-preferences.types';
 export function useThemeToggle(): ThemeToggleController {
   const theme = useUiPreferencesStore(selectTheme);
   const setTheme = useUiPreferencesStore((state) => state.setTheme);
+  const hasHydrated = useUiPreferencesStore((state) => state.hasHydrated);
   const isDark = resolveThemeAttribute(theme) === AppTheme.Dark;
 
   const onToggleTheme = useCallback((): void => {
     setTheme(isDark ? AppTheme.Light : AppTheme.Dark);
   }, [isDark, setTheme]);
 
-  return { theme, isDark, onToggleTheme };
+  return { theme, isDark, hasHydrated, onToggleTheme };
 }

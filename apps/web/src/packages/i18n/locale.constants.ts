@@ -26,6 +26,9 @@ export const DEFAULT_TIME_ZONE = 'UTC';
 /** Cookie the active locale is persisted in (shared with the app-shell wave). */
 export const LOCALE_COOKIE_NAME = 'NEXT_LOCALE';
 
+/** Lifetime of the locale cookie written by the switcher: one year. */
+export const LOCALE_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
+
 /** Text direction a locale renders in. */
 export type AppTextDirection = 'ltr' | 'rtl';
 

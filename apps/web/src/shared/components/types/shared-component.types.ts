@@ -26,6 +26,17 @@ export interface SkipLinkProps {
   label: string;
 }
 
+/** Props for {@link AppHeader}: the brand label plus a slot for control widgets. */
+export interface AppHeaderProps {
+  brandLabel: string;
+  children: ReactNode;
+}
+
+/** Props for {@link HomeLink}: the accessible label for the icon link home. */
+export interface HomeLinkProps {
+  label: string;
+}
+
 /** Props for {@link VisuallyHidden}: content revealed only to assistive tech. */
 export interface VisuallyHiddenProps {
   children: ReactNode;
