@@ -24,6 +24,13 @@ export const GAME_ANALYZE_STREAM_PATH = '/api/v1/game/analyze/stream';
  */
 export const GAME_TRANSLATE_RESULT_PATH = '/api/v1/game/translate-result';
 
+/**
+ * Cancels an in-flight streaming analyze run. Takes the tab/request/stream
+ * correlation ids and aborts only the exactly-matching stream, so cancelling
+ * one tab never disturbs another tab's (or user's) run.
+ */
+export const GAME_CANCEL_PATH = '/api/v1/game/cancel';
+
 export const HEALTH_PATH = '/api/v1/health';
 
 /**

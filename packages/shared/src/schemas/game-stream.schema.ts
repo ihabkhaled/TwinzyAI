@@ -7,6 +7,7 @@ import {
   MAX_TRAIT_TEXT_LENGTH,
 } from '../constants/trait-category.constants';
 import { GAME_STREAM_STAGE_VALUES, GameStreamEvent } from '../enums/game-stream.enum';
+import { STREAM_STATUS_VALUES } from '../enums/stream-status.enum';
 
 import { FinalGameResultSchema } from './game-result.schema';
 
@@ -15,15 +16,40 @@ import { FinalGameResultSchema } from './game-result.schema';
  * against these schemas, so a drifting event shape fails fast rather than
  * silently mis-rendering. A discriminated union on `event` keeps each payload
  * exact.
+ *
+ * Every frame also carries an optional correlation envelope (`tabId`,
+ * `requestId`, `streamId`, `status`) so a client with several concurrent
+ * tabs/requests can attribute — and filter — each frame to the run that
+ * produced it. The fields are optional purely for backward compatibility: the
+ * server always stamps them, and a frame without them is treated as
+ * "unattributed" (accepted, but not matchable to a specific run).
  */
+
+/**
+ * The per-frame correlation envelope. `tabId`/`requestId` originate on the
+ * client and ride in on request headers; `streamId` is minted server-side per
+ * connection; `status` is the lifecycle marker (see `StreamStatus`).
+ */
+export const streamEnvelopeShape = {
+  tabId: z.uuid().optional(),
+  requestId: z.uuid().optional(),
+  streamId: z.uuid().optional(),
+  status: z.enum(STREAM_STATUS_VALUES).optional(),
+} as const;
+
+export const StreamEnvelopeSchema = z.object(streamEnvelopeShape);
+
+export type StreamEnvelope = z.infer<typeof StreamEnvelopeSchema>;
 
 export const StageStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Stage),
   stage: z.enum(GAME_STREAM_STAGE_VALUES),
+  ...streamEnvelopeShape,
 });
 
 export const AcceptedStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Accepted),
+  ...streamEnvelopeShape,
 });
 
 /**
@@ -38,6 +64,7 @@ export const TraitsStreamMessageSchema = z.object({
   compactTraitSummary: z
     .array(z.string().trim().min(1).max(MAX_TRAIT_TEXT_LENGTH))
     .max(MAX_COMPACT_TRAIT_SUMMARY),
+  ...streamEnvelopeShape,
 });
 
 /**
@@ -48,21 +75,25 @@ export const TraitsStreamMessageSchema = z.object({
 export const CandidatesStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Candidates),
   names: z.array(z.string().trim().min(1).max(120)).max(MAX_CANDIDATES),
+  ...streamEnvelopeShape,
 });
 
 export const ResultStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Result),
   result: FinalGameResultSchema,
+  ...streamEnvelopeShape,
 });
 
 export const ErrorStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Error),
   errorCode: z.string().min(1),
   message: z.string(),
+  ...streamEnvelopeShape,
 });
 
 export const HeartbeatStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Heartbeat),
+  ...streamEnvelopeShape,
 });
 
 export const GameStreamMessageSchema = z.discriminatedUnion('event', [
@@ -81,3 +112,23 @@ export type CandidatesStreamMessage = z.infer<typeof CandidatesStreamMessageSche
 export type ResultStreamMessage = z.infer<typeof ResultStreamMessageSchema>;
 export type ErrorStreamMessage = z.infer<typeof ErrorStreamMessageSchema>;
 export type GameStreamMessage = z.infer<typeof GameStreamMessageSchema>;
+
+/**
+ * Body of `POST /api/v1/game/cancel`. All three ids are required and must match
+ * an in-flight stream for the cancel to take effect — a mismatch is a silent
+ * no-op so one tab can never cancel another tab's (or another user's) run.
+ */
+export const CancelAnalysisRequestSchema = z.strictObject({
+  tabId: z.uuid(),
+  requestId: z.uuid(),
+  streamId: z.uuid(),
+});
+
+export type CancelAnalysisRequest = z.infer<typeof CancelAnalysisRequestSchema>;
+
+/** Response of the cancel endpoint: whether a matching stream was aborted. */
+export const CancelAnalysisResponseSchema = z.strictObject({
+  cancelled: z.boolean(),
+});
+
+export type CancelAnalysisResponse = z.infer<typeof CancelAnalysisResponseSchema>;
