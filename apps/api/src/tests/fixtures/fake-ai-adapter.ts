@@ -54,16 +54,20 @@ export class FakeAiAdapter implements AiProviderAdapter {
     prompt: string,
     image: AiImageInput,
     onChunk?: AiStreamChunkListener,
+    signal?: AbortSignal,
   ): Promise<string> {
     this.imageCalls.push({ prompt, image });
+    signal?.throwIfAborted();
     return this.streamDequeue(this.imageResponses, onChunk);
   }
 
   public async generateFromTextStream(
     prompt: string,
     onChunk?: AiStreamChunkListener,
+    signal?: AbortSignal,
   ): Promise<string> {
     this.textCalls.push(prompt);
+    signal?.throwIfAborted();
     return this.streamDequeue(this.textResponses, onChunk);
   }
 

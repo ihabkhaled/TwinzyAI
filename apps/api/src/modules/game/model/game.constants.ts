@@ -14,6 +14,14 @@ export const TRANSLATE_THROTTLE = {
   default: { limit: 10, ttl: 60_000 },
 } as const;
 
+/**
+ * Cancel is a cheap in-memory lookup, but still per-client throttled so it
+ * cannot be abused to probe the stream registry — 60 per minute per client.
+ */
+export const CANCEL_THROTTLE = {
+  default: { limit: 60, ttl: 60_000 },
+} as const;
+
 /** Multipart field name carrying the single uploaded image. */
 export const UPLOAD_FIELD_NAME = 'image';
 

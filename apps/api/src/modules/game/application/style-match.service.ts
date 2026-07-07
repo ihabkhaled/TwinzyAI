@@ -33,9 +33,14 @@ export class StyleMatchService {
     extraction: TraitExtractionResponse,
     languageCode: LanguageCodeValue,
     progress?: StyleMatchProgressListener,
+    signal?: AbortSignal,
   ): Promise<FinalGameResult> {
     progress?.onStage?.(GameStreamStage.GeneratingCandidates);
-    const candidates = await this.candidateGeneration.generateCandidates(extraction, languageCode);
+    const candidates = await this.candidateGeneration.generateCandidates(
+      extraction,
+      languageCode,
+      signal,
+    );
     if (candidates.length === 0) {
       this.logger.warn('No safe candidates — returning fallback');
       progress?.onStage?.(GameStreamStage.Aggregating);
@@ -48,6 +53,7 @@ export class StyleMatchService {
       extraction.traits,
       candidates,
       languageCode,
+      signal,
     );
     progress?.onStage?.(GameStreamStage.Aggregating);
     return this.resultAggregation.aggregate(extraction, judged, languageCode);

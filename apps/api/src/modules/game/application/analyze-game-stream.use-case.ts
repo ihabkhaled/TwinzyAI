@@ -38,6 +38,7 @@ export class AnalyzeGameStreamUseCase {
     file: UploadedImageFile | undefined,
     body: unknown,
     emit: GameStreamEmitter,
+    signal?: AbortSignal,
   ): Promise<void> {
     const languageCode = resolveRequestLanguage(body);
     emit({ event: GameStreamEvent.Accepted });
@@ -48,6 +49,7 @@ export class AnalyzeGameStreamUseCase {
       isConsentGiven(body),
       languageCode,
       emit,
+      signal,
     );
     emit({
       event: GameStreamEvent.Traits,
@@ -55,37 +57,46 @@ export class AnalyzeGameStreamUseCase {
       compactTraitSummary: extraction.compactTraitSummary,
     });
 
-    const result = await this.styleMatch.matchFromTraits(extraction, languageCode, {
-      onStage: (stage) => {
-        emit({ event: GameStreamEvent.Stage, stage });
+    signal?.throwIfAborted();
+    const result = await this.styleMatch.matchFromTraits(
+      extraction,
+      languageCode,
+      {
+        onStage: (stage) => {
+          emit({ event: GameStreamEvent.Stage, stage });
+        },
+        onCandidates: (names) => {
+          emit({ event: GameStreamEvent.Candidates, names: [...names] });
+        },
       },
-      onCandidates: (names) => {
-        emit({ event: GameStreamEvent.Candidates, names: [...names] });
-      },
-    });
+      signal,
+    );
 
     emit({ event: GameStreamEvent.Result, result });
   }
 
   /**
    * The image lives exactly as long as this method: validated, sent to trait
-   * extraction once, then zero-filled no matter what happened. Nothing
-   * downstream of trait extraction ever receives the image.
+   * extraction once, then zero-filled no matter what happened (including an
+   * abort). Nothing downstream of trait extraction ever receives the image.
    */
   private async extractTraitsAndDestroyImage(
     file: UploadedImageFile | undefined,
     consent: boolean,
     languageCode: LanguageCodeValue,
     emit: GameStreamEmitter,
+    signal?: AbortSignal,
   ): Promise<TraitExtractionResponse> {
     try {
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Scanning });
       const safeFile = await this.fileSecurity.assertSafeImage(file, consent);
+      signal?.throwIfAborted();
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.ExtractingTraits });
       return await this.traitExtraction.extractTraits(
         safeFile.buffer,
         safeFile.mimetype,
         languageCode,
+        signal,
       );
     } finally {
       this.cleanup.wipe(file);

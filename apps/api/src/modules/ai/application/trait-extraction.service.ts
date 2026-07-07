@@ -39,15 +39,18 @@ export class TraitExtractionService {
     imageBuffer: Buffer,
     mimeType: string,
     languageCode: LanguageCodeValue,
+    signal?: AbortSignal,
   ): Promise<TraitExtractionResponse> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.TraitExtraction, {
       [PromptPlaceholder.LanguageCode]: languageCode,
     });
 
-    const rawText = await this.aiProvider.generateFromImageStream(prompt, {
-      mimeType,
-      base64Data: imageBuffer.toString('base64'),
-    });
+    const rawText = await this.aiProvider.generateFromImageStream(
+      prompt,
+      { mimeType, base64Data: imageBuffer.toString('base64') },
+      undefined,
+      signal,
+    );
 
     const response = parseAiJsonResponse(rawText, TraitExtractionResponseSchema, (issues) => {
       this.logger.warn(`Trait response schema mismatch: ${issues}`);

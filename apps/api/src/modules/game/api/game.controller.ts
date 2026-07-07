@@ -1,10 +1,17 @@
-import { Body, Controller, Headers, Post, Res, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Post, Res, UseInterceptors, UsePipes } from '@nestjs/common';
 
-import type { FinalGameResult, TranslateResultRequest } from '@twinzy/shared';
-import { TranslateResultRequestSchema } from '@twinzy/shared';
+import type {
+  CancelAnalysisRequest,
+  CancelAnalysisResponse,
+  FinalGameResult,
+  TranslateResultRequest,
+} from '@twinzy/shared';
+import { CancelAnalysisRequestSchema, TranslateResultRequestSchema } from '@twinzy/shared';
 
 import { MultipartBody } from '../../../core/http/multipart-body.decorator';
 import type { SseCapableReplyLike } from '../../../core/http/sse.types';
+import { StreamMeta } from '../../../core/http/stream-meta.decorator';
+import type { StreamRequestMeta } from '../../../core/http/stream-meta.types';
 import { UploadedImage } from '../../../core/http/uploaded-image.decorator';
 import { UploadedImageInterceptor } from '../../../core/http/uploaded-image.interceptor';
 import { ApiTags } from '../../../core/openapi';
@@ -12,8 +19,9 @@ import { Throttle } from '../../../core/rate-limit';
 import { createZodValidationPipe } from '../../../core/validation';
 import type { UploadedImageFile } from '../../file-security';
 import { AnalyzeGameUseCase } from '../application/analyze-game.use-case';
+import { CancelAnalysisUseCase } from '../application/cancel-analysis.use-case';
 import { TranslateResultUseCase } from '../application/translate-result.use-case';
-import { ANALYZE_THROTTLE, TRANSLATE_THROTTLE } from '../model/game.constants';
+import { ANALYZE_THROTTLE, CANCEL_THROTTLE, TRANSLATE_THROTTLE } from '../model/game.constants';
 
 import { GameStreamPresenter } from './game-stream.presenter';
 
@@ -23,6 +31,7 @@ export class GameController {
   public constructor(
     private readonly analyzeGameUseCase: AnalyzeGameUseCase,
     private readonly translateResultUseCase: TranslateResultUseCase,
+    private readonly cancelAnalysisUseCase: CancelAnalysisUseCase,
     private readonly gameStreamPresenter: GameStreamPresenter,
   ) {}
 
@@ -42,10 +51,17 @@ export class GameController {
   public analyzeStream(
     @UploadedImage() file: UploadedImageFile | undefined,
     @MultipartBody() body: unknown,
-    @Headers('origin') origin: string | undefined,
+    @StreamMeta() meta: StreamRequestMeta,
     @Res() reply: SseCapableReplyLike,
   ): Promise<void> {
-    return this.gameStreamPresenter.stream(file, body, origin, reply);
+    return this.gameStreamPresenter.stream({ file, body, reply, ...meta });
+  }
+
+  @Post('cancel')
+  @Throttle(CANCEL_THROTTLE)
+  @UsePipes(createZodValidationPipe(CancelAnalysisRequestSchema))
+  public cancelAnalysis(@Body() body: CancelAnalysisRequest): CancelAnalysisResponse {
+    return this.cancelAnalysisUseCase.cancel(body);
   }
 
   @Post('translate-result')

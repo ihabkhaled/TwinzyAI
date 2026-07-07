@@ -18,7 +18,9 @@ export type AiStreamChunkListener = (chunkText: string) => void;
  * (inter-chunk) timeout rather than a fixed total deadline, so a long-running
  * generation is never cut off while the model is still producing output. They
  * still return the fully assembled text so the caller validates the complete
- * JSON exactly as the non-streaming path does.
+ * JSON exactly as the non-streaming path does. An optional `signal` lets the
+ * caller cancel an in-flight generation (client cancel, disconnect, watchdog)
+ * so the provider call — and its slot — is released immediately.
  */
 export interface AiProviderAdapter {
   generateFromImage(prompt: string, image: AiImageInput): Promise<string>;
@@ -27,8 +29,13 @@ export interface AiProviderAdapter {
     prompt: string,
     image: AiImageInput,
     onChunk?: AiStreamChunkListener,
+    signal?: AbortSignal,
   ): Promise<string>;
-  generateFromTextStream(prompt: string, onChunk?: AiStreamChunkListener): Promise<string>;
+  generateFromTextStream(
+    prompt: string,
+    onChunk?: AiStreamChunkListener,
+    signal?: AbortSignal,
+  ): Promise<string>;
 }
 
 /** Injection token binding the port to the configured provider adapter. */

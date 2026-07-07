@@ -35,6 +35,7 @@ export class CandidateJudgeService {
     traits: Traits,
     candidates: readonly Candidate[],
     languageCode: LanguageCodeValue,
+    signal?: AbortSignal,
   ): Promise<CandidateJudgeResponse> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.CandidateJudge, {
       [PromptPlaceholder.TraitsJson]: JSON.stringify({ traits }, null, 2),
@@ -42,7 +43,7 @@ export class CandidateJudgeService {
       [PromptPlaceholder.LanguageCode]: languageCode,
     });
 
-    const rawText = await this.aiProvider.generateFromTextStream(prompt);
+    const rawText = await this.aiProvider.generateFromTextStream(prompt, undefined, signal);
     const response = parseAiJsonResponse(rawText, CandidateJudgeResponseSchema, (issues) => {
       this.logger.warn(`Judge response schema mismatch: ${issues}`);
     });

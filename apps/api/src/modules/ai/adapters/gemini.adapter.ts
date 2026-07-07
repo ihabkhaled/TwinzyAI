@@ -68,18 +68,22 @@ export class GeminiAdapter implements AiProviderAdapter {
     prompt: string,
     image: AiImageInput,
     onChunk?: AiStreamChunkListener,
+    signal?: AbortSignal,
   ): Promise<string> {
-    return this.runAcrossModels((model) =>
-      this.generateStreamOnce(model, this.imageParts(prompt, image), onChunk),
+    return this.runAcrossModels(
+      (model) => this.generateStreamOnce(model, this.imageParts(prompt, image), onChunk, signal),
+      signal,
     );
   }
 
   public async generateFromTextStream(
     prompt: string,
     onChunk?: AiStreamChunkListener,
+    signal?: AbortSignal,
   ): Promise<string> {
-    return this.runAcrossModels((model) =>
-      this.generateStreamOnce(model, [{ text: prompt }], onChunk),
+    return this.runAcrossModels(
+      (model) => this.generateStreamOnce(model, [{ text: prompt }], onChunk, signal),
+      signal,
     );
   }
 
@@ -93,11 +97,12 @@ export class GeminiAdapter implements AiProviderAdapter {
    * retryable, fall through to the next model. Exhausting the chain surfaces a
    * 429 if any model was rate-limited, otherwise a 502.
    */
-  private async runAcrossModels(call: ModelCall): Promise<string> {
+  private async runAcrossModels(call: ModelCall, signal?: AbortSignal): Promise<string> {
     const models = this.requireModelChain();
     let sawRateLimit = false;
 
     for (const model of models) {
+      signal?.throwIfAborted();
       try {
         return await call(model);
       } catch (error: unknown) {
@@ -152,8 +157,10 @@ export class GeminiAdapter implements AiProviderAdapter {
     model: string,
     parts: Part[],
     onChunk?: AiStreamChunkListener,
+    externalSignal?: AbortSignal,
   ): Promise<string> {
     const controller = new AbortController();
+    const detachExternalAbort = this.attachExternalAbort(controller, externalSignal);
     const startedAt = Date.now();
     let idleTimer: ReturnType<typeof setTimeout> | undefined;
     const resetIdleTimer = (): void => {
@@ -189,10 +196,37 @@ export class GeminiAdapter implements AiProviderAdapter {
       }
       throw error;
     } finally {
+      detachExternalAbort?.();
       if (idleTimer !== undefined) {
         clearTimeout(idleTimer);
       }
     }
+  }
+
+  /**
+   * Bridges an external cancel signal (client cancel, disconnect, watchdog)
+   * onto this call's abort controller, so cancelling the stream immediately
+   * aborts the in-flight Gemini request instead of letting it run to completion.
+   * Returns a detach cleanup, or undefined when there was nothing to attach.
+   */
+  private attachExternalAbort(
+    controller: AbortController,
+    externalSignal?: AbortSignal,
+  ): (() => void) | undefined {
+    if (externalSignal === undefined) {
+      return undefined;
+    }
+    if (externalSignal.aborted) {
+      controller.abort();
+      return undefined;
+    }
+    const onExternalAbort = (): void => {
+      controller.abort();
+    };
+    externalSignal.addEventListener('abort', onExternalAbort, { once: true });
+    return () => {
+      externalSignal.removeEventListener('abort', onExternalAbort);
+    };
   }
 
   private requestConfig(abortSignal: AbortSignal): GenerateContentConfig {
