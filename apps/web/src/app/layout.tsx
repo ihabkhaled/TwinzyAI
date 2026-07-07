@@ -6,6 +6,7 @@ import {
   DEFAULT_LOCALE,
   getLocaleDirection,
   getServerLocale,
+  getServerMessages,
   getServerTranslations,
   isSupportedLocale,
 } from '@/packages/i18n';
@@ -57,6 +58,7 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
   const locale = isSupportedLocale(resolvedLocale) ? resolvedLocale : DEFAULT_LOCALE;
   const direction = getLocaleDirection(locale);
   const t = await getServerTranslations();
+  const messages = await getServerMessages();
 
   return (
     <html
@@ -67,7 +69,7 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
       suppressHydrationWarning
     >
       <body className={bodyClassName}>
-        <AppIntlProvider locale={locale}>
+        <AppIntlProvider locale={locale} messages={messages}>
           <Providers>
             <SkipLink targetHref="#main-content" label={t('nav.skipToContent')} />
             <main id="main-content">{children}</main>

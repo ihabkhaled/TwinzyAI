@@ -13,5 +13,5 @@ export {
   LOCALE_COOKIE_NAME,
   SUPPORTED_LOCALES,
 } from './locale.constants';
-export { getServerLocale, getServerTranslations } from './server-messages';
+export { getServerLocale, getServerMessages, getServerTranslations } from './server-messages';
 export { useAppLocale, useAppTranslation } from './translation-hooks';

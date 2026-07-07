@@ -3,7 +3,12 @@ import type { AbstractIntlMessages } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 
 import type { AppLocale } from './locale.constants';
-import { DEFAULT_LOCALE, isSupportedLocale, LOCALE_COOKIE_NAME } from './locale.constants';
+import {
+  DEFAULT_LOCALE,
+  DEFAULT_TIME_ZONE,
+  isSupportedLocale,
+  LOCALE_COOKIE_NAME,
+} from './locale.constants';
 
 /**
  * next-intl request configuration. Locale is read from the {@link LOCALE_COOKIE_NAME}
@@ -32,5 +37,5 @@ export default getRequestConfig(async () => {
   const locale = await resolveLocaleFromCookie();
   const messages = await loadMessages(locale);
 
-  return { locale, messages };
+  return { locale, messages, timeZone: DEFAULT_TIME_ZONE };
 });

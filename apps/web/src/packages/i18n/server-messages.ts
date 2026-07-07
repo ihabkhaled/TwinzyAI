@@ -6,5 +6,6 @@
 
 export {
   getLocale as getServerLocale,
+  getMessages as getServerMessages,
   getTranslations as getServerTranslations,
 } from 'next-intl/server';

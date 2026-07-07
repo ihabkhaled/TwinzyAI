@@ -4,6 +4,7 @@ import { type AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 import type { ReactNode } from 'react';
 
 import type { AppLocale } from './locale.constants';
+import { DEFAULT_TIME_ZONE } from './locale.constants';
 
 /** The message dictionary shape passed to the provider. */
 export type AppMessages = AbstractIntlMessages;
@@ -24,7 +25,7 @@ export const IntlMessagesProvider = ({
   messages,
   children,
 }: IntlMessagesProviderProps): ReactNode => (
-  <NextIntlClientProvider locale={locale} messages={messages}>
+  <NextIntlClientProvider locale={locale} messages={messages} timeZone={DEFAULT_TIME_ZONE}>
     {children}
   </NextIntlClientProvider>
 );

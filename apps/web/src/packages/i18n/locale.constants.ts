@@ -16,6 +16,13 @@ export type AppLocale = (typeof SUPPORTED_LOCALES)[number];
 /** Locale used when no valid cookie is present. */
 export const DEFAULT_LOCALE: AppLocale = 'en';
 
+/**
+ * Global default time zone. next-intl needs a stable zone on both server and
+ * client to avoid hydration markup mismatches (the ENVIRONMENT_FALLBACK
+ * warning); the game shows no localized dates, so UTC is a safe fixed default.
+ */
+export const DEFAULT_TIME_ZONE = 'UTC';
+
 /** Cookie the active locale is persisted in (shared with the app-shell wave). */
 export const LOCALE_COOKIE_NAME = 'NEXT_LOCALE';
 
