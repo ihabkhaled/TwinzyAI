@@ -46,3 +46,19 @@ export async function postMultipart<TSchema extends z.ZodType>(
 
   return parseSchema(schema, response.data, path);
 }
+
+/**
+ * Posts a JSON body and validates the JSON response against `schema`. Used by
+ * the game's translate-result flow; keeps the response contract zod-enforced
+ * exactly like {@link postMultipart}.
+ */
+export async function postJson<TSchema extends z.ZodType>(
+  client: AxiosInstance,
+  path: string,
+  body: unknown,
+  schema: TSchema,
+): Promise<z.output<TSchema>> {
+  const response = await client.post<unknown>(path, body);
+
+  return parseSchema(schema, response.data, path);
+}

@@ -1,10 +1,14 @@
 import { z } from 'zod';
 
 import { MAX_CANDIDATES } from '../constants/trait.constants';
+import {
+  MAX_COMPACT_TRAIT_SUMMARY,
+  MAX_TRAIT_COUNT,
+  MAX_TRAIT_TEXT_LENGTH,
+} from '../constants/trait-category.constants';
 import { GAME_STREAM_STAGE_VALUES, GameStreamEvent } from '../enums/game-stream.enum';
 
 import { FinalGameResultSchema } from './game-result.schema';
-import { TraitsSchema } from './traits.schema';
 
 /**
  * SSE message contract for the streaming analyze endpoint. Both sides validate
@@ -23,13 +27,17 @@ export const AcceptedStreamMessageSchema = z.object({
 });
 
 /**
- * Intermediate progress payload: the extracted written traits, streamed right
- * after extraction so the UI can "write them down" live. Text only — never the
- * image.
+ * Intermediate progress payload: the trait count plus the compact summary of
+ * the strongest extracted signals, streamed right after extraction so the UI
+ * can "write them down" live. Lean by design (the full nested taxonomy comes
+ * with the final result) and text only — never the image.
  */
 export const TraitsStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Traits),
-  traits: TraitsSchema,
+  traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT),
+  compactTraitSummary: z
+    .array(z.string().trim().min(1).max(MAX_TRAIT_TEXT_LENGTH))
+    .max(MAX_COMPACT_TRAIT_SUMMARY),
 });
 
 /**

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import type { Candidate, CandidateJudgeResponse, Traits } from '@twinzy/shared';
+import type { Candidate, CandidateJudgeResponse, LanguageCodeValue, Traits } from '@twinzy/shared';
 import { CandidateJudgeResponseSchema } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger/app-logger.service';
@@ -15,9 +15,10 @@ import { AiSafetyService } from './ai-safety.service';
 const LOG_CONTEXT = 'CandidateJudge';
 
 /**
- * TEXT-ONLY judge step: receives written traits + the candidate JSON,
- * re-scores, filters weak/unsafe entries, and returns the final safe set.
- * Never sees the image by construction.
+ * TEXT-ONLY strict-judge step: receives written traits + the candidate JSON,
+ * re-scores conservatively, filters weak/unsafe entries, and returns the
+ * final safe set localized to the requested language. Never sees the image
+ * by construction.
  */
 @Injectable()
 export class CandidateJudgeService {
@@ -33,10 +34,12 @@ export class CandidateJudgeService {
   public async judgeCandidates(
     traits: Traits,
     candidates: readonly Candidate[],
+    languageCode: LanguageCodeValue,
   ): Promise<CandidateJudgeResponse> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.CandidateJudge, {
       [PromptPlaceholder.TraitsJson]: JSON.stringify({ traits }, null, 2),
       [PromptPlaceholder.CandidatesJson]: JSON.stringify({ candidates }, null, 2),
+      [PromptPlaceholder.LanguageCode]: languageCode,
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt);

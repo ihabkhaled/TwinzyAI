@@ -1,40 +1,53 @@
 import type { Page } from '@playwright/test';
 
+import {
+  GAME_PROMPT_VERSION,
+  RESULT_DISCLAIMER,
+  TOTAL_TRAIT_FIELDS,
+  TRAIT_CATEGORY_FIELDS,
+  UNCERTAINTY_NOTE_FIELDS,
+} from '@twinzy/shared';
+
 /** The UI uses the streaming endpoint; the glob covers /analyze and /analyze/stream. */
 export const ANALYZE_ROUTE = '**/api/v1/game/analyze/stream';
 
-const TRAIT_KEYS = [
-  'faceShape',
-  'skinToneUndertone',
-  'hairColor',
-  'hairTexture',
-  'hairStyleLength',
-  'hairline',
-  'foreheadShapeSize',
-  'eyebrowShapeThickness',
-  'eyeColorEyeShape',
-  'noseShape',
-  'cheekbonesCheeks',
-  'lipsMouthShape',
-  'beardMustacheColor',
-  'beardMustacheStyleDensity',
-  'jawlineChinOverallStructure',
-];
+/** The text-only language-switch endpoint. */
+export const TRANSLATE_ROUTE = '**/api/v1/game/translate-result';
 
-export const DISCLAIMER =
-  'This is a playful style/vibe result based on written visible traits only. It is not face recognition, identity matching, or biometric comparison.';
+export const DISCLAIMER = RESULT_DISCLAIMER;
+
+/** Full nested advanced traits: every field of every category filled. */
+const buildTraits = (): Record<string, unknown> => ({
+  ...Object.fromEntries(
+    Object.entries(TRAIT_CATEGORY_FIELDS).map(([category, fields]) => [
+      category,
+      Object.fromEntries(fields.map((field) => [field, `observed ${field}`])),
+    ]),
+  ),
+  uncertaintyNotes: Object.fromEntries(UNCERTAINTY_NOTE_FIELDS.map((field) => [field, []])),
+});
 
 export const buildSuccessBody = (): Record<string, unknown> => ({
-  traits: Object.fromEntries(TRAIT_KEYS.map((key) => [key, `observed ${key}`])),
+  promptVersion: GAME_PROMPT_VERSION,
+  languageCode: 'en',
+  traitCount: TOTAL_TRAIT_FIELDS,
+  traits: buildTraits(),
+  compactTraitSummary: ['clear oval face', 'wavy dark hair'],
   results: [
     {
       name: 'Sample Star',
       rank: 1,
       finalStyleVibeFitScore: 87,
+      confidenceLevel: 'high',
       verdict: 'strong',
-      reason: 'Shares a similar public style impression based on hair and jawline traits.',
-      matchingTraits: ['hairColor'],
+      countryOrRegion: 'Global',
+      publicCategory: 'actor',
+      finalReason: 'Shares a similar public style impression based on hair and jawline traits.',
+      topMatchingTraits: ['wavy dark hair'],
+      secondaryMatchingTraits: [],
       weakOrUncertainTraits: [],
+      mismatchWarnings: [],
+      judgeNotes: 'Score kept conservative.',
     },
   ],
   fallbackMessage: '',
@@ -50,8 +63,15 @@ const toEventStream = (messages: Record<string, unknown>[]): string =>
 const SUCCESS_STREAM = (): Record<string, unknown>[] => [
   { event: 'accepted' },
   { event: 'stage', stage: 'validating' },
+  { event: 'stage', stage: 'scanning' },
   { event: 'stage', stage: 'extracting-traits' },
+  {
+    event: 'traits',
+    traitCount: TOTAL_TRAIT_FIELDS,
+    compactTraitSummary: ['clear oval face', 'wavy dark hair'],
+  },
   { event: 'stage', stage: 'generating-candidates' },
+  { event: 'candidates', names: ['Sample Star'] },
   { event: 'stage', stage: 'judging' },
   { event: 'stage', stage: 'aggregating' },
   { event: 'result', result: buildSuccessBody() },

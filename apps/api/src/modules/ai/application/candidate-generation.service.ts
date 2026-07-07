@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import type { Candidate, Traits } from '@twinzy/shared';
+import type { Candidate, LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
 import { CandidateGenerationResponseSchema } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger/app-logger.service';
@@ -15,10 +15,11 @@ import { AiSafetyService } from './ai-safety.service';
 const LOG_CONTEXT = 'CandidateGeneration';
 
 /**
- * TEXT-ONLY step: receives the written traits (never the image, never a
- * hash or crop of it — the adapter method signature has no image slot) and
- * returns 1-5 playful public style/vibe candidates. A response with more
- * than 5 candidates fails schema validation (documented decision).
+ * TEXT-ONLY step: receives the written advanced traits + compact summary
+ * (never the image, never a hash or crop of it — the adapter method
+ * signature has no image slot) and returns up to 5 playful GLOBAL public
+ * style/vibe candidates localized to the requested language. A response with
+ * more than 5 candidates fails schema validation (documented decision).
  * Unsafe candidates are dropped; the caller handles an empty remainder.
  */
 @Injectable()
@@ -32,9 +33,17 @@ export class CandidateGenerationService {
     this.logger.setContext(LOG_CONTEXT);
   }
 
-  public async generateCandidates(traits: Traits): Promise<Candidate[]> {
+  public async generateCandidates(
+    extraction: TraitExtractionResponse,
+    languageCode: LanguageCodeValue,
+  ): Promise<Candidate[]> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.CandidateGeneration, {
-      [PromptPlaceholder.TraitsJson]: JSON.stringify({ traits }, null, 2),
+      [PromptPlaceholder.TraitsJson]: JSON.stringify(
+        { traits: extraction.traits, compactTraitSummary: extraction.compactTraitSummary },
+        null,
+        2,
+      ),
+      [PromptPlaceholder.LanguageCode]: languageCode,
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt);

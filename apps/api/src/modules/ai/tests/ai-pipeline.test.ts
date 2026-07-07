@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Traits } from '@twinzy/shared';
+import { TRAIT_CATEGORY_FIELDS } from '@twinzy/shared';
 
 import {
   AppError,
@@ -13,8 +13,8 @@ import {
   buildCandidatesJson,
   buildJudgedResultPayload,
   buildJudgeJson,
+  buildTraitExtraction,
   buildTraitExtractionJson,
-  buildTraitsPayload,
   FakeAiAdapter,
 } from '../../../tests/fixtures/fake-ai-adapter';
 import { buildJpegBuffer } from '../../../tests/fixtures/image-fixtures';
@@ -46,7 +46,7 @@ const buildPipeline = (): Pipeline => {
   };
 };
 
-const traits = buildTraitsPayload() as Traits;
+const extraction = buildTraitExtraction();
 
 const expectRejection = async (action: Promise<unknown>, errorCode: string): Promise<void> => {
   let caught: unknown;
@@ -61,15 +61,41 @@ const expectRejection = async (action: Promise<unknown>, errorCode: string): Pro
 };
 
 describe('TraitExtractionService', () => {
-  it('extracts exactly 15 traits from a valid response and sends the image once', async () => {
+  it('extracts the full advanced taxonomy from a valid response and sends the image once', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     adapter.queueImageResponse(buildTraitExtractionJson());
 
-    const result = await traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg');
+    const result = await traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en');
 
-    expect(Object.keys(result)).toHaveLength(15);
+    // 16 categories + uncertaintyNotes.
+    expect(Object.keys(result.traits)).toHaveLength(17);
+    expect(result.traitCount).toBeGreaterThanOrEqual(100);
+    expect(result.compactTraitSummary.length).toBeGreaterThan(0);
     expect(adapter.imageCalls).toHaveLength(1);
     expect(adapter.textCalls).toHaveLength(0);
+  });
+
+  it('replaces the language placeholder in the prompt with the requested code', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(buildTraitExtractionJson());
+
+    await traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en');
+
+    expect(adapter.imageCalls[0]?.prompt).not.toContain('[LANGUAGE_CODE]');
+  });
+
+  it('lists every taxonomy field in the prompt template (schema/prompt lock-step)', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(buildTraitExtractionJson());
+
+    await traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en');
+
+    const prompt = adapter.imageCalls[0]?.prompt ?? '';
+    for (const fields of Object.values(TRAIT_CATEGORY_FIELDS)) {
+      for (const field of fields) {
+        expect(prompt).toContain(`"${field}"`);
+      }
+    }
   });
 
   it('rejects invalid JSON from the provider', async () => {
@@ -77,35 +103,48 @@ describe('TraitExtractionService', () => {
     adapter.queueImageResponse('this is not json at all');
 
     await expectRejection(
-      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
       ErrorCode.AiResponseInvalid,
     );
   });
 
-  it('rejects a response missing a trait (14 traits)', async () => {
+  it('rejects a response missing a category field', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     const payload = JSON.parse(buildTraitExtractionJson()) as {
-      traits: Record<string, string>;
+      traits: Record<string, Record<string, string>>;
     };
-    delete payload.traits['faceShape'];
+    delete payload.traits['hair']?.['hairColor'];
     adapter.queueImageResponse(JSON.stringify(payload));
 
     await expectRejection(
-      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
       ErrorCode.AiResponseInvalid,
     );
   });
 
-  it('rejects a response with an extra 16th trait field', async () => {
+  it('rejects a response with an extra smuggled field', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     const payload = JSON.parse(buildTraitExtractionJson()) as {
-      traits: Record<string, string>;
+      traits: Record<string, Record<string, string>>;
     };
-    payload.traits['smuggledField'] = 'extra';
+    const hair = payload.traits['hair'];
+    if (hair !== undefined) {
+      hair['smuggledField'] = 'extra';
+    }
     adapter.queueImageResponse(JSON.stringify(payload));
 
     await expectRejection(
-      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
+      ErrorCode.AiResponseInvalid,
+    );
+  });
+
+  it('rejects a response localized to the wrong language', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(buildTraitExtractionJson({ languageCode: 'ar' }));
+
+    await expectRejection(
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
       ErrorCode.AiResponseInvalid,
     );
   });
@@ -113,13 +152,16 @@ describe('TraitExtractionService', () => {
   it('rejects a trait response containing forbidden wording', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     const payload = JSON.parse(buildTraitExtractionJson()) as {
-      traits: Record<string, string>;
+      traits: Record<string, Record<string, string>>;
     };
-    payload.traits['faceShape'] = 'looks exactly like a famous actor';
+    const overallFace = payload.traits['overallFace'];
+    if (overallFace !== undefined) {
+      overallFace['overallFaceShape'] = 'looks exactly like a famous actor';
+    }
     adapter.queueImageResponse(JSON.stringify(payload));
 
     await expectRejection(
-      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
       ErrorCode.AiResponseUnsafe,
     );
   });
@@ -133,7 +175,7 @@ describe('TraitExtractionService', () => {
     adapter.queueImageResponse(JSON.stringify(payload));
 
     await expectRejection(
-      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
       ErrorCode.AiResponseInvalid,
     );
   });
@@ -149,7 +191,7 @@ describe('TraitExtractionService', () => {
     );
 
     await expectRejection(
-      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg'),
+      traitExtraction.extractTraits(buildJpegBuffer(), 'image/jpeg', 'en'),
       ErrorCode.AiTimeout,
     );
   });
@@ -165,21 +207,23 @@ describe('CandidateGenerationService (text only)', () => {
       ]),
     );
 
-    const candidates = await candidateGeneration.generateCandidates(traits);
+    const candidates = await candidateGeneration.generateCandidates(extraction, 'en');
 
     expect(candidates.map((candidate) => candidate.name)).toEqual(['Higher', 'Lower']);
     expect(adapter.imageCalls).toHaveLength(0);
     expect(adapter.textCalls).toHaveLength(1);
   });
 
-  it('embeds the written traits into the prompt text', async () => {
+  it('embeds the written traits + summary into the prompt text, never the image', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
     adapter.queueTextResponse(buildCandidatesJson());
 
-    await candidateGeneration.generateCandidates(traits);
+    await candidateGeneration.generateCandidates(extraction, 'en');
 
-    expect(adapter.textCalls[0]).toContain('observed faceShape');
+    expect(adapter.textCalls[0]).toContain('observed hairColor');
+    expect(adapter.textCalls[0]).toContain('compactTraitSummary');
     expect(adapter.textCalls[0]).not.toContain('base64');
+    expect(adapter.textCalls[0]).not.toContain('[LANGUAGE_CODE]');
   });
 
   it('rejects more than 5 candidates (strict schema, documented)', async () => {
@@ -193,7 +237,7 @@ describe('CandidateGenerationService (text only)', () => {
     );
 
     await expectRejection(
-      candidateGeneration.generateCandidates(traits),
+      candidateGeneration.generateCandidates(extraction, 'en'),
       ErrorCode.AiResponseInvalid,
     );
   });
@@ -210,7 +254,7 @@ describe('CandidateGenerationService (text only)', () => {
       ]),
     );
 
-    const candidates = await candidateGeneration.generateCandidates(traits);
+    const candidates = await candidateGeneration.generateCandidates(extraction, 'en');
 
     expect(candidates.map((candidate) => candidate.name)).toEqual(['Safe Star']);
   });
@@ -221,7 +265,7 @@ describe('CandidateJudgeService (text only)', () => {
     const { adapter, candidateJudge } = buildPipeline();
     adapter.queueTextResponse(buildJudgeJson());
 
-    const response = await candidateJudge.judgeCandidates(traits, []);
+    const response = await candidateJudge.judgeCandidates(extraction.traits, [], 'en');
 
     expect(response.results).toHaveLength(1);
     expect(adapter.imageCalls).toHaveLength(0);
@@ -236,12 +280,12 @@ describe('CandidateJudgeService (text only)', () => {
         buildJudgedResultPayload({
           name: 'Unsafe Star',
           rank: 2,
-          reason: 'You are definitely this person — same face.',
+          finalReason: 'You are definitely this person — same face.',
         }),
       ]),
     );
 
-    const response = await candidateJudge.judgeCandidates(traits, []);
+    const response = await candidateJudge.judgeCandidates(extraction.traits, [], 'en');
 
     expect(response.results.map((result) => result.name)).toEqual(['Safe Star']);
   });
@@ -250,6 +294,9 @@ describe('CandidateJudgeService (text only)', () => {
     const { adapter, candidateJudge } = buildPipeline();
     adapter.queueTextResponse(JSON.stringify({ results: 'not-an-array' }));
 
-    await expectRejection(candidateJudge.judgeCandidates(traits, []), ErrorCode.AiResponseInvalid);
+    await expectRejection(
+      candidateJudge.judgeCandidates(extraction.traits, [], 'en'),
+      ErrorCode.AiResponseInvalid,
+    );
   });
 });

@@ -59,9 +59,14 @@ export class AiSafetyService {
   private isCandidateSafe(candidate: Candidate): boolean {
     const combined = [
       candidate.name,
+      candidate.countryOrRegion,
       candidate.reason,
-      ...candidate.alignedTraits,
+      candidate.whyThisCandidateWasChosen,
+      candidate.scoreExplanation,
+      ...candidate.strongAlignedTraits,
+      ...candidate.mediumAlignedTraits,
       ...candidate.weakOrUncertainTraits,
+      ...candidate.majorMismatchRisks,
     ].join(' ');
     return !containsForbiddenWording(combined);
   }
@@ -69,9 +74,13 @@ export class AiSafetyService {
   private judgedResultText(result: JudgedResult): string {
     return [
       result.name,
-      result.reason,
-      ...result.matchingTraits,
+      result.countryOrRegion,
+      result.finalReason,
+      result.judgeNotes,
+      ...result.topMatchingTraits,
+      ...result.secondaryMatchingTraits,
       ...result.weakOrUncertainTraits,
+      ...result.mismatchWarnings,
     ].join(' ');
   }
 }

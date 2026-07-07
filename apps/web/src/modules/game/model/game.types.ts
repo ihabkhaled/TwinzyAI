@@ -1,16 +1,27 @@
 import type { RefObject } from 'react';
 
-import type { FinalGameResult, GameStreamStageValue, Traits, VerdictValue } from '@twinzy/shared';
+import type {
+  FinalGameResult,
+  GameStreamStageValue,
+  LanguageCodeValue,
+  TraitCategoryKey,
+} from '@twinzy/shared';
 
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
 import type { GamePhaseValue } from './game.enums';
 
+/** Live mid-pipeline trait progress: the count + strongest written signals. */
+export interface TraitsProgress {
+  traitCount: number;
+  compactTraitSummary: readonly string[];
+}
+
 /** Progress callbacks the streaming analyze request drives as events arrive. */
 export interface GameStreamHandlers {
   onStage: (stage: GameStreamStageValue) => void;
-  /** The extracted written traits, streamed right after extraction. */
-  onTraits?: (traits: Traits) => void;
+  /** Trait count + compact summary, streamed right after extraction. */
+  onTraits?: (progress: TraitsProgress) => void;
   /** The candidate public-figure names being considered ("rough examples"). */
   onCandidates?: (names: readonly string[]) => void;
 }
@@ -19,9 +30,115 @@ export interface GameStreamHandlers {
 export interface StreamProgressController {
   handlers: GameStreamHandlers;
   currentStage: GameStreamStageValue | undefined;
-  traits: Traits | undefined;
+  traitsProgress: TraitsProgress | undefined;
   candidateNames: readonly string[];
   reset: () => void;
+}
+
+/**
+ * Resolves an i18n message key (optionally with ICU values) to a translated
+ * string. Injected into the otherwise React-free mapper/helpers so those pure
+ * layers never import an i18n hook.
+ */
+export type TranslateMessage = (key: string, values?: Record<string, string | number>) => string;
+
+/** One trait field prepared for display (label already translated). */
+export interface TraitFieldView {
+  key: string;
+  label: string;
+  value: string;
+}
+
+/** One trait category prepared for the detailed accordion. */
+export interface TraitCategoryView {
+  key: TraitCategoryKey;
+  title: string;
+  fields: TraitFieldView[];
+}
+
+/** One uncertainty-notes group (label translated; empty groups are dropped). */
+export interface UncertaintyGroupView {
+  key: string;
+  label: string;
+  notes: string[];
+}
+
+/** One final match prepared for display (labels already translated). */
+export interface ResultView {
+  name: string;
+  rank: number;
+  scorePercent: number;
+  verdictLabel: string;
+  confidenceLabel: string;
+  countryOrRegion: string;
+  categoryLabel: string;
+  reason: string;
+  topMatchingTraits: string[];
+  secondaryMatchingTraits: string[];
+  weakOrUncertainTraits: string[];
+  mismatchWarnings: string[];
+}
+
+/** The mapped view model the UI renders — never the raw backend DTO. */
+export interface GameResultView {
+  traitCount: number;
+  compactTraitSummary: string[];
+  /** Detailed categories for the accordion (imageQuality excluded — it has its own section). */
+  categories: TraitCategoryView[];
+  /** The image-quality fields shown in the quality & uncertainty section. */
+  imageQuality: TraitFieldView[];
+  /** Non-empty uncertainty-notes groups. */
+  uncertainty: UncertaintyGroupView[];
+  results: ResultView[];
+  fallbackMessage: string;
+  disclaimer: string;
+  hasResults: boolean;
+  shareText: string;
+}
+
+/**
+ * Client-side file validation outcome (UX only; the backend re-validates).
+ * The failure key is a shared {@link ErrorMessageKey}, never a raw string.
+ */
+export type FileValidationResult = { ok: true } | { ok: false; errorKey: ErrorMessageKey };
+
+/** The narrowed analyze-mutation surface the orchestrator hook consumes. */
+export interface AnalyzeGameMutation {
+  data: FinalGameResult | undefined;
+  error: Error | null;
+  isPending: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  analyze: (file: File) => void;
+  reset: () => void;
+}
+
+/** Input of the translate mutation: the existing result + target language. */
+export interface TranslateResultInput {
+  result: FinalGameResult;
+  targetLanguageCode: LanguageCodeValue;
+}
+
+/** Narrowed surface of the text-only translate-result mutation. */
+export interface TranslateResultMutation {
+  isPending: boolean;
+  isError: boolean;
+  translate: (
+    input: TranslateResultInput,
+    callbacks: { onSuccess: (translated: FinalGameResult) => void; onError: () => void },
+  ) => void;
+  reset: () => void;
+}
+
+/**
+ * Language-switch translation surface: the result to display (translated when
+ * available, canonical otherwise), the in-flight flag for the loading state,
+ * and the error key when the last switch failed (old result stays visible).
+ */
+export interface ResultTranslationController {
+  displayResult: FinalGameResult | undefined;
+  isTranslating: boolean;
+  errorKey: string | undefined;
 }
 
 /**
@@ -48,59 +165,6 @@ export interface CameraViewModel {
   onOpen: () => void;
   onCancel: () => void;
   onCapture: () => void;
-}
-
-/**
- * Resolves an i18n message key (optionally with ICU values) to a translated
- * string. Injected into the otherwise React-free mapper/helpers so those pure
- * layers never import an i18n hook.
- */
-export type TranslateMessage = (key: string, values?: Record<string, string | number>) => string;
-
-/** One extracted trait prepared for display (label already translated). */
-export interface TraitView {
-  key: string;
-  label: string;
-  value: string;
-}
-
-/** One final match prepared for display (verdict label already translated). */
-export interface ResultView {
-  name: string;
-  rank: number;
-  scorePercent: number;
-  verdict: VerdictValue;
-  verdictLabel: string;
-  reason: string;
-  matchingTraits: string[];
-  weakOrUncertainTraits: string[];
-}
-
-/** The mapped view model the UI renders — never the raw backend DTO. */
-export interface GameResultView {
-  traits: TraitView[];
-  results: ResultView[];
-  fallbackMessage: string;
-  disclaimer: string;
-  hasResults: boolean;
-  shareText: string;
-}
-
-/**
- * Client-side file validation outcome (UX only; the backend re-validates).
- * The failure key is a shared {@link ErrorMessageKey}, never a raw string.
- */
-export type FileValidationResult = { ok: true } | { ok: false; errorKey: ErrorMessageKey };
-
-/** The narrowed analyze-mutation surface the orchestrator hook consumes. */
-export interface AnalyzeGameMutation {
-  data: FinalGameResult | undefined;
-  error: Error | null;
-  isPending: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  analyze: (file: File) => void;
-  reset: () => void;
 }
 
 /** Internal upload-hook surface: preview state plus the raw failure key. */
@@ -136,6 +200,12 @@ export interface ShareViewModel {
   feedback: string | undefined;
 }
 
+/** The translation sub-view: loading flag + translated failure copy. */
+export interface TranslationViewModel {
+  isTranslating: boolean;
+  errorMessage: string | undefined;
+}
+
 /** Translated copy for the upload/consent card. */
 export interface UploadLabels {
   label: string;
@@ -159,11 +229,15 @@ export interface CameraLabels {
 /** Translated copy for the results view (dynamic values come from the DTO). */
 export interface ResultLabels {
   title: string;
-  traitsTitle: string;
+  compactSummaryTitle: string;
+  detailedTraitsTitle: string;
+  imageQualityTitle: string;
+  uncertaintyTitle: string;
   scoreLabel: string;
   reasonLabel: string;
   matchingTraitsLabel: string;
   weakTraitsLabel: string;
+  mismatchLabel: string;
   rankLabel: string;
   fallbackTitle: string;
   retryButton: string;
@@ -178,6 +252,7 @@ export interface GameScreenLabels {
   processingHint: string;
   liveTraitsTitle: string;
   liveCandidatesTitle: string;
+  translating: string;
   privacyNotice: string;
   upload: UploadLabels;
   camera: CameraLabels;
@@ -208,11 +283,14 @@ export interface GameViewModel {
   errorMessage: string | undefined;
   /** Live progress copy for the streamed pipeline; the generic text until a stage arrives. */
   stageLabel: string;
-  /** Extracted traits streamed mid-pipeline (empty until the traits event arrives). */
-  liveTraits: TraitView[];
+  /** Trait count streamed mid-pipeline (undefined until the traits event arrives). */
+  liveTraitCount: number | undefined;
+  /** Compact trait summary streamed mid-pipeline (empty until it arrives). */
+  liveSummary: string[];
   /** Candidate public-figure names streamed as "rough examples" (empty until they arrive). */
   liveCandidates: string[];
   upload: UploadViewModel;
   camera: CameraViewModel;
   share: ShareViewModel;
+  translation: TranslationViewModel;
 }

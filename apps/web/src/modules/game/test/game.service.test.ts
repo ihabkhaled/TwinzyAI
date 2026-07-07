@@ -28,12 +28,12 @@ describe('analyzeImage', () => {
     const result = buildFinalResult();
     postMultipartMock.mockResolvedValue(result);
 
-    await expect(analyzeImage(buildImageFile())).resolves.toEqual(result);
+    await expect(analyzeImage(buildImageFile(), 'en')).resolves.toEqual(result);
     expect(postMultipartMock).toHaveBeenCalledTimes(1);
   });
 
   it('throws an AppError for an invalid file without calling the gateway', async () => {
-    await expect(analyzeImage(buildImageFile('bad.gif', 'image/gif'))).rejects.toBeInstanceOf(
+    await expect(analyzeImage(buildImageFile('bad.gif', 'image/gif'), 'en')).rejects.toBeInstanceOf(
       AppError,
     );
     expect(postMultipartMock).not.toHaveBeenCalled();
@@ -55,8 +55,8 @@ describe('analyzeImageStream', () => {
     const stages: GameStreamStageValue[] = [];
 
     await expect(
-      analyzeImageStream(buildImageFile(), {
-        onStage: (stage) => {
+      analyzeImageStream(buildImageFile(), 'en', {
+        onStage: (stage: GameStreamStageValue): void => {
           stages.push(stage);
         },
       }),
@@ -66,7 +66,7 @@ describe('analyzeImageStream', () => {
 
   it('throws an AppError for an invalid file without opening the stream', async () => {
     await expect(
-      analyzeImageStream(buildImageFile('bad.gif', 'image/gif'), { onStage: vi.fn() }),
+      analyzeImageStream(buildImageFile('bad.gif', 'image/gif'), 'en', { onStage: vi.fn() }),
     ).rejects.toBeInstanceOf(AppError);
     expect(streamMultipartMock).not.toHaveBeenCalled();
   });

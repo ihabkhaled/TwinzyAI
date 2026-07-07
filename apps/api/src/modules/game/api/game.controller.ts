@@ -1,6 +1,7 @@
-import { Controller, Headers, Post, Res, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Headers, Post, Res, UseInterceptors, UsePipes } from '@nestjs/common';
 
-import type { FinalGameResult } from '@twinzy/shared';
+import type { FinalGameResult, TranslateResultRequest } from '@twinzy/shared';
+import { TranslateResultRequestSchema } from '@twinzy/shared';
 
 import { MultipartBody } from '../../../core/http/multipart-body.decorator';
 import type { SseCapableReplyLike } from '../../../core/http/sse.types';
@@ -8,9 +9,11 @@ import { UploadedImage } from '../../../core/http/uploaded-image.decorator';
 import { UploadedImageInterceptor } from '../../../core/http/uploaded-image.interceptor';
 import { ApiTags } from '../../../core/openapi';
 import { Throttle } from '../../../core/rate-limit';
+import { createZodValidationPipe } from '../../../core/validation';
 import type { UploadedImageFile } from '../../file-security';
 import { AnalyzeGameUseCase } from '../application/analyze-game.use-case';
-import { ANALYZE_THROTTLE } from '../model/game.constants';
+import { TranslateResultUseCase } from '../application/translate-result.use-case';
+import { ANALYZE_THROTTLE, TRANSLATE_THROTTLE } from '../model/game.constants';
 
 import { GameStreamPresenter } from './game-stream.presenter';
 
@@ -19,6 +22,7 @@ import { GameStreamPresenter } from './game-stream.presenter';
 export class GameController {
   public constructor(
     private readonly analyzeGameUseCase: AnalyzeGameUseCase,
+    private readonly translateResultUseCase: TranslateResultUseCase,
     private readonly gameStreamPresenter: GameStreamPresenter,
   ) {}
 
@@ -42,5 +46,12 @@ export class GameController {
     @Res() reply: SseCapableReplyLike,
   ): Promise<void> {
     return this.gameStreamPresenter.stream(file, body, origin, reply);
+  }
+
+  @Post('translate-result')
+  @Throttle(TRANSLATE_THROTTLE)
+  @UsePipes(createZodValidationPipe(TranslateResultRequestSchema))
+  public translateResult(@Body() body: TranslateResultRequest): Promise<FinalGameResult> {
+    return this.translateResultUseCase.translate(body);
   }
 }

@@ -4,10 +4,10 @@
   "private": true,
   "description": "Twinzy frontend (Next.js App Router, mobile-first PWA).",
   "scripts": {
-    "dev": "next dev --webpack --port 3000",
+    "dev": "next dev --turbopack --port 3000",
     "dev:turbo": "next dev --port 3000",
-    "dev:e2e": "next dev --webpack --port 3100",
-    "build": "next build --webpack",
+    "dev:e2e": "next dev --turbopack --port 3100",
+    "build": "next build --turbopack",
     "build:turbo": "next build",
     "start": "next start --port 3000",
     "typecheck": "tsgo --noEmit -p tsconfig.json",

@@ -10,10 +10,17 @@ import { GameStreamPresenter } from './api/game-stream.presenter';
 import { AnalyzeGameUseCase } from './application/analyze-game.use-case';
 import { AnalyzeGameStreamUseCase } from './application/analyze-game-stream.use-case';
 import { StyleMatchService } from './application/style-match.service';
+import { TranslateResultUseCase } from './application/translate-result.use-case';
 
 @Module({
   imports: [AiModule, FileSecurityModule, ResultAggregationModule, PrivacyModule],
   controllers: [GameController],
-  providers: [AnalyzeGameUseCase, AnalyzeGameStreamUseCase, StyleMatchService, GameStreamPresenter],
+  providers: [
+    AnalyzeGameUseCase,
+    AnalyzeGameStreamUseCase,
+    TranslateResultUseCase,
+    StyleMatchService,
+    GameStreamPresenter,
+  ],
 })
 export class GameModule {}

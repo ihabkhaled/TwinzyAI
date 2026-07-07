@@ -1,4 +1,4 @@
-import type { FinalGameResult } from '@twinzy/shared';
+import type { FinalGameResult, LanguageCodeValue } from '@twinzy/shared';
 import { GameStreamEvent, GameStreamMessageSchema } from '@twinzy/shared';
 
 import { HttpError, streamMultipart } from '@/packages/axios';
@@ -18,46 +18,54 @@ import { buildAnalyzeFormData } from './game-form-data.builder';
  */
 export const analyzeImageStreamRequest = async (
   file: File,
+  languageCode: LanguageCodeValue,
   handlers: GameStreamHandlers,
 ): Promise<FinalGameResult> => {
   let result: FinalGameResult | undefined;
   let streamError: HttpError | undefined;
 
-  await streamMultipart(GAME_ANALYZE_STREAM_PATH, buildAnalyzeFormData(file), (data) => {
-    const parsed = GameStreamMessageSchema.safeParse(parseJson(data));
-    if (!parsed.success) {
-      return;
-    }
-    const message = parsed.data;
-    switch (message.event) {
-      case GameStreamEvent.Stage: {
-        handlers.onStage(message.stage);
-        break;
+  await streamMultipart(
+    GAME_ANALYZE_STREAM_PATH,
+    buildAnalyzeFormData(file, languageCode),
+    (data) => {
+      const parsed = GameStreamMessageSchema.safeParse(parseJson(data));
+      if (!parsed.success) {
+        return;
       }
-      case GameStreamEvent.Traits: {
-        handlers.onTraits?.(message.traits);
-        break;
+      const message = parsed.data;
+      switch (message.event) {
+        case GameStreamEvent.Stage: {
+          handlers.onStage(message.stage);
+          break;
+        }
+        case GameStreamEvent.Traits: {
+          handlers.onTraits?.({
+            traitCount: message.traitCount,
+            compactTraitSummary: message.compactTraitSummary,
+          });
+          break;
+        }
+        case GameStreamEvent.Candidates: {
+          handlers.onCandidates?.(message.names);
+          break;
+        }
+        case GameStreamEvent.Result: {
+          result = message.result;
+          break;
+        }
+        case GameStreamEvent.Error: {
+          streamError = new HttpError('http', message.message, null, {
+            errorCode: message.errorCode,
+            message: message.message,
+          });
+          break;
+        }
+        default: {
+          break;
+        }
       }
-      case GameStreamEvent.Candidates: {
-        handlers.onCandidates?.(message.names);
-        break;
-      }
-      case GameStreamEvent.Result: {
-        result = message.result;
-        break;
-      }
-      case GameStreamEvent.Error: {
-        streamError = new HttpError('http', message.message, null, {
-          errorCode: message.errorCode,
-          message: message.message,
-        });
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  });
+    },
+  );
 
   if (streamError !== undefined) {
     throw streamError;

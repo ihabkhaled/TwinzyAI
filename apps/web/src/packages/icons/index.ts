@@ -10,6 +10,7 @@ export {
   AlertTriangle as AlertIcon,
   ArrowLeft as ArrowLeftIcon,
   Check as CheckIcon,
+  ChevronDown as ChevronDownIcon,
   X as CloseIcon,
   Globe as GlobeIcon,
   House as HomeIcon,

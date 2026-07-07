@@ -15,6 +15,7 @@ import {
 } from '../../../core/errors';
 import { AppLogger, LoggerModule } from '../../../core/logger';
 import {
+  buildCandidatePayload,
   buildCandidatesJson,
   buildJudgeJson,
   buildTraitExtractionJson,
@@ -171,21 +172,11 @@ describe('AnalyzeGameUseCase.analyze', () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
     adapter.queueTextResponse(
       buildCandidatesJson([
-        {
+        buildCandidatePayload({
           name: 'Unsafe Only',
-          publicCategory: 'actor',
-          countryOrRegion: 'Global',
           styleVibeFitScore: 90,
           reason: 'Same face, biometric twin.',
-          alignedTraits: [],
-          weakOrUncertainTraits: [],
-          safetyCheck: {
-            containsFaceRecognitionClaim: false,
-            containsBiometricClaim: false,
-            containsIdentityClaim: false,
-            containsExactLookalikeClaim: false,
-          },
-        },
+        }),
       ]),
     );
 

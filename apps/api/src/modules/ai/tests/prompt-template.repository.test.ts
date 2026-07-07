@@ -53,21 +53,24 @@ describe('PromptTemplateRepository', () => {
   it('replaces every placeholder and caches the template across repeat builds', () => {
     existsSyncMock.mockReturnValue(true);
     readFileSyncMock.mockReturnValue(
-      `Traits: ${PromptPlaceholder.TraitsJson} for ${PromptPlaceholder.AppName} via ${PromptPlaceholder.ModelProvider}`,
+      `Traits: ${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} for ${PromptPlaceholder.AppName} via ${PromptPlaceholder.ModelProvider}`,
     );
     const repository = buildRepository();
 
     const first = repository.buildPrompt(PromptKey.CandidateGeneration, {
       [PromptPlaceholder.TraitsJson]: '{"a":1}',
+      [PromptPlaceholder.LanguageCode]: 'en',
     });
     const second = repository.buildPrompt(PromptKey.CandidateGeneration, {
       [PromptPlaceholder.TraitsJson]: '{"b":2}',
+      [PromptPlaceholder.LanguageCode]: 'ar',
     });
 
     expect(first).toContain('{"a":1}');
     expect(first).toContain(APP_NAME);
     expect(first).toContain(MODEL_PROVIDER);
     expect(first).not.toContain(PromptPlaceholder.TraitsJson);
+    expect(first).not.toContain(PromptPlaceholder.LanguageCode);
     expect(first).not.toContain(PromptPlaceholder.AppName);
     expect(second).toContain('{"b":2}');
     // Second build must not re-read the file: the template is cached.
@@ -76,11 +79,14 @@ describe('PromptTemplateRepository', () => {
 
   it('skips the debug log in production but still builds the prompt', () => {
     existsSyncMock.mockReturnValue(true);
-    readFileSyncMock.mockReturnValue(`${PromptPlaceholder.TraitsJson} only`);
+    readFileSyncMock.mockReturnValue(
+      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} only`,
+    );
     const repository = buildRepository({ isProduction: true });
 
     const prompt = repository.buildPrompt(PromptKey.CandidateGeneration, {
       [PromptPlaceholder.TraitsJson]: '{"c":3}',
+      [PromptPlaceholder.LanguageCode]: 'en',
     });
 
     expect(prompt).toContain('{"c":3}');
@@ -89,7 +95,9 @@ describe('PromptTemplateRepository', () => {
 
   it('rejects a build when a required replacement value is missing', () => {
     existsSyncMock.mockReturnValue(true);
-    readFileSyncMock.mockReturnValue(`${PromptPlaceholder.TraitsJson} placeholder`);
+    readFileSyncMock.mockReturnValue(
+      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} placeholder`,
+    );
     const repository = buildRepository();
 
     const errorCode = internalErrorCodeOf(() =>
@@ -133,6 +141,7 @@ describe('PromptTemplateRepository', () => {
     const errorCode = internalErrorCodeOf(() =>
       repository.buildPrompt(PromptKey.CandidateGeneration, {
         [PromptPlaceholder.TraitsJson]: '{"d":4}',
+        [PromptPlaceholder.LanguageCode]: 'en',
       }),
     );
 
@@ -141,16 +150,17 @@ describe('PromptTemplateRepository', () => {
 
   it('rejects a template that still contains a placeholder after replacement', () => {
     existsSyncMock.mockReturnValue(true);
-    // CandidateGeneration only requires TraitsJson; the extra CandidatesJson
+    // CandidateGeneration does not require CandidatesJson; the extra
     // placeholder is never provided, so it survives replacement and must fail.
     readFileSyncMock.mockReturnValue(
-      `${PromptPlaceholder.TraitsJson} and ${PromptPlaceholder.CandidatesJson}`,
+      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} and ${PromptPlaceholder.CandidatesJson}`,
     );
     const repository = buildRepository();
 
     const errorCode = internalErrorCodeOf(() =>
       repository.buildPrompt(PromptKey.CandidateGeneration, {
         [PromptPlaceholder.TraitsJson]: '{"e":5}',
+        [PromptPlaceholder.LanguageCode]: 'en',
       }),
     );
 

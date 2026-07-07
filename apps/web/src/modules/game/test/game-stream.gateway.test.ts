@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { GameStreamStageValue, Traits } from '@twinzy/shared';
+import type { GameStreamStageValue } from '@twinzy/shared';
 import { GameStreamEvent, GameStreamStage } from '@twinzy/shared';
 
 import * as axiosPackage from '@/packages/axios';
 
 import { analyzeImageStreamRequest } from '../gateway/game-stream.gateway';
-import type { GameStreamHandlers } from '../model/game.types';
+import type { GameStreamHandlers, TraitsProgress } from '../model/game.types';
 
 import { buildFinalResult, buildImageFile } from './game-fixtures';
 
@@ -65,31 +65,41 @@ describe('analyzeImageStreamRequest', () => {
     ]);
     const { handlers, stages } = buildHandlers();
 
-    await expect(analyzeImageStreamRequest(buildImageFile(), handlers)).resolves.toEqual(result);
+    await expect(analyzeImageStreamRequest(buildImageFile(), 'en', handlers)).resolves.toEqual(
+      result,
+    );
     expect(stages).toEqual([GameStreamStage.Validating, GameStreamStage.Judging]);
   });
 
-  it('forwards streamed traits and candidate names to the handlers', async () => {
+  it('forwards the streamed trait summary and candidate names to the handlers', async () => {
     const result = buildFinalResult();
-    const capturedTraits: Traits[] = [];
+    const capturedProgress: TraitsProgress[] = [];
     const capturedCandidates: string[][] = [];
     feed([
-      encode({ event: GameStreamEvent.Traits, traits: result.traits }),
+      encode({
+        event: GameStreamEvent.Traits,
+        traitCount: result.traitCount,
+        compactTraitSummary: result.compactTraitSummary,
+      }),
       encode({ event: GameStreamEvent.Candidates, names: ['Ada Lovelace'] }),
       encode({ event: GameStreamEvent.Result, result }),
     ]);
     const handlers: GameStreamHandlers = {
       onStage: vi.fn(),
-      onTraits: (traits): void => {
-        capturedTraits.push(traits);
+      onTraits: (progress): void => {
+        capturedProgress.push(progress);
       },
       onCandidates: (names): void => {
         capturedCandidates.push([...names]);
       },
     };
 
-    await expect(analyzeImageStreamRequest(buildImageFile(), handlers)).resolves.toEqual(result);
-    expect(capturedTraits).toEqual([result.traits]);
+    await expect(analyzeImageStreamRequest(buildImageFile(), 'en', handlers)).resolves.toEqual(
+      result,
+    );
+    expect(capturedProgress).toEqual([
+      { traitCount: result.traitCount, compactTraitSummary: result.compactTraitSummary },
+    ]);
     expect(capturedCandidates).toEqual([['Ada Lovelace']]);
   });
 
@@ -103,7 +113,9 @@ describe('analyzeImageStreamRequest', () => {
     ]);
     const { handlers, stages } = buildHandlers();
 
-    await expect(analyzeImageStreamRequest(buildImageFile(), handlers)).resolves.toEqual(result);
+    await expect(analyzeImageStreamRequest(buildImageFile(), 'en', handlers)).resolves.toEqual(
+      result,
+    );
     expect(stages).toEqual([]);
   });
 
@@ -114,7 +126,7 @@ describe('analyzeImageStreamRequest', () => {
     ]);
     const { handlers } = buildHandlers();
 
-    const error = await capture(() => analyzeImageStreamRequest(buildImageFile(), handlers));
+    const error = await capture(() => analyzeImageStreamRequest(buildImageFile(), 'en', handlers));
 
     expect(axiosPackage.isHttpError(error)).toBe(true);
     expect((error as axiosPackage.HttpError).responseBody).toStrictEqual({
@@ -127,7 +139,7 @@ describe('analyzeImageStreamRequest', () => {
     feed([encode({ event: GameStreamEvent.Stage, stage: GameStreamStage.Aggregating })]);
     const { handlers } = buildHandlers();
 
-    const error = await capture(() => analyzeImageStreamRequest(buildImageFile(), handlers));
+    const error = await capture(() => analyzeImageStreamRequest(buildImageFile(), 'en', handlers));
 
     expect(axiosPackage.isHttpError(error)).toBe(true);
   });

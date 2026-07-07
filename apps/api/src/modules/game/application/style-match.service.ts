@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import type { FinalGameResult, Traits } from '@twinzy/shared';
+import type { FinalGameResult, LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
 import { GameStreamStage } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger';
@@ -12,10 +12,11 @@ const LOG_CONTEXT = 'StyleMatch';
 
 /**
  * The TEXT-ONLY matching phase of the analyze pipeline. By the time this runs
- * the image is already gone: it receives only the written traits and produces
- * the final ranked style/vibe result. Generates candidates, falls back safely
- * when none survive filtering, judges the survivors, then aggregates with the
- * enforced server-side disclaimer.
+ * the image is already gone: it receives only the written advanced traits and
+ * produces the final ranked style/vibe result localized to the requested
+ * language. Generates global candidates, falls back safely when none survive
+ * filtering, judges the survivors strictly, then aggregates with the enforced
+ * server-side localized disclaimer.
  */
 @Injectable()
 export class StyleMatchService {
@@ -29,21 +30,26 @@ export class StyleMatchService {
   }
 
   public async matchFromTraits(
-    traits: Traits,
+    extraction: TraitExtractionResponse,
+    languageCode: LanguageCodeValue,
     progress?: StyleMatchProgressListener,
   ): Promise<FinalGameResult> {
     progress?.onStage?.(GameStreamStage.GeneratingCandidates);
-    const candidates = await this.candidateGeneration.generateCandidates(traits);
+    const candidates = await this.candidateGeneration.generateCandidates(extraction, languageCode);
     if (candidates.length === 0) {
       this.logger.warn('No safe candidates — returning fallback');
       progress?.onStage?.(GameStreamStage.Aggregating);
-      return this.resultAggregation.buildFallback(traits);
+      return this.resultAggregation.buildFallback(extraction, languageCode);
     }
 
     progress?.onCandidates?.(candidates.map((candidate) => candidate.name));
     progress?.onStage?.(GameStreamStage.Judging);
-    const judged = await this.candidateJudge.judgeCandidates(traits, candidates);
+    const judged = await this.candidateJudge.judgeCandidates(
+      extraction.traits,
+      candidates,
+      languageCode,
+    );
     progress?.onStage?.(GameStreamStage.Aggregating);
-    return this.resultAggregation.aggregate(traits, judged);
+    return this.resultAggregation.aggregate(extraction, judged, languageCode);
   }
 }

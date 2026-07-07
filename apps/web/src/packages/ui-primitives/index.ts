@@ -1,3 +1,5 @@
+export { AccordionItem, type AccordionItemProps } from './accordion';
+export { type AccordionItemVariantProps, accordionItemVariants } from './accordion.variants';
 export { Alert, type AlertProps } from './alert';
 export { type AlertVariantProps, alertVariants } from './alert.variants';
 export { Button, type ButtonProps } from './button';

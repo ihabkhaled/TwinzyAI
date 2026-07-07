@@ -1,22 +1,49 @@
-import type { FinalGameResult } from '@twinzy/shared';
-import { RESULT_DISCLAIMER, TRAIT_KEYS } from '@twinzy/shared';
+import type { FinalGameResult, Traits } from '@twinzy/shared';
+import {
+  GAME_PROMPT_VERSION,
+  RESULT_DISCLAIMER,
+  TOTAL_TRAIT_FIELDS,
+  TRAIT_CATEGORY_FIELDS,
+  UNCERTAINTY_NOTE_FIELDS,
+} from '@twinzy/shared';
 
-import type { TranslateMessage } from '../model/game.types';
+/** Full nested advanced traits: every field of every category filled. */
+export const buildTraits = (): Traits =>
+  ({
+    ...Object.fromEntries(
+      Object.entries(TRAIT_CATEGORY_FIELDS).map(([category, fields]) => [
+        category,
+        Object.fromEntries(fields.map((field) => [field, `observed ${field}`])),
+      ]),
+    ),
+    uncertaintyNotes: {
+      ...Object.fromEntries(UNCERTAINTY_NOTE_FIELDS.map((field) => [field, []])),
+      imageLimitations: ['slightly dim lighting'],
+    },
+  }) as unknown as Traits;
 
-/** A representative backend analyze response, overridable per test. */
+/** A full, valid advanced FinalGameResult with one ranked match. */
 export const buildFinalResult = (overrides: Partial<FinalGameResult> = {}): FinalGameResult => ({
-  traits: Object.fromEntries(
-    TRAIT_KEYS.map((key) => [key, `observed ${key}`]),
-  ) as FinalGameResult['traits'],
+  promptVersion: GAME_PROMPT_VERSION,
+  languageCode: 'en',
+  traitCount: TOTAL_TRAIT_FIELDS,
+  traits: buildTraits(),
+  compactTraitSummary: ['clear oval face', 'wavy dark hair'],
   results: [
     {
       name: 'Sample Star',
       rank: 1,
-      finalStyleVibeFitScore: 87,
+      finalStyleVibeFitScore: 84,
+      confidenceLevel: 'high',
       verdict: 'strong',
-      reason: 'Shares a similar public style impression based on hair and jawline traits.',
-      matchingTraits: ['hairColor', 'jawlineChinOverallStructure'],
-      weakOrUncertainTraits: ['eyeColorEyeShape'],
+      countryOrRegion: 'Global',
+      publicCategory: 'actor',
+      finalReason: 'Consistent public style impression across major written traits.',
+      topMatchingTraits: ['wavy dark hair'],
+      secondaryMatchingTraits: ['defined jawline'],
+      weakOrUncertainTraits: ['eye color unclear'],
+      mismatchWarnings: [],
+      judgeNotes: 'Score kept conservative.',
     },
   ],
   fallbackMessage: '',
@@ -24,28 +51,19 @@ export const buildFinalResult = (overrides: Partial<FinalGameResult> = {}): Fina
   ...overrides,
 });
 
-/** A synthetic in-memory image File for validation/gateway tests. */
-export const buildImageFile = (name = 'photo.jpg', type = 'image/jpeg', sizeBytes = 2048): File => {
-  const content = new Uint8Array(sizeBytes).fill(65);
-  return new File([content], name, { type });
+/** In-memory JPEG file for upload-flow tests. */
+export const buildImageFile = (name = 'photo.jpg', type = 'image/jpeg', size = 1024): File => {
+  const blob = new Blob([new Uint8Array(size)], { type });
+  return new File([blob], name, { type });
 };
 
 /**
- * A deterministic stand-in for the injected translator: it echoes the message
- * key (so label lookups are assertable) and applies `{placeholder}` values for
- * the one ICU message the share text needs.
+ * Key-echo translator for pure helper/mapper tests; only the share template
+ * interpolates so share-text assertions stay readable.
  */
-export const fakeTranslate: TranslateMessage = (key, values) => {
-  const template =
-    key === 'result.shareTemplate'
-      ? 'I tried this fun vibe game and got: {name} with {score}% style/vibe fit.'
-      : key;
-  if (values === undefined) {
-    return template;
+export const fakeTranslate = (key: string, values?: Record<string, string | number>): string => {
+  if (key === 'result.shareTemplate' && values !== undefined) {
+    return `I tried this fun vibe game and got: ${String(values['name'])} with ${String(values['score'])}% style/vibe fit.`;
   }
-  let output = template;
-  for (const [name, value] of Object.entries(values)) {
-    output = output.replaceAll(`{${name}}`, String(value));
-  }
-  return output;
+  return key;
 };

@@ -1,6 +1,13 @@
 import type { ChangeEventHandler, ReactNode, RefObject } from 'react';
 
-import type { GameResultView, ResultLabels, ResultView, TraitView } from './game.types';
+import type {
+  GameResultView,
+  ResultLabels,
+  ResultView,
+  TraitCategoryView,
+  TraitFieldView,
+  UncertaintyGroupView,
+} from './game.types';
 
 /** Props for the landing hero (badge, headline, sub-copy, CTA label). */
 export interface LandingHeroProps {
@@ -101,9 +108,34 @@ export interface ResultCardProps {
 export interface GameResultProps {
   view: GameResultView;
   labels: ResultLabels;
+  traitCountLabel: string;
+  translatingLabel: string;
+  isTranslating: boolean;
+  translationError: string | undefined;
   shareFeedback: string | undefined;
   onShare: () => void;
   onRetry: () => void;
+}
+
+/** Props for the compact "strongest signals" summary section. */
+export interface ResultSummaryProps {
+  title: string;
+  traitCountLabel: string;
+  summary: string[];
+}
+
+/** Props for the grouped detailed-traits accordion. */
+export interface TraitDetailsProps {
+  title: string;
+  categories: TraitCategoryView[];
+}
+
+/** Props for the image-quality & uncertainty section. */
+export interface ImageQualityProps {
+  title: string;
+  uncertaintyTitle: string;
+  fields: TraitFieldView[];
+  uncertainty: UncertaintyGroupView[];
 }
 
 /** Props for the safety disclaimer footer. */
@@ -134,12 +166,13 @@ export interface ProcessingCardProps {
   testId?: string;
 }
 
-/** Props for the live processing view (stage + streamed traits + candidate names). */
+/** Props for the live processing view (stage + streamed summary + candidate names). */
 export interface GameProcessingProps {
   stageLabel: string;
   hint: string;
   traitsTitle: string;
   candidatesTitle: string;
-  traits: TraitView[];
+  traitCountLabel: string | undefined;
+  summary: string[];
   candidateNames: string[];
 }

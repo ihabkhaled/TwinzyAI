@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import type { Traits } from '@twinzy/shared';
+import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
 import { GameStreamEvent, GameStreamStage } from '@twinzy/shared';
 
 import { TraitExtractionService } from '../../ai';
@@ -11,6 +11,7 @@ import {
 } from '../../file-security';
 import { isConsentGiven } from '../lib/consent';
 import type { GameStreamEmitter } from '../lib/game-stream';
+import { resolveRequestLanguage } from '../lib/request-language';
 
 import { StyleMatchService } from './style-match.service';
 
@@ -18,9 +19,11 @@ import { StyleMatchService } from './style-match.service';
  * The streaming counterpart of AnalyzeGameUseCase. It runs the identical
  * pipeline with the identical safety guarantees (image seen only by trait
  * extraction, buffer wiped in finally on success AND failure, text-only after
- * that) but reports each milestone through the emitter as it happens. The HTTP
- * layer turns those messages into SSE frames, so the long multi-step call
- * streams progress and never idles into a timeout.
+ * that) but reports each milestone through the emitter as it happens: the
+ * scanning/extraction stages, the trait count + compact summary, the candidate
+ * names, and the final localized result. The HTTP layer turns those messages
+ * into SSE frames, so the long multi-step call streams progress and never
+ * idles into a timeout.
  */
 @Injectable()
 export class AnalyzeGameStreamUseCase {
@@ -36,13 +39,23 @@ export class AnalyzeGameStreamUseCase {
     body: unknown,
     emit: GameStreamEmitter,
   ): Promise<void> {
+    const languageCode = resolveRequestLanguage(body);
     emit({ event: GameStreamEvent.Accepted });
     emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Validating });
 
-    const traits = await this.extractTraitsAndDestroyImage(file, isConsentGiven(body), emit);
-    emit({ event: GameStreamEvent.Traits, traits });
+    const extraction = await this.extractTraitsAndDestroyImage(
+      file,
+      isConsentGiven(body),
+      languageCode,
+      emit,
+    );
+    emit({
+      event: GameStreamEvent.Traits,
+      traitCount: extraction.traitCount,
+      compactTraitSummary: extraction.compactTraitSummary,
+    });
 
-    const result = await this.styleMatch.matchFromTraits(traits, {
+    const result = await this.styleMatch.matchFromTraits(extraction, languageCode, {
       onStage: (stage) => {
         emit({ event: GameStreamEvent.Stage, stage });
       },
@@ -62,13 +75,18 @@ export class AnalyzeGameStreamUseCase {
   private async extractTraitsAndDestroyImage(
     file: UploadedImageFile | undefined,
     consent: boolean,
+    languageCode: LanguageCodeValue,
     emit: GameStreamEmitter,
-  ): Promise<Traits> {
+  ): Promise<TraitExtractionResponse> {
     try {
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Scanning });
       const safeFile = await this.fileSecurity.assertSafeImage(file, consent);
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.ExtractingTraits });
-      return await this.traitExtraction.extractTraits(safeFile.buffer, safeFile.mimetype);
+      return await this.traitExtraction.extractTraits(
+        safeFile.buffer,
+        safeFile.mimetype,
+        languageCode,
+      );
     } finally {
       this.cleanup.wipe(file);
     }

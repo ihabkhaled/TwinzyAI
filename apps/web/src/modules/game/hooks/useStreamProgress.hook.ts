@@ -1,21 +1,25 @@
 'use client';
-// client-boundary-reason: owns the live streaming-progress state (stage, extracted traits, candidate names) updated as SSE events arrive.
+// client-boundary-reason: owns the live streaming-progress state (stage, trait count + summary, candidate names) updated as SSE events arrive.
 
 import { useCallback, useMemo, useState } from 'react';
 
-import type { GameStreamStageValue, Traits } from '@twinzy/shared';
+import type { GameStreamStageValue } from '@twinzy/shared';
 
-import type { GameStreamHandlers, StreamProgressController } from '../model/game.types';
+import type {
+  GameStreamHandlers,
+  StreamProgressController,
+  TraitsProgress,
+} from '../model/game.types';
 
 /**
  * Owns the mid-pipeline progress the streaming analyze request reports: the
- * current stage, the extracted traits, and the candidate names. Exposes the
- * stream {@link GameStreamHandlers} (stable) plus a `reset` for each new run,
- * keeping the orchestrator hook small.
+ * current stage, the trait count + compact summary, and the candidate names.
+ * Exposes the stream {@link GameStreamHandlers} (stable) plus a `reset` for
+ * each new run, keeping the orchestrator hook small.
  */
 export const useStreamProgress = (): StreamProgressController => {
   const [currentStage, setCurrentStage] = useState<GameStreamStageValue | undefined>();
-  const [traits, setTraits] = useState<Traits | undefined>();
+  const [traitsProgress, setTraitsProgress] = useState<TraitsProgress | undefined>();
   const [candidateNames, setCandidateNames] = useState<readonly string[]>([]);
 
   const handlers = useMemo<GameStreamHandlers>(
@@ -23,8 +27,8 @@ export const useStreamProgress = (): StreamProgressController => {
       onStage: (stage): void => {
         setCurrentStage(stage);
       },
-      onTraits: (next): void => {
-        setTraits(next);
+      onTraits: (progress): void => {
+        setTraitsProgress(progress);
       },
       onCandidates: (names): void => {
         setCandidateNames(names);
@@ -35,9 +39,9 @@ export const useStreamProgress = (): StreamProgressController => {
 
   const reset = useCallback((): void => {
     setCurrentStage(undefined);
-    setTraits(undefined);
+    setTraitsProgress(undefined);
     setCandidateNames([]);
   }, []);
 
-  return { handlers, currentStage, traits, candidateNames, reset };
+  return { handlers, currentStage, traitsProgress, candidateNames, reset };
 };

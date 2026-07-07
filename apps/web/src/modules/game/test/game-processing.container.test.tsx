@@ -8,7 +8,8 @@ const baseProps = {
   hint: 'This usually takes a few seconds.',
   traitsTitle: 'Traits we are reading',
   candidatesTitle: 'Rough matches',
-  traits: [],
+  traitCountLabel: undefined,
+  summary: [],
   candidateNames: [],
 };
 
@@ -21,18 +22,19 @@ describe('GameProcessing', () => {
     expect(screen.queryByText('Rough matches')).not.toBeInTheDocument();
   });
 
-  it('writes down traits and candidate names as they stream in', () => {
+  it('writes down the trait summary and candidate names as they stream in', () => {
     render(
       <GameProcessing
         {...baseProps}
-        traits={[{ key: 'hairColor', label: 'Hair color', value: 'Brown' }]}
+        traitCountLabel="Traits read: 180"
+        summary={['wavy dark hair']}
         candidateNames={['Ada Lovelace']}
       />,
     );
 
     expect(screen.getByText('Traits we are reading')).toBeInTheDocument();
-    expect(screen.getByText('Hair color')).toBeInTheDocument();
-    expect(screen.getByText('Brown')).toBeInTheDocument();
+    expect(screen.getByText('Traits read: 180')).toBeInTheDocument();
+    expect(screen.getByText('wavy dark hair')).toBeInTheDocument();
     expect(screen.getByText('Rough matches')).toBeInTheDocument();
     expect(screen.getByText('Ada Lovelace')).toBeInTheDocument();
   });

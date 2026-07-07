@@ -1,6 +1,21 @@
-import type { GameStreamStageValue, TraitKey, VerdictValue } from '@twinzy/shared';
+import type {
+  ConfidenceLevelValue,
+  GameStreamStageValue,
+  PublicCategoryValue,
+  TraitCategoryKey,
+  UncertaintyNoteField,
+  VerdictValue,
+} from '@twinzy/shared';
 
-import { STAGE_LABEL_KEYS, TRAIT_LABEL_KEYS, VERDICT_LABEL_KEYS } from '../model/game.constants';
+import {
+  buildTraitFieldLabelKey,
+  CONFIDENCE_LABEL_KEYS,
+  PUBLIC_CATEGORY_LABEL_KEYS,
+  STAGE_LABEL_KEYS,
+  TRAIT_CATEGORY_LABEL_KEYS,
+  UNCERTAINTY_LABEL_KEYS,
+  VERDICT_LABEL_KEYS,
+} from '../model/game.constants';
 import { GamePhase, type GamePhaseValue } from '../model/game.enums';
 import type {
   GameScreenLabels,
@@ -37,13 +52,50 @@ export const resolveStageLabel = (
 ): string =>
   stage === undefined ? translate('game.processingText') : translate(STAGE_LABEL_KEYS[stage]);
 
-/** Translated display label for a single extracted trait. */
-export const resolveTraitLabel = (translate: TranslateMessage, key: TraitKey): string =>
-  translate(TRAIT_LABEL_KEYS[key]);
+/** Translated accordion title for one trait category. */
+export const resolveTraitCategoryTitle = (
+  translate: TranslateMessage,
+  category: TraitCategoryKey,
+): string => translate(TRAIT_CATEGORY_LABEL_KEYS[category]);
+
+/** Translated display label for one trait field inside a category. */
+export const resolveTraitFieldLabel = (
+  translate: TranslateMessage,
+  category: TraitCategoryKey,
+  field: string,
+): string => translate(buildTraitFieldLabelKey(category, field));
+
+/** Translated label for one uncertainty-notes group. */
+export const resolveUncertaintyLabel = (
+  translate: TranslateMessage,
+  field: UncertaintyNoteField,
+): string => translate(UNCERTAINTY_LABEL_KEYS[field]);
 
 /** Translated display label for a verdict band. */
 export const resolveVerdictLabel = (translate: TranslateMessage, verdict: VerdictValue): string =>
   translate(VERDICT_LABEL_KEYS[verdict]);
+
+/** Translated display label for a confidence band. */
+export const resolveConfidenceLabel = (
+  translate: TranslateMessage,
+  confidence: ConfidenceLevelValue,
+): string => translate(CONFIDENCE_LABEL_KEYS[confidence]);
+
+/** Translated display label for a public-figure category. */
+export const resolveCategoryLabel = (
+  translate: TranslateMessage,
+  category: PublicCategoryValue,
+): string => translate(PUBLIC_CATEGORY_LABEL_KEYS[category]);
+
+/** Translate an optional message key; undefined stays undefined. */
+export const translateOptionalKey = (
+  translate: TranslateMessage,
+  key: string | undefined,
+): string | undefined => (key === undefined ? undefined : translate(key));
+
+/** Localized "Traits read: N" line (ICU number). */
+export const resolveTraitCountLabel = (translate: TranslateMessage, count: number): string =>
+  translate('game.traitCount', { count });
 
 /**
  * Safe share text: name + score only. Never the photo, never trait JSON, never
@@ -68,6 +120,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   processingHint: translate('game.processingHint'),
   liveTraitsTitle: translate('game.liveTraitsTitle'),
   liveCandidatesTitle: translate('game.liveCandidatesTitle'),
+  translating: translate('game.translating'),
   privacyNotice: translate('home.privacyNotice'),
   upload: {
     label: translate('upload.label'),
@@ -87,11 +140,15 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   },
   result: {
     title: translate('result.title'),
-    traitsTitle: translate('result.traitsTitle'),
+    compactSummaryTitle: translate('game.compactSummaryTitle'),
+    detailedTraitsTitle: translate('game.detailedTraitsTitle'),
+    imageQualityTitle: translate('game.imageQualityTitle'),
+    uncertaintyTitle: translate('game.uncertaintyTitle'),
     scoreLabel: translate('result.scoreLabel'),
     reasonLabel: translate('result.reasonLabel'),
     matchingTraitsLabel: translate('result.matchingTraitsLabel'),
     weakTraitsLabel: translate('result.weakTraitsLabel'),
+    mismatchLabel: translate('result.mismatchLabel'),
     rankLabel: translate('result.rankLabel'),
     fallbackTitle: translate('result.fallbackTitle'),
     retryButton: translate('result.retryButton'),

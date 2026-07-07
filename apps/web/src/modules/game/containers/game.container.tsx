@@ -12,11 +12,11 @@ import { CameraCapture } from '../components/camera-capture.component';
 import { PrivacyNotice } from '../components/privacy-notice.component';
 import { UploadCard } from '../components/upload-card.component';
 import { UploadConsent } from '../components/upload-consent.component';
-import { buildGameScreenLabels } from '../helpers/game-display.helper';
+import { buildGameScreenLabels, resolveTraitCountLabel } from '../helpers/game-display.helper';
 import { useGame } from '../hooks/useGame.hook';
 import { UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
 import { GamePhase } from '../model/game.enums';
-import type { GameScreenLabels, GameViewModel } from '../model/game.types';
+import type { GameScreenLabels, GameViewModel, TranslateMessage } from '../model/game.types';
 
 import { gameTitleClass } from './game.container.variants';
 import { GameProcessing } from './game-processing.container';
@@ -79,13 +79,22 @@ const renderSetup = (vm: GameViewModel, labels: GameScreenLabels): ReactElement 
   );
 };
 
-const renderProcessing = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
+const renderProcessing = (
+  vm: GameViewModel,
+  labels: GameScreenLabels,
+  translate: TranslateMessage,
+): ReactElement => (
   <GameProcessing
     stageLabel={vm.stageLabel}
     hint={labels.processingHint}
     traitsTitle={labels.liveTraitsTitle}
     candidatesTitle={labels.liveCandidatesTitle}
-    traits={vm.liveTraits}
+    traitCountLabel={
+      vm.liveTraitCount === undefined
+        ? undefined
+        : resolveTraitCountLabel(translate, vm.liveTraitCount)
+    }
+    summary={vm.liveSummary}
     candidateNames={vm.liveCandidates}
   />
 );
@@ -115,7 +124,7 @@ export const GameContainer = (): ReactElement => {
     <Stack gap="lg">
       <h1 className={gameTitleClass}>{labels.title}</h1>
       {vm.phase === GamePhase.Setup && renderSetup(vm, labels)}
-      {vm.phase === GamePhase.Processing && renderProcessing(vm, labels)}
+      {vm.phase === GamePhase.Processing && renderProcessing(vm, labels, translate)}
       {vm.phase === GamePhase.Error &&
         vm.errorMessage !== undefined &&
         renderError(vm.errorMessage, labels.result.retryButton, vm.onRetry)}
@@ -123,6 +132,10 @@ export const GameContainer = (): ReactElement => {
         <GameResult
           view={vm.resultView}
           labels={labels.result}
+          traitCountLabel={resolveTraitCountLabel(translate, vm.resultView.traitCount)}
+          translatingLabel={labels.translating}
+          isTranslating={vm.translation.isTranslating}
+          translationError={vm.translation.errorMessage}
           shareFeedback={vm.share.feedback}
           onShare={vm.onShareResult}
           onRetry={vm.onRetry}

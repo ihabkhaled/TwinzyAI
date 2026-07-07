@@ -1,32 +1,13 @@
 /**
- * The exact 15 visible, non-identifying trait keys returned by trait extraction.
- * Order matters for display; the set is the schema contract with Gemini.
+ * Candidate/result bounds and score bands for the matching pipeline. The
+ * advanced trait taxonomy itself lives in trait-category.constants.ts.
  */
-export const TRAIT_KEYS = [
-  'faceShape',
-  'skinToneUndertone',
-  'hairColor',
-  'hairTexture',
-  'hairStyleLength',
-  'hairline',
-  'foreheadShapeSize',
-  'eyebrowShapeThickness',
-  'eyeColorEyeShape',
-  'noseShape',
-  'cheekbonesCheeks',
-  'lipsMouthShape',
-  'beardMustacheColor',
-  'beardMustacheStyleDensity',
-  'jawlineChinOverallStructure',
-] as const;
-
-export const TRAIT_COUNT = TRAIT_KEYS.length;
-
 export const MIN_CANDIDATES = 1;
 
 export const MAX_CANDIDATES = 5;
 
-export const MAX_FINAL_RESULTS = 4;
+/** V2 returns up to 5 final display results when enough safe matches exist. */
+export const MAX_FINAL_RESULTS = 5;
 
 export const MIN_SCORE = 0;
 

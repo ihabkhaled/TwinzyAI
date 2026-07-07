@@ -1,5 +1,18 @@
-import type { GameStreamStageValue, TraitKey, VerdictValue } from '@twinzy/shared';
-import { GameStreamStage, Verdict } from '@twinzy/shared';
+import type {
+  ConfidenceLevelValue,
+  GameStreamStageValue,
+  PublicCategoryValue,
+  TraitCategoryKey,
+  UncertaintyNoteField,
+  VerdictValue,
+} from '@twinzy/shared';
+import {
+  ConfidenceLevel,
+  GameStreamStage,
+  PublicCategory,
+  TRAIT_CATEGORY_KEYS,
+  Verdict,
+} from '@twinzy/shared';
 
 /** Re-exported so the module owns one stable import surface for these values. */
 export {
@@ -8,7 +21,9 @@ export {
   DEFAULT_MAX_IMAGE_SIZE_BYTES,
   GAME_ANALYZE_PATH,
   GAME_ANALYZE_STREAM_PATH,
-  TRAIT_KEYS,
+  GAME_TRANSLATE_RESULT_PATH,
+  TRAIT_CATEGORY_FIELDS,
+  UNCERTAINTY_NOTE_FIELDS,
 } from '@twinzy/shared';
 
 /** Multipart form-field names the backend `/game/analyze` endpoint expects. */
@@ -17,6 +32,9 @@ export const UPLOAD_FIELD_NAME = 'image';
 export const CONSENT_FIELD_NAME = 'consent';
 
 export const CONSENT_FIELD_VALUE = 'true';
+
+/** Multipart form-field carrying the active UI language for localized AI output. */
+export const LANGUAGE_FIELD_NAME = 'languageCode';
 
 /** DOM ids that wire the labels/inputs together for the setup form. */
 export const PHOTO_INPUT_ID = 'game-photo-input';
@@ -86,26 +104,30 @@ export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   NETWORK_ERROR: GAME_ERROR_MESSAGE_KEYS.network,
 };
 
+/** i18n key shown while an existing result is being translated. */
+export const TRANSLATING_MESSAGE_KEY = 'game.translating';
+
+/** i18n key shown when translation fails and the old language is kept. */
+export const TRANSLATION_FAILED_MESSAGE_KEY = 'errors.translationFailed';
+
 /** Square render size (px) for the in-memory photo preview. */
 export const PREVIEW_IMAGE_SIZE = 160;
 
-/** i18n message key for each of the 15 trait fields, in display order. */
-export const TRAIT_LABEL_KEYS: Record<TraitKey, string> = {
-  faceShape: 'result.traits.faceShape',
-  skinToneUndertone: 'result.traits.skinToneUndertone',
-  hairColor: 'result.traits.hairColor',
-  hairTexture: 'result.traits.hairTexture',
-  hairStyleLength: 'result.traits.hairStyleLength',
-  hairline: 'result.traits.hairline',
-  foreheadShapeSize: 'result.traits.foreheadShapeSize',
-  eyebrowShapeThickness: 'result.traits.eyebrowShapeThickness',
-  eyeColorEyeShape: 'result.traits.eyeColorEyeShape',
-  noseShape: 'result.traits.noseShape',
-  cheekbonesCheeks: 'result.traits.cheekbonesCheeks',
-  lipsMouthShape: 'result.traits.lipsMouthShape',
-  beardMustacheColor: 'result.traits.beardMustacheColor',
-  beardMustacheStyleDensity: 'result.traits.beardMustacheStyleDensity',
-  jawlineChinOverallStructure: 'result.traits.jawlineChinOverallStructure',
+/** i18n title key per trait category, shown as accordion group headings. */
+export const TRAIT_CATEGORY_LABEL_KEYS: Record<TraitCategoryKey, string> = Object.fromEntries(
+  TRAIT_CATEGORY_KEYS.map((key) => [key, `result.traitCategories.${key}`]),
+) as Record<TraitCategoryKey, string>;
+
+/** i18n label key for one trait field inside a category. */
+export const buildTraitFieldLabelKey = (category: TraitCategoryKey, field: string): string =>
+  `result.traitFields.${category}.${field}`;
+
+/** i18n label key per uncertainty-notes list. */
+export const UNCERTAINTY_LABEL_KEYS: Record<UncertaintyNoteField, string> = {
+  imageLimitations: 'result.uncertainty.imageLimitations',
+  unclearCategories: 'result.uncertainty.unclearCategories',
+  lowConfidenceObservations: 'result.uncertainty.lowConfidenceObservations',
+  traitsNotVisible: 'result.uncertainty.traitsNotVisible',
 };
 
 /** i18n message key for each verdict band. */
@@ -113,4 +135,21 @@ export const VERDICT_LABEL_KEYS: Record<VerdictValue, string> = {
   [Verdict.Strong]: 'result.verdict.strong',
   [Verdict.Medium]: 'result.verdict.medium',
   [Verdict.Weak]: 'result.verdict.weak',
+};
+
+/** i18n message key for each confidence band. */
+export const CONFIDENCE_LABEL_KEYS: Record<ConfidenceLevelValue, string> = {
+  [ConfidenceLevel.High]: 'result.confidence.high',
+  [ConfidenceLevel.Medium]: 'result.confidence.medium',
+  [ConfidenceLevel.Low]: 'result.confidence.low',
+};
+
+/** i18n message key for each public-figure category. */
+export const PUBLIC_CATEGORY_LABEL_KEYS: Record<PublicCategoryValue, string> = {
+  [PublicCategory.Actor]: 'result.category.actor',
+  [PublicCategory.Singer]: 'result.category.singer',
+  [PublicCategory.Creator]: 'result.category.creator',
+  [PublicCategory.Athlete]: 'result.category.athlete',
+  [PublicCategory.PublicFigure]: 'result.category.public_figure',
+  [PublicCategory.Other]: 'result.category.other',
 };

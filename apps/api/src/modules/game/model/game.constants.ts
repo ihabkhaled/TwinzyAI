@@ -6,6 +6,14 @@ export const ANALYZE_THROTTLE = {
   default: { limit: 10, ttl: 60_000 },
 } as const;
 
+/**
+ * Per-route limit for the text-only translation endpoint. Cheaper than
+ * analyze but still a model call — 10 per minute per client.
+ */
+export const TRANSLATE_THROTTLE = {
+  default: { limit: 10, ttl: 60_000 },
+} as const;
+
 /** Multipart field name carrying the single uploaded image. */
 export const UPLOAD_FIELD_NAME = 'image';
 

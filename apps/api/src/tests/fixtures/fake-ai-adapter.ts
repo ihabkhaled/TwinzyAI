@@ -1,4 +1,11 @@
-import { TRAIT_KEYS } from '@twinzy/shared';
+import type { TraitExtractionResponse } from '@twinzy/shared';
+import {
+  GAME_PROMPT_VERSION,
+  RESULT_DISCLAIMER,
+  TOTAL_TRAIT_FIELDS,
+  TRAIT_CATEGORY_FIELDS,
+  UNCERTAINTY_NOTE_FIELDS,
+} from '@twinzy/shared';
 
 import type {
   AiProviderAdapter,
@@ -82,20 +89,45 @@ export class FakeAiAdapter implements AiProviderAdapter {
   }
 }
 
-export const buildTraitsPayload = (): Record<string, string> =>
-  Object.fromEntries(TRAIT_KEYS.map((key) => [key, `observed ${key}`]));
+/** Full nested advanced traits: every field of every category filled. */
+export const buildTraitsPayload = (): Record<string, unknown> => ({
+  ...Object.fromEntries(
+    Object.entries(TRAIT_CATEGORY_FIELDS).map(([category, fields]) => [
+      category,
+      Object.fromEntries(fields.map((field) => [field, `observed ${field}`])),
+    ]),
+  ),
+  uncertaintyNotes: Object.fromEntries(UNCERTAINTY_NOTE_FIELDS.map((field) => [field, []])),
+});
 
-export const buildTraitExtractionJson = (): string =>
-  JSON.stringify({
-    traits: buildTraitsPayload(),
-    safetyCheck: {
-      containsIdentityClaim: false,
-      containsCelebrityComparison: false,
-      containsSensitiveInference: false,
-      containsFaceRecognitionClaim: false,
-      containsBiometricClaim: false,
-    },
-  });
+export const buildSafetyCheckPayload = (): Record<string, boolean> => ({
+  containsIdentityClaim: false,
+  containsCelebrityComparison: false,
+  containsSensitiveInference: false,
+  containsFaceRecognitionClaim: false,
+  containsBiometricClaim: false,
+});
+
+/** Full valid Prompt 1 response (advanced-global-traits-v2). */
+export const buildTraitExtractionPayload = (
+  overrides: Partial<Record<string, unknown>> = {},
+): Record<string, unknown> => ({
+  promptVersion: GAME_PROMPT_VERSION,
+  languageCode: 'en',
+  traitCount: TOTAL_TRAIT_FIELDS,
+  traits: buildTraitsPayload(),
+  compactTraitSummary: ['clear oval face', 'wavy dark hair'],
+  safetyCheck: buildSafetyCheckPayload(),
+  ...overrides,
+});
+
+export const buildTraitExtractionJson = (
+  overrides: Partial<Record<string, unknown>> = {},
+): string => JSON.stringify(buildTraitExtractionPayload(overrides));
+
+/** Typed extraction fixture for direct service/unit inputs. */
+export const buildTraitExtraction = (): TraitExtractionResponse =>
+  buildTraitExtractionPayload() as unknown as TraitExtractionResponse;
 
 export const buildCandidatePayload = (
   overrides: Partial<Record<string, unknown>> = {},
@@ -103,10 +135,16 @@ export const buildCandidatePayload = (
   name: 'Sample Star',
   publicCategory: 'actor',
   countryOrRegion: 'Global',
+  globalPopularityLevel: 'high',
   styleVibeFitScore: 84,
+  confidenceLevel: 'high',
   reason: 'Shares a similar public style impression from hair and jawline traits.',
-  alignedTraits: ['hairColor', 'jawlineChinOverallStructure'],
-  weakOrUncertainTraits: ['eyeColorEyeShape'],
+  strongAlignedTraits: ['wavy dark hair'],
+  mediumAlignedTraits: ['defined jawline'],
+  weakOrUncertainTraits: ['eye color unclear'],
+  majorMismatchRisks: [],
+  whyThisCandidateWasChosen: 'Strong overlap across hair, jawline, and grooming style signals.',
+  scoreExplanation: 'Most major visible traits align; a few remain unclear.',
   safetyCheck: {
     containsFaceRecognitionClaim: false,
     containsBiometricClaim: false,
@@ -118,7 +156,14 @@ export const buildCandidatePayload = (
 
 export const buildCandidatesJson = (
   candidates: Record<string, unknown>[] = [buildCandidatePayload()],
-): string => JSON.stringify({ candidates });
+): string =>
+  JSON.stringify({
+    promptVersion: GAME_PROMPT_VERSION,
+    languageCode: 'en',
+    candidateCount: candidates.length,
+    candidates,
+    fallbackMessage: '',
+  });
 
 export const buildJudgedResultPayload = (
   overrides: Partial<Record<string, unknown>> = {},
@@ -126,10 +171,16 @@ export const buildJudgedResultPayload = (
   name: 'Sample Star',
   rank: 1,
   finalStyleVibeFitScore: 82,
+  confidenceLevel: 'high',
   verdict: 'strong',
-  reason: 'Consistent style impression across major written traits.',
-  matchingTraits: ['hairColor'],
+  countryOrRegion: 'Global',
+  publicCategory: 'actor',
+  finalReason: 'Consistent style impression across major written traits.',
+  topMatchingTraits: ['wavy dark hair'],
+  secondaryMatchingTraits: ['defined jawline'],
   weakOrUncertainTraits: [],
+  mismatchWarnings: [],
+  judgeNotes: 'Score kept conservative because several traits were unclear.',
   shouldDisplay: true,
   ...overrides,
 });
@@ -138,8 +189,41 @@ export const buildJudgeJson = (
   results: Record<string, unknown>[] = [buildJudgedResultPayload()],
 ): string =>
   JSON.stringify({
+    promptVersion: GAME_PROMPT_VERSION,
+    languageCode: 'en',
     results,
+    removedCandidates: [],
     fallbackMessage: '',
-    disclaimer:
-      'This is a playful style/vibe result based on written visible traits only. It is not face recognition, identity matching, or biometric comparison.',
+    disclaimer: RESULT_DISCLAIMER,
   });
+
+/** Full valid FinalGameResult payload (for the translate endpoint tests). */
+export const buildFinalGameResultPayload = (
+  overrides: Partial<Record<string, unknown>> = {},
+): Record<string, unknown> => ({
+  promptVersion: GAME_PROMPT_VERSION,
+  languageCode: 'en',
+  traitCount: TOTAL_TRAIT_FIELDS,
+  traits: buildTraitsPayload(),
+  compactTraitSummary: ['clear oval face', 'wavy dark hair'],
+  results: [
+    {
+      name: 'Sample Star',
+      rank: 1,
+      finalStyleVibeFitScore: 82,
+      confidenceLevel: 'high',
+      verdict: 'strong',
+      countryOrRegion: 'Global',
+      publicCategory: 'actor',
+      finalReason: 'Consistent style impression across major written traits.',
+      topMatchingTraits: ['wavy dark hair'],
+      secondaryMatchingTraits: [],
+      weakOrUncertainTraits: [],
+      mismatchWarnings: [],
+      judgeNotes: 'Conservative score.',
+    },
+  ],
+  fallbackMessage: '',
+  disclaimer: RESULT_DISCLAIMER,
+  ...overrides,
+});

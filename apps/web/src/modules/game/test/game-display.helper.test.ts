@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import {
   buildShareText,
+  resolveConfidenceLabel,
   resolvePhase,
-  resolveTraitLabel,
+  resolveTraitCategoryTitle,
+  resolveTraitFieldLabel,
   resolveVerdictLabel,
 } from '../helpers/game-display.helper';
 import { GamePhase } from '../model/game.enums';
@@ -20,10 +22,14 @@ describe('resolvePhase', () => {
   });
 });
 
-describe('trait and verdict labels', () => {
-  it('resolves the label key through the injected translator', () => {
-    expect(resolveTraitLabel(fakeTranslate, 'faceShape')).toBe('result.traits.faceShape');
+describe('trait, verdict, and confidence labels', () => {
+  it('resolves category, field, verdict, and confidence keys through the translator', () => {
+    expect(resolveTraitCategoryTitle(fakeTranslate, 'hair')).toBe('result.traitCategories.hair');
+    expect(resolveTraitFieldLabel(fakeTranslate, 'hair', 'hairColor')).toBe(
+      'result.traitFields.hair.hairColor',
+    );
     expect(resolveVerdictLabel(fakeTranslate, 'strong')).toBe('result.verdict.strong');
+    expect(resolveConfidenceLabel(fakeTranslate, 'high')).toBe('result.confidence.high');
   });
 });
 
@@ -32,11 +38,15 @@ describe('buildShareText', () => {
     name: 'Aria',
     rank: 1,
     scorePercent: 90,
-    verdict: 'strong',
     verdictLabel: 'Strong vibe fit',
+    confidenceLabel: 'High confidence',
+    countryOrRegion: 'Global',
+    categoryLabel: 'Actor',
     reason: 'reason',
-    matchingTraits: [],
+    topMatchingTraits: [],
+    secondaryMatchingTraits: [],
     weakOrUncertainTraits: [],
+    mismatchWarnings: [],
   };
 
   it('returns an empty string when there is no result', () => {
