@@ -54,7 +54,8 @@
     "detailedTraitsTitle": "Detailed traits",
     "imageQualityTitle": "Image quality & uncertainty",
     "uncertaintyTitle": "What was unclear",
-    "translating": "Translating your result…"
+    "translating": "Translating your result…",
+    "retryTranslation": "Retry translation"
   },
   "upload": {
     "consentLabel": "I understand this is only a fun style/vibe game and my photo is not stored.",

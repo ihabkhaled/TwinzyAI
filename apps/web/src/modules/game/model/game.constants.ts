@@ -110,6 +110,18 @@ export const TRANSLATING_MESSAGE_KEY = 'game.translating';
 /** i18n key shown when translation fails and the old language is kept. */
 export const TRANSLATION_FAILED_MESSAGE_KEY = 'errors.translationFailed';
 
+/** i18n key for the button that re-attempts a failed translation. */
+export const RETRY_TRANSLATION_MESSAGE_KEY = 'game.retryTranslation';
+
+/**
+ * Per-request timeout (ms) for the translate-result call. Real Gemini
+ * translation of a full result runs 13–25s, well past the shared client's 15s
+ * default, so this request needs a generous ceiling or slow (but valid)
+ * translations abort mid-flight and surface as a failure. Kept finite so a
+ * genuinely hung request still terminates and the user can retry.
+ */
+export const AI_TRANSLATE_REQUEST_TIMEOUT_MS = 60_000;
+
 /** Square render size (px) for the in-memory photo preview. */
 export const PREVIEW_IMAGE_SIZE = 160;
 

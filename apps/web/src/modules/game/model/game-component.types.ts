@@ -2,12 +2,20 @@ import type { ChangeEventHandler, ReactNode, RefObject } from 'react';
 
 import type {
   GameResultView,
+  GameScreenLabels,
+  GameViewModel,
   ResultLabels,
   ResultView,
   TraitCategoryView,
   TraitFieldView,
   UncertaintyGroupView,
 } from './game.types';
+
+/** Props for the setup-phase container (upload/consent/camera composition). */
+export interface GameSetupProps {
+  vm: GameViewModel;
+  labels: GameScreenLabels;
+}
 
 /** Props for the landing hero (badge, headline, sub-copy, CTA label). */
 export interface LandingHeroProps {
@@ -110,10 +118,23 @@ export interface GameResultProps {
   labels: ResultLabels;
   traitCountLabel: string;
   translatingLabel: string;
+  retryTranslationLabel: string;
   isTranslating: boolean;
   translationError: string | undefined;
+  canRetryTranslation: boolean;
+  onRetryTranslation: () => void;
   shareFeedback: string | undefined;
   onShare: () => void;
+  onRetry: () => void;
+}
+
+/** Props for the language-switch status: loading banner + failure + retry. */
+export interface TranslationStatusProps {
+  isTranslating: boolean;
+  translatingLabel: string;
+  error: string | undefined;
+  retryLabel: string;
+  canRetry: boolean;
   onRetry: () => void;
 }
 

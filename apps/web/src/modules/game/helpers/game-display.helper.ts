@@ -121,6 +121,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   liveTraitsTitle: translate('game.liveTraitsTitle'),
   liveCandidatesTitle: translate('game.liveCandidatesTitle'),
   translating: translate('game.translating'),
+  retryTranslation: translate('game.retryTranslation'),
   privacyNotice: translate('home.privacyNotice'),
   upload: {
     label: translate('upload.label'),

@@ -55,7 +55,8 @@
     "detailedTraitsTitle": "الملامح التفصيلية",
     "imageQualityTitle": "جودة الصورة وعدم اليقين",
     "uncertaintyTitle": "ما لم يكن واضحًا",
-    "translating": "جارٍ ترجمة نتيجتك…"
+    "translating": "جارٍ ترجمة نتيجتك…",
+    "retryTranslation": "إعادة محاولة الترجمة"
   },
   "upload": {
     "consentLabel": "أفهم أن هذه مجرد لعبة ممتعة عن الأسلوب والانطباع وأن صورتي لا تُحفظ.",

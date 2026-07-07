@@ -112,6 +112,8 @@ export const useGame = (): GameViewModel => {
     translation: {
       isTranslating: translation.isTranslating,
       errorMessage: translateOptionalKey(translate, translation.errorKey),
+      canRetry: translation.errorKey !== undefined,
+      onRetry: translation.retry,
     },
   };
 };

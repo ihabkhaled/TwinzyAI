@@ -19,6 +19,7 @@ export const TEST_IDS = {
   traitCategory: 'trait-category',
   imageQuality: 'image-quality',
   translationBanner: 'translation-banner',
+  translationRetry: 'translation-retry',
   resultCard: 'result-card',
   traitList: 'trait-list',
   traitItem: 'trait-item',

@@ -1,0 +1,75 @@
+import type { ChangeEventHandler, ReactElement } from 'react';
+
+import { Button, Stack } from '@/packages/ui-primitives';
+import { TEST_IDS } from '@/shared/constants/test-ids.constants';
+
+import { CameraCapture } from '../components/camera-capture.component';
+import { PrivacyNotice } from '../components/privacy-notice.component';
+import { UploadCard } from '../components/upload-card.component';
+import { UploadConsent } from '../components/upload-consent.component';
+import { UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
+import type { GameScreenLabels, GameViewModel } from '../model/game.types';
+import type { GameSetupProps } from '../model/game-component.types';
+
+/** The live-camera capture card, shown while the camera source is open. */
+const renderCamera = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
+  <CameraCapture
+    title={labels.camera.title}
+    previewLabel={labels.camera.previewLabel}
+    startingLabel={labels.camera.starting}
+    captureButton={labels.camera.captureButton}
+    cancelButton={labels.camera.cancelButton}
+    isStarting={vm.camera.isStarting}
+    errorMessage={vm.camera.errorMessage}
+    videoRef={vm.camera.videoRef}
+    onCapture={vm.camera.onCapture}
+    onCancel={vm.camera.onCancel}
+    testId={TEST_IDS.cameraCard}
+  />
+);
+
+/**
+ * The setup-phase view: either the live camera, or the privacy note + photo
+ * source card + consent + analyze action. A container so it may translate the
+ * DOM change events into the view-model's file/consent handlers.
+ */
+export const GameSetup = ({ vm, labels }: GameSetupProps): ReactElement => {
+  if (vm.camera.isOpen) {
+    return renderCamera(vm, labels);
+  }
+
+  const onFileInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    vm.upload.onFileChange(event.target.files);
+  };
+  const onConsentChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    vm.onConsentChange(event.target.checked);
+  };
+  return (
+    <Stack gap="md">
+      <PrivacyNotice message={labels.privacyNotice} testId={TEST_IDS.privacyNotice} />
+      <UploadCard
+        uploadLabel={labels.upload.label}
+        changeButton={labels.upload.changeButton}
+        hint={labels.upload.hint}
+        cameraLabel={labels.upload.cameraLabel}
+        cameraHint={labels.upload.cameraHint}
+        previewAlt={labels.upload.previewAlt}
+        previewUrl={vm.upload.previewUrl}
+        fileError={vm.upload.fileError}
+        uploadAccept={UPLOAD_INPUT_ACCEPT}
+        onFileInputChange={onFileInputChange}
+        onOpenCamera={vm.camera.onOpen}
+        testId={TEST_IDS.uploadCard}
+      />
+      <UploadConsent
+        consentLabel={labels.upload.consentLabel}
+        checked={vm.consentGiven}
+        onChange={onConsentChange}
+        testId={TEST_IDS.consentCheckbox}
+      />
+      <Button onClick={vm.onAnalyze} disabled={!vm.canAnalyze} testId={TEST_IDS.analyzeButton}>
+        {labels.analyzeButton}
+      </Button>
+    </Stack>
+  );
+};

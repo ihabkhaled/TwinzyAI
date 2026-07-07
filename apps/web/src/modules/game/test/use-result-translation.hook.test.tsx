@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -89,7 +89,34 @@ describe('useResultTranslation', () => {
       expect(result.current.errorKey).toBe('errors.translationFailed');
     });
     expect(result.current.displayResult).toBe(canonical);
-    // Failed locale is not retried in a loop.
+    // Failed locale is not AUTO-retried in a loop (would hammer a rate-limited API).
     expect(postJsonMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('re-attempts a previously-failed locale when the user retries, and succeeds', async () => {
+    const canonical = buildFinalResult();
+    const translated = buildFinalResult({ languageCode: 'ar' });
+    // First attempt fails (e.g. transient quota/timeout); the retry succeeds.
+    postJsonMock.mockRejectedValueOnce(new Error('timeout')).mockResolvedValueOnce(translated);
+    localeMock.mockReturnValue('ar');
+
+    const { result } = renderHook(() => useResultTranslation(canonical), { wrapper: Wrapper });
+
+    await waitFor(() => {
+      expect(result.current.errorKey).toBe('errors.translationFailed');
+    });
+    expect(postJsonMock).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      result.current.retry();
+    });
+
+    await waitFor(() => {
+      expect(result.current.displayResult).toBe(translated);
+    });
+    expect(result.current.errorKey).toBeUndefined();
+    expect(postJsonMock).toHaveBeenCalledTimes(2);
+    // Retrying the text endpoint still never re-analyzes the image.
+    expect(streamMultipartMock).not.toHaveBeenCalled();
   });
 });

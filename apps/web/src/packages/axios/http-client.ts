@@ -50,15 +50,18 @@ export async function postMultipart<TSchema extends z.ZodType>(
 /**
  * Posts a JSON body and validates the JSON response against `schema`. Used by
  * the game's translate-result flow; keeps the response contract zod-enforced
- * exactly like {@link postMultipart}.
+ * exactly like {@link postMultipart}. An optional per-request `config` overrides
+ * instance defaults — notably `timeout`, since AI generation legitimately runs
+ * far longer than the shared client's default and must not be aborted early.
  */
 export async function postJson<TSchema extends z.ZodType>(
   client: AxiosInstance,
   path: string,
   body: unknown,
   schema: TSchema,
+  config?: HttpRequestConfig,
 ): Promise<z.output<TSchema>> {
-  const response = await client.post<unknown>(path, body);
+  const response = await client.post<unknown>(path, body, config);
 
   return parseSchema(schema, response.data, path);
 }

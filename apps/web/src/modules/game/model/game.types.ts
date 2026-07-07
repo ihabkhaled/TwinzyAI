@@ -139,6 +139,8 @@ export interface ResultTranslationController {
   displayResult: FinalGameResult | undefined;
   isTranslating: boolean;
   errorKey: string | undefined;
+  /** Re-attempts the current locale after a failed switch (transient recovery). */
+  retry: () => void;
 }
 
 /**
@@ -200,10 +202,12 @@ export interface ShareViewModel {
   feedback: string | undefined;
 }
 
-/** The translation sub-view: loading flag + translated failure copy. */
+/** The translation sub-view: loading flag, failure copy, and the retry action. */
 export interface TranslationViewModel {
   isTranslating: boolean;
   errorMessage: string | undefined;
+  canRetry: boolean;
+  onRetry: () => void;
 }
 
 /** Translated copy for the upload/consent card. */
@@ -253,6 +257,7 @@ export interface GameScreenLabels {
   liveTraitsTitle: string;
   liveCandidatesTitle: string;
   translating: string;
+  retryTranslation: string;
   privacyNotice: string;
   upload: UploadLabels;
   camera: CameraLabels;
