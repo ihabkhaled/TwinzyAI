@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 
-import type { FinalGameResult, GameStreamStageValue, VerdictValue } from '@twinzy/shared';
+import type { FinalGameResult, GameStreamStageValue, Traits, VerdictValue } from '@twinzy/shared';
 
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
@@ -9,6 +9,19 @@ import type { GamePhaseValue } from './game.enums';
 /** Progress callbacks the streaming analyze request drives as events arrive. */
 export interface GameStreamHandlers {
   onStage: (stage: GameStreamStageValue) => void;
+  /** The extracted written traits, streamed right after extraction. */
+  onTraits?: (traits: Traits) => void;
+  /** The candidate public-figure names being considered ("rough examples"). */
+  onCandidates?: (names: readonly string[]) => void;
+}
+
+/** Live streaming-progress state plus the handlers that drive it and a reset. */
+export interface StreamProgressController {
+  handlers: GameStreamHandlers;
+  currentStage: GameStreamStageValue | undefined;
+  traits: Traits | undefined;
+  candidateNames: readonly string[];
+  reset: () => void;
 }
 
 /**
@@ -163,6 +176,8 @@ export interface GameScreenLabels {
   analyzeButton: string;
   processingText: string;
   processingHint: string;
+  liveTraitsTitle: string;
+  liveCandidatesTitle: string;
   privacyNotice: string;
   upload: UploadLabels;
   camera: CameraLabels;
@@ -193,6 +208,10 @@ export interface GameViewModel {
   errorMessage: string | undefined;
   /** Live progress copy for the streamed pipeline; the generic text until a stage arrives. */
   stageLabel: string;
+  /** Extracted traits streamed mid-pipeline (empty until the traits event arrives). */
+  liveTraits: TraitView[];
+  /** Candidate public-figure names streamed as "rough examples" (empty until they arrive). */
+  liveCandidates: string[];
   upload: UploadViewModel;
   camera: CameraViewModel;
   share: ShareViewModel;

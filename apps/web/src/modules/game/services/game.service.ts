@@ -1,11 +1,11 @@
-import type { FinalGameResult, GameStreamStageValue } from '@twinzy/shared';
+import type { FinalGameResult } from '@twinzy/shared';
 
 import { AppError } from '@/shared/errors/app-error';
 
 import { analyzeImageRequest } from '../gateway/game.gateway';
 import { analyzeImageStreamRequest } from '../gateway/game-stream.gateway';
 import { validateImageFile } from '../helpers/game-validation.helper';
-import type { FileValidationResult } from '../model/game.types';
+import type { FileValidationResult, GameStreamHandlers } from '../model/game.types';
 
 /** UX-only file validation reused by the upload hook and {@link analyzeImage}. */
 export const validateFileForUpload = (file: File | undefined): FileValidationResult =>
@@ -37,8 +37,8 @@ export const analyzeImage = async (file: File): Promise<FinalGameResult> => {
  */
 export const analyzeImageStream = async (
   file: File,
-  onStage: (stage: GameStreamStageValue) => void,
+  handlers: GameStreamHandlers,
 ): Promise<FinalGameResult> => {
   assertValidFile(file);
-  return analyzeImageStreamRequest(file, { onStage });
+  return analyzeImageStreamRequest(file, handlers);
 };

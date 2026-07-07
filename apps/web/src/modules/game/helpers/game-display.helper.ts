@@ -66,6 +66,8 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   analyzeButton: translate('game.analyzeButton'),
   processingText: translate('game.processingText'),
   processingHint: translate('game.processingHint'),
+  liveTraitsTitle: translate('game.liveTraitsTitle'),
+  liveCandidatesTitle: translate('game.liveCandidatesTitle'),
   privacyNotice: translate('home.privacyNotice'),
   upload: {
     label: translate('upload.label'),

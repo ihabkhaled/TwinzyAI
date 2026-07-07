@@ -6,6 +6,8 @@
 export const GameStreamEvent = {
   Accepted: 'accepted',
   Stage: 'stage',
+  Traits: 'traits',
+  Candidates: 'candidates',
   Result: 'result',
   Error: 'error',
   Heartbeat: 'heartbeat',
@@ -14,6 +16,8 @@ export const GameStreamEvent = {
 export const GAME_STREAM_EVENT_VALUES = [
   GameStreamEvent.Accepted,
   GameStreamEvent.Stage,
+  GameStreamEvent.Traits,
+  GameStreamEvent.Candidates,
   GameStreamEvent.Result,
   GameStreamEvent.Error,
   GameStreamEvent.Heartbeat,
@@ -27,6 +31,7 @@ export type GameStreamEventValue = (typeof GAME_STREAM_EVENT_VALUES)[number];
  */
 export const GameStreamStage = {
   Validating: 'validating',
+  Scanning: 'scanning',
   ExtractingTraits: 'extracting-traits',
   GeneratingCandidates: 'generating-candidates',
   Judging: 'judging',
@@ -35,6 +40,7 @@ export const GameStreamStage = {
 
 export const GAME_STREAM_STAGE_VALUES = [
   GameStreamStage.Validating,
+  GameStreamStage.Scanning,
   GameStreamStage.ExtractingTraits,
   GameStreamStage.GeneratingCandidates,
   GameStreamStage.Judging,

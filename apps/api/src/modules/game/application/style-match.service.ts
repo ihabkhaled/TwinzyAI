@@ -6,7 +6,7 @@ import { GameStreamStage } from '@twinzy/shared';
 import { AppLogger } from '../../../core/logger';
 import { CandidateGenerationService, CandidateJudgeService } from '../../ai';
 import { ResultAggregationService } from '../../result-aggregation';
-import type { StyleMatchStageListener } from '../model/game-stream.types';
+import type { StyleMatchProgressListener } from '../model/game-stream.types';
 
 const LOG_CONTEXT = 'StyleMatch';
 
@@ -30,19 +30,20 @@ export class StyleMatchService {
 
   public async matchFromTraits(
     traits: Traits,
-    onStage?: StyleMatchStageListener,
+    progress?: StyleMatchProgressListener,
   ): Promise<FinalGameResult> {
-    onStage?.(GameStreamStage.GeneratingCandidates);
+    progress?.onStage?.(GameStreamStage.GeneratingCandidates);
     const candidates = await this.candidateGeneration.generateCandidates(traits);
     if (candidates.length === 0) {
       this.logger.warn('No safe candidates — returning fallback');
-      onStage?.(GameStreamStage.Aggregating);
+      progress?.onStage?.(GameStreamStage.Aggregating);
       return this.resultAggregation.buildFallback(traits);
     }
 
-    onStage?.(GameStreamStage.Judging);
+    progress?.onCandidates?.(candidates.map((candidate) => candidate.name));
+    progress?.onStage?.(GameStreamStage.Judging);
     const judged = await this.candidateJudge.judgeCandidates(traits, candidates);
-    onStage?.(GameStreamStage.Aggregating);
+    progress?.onStage?.(GameStreamStage.Aggregating);
     return this.resultAggregation.aggregate(traits, judged);
   }
 }

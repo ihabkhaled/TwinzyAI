@@ -42,6 +42,7 @@ export const SHARE_COPIED_MESSAGE_KEY = 'result.shareCopied';
  */
 export const STAGE_LABEL_KEYS: Record<GameStreamStageValue, string> = {
   [GameStreamStage.Validating]: 'game.stage.validating',
+  [GameStreamStage.Scanning]: 'game.stage.scanning',
   [GameStreamStage.ExtractingTraits]: 'game.stage.extractingTraits',
   [GameStreamStage.GeneratingCandidates]: 'game.stage.generatingCandidates',
   [GameStreamStage.Judging]: 'game.stage.judging',

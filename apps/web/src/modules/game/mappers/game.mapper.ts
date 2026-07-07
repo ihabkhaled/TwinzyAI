@@ -1,4 +1,4 @@
-import type { FinalGameResult, FinalResultItem } from '@twinzy/shared';
+import type { FinalGameResult, FinalResultItem, Traits } from '@twinzy/shared';
 
 import {
   buildShareText,
@@ -7,6 +7,14 @@ import {
 } from '../helpers/game-display.helper';
 import { TRAIT_KEYS } from '../model/game.constants';
 import type { GameResultView, ResultView, TraitView, TranslateMessage } from '../model/game.types';
+
+/** Shape the raw written traits into translated, display-ready rows (in order). */
+export const mapTraitsToView = (traits: Traits, translate: TranslateMessage): TraitView[] =>
+  TRAIT_KEYS.map((key) => ({
+    key,
+    label: resolveTraitLabel(translate, key),
+    value: traits[key],
+  }));
 
 /** Shape one backend match into its translated, display-ready view. */
 const toResultView = (item: FinalResultItem, translate: TranslateMessage): ResultView => ({
@@ -28,11 +36,7 @@ export const mapFinalResultToView = (
   result: FinalGameResult,
   translate: TranslateMessage,
 ): GameResultView => {
-  const traits: TraitView[] = TRAIT_KEYS.map((key) => ({
-    key,
-    label: resolveTraitLabel(translate, key),
-    value: result.traits[key],
-  }));
+  const traits = mapTraitsToView(result.traits, translate);
 
   const results: ResultView[] = result.results.map((item) => toResultView(item, translate));
 

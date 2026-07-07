@@ -40,9 +40,15 @@ export class AnalyzeGameStreamUseCase {
     emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Validating });
 
     const traits = await this.extractTraitsAndDestroyImage(file, isConsentGiven(body), emit);
+    emit({ event: GameStreamEvent.Traits, traits });
 
-    const result = await this.styleMatch.matchFromTraits(traits, (stage) => {
-      emit({ event: GameStreamEvent.Stage, stage });
+    const result = await this.styleMatch.matchFromTraits(traits, {
+      onStage: (stage) => {
+        emit({ event: GameStreamEvent.Stage, stage });
+      },
+      onCandidates: (names) => {
+        emit({ event: GameStreamEvent.Candidates, names: [...names] });
+      },
     });
 
     emit({ event: GameStreamEvent.Result, result });
@@ -59,6 +65,7 @@ export class AnalyzeGameStreamUseCase {
     emit: GameStreamEmitter,
   ): Promise<Traits> {
     try {
+      emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Scanning });
       const safeFile = await this.fileSecurity.assertSafeImage(file, consent);
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.ExtractingTraits });
       return await this.traitExtraction.extractTraits(safeFile.buffer, safeFile.mimetype);

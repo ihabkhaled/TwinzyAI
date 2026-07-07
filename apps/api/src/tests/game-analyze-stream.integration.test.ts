@@ -103,7 +103,7 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
     expect(response.headers['access-control-allow-origin']).toBe('http://localhost:3000');
   });
 
-  it('emits accepted → ordered stages → result on the happy path', async () => {
+  it('emits accepted → ordered stages + intermediate traits/candidates → result', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
     adapter.queueTextResponse(buildCandidatesJson());
     adapter.queueTextResponse(buildJudgeJson());
@@ -117,11 +117,20 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
     expect(messages[0]?.event).toBe(GameStreamEvent.Accepted);
     expect(stages).toEqual([
       GameStreamStage.Validating,
+      GameStreamStage.Scanning,
       GameStreamStage.ExtractingTraits,
       GameStreamStage.GeneratingCandidates,
       GameStreamStage.Judging,
       GameStreamStage.Aggregating,
     ]);
+
+    // Intermediate progress payloads: extracted traits, then candidate names.
+    const traitsMessage = messages.find((message) => message.event === GameStreamEvent.Traits);
+    expect(traitsMessage?.event).toBe(GameStreamEvent.Traits);
+    const candidatesMessage = messages.find(
+      (message) => message.event === GameStreamEvent.Candidates,
+    );
+    expect(candidatesMessage?.event).toBe(GameStreamEvent.Candidates);
 
     const resultMessage = messages.find((message): message is ResultStreamMessage =>
       isResultMessage(message),

@@ -10,7 +10,6 @@ import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import { CameraCapture } from '../components/camera-capture.component';
 import { PrivacyNotice } from '../components/privacy-notice.component';
-import { ProcessingCard } from '../components/processing-card.component';
 import { UploadCard } from '../components/upload-card.component';
 import { UploadConsent } from '../components/upload-consent.component';
 import { buildGameScreenLabels } from '../helpers/game-display.helper';
@@ -20,6 +19,7 @@ import { GamePhase } from '../model/game.enums';
 import type { GameScreenLabels, GameViewModel } from '../model/game.types';
 
 import { gameTitleClass } from './game.container.variants';
+import { GameProcessing } from './game-processing.container';
 import { GameResult } from './game-result.container';
 
 const renderCamera = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
@@ -80,10 +80,13 @@ const renderSetup = (vm: GameViewModel, labels: GameScreenLabels): ReactElement 
 };
 
 const renderProcessing = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
-  <ProcessingCard
+  <GameProcessing
     stageLabel={vm.stageLabel}
     hint={labels.processingHint}
-    testId={TEST_IDS.processing}
+    traitsTitle={labels.liveTraitsTitle}
+    candidatesTitle={labels.liveCandidatesTitle}
+    traits={vm.liveTraits}
+    candidateNames={vm.liveCandidates}
   />
 );
 

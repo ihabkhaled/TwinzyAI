@@ -55,8 +55,10 @@ describe('analyzeImageStream', () => {
     const stages: GameStreamStageValue[] = [];
 
     await expect(
-      analyzeImageStream(buildImageFile(), (stage) => {
-        stages.push(stage);
+      analyzeImageStream(buildImageFile(), {
+        onStage: (stage) => {
+          stages.push(stage);
+        },
       }),
     ).resolves.toEqual(result);
     expect(stages).toEqual([GameStreamStage.Judging]);
@@ -64,7 +66,7 @@ describe('analyzeImageStream', () => {
 
   it('throws an AppError for an invalid file without opening the stream', async () => {
     await expect(
-      analyzeImageStream(buildImageFile('bad.gif', 'image/gif'), vi.fn()),
+      analyzeImageStream(buildImageFile('bad.gif', 'image/gif'), { onStage: vi.fn() }),
     ).rejects.toBeInstanceOf(AppError);
     expect(streamMultipartMock).not.toHaveBeenCalled();
   });

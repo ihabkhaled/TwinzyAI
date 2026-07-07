@@ -35,11 +35,14 @@
     "processingHint": "This usually takes a few seconds. Please keep this tab open.",
     "stage": {
       "validating": "Checking your photo...",
+      "scanning": "Scanning file for safety...",
       "extractingTraits": "Reading visible traits...",
       "generatingCandidates": "Finding public style/vibe matches...",
-      "judging": "Scoring and filtering the matches...",
+      "judging": "Scoring and double-checking the matches...",
       "aggregating": "Preparing your result..."
     },
+    "liveTraitsTitle": "Traits we're reading",
+    "liveCandidatesTitle": "Rough matches we're considering",
     "cameraTitle": "Take a photo",
     "cameraPreviewLabel": "Live camera preview",
     "cameraStarting": "Starting the camera…",

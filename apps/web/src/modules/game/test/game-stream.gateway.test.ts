@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { GameStreamStageValue } from '@twinzy/shared';
+import type { GameStreamStageValue, Traits } from '@twinzy/shared';
 import { GameStreamEvent, GameStreamStage } from '@twinzy/shared';
 
 import * as axiosPackage from '@/packages/axios';
@@ -67,6 +67,30 @@ describe('analyzeImageStreamRequest', () => {
 
     await expect(analyzeImageStreamRequest(buildImageFile(), handlers)).resolves.toEqual(result);
     expect(stages).toEqual([GameStreamStage.Validating, GameStreamStage.Judging]);
+  });
+
+  it('forwards streamed traits and candidate names to the handlers', async () => {
+    const result = buildFinalResult();
+    const capturedTraits: Traits[] = [];
+    const capturedCandidates: string[][] = [];
+    feed([
+      encode({ event: GameStreamEvent.Traits, traits: result.traits }),
+      encode({ event: GameStreamEvent.Candidates, names: ['Ada Lovelace'] }),
+      encode({ event: GameStreamEvent.Result, result }),
+    ]);
+    const handlers: GameStreamHandlers = {
+      onStage: vi.fn(),
+      onTraits: (traits): void => {
+        capturedTraits.push(traits);
+      },
+      onCandidates: (names): void => {
+        capturedCandidates.push([...names]);
+      },
+    };
+
+    await expect(analyzeImageStreamRequest(buildImageFile(), handlers)).resolves.toEqual(result);
+    expect(capturedTraits).toEqual([result.traits]);
+    expect(capturedCandidates).toEqual([['Ada Lovelace']]);
   });
 
   it('ignores heartbeat and malformed frames while collecting the result', async () => {

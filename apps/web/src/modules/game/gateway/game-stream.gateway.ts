@@ -34,6 +34,14 @@ export const analyzeImageStreamRequest = async (
         handlers.onStage(message.stage);
         break;
       }
+      case GameStreamEvent.Traits: {
+        handlers.onTraits?.(message.traits);
+        break;
+      }
+      case GameStreamEvent.Candidates: {
+        handlers.onCandidates?.(message.names);
+        break;
+      }
       case GameStreamEvent.Result: {
         result = message.result;
         break;

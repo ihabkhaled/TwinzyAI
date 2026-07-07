@@ -3,19 +3,18 @@
 
 import { useCallback, useState } from 'react';
 
-import type { GameStreamStageValue } from '@twinzy/shared';
-
 import { useAppTranslation } from '@/packages/i18n';
 
 import { resolvePhase, resolveStageLabel } from '../helpers/game-display.helper';
 import { toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
-import { mapFinalResultToView } from '../mappers/game.mapper';
+import { mapFinalResultToView, mapTraitsToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
 import { useAnalyzeGameMutation } from '../queries/game.mutations';
 
 import { useCameraCapture } from './useCameraCapture.hook';
 import { useImageUpload } from './useImageUpload.hook';
 import { useShareResult } from './useShareResult.hook';
+import { useStreamProgress } from './useStreamProgress.hook';
 
 /**
  * The single wiring point for the game flow: composes the upload + share
@@ -30,12 +29,10 @@ export const useGame = (): GameViewModel => {
   const { file, previewUrl, fileErrorKey, onFileChange, acceptFile, clearFile } = useImageUpload();
   const camera = useCameraCapture(acceptFile);
   const { feedbackKey, onShare, resetFeedback } = useShareResult();
-  const [currentStage, setCurrentStage] = useState<GameStreamStageValue | undefined>();
-  const onStage = useCallback((stage: GameStreamStageValue): void => {
-    setCurrentStage(stage);
-  }, []);
-  const { data, error, isPending, isSuccess, isError, analyze, reset } =
-    useAnalyzeGameMutation(onStage);
+  const progress = useStreamProgress();
+  const { data, error, isPending, isSuccess, isError, analyze, reset } = useAnalyzeGameMutation(
+    progress.handlers,
+  );
   const [consentGiven, setConsentGiven] = useState(false);
 
   const onConsentChange = useCallback((checked: boolean): void => {
@@ -46,17 +43,17 @@ export const useGame = (): GameViewModel => {
 
   const onAnalyze = useCallback((): void => {
     if (file !== undefined && consentGiven && !isPending) {
-      setCurrentStage(undefined);
+      progress.reset();
       analyze(file);
     }
-  }, [file, consentGiven, isPending, analyze]);
+  }, [file, consentGiven, isPending, analyze, progress]);
 
   const onRetry = useCallback((): void => {
     reset();
     clearFile();
     resetFeedback();
-    setCurrentStage(undefined);
-  }, [reset, clearFile, resetFeedback]);
+    progress.reset();
+  }, [reset, clearFile, resetFeedback, progress]);
 
   const resultView: GameResultView | undefined =
     data === undefined ? undefined : mapFinalResultToView(data, translate);
@@ -76,7 +73,9 @@ export const useGame = (): GameViewModel => {
     onShareResult,
     resultView,
     errorMessage: isError ? translate(toFriendlyErrorMessageKey(error)) : undefined,
-    stageLabel: resolveStageLabel(translate, currentStage),
+    stageLabel: resolveStageLabel(translate, progress.currentStage),
+    liveTraits: progress.traits === undefined ? [] : mapTraitsToView(progress.traits, translate),
+    liveCandidates: [...progress.candidateNames],
     upload: {
       file,
       previewUrl,

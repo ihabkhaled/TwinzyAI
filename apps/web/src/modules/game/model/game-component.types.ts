@@ -1,6 +1,6 @@
 import type { ChangeEventHandler, ReactNode, RefObject } from 'react';
 
-import type { GameResultView, ResultLabels, ResultView } from './game.types';
+import type { GameResultView, ResultLabels, ResultView, TraitView } from './game.types';
 
 /** Props for the landing hero (badge, headline, sub-copy, CTA label). */
 export interface LandingHeroProps {
@@ -132,4 +132,14 @@ export interface ProcessingCardProps {
   stageLabel: string;
   hint: string;
   testId?: string;
+}
+
+/** Props for the live processing view (stage + streamed traits + candidate names). */
+export interface GameProcessingProps {
+  stageLabel: string;
+  hint: string;
+  traitsTitle: string;
+  candidatesTitle: string;
+  traits: TraitView[];
+  candidateNames: string[];
 }
