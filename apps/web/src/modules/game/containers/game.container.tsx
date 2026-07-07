@@ -70,9 +70,9 @@ const renderSetup = (vm: GameViewModel, labels: GameScreenLabels): ReactElement 
   );
 };
 
-const renderProcessing = (labels: GameScreenLabels): ReactElement => (
+const renderProcessing = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
   <ProcessingCard
-    title={labels.processingText}
+    stageLabel={vm.stageLabel}
     hint={labels.processingHint}
     testId={TEST_IDS.processing}
   />
@@ -158,7 +158,7 @@ export const GameContainer = (): ReactElement => {
     <Stack gap="lg">
       <h1 className={gameTitleClass}>{labels.title}</h1>
       {vm.phase === GamePhase.Setup && renderSetup(vm, labels)}
-      {vm.phase === GamePhase.Processing && renderProcessing(labels)}
+      {vm.phase === GamePhase.Processing && renderProcessing(vm, labels)}
       {vm.phase === GamePhase.Error &&
         vm.errorMessage !== undefined &&
         renderError(vm.errorMessage, labels.result.retryButton, vm.onRetry)}

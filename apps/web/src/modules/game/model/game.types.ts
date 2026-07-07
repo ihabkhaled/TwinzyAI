@@ -1,8 +1,13 @@
-import type { FinalGameResult, VerdictValue } from '@twinzy/shared';
+import type { FinalGameResult, GameStreamStageValue, VerdictValue } from '@twinzy/shared';
 
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
 import type { GamePhaseValue } from './game.enums';
+
+/** Progress callbacks the streaming analyze request drives as events arrive. */
+export interface GameStreamHandlers {
+  onStage: (stage: GameStreamStageValue) => void;
+}
 
 /**
  * Resolves an i18n message key (optionally with ICU values) to a translated
@@ -145,6 +150,8 @@ export interface GameViewModel {
   onShareResult: () => void;
   resultView: GameResultView | undefined;
   errorMessage: string | undefined;
+  /** Live progress copy for the streamed pipeline; the generic text until a stage arrives. */
+  stageLabel: string;
   upload: UploadViewModel;
   share: ShareViewModel;
 }

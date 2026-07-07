@@ -1,11 +1,13 @@
 'use client';
-// client-boundary-reason: owns the analyze mutation, consent state, and file/preview lifecycle, and resolves i18n at the client boundary.
+// client-boundary-reason: owns the analyze mutation, consent state, live stage progress, and the file/preview lifecycle, and resolves i18n at the client boundary.
 
 import { useCallback, useState } from 'react';
 
+import type { GameStreamStageValue } from '@twinzy/shared';
+
 import { useAppTranslation } from '@/packages/i18n';
 
-import { resolvePhase } from '../helpers/game-display.helper';
+import { resolvePhase, resolveStageLabel } from '../helpers/game-display.helper';
 import { toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
 import { mapFinalResultToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
@@ -16,8 +18,9 @@ import { useShareResult } from './useShareResult.hook';
 
 /**
  * The single wiring point for the game flow: composes the upload + share
- * sub-hooks, owns consent and the analyze mutation, resolves all dynamic copy,
- * and exposes one {@link GameViewModel} the container spreads into components.
+ * sub-hooks, owns consent, the streaming analyze mutation and its live stage,
+ * resolves all dynamic copy, and exposes one {@link GameViewModel} the container
+ * spreads into components.
  */
 export const useGame = (): GameViewModel => {
   const t = useAppTranslation();
@@ -25,7 +28,12 @@ export const useGame = (): GameViewModel => {
 
   const { file, previewUrl, fileErrorKey, onFileChange, clearFile } = useImageUpload();
   const { feedbackKey, onShare, resetFeedback } = useShareResult();
-  const { data, error, isPending, isSuccess, isError, analyze, reset } = useAnalyzeGameMutation();
+  const [currentStage, setCurrentStage] = useState<GameStreamStageValue | undefined>();
+  const onStage = useCallback((stage: GameStreamStageValue): void => {
+    setCurrentStage(stage);
+  }, []);
+  const { data, error, isPending, isSuccess, isError, analyze, reset } =
+    useAnalyzeGameMutation(onStage);
   const [consentGiven, setConsentGiven] = useState(false);
 
   const onConsentChange = useCallback((checked: boolean): void => {
@@ -36,6 +44,7 @@ export const useGame = (): GameViewModel => {
 
   const onAnalyze = useCallback((): void => {
     if (file !== undefined && consentGiven && !isPending) {
+      setCurrentStage(undefined);
       analyze(file);
     }
   }, [file, consentGiven, isPending, analyze]);
@@ -44,6 +53,7 @@ export const useGame = (): GameViewModel => {
     reset();
     clearFile();
     resetFeedback();
+    setCurrentStage(undefined);
   }, [reset, clearFile, resetFeedback]);
 
   const resultView: GameResultView | undefined =
@@ -64,6 +74,7 @@ export const useGame = (): GameViewModel => {
     onShareResult,
     resultView,
     errorMessage: isError ? translate(toFriendlyErrorMessageKey(error)) : undefined,
+    stageLabel: resolveStageLabel(translate, currentStage),
     upload: {
       file,
       previewUrl,

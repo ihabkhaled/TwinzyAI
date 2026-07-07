@@ -103,9 +103,9 @@ export interface RetryButtonProps {
   testId?: string;
 }
 
-/** Props for the processing placeholder card. */
+/** Props for the processing placeholder card; `stageLabel` is live progress copy. */
 export interface ProcessingCardProps {
-  title: string;
+  stageLabel: string;
   hint: string;
   testId?: string;
 }

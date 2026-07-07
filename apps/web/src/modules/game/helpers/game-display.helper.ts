@@ -1,6 +1,6 @@
-import type { TraitKey, VerdictValue } from '@twinzy/shared';
+import type { GameStreamStageValue, TraitKey, VerdictValue } from '@twinzy/shared';
 
-import { TRAIT_LABEL_KEYS, VERDICT_LABEL_KEYS } from '../model/game.constants';
+import { STAGE_LABEL_KEYS, TRAIT_LABEL_KEYS, VERDICT_LABEL_KEYS } from '../model/game.constants';
 import { GamePhase, type GamePhaseValue } from '../model/game.enums';
 import type {
   GameScreenLabels,
@@ -26,6 +26,16 @@ export const resolvePhase = (
   }
   return GamePhase.Setup;
 };
+
+/**
+ * Live progress copy for a streamed pipeline stage. Falls back to the generic
+ * processing text before any stage has been reported.
+ */
+export const resolveStageLabel = (
+  translate: TranslateMessage,
+  stage: GameStreamStageValue | undefined,
+): string =>
+  stage === undefined ? translate('game.processingText') : translate(STAGE_LABEL_KEYS[stage]);
 
 /** Translated display label for a single extracted trait. */
 export const resolveTraitLabel = (translate: TranslateMessage, key: TraitKey): string =>

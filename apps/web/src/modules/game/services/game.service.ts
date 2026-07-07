@@ -1,8 +1,9 @@
-import type { FinalGameResult } from '@twinzy/shared';
+import type { FinalGameResult, GameStreamStageValue } from '@twinzy/shared';
 
 import { AppError } from '@/shared/errors/app-error';
 
 import { analyzeImageRequest } from '../gateway/game.gateway';
+import { analyzeImageStreamRequest } from '../gateway/game-stream.gateway';
 import { validateImageFile } from '../helpers/game-validation.helper';
 import type { FileValidationResult } from '../model/game.types';
 
@@ -26,4 +27,18 @@ const assertValidFile = (file: File): void => {
 export const analyzeImage = async (file: File): Promise<FinalGameResult> => {
   assertValidFile(file);
   return analyzeImageRequest(file);
+};
+
+/**
+ * Streaming orchestration used by the UI: validate the file for UX, then open
+ * the SSE analyze request, reporting each pipeline stage through `onStage` as
+ * it arrives (so the long call shows live progress and never appears frozen)
+ * and resolving with the raw result the query layer maps to the view model.
+ */
+export const analyzeImageStream = async (
+  file: File,
+  onStage: (stage: GameStreamStageValue) => void,
+): Promise<FinalGameResult> => {
+  assertValidFile(file);
+  return analyzeImageStreamRequest(file, { onStage });
 };
