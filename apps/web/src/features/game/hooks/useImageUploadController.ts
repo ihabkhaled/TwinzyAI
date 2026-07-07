@@ -13,6 +13,7 @@ export interface ImageUploadController {
   fileError: string | undefined;
   onFileSelected: (files: FileList | null) => void;
   onFileInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFileCaptured: (file: File) => void;
   clearFile: () => void;
 }
 
@@ -43,18 +44,10 @@ export const useImageUploadController = (): ImageUploadController => {
     setFileError(undefined);
   }, [revokePreview]);
 
-  const onFileSelected = useCallback(
-    (files: FileList | null) => {
+  const acceptFile = useCallback(
+    (selected: File | undefined) => {
       revokePreview();
 
-      if (files !== null && files.length > 1) {
-        setFile(undefined);
-        setPreviewUrl(undefined);
-        setFileError(t('error.multipleFiles'));
-        return;
-      }
-
-      const selected = files?.[0];
       if (selected === undefined) {
         setFile(undefined);
         setPreviewUrl(undefined);
@@ -79,6 +72,20 @@ export const useImageUploadController = (): ImageUploadController => {
     [revokePreview],
   );
 
+  const onFileSelected = useCallback(
+    (files: FileList | null) => {
+      if (files !== null && files.length > 1) {
+        revokePreview();
+        setFile(undefined);
+        setPreviewUrl(undefined);
+        setFileError(t('error.multipleFiles'));
+        return;
+      }
+      acceptFile(files?.[0]);
+    },
+    [acceptFile, revokePreview],
+  );
+
   const onFileInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       onFileSelected(event.target.files);
@@ -86,5 +93,20 @@ export const useImageUploadController = (): ImageUploadController => {
     [onFileSelected],
   );
 
-  return { file, previewUrl, fileError, onFileSelected, onFileInputChange, clearFile };
+  const onFileCaptured = useCallback(
+    (captured: File) => {
+      acceptFile(captured);
+    },
+    [acceptFile],
+  );
+
+  return {
+    file,
+    previewUrl,
+    fileError,
+    onFileSelected,
+    onFileInputChange,
+    onFileCaptured,
+    clearFile,
+  };
 };

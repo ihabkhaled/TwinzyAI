@@ -1,4 +1,4 @@
-import { Controller, Post, Res, UseInterceptors } from '@nestjs/common';
+import { Controller, Headers, Post, Res, UseInterceptors } from '@nestjs/common';
 
 import type { FinalGameResult } from '@twinzy/shared';
 
@@ -38,8 +38,9 @@ export class GameController {
   public analyzeStream(
     @UploadedImage() file: UploadedImageFile | undefined,
     @MultipartBody() body: unknown,
+    @Headers('origin') origin: string | undefined,
     @Res() reply: SseCapableReplyLike,
   ): Promise<void> {
-    return this.gameStreamPresenter.stream(file, body, reply);
+    return this.gameStreamPresenter.stream(file, body, origin, reply);
   }
 }

@@ -4,12 +4,13 @@ import type { ChangeEvent, ReactNode } from 'react';
 import { Alert, Card } from '@/components/ui';
 import { t } from '@/i18n';
 
-import { CAMERA_INPUT_ACCEPT, UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
+import { UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
 
 interface UploadCardProps {
   previewUrl: string | undefined;
   fileError: string | undefined;
   onFileInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onOpenCamera: () => void;
 }
 
 const SOURCE_BUTTON_CLASS =
@@ -19,6 +20,7 @@ export const UploadCard = ({
   previewUrl,
   fileError,
   onFileInputChange,
+  onOpenCamera,
 }: UploadCardProps): ReactNode => (
   <Card>
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -36,18 +38,10 @@ export const UploadCard = ({
         />
       </label>
 
-      <label htmlFor="game-camera-input" className={SOURCE_BUTTON_CLASS}>
+      <button type="button" onClick={onOpenCamera} className={SOURCE_BUTTON_CLASS}>
         <span className="text-base font-semibold">{t('game.cameraLabel')}</span>
         <span className="text-sm text-text-muted">{t('game.cameraHint')}</span>
-        <input
-          id="game-camera-input"
-          type="file"
-          accept={CAMERA_INPUT_ACCEPT}
-          capture="environment"
-          onChange={onFileInputChange}
-          className="sr-only"
-        />
-      </label>
+      </button>
     </div>
 
     {previewUrl !== undefined && (

@@ -14,6 +14,8 @@ import { GAME_MUTATION_KEY } from '../model/game.query-keys';
 import type { GameResultView } from '../model/game.types';
 import { analyzeImageStreaming } from '../services/game.service';
 
+import type { CameraCaptureController } from './useCameraCaptureController';
+import { useCameraCaptureController } from './useCameraCaptureController';
 import type { GameResultController } from './useGameResultController';
 import { useGameResultController } from './useGameResultController';
 import type { ImageUploadController } from './useImageUploadController';
@@ -31,6 +33,7 @@ export interface GameController {
   errorMessage: string | undefined;
   processingStageLabel: string;
   upload: ImageUploadController;
+  camera: CameraCaptureController;
   share: GameResultController;
 }
 
@@ -54,6 +57,7 @@ const resolvePhase = (isPending: boolean, isSuccess: boolean, isError: boolean):
  */
 export const useGameController = (): GameController => {
   const upload = useImageUploadController();
+  const camera = useCameraCaptureController(upload.onFileCaptured);
   const share = useGameResultController();
   const [consentGiven, setConsentGiven] = useState(false);
   const [stage, setStage] = useState<GameStreamStageValue | undefined>();
@@ -77,9 +81,10 @@ export const useGameController = (): GameController => {
   const onRetry = useCallback(() => {
     mutation.reset();
     setStage(undefined);
+    camera.cancel();
     upload.clearFile();
     share.resetShareFeedback();
-  }, [mutation, upload, share]);
+  }, [mutation, camera, upload, share]);
 
   const onShareResult = useCallback(() => {
     const text = mutation.data?.shareText ?? '';
@@ -98,6 +103,7 @@ export const useGameController = (): GameController => {
     errorMessage: mutation.isError ? toFriendlyErrorMessage(mutation.error) : undefined,
     processingStageLabel: stageLabel(stage),
     upload,
+    camera,
     share,
   };
 };

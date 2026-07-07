@@ -30,6 +30,13 @@ export const en = {
   'game.uploadChangeButton': 'Choose a different photo',
   'game.cameraLabel': 'Take a photo',
   'game.cameraHint': 'Use your camera',
+  'game.cameraTitle': 'Take a photo',
+  'game.cameraPreviewLabel': 'Live camera preview',
+  'game.cameraStarting': 'Starting the camera...',
+  'game.cameraCaptureButton': 'Capture photo',
+  'game.cameraCancelButton': 'Cancel',
+  'game.cameraError':
+    'We could not open the camera. Please allow camera access or upload a photo instead.',
   'game.orDivider': 'or',
   'game.previewAlt': 'Preview of your chosen photo',
   'game.analyzeButton': 'Analyze my vibe',

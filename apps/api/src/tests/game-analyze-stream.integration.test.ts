@@ -93,6 +93,16 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
     expect(response.headers['content-type']).toContain('text/event-stream');
   });
 
+  it('echoes CORS headers for an allowed origin (hijacked SSE keeps cross-origin working)', async () => {
+    adapter.queueImageResponse(buildTraitExtractionJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
+
+    const response = await postImage(true).set('Origin', 'http://localhost:3000').expect(200);
+
+    expect(response.headers['access-control-allow-origin']).toBe('http://localhost:3000');
+  });
+
   it('emits accepted → ordered stages → result on the happy path', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
     adapter.queueTextResponse(buildCandidatesJson());

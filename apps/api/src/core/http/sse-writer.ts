@@ -22,8 +22,16 @@ const SSE_OK_STATUS = 200;
 export class SseWriter {
   private open = true;
 
-  public constructor(private readonly raw: RawResponseLike) {
-    raw.writeHead(SSE_OK_STATUS, SSE_HEADERS);
+  /**
+   * @param extraHeaders merged into the SSE headers — used to carry CORS
+   * headers, which must be written here because hijacking the reply bypasses
+   * the framework's own CORS hook.
+   */
+  public constructor(
+    private readonly raw: RawResponseLike,
+    extraHeaders: Record<string, string> = {},
+  ) {
+    raw.writeHead(SSE_OK_STATUS, { ...SSE_HEADERS, ...extraHeaders });
   }
 
   public event(eventName: string, data: unknown): void {

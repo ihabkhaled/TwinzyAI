@@ -13,9 +13,6 @@ export {
 
 export const UPLOAD_INPUT_ACCEPT = 'image/jpeg,image/png,image/webp';
 
-/** Camera input accepts any image so mobile OSes open the camera app directly. */
-export const CAMERA_INPUT_ACCEPT = 'image/*';
-
 /** i18n label key for each streamed pipeline stage, shown as live progress. */
 export const STAGE_LABEL_KEYS: Record<GameStreamStageValue, TranslationKey> = {
   [GameStreamStage.Validating]: 'game.stage.validating',

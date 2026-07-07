@@ -8,6 +8,7 @@ import { t } from '@/i18n';
 import { useGameController } from '../hooks/useGameController';
 import { GamePhase } from '../model/game.enums';
 
+import { CameraCapture } from './CameraCapture';
 import { ErrorState } from './ErrorState';
 import { PrivacyNotice } from './PrivacyNotice';
 import { ProcessingCard } from './ProcessingCard';
@@ -37,7 +38,17 @@ export const GameScreen = (): ReactNode => {
             previewUrl={controller.upload.previewUrl}
             fileError={controller.upload.fileError}
             onFileInputChange={controller.upload.onFileInputChange}
+            onOpenCamera={controller.camera.open}
           />
+          {controller.camera.isOpen ? (
+            <CameraCapture
+              isStarting={controller.camera.isStarting}
+              errorMessage={controller.camera.errorMessage}
+              videoRef={controller.camera.videoRef}
+              onCapture={controller.camera.capture}
+              onCancel={controller.camera.cancel}
+            />
+          ) : null}
           <UploadConsentCard
             consentGiven={controller.consentGiven}
             onConsentChange={controller.onConsentInputChange}
