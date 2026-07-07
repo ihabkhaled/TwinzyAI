@@ -40,4 +40,6 @@ export const ERROR_MESSAGE_KEY_BY_CODE: Readonly<Record<ErrorCodeValue, ErrorMes
   [ErrorCode.AiResponseInvalid]: 'errors.ai.responseInvalid',
   [ErrorCode.AiResponseUnsafe]: 'errors.ai.responseUnsafe',
   [ErrorCode.AiTimeout]: 'errors.ai.timeout',
+  [ErrorCode.ServerBusy]: 'errors.server.busy',
+  [ErrorCode.AnalysisCancelled]: 'errors.analysis.cancelled',
 };

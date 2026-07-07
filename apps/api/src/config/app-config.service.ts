@@ -104,6 +104,36 @@ export class AppConfigService {
     return this.configService.get('CLAMAV_PORT', { infer: true });
   }
 
+  /** Max streaming analyses allowed to run concurrently across the whole API. */
+  public get maxGlobalActiveAnalyses(): number {
+    return this.configService.get('MAX_GLOBAL_ACTIVE_ANALYSES', { infer: true });
+  }
+
+  /** Max concurrent streaming analyses allowed from a single client IP. */
+  public get maxActiveAnalysesPerIp(): number {
+    return this.configService.get('MAX_ACTIVE_ANALYSES_PER_IP', { infer: true });
+  }
+
+  /** Max concurrent streaming analyses allowed from a single browser tab. */
+  public get maxActiveAnalysesPerTab(): number {
+    return this.configService.get('MAX_ACTIVE_ANALYSES_PER_TAB', { infer: true });
+  }
+
+  /** Max analyses that may wait for a slot before new ones are rejected busy. */
+  public get maxAnalysisQueueSize(): number {
+    return this.configService.get('MAX_ANALYSIS_QUEUE_SIZE', { infer: true });
+  }
+
+  /** Watchdog ceiling: max time an analysis may run or a waiter may queue. */
+  public get analysisTimeoutMs(): number {
+    return this.configService.get('ANALYSIS_TIMEOUT_MS', { infer: true });
+  }
+
+  /** How long an orphaned stream-registry entry survives before reclamation. */
+  public get streamTtlMs(): number {
+    return this.configService.get('STREAM_TTL_MS', { infer: true });
+  }
+
   private toList(value: string): string[] {
     return value
       .split(',')

@@ -56,6 +56,12 @@ const CONFIG_DEFAULTS = {
   enableClamAv: false,
   clamAvHosts: ['localhost'] as readonly string[],
   clamAvPort: 3310,
+  maxGlobalActiveAnalyses: 50,
+  maxActiveAnalysesPerIp: 3,
+  maxActiveAnalysesPerTab: 1,
+  maxAnalysisQueueSize: 100,
+  analysisTimeoutMs: 120_000,
+  streamTtlMs: 180_000,
 };
 
 export const buildConfigStub = (

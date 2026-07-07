@@ -99,6 +99,8 @@ export default defineConfig({
         'apps/api/src/core/validation/zod-issue.mapper.ts',
         'apps/api/src/core/http/multipart-upload.parser.ts',
         'apps/api/src/core/http/uploaded-image.interceptor.ts',
+        'apps/api/src/core/streaming/concurrency-limiter.service.ts',
+        'apps/api/src/core/streaming/stream-registry.service.ts',
         'apps/api/src/modules/**/application/**/*.ts',
         'apps/api/src/modules/**/infrastructure/**/*.ts',
         'apps/api/src/modules/**/lib/**/*.ts',

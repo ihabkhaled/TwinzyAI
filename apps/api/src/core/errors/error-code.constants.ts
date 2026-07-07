@@ -19,6 +19,8 @@ export const ErrorCode = {
   AiResponseInvalid: 'AI_RESPONSE_INVALID',
   AiResponseUnsafe: 'AI_RESPONSE_UNSAFE',
   AiTimeout: 'AI_TIMEOUT',
+  ServerBusy: 'SERVER_BUSY',
+  AnalysisCancelled: 'ANALYSIS_CANCELLED',
 } as const;
 
 export type ErrorCodeValue = (typeof ErrorCode)[keyof typeof ErrorCode];

@@ -55,6 +55,23 @@ export const EnvSchema = z.object({
   // (`127.0.0.1`) against a published clamd port — no hardcoded fallback list.
   CLAMAV_HOSTS: z.string().default('127.0.0.1,clamav'),
   CLAMAV_PORT: z.coerce.number().int().min(1).max(65_535).default(3310),
+  // Hard caps on concurrent streaming analyses. A burst (many tabs, a bot, or a
+  // slow provider holding connections) can never exhaust memory or the model
+  // quota: runs over capacity queue up to MAX_ANALYSIS_QUEUE_SIZE, then are
+  // rejected in-band with SERVER_BUSY. Caps apply globally, per client IP, and
+  // per browser tab.
+  MAX_GLOBAL_ACTIVE_ANALYSES: z.coerce.number().int().min(1).max(10_000).default(50),
+  MAX_ACTIVE_ANALYSES_PER_IP: z.coerce.number().int().min(1).max(1000).default(3),
+  MAX_ACTIVE_ANALYSES_PER_TAB: z.coerce.number().int().min(1).max(100).default(1),
+  MAX_ANALYSIS_QUEUE_SIZE: z.coerce.number().int().min(0).max(10_000).default(100),
+  // Watchdog: an analysis (and a queued waiter) may not run/wait longer than
+  // this before it is aborted and its slot freed — a stuck provider call can
+  // never hold a slot forever.
+  ANALYSIS_TIMEOUT_MS: z.coerce.number().int().min(1000).max(600_000).default(120_000),
+  // How long an orphaned stream-registry entry survives before the sweeper
+  // aborts and reclaims it (safety net for the rare entry the terminal cleanup
+  // missed). Keep it above ANALYSIS_TIMEOUT_MS so healthy runs finish first.
+  STREAM_TTL_MS: z.coerce.number().int().min(1000).max(1_800_000).default(180_000),
 });
 
 export type ParsedEnv = z.infer<typeof EnvSchema>;
