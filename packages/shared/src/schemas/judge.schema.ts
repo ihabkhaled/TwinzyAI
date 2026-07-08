@@ -17,7 +17,11 @@ const traitReferenceSchema = z.string().trim().min(1).max(200);
  */
 export const JudgedResultSchema = z.strictObject({
   name: z.string().trim().min(1).max(120),
-  rank: z.number().int().min(1).max(MAX_CANDIDATES),
+  // The judge's rank is advisory only — result aggregation always re-ranks the
+  // displayable set 1..n by descending final score (result-aggregation.mapper).
+  // So a model that omits rank or returns it as a string / out-of-range must NOT
+  // sink the whole judged batch: coerce what we can and fall back to 1.
+  rank: z.coerce.number().int().min(1).max(MAX_CANDIDATES).catch(1),
   finalStyleVibeFitScore: z.number().int().min(MIN_SCORE).max(MAX_SCORE),
   confidenceLevel: z.enum(CONFIDENCE_LEVEL_VALUES),
   verdict: z.enum(VERDICT_VALUES),

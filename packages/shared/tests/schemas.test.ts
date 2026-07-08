@@ -229,6 +229,18 @@ describe('CandidateJudgeResponseSchema', () => {
     delete withoutDisclaimer['disclaimer'];
     expect(CandidateJudgeResponseSchema.safeParse(withoutDisclaimer).success).toBe(false);
   });
+
+  it('tolerates a non-numeric or missing rank instead of dropping the whole batch', () => {
+    const stringRank = buildJudgeResponse([buildJudgedResultPayload({ rank: 'two' })]);
+    const parsedString = CandidateJudgeResponseSchema.safeParse(stringRank);
+    expect(parsedString.success).toBe(true);
+    expect(parsedString.success && parsedString.data.results[0]?.rank).toBe(1);
+
+    const results = [buildJudgedResultPayload()];
+    delete results[0]?.['rank'];
+    const missingRank = buildJudgeResponse(results);
+    expect(CandidateJudgeResponseSchema.safeParse(missingRank).success).toBe(true);
+  });
 });
 
 describe('FinalGameResultSchema', () => {

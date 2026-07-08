@@ -3,7 +3,7 @@ import type { z } from 'zod';
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AI_INVALID_RESPONSE_MESSAGE } from '../model/gemini.constants';
 
-import { sanitizeAiResponseText } from './ai-response-sanitizer';
+import { extractJsonObject, sanitizeAiResponseText } from './ai-response-sanitizer';
 
 /** Callback the caller uses to log a bounded validation-failure summary. */
 export type AiIssueListener = (issueSummary: string) => void;
@@ -28,6 +28,29 @@ const summarizeIssues = (error: z.ZodError): string =>
     .map((issue) => `${issue.path.join('.') || '(root)'}: ${issue.code}`)
     .join('; ');
 
+type JsonParseOutcome = { readonly ok: true; readonly value: unknown } | { readonly ok: false };
+
+/**
+ * Attempts to parse the model's JSON body. First the fence-stripped text, then —
+ * only if that fails — the object extracted from the first `{` to the last `}`,
+ * which tolerates leading/trailing prose the model sometimes adds around the
+ * JSON. Never guesses at malformed JSON; both attempts failing rejects.
+ */
+const parseJsonBody = (rawText: string): JsonParseOutcome => {
+  const sanitized = sanitizeAiResponseText(rawText);
+  const candidates = [sanitized, extractJsonObject(sanitized)].filter(
+    (candidate): candidate is string => candidate !== undefined,
+  );
+  for (const candidate of candidates) {
+    try {
+      return { ok: true, value: JSON.parse(candidate) };
+    } catch {
+      // Fall through to the next, more tolerant candidate.
+    }
+  }
+  return { ok: false };
+};
+
 /**
  * Parses raw model text into a schema-validated object. Invalid JSON or a
  * shape mismatch rejects the response — the pipeline never guesses. When the
@@ -39,15 +62,13 @@ export const parseAiJsonResponse = <TSchema extends z.ZodType>(
   schema: TSchema,
   onIssues?: AiIssueListener,
 ): z.infer<TSchema> => {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(sanitizeAiResponseText(rawText));
-  } catch {
+  const parsed = parseJsonBody(rawText);
+  if (!parsed.ok) {
     onIssues?.('response is not valid JSON');
     throw invalidResponse();
   }
 
-  const result = schema.safeParse(parsed);
+  const result = schema.safeParse(parsed.value);
   if (!result.success) {
     onIssues?.(summarizeIssues(result.error));
     throw invalidResponse();
