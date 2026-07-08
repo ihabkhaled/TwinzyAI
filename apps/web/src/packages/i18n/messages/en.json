@@ -55,6 +55,7 @@
     "imageQualityTitle": "Image quality & uncertainty",
     "uncertaintyTitle": "What was unclear",
     "translating": "Translating your result…",
+    "translatingHint": "Rewriting your full result in the new language — one moment.",
     "retryTranslation": "Retry translation"
   },
   "upload": {

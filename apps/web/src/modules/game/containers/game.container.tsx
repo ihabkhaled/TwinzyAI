@@ -8,6 +8,7 @@ import { Stack } from '@/packages/ui-primitives';
 import { ErrorState } from '@/shared/components/feedback/error-state.component';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
+import { ProcessingCard } from '../components/processing-card.component';
 import { buildGameScreenLabels, resolveTraitCountLabel } from '../helpers/game-display.helper';
 import { useGame } from '../hooks/useGame.hook';
 import { GamePhase } from '../model/game.enums';
@@ -48,6 +49,52 @@ const renderError = (message: string, retryLabel: string, onRetry: () => void): 
 );
 
 /**
+ * While a language switch is translating, the whole result is hidden behind this
+ * loader so the user never sees the old-language result under new-language
+ * labels — the full result reveals at once, in the new language, when done.
+ */
+const renderTranslating = (labels: GameScreenLabels): ReactElement => (
+  <ProcessingCard
+    stageLabel={labels.translating}
+    hint={labels.translatingHint}
+    testId={TEST_IDS.translationLoader}
+  />
+);
+
+/**
+ * Success phase: the translating loader while a language switch is in flight,
+ * otherwise the full (new-language) result once it is ready.
+ */
+const renderSuccess = (
+  vm: GameViewModel,
+  labels: GameScreenLabels,
+  translate: TranslateMessage,
+): ReactElement | null => {
+  if (vm.translation.isTranslating) {
+    return renderTranslating(labels);
+  }
+  if (vm.resultView === undefined) {
+    return null;
+  }
+  return (
+    <GameResult
+      view={vm.resultView}
+      labels={labels.result}
+      traitCountLabel={resolveTraitCountLabel(translate, vm.resultView.traitCount)}
+      translatingLabel={labels.translating}
+      retryTranslationLabel={labels.retryTranslation}
+      isTranslating={vm.translation.isTranslating}
+      translationError={vm.translation.errorMessage}
+      canRetryTranslation={vm.translation.canRetry}
+      onRetryTranslation={vm.translation.onRetry}
+      shareFeedback={vm.share.feedback}
+      onShare={vm.onShareResult}
+      onRetry={vm.onRetry}
+    />
+  );
+};
+
+/**
  * The documented wiring point for the game flow. Calls the orchestrator hook,
  * resolves static copy once, switches on the phase, and maps the view-model
  * lists into pure JSX-only components.
@@ -67,22 +114,7 @@ export const GameContainer = (): ReactElement => {
       {vm.phase === GamePhase.Error &&
         vm.errorMessage !== undefined &&
         renderError(vm.errorMessage, labels.result.retryButton, vm.onRetry)}
-      {vm.phase === GamePhase.Success && vm.resultView !== undefined && (
-        <GameResult
-          view={vm.resultView}
-          labels={labels.result}
-          traitCountLabel={resolveTraitCountLabel(translate, vm.resultView.traitCount)}
-          translatingLabel={labels.translating}
-          retryTranslationLabel={labels.retryTranslation}
-          isTranslating={vm.translation.isTranslating}
-          translationError={vm.translation.errorMessage}
-          canRetryTranslation={vm.translation.canRetry}
-          onRetryTranslation={vm.translation.onRetry}
-          shareFeedback={vm.share.feedback}
-          onShare={vm.onShareResult}
-          onRetry={vm.onRetry}
-        />
-      )}
+      {vm.phase === GamePhase.Success && renderSuccess(vm, labels, translate)}
     </Stack>
   );
 };

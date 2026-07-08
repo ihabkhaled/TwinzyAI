@@ -56,6 +56,7 @@
     "imageQualityTitle": "جودة الصورة وعدم اليقين",
     "uncertaintyTitle": "ما لم يكن واضحًا",
     "translating": "جارٍ ترجمة نتيجتك…",
+    "translatingHint": "نعيد كتابة نتيجتك كاملة باللغة الجديدة — لحظة من فضلك.",
     "retryTranslation": "إعادة محاولة الترجمة"
   },
   "upload": {

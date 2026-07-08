@@ -280,6 +280,7 @@ export interface GameScreenLabels {
   liveTraitsTitle: string;
   liveCandidatesTitle: string;
   translating: string;
+  translatingHint: string;
   retryTranslation: string;
   privacyNotice: string;
   upload: UploadLabels;
