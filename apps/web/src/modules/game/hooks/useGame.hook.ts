@@ -12,11 +12,7 @@ import {
   resolvePhase,
   resolveStageLabel,
 } from '../helpers/game-display.helper';
-import {
-  extractFailedStage,
-  isTransientGameError,
-  toFriendlyErrorMessageKey,
-} from '../helpers/game-error.helper';
+import { extractFailedStage, toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
 import {
   buildCameraViewModel,
   buildShareViewModel,
@@ -32,6 +28,7 @@ import { useCameraCapture } from './useCameraCapture.hook';
 import { useImageUpload } from './useImageUpload.hook';
 import { useResultCount } from './useResultCount.hook';
 import { useResultTranslation } from './useResultTranslation.hook';
+import { useRunRecovery } from './useRunRecovery.hook';
 import { useShareResult } from './useShareResult.hook';
 import { useStreamProgress } from './useStreamProgress.hook';
 
@@ -73,24 +70,18 @@ export const useGame = (): GameViewModel => {
     }
   }, [file, consentGiven, isPending, beginRun, progress, resultCount]);
 
-  const onRetry = useCallback((): void => {
-    cancelRun();
-    reset();
-    clearFile();
-    resetFeedback();
-    progress.reset();
-  }, [cancelRun, reset, clearFile, resetFeedback, progress]);
-
-  const canRetrySamePhoto = isError && file !== undefined && isTransientGameError(error);
-
-  const onRetrySamePhoto = useCallback((): void => {
-    if (file !== undefined) {
-      reset();
-      resetFeedback();
-      progress.reset();
-      beginRun(file, resultCount);
-    }
-  }, [file, reset, resetFeedback, progress, beginRun, resultCount]);
+  const recovery = useRunRecovery({
+    file,
+    error,
+    isError,
+    resultCount,
+    beginRun,
+    cancelRun,
+    reset,
+    clearFile,
+    resetFeedback,
+    resetProgress: progress.reset,
+  });
 
   const resultView: GameResultView | undefined =
     translation.displayResult === undefined
@@ -102,19 +93,20 @@ export const useGame = (): GameViewModel => {
   }, [onShare, resultView]);
 
   return {
-    phase: resolvePhase(isPending, isSuccess, isError),
+    phase: resolvePhase(isPending, isSuccess, recovery.isRealError),
     consentGiven,
     onConsentChange,
     canAnalyze,
     onAnalyze,
-    onRetry,
+    onRetry: recovery.onRetry,
     onShareResult,
     resultView,
-    errorMessage: isError
+    errorMessage: recovery.isRealError
       ? composeErrorMessage(translate, toFriendlyErrorMessageKey(error), extractFailedStage(error))
       : undefined,
-    canRetrySamePhoto,
-    onRetrySamePhoto,
+    onCancelProcessing: recovery.onCancelProcessing,
+    canRetrySamePhoto: recovery.canRetrySamePhoto,
+    onRetrySamePhoto: recovery.onRetrySamePhoto,
     stageLabel: resolveStageLabel(translate, progress.currentStage),
     liveTraitCount: progress.traitsProgress?.traitCount,
     liveSummary: [...(progress.traitsProgress?.compactTraitSummary ?? [])],

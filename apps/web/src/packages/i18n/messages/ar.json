@@ -60,6 +60,7 @@
     "translating": "جارٍ ترجمة نتيجتك…",
     "translatingHint": "نعيد كتابة نتيجتك كاملة باللغة الجديدة — لحظة من فضلك.",
     "retrySamePhoto": "حاول مرة أخرى بالصورة نفسها",
+    "cancelProcessing": "إلغاء",
     "retryTranslation": "إعادة محاولة الترجمة"
   },
   "upload": {

@@ -59,6 +59,7 @@
     "translating": "Translating your result…",
     "translatingHint": "Rewriting your full result in the new language — one moment.",
     "retrySamePhoto": "Try again with the same photo",
+    "cancelProcessing": "Cancel",
     "retryTranslation": "Retry translation"
   },
   "upload": {

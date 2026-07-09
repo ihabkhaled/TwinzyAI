@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { Card, Stack } from '@/packages/ui-primitives';
+import { Button, Card, Stack } from '@/packages/ui-primitives';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import { ProcessingCard } from '../components/processing-card.component';
@@ -23,6 +23,8 @@ export const GameProcessing = ({
   traitCountLabel,
   summary,
   candidateNames,
+  cancelLabel,
+  onCancel,
 }: GameProcessingProps): ReactElement => {
   const summaryChips = summary.map((signal) => (
     <li key={signal} className={chipClass}>
@@ -38,6 +40,9 @@ export const GameProcessing = ({
   return (
     <Stack gap="md">
       <ProcessingCard stageLabel={stageLabel} hint={hint} testId={TEST_IDS.processing} />
+      <Button onClick={onCancel} variant="secondary" testId={TEST_IDS.cancelProcessing}>
+        {cancelLabel}
+      </Button>
       {summary.length > 0 ? (
         <Card testId={TEST_IDS.compactSummary}>
           <p className={candidatesTitleClass}>{traitsTitle}</p>

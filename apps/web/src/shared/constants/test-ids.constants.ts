@@ -13,6 +13,7 @@ export const TEST_IDS = {
   analyzeButton: 'analyze-button',
   resultCountSelect: 'result-count-select',
   processing: 'processing',
+  cancelProcessing: 'cancel-processing',
   resultList: 'result-list',
   resultExplanation: 'result-explanation',
   compactSummary: 'compact-summary',

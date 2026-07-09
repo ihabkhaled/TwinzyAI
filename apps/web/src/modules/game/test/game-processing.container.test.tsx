@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
 
 import { GameProcessing } from '../containers/game-processing.container';
 
@@ -11,6 +12,8 @@ const baseProps = {
   traitCountLabel: undefined,
   summary: [],
   candidateNames: [],
+  cancelLabel: 'Cancel',
+  onCancel: vi.fn(),
 };
 
 describe('GameProcessing', () => {
@@ -37,5 +40,14 @@ describe('GameProcessing', () => {
     expect(screen.getByText('wavy dark hair')).toBeInTheDocument();
     expect(screen.getByText('Rough matches')).toBeInTheDocument();
     expect(screen.getByText('Ada Lovelace')).toBeInTheDocument();
+  });
+
+  it('offers a cancel action that fires the prepared handler', async () => {
+    const onCancel = vi.fn();
+    render(<GameProcessing {...baseProps} onCancel={onCancel} />);
+
+    await userEvent.click(screen.getByTestId('cancel-processing'));
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });

@@ -149,6 +149,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   translating: translate('game.translating'),
   translatingHint: translate('game.translatingHint'),
   retrySamePhoto: translate('game.retrySamePhoto'),
+  cancelProcessing: translate('game.cancelProcessing'),
   retryTranslation: translate('game.retryTranslation'),
   privacyNotice: translate('home.privacyNotice'),
   upload: {

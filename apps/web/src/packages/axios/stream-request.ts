@@ -49,7 +49,13 @@ export async function streamMultipart(
     throw new HttpError('http', 'Missing response stream', response.status, null);
   }
 
-  await readStream(response.body, onData);
+  try {
+    await readStream(response.body, onData);
+  } catch (error) {
+    throw options?.signal?.aborted === true
+      ? new HttpError('aborted', 'Stream cancelled', null, null)
+      : error;
+  }
 }
 
 async function openStream(
@@ -65,6 +71,9 @@ async function openStream(
       ...(options?.headers === undefined ? {} : { headers: options.headers }),
     });
   } catch {
+    if (options?.signal?.aborted === true) {
+      throw new HttpError('aborted', 'Stream cancelled', null, null);
+    }
     throw new HttpError('network', 'Streaming request failed', null, null);
   }
 }

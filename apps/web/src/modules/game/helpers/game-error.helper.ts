@@ -44,6 +44,13 @@ export const extractFailedStage = (error: unknown): GameStreamStageValue | undef
 };
 
 /**
+ * True when the "failure" is a deliberately cancelled run (user hit cancel or
+ * navigated) — never shown as an error; the UI simply returns to setup.
+ */
+export const isCancelledRunError = (error: unknown): boolean =>
+  isHttpError(error) && error.kind === 'aborted';
+
+/**
  * True when the failure is transient (rate limit, timeout, busy, network,
  * provider blip) — retrying with the SAME photo can genuinely succeed, so the
  * UI offers a non-destructive retry instead of forcing a re-pick.

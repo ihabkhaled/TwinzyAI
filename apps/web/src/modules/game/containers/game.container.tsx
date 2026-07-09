@@ -36,6 +36,8 @@ const renderProcessing = (
     }
     summary={vm.liveSummary}
     candidateNames={vm.liveCandidates}
+    cancelLabel={labels.cancelProcessing}
+    onCancel={vm.onCancelProcessing}
   />
 );
 

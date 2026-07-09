@@ -132,6 +132,29 @@ export interface AnalyzeRunControl {
   cancelRun: () => void;
 }
 
+/** Dependencies the run-recovery hook coordinates (all prepared upstream). */
+export interface RunRecoveryDeps {
+  file: File | undefined;
+  error: Error | null;
+  isError: boolean;
+  resultCount: number;
+  beginRun: (file: File, resultCount: number) => void;
+  cancelRun: () => void;
+  reset: () => void;
+  clearFile: () => void;
+  resetFeedback: () => void;
+  resetProgress: () => void;
+}
+
+/** Error/cancel recovery surface around one analyze run. */
+export interface RunRecoveryController {
+  isRealError: boolean;
+  canRetrySamePhoto: boolean;
+  onRetry: () => void;
+  onRetrySamePhoto: () => void;
+  onCancelProcessing: () => void;
+}
+
 /** The narrowed analyze-mutation surface the orchestrator hook consumes. */
 export interface AnalyzeGameMutation {
   data: FinalGameResult | undefined;
@@ -310,6 +333,7 @@ export interface GameScreenLabels {
   translating: string;
   translatingHint: string;
   retrySamePhoto: string;
+  cancelProcessing: string;
   retryTranslation: string;
   privacyNotice: string;
   upload: UploadLabels;
@@ -337,6 +361,8 @@ export interface GameViewModel {
   canAnalyze: boolean;
   onAnalyze: () => void;
   onRetry: () => void;
+  /** Cancels the in-flight analysis and returns to setup with the photo kept. */
+  onCancelProcessing: () => void;
   /** True when the failure is transient and the photo is still selected. */
   canRetrySamePhoto: boolean;
   /** Re-runs the analysis with the SAME photo (transient failures only). */

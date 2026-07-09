@@ -206,4 +206,6 @@ export interface GameProcessingProps {
   traitCountLabel: string | undefined;
   summary: string[];
   candidateNames: string[];
+  cancelLabel: string;
+  onCancel: () => void;
 }
