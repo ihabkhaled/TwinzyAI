@@ -1,7 +1,12 @@
-import type { GameStreamStageValue } from '@twinzy/shared';
+import type {
+  GameStreamStageValue,
+  LanguageCodeValue,
+  TraitExtractionResponse,
+} from '@twinzy/shared';
 
 import type { SseCapableReplyLike } from '../../../core/http/sse.types';
 import type { StreamRequestMeta } from '../../../core/http/stream-meta.types';
+import type { AiImageInput } from '../../ai';
 import type { UploadedImageFile } from '../../file-security';
 
 /** Optional progress sink so the streaming flow can report matching stages. */
@@ -32,4 +37,18 @@ export interface GameStreamRequest extends StreamRequestMeta {
 export interface StyleMatchProgressListener {
   onStage?: StyleMatchStageListener;
   onCandidates?: (names: readonly string[]) => void;
+}
+
+/**
+ * Everything one matching run needs: the extraction evidence, the photo
+ * payload (reused, single-encode), the output language, the requested display
+ * count, the optional progress sink, and the run's cancel signal.
+ */
+export interface StyleMatchInput {
+  readonly extraction: TraitExtractionResponse;
+  readonly image: AiImageInput;
+  readonly languageCode: LanguageCodeValue;
+  readonly resultCount: number;
+  readonly progress?: StyleMatchProgressListener | undefined;
+  readonly signal?: AbortSignal | undefined;
 }

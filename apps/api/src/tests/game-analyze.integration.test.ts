@@ -54,8 +54,8 @@ describe('POST /api/v1/game/analyze (integration)', () => {
 
   it('returns a schema-valid final result on the happy path', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueTextResponse(buildCandidatesJson());
-    adapter.queueTextResponse(buildJudgeJson());
+    adapter.queueImageResponse(buildCandidatesJson());
+    adapter.queueImageResponse(buildJudgeJson());
 
     const response = await request(server())
       .post(ANALYZE_PATH)
@@ -66,8 +66,8 @@ describe('POST /api/v1/game/analyze (integration)', () => {
     const parsed = FinalGameResultSchema.safeParse(response.body);
     expect(parsed.success).toBe(true);
     expect((response.body as { disclaimer: string }).disclaimer).toBe(RESULT_DISCLAIMER);
-    expect(adapter.imageCalls).toHaveLength(1);
-    expect(adapter.textCalls).toHaveLength(2);
+    expect(adapter.imageCalls).toHaveLength(3);
+    expect(adapter.textCalls).toHaveLength(0);
   });
 
   it('rejects a request without consent', async () => {

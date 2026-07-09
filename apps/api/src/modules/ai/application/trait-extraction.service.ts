@@ -11,6 +11,7 @@ import { collectExtractionTextValues } from '../lib/trait-text.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
 import { AI_INVALID_RESPONSE_MESSAGE } from '../model/gemini.constants';
+import type { AiImageInput } from '../model/gemini.types';
 import { PromptKey, PromptPlaceholder } from '../model/prompt-version.constants';
 
 import { AiSafetyService } from './ai-safety.service';
@@ -36,8 +37,7 @@ export class TraitExtractionService {
   }
 
   public async extractTraits(
-    imageBuffer: Buffer,
-    mimeType: string,
+    image: AiImageInput,
     languageCode: LanguageCodeValue,
     signal?: AbortSignal,
   ): Promise<TraitExtractionResponse> {
@@ -47,7 +47,7 @@ export class TraitExtractionService {
 
     const rawText = await this.aiProvider.generateFromImageStream(
       prompt,
-      { mimeType, base64Data: imageBuffer.toString('base64') },
+      image,
       undefined,
       signal,
       buildSchemaValidator(TraitExtractionResponseSchema),

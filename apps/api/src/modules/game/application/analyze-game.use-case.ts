@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import type { FinalGameResult, LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
+import type { FinalGameResult } from '@twinzy/shared';
 
-import { TraitExtractionService } from '../../ai';
+import { buildAiImageInput, TraitExtractionService } from '../../ai';
 import {
   FileSecurityService,
   TemporaryFileCleanupService,
@@ -15,13 +15,14 @@ import { resolveRequestResultCount } from '../lib/request-result-count';
 import { StyleMatchService } from './style-match.service';
 
 /**
- * Owns the analyze use-case sequence and its safety guarantees:
+ * Owns the analyze use-case sequence and its safety guarantees
+ * (visual-similarity mode):
  * 1. consent + full file-security chain (fail-closed, ordered)
- * 2. trait extraction — the ONLY step that sees the image
- * 3. image buffer destroyed in finally (success AND failure)
- * 4. text-only matching (candidates → judge → aggregation) once the image
- *    is already gone, delegated to the StyleMatchService — all localized to
- *    the request's language
+ * 2. the photo is encoded ONCE and provided to extraction, candidate
+ *    generation, and judging (multimodal resemblance matching)
+ * 3. the image buffer lives exactly as long as the pipeline: zero-filled in
+ *    finally on success AND failure — never logged, stored, or returned
+ * 4. results are localized to the request's language
  */
 @Injectable()
 export class AnalyzeGameUseCase {
@@ -38,31 +39,16 @@ export class AnalyzeGameUseCase {
   ): Promise<FinalGameResult> {
     const languageCode = resolveRequestLanguage(body);
     const resultCount = resolveRequestResultCount(body);
-    const extraction = await this.extractTraitsAndDestroyImage(
-      file,
-      isConsentGiven(body),
-      languageCode,
-    );
-    return this.styleMatch.matchFromTraits(extraction, languageCode, resultCount);
-  }
-
-  /**
-   * The image lives exactly as long as this method: validated, sent to trait
-   * extraction once, then zero-filled no matter what happened — success or
-   * failure. Nothing downstream of trait extraction ever receives the image.
-   */
-  private async extractTraitsAndDestroyImage(
-    file: UploadedImageFile | undefined,
-    consent: boolean,
-    languageCode: LanguageCodeValue,
-  ): Promise<TraitExtractionResponse> {
     try {
-      const safeFile = await this.fileSecurity.assertSafeImage(file, consent);
-      return await this.traitExtraction.extractTraits(
-        safeFile.buffer,
-        safeFile.mimetype,
+      const safeFile = await this.fileSecurity.assertSafeImage(file, isConsentGiven(body));
+      const image = buildAiImageInput(safeFile);
+      const extraction = await this.traitExtraction.extractTraits(image, languageCode);
+      return await this.styleMatch.matchFromTraits({
+        extraction,
+        image,
         languageCode,
-      );
+        resultCount,
+      });
     } finally {
       this.cleanup.wipe(file);
     }

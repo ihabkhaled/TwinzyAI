@@ -62,8 +62,8 @@ describe('streaming isolation + cancellation (integration)', () => {
 
   it('echoes the client tab/request ids and mints a streamId + status on every frame', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueTextResponse(buildCandidatesJson());
-    adapter.queueTextResponse(buildJudgeJson());
+    adapter.queueImageResponse(buildCandidatesJson());
+    adapter.queueImageResponse(buildJudgeJson());
 
     const response = await request(server())
       .post(STREAM_PATH)

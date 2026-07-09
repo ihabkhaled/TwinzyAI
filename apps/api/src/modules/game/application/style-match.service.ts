@@ -1,22 +1,22 @@
 import { Injectable } from '@nestjs/common';
 
-import type { FinalGameResult, LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
+import type { FinalGameResult, GameStreamStageValue } from '@twinzy/shared';
 import { GameStreamStage } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger';
 import { CandidateGenerationService, CandidateJudgeService } from '../../ai';
 import { ResultAggregationService } from '../../result-aggregation';
-import type { StyleMatchProgressListener } from '../model/game-stream.types';
+import type { StyleMatchInput } from '../model/game-stream.types';
 
 const LOG_CONTEXT = 'StyleMatch';
 
 /**
- * The TEXT-ONLY matching phase of the analyze pipeline. By the time this runs
- * the image is already gone: it receives only the written advanced traits and
- * produces the final ranked style/vibe result localized to the requested
- * language. Generates global candidates, falls back safely when none survive
- * filtering, judges the survivors strictly, then aggregates with the enforced
- * server-side localized disclaimer.
+ * The MULTIMODAL matching phase (visual-similarity mode): receives the photo
+ * payload plus the full extraction evidence and produces the final ranked
+ * resemblance result localized to the requested language. Generates a
+ * worldwide candidate pool, falls back safely when none survive filtering,
+ * judges the survivors strictly against the image, then aggregates with the
+ * enforced server-side localized disclaimer.
  */
 @Injectable()
 export class StyleMatchService {
@@ -29,36 +29,37 @@ export class StyleMatchService {
     this.logger.setContext(LOG_CONTEXT);
   }
 
-  public async matchFromTraits(
-    extraction: TraitExtractionResponse,
-    languageCode: LanguageCodeValue,
-    resultCount: number,
-    progress?: StyleMatchProgressListener,
-    signal?: AbortSignal,
-  ): Promise<FinalGameResult> {
-    progress?.onStage?.(GameStreamStage.GeneratingCandidates);
+  public async matchFromTraits(input: StyleMatchInput): Promise<FinalGameResult> {
+    const { extraction, image, languageCode, resultCount, progress, signal } = input;
+    this.reportStage(progress, GameStreamStage.GeneratingCandidates);
     const candidates = await this.candidateGeneration.generateCandidates(
       extraction,
+      image,
       languageCode,
       resultCount,
       signal,
     );
     if (candidates.length === 0) {
       this.logger.warn('No safe candidates — returning fallback');
-      progress?.onStage?.(GameStreamStage.Aggregating);
+      this.reportStage(progress, GameStreamStage.Aggregating);
       return this.resultAggregation.buildFallback(extraction, languageCode, resultCount);
     }
 
     progress?.onCandidates?.(candidates.map((candidate) => candidate.name));
-    progress?.onStage?.(GameStreamStage.Judging);
-    const judged = await this.candidateJudge.judgeCandidates(
-      extraction.traits,
+    this.reportStage(progress, GameStreamStage.Judging);
+    const judged = await this.candidateJudge.judgeCandidates({
+      extraction,
       candidates,
+      image,
       languageCode,
       resultCount,
       signal,
-    );
-    progress?.onStage?.(GameStreamStage.Aggregating);
+    });
+    this.reportStage(progress, GameStreamStage.Aggregating);
     return this.resultAggregation.aggregate(extraction, judged, languageCode, resultCount);
+  }
+
+  private reportStage(progress: StyleMatchInput['progress'], stage: GameStreamStageValue): void {
+    progress?.onStage?.(stage);
   }
 }

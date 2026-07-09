@@ -73,8 +73,8 @@ const buildHarness = async (): Promise<Harness> => {
 
 const queueHappyPath = (adapter: FakeAiAdapter): void => {
   adapter.queueImageResponse(buildTraitExtractionJson());
-  adapter.queueTextResponse(buildCandidatesJson());
-  adapter.queueTextResponse(buildJudgeJson());
+  adapter.queueImageResponse(buildCandidatesJson());
+  adapter.queueImageResponse(buildJudgeJson());
 };
 
 afterEach(() => {
@@ -90,8 +90,8 @@ describe('AnalyzeGameUseCase.analyze', () => {
 
     expect(result.results).toHaveLength(1);
     expect(result.disclaimer).toBe(RESULT_DISCLAIMER);
-    expect(adapter.imageCalls).toHaveLength(1);
-    expect(adapter.textCalls).toHaveLength(2);
+    expect(adapter.imageCalls).toHaveLength(3);
+    expect(adapter.textCalls).toHaveLength(0);
   });
 
   it('destroys the image buffer after a successful run', async () => {
@@ -114,7 +114,19 @@ describe('AnalyzeGameUseCase.analyze', () => {
     expect(file.buffer.every((byte) => byte === 0)).toBe(true);
   });
 
-  it('never sends the image to the candidate or judge steps', async () => {
+  it('destroys the image buffer when the pipeline fails AT THE JUDGE step (post-pivot lifetime)', async () => {
+    const { useCase, adapter } = await buildHarness();
+    adapter.queueImageResponse(buildTraitExtractionJson());
+    adapter.queueImageResponse(buildCandidatesJson());
+    adapter.queueImageResponse(new Error('judge aborted mid-flight'));
+    const file = buildUploadFile();
+
+    await expect(useCase.analyze(file, { consent: 'true' })).rejects.toBeInstanceOf(Error);
+
+    expect(file.buffer.every((byte) => byte === 0)).toBe(true);
+  });
+
+  it('provides the image to all three steps but never embeds bytes in prompt text', async () => {
     const { useCase, adapter } = await buildHarness();
     queueHappyPath(adapter);
     const file = buildUploadFile();
@@ -122,9 +134,9 @@ describe('AnalyzeGameUseCase.analyze', () => {
 
     await useCase.analyze(file, { consent: 'true' });
 
-    expect(adapter.imageCalls).toHaveLength(1);
-    for (const textPrompt of adapter.textCalls) {
-      expect(textPrompt).not.toContain(base64Marker);
+    expect(adapter.imageCalls).toHaveLength(3);
+    for (const call of adapter.imageCalls) {
+      expect(call.prompt).not.toContain(base64Marker);
     }
   });
 
@@ -170,12 +182,12 @@ describe('AnalyzeGameUseCase.analyze', () => {
   it('returns the fallback result when all candidates are filtered as unsafe', async () => {
     const { useCase, adapter } = await buildHarness();
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueTextResponse(
+    adapter.queueImageResponse(
       buildCandidatesJson([
         buildCandidatePayload({
           name: 'Unsafe Only',
           styleVibeFitScore: 90,
-          reason: 'Same face, biometric twin.',
+          reason: 'This is biometric identification of the person.',
         }),
       ]),
     );
@@ -184,7 +196,8 @@ describe('AnalyzeGameUseCase.analyze', () => {
 
     expect(result.results).toHaveLength(0);
     expect(result.fallbackMessage).toBe(NO_MATCH_FALLBACK_MESSAGE);
-    expect(adapter.textCalls).toHaveLength(1);
+    expect(adapter.imageCalls).toHaveLength(2);
+    expect(adapter.textCalls).toHaveLength(0);
   });
 
   it('propagates safe domain errors from the provider without raw details', async () => {
