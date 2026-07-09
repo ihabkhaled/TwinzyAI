@@ -16,7 +16,7 @@ export const RESULT_COUNT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 /** Internal candidate pool size used by Prompt 2. It is always >= N. */
 export const MIN_CANDIDATE_POOL = 1;
 
-export const MAX_CANDIDATE_POOL = 20;
+export const MAX_CANDIDATE_POOL = 25;
 
 export const MIN_SCORE = 0;
 

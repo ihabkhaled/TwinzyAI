@@ -26,6 +26,7 @@ export const PromptPlaceholder = {
   AppName: '[APP_NAME]',
   ModelProvider: '[MODEL_PROVIDER]',
   ResultCount: '[RESULT_COUNT]',
+  RegionHint: '[REGION_HINT]',
 } as const;
 
 export type PromptPlaceholderValue = (typeof PromptPlaceholder)[keyof typeof PromptPlaceholder];
@@ -37,6 +38,7 @@ export const REQUIRED_PLACEHOLDERS: Record<PromptKeyValue, readonly PromptPlaceh
     PromptPlaceholder.TraitsJson,
     PromptPlaceholder.LanguageCode,
     PromptPlaceholder.ResultCount,
+    PromptPlaceholder.RegionHint,
   ],
   [PromptKey.CandidateJudge]: [
     PromptPlaceholder.TraitsJson,

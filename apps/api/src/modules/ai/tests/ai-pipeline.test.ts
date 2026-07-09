@@ -217,11 +217,11 @@ describe('CandidateGenerationService (multimodal)', () => {
     expect(prompt).not.toContain('[LANGUAGE_CODE]');
   });
 
-  it('rejects more than 20 candidates (strict schema, documented)', async () => {
+  it('rejects more than 25 candidates (strict schema, documented)', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
     adapter.queueImageResponse(
       buildCandidatesJson(
-        Array.from({ length: 21 }, (_unused, index) =>
+        Array.from({ length: 26 }, (_unused, index) =>
           buildCandidatePayload({ name: `Candidate ${index}` }),
         ),
         DEFAULT_RESULT_COUNT,

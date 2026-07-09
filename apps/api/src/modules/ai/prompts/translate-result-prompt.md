@@ -1,4 +1,4 @@
-# translate-result-prompt.md — Translation Only (advanced-global-traits-v3)
+# translate-result-prompt.md — Translation Only (visual-similarity-v4)
 
 You are a translation engine for a fun public style/vibe game.
 

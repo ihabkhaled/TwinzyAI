@@ -11,6 +11,7 @@ import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
 import type { AiImageInput } from '../model/gemini.types';
 import { PromptKey, PromptPlaceholder } from '../model/prompt-version.constants';
+import { REGION_HINT_BY_LANGUAGE } from '../model/region-hint.constants';
 
 import { AiSafetyService } from './ai-safety.service';
 
@@ -51,6 +52,7 @@ export class CandidateGenerationService {
       ),
       [PromptPlaceholder.LanguageCode]: languageCode,
       [PromptPlaceholder.ResultCount]: String(resultCount),
+      [PromptPlaceholder.RegionHint]: REGION_HINT_BY_LANGUAGE[languageCode],
     });
 
     const rawText = await this.aiProvider.generateFromImageStream(

@@ -113,7 +113,7 @@ export const buildSafetyCheckPayload = (): Record<string, boolean> => ({
   containsBiometricClaim: false,
 });
 
-/** Full valid Prompt 1 response (advanced-global-traits-v3). */
+/** Full valid Prompt 1 response (visual-similarity-v4). */
 export const buildTraitExtractionPayload = (
   overrides: Partial<Record<string, unknown>> = {},
 ): Record<string, unknown> => ({

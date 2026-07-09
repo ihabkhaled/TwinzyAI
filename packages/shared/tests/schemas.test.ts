@@ -177,7 +177,7 @@ const buildGeneration = (
 });
 
 describe('CandidateGenerationResponseSchema', () => {
-  it('accepts between 1 and 20 generated candidates as long as the pool is at least resultCount', () => {
+  it('accepts between 1 and 25 generated candidates as long as the pool is at least resultCount', () => {
     expect(
       CandidateGenerationResponseSchema.safeParse(buildGeneration([buildCandidatePayload()], 1))
         .success,
@@ -185,14 +185,14 @@ describe('CandidateGenerationResponseSchema', () => {
     expect(
       CandidateGenerationResponseSchema.safeParse(
         buildGeneration(
-          Array.from({ length: 20 }, () => buildCandidatePayload()),
+          Array.from({ length: 25 }, () => buildCandidatePayload()),
           10,
         ),
       ).success,
     ).toBe(true);
   });
 
-  it('rejects an empty candidate list, fewer candidates than resultCount, and more than 20 candidates', () => {
+  it('rejects an empty candidate list, fewer candidates than resultCount, and more than 25 candidates', () => {
     expect(CandidateGenerationResponseSchema.safeParse(buildGeneration([])).success).toBe(false);
     expect(
       CandidateGenerationResponseSchema.safeParse(buildGeneration([buildCandidatePayload()], 5))
@@ -200,7 +200,7 @@ describe('CandidateGenerationResponseSchema', () => {
     ).toBe(false);
     expect(
       CandidateGenerationResponseSchema.safeParse(
-        buildGeneration(Array.from({ length: 21 }, () => buildCandidatePayload())),
+        buildGeneration(Array.from({ length: 26 }, () => buildCandidatePayload())),
       ).success,
     ).toBe(false);
   });
@@ -285,7 +285,7 @@ describe('CandidateJudgeResponseSchema', () => {
 
   it('bounds removedCandidates and requires the disclaimer', () => {
     const tooManyRemoved = buildJudgeResponse([buildJudgedResultPayload()]);
-    tooManyRemoved['removedCandidates'] = Array.from({ length: 21 }, (_unused, index) => ({
+    tooManyRemoved['removedCandidates'] = Array.from({ length: 26 }, (_unused, index) => ({
       name: `Removed ${index}`,
       reasonRemoved: 'unsafe wording',
     }));

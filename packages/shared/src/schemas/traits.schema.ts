@@ -53,7 +53,7 @@ const uncertaintyNotesShape = Object.fromEntries(
 export const UncertaintyNotesSchema = z.strictObject(uncertaintyNotesShape);
 
 /**
- * The advanced-global-traits-v3 nested trait payload: all 16 categories (221
+ * The visual-similarity-v4 nested trait payload: all 16 categories (221
  * named fields, every value localized text) plus the uncertainty-notes block.
  * `strictObject` end-to-end: a drifting model response cannot smuggle new
  * fields in, and a missing category/field fails validation outright.

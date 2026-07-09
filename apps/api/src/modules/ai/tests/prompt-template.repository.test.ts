@@ -53,7 +53,7 @@ describe('PromptTemplateRepository', () => {
   it('replaces every placeholder and caches the template across repeat builds', () => {
     existsSyncMock.mockReturnValue(true);
     readFileSyncMock.mockReturnValue(
-      `Traits: ${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} for ${PromptPlaceholder.AppName} via ${PromptPlaceholder.ModelProvider} count ${PromptPlaceholder.ResultCount}`,
+      `Traits: ${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} for ${PromptPlaceholder.AppName} via ${PromptPlaceholder.ModelProvider} count ${PromptPlaceholder.ResultCount} region ${PromptPlaceholder.RegionHint}`,
     );
     const repository = buildRepository();
 
@@ -61,11 +61,13 @@ describe('PromptTemplateRepository', () => {
       [PromptPlaceholder.TraitsJson]: '{"a":1}',
       [PromptPlaceholder.LanguageCode]: 'en',
       [PromptPlaceholder.ResultCount]: '10',
+      [PromptPlaceholder.RegionHint]: 'global audience',
     });
     const second = repository.buildPrompt(PromptKey.CandidateGeneration, {
       [PromptPlaceholder.TraitsJson]: '{"b":2}',
       [PromptPlaceholder.LanguageCode]: 'ar',
       [PromptPlaceholder.ResultCount]: '5',
+      [PromptPlaceholder.RegionHint]: 'arabic audience',
     });
 
     expect(first).toContain('{"a":1}');
@@ -82,7 +84,7 @@ describe('PromptTemplateRepository', () => {
   it('skips the debug log in production but still builds the prompt', () => {
     existsSyncMock.mockReturnValue(true);
     readFileSyncMock.mockReturnValue(
-      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount}`,
+      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount} region ${PromptPlaceholder.RegionHint}`,
     );
     const repository = buildRepository({ isProduction: true });
 
@@ -90,6 +92,7 @@ describe('PromptTemplateRepository', () => {
       [PromptPlaceholder.TraitsJson]: '{"c":3}',
       [PromptPlaceholder.LanguageCode]: 'en',
       [PromptPlaceholder.ResultCount]: '10',
+      [PromptPlaceholder.RegionHint]: 'global audience',
     });
 
     expect(prompt).toContain('{"c":3}');
@@ -99,7 +102,7 @@ describe('PromptTemplateRepository', () => {
   it('rejects a build when a required replacement value is missing', () => {
     existsSyncMock.mockReturnValue(true);
     readFileSyncMock.mockReturnValue(
-      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount}`,
+      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount} region ${PromptPlaceholder.RegionHint}`,
     );
     const repository = buildRepository();
 

@@ -8,7 +8,7 @@ import {
 } from '../../src';
 
 /**
- * Deterministic advanced-global-traits-v3 fixture builders, generated from
+ * Deterministic visual-similarity-v4 fixture builders, generated from
  * the single taxonomy source so a taxonomy change updates every test at once.
  */
 
