@@ -95,9 +95,7 @@ export function getModuleName(sourcePath) {
 export function isUnderAny(sourcePath, prefixes) {
   const path = sourcePath ?? "";
 
-  return prefixes.some(
-    (prefix) => path === prefix || path.startsWith(`${prefix}`),
-  );
+  return prefixes.some((prefix) => path === prefix || path.startsWith(prefix));
 }
 
 /**

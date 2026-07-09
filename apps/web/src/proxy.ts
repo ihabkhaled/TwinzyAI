@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { publicEnv } from '@/packages/env';
+import { isDevRuntime, publicEnv } from '@/packages/env';
 
 const NONCE_HEADER = 'x-nonce';
 const CSP_HEADER = 'content-security-policy';
@@ -10,12 +10,13 @@ const CSP_HEADER = 'content-security-policy';
  * Build the per-request Content-Security-Policy. A fresh nonce authorizes only
  * this response's inline scripts; `strict-dynamic` lets Next's runtime load its
  * chunks from that trusted root. `connect-src` must allow the NestJS API origin
- * so the game gateway can reach it. `'unsafe-eval'` is added only in local dev
- * (React Refresh / source maps); it is never present in built environments.
+ * so the game gateway can reach it. `'unsafe-eval'` is allowed only under the
+ * `next dev` RUNTIME (React Refresh / eval'd chunks) — keyed on NODE_ENV, not
+ * appEnv, so e2e (dev server with appEnv=test) works and every BUILT
+ * environment stays eval-free.
  */
 const buildContentSecurityPolicy = (nonce: string): string => {
-  const isDev = publicEnv.appEnv === 'local';
-  const scriptSrc = isDev
+  const scriptSrc = isDevRuntime
     ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'`
     : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`;
 

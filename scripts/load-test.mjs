@@ -97,7 +97,10 @@ const run = async () => {
   console.log(`429 (shed):  ${throttled}`);
   console.log(`other/error: ${errors}  (${round(errorRate * 100)}%)`);
   console.log('status distribution:');
-  for (const [status, count] of [...statusCounts.entries()].toSorted()) {
+  const sortedStatuses = [...statusCounts].toSorted((a, b) =>
+    String(a[0]).localeCompare(String(b[0])),
+  );
+  for (const [status, count] of sortedStatuses) {
     console.log(`  ${status}: ${count}`);
   }
   console.log('latency (ms):');

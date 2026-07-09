@@ -73,13 +73,15 @@ export class TraitExtractionService {
 
   /** The model must localize to the requested language — a drift is invalid. */
   private assertRequestedLanguage(returned: LanguageCodeValue, requested: LanguageCodeValue): void {
-    if (returned !== requested) {
-      this.logger.warn(`Trait response language mismatch (${returned} != ${requested})`);
-      throw new IntegrationError(
-        AI_INVALID_RESPONSE_MESSAGE,
-        ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseInvalid],
-        ErrorCode.AiResponseInvalid,
-      );
+    if (returned === requested) {
+      return;
     }
+
+    this.logger.warn(`Trait response language mismatch (${returned} != ${requested})`);
+    throw new IntegrationError(
+      AI_INVALID_RESPONSE_MESSAGE,
+      ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseInvalid],
+      ErrorCode.AiResponseInvalid,
+    );
   }
 }

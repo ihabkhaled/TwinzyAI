@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   output: 'standalone',
   typedRoutes: true,
+  // E2E runs (NEXT_PUBLIC_APP_ENV=test) disable the dev overlay indicator:
+  // its <nextjs-portal> sits bottom-left and intercepts taps on mobile
+  // viewports (it swallowed the share-button click in the e2e gate).
+  ...(process.env.NEXT_PUBLIC_APP_ENV === 'test' && { devIndicators: false }),
   headers: () => Promise.resolve([{ source: '/(.*)', headers: SECURITY_HEADERS }]),
 };
 

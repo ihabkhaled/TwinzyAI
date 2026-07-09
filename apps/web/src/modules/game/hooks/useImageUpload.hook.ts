@@ -20,10 +20,12 @@ export const useImageUpload = (): UploadController => {
   const previewRef = useRef<string | undefined>(undefined);
 
   const revokePreview = useCallback((): void => {
-    if (previewRef.current !== undefined) {
-      URL.revokeObjectURL(previewRef.current);
-      previewRef.current = undefined;
+    if (previewRef.current === undefined) {
+      return;
     }
+
+    URL.revokeObjectURL(previewRef.current);
+    previewRef.current = undefined;
   }, []);
 
   useEffect(() => revokePreview, [revokePreview]);

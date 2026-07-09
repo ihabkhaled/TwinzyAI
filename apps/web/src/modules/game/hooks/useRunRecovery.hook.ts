@@ -28,12 +28,14 @@ export const useRunRecovery = (deps: RunRecoveryDeps): RunRecoveryController => 
   }, [deps]);
 
   const onRetrySamePhoto = useCallback((): void => {
-    if (file !== undefined) {
-      deps.reset();
-      deps.resetFeedback();
-      deps.resetProgress();
-      deps.beginRun(file, resultCount);
+    if (file === undefined) {
+      return;
     }
+
+    deps.reset();
+    deps.resetFeedback();
+    deps.resetProgress();
+    deps.beginRun(file, resultCount);
   }, [deps, file, resultCount]);
 
   const onCancelProcessing = useCallback((): void => {

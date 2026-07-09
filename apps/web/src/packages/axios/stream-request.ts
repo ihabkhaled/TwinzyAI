@@ -67,8 +67,8 @@ async function openStream(
     return await fetch(`${publicEnv.apiBaseUrl}${path}`, {
       method: 'POST',
       body: formData,
-      ...(options?.signal === undefined ? {} : { signal: options.signal }),
-      ...(options?.headers === undefined ? {} : { headers: options.headers }),
+      ...(options?.signal !== undefined && { signal: options.signal }),
+      ...(options?.headers !== undefined && { headers: options.headers }),
     });
   } catch {
     if (options?.signal?.aborted === true) {
@@ -92,7 +92,8 @@ async function readStream(
   const pump = async (): Promise<void> => {
     const chunk = await reader.read();
     if (chunk.value !== undefined) {
-      for (const data of parser.push(decoder.decode(chunk.value, { stream: true }))) {
+      const frames = parser.push(decoder.decode(chunk.value, { stream: true }));
+      for (const data of frames) {
         onData(data);
       }
     }

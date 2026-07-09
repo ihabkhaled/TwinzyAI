@@ -68,7 +68,8 @@ export class PromptTemplateRepository {
   public buildPrompt(key: PromptKeyValue, replacements: Partial<Record<string, string>>): string {
     let prompt = this.loadTemplate(key);
 
-    for (const placeholder of REQUIRED_PLACEHOLDERS[key]) {
+    const requiredPlaceholders = REQUIRED_PLACEHOLDERS[key];
+    for (const placeholder of requiredPlaceholders) {
       const value = replacements[placeholder];
       if (value === undefined) {
         throw this.promptError(`Missing replacement for ${placeholder} in ${key}`);
@@ -118,7 +119,8 @@ export class PromptTemplateRepository {
   }
 
   private assertRequiredPlaceholdersExist(key: PromptKeyValue, template: string): void {
-    for (const placeholder of REQUIRED_PLACEHOLDERS[key]) {
+    const requiredPlaceholders = REQUIRED_PLACEHOLDERS[key];
+    for (const placeholder of requiredPlaceholders) {
       if (!template.includes(placeholder)) {
         throw this.promptError(`Prompt ${key} is missing required placeholder ${placeholder}`);
       }

@@ -100,11 +100,13 @@ export class StreamRegistry implements OnModuleInit, OnModuleDestroy {
   public sweep(now: number = Date.now()): number {
     let reaped = 0;
     for (const [streamId, entry] of this.streams) {
-      if (now >= entry.expiresAt) {
-        entry.controller.abort(StreamAbortReason.Timeout);
-        this.streams.delete(streamId);
-        reaped += 1;
+      if (now < entry.expiresAt) {
+        continue;
       }
+
+      entry.controller.abort(StreamAbortReason.Timeout);
+      this.streams.delete(streamId);
+      reaped += 1;
     }
     if (reaped > 0) {
       this.logger.warn(`Reaped ${reaped} stale stream(s) past TTL`);

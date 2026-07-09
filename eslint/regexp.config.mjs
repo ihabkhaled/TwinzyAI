@@ -1,4 +1,4 @@
-import * as regexp from 'eslint-plugin-regexp';
+import * as regexp from "eslint-plugin-regexp";
 
 /**
  * Regular expression correctness and safety rules (includes catastrophic
@@ -6,7 +6,7 @@ import * as regexp from 'eslint-plugin-regexp';
  */
 export default [
   {
-    ...regexp.configs['flat/recommended'],
-    files: ['**/*.ts', '**/*.tsx', '**/*.mjs'],
+    ...regexp.configs["flat/recommended"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mjs"],
   },
 ];

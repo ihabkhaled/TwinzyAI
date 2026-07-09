@@ -53,12 +53,10 @@ function isInsideJsxTree(node) {
   return false;
 }
 
+const JSX_EXPRESSION_TYPES = new Set(["JSXElement", "JSXFragment", "JSXText"]);
+
 function isJsxExpression(node) {
-  return (
-    node.type === "JSXElement" ||
-    node.type === "JSXFragment" ||
-    node.type === "JSXText"
-  );
+  return JSX_EXPRESSION_TYPES.has(node.type);
 }
 
 function isConditionalRender(node) {

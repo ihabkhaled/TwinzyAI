@@ -127,7 +127,7 @@ export class AiRouterService implements AiProviderAdapter {
         this.shadow.maybeRun(step, carriesImage, dispatch, options);
         return text;
       } catch (error: unknown) {
-        sawRateLimit = sawRateLimit || error instanceof TooManyRequestsError;
+        sawRateLimit ||= error instanceof TooManyRequestsError;
         if (!this.isRouteHoppable(error, options)) {
           throw error;
         }

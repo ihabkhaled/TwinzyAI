@@ -29,14 +29,14 @@ const parseCliOptions = (argv: readonly string[]): BenchmarkCliOptions => {
   const samples = Number(read('samples') ?? DEFAULT_SAMPLES);
   return {
     mode,
-    samples: Number.isInteger(samples) && samples > 0 ? samples : DEFAULT_SAMPLES,
+    samples: Number.isSafeInteger(samples) && samples > 0 ? samples : DEFAULT_SAMPLES,
     photoPath: read('photo'),
     outDir: read('out') ?? DEFAULT_OUT_DIR,
   };
 };
 
 const writeReports = (report: BenchmarkReport, outDir: string): string => {
-  const stamp = report.startedAtIso.replaceAll(':', '-').replaceAll('.', '-');
+  const stamp = report.startedAtIso.replaceAll(/[:.]/g, '-');
   const runDir = path.join(outDir, `run-${report.mode}-${stamp}`);
   mkdirSync(runDir, { recursive: true });
   writeFileSync(path.join(runDir, 'report.md'), toMarkdownReport(report));

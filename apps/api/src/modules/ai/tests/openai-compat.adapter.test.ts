@@ -86,7 +86,7 @@ describe('OpenAiCompatAdapter', () => {
   it('rejects empty content as AI_RESPONSE_INVALID', async () => {
     vi.stubGlobal(
       'fetch',
-      vi.fn(() => Promise.resolve(okResponse('   '))),
+      vi.fn(() => Promise.resolve(okResponse(' '.repeat(3)))),
     );
 
     await expect(

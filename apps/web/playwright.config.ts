@@ -35,9 +35,10 @@ export default defineConfig({
   fullyParallel: !IS_CI,
   // Only pin workers under CI; omit the key locally so Playwright picks its
   // default (exactOptionalPropertyTypes forbids assigning `undefined` here).
-  ...(IS_CI ? { workers: 1 } : {}),
+  ...(IS_CI && { workers: 1 }),
   retries: IS_CI ? 1 : 0,
-  reporter: [['list']],
+  // CI also emits the html report so the gate's uploaded artifact has content.
+  reporter: IS_CI ? [['list'], ['html', { open: 'never' }]] : [['list']],
   timeout: 60_000,
   expect: {
     toHaveScreenshot: { maxDiffPixelRatio: 0.02 },
@@ -50,6 +51,10 @@ export default defineConfig({
     command: `npm run dev:e2e`,
     url: BASE_URL,
     reuseExistingServer: true,
+    // The documented e2e standard: the app runs as APP_ENV=test, which (among
+    // other things) unmounts the ReactQueryDevtools floating launcher — its
+    // logo overflows a 320px viewport by 16px and red-flagged the CI gate.
+    env: { NEXT_PUBLIC_APP_ENV: 'test' },
     timeout: 180_000,
   },
   projects: [

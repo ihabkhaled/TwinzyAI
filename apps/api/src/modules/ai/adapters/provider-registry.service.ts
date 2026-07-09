@@ -48,11 +48,13 @@ export class ProviderRegistryService implements OnModuleInit {
   public async onModuleInit(): Promise<void> {
     this.adapters.set(AiProvider.Gemini, this.geminiAdapter);
     for (const provider of OPENAI_COMPAT_PROVIDER_VALUES) {
-      if (this.config.isProviderEnabled(provider)) {
-        const adapterLogger = await this.moduleRef.resolve(AppLogger);
-        this.adapters.set(provider, new OpenAiCompatAdapter(provider, this.config, adapterLogger));
-        this.logger.info(`Provider enabled: ${provider}`);
+      if (!this.config.isProviderEnabled(provider)) {
+        continue;
       }
+
+      const adapterLogger = await this.moduleRef.resolve(AppLogger);
+      this.adapters.set(provider, new OpenAiCompatAdapter(provider, this.config, adapterLogger));
+      this.logger.info(`Provider enabled: ${provider}`);
     }
     this.validateRouting();
   }

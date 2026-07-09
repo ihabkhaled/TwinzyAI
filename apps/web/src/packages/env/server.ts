@@ -13,14 +13,14 @@ const serverEnvSchema = z.object({
 
 type ServerEnv = z.output<typeof serverEnvSchema>;
 
-let cachedServerEnv: ServerEnv | null = null;
+const serverEnvCache: { value: ServerEnv | null } = { value: null };
 
 export function getServerEnv(): ServerEnv {
-  cachedServerEnv ??= parseSchema(
+  serverEnvCache.value ??= parseSchema(
     serverEnvSchema,
     { apiBaseUrl: process.env['SERVER_API_BASE_URL'] },
     'server environment',
   );
 
-  return cachedServerEnv;
+  return serverEnvCache.value;
 }

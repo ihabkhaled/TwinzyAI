@@ -66,7 +66,7 @@ export const analyzeImageStreamRequest = async (
           streamError = new HttpError('http', message.message, null, {
             errorCode: message.errorCode,
             message: message.message,
-            ...(message.stage === undefined ? {} : { stage: message.stage }),
+            ...(message.stage !== undefined && { stage: message.stage }),
           });
           break;
         }

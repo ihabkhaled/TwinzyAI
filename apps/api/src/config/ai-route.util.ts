@@ -17,12 +17,12 @@ export const parseAiRouteToken = (token: string, sourceKey: string): AiRouteEntr
     return { provider: AiProvider.Gemini, model: token };
   }
   const provider = token.slice(0, separatorIndex).trim();
-  const model = token.slice(separatorIndex + 1).trim();
   if (!isKnownProvider(provider)) {
     throw new Error(
       `Invalid AI route in ${sourceKey}: unknown provider "${provider}" (known: ${AI_PROVIDER_VALUES.join(', ')})`,
     );
   }
+  const model = token.slice(separatorIndex + 1).trim();
   if (model.length === 0) {
     throw new Error(`Invalid AI route in ${sourceKey}: empty model in token "${token}"`);
   }

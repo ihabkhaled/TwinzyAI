@@ -1,4 +1,4 @@
-import sonarjs from 'eslint-plugin-sonarjs';
+import sonarjs from "eslint-plugin-sonarjs";
 
 /**
  * SonarJS bug-detection and code-smell rules.
@@ -6,11 +6,11 @@ import sonarjs from 'eslint-plugin-sonarjs';
 export default [
   {
     ...sonarjs.configs.recommended,
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ["**/*.ts", "**/*.tsx"],
     rules: {
       ...sonarjs.configs.recommended.rules,
-      'sonarjs/cognitive-complexity': ['error', 15],
-      'sonarjs/no-duplicate-string': ['error', { threshold: 5 }],
+      "sonarjs/cognitive-complexity": ["error", 15],
+      "sonarjs/no-duplicate-string": ["error", { threshold: 5 }],
     },
   },
 ];

@@ -168,7 +168,6 @@ const runRealStep = async (
   state: RealRunState,
 ): Promise<StepBenchmarkResult> => {
   const carriesImage = (AI_IMAGE_STEPS as readonly GeminiStepValue[]).includes(step);
-  const notes: string[] = [];
   if (carriesImage && image === undefined) {
     return { step, entries: [], notes: ['skipped: image step needs --photo=<path>'] };
   }
@@ -176,6 +175,7 @@ const runRealStep = async (
   if (entries.length === 0) {
     return { step, entries: [], notes: ['skipped: no enabled (and vision-capable) entries'] };
   }
+  const notes: string[] = [];
   const measured = [];
   for (const entry of entries) {
     const samples = await runRealEntry(deps, { step, entry, image, samplesPerEntry }, state);

@@ -23,7 +23,7 @@ describe('isNonEmptyString', () => {
 
   it('is false for empty, whitespace-only, or non-string values', () => {
     expect(isNonEmptyString('')).toBe(false);
-    expect(isNonEmptyString('   ')).toBe(false);
+    expect(isNonEmptyString(' '.repeat(3))).toBe(false);
     expect(isNonEmptyString(7)).toBe(false);
     expect(isNonEmptyString(null)).toBe(false);
   });

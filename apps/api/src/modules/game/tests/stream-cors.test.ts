@@ -13,7 +13,7 @@ describe('buildStreamCorsHeaders', () => {
   });
 
   it('returns no CORS headers for an origin outside the allowlist', () => {
-    expect(buildStreamCorsHeaders('http://evil.example', ALLOWED)).toEqual({});
+    expect(buildStreamCorsHeaders('https://evil.example', ALLOWED)).toEqual({});
   });
 
   it('returns no CORS headers when there is no Origin header', () => {

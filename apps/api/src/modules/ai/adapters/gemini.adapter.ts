@@ -130,7 +130,7 @@ export class GeminiAdapter implements AiProviderAdapter {
         }
         const kind = classifyProviderError(error);
         this.logProviderError(model, error, kind);
-        sawRateLimit = sawRateLimit || kind === ProviderErrorKind.RateLimited;
+        sawRateLimit ||= kind === ProviderErrorKind.RateLimited;
         if (!isModelRetryable(kind)) {
           throw this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE);
         }

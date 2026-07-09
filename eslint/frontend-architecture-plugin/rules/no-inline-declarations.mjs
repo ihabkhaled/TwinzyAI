@@ -122,7 +122,7 @@ export default {
         reportInlineType(context, node, "type alias"),
       "Program > VariableDeclaration": checkConst,
       "Program > ExportNamedDeclaration > VariableDeclaration": checkConst,
-      ...(isComponentFile(sourcePath) ? componentBodyVisitors(context) : {}),
+      ...(isComponentFile(sourcePath) && componentBodyVisitors(context)),
     };
   },
 };

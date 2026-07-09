@@ -29,7 +29,7 @@ const traitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LE
 
 /** Gemini sometimes omits or mangles rank; keep the result and let backend sorting re-rank later. */
 const normalizeRank = (value: unknown): unknown =>
-  typeof value === 'number' && Number.isInteger(value) ? value : MIN_RESULT_COUNT;
+  typeof value === 'number' && Number.isSafeInteger(value) ? value : MIN_RESULT_COUNT;
 
 export const JudgeSafetyCheckSchema = z.object({
   containsFaceRecognitionClaim: z.literal(false),

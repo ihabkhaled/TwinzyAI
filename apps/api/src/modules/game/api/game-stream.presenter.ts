@@ -120,7 +120,7 @@ export class GameStreamPresenter {
         sse.event(
           termination.message.event,
           stampStreamFrame(
-            { ...termination.message, ...(lastStage === undefined ? {} : { stage: lastStage }) },
+            { ...termination.message, ...(lastStage !== undefined && { stage: lastStage }) },
             { ...envelope, status: termination.status },
           ),
         );

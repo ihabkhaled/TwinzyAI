@@ -13,5 +13,8 @@ import {
 export const redactForLog = (value: string): string =>
   value
     .slice(0, MAX_LOGGED_LENGTH)
-    .replaceAll(BASE64_RUN_PATTERN, REDACTED_PLACEHOLDER)
-    .replaceAll(SECRET_KEY_PATTERN, `$1$2${REDACTED_PLACEHOLDER}`);
+    .replaceAll(BASE64_RUN_PATTERN, () => REDACTED_PLACEHOLDER)
+    .replaceAll(
+      SECRET_KEY_PATTERN,
+      (_match, key: string, separator: string) => `${key}${separator}${REDACTED_PLACEHOLDER}`,
+    );

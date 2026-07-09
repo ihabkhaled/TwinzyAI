@@ -1,11 +1,11 @@
-import promise from 'eslint-plugin-promise';
+import promise from "eslint-plugin-promise";
 
 /**
  * Promise correctness rules.
  */
 export default [
   {
-    ...promise.configs['flat/recommended'],
-    files: ['**/*.ts', '**/*.tsx', '**/*.mjs'],
+    ...promise.configs["flat/recommended"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mjs"],
   },
 ];

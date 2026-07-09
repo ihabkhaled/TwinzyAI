@@ -73,9 +73,8 @@ export default {
 
         for (const boundary of boundaries) {
           const matches =
-            boundary.matchSubpaths === false
-              ? specifier === boundary.package
-              : packageName === boundary.package;
+            (boundary.matchSubpaths === false ? specifier : packageName) ===
+            boundary.package;
 
           if (!matches) {
             continue;

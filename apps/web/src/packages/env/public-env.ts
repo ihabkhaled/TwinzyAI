@@ -23,3 +23,10 @@ export const publicEnv: PublicEnv = parseSchema(
   },
   'public environment',
 );
+
+/**
+ * True when running under the  server (React Refresh, eval'd
+ * chunks). Keyed on NODE_ENV — the RUNTIME — deliberately, not on appEnv:
+ * e2e runs the dev server with appEnv=test and still needs dev allowances.
+ */
+export const isDevRuntime = process.env.NODE_ENV === 'development';

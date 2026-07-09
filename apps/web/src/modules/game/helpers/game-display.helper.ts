@@ -49,8 +49,7 @@ export const resolvePhase = (
 export const resolveStageLabel = (
   translate: TranslateMessage,
   stage: GameStreamStageValue | undefined,
-): string =>
-  stage === undefined ? translate('game.processingText') : translate(STAGE_LABEL_KEYS[stage]);
+): string => translate(stage === undefined ? 'game.processingText' : STAGE_LABEL_KEYS[stage]);
 
 /**
  * The full error copy for the error phase: the friendly per-code message,

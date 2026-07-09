@@ -172,14 +172,12 @@ export default {
       // The const clause is apps/api-only: on the web side the frontend
       // no-inline-declarations rule owns this concern and (unlike this rule)
       // correctly exempts *.variants.ts class-string bundles under components/.
-      ...(isApiFile(filename)
-        ? {
-            "Program > VariableDeclaration": (node) =>
-              reportInlineConst(context, node, layer),
-            "Program > ExportNamedDeclaration > VariableDeclaration": (node) =>
-              reportInlineConst(context, node, layer),
-          }
-        : {}),
+      ...(isApiFile(filename) && {
+        "Program > VariableDeclaration": (node) =>
+          reportInlineConst(context, node, layer),
+        "Program > ExportNamedDeclaration > VariableDeclaration": (node) =>
+          reportInlineConst(context, node, layer),
+      }),
     };
   },
 };
