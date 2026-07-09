@@ -25,7 +25,7 @@ for (const viewport of MOBILE_VIEWPORTS) {
       expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
 
       await playHappyPathUntilAnalyze(page);
-      await expect(page.getByText('Sample Star')).toBeVisible();
+      await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
 
       const resultScrollWidth = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,

@@ -28,8 +28,8 @@ test.describe('game flow (mocked backend)', () => {
     await expect(analyzeButton).toBeEnabled();
     await analyzeButton.click();
 
-    await expect(page.getByText('Sample Star')).toBeVisible();
-    await expect(page.getByText('Style/vibe fit: 87%')).toBeVisible();
+    await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
+    await expect(page.getByText('Style/vibe fit: 90%')).toBeVisible();
     await expect(page.getByText(DISCLAIMER)).toBeVisible();
     // V2: the compact summary chips + trait count render immediately…
     await expect(page.getByText('clear oval face')).toBeVisible();

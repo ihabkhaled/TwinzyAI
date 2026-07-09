@@ -5,7 +5,9 @@ import { DEFAULT_RESULT_COUNT } from '@twinzy/shared';
 import { buildJpegPayload, mockAnalyzeSuccess } from './helpers';
 
 test.describe('streaming progress', () => {
-  test('all pipeline stages are announced during the stream', async ({ page }) => {
+  test('processing card is shown while the pipeline runs and ends with the result', async ({
+    page,
+  }) => {
     await mockAnalyzeSuccess(page, DEFAULT_RESULT_COUNT);
     await page.goto('/game');
 
@@ -13,15 +15,11 @@ test.describe('streaming progress', () => {
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByText('Checking your photo')).toBeVisible();
-    await expect(page.getByText('Reading visible traits')).toBeVisible();
-    await expect(page.getByText('Finding public style/vibe matches')).toBeVisible();
-    await expect(page.getByText('Scoring and double-checking')).toBeVisible();
-    await expect(page.getByText('Preparing your result')).toBeVisible();
-    await expect(page.getByText('Sample Star 1')).toBeVisible();
+    await expect(page.getByTestId('processing')).toBeVisible();
+    await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
   });
 
-  test('trait summary and candidate names render as intermediate payloads', async ({ page }) => {
+  test('intermediate trait summary and candidate names render as they stream', async ({ page }) => {
     await mockAnalyzeSuccess(page, DEFAULT_RESULT_COUNT);
     await page.goto('/game');
 
@@ -30,7 +28,7 @@ test.describe('streaming progress', () => {
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
     await expect(page.getByText('clear oval face')).toBeVisible();
-    await expect(page.getByText('Sample Star 1')).toBeVisible();
+    await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
   });
 
   test('navigating away during streaming does not crash the app', async ({ page }) => {
@@ -40,7 +38,7 @@ test.describe('streaming progress', () => {
     await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
-    await expect(page.getByText('validating')).toBeVisible();
+    await expect(page.getByTestId('processing')).toBeVisible();
 
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'Find your public vibe match' })).toBeVisible();

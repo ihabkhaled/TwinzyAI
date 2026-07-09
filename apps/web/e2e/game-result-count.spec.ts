@@ -31,8 +31,8 @@ test.describe('result-count selection', () => {
     await setResultCount(page, MIN_RESULT_COUNT);
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
-    await expect(page.getByTestId('result-card-2')).toBeHidden();
+    await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
+    await expect(page.getByText('Sample Star 2', { exact: true })).toBeHidden();
   });
 
   test('selecting 5 results renders exactly five ranked cards', async ({ page }) => {
