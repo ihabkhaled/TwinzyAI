@@ -13,7 +13,7 @@
 
 - **Node.js >= 22** (`engines.node >= 22`; developed on Node 24).
 - **TypeScript ~6.0.3**, maximally strict via [`tsconfig.base.json`](../tsconfig.base.json): `strict` plus `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noImplicitReturns`, `noImplicitOverride`, `noPropertyAccessFromIndexSignature`, `noUnusedLocals`, `noUnusedParameters`, `useUnknownInCatchVariables`, `noFallthroughCasesInSwitch`, `allowUnreachableCode: false`, `noEmitOnError`, `noUncheckedSideEffectImports`, `isolatedModules`. These flags are why "no `any`", "no `!`", and "handle every nullable" are mechanically true here.
-- **Typecheck** is per-workspace behind `npm run typecheck` (root builds shared first): the **api** workspace type-checks with **tsgo** (`@typescript/native-preview`, the native TypeScript compiler — fast `--noEmit` checking only), the **web** workspace with regular `tsc`.
+- **Typecheck** is per-workspace behind `npm run typecheck` (root builds shared first): every workspace type-checks with the native `tsc` from **TypeScript 7** (installed via the `tsc7` npm alias; the `typescript` package name resolves to the official 6.0 API shim `@typescript/typescript6` for API consumers: nest CLI, Next, typescript-eslint, sonarjs).
 
 ## Backend libraries (apps/api)
 
@@ -70,7 +70,7 @@ Next.js (App Router) + React with Tailwind CSS, TanStack Query, React Hook Form,
 | `dev` / `dev:api` / `dev:web` | Run both apps (concurrently) or one |
 | `build` | `build:shared` → `build:api` → `build:web` |
 | `lint` / `lint:fix` | ESLint flat config, whole repo (0/0 target) |
-| `typecheck` | Build shared, then per-workspace typecheck (tsgo for api, tsc for web) |
+| `typecheck` | Build shared, then per-workspace typecheck (native tsc from TypeScript 7) |
 | `test` / `test:watch` | All vitest projects |
 | `test:unit` | `api-unit` + `web-unit` + `shared-unit` + `lint-rules` |
 | `test:integration` | `api-integration` |

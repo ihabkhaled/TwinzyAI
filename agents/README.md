@@ -150,7 +150,7 @@ shape (mission · when to invoke · read-first · checklist · verdict) and clos
 
 ```bash
 npm run lint            # eslint . --max-warnings=0 (incl. the frontend-architecture plugin)
-npm run typecheck       # tsgo over app + test + node tsconfigs
+npm run typecheck       # native tsc (TypeScript 7) over app + test + node tsconfigs
 npm run test:coverage   # Vitest 4 + RTL + jsdom + MSW v2 — 95% global / 100% pure logic
 npm run build           # Next.js production build
 npm run test:e2e        # Playwright *.e2e.ts (mocked BFF gateway)
