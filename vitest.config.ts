@@ -110,8 +110,11 @@ export default defineConfig({
         'packages/shared/src/utils/**/*.ts',
       ],
       exclude: ['**/tests/**', '**/*.test.ts', '**/*.test.tsx', '**/*.d.ts', '**/index.ts'],
-      // Branch floor is 90 (not 95) solely because the decorator downlevel
-      // emits one uncoverable synthetic branch per decorated class.
+      // Branch floor is 90 (not 95) because the decorator downlevel emits one
+      // uncoverable synthetic branch per decorated class (@Injectable services),
+      // plus a handful of provider I/O abort/error edges that are not worth the
+      // heavy mock scaffolding. Statement/function/line floors stay high (95),
+      // and pure-logic libs are effectively fully covered by direct unit tests.
       thresholds: {
         statements: 95,
         branches: 90,

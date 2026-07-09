@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
 
-import { parseAiJsonResponse } from '../lib/json-response.util';
+import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
 
 const TestSchema = z.object({
   value: z.string(),
@@ -41,5 +41,48 @@ describe('parseAiJsonResponse', () => {
     const listener = vi.fn();
     expect(() => parseAiJsonResponse('broken', TestSchema, listener)).toThrow();
     expect(listener).toHaveBeenCalledWith('response is not valid JSON');
+  });
+
+  it('recovers JSON wrapped in leading/trailing prose via the object extractor', () => {
+    const result = parseAiJsonResponse(
+      'Sure! Here is the result: {"value":"hi","count":1} — hope that helps.',
+      TestSchema,
+    );
+    expect(result).toEqual({ value: 'hi', count: 1 });
+  });
+
+  it('applies the optional normalize step before validation', () => {
+    const normalize = vi.fn((parsed: unknown) => ({
+      ...(parsed as Record<string, unknown>),
+      count: Number((parsed as { count: string }).count),
+    }));
+    const result = parseAiJsonResponse(
+      '{"value":"hi","count":"7"}',
+      TestSchema,
+      undefined,
+      normalize,
+    );
+    expect(normalize).toHaveBeenCalledOnce();
+    expect(result).toEqual({ value: 'hi', count: 7 });
+  });
+});
+
+describe('buildSchemaValidator', () => {
+  const isValid = buildSchemaValidator(TestSchema);
+
+  it('accepts text that parses and satisfies the schema', () => {
+    expect(isValid('{"value":"hi","count":2}')).toBe(true);
+  });
+
+  it('accepts schema-valid text even inside markdown fences', () => {
+    expect(isValid('```json\n{"value":"hi","count":2}\n```')).toBe(true);
+  });
+
+  it('rejects valid JSON that does not satisfy the schema', () => {
+    expect(isValid('{"value":"hi"}')).toBe(false);
+  });
+
+  it('rejects text that is not JSON at all', () => {
+    expect(isValid('definitely not json')).toBe(false);
   });
 });

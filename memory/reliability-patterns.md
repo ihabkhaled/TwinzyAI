@@ -22,3 +22,24 @@ Rule: [/rules/08-reliability-durability.md](../rules/08-reliability-durability.m
 - **Stateless instances**: nothing persisted ([database-decisions.md](./database-decisions.md)),
   so restart/redeploy is always safe and horizontal scaling needs no coordination.
 - Health endpoints wired into Docker healthchecks; readiness reflects critical adapters.
+
+## Provider resilience doctrine: immediate model-fallback, not retry-with-backoff
+
+The Gemini adapter resolves a **retryable** failure (transient/5xx/timeout) by falling through
+to the **next model** in the configured chain immediately — content-level fallback across the
+model list, bounded per-model by `GEMINI_TIMEOUT_MS`. This is deliberate, and the classic
+resilience patterns are intentionally **not** used here:
+
+- **No jittered retry/backoff on the same model.** The whole pipeline runs while a user watches
+  an SSE stream; inserting backoff delays between attempts would add visible latency to an
+  interactive flow whose explicit product goal is a fast, transparent loading experience.
+  Falling straight to a different model both recovers *and* stays fast. Backoff/jitter is the
+  right tool for high-throughput background work against a rate-limited dependency — not for a
+  single interactive request.
+- **No circuit breaker.** Instances are stateless and per-request; there is no shared hot loop
+  hammering one model, so there is no thundering herd to trip a breaker on. A breaker would add
+  cross-request state (the thing the stateless design avoids) for no workload that needs it.
+- **When these WOULD apply:** if a future path does fan-out or background batch calls against
+  the provider, add jittered exponential backoff there and reconsider a breaker — but keep the
+  interactive request path on immediate fallback. Terminal non-retryable failures still surface
+  as the typed `IntegrationError` envelope so the UI shows a friendly, stage-aware message.

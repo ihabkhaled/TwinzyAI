@@ -10,6 +10,7 @@ import noDirectEnvAccess from "../rules/no-direct-env-access.mjs";
 import noDirectSdkImports from "../rules/no-direct-sdk-imports.mjs";
 import noInlineDomainDefinitions from "../rules/no-inline-domain-definitions.mjs";
 import noRawLibraryImports from "../rules/no-raw-library-imports.mjs";
+import noReactInPureLayers from "../rules/no-react-in-pure-layers.mjs";
 import noRestrictedLayerImports from "../rules/no-restricted-layer-imports.mjs";
 import noRestrictedVendorImports from "../rules/no-restricted-vendor-imports.mjs";
 import repositoryPersistenceOnly from "../rules/repository-persistence-only.mjs";
@@ -385,6 +386,77 @@ tester.run("tsx-pure-composition", tsxPureComposition, {
     {
       filename: COMPONENT_FILE,
       code: "import { useState } from 'react'; export const Card = () => { const [a, setA] = useState(0); return null; };",
+      errors: 1,
+    },
+  ],
+});
+
+// Pure logic layers stay framework-agnostic: no runtime React outside
+// components (.tsx) and hooks (*.hook.ts); type-only React imports are allowed.
+tester.run("no-react-in-pure-layers", noReactInPureLayers, {
+  valid: [
+    {
+      // Type-only React import in a model/types file is allowed (erased at compile time).
+      filename: "/repo/apps/web/src/modules/game/model/game-component.types.ts",
+      code: "import type { ReactNode, RefObject } from 'react';",
+    },
+    {
+      // Fully-inline type specifiers are also type-only.
+      filename: "/repo/apps/web/src/shared/types/shared-view.types.ts",
+      code: "import { type ReactNode } from 'react';",
+    },
+    {
+      // Hooks legitimately consume the React runtime.
+      filename: "/repo/apps/web/src/modules/game/hooks/useGame.hook.ts",
+      code: "import { useState } from 'react';",
+    },
+    {
+      // Components (.tsx) are governed by tsx-pure-composition, not this rule.
+      filename: COMPONENT_FILE,
+      code: "import { useMemo } from 'react';",
+    },
+    {
+      // Non-React imports in pure files are untouched.
+      filename:
+        "/repo/apps/web/src/modules/game/helpers/game-display.helper.ts",
+      code: "import { formatScore } from './score';",
+    },
+    {
+      // Backend pure file importing a normal dependency is fine.
+      filename: SERVICE_FILE,
+      code: "import { z } from 'zod';",
+    },
+  ],
+  invalid: [
+    {
+      // Default React import (runtime) in a frontend helper.
+      filename:
+        "/repo/apps/web/src/modules/game/helpers/game-display.helper.ts",
+      code: "import React from 'react';",
+      errors: 1,
+    },
+    {
+      // Named runtime binding in a pure service file.
+      filename: "/repo/apps/web/src/modules/game/services/game.service.ts",
+      code: "import { createElement } from 'react';",
+      errors: 1,
+    },
+    {
+      // Mixed import with a runtime binding still fails.
+      filename: "/repo/apps/web/src/modules/game/model/game.mapper.ts",
+      code: "import { type ReactNode, useRef } from 'react';",
+      errors: 1,
+    },
+    {
+      // Side-effect React import in a pure file.
+      filename: "/repo/apps/web/src/shared/lib/setup.ts",
+      code: "import 'react-dom';",
+      errors: 1,
+    },
+    {
+      // React must never leak into the backend.
+      filename: SERVICE_FILE,
+      code: "import { useState } from 'react';",
       errors: 1,
     },
   ],

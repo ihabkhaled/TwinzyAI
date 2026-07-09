@@ -25,6 +25,7 @@ export default [
       "architecture/no-direct-sdk-imports": "error",
       "architecture/no-direct-env-access": "error",
       "architecture/no-raw-library-imports": "error",
+      "architecture/no-react-in-pure-layers": "error",
       "architecture/tsx-pure-composition": "error",
       "architecture/repository-persistence-only": "error",
     },
