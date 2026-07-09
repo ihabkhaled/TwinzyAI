@@ -15,6 +15,7 @@ import { AppTheme } from '@/shared/enums/app-theme.enum';
 import {
   DARK_COLOR_SCHEME_QUERY,
   resolveInitialDirection,
+  resolveInitialTheme,
   resolveThemeAttribute,
   UI_PREFERENCE_DOM_ATTRIBUTES,
 } from '../model/ui-preferences.constants';
@@ -26,8 +27,9 @@ import { useUiPreferencesStore } from '../store/ui-preferences.store';
  * Mounts the three UI-preference side effects, each gated on `hasHydrated`:
  *
  *  1. Hydrate the store once from local storage. When nothing is persisted yet
- *     the server-rendered `dir` is adopted (so a locale-driven RTL page does
- *     not flash back to LTR) and the current in-store theme is kept.
+ *     the server-rendered `dir` and `data-theme` are adopted (so a locale-driven
+ *     RTL page does not flash back to LTR, and a dark first paint driven by the
+ *     theme cookie is not flipped back to the default by the first DOM mirror).
  *  2. Mirror theme + direction onto <html>, re-resolving `system` live whenever
  *     the OS `prefers-color-scheme` changes.
  *  3. Persist the snapshot to local storage whenever it changes.
@@ -53,7 +55,7 @@ export function useUiPreferencesEffects(): void {
     );
 
     if (stored === null) {
-      hydrate({ theme, direction: resolveInitialDirection() });
+      hydrate({ theme: resolveInitialTheme(theme), direction: resolveInitialDirection() });
 
       return;
     }

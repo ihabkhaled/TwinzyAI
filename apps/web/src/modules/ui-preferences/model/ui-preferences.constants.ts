@@ -44,6 +44,20 @@ export const resolveThemeAttribute = (theme: AppThemeValue): ResolvedColorScheme
 };
 
 /**
+ * Resolve the initial theme from the server-rendered `<html data-theme>`
+ * attribute. Used only on first load when no preference has been persisted
+ * yet: a dark first paint (driven by the theme cookie) is adopted instead of
+ * being flipped back to the default by the first DOM mirror. A light or
+ * missing attribute keeps the caller's in-store default — the cookie only
+ * distinguishes an explicit dark scheme.
+ */
+export const resolveInitialTheme = (fallbackTheme: AppThemeValue): AppThemeValue => {
+  const attribute = getRootAttribute(UI_PREFERENCE_DOM_ATTRIBUTES.theme);
+
+  return attribute === AppTheme.Dark ? AppTheme.Dark : fallbackTheme;
+};
+
+/**
  * Resolve the initial writing direction from the server-rendered `<html dir>`
  * attribute, defaulting to left-to-right. Used only on first load when no
  * preference has been persisted yet, so the client adopts whatever the server

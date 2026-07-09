@@ -4,7 +4,11 @@ import { getRootAttribute, matchesMediaQuery } from '@/packages/browser';
 import { AppDirection } from '@/shared/enums/app-direction.enum';
 import { AppTheme } from '@/shared/enums/app-theme.enum';
 
-import { resolveInitialDirection, resolveThemeAttribute } from '../model/ui-preferences.constants';
+import {
+  resolveInitialDirection,
+  resolveInitialTheme,
+  resolveThemeAttribute,
+} from '../model/ui-preferences.constants';
 
 vi.mock('@/packages/browser', () => ({
   getRootAttribute: vi.fn(),
@@ -30,6 +34,26 @@ describe('resolveThemeAttribute', () => {
     vi.mocked(matchesMediaQuery).mockReturnValue(false);
 
     expect(resolveThemeAttribute(AppTheme.System)).toBe(AppTheme.Light);
+  });
+});
+
+describe('resolveInitialTheme', () => {
+  it('adopts dark from the server-rendered data-theme attribute (theme cookie present)', () => {
+    vi.mocked(getRootAttribute).mockReturnValue(AppTheme.Dark);
+
+    expect(resolveInitialTheme(AppTheme.System)).toBe(AppTheme.Dark);
+  });
+
+  it('keeps the in-store default when the server rendered light', () => {
+    vi.mocked(getRootAttribute).mockReturnValue(AppTheme.Light);
+
+    expect(resolveInitialTheme(AppTheme.System)).toBe(AppTheme.System);
+  });
+
+  it('keeps the in-store default when no data-theme attribute is present', () => {
+    vi.mocked(getRootAttribute).mockReturnValue(null);
+
+    expect(resolveInitialTheme(AppTheme.Light)).toBe(AppTheme.Light);
   });
 });
 
