@@ -33,7 +33,7 @@ Run `npm run validate` for `apps/web`, which expands to:
 | Gate                                     | Script                      |
 | ---------------------------------------- | --------------------------- |
 | Lint (zero warnings)                     | `npm run lint`              |
-| Types (tsgo, app+test+node)              | `npm run typecheck`         |
+| Types (native tsc 7, app+test+node)              | `npm run typecheck`         |
 | Unit/integration + coverage thresholds   | `npm run test:coverage`     |
 | Production build                         | `npm run build`             |
 | End-to-end                               | `npm run test:e2e`          |
