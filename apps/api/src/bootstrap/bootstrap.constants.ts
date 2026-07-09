@@ -11,6 +11,24 @@ export const BODY_LIMIT_MARGIN_BYTES = 1_048_576;
 
 export const BODY_LIMIT_BYTES = UPLOAD_HARD_CAP_BYTES + BODY_LIMIT_MARGIN_BYTES;
 
+/**
+ * Per-route request-body caps for the JSON endpoints, keyed by route-path
+ * suffix. The global {@link BODY_LIMIT_BYTES} is sized for the multipart image
+ * upload (~11 MiB); these far-tighter caps are applied as Fastify's native
+ * per-route `bodyLimit` (via the `onRoute` hook in `configureSecurity`), so an
+ * oversized JSON body is rejected with the same native 413 long before it can
+ * be buffered or parsed — defence in depth on top of the strict zod schemas.
+ * The cancel body is three uuids; the translate-result body carries a full game
+ * result, so it gets the larger cap.
+ */
+export const JSON_ROUTE_BODY_LIMITS: readonly {
+  readonly suffix: string;
+  readonly limitBytes: number;
+}[] = [
+  { suffix: '/game/cancel', limitBytes: 8192 },
+  { suffix: '/game/translate-result', limitBytes: 262_144 },
+];
+
 export const DEFAULT_API_VERSION = '1';
 
 export const CORS_ALLOWED_METHODS = ['GET', 'POST'] as const;

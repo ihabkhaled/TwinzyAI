@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  security-events: write
 
 concurrency:
   group: gate-security-scan-${{ github.ref }}
@@ -26,11 +27,31 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Dependency audit (fails on any advisory)
+        run: npm run security:audit
 
       - name: Setup Trivy
         uses: aquasecurity/setup-trivy@v0.3.1
 
-      - name: Run Security Scan Gate
+      - name: Run Security Scan Gate (vuln + secret + misconfig)
         run: npm run security:scan
+
+      - name: Trivy SARIF report
+        if: always()
+        run: >-
+          trivy fs --scanners vuln,secret,misconfig --include-dev-deps
+          --skip-dirs "node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results"
+          --format sarif --output trivy-results.sarif .
+
+      - name: Upload SARIF to code scanning
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-results.sarif
+          category: trivy-fs

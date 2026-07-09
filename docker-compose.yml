@@ -20,6 +20,15 @@ services:
       CLAMAV_HOSTS: ${CLAMAV_HOSTS:-clamav,127.0.0.1}
       CLAMAV_PORT: 3310
     restart: unless-stopped
+    mem_limit: 1g
+    cpus: 1.0
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     # No volumes on purpose: uploads must never persist.
 
   web:
@@ -36,11 +45,23 @@ services:
     depends_on:
       - api
     restart: unless-stopped
+    mem_limit: 512m
+    cpus: 0.5
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
   clamav:
     image: clamav/clamav:stable
     profiles:
       - clamav
-    ports:
-      - '3310:3310'
+    # clamd is reached only over the internal compose network — not published.
+    expose:
+      - '3310'
+    security_opt:
+      - no-new-privileges:true
     restart: unless-stopped
