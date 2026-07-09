@@ -60,7 +60,6 @@ export const buildSuccessBody = (
     weakOrUncertainTraits: [],
     mismatchWarnings: [],
     judgeNotes: 'Score kept conservative.',
-    shouldDisplay: true,
     safetyCheck: buildJudgeSafetyCheck(),
   })),
   fallbackMessage: '',
