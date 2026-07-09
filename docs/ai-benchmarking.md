@@ -1,6 +1,6 @@
 # AI Benchmarking
 
-`npm run ai:benchmark` measures provider/model candidates per pipeline step with the SAME validators production uses (step Zod schemas + forbidden-wording scan), and writes a markdown + JSON report under `docs/features/multi-provider-ai/benchmarks/run-<mode>-<timestamp>/`.
+`npm run ai:benchmark` measures provider/model candidates per pipeline step with the SAME validators production uses (step Zod schemas + forbidden-wording scan), and writes a markdown + JSON report under `benchmark-results/run-<mode>-<timestamp>/ (gitignored — reports/results never enter git; only scripts, code, and docs are committed)`.
 
 ## Modes
 

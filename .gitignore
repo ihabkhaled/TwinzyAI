@@ -36,3 +36,7 @@ tmp/
 
 # Parallel frontend-anatomy migration WIP (other agent, incomplete, not wired into the app)
 .migration-wip/
+
+# AI benchmark outputs (results/reports stay out of git — scripts and docs only)
+benchmark-results/
+docs/features/multi-provider-ai/benchmarks/

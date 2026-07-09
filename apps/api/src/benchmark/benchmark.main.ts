@@ -15,7 +15,7 @@ import type { BenchmarkCliOptions, BenchmarkReport } from './model/benchmark.typ
 
 const DEFAULT_SAMPLES = 3;
 const CLI_ARGV_OFFSET = 2;
-const DEFAULT_OUT_DIR = 'docs/features/multi-provider-ai/benchmarks';
+const DEFAULT_OUT_DIR = 'benchmark-results';
 
 /** Parse `--key=value` CLI arguments (mock by default; real is explicit). */
 const parseCliOptions = (argv: readonly string[]): BenchmarkCliOptions => {
