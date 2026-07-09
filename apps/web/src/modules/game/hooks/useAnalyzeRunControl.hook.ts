@@ -21,11 +21,11 @@ export const useAnalyzeRunControl = (
   }, []);
 
   const beginRun = useCallback(
-    (file: File): void => {
+    (file: File, resultCount: number): void => {
       controllerRef.current?.abort();
       const controller = new AbortController();
       controllerRef.current = controller;
-      start({ file, requestId: newRequestId(), signal: controller.signal });
+      start({ file, requestId: newRequestId(), signal: controller.signal, resultCount });
     },
     [start],
   );

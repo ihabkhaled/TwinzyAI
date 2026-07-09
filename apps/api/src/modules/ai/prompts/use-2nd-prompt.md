@@ -1,11 +1,11 @@
-# Use 2ndPrompt.md — Advanced Traits to Global Public Style/Vibe Candidates (advanced-global-traits-v2)
+# Use 2ndPrompt.md — Advanced Traits to Global Public Style/Vibe Candidates (advanced-global-traits-v3)
 
 You are working inside a fun public style/vibe game.
 
-You will receive an advanced structured set of visible appearance traits as JSON text (nested categories plus a compact summary of the strongest signals).
+You will receive an advanced structured set of visible appearance traits as JSON text (nested categories plus compact summary, high-signal tokens, weighted evidence, visual archetype hints, and candidate-search hints).
 You will not receive an image.
 
-Your task is to suggest up to 5 public figures who have the closest general public style/vibe compatibility based only on the written traits.
+Your task is to suggest public figures who have the closest general public style/vibe compatibility based only on the written traits.
 
 This is not face recognition.
 This is not identity matching.
@@ -19,6 +19,10 @@ This is not exact lookalike matching.
 - Public figure names stay in their common public spelling — do not translate names.
 - Keep all JSON keys in English camelCase exactly as shown below.
 - Do not mix languages inside a value.
+
+## Requested result count
+
+The user asked for exactly [RESULT_COUNT] final results. Build a candidate pool that is at least [RESULT_COUNT] and at most the safe upper limit, but never smaller than [RESULT_COUNT]. Aim for roughly min(max([RESULT_COUNT] * 2, [RESULT_COUNT] + 3), 20). The judge will later narrow the pool down to [RESULT_COUNT].
 
 ## Input traits
 
@@ -46,18 +50,22 @@ Candidate types: actor, singer, athlete, creator, TV personality, public enterta
 - Do not say `same face`.
 - Do not infer sensitive attributes.
 - Treat the output as a playful style/vibe guess from text traits only.
-- Return at least 1 candidate and at most 5 candidates. Return 5 whenever the traits safely support 5; return fewer only when there are not enough safe, credible candidates.
-- Rank strongest to weakest.
+- Return a candidate pool whose size is between [RESULT_COUNT] and 20, inclusive. `candidateCount` must equal the number of candidates you actually return.
+- If [RESULT_COUNT] is 1, still return at least 3 candidates when the traits support them, so the judge has headroom to filter safely.
+- Rank strongest to weakest within the pool.
 - `candidateCount` must equal the number of candidates you actually return.
 - Scores are `styleVibeFitScore`, not accuracy and not biometric similarity.
-- Be conservative with scores:
-  - 95–100: almost never use.
-  - 90–94: very rare — many major traits strongly align.
+- Be conservative with scores. Never force a score to 90 or above. A 90+ score requires many strong, clearly visible traits to align.
+- Score calibration for `styleVibeFitScore`:
+  - 95–100: almost never use. Only when an unusually large number of strong, unique visible traits align and image quality is high.
+  - 90–94: very rare — at least four major strong traits clearly align and image quality is good.
   - 80–89: strong style/vibe fit.
   - 70–79: medium style/vibe fit.
   - 50–69: weak or generic fit.
   - 0–49: poor fit — should usually not be suggested.
-- If traits are generic, unclear, or common, use lower scores.
+- If the input traits are generic, unclear, or common, cap the top score below 80.
+- Apply image-quality caps from the input: if `imageQualityCaps` indicates low or very-low quality, cap all scores at 79 or lower.
+- If few strong traits are visible, cap all scores at 74 or lower.
 - `confidenceLevel` is how confident you are in the suggestion: high | medium | low.
 - `globalPopularityLevel` is how globally recognizable the figure is: high | medium | low.
 - Fill the aligned/mismatch arrays with short localized trait references from the input.
@@ -65,13 +73,15 @@ Candidate types: actor, singer, athlete, creator, TV personality, public enterta
 - Do not include markdown or comments.
 - Return valid JSON only. No text before or after the JSON.
 - Return exactly the JSON shape below.
+- Every field in every candidate's `safetyCheck` must be `false`.
 
 ## Required JSON output
 
 {
-  "promptVersion": "advanced-global-traits-v2",
+  "promptVersion": "advanced-global-traits-v3",
   "languageCode": "[LANGUAGE_CODE]",
-  "candidateCount": 5,
+  "resultCount": 0,
+  "candidateCount": 0,
   "candidates": [
     {
       "name": "string",
@@ -105,4 +115,4 @@ Never output any of: "face recognition", "biometric", "identity match", "same fa
 ## Final reminder
 
 Playful style/vibe suggestions from written traits only.
-Return the JSON only, localized to [LANGUAGE_CODE], names in common public spelling.
+Return the JSON only, localized to [LANGUAGE_CODE], names in common public spelling, pool size between [RESULT_COUNT] and 20.

@@ -82,6 +82,10 @@ export interface ResultView {
 /** The mapped view model the UI renders — never the raw backend DTO. */
 export interface GameResultView {
   traitCount: number;
+  /** Number of results the user requested (1–10), echoed back for display. */
+  resultCount: number;
+  /** Translated title for the result list, including the requested count. */
+  resultCountTitle: string;
   compactTraitSummary: string[];
   /** Detailed categories for the accordion (imageQuality excluded — it has its own section). */
   categories: TraitCategoryView[];
@@ -104,24 +108,27 @@ export type FileValidationResult = { ok: true } | { ok: false; errorKey: ErrorMe
 
 /**
  * One analyze run's isolation context sent alongside the file: a per-run
- * correlation id and the AbortSignal that cancels this run (aborting closes the
- * SSE socket, which the backend treats as a disconnect and stops the pipeline).
+ * correlation id, the AbortSignal that cancels this run (aborting closes the
+ * SSE socket, which the backend treats as a disconnect and stops the pipeline),
+ * and the user-selected number of results to return.
  */
 export interface AnalyzeRunInput {
   file: File;
   requestId: string;
   signal: AbortSignal;
+  resultCount: number;
 }
 
-/** Per-run correlation + cancel controls threaded to the streaming gateway. */
+/** Per-run correlation + cancel controls + result count threaded to the streaming gateway. */
 export interface AnalyzeStreamOptions {
   requestId: string;
   signal: AbortSignal;
+  resultCount: number;
 }
 
 /** The run-control surface: start a fresh analyze run, or cancel the in-flight one. */
 export interface AnalyzeRunControl {
-  beginRun: (file: File) => void;
+  beginRun: (file: File, resultCount: number) => void;
   cancelRun: () => void;
 }
 
@@ -204,12 +211,21 @@ export interface UploadController {
   clearFile: () => void;
 }
 
+/** Narrow input for building the upload sub-view (preview is supplied separately). */
+export type UploadViewModelInput = Pick<
+  UploadController,
+  'file' | 'onFileChange' | 'clearFile' | 'fileErrorKey'
+>;
+
 /** Internal share-hook surface: the "copied" feedback and its actions. */
 export interface ShareController {
   feedbackKey: string | undefined;
   onShare: (text: string) => Promise<void>;
   resetFeedback: () => void;
 }
+
+/** Narrow input for building the share sub-view (only the feedback key is used). */
+export type ShareFeedbackInput = Pick<ShareController, 'feedbackKey'>;
 
 /** The selected-image sub-view: the file, its preview, and its handlers. */
 export interface UploadViewModel {
@@ -244,6 +260,12 @@ export interface UploadLabels {
   previewAlt: string;
 }
 
+/** Translated copy for the result-count dropdown. */
+export interface ResultCountLabels {
+  label: string;
+  hint: string;
+}
+
 /** Translated copy for the live-camera capture card. */
 export interface CameraLabels {
   title: string;
@@ -269,6 +291,12 @@ export interface ResultLabels {
   fallbackTitle: string;
   retryButton: string;
   shareButton: string;
+  /** Explains what the percentage score represents. */
+  scoreExplanation: string;
+  /** Explains why some traits are marked as uncertain. */
+  uncertaintyExplanation: string;
+  /** Explains why mismatch warnings appear. */
+  mismatchExplanation: string;
 }
 
 /** All static copy the game screen needs, resolved once per render. */
@@ -284,6 +312,7 @@ export interface GameScreenLabels {
   retryTranslation: string;
   privacyNotice: string;
   upload: UploadLabels;
+  resultCount: ResultCountLabels;
   camera: CameraLabels;
   result: ResultLabels;
 }
@@ -318,6 +347,12 @@ export interface GameViewModel {
   liveSummary: string[];
   /** Candidate public-figure names streamed as "rough examples" (empty until they arrive). */
   liveCandidates: string[];
+  /** Currently selected number of results (1–10), controlled by the setup dropdown. */
+  resultCount: number;
+  /** Available options for the result-count dropdown. */
+  resultCountOptions: readonly number[];
+  /** Update the selected result count. */
+  onResultCountChange: (count: number) => void;
   upload: UploadViewModel;
   camera: CameraViewModel;
   share: ShareViewModel;

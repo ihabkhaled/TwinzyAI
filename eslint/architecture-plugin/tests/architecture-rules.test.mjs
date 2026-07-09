@@ -9,6 +9,7 @@ import controllerNoLogic from "../rules/controller-no-logic.mjs";
 import noDirectEnvAccess from "../rules/no-direct-env-access.mjs";
 import noDirectSdkImports from "../rules/no-direct-sdk-imports.mjs";
 import noInlineDomainDefinitions from "../rules/no-inline-domain-definitions.mjs";
+import noRawLibraryImports from "../rules/no-raw-library-imports.mjs";
 import noRestrictedLayerImports from "../rules/no-restricted-layer-imports.mjs";
 import noRestrictedVendorImports from "../rules/no-restricted-vendor-imports.mjs";
 import repositoryPersistenceOnly from "../rules/repository-persistence-only.mjs";
@@ -503,6 +504,54 @@ tester.run("no-restricted-vendor-imports", noRestrictedVendorImports, {
         },
       ],
       errors: [{ messageId: "forbiddenImport" }],
+    },
+  ],
+});
+
+// Raw wrapped-library imports are only allowed inside wrapper homes.
+tester.run("no-raw-library-imports", noRawLibraryImports, {
+  valid: [
+    {
+      filename: "/repo/apps/api/src/core/logger/app-logger.service.ts",
+      code: "import pino from 'pino';",
+    },
+    {
+      filename: "/repo/apps/api/src/infrastructure/cache/redis.repository.ts",
+      code: "import dayjs from 'dayjs';",
+    },
+    {
+      filename: "/repo/apps/api/src/adapters/http/http.adapter.ts",
+      code: "import axios from 'axios';",
+    },
+    {
+      filename: "/repo/apps/api/src/lib/date/format.ts",
+      code: "import { format } from 'date-fns';",
+    },
+    {
+      filename: "/repo/apps/web/src/packages/axios/http-client.ts",
+      code: "import axios from 'axios';",
+    },
+  ],
+  invalid: [
+    {
+      filename: "/repo/apps/api/src/modules/game/application/game.service.ts",
+      code: "import pino from 'pino';",
+      errors: [{ messageId: "noRawLibrary" }],
+    },
+    {
+      filename: "/repo/apps/api/src/modules/game/application/game.service.ts",
+      code: "import dayjs from 'dayjs';",
+      errors: [{ messageId: "noRawLibrary" }],
+    },
+    {
+      filename: "/repo/apps/api/src/modules/game/application/game.service.ts",
+      code: "import axios from 'axios';",
+      errors: [{ messageId: "noRawHttp" }],
+    },
+    {
+      filename: "/repo/apps/api/src/modules/game/api/game.controller.ts",
+      code: "import { format } from 'date-fns';",
+      errors: [{ messageId: "noRawLibrary" }],
     },
   ],
 });

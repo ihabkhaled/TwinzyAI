@@ -6,3 +6,4 @@ playwright-report
 test-results
 package-lock.json
 *.md
+apps/web/next-env.d.ts

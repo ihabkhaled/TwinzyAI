@@ -1,5 +1,6 @@
 import type { TraitExtractionResponse } from '@twinzy/shared';
 import {
+  DEFAULT_RESULT_COUNT,
   GAME_PROMPT_VERSION,
   RESULT_DISCLAIMER,
   TOTAL_TRAIT_FIELDS,
@@ -112,7 +113,7 @@ export const buildSafetyCheckPayload = (): Record<string, boolean> => ({
   containsBiometricClaim: false,
 });
 
-/** Full valid Prompt 1 response (advanced-global-traits-v2). */
+/** Full valid Prompt 1 response (advanced-global-traits-v3). */
 export const buildTraitExtractionPayload = (
   overrides: Partial<Record<string, unknown>> = {},
 ): Record<string, unknown> => ({
@@ -121,6 +122,20 @@ export const buildTraitExtractionPayload = (
   traitCount: TOTAL_TRAIT_FIELDS,
   traits: buildTraitsPayload(),
   compactTraitSummary: ['clear oval face', 'wavy dark hair'],
+  highSignalTraitTokens: ['oval face', 'wavy hair', 'defined jawline'],
+  weightedTraitEvidence: [
+    { token: 'oval face', weight: 8 },
+    { token: 'wavy hair', weight: 7 },
+    { token: 'defined jawline', weight: 6 },
+  ],
+  visualArchetypeHints: ['soft oval face with wavy dark hair'],
+  imageQualityCaps: [{ quality: 'clear', impact: 'Most traits are visible and reliable.' }],
+  candidateSearchHints: [
+    {
+      archetype: 'actors with wavy dark hair',
+      why: 'The hair texture and face shape are strong signals.',
+    },
+  ],
   safetyCheck: buildSafetyCheckPayload(),
   ...overrides,
 });
@@ -160,14 +175,27 @@ export const buildCandidatePayload = (
 
 export const buildCandidatesJson = (
   candidates: Record<string, unknown>[] = [buildCandidatePayload()],
+  resultCount?: number,
 ): string =>
   JSON.stringify({
     promptVersion: GAME_PROMPT_VERSION,
     languageCode: 'en',
+    resultCount: resultCount ?? candidates.length,
     candidateCount: candidates.length,
     candidates,
     fallbackMessage: '',
   });
+
+export const buildJudgeSafetyCheckPayload = (
+  meetsMinimumEvidence = true,
+): Record<string, boolean> => ({
+  containsFaceRecognitionClaim: false,
+  containsBiometricClaim: false,
+  containsIdentityClaim: false,
+  containsExactLookalikeClaim: false,
+  containsSensitiveInference: false,
+  meetsMinimumEvidence,
+});
 
 export const buildJudgedResultPayload = (
   overrides: Partial<Record<string, unknown>> = {},
@@ -186,15 +214,18 @@ export const buildJudgedResultPayload = (
   mismatchWarnings: [],
   judgeNotes: 'Score kept conservative because several traits were unclear.',
   shouldDisplay: true,
+  safetyCheck: buildJudgeSafetyCheckPayload(),
   ...overrides,
 });
 
 export const buildJudgeJson = (
   results: Record<string, unknown>[] = [buildJudgedResultPayload()],
+  resultCount?: number,
 ): string =>
   JSON.stringify({
     promptVersion: GAME_PROMPT_VERSION,
     languageCode: 'en',
+    resultCount: resultCount ?? results.length,
     results,
     removedCandidates: [],
     fallbackMessage: '',
@@ -207,6 +238,7 @@ export const buildFinalGameResultPayload = (
 ): Record<string, unknown> => ({
   promptVersion: GAME_PROMPT_VERSION,
   languageCode: 'en',
+  resultCount: DEFAULT_RESULT_COUNT,
   traitCount: TOTAL_TRAIT_FIELDS,
   traits: buildTraitsPayload(),
   compactTraitSummary: ['clear oval face', 'wavy dark hair'],
@@ -225,6 +257,7 @@ export const buildFinalGameResultPayload = (
       weakOrUncertainTraits: [],
       mismatchWarnings: [],
       judgeNotes: 'Conservative score.',
+      safetyCheck: buildJudgeSafetyCheckPayload(),
     },
   ],
   fallbackMessage: '',

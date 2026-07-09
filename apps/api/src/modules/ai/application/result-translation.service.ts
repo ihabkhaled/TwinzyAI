@@ -4,13 +4,14 @@ import type { FinalGameResult, FinalResultItem, LanguageCodeValue } from '@twinz
 import {
   FinalGameResultSchema,
   NO_MATCH_FALLBACK_BY_LANGUAGE,
+  PROMPT_JSON_INDENT,
   RESULT_DISCLAIMER_BY_LANGUAGE,
 } from '@twinzy/shared';
 
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
-import { parseAiJsonResponse } from '../lib/json-response.util';
+import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
 import { collectTraitTextValues } from '../lib/trait-text.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
@@ -48,11 +49,16 @@ export class ResultTranslationService {
     targetLanguageCode: LanguageCodeValue,
   ): Promise<FinalGameResult> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.TranslateResult, {
-      [PromptPlaceholder.ResultJson]: JSON.stringify(original, null, 2),
+      [PromptPlaceholder.ResultJson]: JSON.stringify(original, null, PROMPT_JSON_INDENT),
       [PromptPlaceholder.TargetLanguageCode]: targetLanguageCode,
     });
 
-    const rawText = await this.aiProvider.generateFromTextStream(prompt);
+    const rawText = await this.aiProvider.generateFromTextStream(
+      prompt,
+      undefined,
+      undefined,
+      buildSchemaValidator(FinalGameResultSchema),
+    );
     const translated = parseAiJsonResponse(rawText, FinalGameResultSchema, (issues) => {
       this.logger.warn(`Translated result schema mismatch: ${issues}`);
     });
@@ -93,6 +99,7 @@ export class ResultTranslationService {
       ...translated,
       promptVersion: original.promptVersion,
       languageCode: targetLanguageCode,
+      resultCount: original.resultCount,
       traitCount: original.traitCount,
       results,
       disclaimer: RESULT_DISCLAIMER_BY_LANGUAGE[targetLanguageCode],
@@ -114,6 +121,7 @@ export class ResultTranslationService {
       confidenceLevel: original.confidenceLevel,
       verdict: original.verdict,
       publicCategory: original.publicCategory,
+      safetyCheck: original.safetyCheck,
     };
   }
 

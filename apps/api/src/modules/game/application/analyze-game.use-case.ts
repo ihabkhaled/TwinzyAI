@@ -10,6 +10,7 @@ import {
 } from '../../file-security';
 import { isConsentGiven } from '../lib/consent';
 import { resolveRequestLanguage } from '../lib/request-language';
+import { resolveRequestResultCount } from '../lib/request-result-count';
 
 import { StyleMatchService } from './style-match.service';
 
@@ -36,12 +37,13 @@ export class AnalyzeGameUseCase {
     body: unknown,
   ): Promise<FinalGameResult> {
     const languageCode = resolveRequestLanguage(body);
+    const resultCount = resolveRequestResultCount(body);
     const extraction = await this.extractTraitsAndDestroyImage(
       file,
       isConsentGiven(body),
       languageCode,
     );
-    return this.styleMatch.matchFromTraits(extraction, languageCode);
+    return this.styleMatch.matchFromTraits(extraction, languageCode, resultCount);
   }
 
   /**

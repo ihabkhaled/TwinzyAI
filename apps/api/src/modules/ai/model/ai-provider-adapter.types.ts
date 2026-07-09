@@ -7,6 +7,13 @@ import type { AiImageInput } from './gemini.types';
 export type AiStreamChunkListener = (chunkText: string) => void;
 
 /**
+ * Optional content validator. Returning false means the model's returned text
+ * is not acceptable (e.g., invalid JSON or schema mismatch), so the adapter
+ * should try the next model in the configured chain before giving up.
+ */
+export type AiContentValidator = (text: string) => boolean;
+
+/**
  * Port for AI providers. The separation of the image and text methods is the
  * AI-safety boundary in type form: only the *FromImage methods can carry an
  * image, and only the trait-extraction service is allowed to call them.
@@ -23,18 +30,24 @@ export type AiStreamChunkListener = (chunkText: string) => void;
  * so the provider call — and its slot — is released immediately.
  */
 export interface AiProviderAdapter {
-  generateFromImage(prompt: string, image: AiImageInput): Promise<string>;
-  generateFromText(prompt: string): Promise<string>;
+  generateFromImage(
+    prompt: string,
+    image: AiImageInput,
+    validate?: AiContentValidator,
+  ): Promise<string>;
+  generateFromText(prompt: string, validate?: AiContentValidator): Promise<string>;
   generateFromImageStream(
     prompt: string,
     image: AiImageInput,
     onChunk?: AiStreamChunkListener,
     signal?: AbortSignal,
+    validate?: AiContentValidator,
   ): Promise<string>;
   generateFromTextStream(
     prompt: string,
     onChunk?: AiStreamChunkListener,
     signal?: AbortSignal,
+    validate?: AiContentValidator,
   ): Promise<string>;
 }
 

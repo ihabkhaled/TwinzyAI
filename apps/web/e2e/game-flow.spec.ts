@@ -1,3 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 import { expect, test } from '@playwright/test';
 
 import {
@@ -6,6 +9,7 @@ import {
   mockAnalyzeFailure,
   mockAnalyzeSuccess,
   playHappyPathUntilAnalyze,
+  setInputFile,
 } from './helpers';
 
 test.describe('game flow (mocked backend)', () => {
@@ -21,15 +25,15 @@ test.describe('game flow (mocked backend)', () => {
     const analyzeButton = page.getByRole('button', { name: 'Analyze my vibe' });
     await expect(analyzeButton).toBeDisabled();
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await expect(analyzeButton).toBeDisabled();
 
     await page.getByRole('checkbox').check();
     await expect(analyzeButton).toBeEnabled();
     await analyzeButton.click();
 
-    await expect(page.getByText('Sample Star')).toBeVisible();
-    await expect(page.getByText('Style/vibe fit: 87%')).toBeVisible();
+    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByText('Style/vibe fit: 90%')).toBeVisible();
     await expect(page.getByText(DISCLAIMER)).toBeVisible();
     // V2: the compact summary chips + trait count render immediately…
     await expect(page.getByText('clear oval face')).toBeVisible();
@@ -43,13 +47,13 @@ test.describe('game flow (mocked backend)', () => {
   });
 
   test('invalid upload shows a friendly error and analyze stays disabled', async ({ page }) => {
+    const tmpDir = path.resolve(__dirname, '../test-results');
+    fs.mkdirSync(tmpDir, { recursive: true });
+    const hugePath = path.join(tmpDir, 'twinzy-huge.jpg');
+    fs.writeFileSync(hugePath, Buffer.alloc(6_000_000, 0xff));
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles({
-      name: 'malware.exe',
-      mimeType: 'application/octet-stream',
-      buffer: Buffer.from('MZ-not-an-image'),
-    });
+    await setInputFile(page, '#game-photo-input', hugePath);
 
     await expect(
       page.getByText('That photo could not be uploaded. Please try a different one.'),

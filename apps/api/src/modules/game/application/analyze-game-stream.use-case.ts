@@ -12,6 +12,7 @@ import {
 import { isConsentGiven } from '../lib/consent';
 import type { GameStreamEmitter } from '../lib/game-stream';
 import { resolveRequestLanguage } from '../lib/request-language';
+import { resolveRequestResultCount } from '../lib/request-result-count';
 
 import { StyleMatchService } from './style-match.service';
 
@@ -41,6 +42,7 @@ export class AnalyzeGameStreamUseCase {
     signal?: AbortSignal,
   ): Promise<void> {
     const languageCode = resolveRequestLanguage(body);
+    const resultCount = resolveRequestResultCount(body);
     emit({ event: GameStreamEvent.Accepted });
     emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Validating });
 
@@ -61,12 +63,13 @@ export class AnalyzeGameStreamUseCase {
     const result = await this.styleMatch.matchFromTraits(
       extraction,
       languageCode,
+      resultCount,
       {
         onStage: (stage) => {
           emit({ event: GameStreamEvent.Stage, stage });
         },
         onCandidates: (names) => {
-          emit({ event: GameStreamEvent.Candidates, names: [...names] });
+          emit({ event: GameStreamEvent.Candidates, resultCount, names: [...names] });
         },
       },
       signal,

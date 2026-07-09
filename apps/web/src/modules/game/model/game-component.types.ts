@@ -43,8 +43,7 @@ export interface PrivacyNoticeProps {
 
 /** Props for the upload / open-camera source card. */
 export interface UploadCardProps {
-  uploadLabel: string;
-  changeButton: string;
+  sourceLabel: string;
   hint: string;
   cameraLabel: string;
   cameraHint: string;
@@ -55,6 +54,17 @@ export interface UploadCardProps {
   onFileInputChange: ChangeEventHandler<HTMLInputElement>;
   /** Opens the live getUserMedia camera (NOT a file input — see rules/12). */
   onOpenCamera: () => void;
+  testId?: string;
+}
+
+/** Props for the result-count selector in the setup phase. */
+export interface ResultCountSelectProps {
+  id: string;
+  label: string;
+  hint: string;
+  value: number;
+  onChange: ChangeEventHandler<HTMLSelectElement>;
+  children: ReactNode;
   testId?: string;
 }
 

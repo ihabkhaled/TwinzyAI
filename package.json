@@ -10,6 +10,9 @@
   "overrides": {
     "@nestjs/platform-fastify": {
       "fastify": "$fastify"
+    },
+    "next": {
+      "postcss": "^8.5.10"
     }
   },
   "workspaces": [
@@ -20,7 +23,7 @@
     "apps/web"
   ],
   "scripts": {
-    "dev": "concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev": "npm run build:shared && concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
     "dev:web": "npm run dev --workspace apps/web",
     "dev:api": "npm run dev --workspace apps/api",
     "build": "npm run build:shared && npm run build:api && npm run build:web",
@@ -51,6 +54,7 @@
     "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
     "audit": "npm audit --omit dev",
     "security:scan": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" --exit-code 1 --severity HIGH,CRITICAL .",
+    "security:scan:secrets": "node scripts/scan-secrets.mjs",
     "security:scan:full": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" .",
     "deps:check": "npm-check-updates --workspaces --root",
     "deps:upgrade": "npm-check-updates --workspaces --root -u && npm install",

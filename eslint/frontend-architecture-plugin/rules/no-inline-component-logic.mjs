@@ -53,6 +53,25 @@ function isInsideJsxTree(node) {
   return false;
 }
 
+function isJsxExpression(node) {
+  return (
+    node.type === "JSXElement" ||
+    node.type === "JSXFragment" ||
+    node.type === "JSXText"
+  );
+}
+
+function isConditionalRender(node) {
+  const { consequent, alternate } = node;
+
+  return (
+    (isJsxExpression(consequent) ||
+      (consequent.type === "Literal" && consequent.value === null)) &&
+    (isJsxExpression(alternate) ||
+      (alternate.type === "Literal" && alternate.value === null))
+  );
+}
+
 export default {
   meta: {
     type: "problem",
@@ -107,12 +126,19 @@ function structuralVisitors(context) {
       context.report({ node, messageId: "inlineHandler" });
     },
     ConditionalExpression(node) {
-      if (
+      const isNested =
         node.parent.type === "ConditionalExpression" ||
         node.consequent.type === "ConditionalExpression" ||
-        node.alternate.type === "ConditionalExpression"
-      ) {
+        node.alternate.type === "ConditionalExpression";
+
+      if (isNested) {
         context.report({ node, messageId: "nestedTernary" });
+      } else if (isInsideJsxTree(node) && !isConditionalRender(node)) {
+        context.report({
+          node,
+          messageId: "inlineComputation",
+          data: { what: "a ternary expression" },
+        });
       }
     },
   };

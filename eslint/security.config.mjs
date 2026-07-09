@@ -34,4 +34,22 @@ export default [
       "security/detect-non-literal-regexp": "off",
     },
   },
+  {
+    // Secret scanner intentionally walks the repository and reads files from a
+    // dynamically-built set; the paths are derived from a trusted root and
+    // never from user input.
+    files: ["scripts/scan-secrets.mjs"],
+    rules: {
+      "security/detect-non-literal-fs-filename": "off",
+    },
+  },
+  {
+    // E2E tests create transient fixture files under project-controlled paths
+    // (e.g., `test-results/`). Paths are built from `__dirname` and never from
+    // user input, so the non-literal-filename warning is a false positive.
+    files: ["apps/web/e2e/**/*.spec.ts"],
+    rules: {
+      "security/detect-non-literal-fs-filename": "off",
+    },
+  },
 ];

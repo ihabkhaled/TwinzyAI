@@ -31,6 +31,7 @@ export const useAnalyzeGameMutation = (
       analyzeImageStream(input.file, languageCode, handlers, {
         requestId: input.requestId,
         signal: input.signal,
+        resultCount: input.resultCount,
       }),
   });
 

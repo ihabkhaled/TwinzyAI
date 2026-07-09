@@ -13,9 +13,8 @@ no biometric comparison, and your photo is never stored. Fully localized in Engl
    fields across 16 categories, targeting **100+ traits** when image quality allows
    (`use-1st-prompt`).
 4. The image buffer is destroyed immediately after.
-5. Gemini receives the **written traits only** and suggests up to 5 playful candidates from a
-   **global public-figure pool** (`use-2nd-prompt`).
-6. A judge pass re-scores and filters (`use-3rd-prompt`) — up to 5 safe final results.
+5. Gemini receives the **written traits only** and suggests a candidate pool larger than the requested count from a **global public-figure pool** (`use-2nd-prompt`).
+6. A judge pass re-scores and filters (`use-3rd-prompt`) — up to the user-selected number of safe final results (1–10, default 10).
 7. The frontend shows traits, results, and a permanent disclaimer — all dynamic output is
    localized (en/ar).
 8. Switching language calls `POST /api/v1/game/translate-result`, which translates the existing
@@ -63,6 +62,7 @@ pre-push validation. Never bypass hooks with `--no-verify`.
 | `npm run test:coverage` | Coverage report |
 | `npm run build` | Build shared → api → web |
 | `npm run security:scan` | Trivy vulnerability/secret/misconfig scan |
+| `npm run security:scan:secrets` | Custom plaintext-secret scanner (complements Trivy) |
 | `npm run validate` | lint + typecheck + coverage + build |
 
 ## Repository map

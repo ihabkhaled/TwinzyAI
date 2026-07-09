@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { buildConfigStub } from '../../../tests/fixtures/stubs';
 import { ConcurrencyLimiter } from '../concurrency-limiter.service';
@@ -19,6 +19,13 @@ const buildLimiter = (overrides: Record<string, number>): ConcurrencyLimiter =>
   );
 
 describe('ConcurrencyLimiter', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
   it('grants a slot immediately when under all caps', async () => {
     const limiter = buildLimiter({
       maxGlobalActiveAnalyses: 2,
@@ -146,7 +153,9 @@ describe('ConcurrencyLimiter', () => {
     });
 
     await limiter.acquire(req('ip-a', 'tabA'));
-    const outcome = await limiter.acquire(req('ip-b', 'tabB'));
+    const pending = limiter.acquire(req('ip-b', 'tabB'));
+    await vi.advanceTimersByTimeAsync(20);
+    const outcome = await pending;
 
     expect(outcome.granted).toBe(false);
     expect(limiter.queuedCount).toBe(0);

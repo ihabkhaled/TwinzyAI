@@ -6,10 +6,10 @@ import { useCallback } from 'react';
 import {
   DEFAULT_LOCALE,
   getLocaleDirection,
-  isSupportedLocale,
+  isSupportedLanguageCode,
+  LANGUAGE_CODES,
   LOCALE_COOKIE_MAX_AGE_SECONDS,
   LOCALE_COOKIE_NAME,
-  SUPPORTED_LOCALES,
   useAppLocale,
 } from '@/packages/i18n';
 import { useAppNavigation } from '@/packages/navigation';
@@ -27,8 +27,8 @@ import type { LocaleSwitcherController } from '../types/ui-preferences.types';
  */
 export const useLocaleSwitcher = (): LocaleSwitcherController => {
   const rawLocale = useAppLocale();
-  const activeLocale = isSupportedLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
-  const nextLocale = SUPPORTED_LOCALES.find((locale) => locale !== activeLocale) ?? activeLocale;
+  const activeLocale = isSupportedLanguageCode(rawLocale) ? rawLocale : DEFAULT_LOCALE;
+  const nextLocale = LANGUAGE_CODES.find((locale) => locale !== activeLocale) ?? activeLocale;
   const setDirection = useUiPreferencesStore((state) => state.setDirection);
   const navigation = useAppNavigation();
 

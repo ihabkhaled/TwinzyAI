@@ -33,3 +33,5 @@ exploit details.
 
 - Never commit `.env` (only `.env.example`).
 - Never bake secrets into Docker images; pass them at runtime.
+- Rotate any secret that has been exposed in an audit, a transcript, or shared history.
+- Trivy scans for vulnerabilities and misconfigurations. A custom `npm run security:scan:secrets` scanner complements Trivy by looking for common plaintext patterns (Google API keys, AWS access keys, high-entropy secret assignments). Trivy alone may not catch every secret pattern; use both scanners before releasing.

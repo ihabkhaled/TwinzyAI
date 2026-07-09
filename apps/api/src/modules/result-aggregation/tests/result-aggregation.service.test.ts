@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { CandidateJudgeResponse } from '@twinzy/shared';
 import {
+  DEFAULT_RESULT_COUNT,
   NO_MATCH_FALLBACK_BY_LANGUAGE,
   NO_MATCH_FALLBACK_MESSAGE,
   RESULT_DISCLAIMER,
@@ -19,6 +20,8 @@ const extraction = buildTraitExtraction();
 
 const buildService = (): ResultAggregationService =>
   new ResultAggregationService(buildAppLoggerStub().logger);
+
+const CAP_RESULT_COUNT = 5;
 
 const buildJudgeResponse = (results: Record<string, unknown>[]): CandidateJudgeResponse =>
   ({
@@ -40,7 +43,7 @@ describe('ResultAggregationService', () => {
       ),
     );
 
-    const result = buildService().aggregate(extraction, response, 'en');
+    const result = buildService().aggregate(extraction, response, 'en', CAP_RESULT_COUNT);
 
     expect(result.results).toHaveLength(5);
     expect(result.results.map((item) => item.rank)).toEqual([1, 2, 3, 4, 5]);
@@ -56,7 +59,7 @@ describe('ResultAggregationService', () => {
       buildJudgedResultPayload({ name: 'Hidden', shouldDisplay: false, rank: 4 }),
     ]);
 
-    const result = buildService().aggregate(extraction, response, 'en');
+    const result = buildService().aggregate(extraction, response, 'en', DEFAULT_RESULT_COUNT);
 
     expect(result.results.map((item) => item.name)).toEqual(['Keeper']);
   });
@@ -66,7 +69,7 @@ describe('ResultAggregationService', () => {
       buildJudgedResultPayload({ name: 'Weak', verdict: 'weak' }),
     ]);
 
-    const result = buildService().aggregate(extraction, response, 'en');
+    const result = buildService().aggregate(extraction, response, 'en', DEFAULT_RESULT_COUNT);
 
     expect(result.results).toHaveLength(0);
     expect(result.fallbackMessage).toBe(NO_MATCH_FALLBACK_MESSAGE);
@@ -76,13 +79,13 @@ describe('ResultAggregationService', () => {
   it('always enforces the fixed server-side disclaimer in the requested language', () => {
     const response = buildJudgeResponse([buildJudgedResultPayload()]);
 
-    const english = buildService().aggregate(extraction, response, 'en');
+    const english = buildService().aggregate(extraction, response, 'en', DEFAULT_RESULT_COUNT);
     expect(english.disclaimer).toBe(RESULT_DISCLAIMER);
     expect(english.disclaimer).not.toContain('model-provided');
     expect(english.languageCode).toBe('en');
 
     const responseAr = buildJudgeResponse([buildJudgedResultPayload()]);
-    const arabic = buildService().aggregate(extraction, responseAr, 'ar');
+    const arabic = buildService().aggregate(extraction, responseAr, 'ar', DEFAULT_RESULT_COUNT);
     expect(arabic.disclaimer).toBe(RESULT_DISCLAIMER_BY_LANGUAGE.ar);
     expect(arabic.languageCode).toBe('ar');
   });
@@ -90,7 +93,7 @@ describe('ResultAggregationService', () => {
   it('carries the advanced trait payload, summary, and count into the response', () => {
     const response = buildJudgeResponse([buildJudgedResultPayload()]);
 
-    const result = buildService().aggregate(extraction, response, 'en');
+    const result = buildService().aggregate(extraction, response, 'en', DEFAULT_RESULT_COUNT);
 
     expect(result.traits).toEqual(extraction.traits);
     expect(result.compactTraitSummary).toEqual(extraction.compactTraitSummary);
@@ -103,13 +106,13 @@ describe('ResultAggregationService', () => {
       removedCandidates: [{ name: 'Removed Star', reasonRemoved: 'unsafe wording' }],
     } as CandidateJudgeResponse;
 
-    const result = buildService().aggregate(extraction, response, 'en');
+    const result = buildService().aggregate(extraction, response, 'en', DEFAULT_RESULT_COUNT);
 
     expect(JSON.stringify(result)).not.toContain('Removed Star');
   });
 
   it('builds a localized fallback result with traits and disclaimer', () => {
-    const result = buildService().buildFallback(extraction, 'ar');
+    const result = buildService().buildFallback(extraction, 'ar', DEFAULT_RESULT_COUNT);
 
     expect(result.traits).toEqual(extraction.traits);
     expect(result.results).toHaveLength(0);

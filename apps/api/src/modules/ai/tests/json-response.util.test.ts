@@ -1,50 +1,45 @@
 import { describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
 
-import { AppError, ErrorCode } from '../../../core/errors';
 import { parseAiJsonResponse } from '../lib/json-response.util';
 
-const Schema = z.object({ promptVersion: z.string(), count: z.number() });
-
-const VALID = { promptVersion: 'v1', count: 3 };
+const TestSchema = z.object({
+  value: z.string(),
+  count: z.number(),
+});
 
 describe('parseAiJsonResponse', () => {
-  it('parses a clean JSON object', () => {
-    expect(parseAiJsonResponse(JSON.stringify(VALID), Schema)).toEqual(VALID);
+  it('parses valid JSON and returns the typed data', () => {
+    const result = parseAiJsonResponse('{"value":"hello","count":3}', TestSchema);
+    expect(result).toEqual({ value: 'hello', count: 3 });
   });
 
-  it('parses JSON wrapped in a markdown code fence', () => {
-    const fenced = ['```json', JSON.stringify(VALID), '```'].join('\n');
-    expect(parseAiJsonResponse(fenced, Schema)).toEqual(VALID);
+  it('strips markdown fences before parsing', () => {
+    const result = parseAiJsonResponse('```json\n{"value":"hello","count":3}\n```', TestSchema);
+    expect(result).toEqual({ value: 'hello', count: 3 });
   });
 
-  it('extracts the JSON object from surrounding prose (fallback)', () => {
-    const noisy = `Sure! Here is the translated result:\n${JSON.stringify(VALID)}\nHope that helps.`;
-    expect(parseAiJsonResponse(noisy, Schema)).toEqual(VALID);
+  it('throws an integration error for invalid JSON', () => {
+    expect(() => parseAiJsonResponse('not json', TestSchema)).toThrow(
+      'The vibe engine returned something we could not read. Please try again.',
+    );
   });
 
-  it('rejects a response with no JSON object at all', () => {
-    const onIssues = vi.fn();
-    let caught: unknown;
-    try {
-      parseAiJsonResponse('the model refused to answer', Schema, onIssues);
-    } catch (error) {
-      caught = error;
-    }
-    expect(caught).toBeInstanceOf(AppError);
-    expect((caught as AppError).errorCode).toBe(ErrorCode.AiResponseInvalid);
-    expect(onIssues).toHaveBeenCalledWith('response is not valid JSON');
+  it('throws an integration error for schema mismatches', () => {
+    expect(() => parseAiJsonResponse('{"value":"hello"}', TestSchema)).toThrow(
+      'The vibe engine returned something we could not read. Please try again.',
+    );
   });
 
-  it('rejects a well-formed object that fails the schema, reporting paths only', () => {
-    const onIssues = vi.fn();
-    let caught: unknown;
-    try {
-      parseAiJsonResponse(JSON.stringify({ promptVersion: 'v1' }), Schema, onIssues);
-    } catch (error) {
-      caught = error;
-    }
-    expect(caught).toBeInstanceOf(AppError);
-    expect(onIssues).toHaveBeenCalledWith(expect.stringContaining('count'));
+  it('reports schema issues to the optional listener', () => {
+    const listener = vi.fn();
+    expect(() => parseAiJsonResponse('{"value":123}', TestSchema, listener)).toThrow();
+    expect(listener).toHaveBeenCalledWith(expect.stringContaining('value'));
+  });
+
+  it('reports non-JSON to the optional listener', () => {
+    const listener = vi.fn();
+    expect(() => parseAiJsonResponse('broken', TestSchema, listener)).toThrow();
+    expect(listener).toHaveBeenCalledWith('response is not valid JSON');
   });
 });

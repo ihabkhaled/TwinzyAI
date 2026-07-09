@@ -51,7 +51,10 @@ export default defineConfig({
           name: 'lint-rules',
           root: path.resolve(rootDir, 'eslint'),
           environment: 'node',
-          include: ['architecture-plugin/tests/**/*.test.mjs'],
+          include: [
+            'architecture-plugin/tests/**/*.test.mjs',
+            'frontend-architecture-plugin/tests/**/*.test.mjs',
+          ],
           exclude: [NODE_MODULES_GLOB],
         },
       },

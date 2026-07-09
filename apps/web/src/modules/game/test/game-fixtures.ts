@@ -1,11 +1,14 @@
 import type { FinalGameResult, Traits } from '@twinzy/shared';
 import {
+  DEFAULT_RESULT_COUNT,
   GAME_PROMPT_VERSION,
   RESULT_DISCLAIMER,
   TOTAL_TRAIT_FIELDS,
   TRAIT_CATEGORY_FIELDS,
   UNCERTAINTY_NOTE_FIELDS,
 } from '@twinzy/shared';
+
+import { DEFAULT_TEST_IMAGE_SIZE_BYTES } from '../model/game.constants';
 
 /** Full nested advanced traits: every field of every category filled. */
 export const buildTraits = (): Traits =>
@@ -22,10 +25,21 @@ export const buildTraits = (): Traits =>
     },
   }) as unknown as Traits;
 
+const buildJudgeSafetyCheck = (meetsMinimumEvidence = true) =>
+  ({
+    containsFaceRecognitionClaim: false,
+    containsBiometricClaim: false,
+    containsIdentityClaim: false,
+    containsExactLookalikeClaim: false,
+    containsSensitiveInference: false,
+    meetsMinimumEvidence,
+  }) as const;
+
 /** A full, valid advanced FinalGameResult with one ranked match. */
 export const buildFinalResult = (overrides: Partial<FinalGameResult> = {}): FinalGameResult => ({
   promptVersion: GAME_PROMPT_VERSION,
   languageCode: 'en',
+  resultCount: DEFAULT_RESULT_COUNT,
   traitCount: TOTAL_TRAIT_FIELDS,
   traits: buildTraits(),
   compactTraitSummary: ['clear oval face', 'wavy dark hair'],
@@ -44,6 +58,7 @@ export const buildFinalResult = (overrides: Partial<FinalGameResult> = {}): Fina
       weakOrUncertainTraits: ['eye color unclear'],
       mismatchWarnings: [],
       judgeNotes: 'Score kept conservative.',
+      safetyCheck: buildJudgeSafetyCheck(),
     },
   ],
   fallbackMessage: '',
@@ -52,7 +67,11 @@ export const buildFinalResult = (overrides: Partial<FinalGameResult> = {}): Fina
 });
 
 /** In-memory JPEG file for upload-flow tests. */
-export const buildImageFile = (name = 'photo.jpg', type = 'image/jpeg', size = 1024): File => {
+export const buildImageFile = (
+  name = 'photo.jpg',
+  type = 'image/jpeg',
+  size = DEFAULT_TEST_IMAGE_SIZE_BYTES,
+): File => {
   const blob = new Blob([new Uint8Array(size)], { type });
   return new File([blob], name, { type });
 };

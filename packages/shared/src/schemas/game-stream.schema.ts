@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-import { MAX_CANDIDATES } from '../constants/trait.constants';
+import { MAX_NAME_LENGTH } from '../constants/response-bounds.constants';
+import { MAX_CANDIDATE_POOL, MAX_RESULT_COUNT } from '../constants/trait.constants';
 import {
   MAX_COMPACT_TRAIT_SUMMARY,
   MAX_TRAIT_COUNT,
@@ -71,6 +72,7 @@ export const TraitsStreamMessageSchema = z.object({
   traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT),
   compactTraitSummary: z
     .array(z.string().trim().min(1).max(MAX_TRAIT_TEXT_LENGTH))
+    .min(1)
     .max(MAX_COMPACT_TRAIT_SUMMARY),
   ...streamEnvelopeShape,
 });
@@ -82,7 +84,8 @@ export const TraitsStreamMessageSchema = z.object({
  */
 export const CandidatesStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Candidates),
-  names: z.array(z.string().trim().min(1).max(120)).max(MAX_CANDIDATES),
+  resultCount: z.number().int().min(1).max(MAX_RESULT_COUNT),
+  names: z.array(z.string().trim().min(1).max(MAX_NAME_LENGTH)).max(MAX_CANDIDATE_POOL),
   ...streamEnvelopeShape,
 });
 

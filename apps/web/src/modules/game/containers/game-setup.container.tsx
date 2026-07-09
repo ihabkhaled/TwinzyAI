@@ -5,9 +5,10 @@ import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import { CameraCapture } from '../components/camera-capture.component';
 import { PrivacyNotice } from '../components/privacy-notice.component';
+import { ResultCountSelect } from '../components/result-count-select.component';
 import { UploadCard } from '../components/upload-card.component';
 import { UploadConsent } from '../components/upload-consent.component';
-import { UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
+import { RESULT_COUNT_INPUT_ID, UPLOAD_INPUT_ACCEPT } from '../model/game.constants';
 import type { GameScreenLabels, GameViewModel } from '../model/game.types';
 import type { GameSetupProps } from '../model/game-component.types';
 
@@ -44,12 +45,16 @@ export const GameSetup = ({ vm, labels }: GameSetupProps): ReactElement => {
   const onConsentChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     vm.onConsentChange(event.target.checked);
   };
+  const onResultCountChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
+    vm.onResultCountChange(Number(event.target.value));
+  };
+  const sourceLabel =
+    vm.upload.previewUrl === undefined ? labels.upload.label : labels.upload.changeButton;
   return (
     <Stack gap="md">
       <PrivacyNotice message={labels.privacyNotice} testId={TEST_IDS.privacyNotice} />
       <UploadCard
-        uploadLabel={labels.upload.label}
-        changeButton={labels.upload.changeButton}
+        sourceLabel={sourceLabel}
         hint={labels.upload.hint}
         cameraLabel={labels.upload.cameraLabel}
         cameraHint={labels.upload.cameraHint}
@@ -61,6 +66,20 @@ export const GameSetup = ({ vm, labels }: GameSetupProps): ReactElement => {
         onOpenCamera={vm.camera.onOpen}
         testId={TEST_IDS.uploadCard}
       />
+      <ResultCountSelect
+        id={RESULT_COUNT_INPUT_ID}
+        label={labels.resultCount.label}
+        hint={labels.resultCount.hint}
+        value={vm.resultCount}
+        onChange={onResultCountChange}
+        testId={TEST_IDS.resultCountSelect}
+      >
+        {vm.resultCountOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </ResultCountSelect>
       <UploadConsent
         consentLabel={labels.upload.consentLabel}
         checked={vm.consentGiven}

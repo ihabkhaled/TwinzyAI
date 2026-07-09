@@ -67,6 +67,7 @@ export default [
     rules: {
       ...playwright.configs["flat/recommended"].rules,
       "max-lines-per-function": "off",
+      "@typescript-eslint/no-magic-numbers": "off",
     },
   },
 ];

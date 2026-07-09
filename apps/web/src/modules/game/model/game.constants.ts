@@ -19,9 +19,13 @@ export {
   ALLOWED_IMAGE_EXTENSIONS,
   ALLOWED_IMAGE_MIME_TYPES,
   DEFAULT_MAX_IMAGE_SIZE_BYTES,
+  DEFAULT_RESULT_COUNT,
   GAME_ANALYZE_PATH,
   GAME_ANALYZE_STREAM_PATH,
   GAME_TRANSLATE_RESULT_PATH,
+  MAX_RESULT_COUNT,
+  MIN_RESULT_COUNT,
+  RESULT_COUNT_OPTIONS,
   TRAIT_CATEGORY_FIELDS,
   UNCERTAINTY_NOTE_FIELDS,
 } from '@twinzy/shared';
@@ -36,10 +40,15 @@ export const CONSENT_FIELD_VALUE = 'true';
 /** Multipart form-field carrying the active UI language for localized AI output. */
 export const LANGUAGE_FIELD_NAME = 'languageCode';
 
+/** Multipart form-field carrying the user-selected number of results (1–10). */
+export const RESULT_COUNT_FIELD_NAME = 'resultCount';
+
 /** DOM ids that wire the labels/inputs together for the setup form. */
 export const PHOTO_INPUT_ID = 'game-photo-input';
 
 export const CONSENT_INPUT_ID = 'game-consent';
+
+export const RESULT_COUNT_INPUT_ID = 'game-result-count';
 
 /** File-picker `accept` allow-list; mirrors the server's accepted MIME types. */
 export const UPLOAD_INPUT_ACCEPT = 'image/jpeg,image/png,image/webp';
@@ -126,6 +135,9 @@ export const AI_TRANSLATE_REQUEST_TIMEOUT_MS = 60_000;
 
 /** Square render size (px) for the in-memory photo preview. */
 export const PREVIEW_IMAGE_SIZE = 160;
+
+/** Default size for synthetic image files used in unit tests. */
+export const DEFAULT_TEST_IMAGE_SIZE_BYTES = 1024;
 
 /** i18n title key per trait category, shown as accordion group headings. */
 export const TRAIT_CATEGORY_LABEL_KEYS: Record<TraitCategoryKey, string> = Object.fromEntries(

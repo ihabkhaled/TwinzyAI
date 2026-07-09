@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
-import { TraitExtractionResponseSchema } from '@twinzy/shared';
+import { countPopulatedTraitFields, isRecord, TraitExtractionResponseSchema } from '@twinzy/shared';
 
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
-import { parseAiJsonResponse } from '../lib/json-response.util';
+import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
 import { collectExtractionTextValues } from '../lib/trait-text.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
@@ -50,11 +50,21 @@ export class TraitExtractionService {
       { mimeType, base64Data: imageBuffer.toString('base64') },
       undefined,
       signal,
+      buildSchemaValidator(TraitExtractionResponseSchema),
     );
 
-    const response = parseAiJsonResponse(rawText, TraitExtractionResponseSchema, (issues) => {
-      this.logger.warn(`Trait response schema mismatch: ${issues}`);
-    });
+    const response = parseAiJsonResponse(
+      rawText,
+      TraitExtractionResponseSchema,
+      (issues) => {
+        this.logger.warn(`Trait response schema mismatch: ${issues}`);
+      },
+      (parsed) => {
+        if (!isRecord(parsed) || !isRecord(parsed['traits'])) return parsed;
+        const traits = parsed['traits'];
+        return { ...parsed, traitCount: countPopulatedTraitFields(traits) };
+      },
+    );
     this.assertRequestedLanguage(response.languageCode, languageCode);
     this.aiSafety.assertTraitTextSafe(collectExtractionTextValues(response));
 

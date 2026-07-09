@@ -59,5 +59,15 @@ export default defineConfig({
       testMatch: VISUAL_SPECS,
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'mobile-chromium',
+      testIgnore: [A11Y_SPECS, VISUAL_SPECS],
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'mobile-webkit',
+      testIgnore: [A11Y_SPECS, VISUAL_SPECS],
+      use: { ...devices['iPhone 13'] },
+    },
   ],
 });

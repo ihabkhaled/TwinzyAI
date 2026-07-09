@@ -19,7 +19,11 @@ import {
   ProviderErrorKind,
   type ProviderErrorKindValue,
 } from '../lib/provider-error.util';
-import type { AiProviderAdapter, AiStreamChunkListener } from '../model/ai-provider-adapter.types';
+import type {
+  AiContentValidator,
+  AiProviderAdapter,
+  AiStreamChunkListener,
+} from '../model/ai-provider-adapter.types';
 import {
   AI_RATE_LIMITED_MESSAGE,
   AI_TIMEOUT_MESSAGE,
@@ -54,14 +58,19 @@ export class GeminiAdapter implements AiProviderAdapter {
     this.logger.setContext(LOG_CONTEXT);
   }
 
-  public async generateFromImage(prompt: string, image: AiImageInput): Promise<string> {
-    return this.runAcrossModels((model) =>
-      this.generateOnce(model, this.imageParts(prompt, image)),
+  public async generateFromImage(
+    prompt: string,
+    image: AiImageInput,
+    validate?: AiContentValidator,
+  ): Promise<string> {
+    return this.runAcrossModels(
+      (model) => this.generateOnce(model, this.imageParts(prompt, image)),
+      validate,
     );
   }
 
-  public async generateFromText(prompt: string): Promise<string> {
-    return this.runAcrossModels((model) => this.generateOnce(model, [{ text: prompt }]));
+  public async generateFromText(prompt: string, validate?: AiContentValidator): Promise<string> {
+    return this.runAcrossModels((model) => this.generateOnce(model, [{ text: prompt }]), validate);
   }
 
   public async generateFromImageStream(
@@ -69,9 +78,11 @@ export class GeminiAdapter implements AiProviderAdapter {
     image: AiImageInput,
     onChunk?: AiStreamChunkListener,
     signal?: AbortSignal,
+    validate?: AiContentValidator,
   ): Promise<string> {
     return this.runAcrossModels(
       (model) => this.generateStreamOnce(model, this.imageParts(prompt, image), onChunk, signal),
+      validate,
       signal,
     );
   }
@@ -80,9 +91,11 @@ export class GeminiAdapter implements AiProviderAdapter {
     prompt: string,
     onChunk?: AiStreamChunkListener,
     signal?: AbortSignal,
+    validate?: AiContentValidator,
   ): Promise<string> {
     return this.runAcrossModels(
       (model) => this.generateStreamOnce(model, [{ text: prompt }], onChunk, signal),
+      validate,
       signal,
     );
   }
@@ -94,17 +107,30 @@ export class GeminiAdapter implements AiProviderAdapter {
   /**
    * Tries the call against each model in the chain. Our own AppErrors (timeout,
    * empty response) are terminal; raw provider errors are classified and, when
-   * retryable, fall through to the next model. Exhausting the chain surfaces a
-   * 429 if any model was rate-limited, otherwise a 502.
+   * retryable, fall through to the next model. If the caller supplies a
+   * content validator, a model whose returned text fails validation is also
+   * retried on the next model. Exhausting the chain surfaces a 429 if any
+   * model was rate-limited, otherwise a 502.
    */
-  private async runAcrossModels(call: ModelCall, signal?: AbortSignal): Promise<string> {
+  private async runAcrossModels(
+    call: ModelCall,
+    validate?: AiContentValidator,
+    signal?: AbortSignal,
+  ): Promise<string> {
     const models = this.requireModelChain();
     let sawRateLimit = false;
 
     for (const model of models) {
       signal?.throwIfAborted();
       try {
-        return await call(model);
+        const text = await call(model);
+        if (validate !== undefined && !validate(text)) {
+          this.logger.warn(
+            `Model ${model} returned content that failed validation; trying next model`,
+          );
+          continue;
+        }
+        return text;
       } catch (error: unknown) {
         if (error instanceof AppError) {
           throw error;
