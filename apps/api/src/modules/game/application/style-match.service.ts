@@ -32,6 +32,7 @@ export class StyleMatchService {
   public async matchFromTraits(
     extraction: TraitExtractionResponse,
     languageCode: LanguageCodeValue,
+    resultCount: number,
     progress?: StyleMatchProgressListener,
     signal?: AbortSignal,
   ): Promise<FinalGameResult> {
@@ -39,12 +40,13 @@ export class StyleMatchService {
     const candidates = await this.candidateGeneration.generateCandidates(
       extraction,
       languageCode,
+      resultCount,
       signal,
     );
     if (candidates.length === 0) {
       this.logger.warn('No safe candidates — returning fallback');
       progress?.onStage?.(GameStreamStage.Aggregating);
-      return this.resultAggregation.buildFallback(extraction, languageCode);
+      return this.resultAggregation.buildFallback(extraction, languageCode, resultCount);
     }
 
     progress?.onCandidates?.(candidates.map((candidate) => candidate.name));
@@ -53,9 +55,10 @@ export class StyleMatchService {
       extraction.traits,
       candidates,
       languageCode,
+      resultCount,
       signal,
     );
     progress?.onStage?.(GameStreamStage.Aggregating);
-    return this.resultAggregation.aggregate(extraction, judged, languageCode);
+    return this.resultAggregation.aggregate(extraction, judged, languageCode, resultCount);
   }
 }

@@ -5,6 +5,7 @@ import {
   buildShareText,
   resolveCategoryLabel,
   resolveConfidenceLabel,
+  resolveResultCountTitle,
   resolveTraitCategoryTitle,
   resolveTraitFieldLabel,
   resolveUncertaintyLabel,
@@ -79,6 +80,8 @@ export const mapFinalResultToView = (
 
   return {
     traitCount: result.traitCount,
+    resultCount: result.resultCount,
+    resultCountTitle: resolveResultCountTitle(translate, result.resultCount),
     compactTraitSummary: [...result.compactTraitSummary],
     categories: toCategoryViews(result.traits, translate),
     imageQuality: toCategoryFields(result.traits, 'imageQuality', translate),

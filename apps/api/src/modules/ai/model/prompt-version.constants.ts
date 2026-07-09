@@ -25,6 +25,7 @@ export const PromptPlaceholder = {
   TargetLanguageCode: '[TARGET_LANGUAGE_CODE]',
   AppName: '[APP_NAME]',
   ModelProvider: '[MODEL_PROVIDER]',
+  ResultCount: '[RESULT_COUNT]',
 } as const;
 
 export type PromptPlaceholderValue = (typeof PromptPlaceholder)[keyof typeof PromptPlaceholder];
@@ -32,18 +33,16 @@ export type PromptPlaceholderValue = (typeof PromptPlaceholder)[keyof typeof Pro
 /** Placeholders that MUST exist in the template and MUST be replaced. */
 export const REQUIRED_PLACEHOLDERS: Record<PromptKeyValue, readonly PromptPlaceholderValue[]> = {
   [PromptKey.TraitExtraction]: [PromptPlaceholder.LanguageCode],
-  [PromptKey.CandidateGeneration]: [PromptPlaceholder.TraitsJson, PromptPlaceholder.LanguageCode],
+  [PromptKey.CandidateGeneration]: [
+    PromptPlaceholder.TraitsJson,
+    PromptPlaceholder.LanguageCode,
+    PromptPlaceholder.ResultCount,
+  ],
   [PromptKey.CandidateJudge]: [
     PromptPlaceholder.TraitsJson,
     PromptPlaceholder.CandidatesJson,
     PromptPlaceholder.LanguageCode,
+    PromptPlaceholder.ResultCount,
   ],
   [PromptKey.TranslateResult]: [PromptPlaceholder.ResultJson, PromptPlaceholder.TargetLanguageCode],
 };
-
-/**
- * Prompt contract version — the shared constant every AI response must echo
- * (schema-validated as a literal). Bump the shared value when any prompt file
- * changes shape or safety rules; tests and docs reference this.
- */
-export { GAME_PROMPT_VERSION as PROMPT_VERSION } from '@twinzy/shared';

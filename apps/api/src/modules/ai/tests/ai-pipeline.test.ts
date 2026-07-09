@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { TRAIT_CATEGORY_FIELDS } from '@twinzy/shared';
+import { DEFAULT_RESULT_COUNT, TRAIT_CATEGORY_FIELDS } from '@twinzy/shared';
 
 import {
   AppError,
@@ -207,7 +207,11 @@ describe('CandidateGenerationService (text only)', () => {
       ]),
     );
 
-    const candidates = await candidateGeneration.generateCandidates(extraction, 'en');
+    const candidates = await candidateGeneration.generateCandidates(
+      extraction,
+      'en',
+      DEFAULT_RESULT_COUNT,
+    );
 
     expect(candidates.map((candidate) => candidate.name)).toEqual(['Higher', 'Lower']);
     expect(adapter.imageCalls).toHaveLength(0);
@@ -218,7 +222,7 @@ describe('CandidateGenerationService (text only)', () => {
     const { adapter, candidateGeneration } = buildPipeline();
     adapter.queueTextResponse(buildCandidatesJson());
 
-    await candidateGeneration.generateCandidates(extraction, 'en');
+    await candidateGeneration.generateCandidates(extraction, 'en', DEFAULT_RESULT_COUNT);
 
     expect(adapter.textCalls[0]).toContain('observed hairColor');
     expect(adapter.textCalls[0]).toContain('compactTraitSummary');
@@ -226,18 +230,19 @@ describe('CandidateGenerationService (text only)', () => {
     expect(adapter.textCalls[0]).not.toContain('[LANGUAGE_CODE]');
   });
 
-  it('rejects more than 5 candidates (strict schema, documented)', async () => {
+  it('rejects more than 20 candidates (strict schema, documented)', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
     adapter.queueTextResponse(
       buildCandidatesJson(
-        Array.from({ length: 6 }, (_unused, index) =>
+        Array.from({ length: 21 }, (_unused, index) =>
           buildCandidatePayload({ name: `Candidate ${index}` }),
         ),
+        DEFAULT_RESULT_COUNT,
       ),
     );
 
     await expectRejection(
-      candidateGeneration.generateCandidates(extraction, 'en'),
+      candidateGeneration.generateCandidates(extraction, 'en', DEFAULT_RESULT_COUNT),
       ErrorCode.AiResponseInvalid,
     );
   });
@@ -254,7 +259,11 @@ describe('CandidateGenerationService (text only)', () => {
       ]),
     );
 
-    const candidates = await candidateGeneration.generateCandidates(extraction, 'en');
+    const candidates = await candidateGeneration.generateCandidates(
+      extraction,
+      'en',
+      DEFAULT_RESULT_COUNT,
+    );
 
     expect(candidates.map((candidate) => candidate.name)).toEqual(['Safe Star']);
   });
@@ -265,7 +274,12 @@ describe('CandidateJudgeService (text only)', () => {
     const { adapter, candidateJudge } = buildPipeline();
     adapter.queueTextResponse(buildJudgeJson());
 
-    const response = await candidateJudge.judgeCandidates(extraction.traits, [], 'en');
+    const response = await candidateJudge.judgeCandidates(
+      extraction.traits,
+      [],
+      'en',
+      DEFAULT_RESULT_COUNT,
+    );
 
     expect(response.results).toHaveLength(1);
     expect(adapter.imageCalls).toHaveLength(0);
@@ -285,7 +299,12 @@ describe('CandidateJudgeService (text only)', () => {
       ]),
     );
 
-    const response = await candidateJudge.judgeCandidates(extraction.traits, [], 'en');
+    const response = await candidateJudge.judgeCandidates(
+      extraction.traits,
+      [],
+      'en',
+      DEFAULT_RESULT_COUNT,
+    );
 
     expect(response.results.map((result) => result.name)).toEqual(['Safe Star']);
   });
@@ -295,7 +314,7 @@ describe('CandidateJudgeService (text only)', () => {
     adapter.queueTextResponse(JSON.stringify({ results: 'not-an-array' }));
 
     await expectRejection(
-      candidateJudge.judgeCandidates(extraction.traits, [], 'en'),
+      candidateJudge.judgeCandidates(extraction.traits, [], 'en', DEFAULT_RESULT_COUNT),
       ErrorCode.AiResponseInvalid,
     );
   });

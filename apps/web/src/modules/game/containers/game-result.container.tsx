@@ -20,7 +20,7 @@ import { TraitDetails } from './trait-details.container';
 /** The ranked style/vibe match cards (or the localized no-match fallback). */
 const renderResultList = (view: GameResultView, labels: ResultLabels): ReactElement => (
   <ResultList
-    title={labels.title}
+    title={view.resultCountTitle}
     fallbackTitle={labels.fallbackTitle}
     fallbackMessage={view.fallbackMessage}
     hasResults={view.hasResults}
@@ -117,6 +117,13 @@ export const GameResult = ({
       fields={view.imageQuality}
       uncertainty={view.uncertainty}
     />
+    <Alert tone="info" testId={TEST_IDS.resultExplanation}>
+      <Stack gap="xs">
+        <p>{labels.scoreExplanation}</p>
+        <p>{labels.uncertaintyExplanation}</p>
+        <p>{labels.mismatchExplanation}</p>
+      </Stack>
+    </Alert>
     {renderResultList(view, labels)}
     <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
     <Stack direction="row" gap="sm" align="center" wrap="wrap">

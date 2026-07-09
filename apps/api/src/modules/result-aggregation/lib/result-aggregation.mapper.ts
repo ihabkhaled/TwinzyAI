@@ -29,6 +29,7 @@ export const toFinalResultItem = (result: JudgedResult, index: number): FinalRes
   weakOrUncertainTraits: result.weakOrUncertainTraits,
   mismatchWarnings: result.mismatchWarnings,
   judgeNotes: result.judgeNotes,
+  safetyCheck: result.safetyCheck,
 });
 
 /**
@@ -41,9 +42,11 @@ export const toFinalGameResult = (
   extraction: TraitExtractionResponse,
   displayable: readonly JudgedResult[],
   languageCode: LanguageCodeValue,
+  resultCount: number,
 ): FinalGameResult => ({
   promptVersion: GAME_PROMPT_VERSION,
   languageCode,
+  resultCount,
   traitCount: extraction.traitCount,
   traits: extraction.traits,
   compactTraitSummary: extraction.compactTraitSummary,
@@ -59,9 +62,11 @@ export const toFinalGameResult = (
 export const toFallbackResult = (
   extraction: TraitExtractionResponse,
   languageCode: LanguageCodeValue,
+  resultCount: number,
 ): FinalGameResult => ({
   promptVersion: GAME_PROMPT_VERSION,
   languageCode,
+  resultCount,
   traitCount: extraction.traitCount,
   traits: extraction.traits,
   compactTraitSummary: extraction.compactTraitSummary,

@@ -3,14 +3,14 @@
 import { type AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 import type { ReactNode } from 'react';
 
-import type { AppLocale } from './locale.constants';
+import type { LanguageCodeValue } from './locale.constants';
 import { DEFAULT_TIME_ZONE } from './locale.constants';
 
 /** The message dictionary shape passed to the provider. */
 export type AppMessages = AbstractIntlMessages;
 
 interface IntlMessagesProviderProps {
-  locale: AppLocale;
+  locale: LanguageCodeValue;
   messages: AppMessages;
   children: ReactNode;
 }

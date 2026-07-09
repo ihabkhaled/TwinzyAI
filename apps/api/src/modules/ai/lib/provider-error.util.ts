@@ -1,3 +1,10 @@
+import {
+  HTTP_STATUS_INTERNAL_SERVER_ERROR,
+  HTTP_STATUS_NOT_FOUND,
+  HTTP_STATUS_SERVICE_UNAVAILABLE,
+  HTTP_STATUS_TOO_MANY_REQUESTS,
+} from '@twinzy/shared';
+
 /**
  * How a raw provider (Gemini) error should be treated when a model chain is
  * available. RateLimited and Unavailable are worth retrying on the NEXT model;
@@ -41,11 +48,16 @@ export const classifyProviderError = (error: unknown): ProviderErrorKindValue =>
   const status = readStatus(error);
   const message = messageOf(error);
 
-  if (status === 429 || RATE_LIMIT_PATTERN.test(message)) {
+  if (status === HTTP_STATUS_TOO_MANY_REQUESTS || RATE_LIMIT_PATTERN.test(message)) {
     return ProviderErrorKind.RateLimited;
   }
 
-  if (status === 500 || status === 503 || status === 404 || UNAVAILABLE_PATTERN.test(message)) {
+  if (
+    status === HTTP_STATUS_INTERNAL_SERVER_ERROR ||
+    status === HTTP_STATUS_SERVICE_UNAVAILABLE ||
+    status === HTTP_STATUS_NOT_FOUND ||
+    UNAVAILABLE_PATTERN.test(message)
+  ) {
     return ProviderErrorKind.Unavailable;
   }
 

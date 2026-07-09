@@ -1,10 +1,12 @@
 # Frontend Coverage Policy (`apps/web`)
 
 Coverage is measured by Vitest's v8 provider and enforced as build-breaking thresholds in
-`apps/web/vitest.config.mts`. `npm run test:coverage` fails — locally and in CI — when any threshold
-is missed. Reports: `text`, `html`, `lcov`.
+`apps/web/vitest.config.mts`. As of `twinzy-hardening-v3`, this config file is being created and
+wired into `vitest.config.ts` as a dedicated `web-unit` project with thresholds. Until then, the
+frontend has no mechanical coverage gate; this doc records the intended thresholds and measured
+layout.
 
-## Exact thresholds (from `apps/web/vitest.config.mts`)
+## Intended thresholds (target `apps/web/vitest.config.mts`)
 
 ```ts
 thresholds: {

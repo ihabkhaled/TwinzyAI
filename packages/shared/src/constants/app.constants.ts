@@ -38,7 +38,7 @@ export const HEALTH_PATH = '/api/v1/health';
  * mismatch fails schema validation, so a stale model/template pairing can
  * never silently serve the old contract.
  */
-export const GAME_PROMPT_VERSION = 'advanced-global-traits-v2';
+export const GAME_PROMPT_VERSION = 'advanced-global-traits-v3';
 
 /**
  * Server-enforced localized safety disclaimer. The model's own disclaimer

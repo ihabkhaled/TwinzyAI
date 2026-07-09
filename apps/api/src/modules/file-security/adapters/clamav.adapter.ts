@@ -5,7 +5,12 @@ import { Injectable } from '@nestjs/common';
 import { AppConfigService } from '../../../config/app-config.service';
 import { AppLogger } from '../../../core/logger';
 import type { ClamAvScanResult } from '../model/clamav.types';
-import { CLAMAV_CHUNK_SIZE_BYTES, CLAMAV_TIMEOUT_MS } from '../model/file-security.constants';
+import {
+  CLAMAV_CHUNK_SIZE_BYTES,
+  CLAMAV_SIZE_PREFIX_LENGTH_BYTES,
+  CLAMAV_TERMINAL_CHUNK_LENGTH_BYTES,
+  CLAMAV_TIMEOUT_MS,
+} from '../model/file-security.constants';
 
 const LOG_CONTEXT = 'ClamAvAdapter';
 
@@ -103,13 +108,13 @@ export class ClamAvAdapter {
   private writeChunks(socket: Socket, buffer: Buffer): void {
     for (let offset = 0; offset < buffer.length; offset += CLAMAV_CHUNK_SIZE_BYTES) {
       const chunk = buffer.subarray(offset, offset + CLAMAV_CHUNK_SIZE_BYTES);
-      const sizePrefix = Buffer.alloc(4);
+      const sizePrefix = Buffer.alloc(CLAMAV_SIZE_PREFIX_LENGTH_BYTES);
       sizePrefix.writeUInt32BE(chunk.length, 0);
       socket.write(sizePrefix);
       socket.write(chunk);
     }
 
-    socket.write(Buffer.alloc(4));
+    socket.write(Buffer.alloc(CLAMAV_TERMINAL_CHUNK_LENGTH_BYTES));
     socket.end();
   }
 }

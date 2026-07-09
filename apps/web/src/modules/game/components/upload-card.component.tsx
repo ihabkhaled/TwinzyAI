@@ -23,8 +23,7 @@ import {
  * the upload hook.
  */
 export function UploadCard({
-  uploadLabel,
-  changeButton,
+  sourceLabel,
   hint,
   cameraLabel,
   cameraHint,
@@ -40,9 +39,7 @@ export function UploadCard({
     <Card testId={testId}>
       <div className={uploadGridClass}>
         <label htmlFor={PHOTO_INPUT_ID} className={uploadSourceButtonClass}>
-          <span className={uploadSourceTitleClass}>
-            {previewUrl === undefined ? uploadLabel : changeButton}
-          </span>
+          <span className={uploadSourceTitleClass}>{sourceLabel}</span>
           <span className={uploadSourceHintClass}>{hint}</span>
           <input
             id={PHOTO_INPUT_ID}

@@ -34,6 +34,7 @@ const NON_COPY_ATTRIBUTES = new Set([
   "dir",
   "lang",
   "role",
+  "aria-hidden",
   "autoComplete",
   "inputMode",
   "method",

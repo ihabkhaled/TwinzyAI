@@ -19,9 +19,10 @@ vi.mock('@/packages/axios', async (importActual) => {
 const postMultipartMock = vi.mocked(axiosPackage.postMultipart);
 const streamMultipartMock = vi.mocked(axiosPackage.streamMultipart);
 
-const streamOptions = (): { requestId: string; signal: AbortSignal } => ({
+const streamOptions = (): { requestId: string; signal: AbortSignal; resultCount: number } => ({
   requestId: '99999999-9999-4999-8999-999999999999',
   signal: new AbortController().signal,
+  resultCount: 10,
 });
 
 describe('analyzeImage', () => {
@@ -33,14 +34,14 @@ describe('analyzeImage', () => {
     const result = buildFinalResult();
     postMultipartMock.mockResolvedValue(result);
 
-    await expect(analyzeImage(buildImageFile(), 'en')).resolves.toEqual(result);
+    await expect(analyzeImage(buildImageFile(), 'en', 10)).resolves.toEqual(result);
     expect(postMultipartMock).toHaveBeenCalledTimes(1);
   });
 
   it('throws an AppError for an invalid file without calling the gateway', async () => {
-    await expect(analyzeImage(buildImageFile('bad.gif', 'image/gif'), 'en')).rejects.toBeInstanceOf(
-      AppError,
-    );
+    await expect(
+      analyzeImage(buildImageFile('bad.gif', 'image/gif'), 'en', 10),
+    ).rejects.toBeInstanceOf(AppError);
     expect(postMultipartMock).not.toHaveBeenCalled();
   });
 });

@@ -12,6 +12,7 @@ import { useUiPreferencesStore } from '../store/ui-preferences.store';
 vi.mock('@/packages/i18n', async (importActual) => ({
   ...(await importActual<typeof i18nPackage>()),
   useAppLocale: vi.fn(),
+  LANGUAGE_CODES: ['en', 'ar'],
 }));
 vi.mock('@/packages/navigation', async (importActual) => ({
   ...(await importActual<typeof navigationPackage>()),

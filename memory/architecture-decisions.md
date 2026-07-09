@@ -48,3 +48,10 @@ the individual decisions and their reasons.
   that requires an ADR + privacy review ([database-decisions.md](./database-decisions.md)).
 - A parallel frontend workstream owns `apps/web`; root config changes must stay additive
   (standing coexistence rule).
+
+## Horizontal scaling plan (ADR-003)
+
+- The API stays single-process until profiling proves a bottleneck. Horizontal scaling is
+  deferred; when needed, it requires a shared SSE/cancellation store and a shared per-IP
+  rate-limit store before containers can be scaled. See
+  [adr-003-horizontal-scaling-plan.md](../architecture/adrs/adr-003-horizontal-scaling-plan.md).

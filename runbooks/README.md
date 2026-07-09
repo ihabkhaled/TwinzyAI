@@ -9,6 +9,7 @@ Operational procedures an engineer or on-call owner can execute during release, 
 | [`api-outage.md`](./api-outage.md) | The API is down or unresponsive |
 | [`ai-provider-outage.md`](./ai-provider-outage.md) | Gemini timeouts / 5xx — analyze flow failing with 502 |
 | [`release-smoke-test.md`](./release-smoke-test.md) | Post-deploy verification of every release |
+|| [`secret-rotation.md`](./secret-rotation.md) | A secret has been exposed or needs routine rotation |
 
 ## Templates
 

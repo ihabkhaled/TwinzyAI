@@ -34,4 +34,13 @@ export default [
       "security/detect-non-literal-regexp": "off",
     },
   },
+  {
+    // Secret scanner intentionally walks the repository and reads files from a
+    // dynamically-built set; the paths are derived from a trusted root and
+    // never from user input.
+    files: ["scripts/scan-secrets.mjs"],
+    rules: {
+      "security/detect-non-literal-fs-filename": "off",
+    },
+  },
 ];

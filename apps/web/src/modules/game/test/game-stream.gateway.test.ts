@@ -22,6 +22,7 @@ const RUN_REQUEST_ID = '99999999-9999-4999-8999-999999999999';
 const runOptions = (): AnalyzeStreamOptions => ({
   requestId: RUN_REQUEST_ID,
   signal: new AbortController().signal,
+  resultCount: 10,
 });
 
 /** Drive the mocked transport with a fixed sequence of raw SSE data frames. */
@@ -88,7 +89,7 @@ describe('analyzeImageStreamRequest', () => {
         traitCount: result.traitCount,
         compactTraitSummary: result.compactTraitSummary,
       }),
-      encode({ event: GameStreamEvent.Candidates, names: ['Ada Lovelace'] }),
+      encode({ event: GameStreamEvent.Candidates, resultCount: 10, names: ['Ada Lovelace'] }),
       encode({ event: GameStreamEvent.Result, result }),
     ]);
     const handlers: GameStreamHandlers = {

@@ -1,0 +1,21 @@
+# 00-intake.md — TwinzyAI Hardening v3
+
+- **Request ID:** twinzy-hardening-v3
+- **Title:** TwinzyAI hardening, result-count feature, prompt vNext, and full quality-gate closure
+- **Type:** Enhancement / hardening / feature
+- **Source:** Product request for stricter, cleaner, more secure, scalable, and production-ready codebase
+- **Owners:**
+  - Business owner: requester
+  - Technical owner: AI engineering lead
+  - QA owner: QA automation engineer
+  - Security owner: security engineer
+- **Severity:** High (core product quality and safety)
+- **Urgency:** High (blocks production-readiness claims)
+- **Affected domains:** Frontend (Next.js), backend (NestJS/Fastify), shared package (`@twinzy/shared`), prompts/AI pipeline, security, DevOps, testing, documentation
+- **Delivery track:** Standard track (large cross-cutting change)
+- **Critical-risk flags:**
+  - AI safety and prompt behavior
+  - File upload security and privacy
+  - Secret handling (`.env` plaintext `GEMINI_API_KEY` accepted as risk-for-now)
+  - Score calibration and product claims (no recognition/biometrics/identity)
+- **Initial scope statement:** Implement 1–10 user-selectable result count with default 10; rewrite prompts to vNext for deeper, non-identifying trait extraction and calibrated evidence-based scoring; harden security, testing, lint governance, and documentation; keep the game free, privacy-safe, and free of face recognition, identity matching, biometrics, image persistence, or exact-lookalike claims.

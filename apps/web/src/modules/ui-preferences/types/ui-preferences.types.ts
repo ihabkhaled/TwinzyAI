@@ -1,4 +1,4 @@
-import type { AppLocale } from '@/packages/i18n';
+import type { LanguageCodeValue } from '@/packages/i18n';
 import type { AppDirectionValue } from '@/shared/enums/app-direction.enum';
 import type { AppTheme, AppThemeValue } from '@/shared/enums/app-theme.enum';
 
@@ -43,7 +43,7 @@ export interface ThemeToggleController {
  * the active locale, the locale a click switches to, and the switch handler.
  */
 export interface LocaleSwitcherController {
-  activeLocale: AppLocale;
-  nextLocale: AppLocale;
+  activeLocale: LanguageCodeValue;
+  nextLocale: LanguageCodeValue;
   onSwitchLocale: () => void;
 }

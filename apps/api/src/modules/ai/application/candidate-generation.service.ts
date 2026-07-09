@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import type { Candidate, LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
-import { CandidateGenerationResponseSchema } from '@twinzy/shared';
+import { CandidateGenerationResponseSchema, PROMPT_JSON_INDENT } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
@@ -36,15 +36,17 @@ export class CandidateGenerationService {
   public async generateCandidates(
     extraction: TraitExtractionResponse,
     languageCode: LanguageCodeValue,
+    resultCount: number,
     signal?: AbortSignal,
   ): Promise<Candidate[]> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.CandidateGeneration, {
       [PromptPlaceholder.TraitsJson]: JSON.stringify(
         { traits: extraction.traits, compactTraitSummary: extraction.compactTraitSummary },
         null,
-        2,
+        PROMPT_JSON_INDENT,
       ),
       [PromptPlaceholder.LanguageCode]: languageCode,
+      [PromptPlaceholder.ResultCount]: String(resultCount),
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt, undefined, signal);

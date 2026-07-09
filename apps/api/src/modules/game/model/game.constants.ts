@@ -36,3 +36,6 @@ export const UPLOAD_HARD_CAP_BYTES = 10_485_760;
 
 /** Exactly one file per request; extras are rejected at the transport edge. */
 export const UPLOAD_MAX_FILES = 1;
+
+/** Transport-level cap on the free-form languageCode multipart field. */
+export const LANGUAGE_CODE_MAX_LENGTH = 35;

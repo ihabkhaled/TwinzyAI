@@ -1,17 +1,50 @@
+import {
+  JPEG_HEIGHT_OFFSET,
+  JPEG_LENGTH_BIAS,
+  JPEG_LENGTH_MIN,
+  JPEG_LENGTH_OFFSET,
+  JPEG_MARKER_PREFIX,
+  JPEG_MIN_SOF_LENGTH,
+  JPEG_SOF_MARKERS,
+  JPEG_START_OFFSET,
+  JPEG_WIDTH_OFFSET,
+  PNG_HEIGHT_OFFSET,
+  PNG_IHDR_SIZE,
+  PNG_IHDR_TYPE_OFFSET,
+  PNG_WIDTH_OFFSET,
+  WEBP_CHUNK_HEADER_OFFSET,
+  WEBP_CHUNK_HEADER_SIZE,
+  WEBP_MIN_BUFFER_LENGTH,
+  WEBP_PAYLOAD_OFFSET,
+  WEBP_VP8_DIMENSION_MASK,
+  WEBP_VP8_HEIGHT_OFFSET,
+  WEBP_VP8_SYNC_CODE_A,
+  WEBP_VP8_SYNC_CODE_B,
+  WEBP_VP8_SYNC_CODE_C,
+  WEBP_VP8_SYNC_OFFSET,
+  WEBP_VP8_WIDTH_OFFSET,
+  WEBP_VP8L_BITS_OFFSET,
+  WEBP_VP8L_DIMENSION_BIAS,
+  WEBP_VP8L_DIMENSION_MASK,
+  WEBP_VP8L_FLAG_OFFSET,
+  WEBP_VP8L_FLAG_VALUE,
+  WEBP_VP8L_HEIGHT_SHIFT,
+  WEBP_VP8X_DIMENSION_BIAS,
+  WEBP_VP8X_DIMENSION_SIZE,
+  WEBP_VP8X_HEIGHT_OFFSET,
+  WEBP_VP8X_WIDTH_OFFSET,
+} from '../model/image-format.constants';
+
 export interface ImageDimensions {
   width: number;
   height: number;
 }
 
-const JPEG_SOF_MARKERS = new Set([
-  0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
-]);
-
 const readJpegDimensions = (buffer: Buffer): ImageDimensions | undefined => {
-  let offset = 2;
+  let offset = JPEG_START_OFFSET;
 
-  while (offset + 9 < buffer.length) {
-    if (buffer[offset] !== 0xff) {
+  while (offset + JPEG_MIN_SOF_LENGTH < buffer.length) {
+    if (buffer[offset] !== JPEG_MARKER_PREFIX) {
       return undefined;
     }
 
@@ -22,79 +55,85 @@ const readJpegDimensions = (buffer: Buffer): ImageDimensions | undefined => {
 
     if (JPEG_SOF_MARKERS.has(marker)) {
       return {
-        height: buffer.readUInt16BE(offset + 5),
-        width: buffer.readUInt16BE(offset + 7),
+        height: buffer.readUInt16BE(offset + JPEG_HEIGHT_OFFSET),
+        width: buffer.readUInt16BE(offset + JPEG_WIDTH_OFFSET),
       };
     }
 
-    const segmentLength = buffer.readUInt16BE(offset + 2);
-    if (segmentLength < 2) {
+    const segmentLength = buffer.readUInt16BE(offset + JPEG_LENGTH_OFFSET);
+    if (segmentLength < JPEG_LENGTH_MIN) {
       return undefined;
     }
-    offset += 2 + segmentLength;
+    offset += JPEG_LENGTH_BIAS + segmentLength;
   }
 
   return undefined;
 };
 
 const readPngDimensions = (buffer: Buffer): ImageDimensions | undefined => {
-  const IHDR_TYPE_OFFSET = 12;
-  const WIDTH_OFFSET = 16;
-  const HEIGHT_OFFSET = 20;
-
-  if (buffer.length < HEIGHT_OFFSET + 4) {
+  if (buffer.length < PNG_HEIGHT_OFFSET + PNG_IHDR_SIZE) {
     return undefined;
   }
 
-  if (buffer.toString('ascii', IHDR_TYPE_OFFSET, IHDR_TYPE_OFFSET + 4) !== 'IHDR') {
+  if (
+    buffer.toString('ascii', PNG_IHDR_TYPE_OFFSET, PNG_IHDR_TYPE_OFFSET + PNG_IHDR_SIZE) !== 'IHDR'
+  ) {
     return undefined;
   }
 
   return {
-    width: buffer.readUInt32BE(WIDTH_OFFSET),
-    height: buffer.readUInt32BE(HEIGHT_OFFSET),
+    width: buffer.readUInt32BE(PNG_WIDTH_OFFSET),
+    height: buffer.readUInt32BE(PNG_HEIGHT_OFFSET),
   };
 };
 
 const readWebpDimensions = (buffer: Buffer): ImageDimensions | undefined => {
-  const CHUNK_HEADER_OFFSET = 12;
-  const PAYLOAD_OFFSET = 20;
-
-  if (buffer.length < 30) {
+  if (buffer.length < WEBP_MIN_BUFFER_LENGTH) {
     return undefined;
   }
 
-  const chunkType = buffer.toString('ascii', CHUNK_HEADER_OFFSET, CHUNK_HEADER_OFFSET + 4);
+  const chunkType = buffer.toString(
+    'ascii',
+    WEBP_CHUNK_HEADER_OFFSET,
+    WEBP_CHUNK_HEADER_OFFSET + WEBP_CHUNK_HEADER_SIZE,
+  );
 
   if (chunkType === 'VP8X') {
     return {
-      width: buffer.readUIntLE(PAYLOAD_OFFSET + 4, 3) + 1,
-      height: buffer.readUIntLE(PAYLOAD_OFFSET + 7, 3) + 1,
+      width:
+        buffer.readUIntLE(WEBP_PAYLOAD_OFFSET + WEBP_VP8X_WIDTH_OFFSET, WEBP_VP8X_DIMENSION_SIZE) +
+        WEBP_VP8X_DIMENSION_BIAS,
+      height:
+        buffer.readUIntLE(WEBP_PAYLOAD_OFFSET + WEBP_VP8X_HEIGHT_OFFSET, WEBP_VP8X_DIMENSION_SIZE) +
+        WEBP_VP8X_DIMENSION_BIAS,
     };
   }
 
   if (chunkType === 'VP8 ') {
     const hasSyncCode =
-      buffer[PAYLOAD_OFFSET + 3] === 0x9d &&
-      buffer[PAYLOAD_OFFSET + 4] === 0x01 &&
-      buffer[PAYLOAD_OFFSET + 5] === 0x2a;
+      buffer[WEBP_PAYLOAD_OFFSET + WEBP_VP8_SYNC_OFFSET] === WEBP_VP8_SYNC_CODE_A &&
+      buffer[WEBP_PAYLOAD_OFFSET + WEBP_VP8_SYNC_OFFSET + 1] === WEBP_VP8_SYNC_CODE_B &&
+      buffer[WEBP_PAYLOAD_OFFSET + WEBP_VP8_SYNC_OFFSET + 2] === WEBP_VP8_SYNC_CODE_C;
     if (!hasSyncCode) {
       return undefined;
     }
     return {
-      width: buffer.readUInt16LE(PAYLOAD_OFFSET + 6) & 0x3f_ff,
-      height: buffer.readUInt16LE(PAYLOAD_OFFSET + 8) & 0x3f_ff,
+      width:
+        buffer.readUInt16LE(WEBP_PAYLOAD_OFFSET + WEBP_VP8_WIDTH_OFFSET) & WEBP_VP8_DIMENSION_MASK,
+      height:
+        buffer.readUInt16LE(WEBP_PAYLOAD_OFFSET + WEBP_VP8_HEIGHT_OFFSET) & WEBP_VP8_DIMENSION_MASK,
     };
   }
 
   if (chunkType === 'VP8L') {
-    if (buffer[PAYLOAD_OFFSET] !== 0x2f) {
+    if (buffer[WEBP_PAYLOAD_OFFSET + WEBP_VP8L_FLAG_OFFSET] !== WEBP_VP8L_FLAG_VALUE) {
       return undefined;
     }
-    const bits = buffer.readUInt32LE(PAYLOAD_OFFSET + 1);
+    const bits = buffer.readUInt32LE(WEBP_PAYLOAD_OFFSET + WEBP_VP8L_BITS_OFFSET);
     return {
-      width: (bits & 0x3f_ff) + 1,
-      height: ((bits >> 14) & 0x3f_ff) + 1,
+      width: (bits & WEBP_VP8L_DIMENSION_MASK) + WEBP_VP8L_DIMENSION_BIAS,
+      height:
+        ((bits >> WEBP_VP8L_HEIGHT_SHIFT) & WEBP_VP8L_DIMENSION_MASK) + WEBP_VP8L_DIMENSION_BIAS,
     };
   }
 

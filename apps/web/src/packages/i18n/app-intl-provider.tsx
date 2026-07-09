@@ -3,11 +3,11 @@
 import { type AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 import type { ReactNode } from 'react';
 
-import type { AppLocale } from './locale.constants';
+import type { LanguageCodeValue } from './locale.constants';
 import { DEFAULT_TIME_ZONE } from './locale.constants';
 
 interface AppIntlProviderProps {
-  locale: AppLocale;
+  locale: LanguageCodeValue;
   messages: AbstractIntlMessages;
   children: ReactNode;
 }

@@ -11,6 +11,7 @@ import type {
   FileValidationResult,
   GameStreamHandlers,
 } from '../model/game.types';
+import { ResultCountSchema } from '../schemas/game.schema';
 
 /** UX-only file validation reused by the upload hook and {@link analyzeImage}. */
 export const validateFileForUpload = (file: File | undefined): FileValidationResult =>
@@ -24,18 +25,29 @@ const assertValidFile = (file: File): void => {
   }
 };
 
+/** Throw a typed {@link AppError} when the selected result count is out of bounds. */
+const assertValidResultCount = (resultCount: number): void => {
+  const parsed = ResultCountSchema.safeParse(resultCount);
+  if (!parsed.success) {
+    throw new AppError('errors.validation');
+  }
+};
+
 /**
  * Frontend orchestration (React-free): validate the file for UX, then delegate
- * to the gateway with the active language so all dynamic AI output arrives
- * localized. Consent is asserted by the caller (analyze stays disabled until
- * the box is ticked) and re-checked by the backend regardless.
+ * to the gateway with the active language and result count so all dynamic AI
+ * output arrives localized and bounded. Consent is asserted by the caller
+ * (analyze stays disabled until the box is ticked) and re-checked by the
+ * backend regardless.
  */
 export const analyzeImage = async (
   file: File,
   languageCode: LanguageCodeValue,
+  resultCount: number,
 ): Promise<FinalGameResult> => {
   assertValidFile(file);
-  return analyzeImageRequest(file, languageCode);
+  assertValidResultCount(resultCount);
+  return analyzeImageRequest(file, languageCode, resultCount);
 };
 
 /**
@@ -52,6 +64,7 @@ export const analyzeImageStream = async (
   options: AnalyzeStreamOptions,
 ): Promise<FinalGameResult> => {
   assertValidFile(file);
+  assertValidResultCount(options.resultCount);
   return analyzeImageStreamRequest(file, languageCode, handlers, options);
 };
 

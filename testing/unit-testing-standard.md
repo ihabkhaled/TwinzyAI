@@ -270,7 +270,7 @@ The fix is always **more scenarios at the right boundary**, never a lower thresh
 
 ## File placement & banned tokens
 
-- Tests live in the nearest `tests/` folder beside the SUT: `apps/api/src/modules/<feature>/tests/<name>.test.ts`; shared-package tests in `packages/shared/tests/<name>.test.ts` (mirrors the layout in [/context/architecture-map.md](../context/architecture-map.md)).
+- Tests live in the nearest `tests/` folder beside the SUT: `apps/api/src/modules/<feature>/tests/<name>.test.ts`; shared-package tests in `packages/shared/tests/<name>.test.ts` (mirrors the layout in [/context/architecture-map.md](../context/architecture-map.md)). The web workspace currently uses `test/` (singular) as a historical convention; new web tests should use `tests/` and existing `test/` folders will be normalized during the `twinzy-hardening-v3` workstream.
 - Naming is `*.test.ts` — a `*.spec.ts` file under `apps/api` or `packages/shared` matches **no** Vitest project and silently never runs.
 - Type doubles to the collaborator interface (e.g. `FakeAiAdapter implements AiProviderAdapter`); **never** `any`, `@ts-ignore`, non-null `!`, or `eslint-disable` — strict TS and the non-negotiables ([/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), [/rules/11-eslint-typescript.md](../rules/11-eslint-typescript.md)) hold in tests too. No TypeScript `enum` in fixtures — `as const` objects only ([/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md)).
 

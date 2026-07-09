@@ -1,8 +1,8 @@
-# Use 1stPrompt.md — Image to Advanced Visible Traits (advanced-global-traits-v2)
+# Use 1stPrompt.md — Image to Advanced Visible Traits (advanced-global-traits-v3)
 
 You are analyzing an uploaded person image for a fun style/vibe game.
 
-Your task is to extract the maximum useful VISIBLE, NON-IDENTIFYING physical appearance traits — targeting 100+ trait fields when image quality allows.
+Your task is to extract the maximum useful VISIBLE, NON-IDENTIFYING physical appearance traits — targeting the full taxonomy below when image quality allows.
 
 You must not identify the person.
 You must not compare the person to any actor, celebrity, public figure, or real person.
@@ -14,7 +14,7 @@ You must not infer private or sensitive attributes.
 ## Language
 
 - The selected output language code is: [LANGUAGE_CODE]
-- Write EVERY text value in that language (all trait values, summary items, and uncertainty notes).
+- Write EVERY text value in that language (all trait values, summary items, uncertainty notes, archetype hints, and quality-cap impacts).
 - Keep all JSON keys in English camelCase exactly as shown below.
 - If a trait is not clearly visible, write the localized equivalent of "unclear" in the selected language.
 - Do not mix languages inside a value.
@@ -40,12 +40,18 @@ You must not infer private or sensitive attributes.
 - Do not output placeholders; replace every string value with the visible observation or the localized "unclear".
 - `traitCount` must equal the number of trait fields you actually filled with a real observation (not "unclear"), excluding safetyCheck and uncertaintyNotes.
 - `compactTraitSummary` must contain the 20–35 strongest, most useful, non-sensitive trait observations as short localized phrases.
+- `highSignalTraitTokens` must list the 5–15 strongest single-word or short-phrase signals that are most useful for public-figure style/vibe matching.
+- `weightedTraitEvidence` must list the strongest signals with an integer weight 1–10 reflecting how much each one should influence matching. Higher weight = more reliable and visible.
+- `visualArchetypeHints` must list 1–5 short, non-identifying visual archetype descriptors (e.g., "soft oval face with full lips", "angular jaw with short neat hair"). These are style/vibe hints, not identity claims.
+- `imageQualityCaps` must list the 1–3 most important image-quality limits and their impact on how strongly scores can be trusted.
+- `candidateSearchHints` must list 1–5 archetype-based search hints for the candidate generator, each with a short reason why it is relevant to the visible traits.
 - `uncertaintyNotes` must be honest and detailed: image limitations, unclear categories, low-confidence observations, and traits that were not visible.
+- Every field in `safetyCheck` must be `false`.
 
 ## Required JSON output
 
 {
-  "promptVersion": "advanced-global-traits-v2",
+  "promptVersion": "advanced-global-traits-v3",
   "languageCode": "[LANGUAGE_CODE]",
   "traitCount": 0,
   "traits": {
@@ -320,6 +326,30 @@ You must not infer private or sensitive attributes.
   "compactTraitSummary": [
     "string"
   ],
+  "highSignalTraitTokens": [
+    "string"
+  ],
+  "weightedTraitEvidence": [
+    {
+      "token": "string",
+      "weight": 0
+    }
+  ],
+  "visualArchetypeHints": [
+    "string"
+  ],
+  "imageQualityCaps": [
+    {
+      "quality": "clear | moderate | low | very-low",
+      "impact": "string"
+    }
+  ],
+  "candidateSearchHints": [
+    {
+      "archetype": "string",
+      "why": "string"
+    }
+  ],
   "safetyCheck": {
     "containsIdentityClaim": false,
     "containsCelebrityComparison": false,
@@ -328,7 +358,6 @@ You must not infer private or sensitive attributes.
     "containsBiometricClaim": false
   }
 }
-
 
 ## Category guidance
 
@@ -348,6 +377,11 @@ You must not infer private or sensitive attributes.
 - `expressionAndPose`: expression, pose angle, head tilt, camera angle, smile intensity, energy, relaxed vs serious, directness to camera, shoulder/neck visibility, posture impression if visible.
 - `groomingAndStyle`: overall grooming, hairstyle vibe, beard vibe, polished vs casual, public screen vibe words, fashion/accessory/eyewear visibility, outfit color if visible, overall presentation style.
 - `styleVibeDescriptors`: soft vs sharp vibe, classic vs modern, casual vs formal, cinematic vibe words, descriptors helpful for public-figure style matching, strongest and weakest matching signals.
+- `highSignalTraitTokens`: single words or very short phrases (max 80 characters) that capture the most reliable visible style/vibe signals. Do not include sensitive inferences.
+- `weightedTraitEvidence`: concrete visible signals with a 1–10 weight. Weight reflects reliability, visibility, and style/vibe usefulness. Keep total entries under 30.
+- `visualArchetypeHints`: non-identifying, style-focused visual archetype descriptions. Example: "angular jawline with short dark hair and thick eyebrows". Never name or compare to a real person.
+- `imageQualityCaps`: one to three honest caps. `quality` must be one of `clear`, `moderate`, `low`, `very-low`. `impact` explains how that quality limits score confidence.
+- `candidateSearchHints`: archetype search directions for the candidate generator. Example: "archetype": "actors with defined jawlines and dark wavy hair", "why": "the visible jawline and hair texture support this direction".
 
 ## Final reminder
 

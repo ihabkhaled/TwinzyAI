@@ -30,21 +30,23 @@ export class ResultAggregationService {
     extraction: TraitExtractionResponse,
     judgeResponse: CandidateJudgeResponse,
     languageCode: LanguageCodeValue,
+    resultCount: number,
   ): FinalGameResult {
-    const displayable = selectDisplayableResults(judgeResponse);
+    const displayable = selectDisplayableResults(judgeResponse, resultCount);
     this.logger.info(`Aggregated ${displayable.length} final result(s)`);
 
     if (displayable.length === 0) {
-      return this.buildFallback(extraction, languageCode);
+      return this.buildFallback(extraction, languageCode, resultCount);
     }
 
-    return toFinalGameResult(extraction, displayable, languageCode);
+    return toFinalGameResult(extraction, displayable, languageCode, resultCount);
   }
 
   public buildFallback(
     extraction: TraitExtractionResponse,
     languageCode: LanguageCodeValue,
+    resultCount: number,
   ): FinalGameResult {
-    return toFallbackResult(extraction, languageCode);
+    return toFallbackResult(extraction, languageCode, resultCount);
   }
 }

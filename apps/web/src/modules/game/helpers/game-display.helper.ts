@@ -97,6 +97,10 @@ export const translateOptionalKey = (
 export const resolveTraitCountLabel = (translate: TranslateMessage, count: number): string =>
   translate('game.traitCount', { count });
 
+/** Localized "Showing up to N matches" line (ICU number) above the result list. */
+export const resolveResultCountTitle = (translate: TranslateMessage, count: number): string =>
+  translate('result.resultCountTitle', { count });
+
 /**
  * Safe share text: name + score only. Never the photo, never trait JSON, never
  * identity/biometric wording. Returns an empty string when there is no match.
@@ -120,6 +124,10 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   processingHint: translate('game.processingHint'),
   liveTraitsTitle: translate('game.liveTraitsTitle'),
   liveCandidatesTitle: translate('game.liveCandidatesTitle'),
+  resultCount: {
+    label: translate('game.resultCountLabel'),
+    hint: translate('game.resultCountHint'),
+  },
   translating: translate('game.translating'),
   retryTranslation: translate('game.retryTranslation'),
   privacyNotice: translate('home.privacyNotice'),
@@ -154,6 +162,10 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
     fallbackTitle: translate('result.fallbackTitle'),
     retryButton: translate('result.retryButton'),
     shareButton: translate('result.shareButton'),
+    resultCountTitle: translate('result.resultCountTitle'),
+    scoreExplanation: translate('result.scoreExplanation'),
+    uncertaintyExplanation: translate('result.uncertaintyExplanation'),
+    mismatchExplanation: translate('result.mismatchExplanation'),
   },
 });
 

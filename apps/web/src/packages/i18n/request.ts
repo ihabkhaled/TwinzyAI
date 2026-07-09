@@ -2,11 +2,11 @@ import { cookies } from 'next/headers';
 import type { AbstractIntlMessages } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 
-import type { AppLocale } from './locale.constants';
+import type { LanguageCodeValue } from './locale.constants';
 import {
   DEFAULT_LOCALE,
   DEFAULT_TIME_ZONE,
-  isSupportedLocale,
+  isSupportedLanguageCode,
   LOCALE_COOKIE_NAME,
 } from './locale.constants';
 
@@ -17,14 +17,14 @@ import {
  * in the app-shell wave.
  */
 
-const resolveLocaleFromCookie = async (): Promise<AppLocale> => {
+const resolveLocaleFromCookie = async (): Promise<LanguageCodeValue> => {
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get(LOCALE_COOKIE_NAME)?.value;
 
-  return isSupportedLocale(cookieValue) ? cookieValue : DEFAULT_LOCALE;
+  return isSupportedLanguageCode(cookieValue) ? cookieValue : DEFAULT_LOCALE;
 };
 
-const loadMessages = async (locale: AppLocale): Promise<AbstractIntlMessages> => {
+const loadMessages = async (locale: LanguageCodeValue): Promise<AbstractIntlMessages> => {
   // Dynamic specifier: only the active locale's dictionary reaches the bundle.
   const imported = (await import(`./messages/${locale}.json`)) as {
     readonly default: AbstractIntlMessages;

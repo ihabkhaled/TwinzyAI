@@ -7,12 +7,14 @@ import { normalizeLanguageCode } from '@twinzy/shared';
 
 import { useAppLocale, useAppTranslation } from '@/packages/i18n';
 
-import {
-  resolvePhase,
-  resolveStageLabel,
-  translateOptionalKey,
-} from '../helpers/game-display.helper';
+import { resolvePhase, resolveStageLabel } from '../helpers/game-display.helper';
 import { toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
+import {
+  buildCameraViewModel,
+  buildShareViewModel,
+  buildTranslationViewModel,
+  buildUploadViewModel,
+} from '../helpers/game-view-model.helper';
 import { mapFinalResultToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
 import { useAnalyzeGameMutation } from '../queries/game.mutations';
@@ -20,6 +22,7 @@ import { useAnalyzeGameMutation } from '../queries/game.mutations';
 import { useAnalyzeRunControl } from './useAnalyzeRunControl.hook';
 import { useCameraCapture } from './useCameraCapture.hook';
 import { useImageUpload } from './useImageUpload.hook';
+import { useResultCount } from './useResultCount.hook';
 import { useResultTranslation } from './useResultTranslation.hook';
 import { useShareResult } from './useShareResult.hook';
 import { useStreamProgress } from './useStreamProgress.hook';
@@ -46,6 +49,7 @@ export const useGame = (): GameViewModel => {
   );
   const translation = useResultTranslation(data);
   const [consentGiven, setConsentGiven] = useState(false);
+  const { resultCount, resultCountOptions, onResultCountChange } = useResultCount();
   const { beginRun, cancelRun } = useAnalyzeRunControl(analyze);
 
   const onConsentChange = useCallback((checked: boolean): void => {
@@ -57,9 +61,9 @@ export const useGame = (): GameViewModel => {
   const onAnalyze = useCallback((): void => {
     if (file !== undefined && consentGiven && !isPending) {
       progress.reset();
-      beginRun(file);
+      beginRun(file, resultCount);
     }
-  }, [file, consentGiven, isPending, beginRun, progress]);
+  }, [file, consentGiven, isPending, beginRun, progress, resultCount]);
 
   const onRetry = useCallback((): void => {
     cancelRun();
@@ -92,30 +96,16 @@ export const useGame = (): GameViewModel => {
     liveTraitCount: progress.traitsProgress?.traitCount,
     liveSummary: [...(progress.traitsProgress?.compactTraitSummary ?? [])],
     liveCandidates: [...progress.candidateNames],
-    upload: {
-      file,
+    resultCount,
+    resultCountOptions: [...resultCountOptions],
+    onResultCountChange,
+    upload: buildUploadViewModel(
+      { file, onFileChange, clearFile, fileErrorKey },
       previewUrl,
-      fileError: translateOptionalKey(translate, fileErrorKey),
-      onFileChange,
-      clearFile,
-    },
-    camera: {
-      isOpen: camera.isOpen,
-      isStarting: camera.isStarting,
-      errorMessage: translateOptionalKey(translate, camera.errorKey),
-      videoRef: camera.videoRef,
-      onOpen: camera.open,
-      onCancel: camera.cancel,
-      onCapture: camera.capture,
-    },
-    share: {
-      feedback: translateOptionalKey(translate, feedbackKey),
-    },
-    translation: {
-      isTranslating: translation.isTranslating,
-      errorMessage: translateOptionalKey(translate, translation.errorKey),
-      canRetry: translation.errorKey !== undefined,
-      onRetry: translation.retry,
-    },
+      translate,
+    ),
+    camera: buildCameraViewModel(camera, translate),
+    share: buildShareViewModel({ feedbackKey }, translate),
+    translation: buildTranslationViewModel(translation, translate),
   };
 };

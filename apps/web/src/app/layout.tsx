@@ -9,7 +9,7 @@ import {
   getServerLocale,
   getServerMessages,
   getServerTranslations,
-  isSupportedLocale,
+  isSupportedLanguageCode,
 } from '@/packages/i18n';
 import { AppToaster } from '@/packages/toast';
 import { AppHeader } from '@/shared/components/layout/app-header.component';
@@ -59,7 +59,7 @@ export const viewport: Viewport = {
 
 const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => {
   const resolvedLocale = await getServerLocale();
-  const locale = isSupportedLocale(resolvedLocale) ? resolvedLocale : DEFAULT_LOCALE;
+  const locale = isSupportedLanguageCode(resolvedLocale) ? resolvedLocale : DEFAULT_LOCALE;
   const direction = getLocaleDirection(locale);
   const t = await getServerTranslations();
   const messages = await getServerMessages();

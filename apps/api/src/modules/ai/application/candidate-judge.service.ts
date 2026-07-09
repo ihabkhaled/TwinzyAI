@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import type { Candidate, CandidateJudgeResponse, LanguageCodeValue, Traits } from '@twinzy/shared';
-import { CandidateJudgeResponseSchema } from '@twinzy/shared';
+import { CandidateJudgeResponseSchema, PROMPT_JSON_INDENT } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
@@ -35,12 +35,14 @@ export class CandidateJudgeService {
     traits: Traits,
     candidates: readonly Candidate[],
     languageCode: LanguageCodeValue,
+    resultCount: number,
     signal?: AbortSignal,
   ): Promise<CandidateJudgeResponse> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.CandidateJudge, {
-      [PromptPlaceholder.TraitsJson]: JSON.stringify({ traits }, null, 2),
-      [PromptPlaceholder.CandidatesJson]: JSON.stringify({ candidates }, null, 2),
+      [PromptPlaceholder.TraitsJson]: JSON.stringify({ traits }, null, PROMPT_JSON_INDENT),
+      [PromptPlaceholder.CandidatesJson]: JSON.stringify({ candidates }, null, PROMPT_JSON_INDENT),
       [PromptPlaceholder.LanguageCode]: languageCode,
+      [PromptPlaceholder.ResultCount]: String(resultCount),
     });
 
     const rawText = await this.aiProvider.generateFromTextStream(prompt, undefined, signal);

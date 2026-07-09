@@ -4,6 +4,7 @@ import type { FinalGameResult, FinalResultItem, LanguageCodeValue } from '@twinz
 import {
   FinalGameResultSchema,
   NO_MATCH_FALLBACK_BY_LANGUAGE,
+  PROMPT_JSON_INDENT,
   RESULT_DISCLAIMER_BY_LANGUAGE,
 } from '@twinzy/shared';
 
@@ -48,7 +49,7 @@ export class ResultTranslationService {
     targetLanguageCode: LanguageCodeValue,
   ): Promise<FinalGameResult> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.TranslateResult, {
-      [PromptPlaceholder.ResultJson]: JSON.stringify(original, null, 2),
+      [PromptPlaceholder.ResultJson]: JSON.stringify(original, null, PROMPT_JSON_INDENT),
       [PromptPlaceholder.TargetLanguageCode]: targetLanguageCode,
     });
 
@@ -93,6 +94,7 @@ export class ResultTranslationService {
       ...translated,
       promptVersion: original.promptVersion,
       languageCode: targetLanguageCode,
+      resultCount: original.resultCount,
       traitCount: original.traitCount,
       results,
       disclaimer: RESULT_DISCLAIMER_BY_LANGUAGE[targetLanguageCode],
@@ -114,6 +116,7 @@ export class ResultTranslationService {
       confidenceLevel: original.confidenceLevel,
       verdict: original.verdict,
       publicCategory: original.publicCategory,
+      safetyCheck: original.safetyCheck,
     };
   }
 

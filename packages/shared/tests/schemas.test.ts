@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  ApiErrorResponseSchema,
   CandidateGenerationResponseSchema,
   CandidateJudgeResponseSchema,
   FinalGameResultSchema,
@@ -8,7 +9,9 @@ import {
   HealthResponseSchema,
   LanguageCodeSchema,
   MAX_COMPACT_TRAIT_SUMMARY,
+  NO_MATCH_FALLBACK_MESSAGE,
   RESULT_DISCLAIMER,
+  ResultCountSchema,
   TOTAL_TRAIT_FIELDS,
   TRAIT_CATEGORY_FIELDS,
   TraitExtractionResponseSchema,
@@ -37,6 +40,16 @@ const buildExtraction = (): Record<string, unknown> => ({
   traitCount: TOTAL_TRAIT_FIELDS,
   traits: buildTraitsPayload(),
   compactTraitSummary: ['clear oval face', 'wavy dark hair'],
+  highSignalTraitTokens: ['oval face', 'wavy dark hair', 'full beard', 'broad smile'],
+  weightedTraitEvidence: [
+    { token: 'oval face', weight: 9 },
+    { token: 'wavy dark hair', weight: 8 },
+  ],
+  visualArchetypeHints: ['warm-friendly-rounded'],
+  imageQualityCaps: [{ quality: 'clear', impact: 'good lighting' }],
+  candidateSearchHints: [
+    { archetype: 'warm approachable public style', why: 'matches rounded face and smile' },
+  ],
   safetyCheck: buildSafetyCheck(),
 });
 
@@ -151,27 +164,43 @@ describe('TraitExtractionResponseSchema', () => {
   });
 });
 
-const buildGeneration = (candidates: Record<string, unknown>[]): Record<string, unknown> => ({
+const buildGeneration = (
+  candidates: Record<string, unknown>[],
+  resultCount = 10,
+): Record<string, unknown> => ({
   promptVersion: GAME_PROMPT_VERSION,
   languageCode: 'en',
+  resultCount,
   candidateCount: candidates.length,
   candidates,
   fallbackMessage: '',
 });
 
 describe('CandidateGenerationResponseSchema', () => {
-  it('accepts between 1 and 5 candidates', () => {
+  it('accepts between 1 and 20 generated candidates as long as the pool is at least resultCount', () => {
     expect(
-      CandidateGenerationResponseSchema.safeParse(buildGeneration([buildCandidatePayload()]))
+      CandidateGenerationResponseSchema.safeParse(buildGeneration([buildCandidatePayload()], 1))
         .success,
+    ).toBe(true);
+    expect(
+      CandidateGenerationResponseSchema.safeParse(
+        buildGeneration(
+          Array.from({ length: 20 }, () => buildCandidatePayload()),
+          10,
+        ),
+      ).success,
     ).toBe(true);
   });
 
-  it('rejects an empty candidate list and more than 5 candidates', () => {
+  it('rejects an empty candidate list, fewer candidates than resultCount, and more than 20 candidates', () => {
     expect(CandidateGenerationResponseSchema.safeParse(buildGeneration([])).success).toBe(false);
     expect(
+      CandidateGenerationResponseSchema.safeParse(buildGeneration([buildCandidatePayload()], 5))
+        .success,
+    ).toBe(false);
+    expect(
       CandidateGenerationResponseSchema.safeParse(
-        buildGeneration(Array.from({ length: 6 }, () => buildCandidatePayload())),
+        buildGeneration(Array.from({ length: 21 }, () => buildCandidatePayload())),
       ).success,
     ).toBe(false);
   });
@@ -180,6 +209,25 @@ describe('CandidateGenerationResponseSchema', () => {
     const payload = buildGeneration([buildCandidatePayload()]);
     payload['candidateCount'] = 3;
     expect(CandidateGenerationResponseSchema.safeParse(payload).success).toBe(false);
+  });
+
+  it('rejects resultCount outside 1-10', () => {
+    expect(
+      CandidateGenerationResponseSchema.safeParse(
+        buildGeneration(
+          Array.from({ length: 11 }, () => buildCandidatePayload()),
+          11,
+        ),
+      ).success,
+    ).toBe(false);
+    expect(
+      CandidateGenerationResponseSchema.safeParse(
+        buildGeneration(
+          Array.from({ length: 10 }, () => buildCandidatePayload()),
+          0,
+        ),
+      ).success,
+    ).toBe(false);
   });
 
   it('rejects an out-of-range score and a missing languageCode', () => {
@@ -195,31 +243,49 @@ describe('CandidateGenerationResponseSchema', () => {
   });
 });
 
-const buildJudgeResponse = (results: Record<string, unknown>[]): Record<string, unknown> => ({
+const buildJudgeResponse = (
+  results: Record<string, unknown>[],
+  resultCount = 10,
+): Record<string, unknown> => ({
   promptVersion: GAME_PROMPT_VERSION,
   languageCode: 'en',
+  resultCount,
   results,
   removedCandidates: [],
-  fallbackMessage: '',
+  fallbackMessage: results.length === 0 ? NO_MATCH_FALLBACK_MESSAGE : '',
   disclaimer: RESULT_DISCLAIMER,
 });
 
 describe('CandidateJudgeResponseSchema', () => {
-  it('accepts up to 5 judged results and rejects more', () => {
-    const five = Array.from({ length: 5 }, (_unused, index) =>
-      buildJudgedResultPayload({ rank: index + 1 }),
+  it('accepts up to 10 judged results and rejects more', () => {
+    const ten = Array.from({ length: 10 }, (_unused, index) =>
+      buildJudgedResultPayload({ rank: index + 1, name: `Sample Star ${index + 1}` }),
     );
-    expect(CandidateJudgeResponseSchema.safeParse(buildJudgeResponse(five)).success).toBe(true);
+    expect(CandidateJudgeResponseSchema.safeParse(buildJudgeResponse(ten)).success).toBe(true);
 
-    const six = Array.from({ length: 6 }, (_unused, index) =>
+    const eleven = Array.from({ length: 11 }, (_unused, index) =>
       buildJudgedResultPayload({ rank: index + 1 }),
     );
-    expect(CandidateJudgeResponseSchema.safeParse(buildJudgeResponse(six)).success).toBe(false);
+    expect(CandidateJudgeResponseSchema.safeParse(buildJudgeResponse(eleven)).success).toBe(false);
+  });
+
+  it('rejects results that exceed the requested resultCount', () => {
+    const payload = buildJudgeResponse(
+      Array.from({ length: 5 }, (_unused, index) => buildJudgedResultPayload({ rank: index + 1 })),
+      3,
+    );
+    expect(CandidateJudgeResponseSchema.safeParse(payload).success).toBe(false);
+  });
+
+  it('requires a non-empty fallbackMessage when results are empty', () => {
+    const empty = buildJudgeResponse([], 10);
+    empty['fallbackMessage'] = '';
+    expect(CandidateJudgeResponseSchema.safeParse(empty).success).toBe(false);
   });
 
   it('bounds removedCandidates and requires the disclaimer', () => {
     const tooManyRemoved = buildJudgeResponse([buildJudgedResultPayload()]);
-    tooManyRemoved['removedCandidates'] = Array.from({ length: 6 }, (_unused, index) => ({
+    tooManyRemoved['removedCandidates'] = Array.from({ length: 21 }, (_unused, index) => ({
       name: `Removed ${index}`,
       reasonRemoved: 'unsafe wording',
     }));
@@ -235,21 +301,33 @@ describe('FinalGameResultSchema', () => {
   it('accepts an empty results list with a fallback message', () => {
     expect(
       FinalGameResultSchema.safeParse(
-        buildFinalResultPayload({ results: [], fallbackMessage: 'No confident match this time.' }),
+        buildFinalResultPayload({ results: [], fallbackMessage: NO_MATCH_FALLBACK_MESSAGE }),
       ).success,
     ).toBe(true);
   });
 
-  it('accepts exactly 5 final results and rejects 6', () => {
-    const five = buildFinalResultPayload();
-    expect(FinalGameResultSchema.safeParse(five).success).toBe(true);
-    expect(five['results'] as unknown[]).toHaveLength(5);
+  it('rejects an empty results list without a fallback message', () => {
+    expect(
+      FinalGameResultSchema.safeParse(buildFinalResultPayload({ results: [], fallbackMessage: '' }))
+        .success,
+    ).toBe(false);
+  });
+
+  it('accepts exactly 10 final results and rejects 11', () => {
+    const ten = buildFinalResultPayload();
+    expect(FinalGameResultSchema.safeParse(ten).success).toBe(true);
+    expect(ten['results'] as unknown[]).toHaveLength(10);
 
     const results = buildFinalResultPayload()['results'] as Record<string, unknown>[];
-    const six = buildFinalResultPayload({
-      results: [...results, { ...results[0], rank: 6 }],
+    const eleven = buildFinalResultPayload({
+      results: [...results, { ...results[0], rank: 11 }],
     });
-    expect(FinalGameResultSchema.safeParse(six).success).toBe(false);
+    expect(FinalGameResultSchema.safeParse(eleven).success).toBe(false);
+  });
+
+  it('rejects results that exceed the requested resultCount', () => {
+    const payload = buildFinalResultPayload({ resultCount: 3 });
+    expect(FinalGameResultSchema.safeParse(payload).success).toBe(false);
   });
 });
 
@@ -291,5 +369,53 @@ describe('HealthResponseSchema', () => {
     });
 
     expect(parsed.success).toBe(true);
+  });
+});
+
+describe('ResultCountSchema', () => {
+  it('accepts 1 through 10 and defaults to 10', () => {
+    const parseOptional = (value?: number): number => ResultCountSchema.parse(value);
+
+    expect(ResultCountSchema.parse(1)).toBe(1);
+    expect(ResultCountSchema.parse(10)).toBe(10);
+    expect(parseOptional()).toBe(10);
+  });
+
+  it('rejects 0 and 11', () => {
+    expect(ResultCountSchema.safeParse(0).success).toBe(false);
+    expect(ResultCountSchema.safeParse(11).success).toBe(false);
+  });
+});
+
+describe('ApiErrorResponseSchema', () => {
+  it('accepts a valid error envelope and rejects unsafe extras', () => {
+    expect(
+      ApiErrorResponseSchema.safeParse({
+        statusCode: 422,
+        errorCode: 'FILE_INVALID',
+        message: 'The uploaded file could not be processed.',
+      }).success,
+    ).toBe(true);
+
+    expect(
+      ApiErrorResponseSchema.safeParse({
+        statusCode: 422,
+        errorCode: 'FILE_INVALID',
+        message: 'The uploaded file could not be processed.',
+        stack: 'at foo',
+      }).success,
+    ).toBe(false);
+  });
+});
+
+describe('TraitExtractionResponseSchema traitCount refinement', () => {
+  it('accepts when traitCount matches the populated field count', () => {
+    expect(TraitExtractionResponseSchema.safeParse(buildExtraction()).success).toBe(true);
+  });
+
+  it('rejects when traitCount disagrees with the populated field count', () => {
+    const extraction = buildExtraction();
+    extraction['traitCount'] = TOTAL_TRAIT_FIELDS - 1;
+    expect(TraitExtractionResponseSchema.safeParse(extraction).success).toBe(false);
   });
 });
