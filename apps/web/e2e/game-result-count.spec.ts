@@ -18,7 +18,7 @@ test.describe('result-count selection', () => {
     await expect(select).toHaveValue(String(DEFAULT_RESULT_COUNT));
 
     for (const value of [MIN_RESULT_COUNT, 5, MAX_RESULT_COUNT]) {
-      await expect(select.locator(`option[value="${value}"]`)).toBeVisible();
+      await expect(select.locator(`option[value="${value}"]`)).toHaveCount(1);
     }
   });
 

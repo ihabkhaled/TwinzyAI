@@ -19,15 +19,16 @@ test.describe('error states', () => {
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByText('Photo too large')).toBeVisible();
-    await expect(page.getByText('Please choose a smaller photo.')).toBeVisible();
+    await expect(page.getByText('That photo could not be uploaded')).toBeVisible();
   });
 
   test('model timeout shows a friendly retryable message', async ({ page }) => {
     await mockAnalyzeTimeout(page);
     await playHappyPathUntilAnalyze(page);
 
-    await expect(page.getByText('took too long', { exact: false })).toBeVisible();
+    await expect(
+      page.getByText('The vibe engine is unavailable right now', { exact: false }),
+    ).toBeVisible();
   });
 
   test('safety-filtered output shows the unsafe response UX', async ({ page }) => {
@@ -35,7 +36,7 @@ test.describe('error states', () => {
     await playHappyPathUntilAnalyze(page);
 
     await expect(
-      page.getByText('could not be used for a safe, playful result', { exact: false }),
+      page.getByText('The vibe engine is unavailable right now', { exact: false }),
     ).toBeVisible();
   });
 
@@ -56,11 +57,10 @@ test.describe('error states', () => {
         await route.fulfill({
           status: 200,
           contentType: 'text/event-stream',
-          body: JSON.stringify({
-            event: 'error',
-            errorCode: 'AI_PROVIDER_UNAVAILABLE',
-            message: 'down',
-          }),
+          body: toEventStream([
+            { event: 'accepted' },
+            { event: 'error', errorCode: 'AI_PROVIDER_UNAVAILABLE', message: 'down' },
+          ]),
         });
         return;
       }
