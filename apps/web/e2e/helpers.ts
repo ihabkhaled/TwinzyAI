@@ -93,6 +93,7 @@ export const SUCCESS_STREAM = (
   { event: 'stage', stage: 'generating-candidates' },
   {
     event: 'candidates',
+    resultCount,
     names: Array.from({ length: resultCount }, (_unused, index) => `Sample Star ${index + 1}`),
   },
   { event: 'stage', stage: 'judging' },
