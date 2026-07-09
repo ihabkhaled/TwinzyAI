@@ -3,6 +3,7 @@ import { GoogleGenAI } from '@google/genai';
 import { Injectable } from '@nestjs/common';
 
 import { AppConfigService } from '../../../config/app-config.service';
+import type { GeminiStepValue } from '../../../config/gemini-step.constants';
 import {
   AppError,
   ERROR_MESSAGE_KEY_BY_CODE,
@@ -20,9 +21,10 @@ import {
   type ProviderErrorKindValue,
 } from '../lib/provider-error.util';
 import type {
-  AiContentValidator,
+  AiCallOptions,
   AiProviderAdapter,
   AiStreamChunkListener,
+  AiStreamOptions,
 } from '../model/ai-provider-adapter.types';
 import {
   AI_RATE_LIMITED_MESSAGE,
@@ -61,42 +63,40 @@ export class GeminiAdapter implements AiProviderAdapter {
   public async generateFromImage(
     prompt: string,
     image: AiImageInput,
-    validate?: AiContentValidator,
+    options?: AiCallOptions,
   ): Promise<string> {
     return this.runAcrossModels(
       (model) => this.generateOnce(model, this.imageParts(prompt, image)),
-      validate,
+      options,
     );
   }
 
-  public async generateFromText(prompt: string, validate?: AiContentValidator): Promise<string> {
-    return this.runAcrossModels((model) => this.generateOnce(model, [{ text: prompt }]), validate);
+  public async generateFromText(prompt: string, options?: AiCallOptions): Promise<string> {
+    return this.runAcrossModels((model) => this.generateOnce(model, [{ text: prompt }]), options);
   }
 
   public async generateFromImageStream(
     prompt: string,
     image: AiImageInput,
-    onChunk?: AiStreamChunkListener,
-    signal?: AbortSignal,
-    validate?: AiContentValidator,
+    options?: AiStreamOptions,
   ): Promise<string> {
     return this.runAcrossModels(
-      (model) => this.generateStreamOnce(model, this.imageParts(prompt, image), onChunk, signal),
-      validate,
-      signal,
+      (model) =>
+        this.generateStreamOnce(
+          model,
+          this.imageParts(prompt, image),
+          options?.onChunk,
+          options?.signal,
+        ),
+      options,
     );
   }
 
-  public async generateFromTextStream(
-    prompt: string,
-    onChunk?: AiStreamChunkListener,
-    signal?: AbortSignal,
-    validate?: AiContentValidator,
-  ): Promise<string> {
+  public async generateFromTextStream(prompt: string, options?: AiStreamOptions): Promise<string> {
     return this.runAcrossModels(
-      (model) => this.generateStreamOnce(model, [{ text: prompt }], onChunk, signal),
-      validate,
-      signal,
+      (model) =>
+        this.generateStreamOnce(model, [{ text: prompt }], options?.onChunk, options?.signal),
+      options,
     );
   }
 
@@ -105,33 +105,24 @@ export class GeminiAdapter implements AiProviderAdapter {
   }
 
   /**
-   * Tries the call against each model in the chain. Our own AppErrors (timeout,
+   * Tries the call against each model in the step's configured chain (or the
+   * global chain when the call carries no step). Our own AppErrors (timeout,
    * empty response) are terminal; raw provider errors are classified and, when
    * retryable, fall through to the next model. If the caller supplies a
    * content validator, a model whose returned text fails validation is also
    * retried on the next model. Exhausting the chain surfaces a 429 if any
    * model was rate-limited, otherwise a 502.
    */
-  private async runAcrossModels(
-    call: ModelCall,
-    validate?: AiContentValidator,
-    signal?: AbortSignal,
-  ): Promise<string> {
-    const models = this.requireModelChain();
+  private async runAcrossModels(call: ModelCall, options?: AiStreamOptions): Promise<string> {
+    const models = this.requireModelChain(options?.step);
     let sawRateLimit = false;
 
     for (const model of models) {
-      signal?.throwIfAborted();
+      options?.signal?.throwIfAborted();
       try {
         const text = await call(model);
-        if (validate !== undefined) {
-          const validation = validate(text);
-          if (!validation.ok) {
-            this.logger.warn(
-              `Model ${model} returned content that failed validation (${validation.reason ?? 'unknown'}); trying next model`,
-            );
-            continue;
-          }
+        if (!this.acceptModelText(model, text, options)) {
+          continue;
         }
         return text;
       } catch (error: unknown) {
@@ -150,6 +141,28 @@ export class GeminiAdapter implements AiProviderAdapter {
     throw sawRateLimit
       ? this.rateLimitedError()
       : this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE);
+  }
+
+  /**
+   * Accepts or rejects one model's returned text. Without a validator every
+   * non-empty text is accepted; with one, a failing text logs its bounded,
+   * privacy-safe reason (field paths + issue codes, never values) and reports
+   * false so the chain advances to the next model. Successful serves are
+   * logged with their step so per-step routing is observable in production.
+   */
+  private acceptModelText(model: string, text: string, options?: AiStreamOptions): boolean {
+    const stepTag = options?.step ?? 'default';
+    if (options?.validate !== undefined) {
+      const validation = options.validate(text);
+      if (!validation.ok) {
+        this.logger.warn(
+          `Model ${model} returned content that failed validation (step=${stepTag}, ${validation.reason ?? 'unknown'}); trying next model`,
+        );
+        return false;
+      }
+    }
+    this.logger.info(`Step ${stepTag} served by model ${model}`);
+    return true;
   }
 
   private async generateOnce(model: string, parts: Part[]): Promise<string> {
@@ -284,8 +297,8 @@ export class GeminiAdapter implements AiProviderAdapter {
     this.logger.warn(`Model ${model} failed (${kind}): ${redactForLog(rawMessage)}`);
   }
 
-  private requireModelChain(): readonly string[] {
-    const models = this.config.geminiModelChain;
+  private requireModelChain(step?: GeminiStepValue): readonly string[] {
+    const models = this.config.geminiModelChainFor(step);
     if (models.length === 0) {
       throw this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE);
     }

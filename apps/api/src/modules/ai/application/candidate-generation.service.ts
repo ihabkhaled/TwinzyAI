@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import type { Candidate, LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
 import { CandidateGenerationResponseSchema, PROMPT_JSON_INDENT } from '@twinzy/shared';
 
+import { GeminiStep } from '../../../config/gemini-step.constants';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
@@ -55,13 +56,11 @@ export class CandidateGenerationService {
       [PromptPlaceholder.RegionHint]: REGION_HINT_BY_LANGUAGE[languageCode],
     });
 
-    const rawText = await this.aiProvider.generateFromImageStream(
-      prompt,
-      image,
-      undefined,
+    const rawText = await this.aiProvider.generateFromImageStream(prompt, image, {
       signal,
-      buildSchemaValidator(CandidateGenerationResponseSchema),
-    );
+      validate: buildSchemaValidator(CandidateGenerationResponseSchema),
+      step: GeminiStep.Generation,
+    });
     const response = parseAiJsonResponse(rawText, CandidateGenerationResponseSchema, (issues) => {
       this.logger.warn(`Candidate response schema mismatch: ${issues}`);
     });

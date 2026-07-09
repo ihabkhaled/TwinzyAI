@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import type { LogLevelValue, NodeEnvironment, ParsedEnv } from './env.schema';
+import { GEMINI_STEP_ENV_KEYS, type GeminiStepValue } from './gemini-step.constants';
 
 /**
  * The only injectable configuration surface. Wraps the config vendor behind
@@ -77,6 +78,25 @@ export class AppConfigService {
     return [...new Set([this.geminiModel, ...this.geminiFallbackModels])].filter(
       (model) => model.length > 0,
     );
+  }
+
+  /**
+   * The ordered model chain for one PIPELINE STEP. A step's chain is exactly
+   * what its own env pair configures (primary + fallbacks, de-duplicated); a
+   * step with both vars empty — or no step at all — uses the global chain.
+   * Explicit by design: per-step values fully replace the global chain rather
+   * than being merged with it, so operators can e.g. keep lite models out of
+   * the extraction chain entirely.
+   */
+  public geminiModelChainFor(step?: GeminiStepValue): readonly string[] {
+    if (step === undefined) {
+      return this.geminiModelChain;
+    }
+    const keys = GEMINI_STEP_ENV_KEYS[step];
+    const primary: string = this.configService.get(keys.model, { infer: true });
+    const fallbacks = this.toList(this.configService.get(keys.fallbacks, { infer: true }));
+    const chain = [...new Set([primary, ...fallbacks])].filter((model) => model.length > 0);
+    return chain.length > 0 ? chain : this.geminiModelChain;
   }
 
   public get geminiTimeoutMs(): number {

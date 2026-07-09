@@ -8,6 +8,7 @@ import {
   RESULT_DISCLAIMER_BY_LANGUAGE,
 } from '@twinzy/shared';
 
+import { GeminiStep } from '../../../config/gemini-step.constants';
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
@@ -53,12 +54,10 @@ export class ResultTranslationService {
       [PromptPlaceholder.TargetLanguageCode]: targetLanguageCode,
     });
 
-    const rawText = await this.aiProvider.generateFromTextStream(
-      prompt,
-      undefined,
-      undefined,
-      buildSchemaValidator(FinalGameResultSchema),
-    );
+    const rawText = await this.aiProvider.generateFromTextStream(prompt, {
+      validate: buildSchemaValidator(FinalGameResultSchema),
+      step: GeminiStep.Translation,
+    });
     const translated = parseAiJsonResponse(rawText, FinalGameResultSchema, (issues) => {
       this.logger.warn(`Translated result schema mismatch: ${issues}`);
     });

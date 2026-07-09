@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 
 import type { AppConfigService } from '../../config/app-config.service';
+import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import type { AppLogger } from '../../core/logger/app-logger.service';
 import type { ClamAvAdapter } from '../../modules/file-security/adapters/clamav.adapter';
 
@@ -62,8 +63,19 @@ const CONFIG_DEFAULTS = {
   maxAnalysisQueueSize: 100,
   analysisTimeoutMs: 120_000,
   streamTtlMs: 180_000,
+  // Per-step chain overrides for geminiModelChainFor; a step absent here
+  // falls back to geminiModelChain, mirroring the real service's semantics.
+  geminiStepModelChains: {} as Partial<Record<GeminiStepValue, readonly string[]>>,
 };
 
 export const buildConfigStub = (
   overrides: Partial<typeof CONFIG_DEFAULTS> = {},
-): AppConfigService => ({ ...CONFIG_DEFAULTS, ...overrides }) as unknown as AppConfigService;
+): AppConfigService => {
+  const values = { ...CONFIG_DEFAULTS, ...overrides };
+  return {
+    ...values,
+    geminiModelChainFor: (step?: GeminiStepValue): readonly string[] =>
+      (step === undefined ? undefined : values.geminiStepModelChains[step]) ??
+      values.geminiModelChain,
+  } as unknown as AppConfigService;
+};

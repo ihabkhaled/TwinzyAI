@@ -8,26 +8,34 @@ import {
   UNCERTAINTY_NOTE_FIELDS,
 } from '@twinzy/shared';
 
+import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import type {
+  AiCallOptions,
   AiProviderAdapter,
   AiStreamChunkListener,
+  AiStreamOptions,
 } from '../../modules/ai/model/ai-provider-adapter.types';
 import type { AiImageInput } from '../../modules/ai/model/gemini.types';
 
 export interface RecordedImageCall {
   prompt: string;
   image: AiImageInput;
+  step?: GeminiStepValue | undefined;
 }
 
 /**
  * Deterministic AI adapter for tests. Responses are queued per method;
- * every call is recorded so tests can assert the image never reaches the
- * text-only pipeline steps.
+ * every call is recorded (prompt, image, and the pipeline step it declared)
+ * so tests can assert the image never reaches the text-only pipeline steps
+ * and that each service selects its own step's model chain.
  */
 export class FakeAiAdapter implements AiProviderAdapter {
   public readonly imageCalls: RecordedImageCall[] = [];
 
   public readonly textCalls: string[] = [];
+
+  /** Step declared by each text call, parallel to {@link textCalls}. */
+  public readonly textSteps: (GeminiStepValue | undefined)[] = [];
 
   private readonly imageResponses: (string | Error)[] = [];
 
@@ -41,35 +49,36 @@ export class FakeAiAdapter implements AiProviderAdapter {
     this.textResponses.push(response);
   }
 
-  public generateFromImage(prompt: string, image: AiImageInput): Promise<string> {
-    this.imageCalls.push({ prompt, image });
+  public generateFromImage(
+    prompt: string,
+    image: AiImageInput,
+    options?: AiCallOptions,
+  ): Promise<string> {
+    this.imageCalls.push({ prompt, image, step: options?.step });
     return this.dequeue(this.imageResponses);
   }
 
-  public generateFromText(prompt: string): Promise<string> {
+  public generateFromText(prompt: string, options?: AiCallOptions): Promise<string> {
     this.textCalls.push(prompt);
+    this.textSteps.push(options?.step);
     return this.dequeue(this.textResponses);
   }
 
   public async generateFromImageStream(
     prompt: string,
     image: AiImageInput,
-    onChunk?: AiStreamChunkListener,
-    signal?: AbortSignal,
+    options?: AiStreamOptions,
   ): Promise<string> {
-    this.imageCalls.push({ prompt, image });
-    signal?.throwIfAborted();
-    return this.streamDequeue(this.imageResponses, onChunk);
+    this.imageCalls.push({ prompt, image, step: options?.step });
+    options?.signal?.throwIfAborted();
+    return this.streamDequeue(this.imageResponses, options?.onChunk);
   }
 
-  public async generateFromTextStream(
-    prompt: string,
-    onChunk?: AiStreamChunkListener,
-    signal?: AbortSignal,
-  ): Promise<string> {
+  public async generateFromTextStream(prompt: string, options?: AiStreamOptions): Promise<string> {
     this.textCalls.push(prompt);
-    signal?.throwIfAborted();
-    return this.streamDequeue(this.textResponses, onChunk);
+    this.textSteps.push(options?.step);
+    options?.signal?.throwIfAborted();
+    return this.streamDequeue(this.textResponses, options?.onChunk);
   }
 
   /** Delivers the queued response as a single chunk so onChunk fires once. */

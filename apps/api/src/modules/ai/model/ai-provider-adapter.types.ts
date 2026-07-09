@@ -1,3 +1,5 @@
+import type { GeminiStepValue } from '../../../config/gemini-step.constants';
+
 import type { AiImageInput } from './gemini.types';
 
 /**
@@ -24,6 +26,28 @@ export interface AiValidationResult {
 export type AiContentValidator = (text: string) => AiValidationResult;
 
 /**
+ * Per-call options shared by all provider methods. `step` selects the
+ * env-configured model chain for that pipeline step (extraction, generation,
+ * judge, translation); omitted → the global chain. Model ids themselves never
+ * appear here — they come exclusively from configuration.
+ */
+export interface AiCallOptions {
+  readonly validate?: AiContentValidator;
+  readonly step?: GeminiStepValue;
+}
+
+/**
+ * Streaming variant: adds chunk progress and caller-driven cancellation.
+ * Both fields tolerate an explicit `undefined` so callers can pass through
+ * their own optional params without conditional spreads
+ * (exactOptionalPropertyTypes).
+ */
+export interface AiStreamOptions extends AiCallOptions {
+  readonly onChunk?: AiStreamChunkListener | undefined;
+  readonly signal?: AbortSignal | undefined;
+}
+
+/**
  * Port for AI providers. The separation of the image and text methods is the
  * AI-safety boundary in type form: only the *FromImage methods can carry an
  * image, and only the trait-extraction service is allowed to call them.
@@ -40,25 +64,14 @@ export type AiContentValidator = (text: string) => AiValidationResult;
  * so the provider call — and its slot — is released immediately.
  */
 export interface AiProviderAdapter {
-  generateFromImage(
-    prompt: string,
-    image: AiImageInput,
-    validate?: AiContentValidator,
-  ): Promise<string>;
-  generateFromText(prompt: string, validate?: AiContentValidator): Promise<string>;
+  generateFromImage(prompt: string, image: AiImageInput, options?: AiCallOptions): Promise<string>;
+  generateFromText(prompt: string, options?: AiCallOptions): Promise<string>;
   generateFromImageStream(
     prompt: string,
     image: AiImageInput,
-    onChunk?: AiStreamChunkListener,
-    signal?: AbortSignal,
-    validate?: AiContentValidator,
+    options?: AiStreamOptions,
   ): Promise<string>;
-  generateFromTextStream(
-    prompt: string,
-    onChunk?: AiStreamChunkListener,
-    signal?: AbortSignal,
-    validate?: AiContentValidator,
-  ): Promise<string>;
+  generateFromTextStream(prompt: string, options?: AiStreamOptions): Promise<string>;
 }
 
 /** Injection token binding the port to the configured provider adapter. */

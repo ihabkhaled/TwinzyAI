@@ -317,3 +317,28 @@ describe('CandidateJudgeService (multimodal)', () => {
     );
   });
 });
+
+describe('per-step model chain declaration', () => {
+  it('each pipeline service declares its own step so config can route its model chain', async () => {
+    const { adapter, traitExtraction, candidateGeneration, candidateJudge } = buildPipeline();
+    adapter.queueImageResponse(buildTraitExtractionJson());
+    adapter.queueImageResponse(buildCandidatesJson());
+    adapter.queueImageResponse(buildJudgeJson());
+
+    await traitExtraction.extractTraits(image, 'en');
+    await candidateGeneration.generateCandidates(extraction, image, 'en', DEFAULT_RESULT_COUNT);
+    await candidateJudge.judgeCandidates({
+      extraction,
+      candidates: [],
+      image,
+      languageCode: 'en',
+      resultCount: DEFAULT_RESULT_COUNT,
+    });
+
+    expect(adapter.imageCalls.map((call) => call.step)).toEqual([
+      'extraction',
+      'generation',
+      'judge',
+    ]);
+  });
+});

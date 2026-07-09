@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
 import { countPopulatedTraitFields, isRecord, TraitExtractionResponseSchema } from '@twinzy/shared';
 
+import { GeminiStep } from '../../../config/gemini-step.constants';
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
@@ -45,13 +46,11 @@ export class TraitExtractionService {
       [PromptPlaceholder.LanguageCode]: languageCode,
     });
 
-    const rawText = await this.aiProvider.generateFromImageStream(
-      prompt,
-      image,
-      undefined,
+    const rawText = await this.aiProvider.generateFromImageStream(prompt, image, {
       signal,
-      buildSchemaValidator(TraitExtractionResponseSchema),
-    );
+      validate: buildSchemaValidator(TraitExtractionResponseSchema),
+      step: GeminiStep.Extraction,
+    });
 
     const response = parseAiJsonResponse(
       rawText,

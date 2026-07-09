@@ -95,6 +95,20 @@ export const EnvSchema = z.object({
   // same call down this list before giving up — so one model's quota does not
   // take the game down.
   GEMINI_FALLBACK_MODELS: z.string().default(''),
+  // Optional PER-STEP model chains. Each pipeline step (trait extraction,
+  // candidate generation, judging, result translation) may pin its own primary
+  // + fallbacks so the hardest steps run on the strongest models while cheap
+  // mechanical steps (translation) run on the fastest/cheapest. Semantics: a
+  // step's chain is exactly what its two vars configure; when BOTH are empty
+  // the step uses the global GEMINI_MODEL/GEMINI_FALLBACK_MODELS chain.
+  GEMINI_MODEL_EXTRACTION: z.string().default(''),
+  GEMINI_FALLBACK_MODELS_EXTRACTION: z.string().default(''),
+  GEMINI_MODEL_GENERATION: z.string().default(''),
+  GEMINI_FALLBACK_MODELS_GENERATION: z.string().default(''),
+  GEMINI_MODEL_JUDGE: z.string().default(''),
+  GEMINI_FALLBACK_MODELS_JUDGE: z.string().default(''),
+  GEMINI_MODEL_TRANSLATION: z.string().default(''),
+  GEMINI_FALLBACK_MODELS_TRANSLATION: z.string().default(''),
   GEMINI_TIMEOUT_MS: z.coerce
     .number()
     .int()

@@ -44,6 +44,7 @@ describe('POST /api/v1/game/translate-result (integration)', () => {
   afterEach(() => {
     adapter.imageCalls.length = 0;
     adapter.textCalls.length = 0;
+    adapter.textSteps.length = 0;
   });
 
   afterAll(async () => {
@@ -60,9 +61,12 @@ describe('POST /api/v1/game/translate-result (integration)', () => {
       .send({ targetLanguageCode: 'ar', result: buildFinalGameResultPayload() })
       .expect(201);
 
-    // Text-only guarantee: zero image-capable adapter calls, one text call.
+    // Text-only guarantee: zero image-capable adapter calls, one text call —
+    // and the call declares the translation step so it rides the cheap/fast
+    // per-step model chain.
     expect(adapter.imageCalls).toHaveLength(0);
     expect(adapter.textCalls).toHaveLength(1);
+    expect(adapter.textSteps).toEqual(['translation']);
     expect(response.body).toMatchObject({ languageCode: 'ar' });
   });
 

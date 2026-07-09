@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import type { CandidateJudgeResponse } from '@twinzy/shared';
 import { CandidateJudgeResponseSchema, PROMPT_JSON_INDENT } from '@twinzy/shared';
 
+import { GeminiStep } from '../../../config/gemini-step.constants';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
@@ -50,13 +51,11 @@ export class CandidateJudgeService {
       [PromptPlaceholder.ResultCount]: String(input.resultCount),
     });
 
-    const rawText = await this.aiProvider.generateFromImageStream(
-      prompt,
-      input.image,
-      undefined,
-      input.signal,
-      buildSchemaValidator(CandidateJudgeResponseSchema),
-    );
+    const rawText = await this.aiProvider.generateFromImageStream(prompt, input.image, {
+      signal: input.signal,
+      validate: buildSchemaValidator(CandidateJudgeResponseSchema),
+      step: GeminiStep.Judge,
+    });
     const response = parseAiJsonResponse(rawText, CandidateJudgeResponseSchema, (issues) => {
       this.logger.warn(`Judge response schema mismatch: ${issues}`);
     });
