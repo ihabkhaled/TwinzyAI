@@ -15,21 +15,17 @@
     "test:e2e:ci": "playwright test --project=chromium --project=a11y --project=mobile-chromium"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.4.0",
     "@tanstack/react-query": "^5.101.2",
     "@tanstack/react-query-devtools": "^5.101.2",
     "@twinzy/shared": "*",
     "axios": "^1.18.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dayjs": "^1.11.21",
     "lucide-react": "^1.24.0",
     "next": "^16.2.10",
     "next-intl": "^4.13.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-hook-form": "^7.81.0",
-    "react-virtuoso": "^4.18.10",
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
@@ -48,7 +44,6 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "jsdom": "^29.1.1",
-    "msw": "^2.15.0",
     "postcss": "^8.5.16",
     "tailwindcss": "^4.3.2"
   }

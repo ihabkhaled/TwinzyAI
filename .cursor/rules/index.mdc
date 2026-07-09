@@ -14,3 +14,5 @@ Precedence: `CLAUDE.md` > `.cursor/rules` > `AGENTS.md` > `CODEX.md`/`cursor.md`
 Rule files here: 00-canonical-policy, 10-sdlc-and-artifacts, 30-devops-release-and-ops,
 40-nestjs-engineering-os, non-negotiables, frontend, backend, security, ai-safety,
 file-upload-security, testing, eslint, pitfalls.
+
+- Simple Code Ladder is permanent policy: rules/28-simple-readable-code.md, rules/29-reuse-before-creating.md, rules/30-refactor-discipline.md; ownership answers in context/declaration-ownership-map.md.

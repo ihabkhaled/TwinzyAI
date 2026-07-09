@@ -39,8 +39,3 @@ export interface AppHeaderProps {
 export interface HomeLinkProps {
   label: string;
 }
-
-/** Props for {@link VisuallyHidden}: content revealed only to assistive tech. */
-export interface VisuallyHiddenProps {
-  children: ReactNode;
-}

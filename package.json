@@ -83,6 +83,7 @@
     "@eslint/js": "^10.0.1",
     "@next/eslint-plugin-next": "^16.2.10",
     "@tanstack/eslint-plugin-query": "^5.101.2",
+    "@vitejs/plugin-react": "^6.0.3",
     "@vitest/coverage-v8": "^4.1.10",
     "@vitest/eslint-plugin": "^1.6.22",
     "concurrently": "^10.0.3",
@@ -107,12 +108,10 @@
     "madge": "^8.0.0",
     "npm-check-updates": "^22.2.9",
     "prettier": "^3.9.5",
+    "tsc7": "npm:typescript@^7.0.2",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.62.1",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.10",
-    "@vitejs/plugin-react": "^6.0.3",
-    "tsc7": "npm:typescript@^7.0.2"
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "fastify": "^5.10.0"

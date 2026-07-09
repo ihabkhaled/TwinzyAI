@@ -4,8 +4,14 @@
   "ignoreDependencies": [
     "@nestjs/schematics",
     "@typescript-eslint/parser",
-    "@vitejs/plugin-react",
-    "unplugin-swc"
+    "unplugin-swc",
+    "@fastify/cors",
+    "@fastify/static",
+    "pino-pretty",
+    "jsdom",
+    "tailwindcss",
+    "fastify",
+    "tsc7"
   ],
   "ignoreUnresolved": ["src/tests/setup.ts"],
   "rules": {
@@ -30,7 +36,8 @@
         "src/main.ts",
         "src/**/*.test.ts",
         "src/**/*.integration.test.ts",
-        "src/tests/**/*.ts"
+        "src/tests/**/*.ts",
+        "src/benchmark/benchmark.main.ts"
       ],
       "project": ["src/**/*.ts"]
     },
@@ -39,7 +46,8 @@
         "e2e/**/*.spec.ts",
         "e2e/helpers.ts",
         "src/**/*.test.{ts,tsx}",
-        "src/tests/**/*.{ts,tsx}"
+        "src/tests/**/*.{ts,tsx}",
+        "src/packages/i18n/request.ts"
       ],
       "project": ["src/**/*.{ts,tsx}"]
     },

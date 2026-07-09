@@ -36,7 +36,6 @@ export const TEST_IDS = {
   shareNotFound: 'share-not-found',
   createOwnResult: 'create-own-result',
   resultCard: 'result-card',
-  traitList: 'trait-list',
   traitItem: 'trait-item',
   shareButton: 'share-button',
   retryButton: 'retry-button',

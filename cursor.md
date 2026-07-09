@@ -4,6 +4,11 @@
 work. The active Cursor ruleset lives in `.cursor/rules/*.mdc`; this file is only a
 human-readable pointer. If anything diverges, `CLAUDE.md` wins.
 
+## Simple Code Ladder (permanent policy — rules/28–30)
+
+Before writing code: need it → reuse existing owner → native/platform → existing wrapper/dependency → small helper → direct readable code → new abstraction only when justified. Be lazy about code volume, never about reading, validation, security, privacy, AI safety, file upload safety, tests, docs, observability, accessibility, i18n, or architecture. No inline reusable declarations in layer files; reuse before creating; no clever code. Never bypass hooks or gates. See [rules/28-simple-readable-code.md](rules/28-simple-readable-code.md) and [context/declaration-ownership-map.md](context/declaration-ownership-map.md).
+
+
 Precedence: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` > `CODEX.md` / `cursor.md` >
 `.cursorrules`. When two rules overlap, the stricter one applies.
 

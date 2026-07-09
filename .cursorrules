@@ -26,3 +26,4 @@ Compact non-negotiables:
 - Tests first; coverage on touched modules 95/90/95/95 (stmts/branches/funcs/lines).
 - Gates green before done: lint (0/0), typecheck, test:unit, test:coverage, build, security:scan.
 - Conventional commits via Husky hooks; never --no-verify; do not commit/push unless asked.
+Simple Code Ladder (rules/28-30): reuse -> native -> wrapper -> helper -> direct code -> justified abstraction. No inline declarations, no clever code, never weaken privacy/AI safety/upload safety/tests/gates.
