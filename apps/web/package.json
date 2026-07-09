@@ -23,7 +23,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.21",
-    "lucide-react": "^1.23.0",
+    "lucide-react": "^1.24.0",
     "next": "^16.2.10",
     "next-intl": "^4.13.1",
     "react": "^19.2.7",
@@ -37,20 +37,19 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.10.2",
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4.3.2",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.6.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.0",
-    "@types/node": "^24.0.0",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "jsdom": "^26.1.0",
-    "msw": "^2.14.6",
-    "postcss": "^8.5.0",
+    "msw": "^2.15.0",
+    "postcss": "^8.5.16",
     "tailwindcss": "^4.3.2"
   }
 }
