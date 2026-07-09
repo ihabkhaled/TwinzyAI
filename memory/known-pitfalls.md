@@ -469,6 +469,21 @@
   labels key per field, prompts/schemas are built from it). Never enumerate trait field
   names by hand anywhere.
 
+### K4. Typed eslint against a stale `packages/shared/dist` floods `no-unsafe-*` false positives
+
+- **Symptom:** lint results differ wildly by machine (0 errors on one, dozens locally,
+  hundreds on CI) and every error is a `@typescript-eslint/no-unsafe-*` on "a type that
+  cannot be resolved" — always on values imported from `@twinzy/shared`.
+- **Cause:** `@twinzy/shared` resolves through its BUILT types (package `exports` →
+  `dist/index.d.ts`). Typed eslint therefore lints against whatever `dist/` happens to
+  exist: stale after a `packages/shared/src` change → the new exports are error-typed;
+  absent (fresh CI checkout) → EVERY shared import is error-typed. The errors are noise —
+  the code is fine; the dist is old.
+- **Fix:** `npm run lint` / `lint:fix` build shared first (same as `typecheck` and `test`),
+  and the pre-commit hook builds shared before lint-staged. Never invoke raw
+  `npx eslint <file>` after touching `packages/shared/src` without `npm run build:shared`
+  first — and never "fix" these errors with casts; rebuild the dist instead.
+
 **Related:** [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) ·
 [backend-stack.md](./backend-stack.md) · [testing-strategy.md](./testing-strategy.md) ·
 [ai-context-map.md](./ai-context-map.md)
