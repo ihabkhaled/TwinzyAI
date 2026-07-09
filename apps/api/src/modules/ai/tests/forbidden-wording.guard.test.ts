@@ -23,11 +23,17 @@ describe('forbidden-wording guard', () => {
 
   describe('findForbiddenPhrase', () => {
     it('returns the first offending phrase', () => {
-      expect(findForbiddenPhrase('You are the same face as someone')).toBe('same face');
+      expect(findForbiddenPhrase('You are the person we matched')).toBe('you are ');
     });
 
     it('returns undefined when text is safe', () => {
       expect(findForbiddenPhrase('Public style impression only')).toBeUndefined();
+    });
+
+    it('allows graded resemblance language post-pivot', () => {
+      expect(
+        findForbiddenPhrase('Closely resembles this actor — a strong visual lookalike match'),
+      ).toBeUndefined();
     });
   });
 });

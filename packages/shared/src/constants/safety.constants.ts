@@ -2,6 +2,14 @@
  * Phrases that must never appear in any AI output or user-facing result.
  * The backend rejects/sanitizes responses containing them; frontend tests
  * assert they never render. Single source of truth for both sides.
+ *
+ * Post-pivot semantics (visual-similarity mode, owner-approved): graded
+ * resemblance language ("closely resembles", "strong visual match", lookalike
+ * phrasing) is ALLOWED — it is the product. What stays banned:
+ * - identity ASSERTIONS about who the user is ("you are …", "we identified"),
+ * - clinical biometric-identification phrasing ("face recognition",
+ *   "identity match", "biometric") — the product voice is playful resemblance,
+ *   never surveillance vocabulary.
  */
 export const FORBIDDEN_RESULT_PHRASES = [
   'face recognition',
@@ -9,9 +17,6 @@ export const FORBIDDEN_RESULT_PHRASES = [
   'identity match',
   'identity matching',
   'biometric',
-  'exact lookalike',
-  'looks exactly like',
-  'same face',
   'you are ',
   'the person is ',
   'recognized you',

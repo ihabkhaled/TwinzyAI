@@ -26,6 +26,13 @@ import { LanguageCodeSchema } from './language.schema';
 /** Short localized trait-reference text used across candidate detail arrays. */
 const traitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH);
 
+/**
+ * Candidate self-report (visual-similarity mode): graded resemblance language is
+ * the product and is allowed. Still banned in output text: asserting who the USER
+ * is (`containsIdentityClaim`), claiming an EXACT/identical match rather than
+ * graded resemblance (`containsExactLookalikeClaim`), and clinical
+ * biometric-identification phrasing. Voice guards, not mechanism bans.
+ */
 export const CandidateSafetyCheckSchema = z.object({
   containsFaceRecognitionClaim: z.literal(false),
   containsBiometricClaim: z.literal(false),

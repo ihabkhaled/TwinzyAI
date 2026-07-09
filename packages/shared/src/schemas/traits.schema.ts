@@ -63,6 +63,14 @@ export const TraitsSchema = z.strictObject({
   uncertaintyNotes: UncertaintyNotesSchema,
 });
 
+/**
+ * Extraction self-report (visual-similarity mode): extraction DESCRIBES the
+ * person only — it must not assert who they are, must not name candidates itself
+ * (that is the generator's job), must not make sensitive inferences, and must not
+ * phrase output in clinical biometric-identification vocabulary. Downstream
+ * visual-similarity matching is the product; these booleans guard the OUTPUT
+ * VOICE, not the mechanism.
+ */
 export const TraitSafetyCheckSchema = z.strictObject({
   containsIdentityClaim: z.literal(false),
   containsCelebrityComparison: z.literal(false),

@@ -156,7 +156,7 @@ describe('TraitExtractionService', () => {
     };
     const overallFace = payload.traits['overallFace'];
     if (overallFace !== undefined) {
-      overallFace['overallFaceShape'] = 'looks exactly like a famous actor';
+      overallFace['overallFaceShape'] = 'we identified this famous actor';
     }
     adapter.queueImageResponse(JSON.stringify(payload));
 

@@ -105,14 +105,23 @@ Before NestJS implementation: read this `claude.md`, then [`context/architecture
 
 These are product-defining and can never be relaxed by any request, ticket, or prompt:
 
+> **Policy revision (owner-approved, 2026-07-09, recorded in
+> `docs/features/visual-similarity-pivot/`):** the former "text-only after
+> extraction / no facial-similarity" constraints were explicitly relaxed by the
+> product owner in writing. Twinzy is now an honest, consent-first
+> **visual-similarity lookalike game**: the user's photo may be provided to all
+> three pipeline steps (extraction, candidate generation, judging) to assess
+> resemblance directly. The constraints below are the CURRENT non-negotiables.
+
 1. **The game is free.** Never add payment, subscription, or monetization logic.
-2. **No face recognition, no identity matching, no biometric anything.** Twinzy suggests playful public style/vibe matches from **written traits only** — never exact-lookalike, identity, or facial-similarity claims.
-3. **No image persistence.** Uploaded images live in memory only, are wiped in `finally`, and are never logged, stored, embedded, or returned.
-4. **Only the trait-extraction prompt sees the image.** Candidate and judge prompts receive text only (traits JSON / candidates JSON).
-5. **`GEMINI_MODEL` comes from `.env`** — never hardcode a model name.
-6. **Every AI response is Zod-validated and safety-filtered** before use; forbidden wording is rejected or sanitized (see `packages/shared/src/constants/safety.constants.ts`).
-7. **No TypeScript `enum` keyword** anywhere in this repository — `as const` objects + derived types (stricter than the generic engineering OS; the stricter rule wins).
-8. **File uploads are backend-verified**: consent flag, single file, size/MIME/extension/consistency/magic-bytes/decode checks, optional ClamAV failing closed in production (rules/15).
+2. **Consent-first.** The photo is processed only after the explicit consent checkbox, whose copy accurately describes visual-similarity processing. User-facing copy must never claim the app does something its pipeline contradicts (and vice versa).
+3. **No image persistence.** Uploaded images live in request memory only, are wiped in `finally` on success/failure/abort, and are never logged, stored, embedded, cached, or returned. Registries, queues, and stores hold ids only — never image bytes.
+4. **No identification of the user.** The app never determines, guesses, or asserts WHO the user is — only which public figures they visually resemble. No identity assertions in any output.
+5. **No sensitive inference.** No ethnicity/religion/health/sexuality/personality/attractiveness/income judgments, ever. Visible descriptors (skin tone, hair texture) are fine; claims about who or what the person IS are not.
+6. **`GEMINI_MODEL` comes from `.env`** — never hardcode a model name; every operational cap is env-driven.
+7. **Every AI response is Zod-validated and safety-filtered** before use; forbidden wording (identity assertions, sensitive topics, clinical biometric phrasing) is rejected or sanitized (see `packages/shared/src/constants/safety.constants.ts`).
+8. **No TypeScript `enum` keyword** anywhere in this repository — `as const` objects + derived types (stricter than the generic engineering OS; the stricter rule wins).
+9. **File uploads are backend-verified**: consent flag, single file, size/MIME/extension/consistency/magic-bytes/decode checks, optional ClamAV failing closed in production (rules/15).
 
 ## Standing Instruction To Claude Or Any AI Coding Agent
 
