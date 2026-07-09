@@ -18,9 +18,9 @@ import {
   MIN_RESULT_COUNT,
   MIN_SCORE,
 } from '../constants/trait.constants';
-import { CONFIDENCE_LEVEL_VALUES } from '../enums/confidence.enum';
-import { PUBLIC_CATEGORY_VALUES } from '../enums/public-category.enum';
-import { VERDICT_VALUES } from '../enums/verdict.enum';
+import { CONFIDENCE_LEVEL_VALUES, ConfidenceLevel } from '../enums/confidence.enum';
+import { PUBLIC_CATEGORY_VALUES, PublicCategory } from '../enums/public-category.enum';
+import { Verdict, VERDICT_VALUES } from '../enums/verdict.enum';
 
 import { LanguageCodeSchema } from './language.schema';
 
@@ -31,7 +31,7 @@ const traitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LE
 const normalizeRank = (value: unknown): unknown =>
   typeof value === 'number' && Number.isInteger(value) ? value : MIN_RESULT_COUNT;
 
-export const JudgeSafetyCheckSchema = z.strictObject({
+export const JudgeSafetyCheckSchema = z.object({
   containsFaceRecognitionClaim: z.literal(false),
   containsBiometricClaim: z.literal(false),
   containsIdentityClaim: z.literal(false),
@@ -44,14 +44,14 @@ export const JudgeSafetyCheckSchema = z.strictObject({
  * One strictly-judged final candidate: rescored, verdict-banded, localized
  * reasoning, and the judge's explicit display decision.
  */
-export const JudgedResultSchema = z.strictObject({
+export const JudgedResultSchema = z.object({
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   rank: z.preprocess(normalizeRank, z.number().int().min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT)),
   finalStyleVibeFitScore: z.number().int().min(MIN_SCORE).max(MAX_SCORE),
-  confidenceLevel: z.enum(CONFIDENCE_LEVEL_VALUES),
-  verdict: z.enum(VERDICT_VALUES),
+  confidenceLevel: z.enum(CONFIDENCE_LEVEL_VALUES).catch(ConfidenceLevel.Low),
+  verdict: z.enum(VERDICT_VALUES).catch(Verdict.Weak),
   countryOrRegion: z.string().trim().min(1).max(MAX_NAME_LENGTH),
-  publicCategory: z.enum(PUBLIC_CATEGORY_VALUES),
+  publicCategory: z.enum(PUBLIC_CATEGORY_VALUES).catch(PublicCategory.Other),
   finalReason: z.string().trim().min(1).max(MAX_REASON_LENGTH),
   topMatchingTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   secondaryMatchingTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
@@ -63,35 +63,38 @@ export const JudgedResultSchema = z.strictObject({
 });
 
 /** A candidate the judge refused, with its localized removal reason. */
-export const RemovedCandidateSchema = z.strictObject({
+export const RemovedCandidateSchema = z.object({
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   reasonRemoved: z.string().trim().min(1).max(MAX_REMOVED_REASON_LENGTH),
 });
 
-/** Full Prompt 3 response contract (backend still re-enforces every bound). */
+/**
+ * Full Prompt 3 response contract. The backend is authoritative for the display
+ * count (it slices results to the requested count) and the disclaimer (it
+ * overrides with the localized canonical text), so those model self-reports are
+ * tolerated rather than made hard failures — a miscount or omitted disclaimer
+ * must not sink the whole judge and burn a model-chain fallback. Empty results
+ * are allowed, but only alongside a fallback message.
+ */
 export const CandidateJudgeResponseSchema = z
-  .strictObject({
+  .object({
     promptVersion: z.literal(GAME_PROMPT_VERSION),
     languageCode: LanguageCodeSchema,
-    resultCount: z.number().int().min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT),
-    results: z.array(JudgedResultSchema).min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT),
+    resultCount: z
+      .number()
+      .int()
+      .min(MIN_RESULT_COUNT)
+      .max(MAX_RESULT_COUNT)
+      .catch(MIN_RESULT_COUNT),
+    results: z.array(JudgedResultSchema).max(MAX_RESULT_COUNT),
     removedCandidates: z.array(RemovedCandidateSchema).max(MAX_CANDIDATE_POOL),
     fallbackMessage: z.string().max(MAX_FALLBACK_MESSAGE_LENGTH),
-    disclaimer: z.string().trim().min(1).max(MAX_DISCLAIMER_LENGTH),
+    disclaimer: z.string().max(MAX_DISCLAIMER_LENGTH).catch(''),
   })
-  .refine((response) => response.results.length <= response.resultCount, {
-    message: 'results must not exceed the requested resultCount',
-    path: ['results'],
-  })
-  .refine(
-    (response) =>
-      response.results.length > 0 ||
-      (response.fallbackMessage.length > 0 && response.results.length === 0),
-    {
-      message: 'fallbackMessage is required when results are empty',
-      path: ['fallbackMessage'],
-    },
-  );
+  .refine((response) => response.results.length > 0 || response.fallbackMessage.length > 0, {
+    message: 'fallbackMessage is required when results are empty',
+    path: ['fallbackMessage'],
+  });
 
 export type JudgedResult = z.infer<typeof JudgedResultSchema>;
 export type RemovedCandidate = z.infer<typeof RemovedCandidateSchema>;

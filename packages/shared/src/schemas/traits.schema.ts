@@ -27,19 +27,29 @@ import { LanguageCodeSchema } from './language.schema';
 /** One localized trait observation (or the localized equivalent of "unclear"). */
 export const traitValueSchema = z.string().trim().min(1).max(MAX_TRAIT_TEXT_LENGTH);
 
-/** Build the strict field shape for one trait category from its field list. */
-const buildCategoryShape = (fields: readonly string[]): Record<string, typeof traitValueSchema> =>
-  Object.fromEntries(fields.map((field) => [field, traitValueSchema]));
+/**
+ * A single trait field as the EXTRACTION model reports it. Tolerant by design:
+ * a model that leaves an unobservable feature null / empty / missing (across
+ * 221 fields it always leaves a few) yields `undefined` for that field instead
+ * of failing the whole extraction and burning a model-chain fallback. Populated
+ * fields are still bounded, non-empty, localized strings; downstream matching
+ * uses the aggregates plus whatever fields are present.
+ */
+const optionalTraitValue = traitValueSchema.optional().catch('');
+
+/** Build the field shape for one trait category from its field list. */
+const buildCategoryShape = (fields: readonly string[]): Record<string, typeof optionalTraitValue> =>
+  Object.fromEntries(fields.map((field) => [field, optionalTraitValue]));
 
 /** Strict per-category schemas derived from the single taxonomy source. */
 const categoryShape = Object.fromEntries(
   Object.entries(TRAIT_CATEGORY_FIELDS).map(([category, fields]) => [
     category,
-    z.strictObject(buildCategoryShape(fields)),
+    z.object(buildCategoryShape(fields)),
   ]),
 ) as Record<
   keyof typeof TRAIT_CATEGORY_FIELDS,
-  z.ZodObject<Record<string, typeof traitValueSchema>>
+  z.ZodObject<Record<string, typeof optionalTraitValue>>
 >;
 
 /** Structured honesty block: what the model could NOT observe, and why. */
@@ -50,15 +60,17 @@ const uncertaintyNotesShape = Object.fromEntries(
   ]),
 ) as Record<(typeof UNCERTAINTY_NOTE_FIELDS)[number], z.ZodArray<typeof traitValueSchema>>;
 
-export const UncertaintyNotesSchema = z.strictObject(uncertaintyNotesShape);
+export const UncertaintyNotesSchema = z.object(uncertaintyNotesShape);
 
 /**
- * The visual-similarity-v4 nested trait payload: all 16 categories (221
- * named fields, every value localized text) plus the uncertainty-notes block.
- * `strictObject` end-to-end: a drifting model response cannot smuggle new
- * fields in, and a missing category/field fails validation outright.
+ * The visual-similarity-v4 nested trait payload: all 16 categories (221 named
+ * fields, every populated value localized text) plus the uncertainty-notes
+ * block. Each category is required, but individual fields are tolerant (see
+ * `optionalTraitValue`): a model that omits/nulls a few of 221 fields yields a
+ * partial category rather than a failed extraction. Unknown extra fields are
+ * stripped (not smuggled through) — the safety filter still scans every value.
  */
-export const TraitsSchema = z.strictObject({
+export const TraitsSchema = z.object({
   ...categoryShape,
   uncertaintyNotes: UncertaintyNotesSchema,
 });
@@ -71,7 +83,7 @@ export const TraitsSchema = z.strictObject({
  * visual-similarity matching is the product; these booleans guard the OUTPUT
  * VOICE, not the mechanism.
  */
-export const TraitSafetyCheckSchema = z.strictObject({
+export const TraitSafetyCheckSchema = z.object({
   containsIdentityClaim: z.literal(false),
   containsCelebrityComparison: z.literal(false),
   containsSensitiveInference: z.literal(false),
@@ -80,17 +92,17 @@ export const TraitSafetyCheckSchema = z.strictObject({
 });
 
 const tokenSchema = z.string().trim().min(1).max(MAX_TRAIT_TOKEN_LENGTH);
-const weightedEvidenceSchema = z.strictObject({
+const weightedEvidenceSchema = z.object({
   token: tokenSchema,
   weight: z.number().int().min(1).max(MAX_TRAIT_EVIDENCE_WEIGHT),
 });
 
-const imageQualityCapSchema = z.strictObject({
-  quality: z.enum(['clear', 'moderate', 'low', 'very-low']),
+const imageQualityCapSchema = z.object({
+  quality: z.enum(['clear', 'moderate', 'low', 'very-low']).catch('moderate'),
   impact: z.string().trim().min(1).max(MAX_IMAGE_QUALITY_IMPACT_LENGTH),
 });
 
-const candidateSearchHintSchema = z.strictObject({
+const candidateSearchHintSchema = z.object({
   archetype: z.string().trim().min(1).max(MAX_ARCHETYPE_LENGTH),
   why: z.string().trim().min(1).max(MAX_SEARCH_HINT_REASON_LENGTH),
 });
@@ -116,10 +128,14 @@ export const countPopulatedTraitFields = (traits: Record<string, unknown>): numb
  * template/model pairing fails fast instead of silently serving old data.
  */
 export const TraitExtractionResponseSchema = z
-  .strictObject({
+  .object({
     promptVersion: z.literal(GAME_PROMPT_VERSION),
     languageCode: LanguageCodeSchema,
-    traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT),
+    // Advisory only — the model's self-reported count is tolerated (models
+    // over/under-count) and then overwritten by the authoritative transform
+    // below. `.catch` keeps an out-of-range or missing value from failing the
+    // whole extraction.
+    traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT).catch(0),
     traits: TraitsSchema,
     compactTraitSummary: z.array(traitValueSchema).min(1).max(MAX_COMPACT_TRAIT_SUMMARY),
     highSignalTraitTokens: z.array(tokenSchema).max(MAX_HIGH_SIGNAL_TOKENS),
@@ -131,10 +147,15 @@ export const TraitExtractionResponseSchema = z
     candidateSearchHints: z.array(candidateSearchHintSchema).max(MAX_CANDIDATE_SEARCH_HINTS),
     safetyCheck: TraitSafetyCheckSchema,
   })
-  .refine((response) => response.traitCount === countPopulatedTraitFields(response.traits), {
-    message: 'traitCount must equal the number of populated trait fields',
-    path: ['traitCount'],
-  });
+  // traitCount is a DERIVED value: overwrite the model's self-report with the
+  // authoritative count rather than requiring the model to count 221 fields
+  // exactly (which it cannot do reliably — a mismatch used to fail the whole
+  // extraction and burn a model-chain fallback). The bounded field above still
+  // guards against absurd values before we recompute.
+  .transform((response) => ({
+    ...response,
+    traitCount: countPopulatedTraitFields(response.traits),
+  }));
 
 export type Traits = z.infer<typeof TraitsSchema>;
 export type UncertaintyNotes = z.infer<typeof UncertaintyNotesSchema>;

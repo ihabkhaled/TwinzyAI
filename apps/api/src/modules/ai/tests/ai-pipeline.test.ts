@@ -108,7 +108,7 @@ describe('TraitExtractionService', () => {
     await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseInvalid);
   });
 
-  it('rejects a response missing a category field', async () => {
+  it('tolerates a missing category field by dropping it instead of rejecting', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     const payload = JSON.parse(buildTraitExtractionJson()) as {
       traits: Record<string, Record<string, string>>;
@@ -116,10 +116,11 @@ describe('TraitExtractionService', () => {
     delete payload.traits['hair']?.['hairColor'];
     adapter.queueImageResponse(JSON.stringify(payload));
 
-    await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseInvalid);
+    const result = await traitExtraction.extractTraits(image, 'en');
+    expect((result.traits.hair as Record<string, unknown>)['hairColor']).toBeUndefined();
   });
 
-  it('rejects a response with an extra smuggled field', async () => {
+  it('strips an extra smuggled field instead of rejecting the whole extraction', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     const payload = JSON.parse(buildTraitExtractionJson()) as {
       traits: Record<string, Record<string, string>>;
@@ -130,7 +131,8 @@ describe('TraitExtractionService', () => {
     }
     adapter.queueImageResponse(JSON.stringify(payload));
 
-    await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseInvalid);
+    const result = await traitExtraction.extractTraits(image, 'en');
+    expect((result.traits.hair as Record<string, unknown>)['smuggledField']).toBeUndefined();
   });
 
   it('rejects a response localized to the wrong language', async () => {

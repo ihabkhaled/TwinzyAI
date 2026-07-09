@@ -124,11 +124,14 @@ export class GeminiAdapter implements AiProviderAdapter {
       signal?.throwIfAborted();
       try {
         const text = await call(model);
-        if (validate !== undefined && !validate(text)) {
-          this.logger.warn(
-            `Model ${model} returned content that failed validation; trying next model`,
-          );
-          continue;
+        if (validate !== undefined) {
+          const validation = validate(text);
+          if (!validation.ok) {
+            this.logger.warn(
+              `Model ${model} returned content that failed validation (${validation.reason ?? 'unknown'}); trying next model`,
+            );
+            continue;
+          }
         }
         return text;
       } catch (error: unknown) {

@@ -71,18 +71,20 @@ describe('buildSchemaValidator', () => {
   const isValid = buildSchemaValidator(TestSchema);
 
   it('accepts text that parses and satisfies the schema', () => {
-    expect(isValid('{"value":"hi","count":2}')).toBe(true);
+    expect(isValid('{"value":"hi","count":2}')).toEqual({ ok: true });
   });
 
   it('accepts schema-valid text even inside markdown fences', () => {
-    expect(isValid('```json\n{"value":"hi","count":2}\n```')).toBe(true);
+    expect(isValid('```json\n{"value":"hi","count":2}\n```')).toEqual({ ok: true });
   });
 
-  it('rejects valid JSON that does not satisfy the schema', () => {
-    expect(isValid('{"value":"hi"}')).toBe(false);
+  it('rejects valid JSON that does not satisfy the schema, reporting the field path', () => {
+    const result = isValid('{"value":"hi"}');
+    expect(result.ok).toBe(false);
+    expect(result.reason).toContain('count');
   });
 
-  it('rejects text that is not JSON at all', () => {
-    expect(isValid('definitely not json')).toBe(false);
+  it('rejects text that is not JSON at all with a JSON reason', () => {
+    expect(isValid('definitely not json')).toEqual({ ok: false, reason: 'not valid JSON' });
   });
 });

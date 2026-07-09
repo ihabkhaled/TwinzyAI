@@ -17,9 +17,9 @@ import {
   MIN_RESULT_COUNT,
   MIN_SCORE,
 } from '../constants/trait.constants';
-import { CONFIDENCE_LEVEL_VALUES } from '../enums/confidence.enum';
-import { POPULARITY_LEVEL_VALUES } from '../enums/popularity.enum';
-import { PUBLIC_CATEGORY_VALUES } from '../enums/public-category.enum';
+import { CONFIDENCE_LEVEL_VALUES, ConfidenceLevel } from '../enums/confidence.enum';
+import { POPULARITY_LEVEL_VALUES, PopularityLevel } from '../enums/popularity.enum';
+import { PUBLIC_CATEGORY_VALUES, PublicCategory } from '../enums/public-category.enum';
 
 import { LanguageCodeSchema } from './language.schema';
 
@@ -45,13 +45,13 @@ export const CandidateSafetyCheckSchema = z.object({
  * spelling name plus localized, bounded reasoning detail. Every free-text
  * field is additionally safety-filtered server-side.
  */
-export const CandidateSchema = z.strictObject({
+export const CandidateSchema = z.object({
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
-  publicCategory: z.enum(PUBLIC_CATEGORY_VALUES),
+  publicCategory: z.enum(PUBLIC_CATEGORY_VALUES).catch(PublicCategory.Other),
   countryOrRegion: z.string().trim().min(1).max(MAX_NAME_LENGTH),
-  globalPopularityLevel: z.enum(POPULARITY_LEVEL_VALUES),
+  globalPopularityLevel: z.enum(POPULARITY_LEVEL_VALUES).catch(PopularityLevel.Medium),
   styleVibeFitScore: z.number().int().min(MIN_SCORE).max(MAX_SCORE),
-  confidenceLevel: z.enum(CONFIDENCE_LEVEL_VALUES),
+  confidenceLevel: z.enum(CONFIDENCE_LEVEL_VALUES).catch(ConfidenceLevel.Low),
   reason: z.string().trim().min(1).max(MAX_REASON_LENGTH),
   strongAlignedTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   mediumAlignedTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
@@ -68,22 +68,26 @@ export const CandidateSchema = z.strictObject({
  * larger than the requested result count so the judge has headroom to filter.
  */
 export const CandidateGenerationResponseSchema = z
-  .strictObject({
+  .object({
     promptVersion: z.literal(GAME_PROMPT_VERSION),
     languageCode: LanguageCodeSchema,
-    resultCount: z.number().int().min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT),
-    candidateCount: z.number().int().min(0).max(MAX_CANDIDATE_POOL),
+    // Advisory self-reports: neither is consumed downstream (only `candidates`
+    // is). Tolerate whatever the model echoes rather than failing the whole
+    // generation over a miscount, then derive candidateCount authoritatively.
+    resultCount: z
+      .number()
+      .int()
+      .min(MIN_RESULT_COUNT)
+      .max(MAX_RESULT_COUNT)
+      .catch(MIN_RESULT_COUNT),
+    candidateCount: z.number().int().min(0).max(MAX_CANDIDATE_POOL).catch(0),
     candidates: z.array(CandidateSchema).min(MIN_CANDIDATE_POOL).max(MAX_CANDIDATE_POOL),
     fallbackMessage: z.string().max(MAX_FALLBACK_MESSAGE_LENGTH),
   })
-  .refine((response) => response.candidateCount === response.candidates.length, {
-    message: 'candidateCount must equal the number of candidates',
-    path: ['candidateCount'],
-  })
-  .refine((response) => response.candidateCount >= response.resultCount, {
-    message: 'candidateCount must be at least resultCount',
-    path: ['candidateCount'],
-  });
+  .transform((response) => ({
+    ...response,
+    candidateCount: response.candidates.length,
+  }));
 
 export type Candidate = z.infer<typeof CandidateSchema>;
 export type CandidateGenerationResponse = z.infer<typeof CandidateGenerationResponseSchema>;

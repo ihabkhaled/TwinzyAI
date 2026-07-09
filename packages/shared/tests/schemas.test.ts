@@ -81,14 +81,16 @@ describe('TraitExtractionResponseSchema', () => {
     expect(parsed.success).toBe(false);
   });
 
-  it('requires languageCode and traitCount', () => {
+  it('requires languageCode but derives traitCount when the model omits it', () => {
     const withoutLanguage = { ...buildExtraction() };
     delete withoutLanguage['languageCode'];
     expect(TraitExtractionResponseSchema.safeParse(withoutLanguage).success).toBe(false);
 
     const withoutCount = { ...buildExtraction() };
     delete withoutCount['traitCount'];
-    expect(TraitExtractionResponseSchema.safeParse(withoutCount).success).toBe(false);
+    const parsed = TraitExtractionResponseSchema.safeParse(withoutCount);
+    expect(parsed.success).toBe(true);
+    expect(parsed.success && parsed.data.traitCount).toBe(TOTAL_TRAIT_FIELDS);
   });
 
   it('rejects a response missing a whole category', () => {
@@ -99,23 +101,31 @@ describe('TraitExtractionResponseSchema', () => {
     );
   });
 
-  it('rejects a response missing a single category field', () => {
+  it('tolerates a missing single category field (drops it) instead of failing', () => {
     const traits = buildTraitsPayload();
     const hair = { ...(traits['hair'] as Record<string, unknown>) };
     delete hair['hairColor'];
+    const parsed = TraitExtractionResponseSchema.safeParse({
+      ...buildExtraction(),
+      traits: { ...traits, hair },
+    });
+    expect(parsed.success).toBe(true);
     expect(
-      TraitExtractionResponseSchema.safeParse({ ...buildExtraction(), traits: { ...traits, hair } })
-        .success,
-    ).toBe(false);
+      parsed.success && (parsed.data.traits.hair as Record<string, unknown>)['hairColor'],
+    ).toBeUndefined();
   });
 
-  it('rejects extra unknown fields inside a category', () => {
+  it('strips extra unknown fields inside a category instead of failing', () => {
     const traits = buildTraitsPayload();
     const hair = { ...(traits['hair'] as Record<string, unknown>), secretExtra: 'value' };
+    const parsed = TraitExtractionResponseSchema.safeParse({
+      ...buildExtraction(),
+      traits: { ...traits, hair },
+    });
+    expect(parsed.success).toBe(true);
     expect(
-      TraitExtractionResponseSchema.safeParse({ ...buildExtraction(), traits: { ...traits, hair } })
-        .success,
-    ).toBe(false);
+      parsed.success && (parsed.data.traits.hair as Record<string, unknown>)['secretExtra'],
+    ).toBeUndefined();
   });
 
   it('bounds the compact summary and uncertainty-note arrays', () => {
@@ -140,13 +150,18 @@ describe('TraitExtractionResponseSchema', () => {
     );
   });
 
-  it('rejects a too-long trait string', () => {
+  it('drops a too-long trait string instead of failing the whole extraction', () => {
     const traits = buildTraitsPayload();
     const hair = { ...(traits['hair'] as Record<string, unknown>), hairColor: 'x'.repeat(301) };
+    const parsed = TraitExtractionResponseSchema.safeParse({
+      ...buildExtraction(),
+      traits: { ...traits, hair },
+    });
+    expect(parsed.success).toBe(true);
+    // A too-long value is dropped to an empty (unobserved) field, not surfaced.
     expect(
-      TraitExtractionResponseSchema.safeParse({ ...buildExtraction(), traits: { ...traits, hair } })
-        .success,
-    ).toBe(false);
+      parsed.success && (parsed.data.traits.hair as Record<string, unknown>)['hairColor'],
+    ).toBeFalsy();
   });
 
   it('rejects a response where the model flags an identity claim or comparison', () => {
@@ -192,12 +207,14 @@ describe('CandidateGenerationResponseSchema', () => {
     ).toBe(true);
   });
 
-  it('rejects an empty candidate list, fewer candidates than resultCount, and more than 25 candidates', () => {
+  it('rejects an empty list and >25 candidates, but tolerates a pool smaller than resultCount', () => {
     expect(CandidateGenerationResponseSchema.safeParse(buildGeneration([])).success).toBe(false);
+    // A pool smaller than the requested count is fine — the judge just has less
+    // to work with; the old "pool must be >= resultCount" rule burned fallbacks.
     expect(
       CandidateGenerationResponseSchema.safeParse(buildGeneration([buildCandidatePayload()], 5))
         .success,
-    ).toBe(false);
+    ).toBe(true);
     expect(
       CandidateGenerationResponseSchema.safeParse(
         buildGeneration(Array.from({ length: 26 }, () => buildCandidatePayload())),
@@ -205,13 +222,15 @@ describe('CandidateGenerationResponseSchema', () => {
     ).toBe(false);
   });
 
-  it('rejects a candidateCount that disagrees with the list length', () => {
+  it('derives candidateCount from the list length, ignoring the model self-report', () => {
     const payload = buildGeneration([buildCandidatePayload()]);
     payload['candidateCount'] = 3;
-    expect(CandidateGenerationResponseSchema.safeParse(payload).success).toBe(false);
+    const parsed = CandidateGenerationResponseSchema.safeParse(payload);
+    expect(parsed.success).toBe(true);
+    expect(parsed.success && parsed.data.candidateCount).toBe(1);
   });
 
-  it('rejects resultCount outside 1-10', () => {
+  it('normalizes a resultCount outside 1-10 instead of failing', () => {
     expect(
       CandidateGenerationResponseSchema.safeParse(
         buildGeneration(
@@ -219,7 +238,7 @@ describe('CandidateGenerationResponseSchema', () => {
           11,
         ),
       ).success,
-    ).toBe(false);
+    ).toBe(true);
     expect(
       CandidateGenerationResponseSchema.safeParse(
         buildGeneration(
@@ -227,7 +246,7 @@ describe('CandidateGenerationResponseSchema', () => {
           0,
         ),
       ).success,
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it('rejects an out-of-range score and a missing languageCode', () => {
@@ -269,12 +288,12 @@ describe('CandidateJudgeResponseSchema', () => {
     expect(CandidateJudgeResponseSchema.safeParse(buildJudgeResponse(eleven)).success).toBe(false);
   });
 
-  it('rejects results that exceed the requested resultCount', () => {
+  it('tolerates more results than the requested resultCount (the backend caps them)', () => {
     const payload = buildJudgeResponse(
       Array.from({ length: 5 }, (_unused, index) => buildJudgedResultPayload({ rank: index + 1 })),
       3,
     );
-    expect(CandidateJudgeResponseSchema.safeParse(payload).success).toBe(false);
+    expect(CandidateJudgeResponseSchema.safeParse(payload).success).toBe(true);
   });
 
   it('requires a non-empty fallbackMessage when results are empty', () => {
@@ -283,7 +302,7 @@ describe('CandidateJudgeResponseSchema', () => {
     expect(CandidateJudgeResponseSchema.safeParse(empty).success).toBe(false);
   });
 
-  it('bounds removedCandidates and requires the disclaimer', () => {
+  it('bounds removedCandidates but tolerates a missing disclaimer (backend overrides it)', () => {
     const tooManyRemoved = buildJudgeResponse([buildJudgedResultPayload()]);
     tooManyRemoved['removedCandidates'] = Array.from({ length: 26 }, (_unused, index) => ({
       name: `Removed ${index}`,
@@ -293,7 +312,9 @@ describe('CandidateJudgeResponseSchema', () => {
 
     const withoutDisclaimer = buildJudgeResponse([buildJudgedResultPayload()]);
     delete withoutDisclaimer['disclaimer'];
-    expect(CandidateJudgeResponseSchema.safeParse(withoutDisclaimer).success).toBe(false);
+    const parsed = CandidateJudgeResponseSchema.safeParse(withoutDisclaimer);
+    expect(parsed.success).toBe(true);
+    expect(parsed.success && parsed.data.disclaimer).toBe('');
   });
 
   it('tolerates a non-numeric or missing rank instead of dropping the whole batch', () => {
@@ -420,14 +441,16 @@ describe('ApiErrorResponseSchema', () => {
   });
 });
 
-describe('TraitExtractionResponseSchema traitCount refinement', () => {
+describe('TraitExtractionResponseSchema traitCount derivation', () => {
   it('accepts when traitCount matches the populated field count', () => {
     expect(TraitExtractionResponseSchema.safeParse(buildExtraction()).success).toBe(true);
   });
 
-  it('rejects when traitCount disagrees with the populated field count', () => {
+  it('overwrites a disagreeing traitCount with the authoritative populated count', () => {
     const extraction = buildExtraction();
     extraction['traitCount'] = TOTAL_TRAIT_FIELDS - 1;
-    expect(TraitExtractionResponseSchema.safeParse(extraction).success).toBe(false);
+    const parsed = TraitExtractionResponseSchema.safeParse(extraction);
+    expect(parsed.success).toBe(true);
+    expect(parsed.success && parsed.data.traitCount).toBe(TOTAL_TRAIT_FIELDS);
   });
 });

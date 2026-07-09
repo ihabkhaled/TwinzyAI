@@ -7,11 +7,21 @@ import type { AiImageInput } from './gemini.types';
 export type AiStreamChunkListener = (chunkText: string) => void;
 
 /**
- * Optional content validator. Returning false means the model's returned text
- * is not acceptable (e.g., invalid JSON or schema mismatch), so the adapter
- * should try the next model in the configured chain before giving up.
+ * Outcome of a content validation. `ok: false` carries a bounded, privacy-safe
+ * `reason` (field paths + issue codes only — never model values) so the adapter
+ * can log WHY a model's output was rejected instead of failing silently.
  */
-export type AiContentValidator = (text: string) => boolean;
+export interface AiValidationResult {
+  readonly ok: boolean;
+  readonly reason?: string;
+}
+
+/**
+ * Optional content validator. An `ok: false` result means the model's returned
+ * text is not acceptable (invalid JSON or schema mismatch), so the adapter tries
+ * the next model in the configured chain before giving up, logging the reason.
+ */
+export type AiContentValidator = (text: string) => AiValidationResult;
 
 /**
  * Port for AI providers. The separation of the image and text methods is the
