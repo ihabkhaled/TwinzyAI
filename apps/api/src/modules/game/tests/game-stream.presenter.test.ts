@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { FinalGameResult } from '@twinzy/shared';
 import { GameStreamEvent, GameStreamStage, StreamStatus } from '@twinzy/shared';
@@ -11,6 +11,8 @@ import { GameStreamPresenter } from '../api/game-stream.presenter';
 import type { AnalyzeGameStreamUseCase } from '../application/analyze-game-stream.use-case';
 import type { GameStreamEmitter } from '../lib/game-stream';
 import type { GameStreamRequest } from '../model/game-stream.types';
+
+const { useFakeTimers, useRealTimers } = vi;
 
 const TAB = '111e4567-e89b-42d3-a456-426614174000';
 const REQ = '222e4567-e89b-42d3-a456-426614174001';
@@ -138,6 +140,15 @@ const hasEvent = (frames: Record<string, unknown>[], event: string): boolean =>
   frames.some((frame) => frame['event'] === event);
 
 describe('GameStreamPresenter', () => {
+  beforeEach(() => {
+    useFakeTimers({
+      toFake: ['setTimeout', 'setInterval', 'clearTimeout', 'clearInterval', 'Date'],
+    });
+  });
+
+  afterEach(() => {
+    useRealTimers();
+  });
   it('stamps the correlation envelope + lifecycle status on every frame and cleans up', async () => {
     const { presenter, limiter, registry } = buildHarness(emitStageAndResult);
     const reply = new FakeReply();
@@ -234,7 +245,9 @@ describe('GameStreamPresenter', () => {
     const { presenter } = buildHarness(emitAcceptedThenAwaitAbort, { analysisTimeoutMs: 20 });
     const reply = new FakeReply();
 
-    await presenter.stream(buildInput(reply));
+    const pending = presenter.stream(buildInput(reply));
+    await vi.advanceTimersByTimeAsync(20);
+    await pending;
 
     const error = parseFrames(reply.raw).find((f) => f['event'] === GameStreamEvent.Error);
     expect(error?.['errorCode']).toBe('AI_TIMEOUT');
