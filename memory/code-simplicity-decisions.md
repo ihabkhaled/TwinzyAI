@@ -1,0 +1,10 @@
+# Code Simplicity Decisions
+
+Rules: [/rules/28](../rules/28-simple-readable-code.md) · [/rules/29](../rules/29-reuse-before-creating.md) · [/rules/30](../rules/30-refactor-discipline.md). Recorded 2026-07-10 as **permanent TwinzyAI policy**.
+
+- **Simple readable code is permanent policy.** Boring beats clever; the target reader is a mid-level hire (or an AI agent) reading the file once, under pressure. The Simple Code Ladder is a non-negotiable pre-flight step (rule 00 §52–53).
+- **Minimal code means minimum SAFE code.** No cleanup ever removes privacy, AI safety, upload validation, error handling, redaction, a11y, i18n, tests, or gates.
+- **Declaration ownership is absolute**: constants → `.constants.ts`, types → `.types.ts`, as-const enum maps → `.enum(s).ts`, schemas → schema owners, DTOs → `api/dto/`, query keys → the frontend model owner, helpers → `lib//helpers/`. No parallel duplicate owners; extend-before-create; the answer sheet is [context/declaration-ownership-map.md](../context/declaration-ownership-map.md). `.interfaces.ts` was deliberately NOT adopted — this repo's convention keeps interfaces with types in `.types.ts`; adding a second owner would violate the no-parallel-owners rule itself.
+- **No speculative abstraction**: extract on the SECOND real use; abstractions require a current concrete justification (boundary, provider isolation, testability, safety).
+- **Agent mirrors are compact bootstraps** (CLAUDE/AGENTS/CODEX/cursor + KIMI/GEMINI/GLM/QWEN/DEEPSEEK/OPENAI/ANTHROPIC/MISTRAL): identical content, canonical links, no rule bodies, updated in the same stream as any permanent rule change. Rules stay canonical; skills are procedures only.
+- **Refactors are ownership-driven** (rule 30): tests first when behavior changes, one concern per slice, safety-critical surfaces follow [skills/cleanup-without-weakening-safety.md](../skills/cleanup-without-weakening-safety.md), gates green per slice.

@@ -27,6 +27,9 @@
 | 25 | [25-configuration-and-environment.md](./25-configuration-and-environment.md) | Zod env fail-fast; AppConfigService the only surface; .env.example discipline |
 | 26 | [26-error-handling-and-exceptions.md](./26-error-handling-and-exceptions.md) | AppError hierarchy (incl. 413), messageKeys, one filter, compatible envelope |
 | 27 | [27-async-events-and-jobs.md](./27-async-events-and-jobs.md) | No brokers/jobs today; terminal AI-call outcomes; the rules if events arrive |
+| 28 | [28-simple-readable-code.md](./28-simple-readable-code.md) | The Simple Code Ladder; boring > clever; token-burning code banned; review lens |
+| 29 | [29-reuse-before-creating.md](./29-reuse-before-creating.md) | YAGNI + search-then-extend for ALL code; extract-on-second-use; delete dead code |
+| 30 | [30-refactor-discipline.md](./30-refactor-discipline.md) | Ownership-driven refactors; never-weaken list; agent-mirror alignment |
 
 ## Frontend
 

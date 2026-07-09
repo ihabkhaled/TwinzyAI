@@ -14,6 +14,6 @@ which knowledge file to open for a given task.
 For the domain: [product-context.md](./product-context.md) (what Twinzy is) and
 [ai-context.md](./ai-context.md) (the three-step AI pipeline and its safety boundaries).
 
-Also here: [reference-patterns.md](./reference-patterns.md) (copy-ready code per layer) and
+Also here: [declaration-ownership-map.md](./declaration-ownership-map.md) (the single "where does X live" answer sheet), [reference-patterns.md](./reference-patterns.md) (copy-ready code per layer) and
 [glossary.md](./glossary.md) (shared vocabulary). [code-map.md](./code-map.md) and
 [task-router.md](./task-router.md) are kept as pointers so old links don't break.

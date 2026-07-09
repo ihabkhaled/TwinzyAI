@@ -8,6 +8,14 @@ Every skill ends the same way:
 
     npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
 
+## Simple code & cleanup
+
+- [write-simple-readable-code.md](./write-simple-readable-code.md) — the Simple Code Ladder applied to every new line.
+- [simplify-existing-code.md](./simplify-existing-code.md) — extract · split · de-inline · delete, by ownership.
+- [full-codebase-cleanup.md](./full-codebase-cleanup.md) — repo-wide sweep orchestration, gates green per slice.
+- [cleanup-without-weakening-safety.md](./cleanup-without-weakening-safety.md) — refactoring the privacy/AI-safety/upload surfaces behavior-identically.
+- [prepare-agent-mirrors.md](./prepare-agent-mirrors.md) — keep every agent entrypoint compact and aligned.
+
 ## Backend
 
 - [create-module.md](./create-module.md) — scaffold a feature module: canonical tree + `index.ts` public surface + AppModule registration.

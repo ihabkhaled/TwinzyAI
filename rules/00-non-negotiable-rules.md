@@ -85,12 +85,18 @@
 
 ---
 
+## Simple code (52–53)
+
+52. **Run the Simple Code Ladder before writing code** — need it? → reuse existing owner → platform-native → existing wrapper → small pure helper → direct readable code → new abstraction only with a real current reason ([28-simple-readable-code.md](./28-simple-readable-code.md)).
+53. **No clever code, no speculation, no duplication** — boring, junior-readable code; extract on second use; one owner per concern; delete dead code on sight ([29-reuse-before-creating.md](./29-reuse-before-creating.md), [30-refactor-discipline.md](./30-refactor-discipline.md)). Simplicity is MINIMUM SAFE code: it never removes privacy, AI safety, validation, a11y, i18n, tests, or gates.
+
 ## Pre-flight checklist (run mentally before writing code)
 
 - [ ] No `any`, no `eslint-disable`, no `@ts-ignore`, no `!`, `===`/`!==` only (rules 3–7)
 - [ ] No TS `enum`; no magic strings / domain literal comparisons — as-const members + `*_VALUES` (rules 8, 9)
 - [ ] No inline types/enum-maps/consts/DTOs/schemas/maps in layer files (rules 10–14)
-- [ ] New util/constant? Searched the existing owner and extended it — no duplicate file (rule 15)
+- [ ] Ran the Simple Code Ladder: reuse → native → wrapper → helper → direct code → justified abstraction (rule 52)
+- [ ] New util/constant? Searched the existing owner and extended it — no duplicate file (rules 15, 53)
 - [ ] Controller = one delegation; service ≤ 20 lines; use case owns orchestration; repository persists only (rules 16–20)
 - [ ] No cross-module internal imports; dependencies one-way (rules 22, 23)
 - [ ] Zod at the boundary (never class-validator); every error is an `AppError` + `messageKey` (rules 24, 25)
