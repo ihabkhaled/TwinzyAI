@@ -1,3 +1,7 @@
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+
 import { expect, test } from '@playwright/test';
 
 import {
@@ -43,13 +47,11 @@ test.describe('game flow (mocked backend)', () => {
   });
 
   test('invalid upload shows a friendly error and analyze stays disabled', async ({ page }) => {
+    const hugePath = path.join(os.tmpdir(), 'twinzy-huge.jpg');
+    fs.writeFileSync(hugePath, Buffer.alloc(6_000_000, 0xff));
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles({
-      name: 'malware.exe',
-      mimeType: 'application/octet-stream',
-      buffer: Buffer.from('MZ-not-an-image'),
-    });
+    await page.locator('#game-photo-input').setInputFiles(hugePath);
 
     await expect(
       page.getByText('That photo could not be uploaded. Please try a different one.'),

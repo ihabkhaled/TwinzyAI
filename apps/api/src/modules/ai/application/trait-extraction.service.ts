@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
-import { TraitExtractionResponseSchema } from '@twinzy/shared';
+import { countPopulatedTraitFields, isRecord, TraitExtractionResponseSchema } from '@twinzy/shared';
 
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
@@ -52,9 +52,18 @@ export class TraitExtractionService {
       signal,
     );
 
-    const response = parseAiJsonResponse(rawText, TraitExtractionResponseSchema, (issues) => {
-      this.logger.warn(`Trait response schema mismatch: ${issues}`);
-    });
+    const response = parseAiJsonResponse(
+      rawText,
+      TraitExtractionResponseSchema,
+      (issues) => {
+        this.logger.warn(`Trait response schema mismatch: ${issues}`);
+      },
+      (parsed) => {
+        if (!isRecord(parsed) || !isRecord(parsed['traits'])) return parsed;
+        const traits = parsed['traits'];
+        return { ...parsed, traitCount: countPopulatedTraitFields(traits) };
+      },
+    );
     this.assertRequestedLanguage(response.languageCode, languageCode);
     this.aiSafety.assertTraitTextSafe(collectExtractionTextValues(response));
 

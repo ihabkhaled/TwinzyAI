@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import type { Page } from '@playwright/test';
 
 import {
@@ -196,14 +198,10 @@ export const mockTranslateSuccess = async (page: Page): Promise<void> => {
   });
 };
 
-/** Minimal structurally-valid JPEG the client-side validator accepts. */
-export const buildJpegPayload = (): { name: string; mimeType: string; buffer: Buffer } => {
-  const bytes = [
-    0xff, 0xd8, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x01, 0xe0, 0x02, 0x80, 0x03, 0x01, 0x22, 0x00, 0x02,
-    0x11, 0x01, 0x03, 0x11, 0x01, 0xff, 0xd9,
-  ];
-  return { name: 'photo.jpg', mimeType: 'image/jpeg', buffer: Buffer.from(bytes) };
-};
+const PHOTO_FIXTURE_PATH = path.resolve(__dirname, './fixtures/photo.png');
+
+/** Structurally-valid image fixture the client-side validator accepts. */
+export const buildJpegPayload = (): string => PHOTO_FIXTURE_PATH;
 
 export const playHappyPathUntilAnalyze = async (page: Page): Promise<void> => {
   await page.goto('/game');

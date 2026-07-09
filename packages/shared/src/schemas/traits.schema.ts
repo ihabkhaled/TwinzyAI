@@ -91,7 +91,7 @@ const candidateSearchHintSchema = z.strictObject({
  * Count the number of populated (non-empty) trait fields across all categories.
  * Uncertainty notes are not counted as trait observations.
  */
-const countPopulatedTraitFields = (traits: Record<string, unknown>): number =>
+export const countPopulatedTraitFields = (traits: Record<string, unknown>): number =>
   Object.entries(traits).reduce((count, [key, value]) => {
     if (key === 'uncertaintyNotes') return count;
     if (typeof value !== 'object' || value === null) return count;
