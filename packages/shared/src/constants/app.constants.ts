@@ -46,8 +46,8 @@ export const GAME_PROMPT_VERSION = 'visual-similarity-v4';
  * overwrite it with this fixed copy for the response's languageCode.
  */
 export const RESULT_DISCLAIMER_BY_LANGUAGE: Record<LanguageCodeValue, string> = {
-  en: 'This is a playful style/vibe result based on written visible traits only. It is not face recognition, identity matching, or biometric comparison.',
-  ar: 'هذه نتيجة ممتعة عن الأسلوب والانطباع العام تعتمد على الملامح الظاهرة المكتوبة فقط. وهي ليست تعرّفًا على الوجه ولا مطابقة هوية ولا مقارنة بيومترية.',
+  en: 'This is a playful visual-resemblance result on your own photo, for entertainment. Your photo is never stored and is never used to identify you.',
+  ar: 'هذه نتيجة شبه بصري ممتعة على صورتك أنت، للتسلية فقط. لا تُحفظ صورتك أبدًا ولا تُستخدم للتعرف على هويتك.',
 };
 
 /** English disclaimer kept as the canonical reference copy. */

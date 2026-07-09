@@ -4,7 +4,7 @@ import type { ResultDisclaimerProps } from '../model/game-component.types';
 
 import { resultDisclaimerClass } from './result-disclaimer.variants';
 
-/** The mandatory "not face recognition / not biometric" safety disclaimer. */
+/** The mandatory honesty disclaimer: entertainment-only resemblance, zero storage, no identification. */
 export function ResultDisclaimer({
   disclaimer,
   testId,
