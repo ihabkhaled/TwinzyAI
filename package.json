@@ -39,6 +39,7 @@
     "test:unit": "npm run build:shared && vitest run --project api-unit --project web-unit --project shared-unit --project lint-rules",
     "test:integration": "npm run build:shared && vitest run --project api-integration",
     "test:e2e": "npm run test:e2e --workspace apps/web",
+    "test:e2e:ci": "npm run build:shared && npm run test:e2e:ci --workspace apps/web",
     "test:coverage": "npm run build:shared && vitest run --coverage",
     "test:security": "npm run build:shared && vitest run --project api-unit --project api-integration -- modules/file-security modules/privacy common",
     "test:file-security": "npm run build:shared && vitest run --project api-unit --project api-integration -- modules/file-security",

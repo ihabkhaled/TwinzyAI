@@ -11,7 +11,8 @@
     "build:turbo": "next build",
     "start": "next start --port 3000",
     "typecheck": "tsgo --noEmit -p tsconfig.json",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:ci": "playwright test --project=chromium --project=a11y --project=mobile-chromium"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

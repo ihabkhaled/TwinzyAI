@@ -24,10 +24,19 @@ const BASE_URL = `http://localhost:${E2E_PORT}`;
 const A11Y_SPECS = /\.a11y\.spec\.ts$/;
 const VISUAL_SPECS = /\.visual\.spec\.ts$/;
 
+const IS_CI = process.env['CI'] === 'true' || process.env['CI'] === '1';
+
 export default defineConfig({
   testDir: './e2e',
-  fullyParallel: true,
-  retries: 0,
+  // Local runs go wide for speed. CI runs SERIALLY (one worker): the tests share
+  // a single dev server, and Next's on-demand compile serves a cookie-agnostic
+  // cached render to concurrent requests, which races the theme/locale specs.
+  // Serial execution is the reliable gate condition; retries absorb rare blips.
+  fullyParallel: !IS_CI,
+  // Only pin workers under CI; omit the key locally so Playwright picks its
+  // default (exactOptionalPropertyTypes forbids assigning `undefined` here).
+  ...(IS_CI ? { workers: 1 } : {}),
+  retries: IS_CI ? 1 : 0,
   reporter: [['list']],
   timeout: 60_000,
   expect: {
