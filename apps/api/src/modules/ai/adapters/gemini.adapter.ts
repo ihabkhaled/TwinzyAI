@@ -5,14 +5,15 @@ import { Injectable } from '@nestjs/common';
 import { AppConfigService } from '../../../config/app-config.service';
 import {
   AppError,
-  ERROR_MESSAGE_KEY_BY_CODE,
+  buildIntegrationError,
+  buildTooManyRequestsError,
   ErrorCode,
-  type ErrorCodeValue,
-  IntegrationError,
-  TooManyRequestsError,
+  type IntegrationError,
+  type TooManyRequestsError,
 } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { redactForLog } from '../../privacy';
+import { attachExternalAbort } from '../lib/abort-bridge.util';
 import {
   classifyProviderError,
   isModelRetryable,
@@ -201,7 +202,7 @@ export class GeminiAdapter implements AiProviderAdapter {
     externalSignal?: AbortSignal,
   ): Promise<string> {
     const controller = new AbortController();
-    const detachExternalAbort = this.attachExternalAbort(controller, externalSignal);
+    const detachExternalAbort = attachExternalAbort(controller, externalSignal);
     const startedAt = Date.now();
     let idleTimer: ReturnType<typeof setTimeout> | undefined;
     const resetIdleTimer = (): void => {
@@ -242,32 +243,6 @@ export class GeminiAdapter implements AiProviderAdapter {
         clearTimeout(idleTimer);
       }
     }
-  }
-
-  /**
-   * Bridges an external cancel signal (client cancel, disconnect, watchdog)
-   * onto this call's abort controller, so cancelling the stream immediately
-   * aborts the in-flight Gemini request instead of letting it run to completion.
-   * Returns a detach cleanup, or undefined when there was nothing to attach.
-   */
-  private attachExternalAbort(
-    controller: AbortController,
-    externalSignal?: AbortSignal,
-  ): (() => void) | undefined {
-    if (externalSignal === undefined) {
-      return undefined;
-    }
-    if (externalSignal.aborted) {
-      controller.abort();
-      return undefined;
-    }
-    const onExternalAbort = (): void => {
-      controller.abort();
-    };
-    externalSignal.addEventListener('abort', onExternalAbort, { once: true });
-    return () => {
-      externalSignal.removeEventListener('abort', onExternalAbort);
-    };
   }
 
   private requestConfig(abortSignal: AbortSignal): GenerateContentConfig {
@@ -330,14 +305,13 @@ export class GeminiAdapter implements AiProviderAdapter {
 
   private rateLimitedError(): TooManyRequestsError {
     this.logger.warn('All models rate-limited');
-    return new TooManyRequestsError(
-      AI_RATE_LIMITED_MESSAGE,
-      ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiRateLimited],
-      ErrorCode.AiRateLimited,
-    );
+    return buildTooManyRequestsError(ErrorCode.AiRateLimited, AI_RATE_LIMITED_MESSAGE);
   }
 
-  private integrationError(errorCode: ErrorCodeValue, message: string): IntegrationError {
-    return new IntegrationError(message, ERROR_MESSAGE_KEY_BY_CODE[errorCode], errorCode);
+  private integrationError(
+    errorCode: Parameters<typeof buildIntegrationError>[0],
+    message: string,
+  ): IntegrationError {
+    return buildIntegrationError(errorCode, message);
   }
 }

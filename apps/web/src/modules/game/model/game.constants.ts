@@ -31,7 +31,7 @@ export {
 } from '@twinzy/shared';
 
 /** Multipart form-field names the backend `/game/analyze` endpoint expects. */
-export const UPLOAD_FIELD_NAME = 'image';
+export { UPLOAD_FIELD_NAME } from '@twinzy/shared';
 
 export const CONSENT_FIELD_NAME = 'consent';
 

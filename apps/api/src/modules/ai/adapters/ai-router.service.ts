@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 import { routeEntryKey } from '../../../config/ai-route.types';
 import {
   AppError,
-  ERROR_MESSAGE_KEY_BY_CODE,
+  buildIntegrationError,
+  buildTooManyRequestsError,
   ErrorCode,
-  type ErrorCodeValue,
-  IntegrationError,
+  type IntegrationError,
   TooManyRequestsError,
 } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
@@ -138,11 +138,7 @@ export class AiRouterService implements AiProviderAdapter {
     }
 
     throw sawRateLimit
-      ? new TooManyRequestsError(
-          AI_RATE_LIMITED_MESSAGE,
-          ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiRateLimited],
-          ErrorCode.AiRateLimited,
-        )
+      ? buildTooManyRequestsError(ErrorCode.AiRateLimited, AI_RATE_LIMITED_MESSAGE)
       : this.integrationError(ErrorCode.AiProviderUnavailable);
   }
 
@@ -161,11 +157,9 @@ export class AiRouterService implements AiProviderAdapter {
     return (ROUTE_HOPPABLE_ERROR_CODES as readonly string[]).includes(error.errorCode);
   }
 
-  private integrationError(errorCode: ErrorCodeValue): IntegrationError {
-    return new IntegrationError(
-      AI_UNAVAILABLE_MESSAGE,
-      ERROR_MESSAGE_KEY_BY_CODE[errorCode],
-      errorCode,
-    );
+  private integrationError(
+    errorCode: Parameters<typeof buildIntegrationError>[0],
+  ): IntegrationError {
+    return buildIntegrationError(errorCode, AI_UNAVAILABLE_MESSAGE);
   }
 }

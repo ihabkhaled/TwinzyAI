@@ -9,7 +9,7 @@ import {
 } from '@twinzy/shared';
 
 import { GeminiStep } from '../../../config/gemini-step.constants';
-import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
+import { buildIntegrationError, ErrorCode, type IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
@@ -143,10 +143,6 @@ export class ResultTranslationService {
 
   private invalidTranslation(reason: string): IntegrationError {
     this.logger.warn(reason);
-    return new IntegrationError(
-      AI_INVALID_RESPONSE_MESSAGE,
-      ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseInvalid],
-      ErrorCode.AiResponseInvalid,
-    );
+    return buildIntegrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
   }
 }

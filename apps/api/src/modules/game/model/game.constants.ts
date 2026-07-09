@@ -22,9 +22,6 @@ export const CANCEL_THROTTLE = {
   default: { limit: 60, ttl: 60_000 },
 } as const;
 
-/** Multipart field name carrying the single uploaded image. */
-export const UPLOAD_FIELD_NAME = 'image';
-
 /**
  * Hard transport-level cap (10 MB) — a backstop above the configured
  * business limit (5 MB default) so oversized bodies are cut early while
@@ -39,3 +36,17 @@ export const UPLOAD_MAX_FILES = 1;
 
 /** Transport-level cap on the free-form languageCode multipart field. */
 export const LANGUAGE_CODE_MAX_LENGTH = 35;
+
+/**
+ * Route segments of the game controller — single-sourced so transport-level
+ * per-route protections (the JSON body caps in src/bootstrap) can never drift
+ * from the decorators: renaming a route here updates both sides together.
+ */
+export const GAME_ROUTE_ROOT = 'game';
+export const GAME_ROUTE_ANALYZE = 'analyze';
+export const GAME_ROUTE_ANALYZE_STREAM = 'analyze/stream';
+export const GAME_ROUTE_CANCEL = 'cancel';
+export const GAME_ROUTE_TRANSLATE_RESULT = 'translate-result';
+
+/** Interval between keep-alive heartbeats while the pipeline runs. */
+export const STREAM_HEARTBEAT_INTERVAL_MS = 10_000;

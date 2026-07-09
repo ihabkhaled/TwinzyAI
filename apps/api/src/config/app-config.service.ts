@@ -6,6 +6,7 @@ import {
   type AiProviderValue,
   OPENAI_COMPAT_DEFAULT_BASE_URLS,
   OPENAI_COMPAT_PROVIDER_ENV_KEYS,
+  type OpenAiCompatCredential,
   type OpenAiCompatProviderValue,
 } from './ai-provider.constants';
 import { type AiRouteEntry, routeEntryKey } from './ai-route.types';
@@ -45,11 +46,7 @@ export class AppConfigService {
   }
 
   public get corsAllowedOrigins(): readonly string[] {
-    return this.configService
-      .get('CORS_ALLOWED_ORIGINS', { infer: true })
-      .split(',')
-      .map((origin) => origin.trim())
-      .filter((origin) => origin.length > 0);
+    return this.toList(this.configService.get('CORS_ALLOWED_ORIGINS', { infer: true }));
   }
 
   public get logLevel(): LogLevelValue {
@@ -139,10 +136,7 @@ export class AppConfigService {
   }
 
   /** Credential + base URL for one OpenAI-compatible provider (key may be empty). */
-  public openAiCompatCredential(provider: OpenAiCompatProviderValue): {
-    readonly apiKey: string;
-    readonly baseUrl: string;
-  } {
+  public openAiCompatCredential(provider: OpenAiCompatProviderValue): OpenAiCompatCredential {
     const keys = OPENAI_COMPAT_PROVIDER_ENV_KEYS[provider];
     const apiKey: string = this.configService.get(keys.apiKey, { infer: true });
     const overrideBaseUrl: string = this.configService.get(keys.baseUrl, { infer: true });

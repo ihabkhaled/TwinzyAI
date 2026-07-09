@@ -4,7 +4,7 @@ import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared'
 import { countPopulatedTraitFields, isRecord, TraitExtractionResponseSchema } from '@twinzy/shared';
 
 import { GeminiStep } from '../../../config/gemini-step.constants';
-import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
+import { buildIntegrationError, ErrorCode } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
@@ -78,10 +78,6 @@ export class TraitExtractionService {
     }
 
     this.logger.warn(`Trait response language mismatch (${returned} != ${requested})`);
-    throw new IntegrationError(
-      AI_INVALID_RESPONSE_MESSAGE,
-      ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseInvalid],
-      ErrorCode.AiResponseInvalid,
-    );
+    throw buildIntegrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
   }
 }

@@ -21,12 +21,21 @@ import type { UploadedImageFile } from '../../file-security';
 import { AnalyzeGameUseCase } from '../application/analyze-game.use-case';
 import { CancelAnalysisUseCase } from '../application/cancel-analysis.use-case';
 import { TranslateResultUseCase } from '../application/translate-result.use-case';
-import { ANALYZE_THROTTLE, CANCEL_THROTTLE, TRANSLATE_THROTTLE } from '../model/game.constants';
+import {
+  ANALYZE_THROTTLE,
+  CANCEL_THROTTLE,
+  GAME_ROUTE_ANALYZE,
+  GAME_ROUTE_ANALYZE_STREAM,
+  GAME_ROUTE_CANCEL,
+  GAME_ROUTE_ROOT,
+  GAME_ROUTE_TRANSLATE_RESULT,
+  TRANSLATE_THROTTLE,
+} from '../model/game.constants';
 
 import { GameStreamPresenter } from './game-stream.presenter';
 
 @ApiTags('game')
-@Controller('game')
+@Controller(GAME_ROUTE_ROOT)
 export class GameController {
   public constructor(
     private readonly analyzeGameUseCase: AnalyzeGameUseCase,
@@ -35,7 +44,7 @@ export class GameController {
     private readonly gameStreamPresenter: GameStreamPresenter,
   ) {}
 
-  @Post('analyze')
+  @Post(GAME_ROUTE_ANALYZE)
   @Throttle(ANALYZE_THROTTLE)
   @UseInterceptors(UploadedImageInterceptor)
   public analyze(
@@ -45,7 +54,7 @@ export class GameController {
     return this.analyzeGameUseCase.analyze(file, body);
   }
 
-  @Post('analyze/stream')
+  @Post(GAME_ROUTE_ANALYZE_STREAM)
   @Throttle(ANALYZE_THROTTLE)
   @UseInterceptors(UploadedImageInterceptor)
   public analyzeStream(
@@ -57,14 +66,14 @@ export class GameController {
     return this.gameStreamPresenter.stream({ file, body, reply, ...meta });
   }
 
-  @Post('cancel')
+  @Post(GAME_ROUTE_CANCEL)
   @Throttle(CANCEL_THROTTLE)
   @UsePipes(createZodValidationPipe(CancelAnalysisRequestSchema))
   public cancelAnalysis(@Body() body: CancelAnalysisRequest): CancelAnalysisResponse {
     return this.cancelAnalysisUseCase.cancel(body);
   }
 
-  @Post('translate-result')
+  @Post(GAME_ROUTE_TRANSLATE_RESULT)
   @Throttle(TRANSLATE_THROTTLE)
   @UsePipes(createZodValidationPipe(TranslateResultRequestSchema))
   public translateResult(@Body() body: TranslateResultRequest): Promise<FinalGameResult> {

@@ -5,20 +5,9 @@ import {
   HTTP_STATUS_TOO_MANY_REQUESTS,
 } from '@twinzy/shared';
 
-/**
- * How a raw provider (Gemini) error should be treated when a model chain is
- * available. RateLimited and Unavailable are worth retrying on the NEXT model;
- * Fatal is not (the request itself is bad or the provider is fully down).
- * Timeouts are handled separately by the adapter (our own idle abort), so this
- * classifier never sees them.
- */
-export const ProviderErrorKind = {
-  RateLimited: 'rate-limited',
-  Unavailable: 'unavailable',
-  Fatal: 'fatal',
-} as const;
+import { ProviderErrorKind, type ProviderErrorKindValue } from '../model/provider-error.enums';
 
-export type ProviderErrorKindValue = (typeof ProviderErrorKind)[keyof typeof ProviderErrorKind];
+export { ProviderErrorKind, type ProviderErrorKindValue } from '../model/provider-error.enums';
 
 const RATE_LIMIT_PATTERN = /\b429\b|resource_exhausted|quota|rate.?limit/i;
 

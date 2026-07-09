@@ -1,6 +1,6 @@
 import type { z } from 'zod';
 
-import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
+import { buildIntegrationError, ErrorCode, type IntegrationError } from '../../../core/errors';
 import type { AiContentValidator, AiValidationResult } from '../model/ai-provider-adapter.types';
 import { AI_INVALID_RESPONSE_MESSAGE } from '../model/gemini.constants';
 
@@ -13,11 +13,7 @@ export type AiIssueListener = (issueSummary: string) => void;
 const MAX_REPORTED_ISSUES = 8;
 
 const invalidResponse = (): IntegrationError =>
-  new IntegrationError(
-    AI_INVALID_RESPONSE_MESSAGE,
-    ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseInvalid],
-    ErrorCode.AiResponseInvalid,
-  );
+  buildIntegrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
 
 /**
  * Bounded, privacy-safe diagnostic: field PATHS and zod issue codes only —

@@ -3,13 +3,14 @@ import { HTTP_STATUS_TOO_MANY_REQUESTS } from '@twinzy/shared';
 import type { OpenAiCompatProviderValue } from '../../../config/ai-provider.constants';
 import type { AppConfigService } from '../../../config/app-config.service';
 import {
-  ERROR_MESSAGE_KEY_BY_CODE,
+  buildIntegrationError,
+  buildTooManyRequestsError,
   ErrorCode,
-  type ErrorCodeValue,
   IntegrationError,
   TooManyRequestsError,
 } from '../../../core/errors';
 import type { AppLogger } from '../../../core/logger/app-logger.service';
+import { attachExternalAbort } from '../lib/abort-bridge.util';
 import type {
   AiCallOptions,
   AiProviderAdapter,
@@ -138,7 +139,7 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
     const timer = setTimeout(() => {
       controller.abort();
     }, this.config.geminiTimeoutMs);
-    const detachExternalAbort = this.attachExternalAbort(controller, externalSignal);
+    const detachExternalAbort = attachExternalAbort(controller, externalSignal);
 
     const body: OpenAiCompatRequestBody = {
       model,
@@ -169,11 +170,7 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
   private async readResponseText(response: Response, model: string): Promise<string> {
     if (response.status === HTTP_STATUS_TOO_MANY_REQUESTS) {
       this.logger.warn(`Model ${model} rate-limited (429)`);
-      throw new TooManyRequestsError(
-        AI_RATE_LIMITED_MESSAGE,
-        ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiRateLimited],
-        ErrorCode.AiRateLimited,
-      );
+      throw buildTooManyRequestsError(ErrorCode.AiRateLimited, AI_RATE_LIMITED_MESSAGE);
     }
     if (!response.ok) {
       this.logger.warn(`Model ${model} failed with HTTP ${response.status}`);
@@ -205,27 +202,10 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
     return this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE);
   }
 
-  private attachExternalAbort(
-    controller: AbortController,
-    externalSignal?: AbortSignal,
-  ): (() => void) | undefined {
-    if (externalSignal === undefined) {
-      return undefined;
-    }
-    if (externalSignal.aborted) {
-      controller.abort();
-      return undefined;
-    }
-    const onExternalAbort = (): void => {
-      controller.abort();
-    };
-    externalSignal.addEventListener('abort', onExternalAbort, { once: true });
-    return () => {
-      externalSignal.removeEventListener('abort', onExternalAbort);
-    };
-  }
-
-  private integrationError(errorCode: ErrorCodeValue, message: string): IntegrationError {
-    return new IntegrationError(message, ERROR_MESSAGE_KEY_BY_CODE[errorCode], errorCode);
+  private integrationError(
+    errorCode: Parameters<typeof buildIntegrationError>[0],
+    message: string,
+  ): IntegrationError {
+    return buildIntegrationError(errorCode, message);
   }
 }

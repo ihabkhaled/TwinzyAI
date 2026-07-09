@@ -1,3 +1,5 @@
+import { IMAGE_MIME } from '@twinzy/shared';
+
 import {
   JPEG_HEIGHT_OFFSET,
   JPEG_LENGTH_BIAS,
@@ -149,13 +151,13 @@ export const readImageDimensions = (
   mimeType: string,
 ): ImageDimensions | undefined => {
   switch (mimeType.toLowerCase()) {
-    case 'image/jpeg': {
+    case IMAGE_MIME.jpeg: {
       return readJpegDimensions(buffer);
     }
-    case 'image/png': {
+    case IMAGE_MIME.png: {
       return readPngDimensions(buffer);
     }
-    case 'image/webp': {
+    case IMAGE_MIME.webp: {
       return readWebpDimensions(buffer);
     }
     default: {

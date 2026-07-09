@@ -1,4 +1,9 @@
-import { UPLOAD_HARD_CAP_BYTES } from '../modules/game/model/game.constants';
+import {
+  GAME_ROUTE_CANCEL,
+  GAME_ROUTE_ROOT,
+  GAME_ROUTE_TRANSLATE_RESULT,
+  UPLOAD_HARD_CAP_BYTES,
+} from '../modules/game/model/game.constants';
 
 export const LISTEN_HOST = '0.0.0.0';
 
@@ -25,8 +30,8 @@ export const JSON_ROUTE_BODY_LIMITS: readonly {
   readonly suffix: string;
   readonly limitBytes: number;
 }[] = [
-  { suffix: '/game/cancel', limitBytes: 8192 },
-  { suffix: '/game/translate-result', limitBytes: 262_144 },
+  { suffix: `/${GAME_ROUTE_ROOT}/${GAME_ROUTE_CANCEL}`, limitBytes: 8192 },
+  { suffix: `/${GAME_ROUTE_ROOT}/${GAME_ROUTE_TRANSLATE_RESULT}`, limitBytes: 262_144 },
 ];
 
 export const DEFAULT_API_VERSION = '1';

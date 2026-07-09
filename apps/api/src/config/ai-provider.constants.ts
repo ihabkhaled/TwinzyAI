@@ -30,6 +30,12 @@ export const AI_PROVIDER_VALUES = [
 /** Every provider served by the shared OpenAI-compatible adapter (all but Gemini). */
 export type OpenAiCompatProviderValue = Exclude<AiProviderValue, typeof AiProvider.Gemini>;
 
+/** Resolved credential + endpoint for one OpenAI-compatible provider. */
+export interface OpenAiCompatCredential {
+  readonly apiKey: string;
+  readonly baseUrl: string;
+}
+
 export const OPENAI_COMPAT_PROVIDER_VALUES = [
   AiProvider.OpenAi,
   AiProvider.DeepSeek,

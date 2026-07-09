@@ -2,6 +2,21 @@ export const DEFAULT_MAX_IMAGE_SIZE_BYTES = 5_242_880;
 
 export const ALLOWED_IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const;
 
+export type AllowedImageMimeType = (typeof ALLOWED_IMAGE_MIME_TYPES)[number];
+
+/** Named members of the allowed set, for drift-proof comparisons. */
+export const IMAGE_MIME = {
+  jpeg: 'image/jpeg',
+  png: 'image/png',
+  webp: 'image/webp',
+} as const satisfies Record<string, AllowedImageMimeType>;
+
+/**
+ * Multipart field name of the analyze upload wire contract — the client's
+ * FormData builder and any server-side field handling must agree on it.
+ */
+export const UPLOAD_FIELD_NAME = 'image';
+
 export const ALLOWED_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'] as const;
 
 export const MIME_TYPE_BY_EXTENSION = {

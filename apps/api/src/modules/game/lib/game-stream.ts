@@ -3,6 +3,12 @@ import { GameStreamEvent, StreamStatus } from '@twinzy/shared';
 
 import { ErrorCode, toErrorBody } from '../../../core/errors';
 import { StreamAbortReason } from '../../../core/streaming';
+import {
+  ANALYSIS_CANCELLED_MESSAGE,
+  ANALYSIS_TIMEOUT_MESSAGE,
+  DUPLICATE_REQUEST_MESSAGE,
+  SERVER_BUSY_MESSAGE,
+} from '../model/game.messages';
 
 /** Sink the stream use-case pushes protocol messages into. */
 export type GameStreamEmitter = (message: GameStreamMessage) => void;
@@ -20,14 +26,6 @@ export interface StreamTermination {
   readonly message: ErrorStreamMessage;
   readonly status: StreamStatusValue;
 }
-
-const SERVER_BUSY_MESSAGE = 'The vibe engine is busy right now. Please try again in a moment.';
-const DUPLICATE_REQUEST_MESSAGE = 'This analysis is already running.';
-const ANALYSIS_CANCELLED_MESSAGE = 'Analysis cancelled.';
-const ANALYSIS_TIMEOUT_MESSAGE = 'The analysis took too long and was stopped. Please try again.';
-
-/** Interval between keep-alive heartbeats while the pipeline runs. */
-export const STREAM_HEARTBEAT_INTERVAL_MS = 10_000;
 
 /** Lifecycle status for a non-terminal / success frame emitted by the pipeline. */
 export const statusForStreamEvent = (event: GameStreamMessage['event']): StreamStatusValue =>

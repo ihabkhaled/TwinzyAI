@@ -20,10 +20,10 @@ import {
   resolveStreamTermination,
   stampStreamFrame,
   statusForStreamEvent,
-  STREAM_HEARTBEAT_INTERVAL_MS,
 } from '../lib/game-stream';
 import { randomStreamId, resolveCorrelationId } from '../lib/stream-correlation';
 import { buildStreamCorsHeaders } from '../lib/stream-cors';
+import { STREAM_HEARTBEAT_INTERVAL_MS } from '../model/game.constants';
 import type { GameStreamRequest, StreamCorrelationIds } from '../model/game-stream.types';
 
 const LOG_CONTEXT = 'GameStream';

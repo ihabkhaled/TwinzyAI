@@ -5,6 +5,7 @@ export * from './error.constants';
 export type { ErrorBody, ErrorMessageKey } from './error.types';
 export { toErrorBody } from './error-body.mapper';
 export { ErrorCode, type ErrorCodeValue } from './error-code.constants';
+export { buildIntegrationError, buildTooManyRequestsError } from './error-factory';
 export { ForbiddenError } from './forbidden.error';
 export { IntegrationError } from './integration.error';
 export { NotFoundError } from './not-found.error';

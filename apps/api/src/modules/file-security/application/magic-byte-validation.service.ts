@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import { ALLOWED_IMAGE_MIME_TYPES, type AllowedImageMimeType, IMAGE_MIME } from '@twinzy/shared';
+
 import {
   FILE_ERROR_MESSAGES,
   IMAGE_MAGIC_BYTES,
@@ -16,7 +18,10 @@ import { InvalidImageError } from '../model/file-security.errors';
 @Injectable()
 export class MagicByteValidationService {
   public assertMagicBytesMatch(buffer: Buffer, mimeType: string): void {
-    const signature = IMAGE_MAGIC_BYTES[mimeType.toLowerCase()];
+    const normalized = mimeType.toLowerCase();
+    const signature = (ALLOWED_IMAGE_MIME_TYPES as readonly string[]).includes(normalized)
+      ? IMAGE_MAGIC_BYTES[normalized as AllowedImageMimeType]
+      : undefined;
     if (signature === undefined) {
       throw this.invalidFile();
     }
@@ -25,7 +30,7 @@ export class MagicByteValidationService {
       throw this.invalidFile();
     }
 
-    if (mimeType.toLowerCase() === 'image/webp' && !this.hasWebpMarker(buffer)) {
+    if (mimeType.toLowerCase() === IMAGE_MIME.webp && !this.hasWebpMarker(buffer)) {
       throw this.invalidFile();
     }
   }

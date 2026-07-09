@@ -1,6 +1,10 @@
+import { type AllowedImageMimeType, IMAGE_MIME } from '@twinzy/shared';
+
 export {
   ALLOWED_IMAGE_EXTENSIONS,
   ALLOWED_IMAGE_MIME_TYPES,
+  type AllowedImageMimeType,
+  IMAGE_MIME,
   DEFAULT_MAX_IMAGE_SIZE_BYTES as MAX_IMAGE_SIZE_BYTES,
   MIME_TYPE_BY_EXTENSION,
   TEMP_FILE_PREFIX,
@@ -10,13 +14,13 @@ const JPEG_MAGIC_BYTES: readonly number[] = [0xff, 0xd8, 0xff];
 const PNG_MAGIC_BYTES: readonly number[] = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
 const WEBP_MAGIC_BYTES: readonly number[] = [0x52, 0x49, 0x46, 0x46];
 
-/** Magic-byte signatures per allowed MIME type. */
-export const IMAGE_MAGIC_BYTES: Record<string, readonly number[]> = {
-  'image/jpeg': JPEG_MAGIC_BYTES,
-  'image/png': PNG_MAGIC_BYTES,
+/** Magic-byte signatures per allowed MIME type (typed: adding a type can't drift). */
+export const IMAGE_MAGIC_BYTES: Record<AllowedImageMimeType, readonly number[]> = {
+  [IMAGE_MIME.jpeg]: JPEG_MAGIC_BYTES,
+  [IMAGE_MIME.png]: PNG_MAGIC_BYTES,
   // WebP: 'RIFF' at 0..3 (bytes 4-7 are the size), 'WEBP' at 8..11 —
   // validated structurally in MagicByteValidationService.
-  'image/webp': WEBP_MAGIC_BYTES,
+  [IMAGE_MIME.webp]: WEBP_MAGIC_BYTES,
 };
 
 export const WEBP_FORMAT_MARKER = 'WEBP';
@@ -35,8 +39,6 @@ export const CLAMAV_CHUNK_SIZE_BYTES = 65_536;
 export const CLAMAV_SIZE_PREFIX_LENGTH_BYTES = 4;
 
 export const CLAMAV_TERMINAL_CHUNK_LENGTH_BYTES = 4;
-
-export const UPLOAD_FIELD_NAME = 'image';
 
 /** Friendly, safe user messages per rejection. */
 export const FILE_ERROR_MESSAGES = {
