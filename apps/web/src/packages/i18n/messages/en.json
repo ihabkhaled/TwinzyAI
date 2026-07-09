@@ -73,6 +73,7 @@
     "previewAlt": "Preview of your chosen photo"
   },
   "result": {
+    "listSeparator": ", ",
     "title": "Your vibe matches",
     "traitsTitle": "Your visible traits",
     "scoreLabel": "Style/vibe fit",

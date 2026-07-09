@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+
 import { ANALYZE_ROUTE, buildJpegPayload, setInputFile } from './helpers';
 
 test.describe('cancel during processing', () => {
@@ -20,13 +22,13 @@ test.describe('cancel during processing', () => {
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    const cancel = page.getByTestId('cancel-processing');
+    const cancel = page.getByTestId(TEST_IDS.cancelProcessing);
     await expect(cancel).toBeVisible();
     await cancel.click();
 
     // A cancelled run is NOT a failure: the setup screen comes back and no
     // error surface is ever rendered.
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeVisible();
-    await expect(page.getByTestId('error-state')).toHaveCount(0);
+    await expect(page.getByTestId(TEST_IDS.errorState)).toHaveCount(0);
   });
 });

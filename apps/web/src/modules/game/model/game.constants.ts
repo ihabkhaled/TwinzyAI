@@ -8,6 +8,7 @@ import type {
 } from '@twinzy/shared';
 import {
   ConfidenceLevel,
+  ErrorCode,
   GameStreamStage,
   PublicCategory,
   TRAIT_CATEGORY_KEYS,
@@ -102,31 +103,38 @@ export type GameErrorMessageKey =
  * timeout, overload, provider blip). The error UI offers a non-destructive
  * "try again" for these instead of forcing a re-pick.
  */
+/**
+ * Client-only error code for transport failures that never carried a backend
+ * code (connection drop mid-stream). Not an {@link ErrorCode} member because
+ * the backend never emits it.
+ */
+export const CLIENT_NETWORK_ERROR_CODE = 'NETWORK_ERROR';
+
 export const TRANSIENT_ERROR_CODES = [
-  'RATE_LIMITED',
-  'AI_RATE_LIMITED',
-  'SERVER_BUSY',
-  'AI_TIMEOUT',
-  'AI_PROVIDER_UNAVAILABLE',
-  'NETWORK_ERROR',
+  ErrorCode.RateLimited,
+  ErrorCode.AiRateLimited,
+  ErrorCode.ServerBusy,
+  ErrorCode.AiTimeout,
+  ErrorCode.AiProviderUnavailable,
+  CLIENT_NETWORK_ERROR_CODE,
 ] as const;
 
 /** Backend error codes mapped to friendly game i18n message keys. */
 export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
-  CONSENT_REQUIRED: GAME_ERROR_MESSAGE_KEYS.consentRequired,
-  FILE_MISSING: GAME_ERROR_MESSAGE_KEYS.fileMissing,
-  FILE_TOO_LARGE: GAME_ERROR_MESSAGE_KEYS.fileTooLarge,
-  FILE_TYPE_NOT_ALLOWED: GAME_ERROR_MESSAGE_KEYS.fileTypeNotAllowed,
-  FILE_INVALID: GAME_ERROR_MESSAGE_KEYS.fileTypeNotAllowed,
-  MULTIPLE_FILES_NOT_ALLOWED: GAME_ERROR_MESSAGE_KEYS.multipleFiles,
-  RATE_LIMITED: GAME_ERROR_MESSAGE_KEYS.rateLimited,
-  AI_RATE_LIMITED: GAME_ERROR_MESSAGE_KEYS.rateLimited,
-  SERVER_BUSY: GAME_ERROR_MESSAGE_KEYS.serverBusy,
-  AI_PROVIDER_UNAVAILABLE: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
-  AI_TIMEOUT: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
-  AI_RESPONSE_INVALID: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
-  AI_RESPONSE_UNSAFE: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
-  NETWORK_ERROR: GAME_ERROR_MESSAGE_KEYS.network,
+  [ErrorCode.ConsentRequired]: GAME_ERROR_MESSAGE_KEYS.consentRequired,
+  [ErrorCode.FileMissing]: GAME_ERROR_MESSAGE_KEYS.fileMissing,
+  [ErrorCode.FileTooLarge]: GAME_ERROR_MESSAGE_KEYS.fileTooLarge,
+  [ErrorCode.FileTypeNotAllowed]: GAME_ERROR_MESSAGE_KEYS.fileTypeNotAllowed,
+  [ErrorCode.FileInvalid]: GAME_ERROR_MESSAGE_KEYS.fileTypeNotAllowed,
+  [ErrorCode.MultipleFilesNotAllowed]: GAME_ERROR_MESSAGE_KEYS.multipleFiles,
+  [ErrorCode.RateLimited]: GAME_ERROR_MESSAGE_KEYS.rateLimited,
+  [ErrorCode.AiRateLimited]: GAME_ERROR_MESSAGE_KEYS.rateLimited,
+  [ErrorCode.ServerBusy]: GAME_ERROR_MESSAGE_KEYS.serverBusy,
+  [ErrorCode.AiProviderUnavailable]: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
+  [ErrorCode.AiTimeout]: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
+  [ErrorCode.AiResponseInvalid]: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
+  [ErrorCode.AiResponseUnsafe]: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
+  [CLIENT_NETWORK_ERROR_CODE]: GAME_ERROR_MESSAGE_KEYS.network,
 };
 
 /** i18n key shown while an existing result is being translated. */

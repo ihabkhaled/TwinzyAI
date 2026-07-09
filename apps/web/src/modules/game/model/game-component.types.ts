@@ -153,6 +153,8 @@ export interface ResultSectionsProps {
   view: GameResultView;
   labels: ResultLabels;
   traitCountLabel: string;
+  /** Optional extra section between image quality and the match list (the in-game explanation alert). */
+  explanation?: ReactNode;
 }
 
 /** Props for the compact "strongest signals" summary section. */

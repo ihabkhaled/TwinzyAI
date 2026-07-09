@@ -3,6 +3,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { createObjectUrl, revokeObjectUrl } from '@/packages/browser';
 import { ERROR_MESSAGE_KEYS, type ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
 import type { UploadController } from '../model/game.types';
@@ -24,7 +25,7 @@ export const useImageUpload = (): UploadController => {
       return;
     }
 
-    URL.revokeObjectURL(previewRef.current);
+    revokeObjectUrl(previewRef.current);
     previewRef.current = undefined;
   }, []);
 
@@ -51,7 +52,7 @@ export const useImageUpload = (): UploadController => {
         return;
       }
 
-      const nextPreview = URL.createObjectURL(selected);
+      const nextPreview = createObjectUrl(selected);
       previewRef.current = nextPreview;
       setFile(selected);
       setPreviewUrl(nextPreview);

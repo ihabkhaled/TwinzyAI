@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
+
 import {
   buildJpegPayload,
   mockAnalyzeOversized,
@@ -45,7 +48,7 @@ test.describe('error states', () => {
     await page.route('**/api/v1/game/analyze/stream', (route) => route.abort('failed'));
     await playHappyPathUntilAnalyze(page);
 
-    await expect(page.getByTestId('error-state')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.errorState)).toBeVisible();
     await page.getByRole('button', { name: 'Try another photo' }).click();
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeDisabled();
   });
@@ -82,6 +85,6 @@ test.describe('error states', () => {
     await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
   });
 });

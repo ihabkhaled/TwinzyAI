@@ -11,6 +11,8 @@ import {
   UNCERTAINTY_NOTE_FIELDS,
 } from '@twinzy/shared';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+
 /** The UI uses the streaming endpoint; the glob covers /analyze and /analyze/stream. */
 export const ANALYZE_ROUTE = '**/api/v1/game/analyze/stream';
 
@@ -177,7 +179,7 @@ export const mockTranslateSuccess = async (page: Page): Promise<void> => {
       result: Record<string, unknown>;
     };
     const result = body.result;
-    const results = (result.results as Record<string, unknown>[]).map(
+    const results = (result['results'] as Record<string, unknown>[]).map(
       (item: Record<string, unknown>) => ({
         ...item,
         finalReason: 'تطابق أسلوبي عام بناءً على الملامح المرئية المكتوبة.',
@@ -224,7 +226,7 @@ export const playHappyPathUntilAnalyze = async (page: Page): Promise<void> => {
 };
 
 export const setResultCount = async (page: Page, value: number): Promise<void> => {
-  const select = page.getByTestId('result-count-select');
+  const select = page.getByTestId(TEST_IDS.resultCountSelect);
   await select.selectOption(String(value));
 };
 

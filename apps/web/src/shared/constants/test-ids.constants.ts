@@ -39,6 +39,7 @@ export const TEST_IDS = {
   traitItem: 'trait-item',
   shareButton: 'share-button',
   retryButton: 'retry-button',
+  retrySamePhoto: 'retry-same-photo',
   errorState: 'error-state',
   disclaimer: 'disclaimer',
   privacyNotice: 'privacy-notice',

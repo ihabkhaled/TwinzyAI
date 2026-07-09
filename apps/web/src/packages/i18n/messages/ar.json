@@ -74,6 +74,7 @@
     "previewAlt": "معاينة الصورة التي اخترتها"
   },
   "result": {
+    "listSeparator": "\u060c ",
     "title": "تطابقات انطباعك",
     "traitsTitle": "ملامحك الظاهرة",
     "scoreLabel": "توافق الأسلوب/الانطباع",

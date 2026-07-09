@@ -1,4 +1,5 @@
 export * from './app.constants';
+export * from './error-code.constants';
 export * from './language.constants';
 export * from './response-bounds.constants';
 export * from './safety.constants';

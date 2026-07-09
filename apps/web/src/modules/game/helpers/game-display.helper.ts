@@ -178,6 +178,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
     matchingTraitsLabel: translate('result.matchingTraitsLabel'),
     weakTraitsLabel: translate('result.weakTraitsLabel'),
     mismatchLabel: translate('result.mismatchLabel'),
+    listSeparator: translate('result.listSeparator'),
     rankLabel: translate('result.rankLabel'),
     fallbackTitle: translate('result.fallbackTitle'),
     retryButton: translate('result.retryButton'),

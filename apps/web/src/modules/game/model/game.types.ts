@@ -311,6 +311,8 @@ export interface ResultLabels {
   matchingTraitsLabel: string;
   weakTraitsLabel: string;
   mismatchLabel: string;
+  /** Locale-correct separator when joining trait lists ("، " in Arabic). */
+  listSeparator: string;
   rankLabel: string;
   fallbackTitle: string;
   retryButton: string;

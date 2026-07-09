@@ -1,6 +1,7 @@
 import type { FinalGameResult, LanguageCodeValue } from '@twinzy/shared';
 
 import { AppError } from '@/shared/errors/app-error';
+import { ERROR_MESSAGE_KEYS } from '@/shared/errors/error-keys.constants';
 
 import { analyzeImageRequest } from '../gateway/game.gateway';
 import { analyzeImageStreamRequest } from '../gateway/game-stream.gateway';
@@ -29,7 +30,7 @@ const assertValidFile = (file: File): void => {
 const assertValidResultCount = (resultCount: number): void => {
   const parsed = ResultCountSchema.safeParse(resultCount);
   if (!parsed.success) {
-    throw new AppError('errors.validation');
+    throw new AppError(ERROR_MESSAGE_KEYS.validation);
   }
 };
 

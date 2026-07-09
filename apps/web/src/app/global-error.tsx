@@ -4,6 +4,7 @@
 import type { CSSProperties, ReactElement } from 'react';
 
 import { FALLBACK_ERROR_COPY } from '@/shared/constants/fallback-copy.constants';
+import { THEME_PALETTE } from '@/shared/constants/theme-palette.constants';
 
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -18,8 +19,8 @@ const bodyStyle: CSSProperties = {
   justifyContent: 'center',
   padding: '1.5rem',
   fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif',
-  backgroundColor: '#13111c',
-  color: '#f2f0fa',
+  backgroundColor: THEME_PALETTE.surfaceDark,
+  color: THEME_PALETTE.textOnDark,
 };
 
 const cardStyle: CSSProperties = {
@@ -34,8 +35,8 @@ const buttonStyle: CSSProperties = {
   border: 'none',
   cursor: 'pointer',
   fontSize: '1rem',
-  backgroundColor: '#a78bfa',
-  color: '#1c1927',
+  backgroundColor: THEME_PALETTE.accent,
+  color: THEME_PALETTE.textOnAccent,
 };
 
 const GlobalError = ({ reset }: GlobalErrorProps): ReactElement => (

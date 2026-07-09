@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
+
 import {
   buildJpegPayload,
   mockAnalyzeSuccess,
@@ -22,7 +25,9 @@ test.describe('visual regression', () => {
     await mockAnalyzeSuccess(page);
     await page.goto('/game');
     await playHappyPathUntilAnalyze(page);
-    await expect(page.getByTestId('result-card-1')).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible({
+      timeout: 10_000,
+    });
     await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
     await expect(page).toHaveScreenshot('game-results.png');
   });

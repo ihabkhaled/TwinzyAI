@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
+
 import {
   buildJpegPayload,
   mockAnalyzeSuccess,
@@ -16,10 +19,10 @@ test.describe('privacy', () => {
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
 
     await page.reload();
-    await expect(page.getByTestId('result-card-1')).toBeHidden();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeHidden();
     await expect(page.locator('#game-photo-input')).toHaveValue('');
   });
 
@@ -28,10 +31,10 @@ test.describe('privacy', () => {
     await page.goto('/game');
 
     await playHappyPathUntilAnalyze(page);
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
 
     await page.getByRole('button', { name: 'Try another photo' }).click();
-    await expect(page.getByTestId('result-card-1')).toBeHidden();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeHidden();
     await expect(page.locator('#game-photo-input')).toHaveValue('');
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeDisabled();
   });
@@ -41,6 +44,6 @@ test.describe('privacy', () => {
     await page.goto('/game');
 
     await playHappyPathUntilAnalyze(page);
-    await expect(page.getByTestId('disclaimer')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.disclaimer)).toBeVisible();
   });
 });

@@ -2,6 +2,9 @@ import { expect, test } from '@playwright/test';
 
 import { DEFAULT_RESULT_COUNT, MAX_RESULT_COUNT, MIN_RESULT_COUNT } from '@twinzy/shared';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
+
 import {
   buildJpegPayload,
   mockAnalyzeSuccess,
@@ -16,7 +19,7 @@ test.describe('result-count selection', () => {
   test('result-count dropdown defaults to 10 and shows 1, 5, 10 options', async ({ page }) => {
     await page.goto('/game');
 
-    const select = page.getByTestId('result-count-select');
+    const select = page.getByTestId(TEST_IDS.resultCountSelect);
     await expect(select).toHaveValue(String(DEFAULT_RESULT_COUNT));
 
     for (const value of [MIN_RESULT_COUNT, 5, MAX_RESULT_COUNT]) {
@@ -33,8 +36,8 @@ test.describe('result-count selection', () => {
     await setResultCount(page, MIN_RESULT_COUNT);
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
-    await expect(page.getByTestId('result-card-2')).toBeHidden();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 2))).toBeHidden();
   });
 
   test('selecting 5 results renders exactly five ranked cards', async ({ page }) => {
@@ -49,7 +52,7 @@ test.describe('result-count selection', () => {
     for (let rank = 1; rank <= 5; rank += 1) {
       await expect(page.getByTestId(`result-card-${rank}`)).toBeVisible();
     }
-    await expect(page.getByTestId('result-card-6')).toBeHidden();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 6))).toBeHidden();
   });
 
   test('default 10 results render the full requested count', async ({ page }) => {
@@ -83,7 +86,7 @@ test.describe('result-count selection', () => {
     });
 
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
 
     expect(capturedResultCount).toBe(5);
   });

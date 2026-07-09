@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 
 import { Alert, Button, Stack } from '@/packages/ui-primitives';
+import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import type { ErrorStateProps } from '../types/shared-component.types';
 
@@ -23,7 +24,7 @@ export function ErrorState({
         {message}
         <Stack direction="row" gap="sm" wrap="wrap">
           {primaryRetryLabel !== undefined && onPrimaryRetry !== undefined ? (
-            <Button onClick={onPrimaryRetry} variant="primary" testId="retry-same-photo">
+            <Button onClick={onPrimaryRetry} variant="primary" testId={TEST_IDS.retrySamePhoto}>
               {primaryRetryLabel}
             </Button>
           ) : null}

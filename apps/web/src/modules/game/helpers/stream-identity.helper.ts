@@ -1,8 +1,8 @@
 import { randomUuid } from '@/packages/browser';
 import { readStorageJson, writeStorageJson } from '@/packages/storage';
 import { z } from '@/packages/zod';
+import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constants';
 
-const TAB_ID_STORAGE_KEY = 'twinzy.tabId';
 const TabIdSchema = z.uuid();
 
 /**
@@ -13,12 +13,12 @@ const TabIdSchema = z.uuid();
  * sessionStorage directly.
  */
 export const getTabId = (): string => {
-  const existing = readStorageJson('session', TAB_ID_STORAGE_KEY, TabIdSchema);
+  const existing = readStorageJson('session', STORAGE_KEYS.tabId, TabIdSchema);
   if (existing !== null) {
     return existing;
   }
   const tabId = randomUuid();
-  writeStorageJson('session', TAB_ID_STORAGE_KEY, tabId);
+  writeStorageJson('session', STORAGE_KEYS.tabId, tabId);
   return tabId;
 };
 

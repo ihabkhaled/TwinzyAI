@@ -44,6 +44,7 @@ export const ResultSections = ({
   view,
   labels,
   traitCountLabel,
+  explanation,
 }: ResultSectionsProps): ReactElement => (
   <Stack gap="md">
     <ResultSummary
@@ -58,6 +59,7 @@ export const ResultSections = ({
       fields={view.imageQuality}
       uncertainty={view.uncertainty}
     />
+    {explanation}
     {renderResultList(view, labels)}
     <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
   </Stack>

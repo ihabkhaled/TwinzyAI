@@ -95,3 +95,11 @@ export async function shareViaWebShare(data: {
     return false;
   }
 }
+
+/** Mint an object URL for an in-memory Blob/File (image preview; browser-only). */
+export const createObjectUrl = (blob: Blob): string => URL.createObjectURL(blob);
+
+/** Release an object URL minted by {@link createObjectUrl}. */
+export const revokeObjectUrl = (url: string): void => {
+  URL.revokeObjectURL(url);
+};

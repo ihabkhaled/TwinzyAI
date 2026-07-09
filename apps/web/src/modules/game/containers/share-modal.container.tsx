@@ -2,11 +2,10 @@
 // client-boundary-reason: renders a role="dialog" modal with Escape-to-close plus copy-link and native-share actions, all browser interactions.
 
 import type { ReactElement } from 'react';
-import { useEffect } from 'react';
 
-import { getSafeWindow } from '@/packages/browser';
 import { Alert, Button, Input, Spinner, Stack } from '@/packages/ui-primitives';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
+import { useEscapeKey } from '@/shared/hooks/useEscapeKey.hook';
 
 import { SHARE_MODAL_TITLE_ID } from '../model/share.constants';
 import type { ShareModalProps } from '../model/share-modal.types';
@@ -77,24 +76,9 @@ const renderBody = (props: ShareModalProps): ReactElement => {
  * field is read-only and the platform buttons carry only the safe URL.
  */
 export const ShareModal = (props: Readonly<ShareModalProps>): ReactElement => {
-  const { onClose } = props;
-  // Escape-to-close via a window listener (through the SSR-safe facade) rather
-  // than a keydown on the non-interactive dialog element.
-  useEffect(() => {
-    const safeWindow = getSafeWindow();
-    if (safeWindow === null) {
-      return;
-    }
-    const onKeyDown = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-    safeWindow.addEventListener('keydown', onKeyDown);
-    return (): void => {
-      safeWindow.removeEventListener('keydown', onKeyDown);
-    };
-  }, [onClose]);
+  // Escape-to-close via a window listener rather than a keydown on the
+  // non-interactive dialog element.
+  useEscapeKey(props.onClose);
 
   return (
     <div className={modalBackdropClass}>

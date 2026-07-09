@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
+
 import { mockAnalyzeSuccess, playHappyPathUntilAnalyze } from './helpers';
 
 const MOBILE_VIEWPORTS = [
@@ -25,7 +28,7 @@ for (const viewport of MOBILE_VIEWPORTS) {
       expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
 
       await playHappyPathUntilAnalyze(page);
-      await expect(page.getByTestId('result-card-1')).toBeVisible();
+      await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
 
       const resultScrollWidth = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,

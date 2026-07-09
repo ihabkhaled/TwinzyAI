@@ -3,6 +3,9 @@ import path from 'node:path';
 
 import { expect, test } from '@playwright/test';
 
+import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
+import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
+
 import {
   buildJpegPayload,
   DISCLAIMER,
@@ -32,12 +35,12 @@ test.describe('game flow (mocked backend)', () => {
     await expect(analyzeButton).toBeEnabled();
     await analyzeButton.click();
 
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
     await expect(page.getByText('Style/vibe fit: 90%')).toBeVisible();
     await expect(page.getByText(DISCLAIMER)).toBeVisible();
     // V2: the compact summary chips + trait count render immediately…
     await expect(page.getByText('clear oval face')).toBeVisible();
-    await expect(page.getByTestId('trait-count')).toBeVisible();
+    await expect(page.getByTestId(TEST_IDS.traitCount)).toBeVisible();
     // …and the detailed traits reveal lazily through the accessible accordion.
     const firstCategory = page.getByRole('button', { name: 'Overall face' });
     await expect(page.getByText('observed overallFaceShape')).toBeHidden();

@@ -15,6 +15,7 @@ import { AppToaster } from '@/packages/toast';
 import { AppHeader } from '@/shared/components/layout/app-header.component';
 import { HomeLink } from '@/shared/components/layout/home-link.component';
 import { SkipLink } from '@/shared/components/primitives/skip-link.component';
+import { THEME_PALETTE } from '@/shared/constants/theme-palette.constants';
 import { interFont } from '@/shared/fonts/app-fonts';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { readThemeAttribute } from '@/shared/helpers/read-theme-cookie.helper';
@@ -52,8 +53,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f7fc' },
-    { media: '(prefers-color-scheme: dark)', color: '#13111c' },
+    { media: '(prefers-color-scheme: light)', color: THEME_PALETTE.surfaceLight },
+    { media: '(prefers-color-scheme: dark)', color: THEME_PALETTE.surfaceDark },
   ],
 };
 

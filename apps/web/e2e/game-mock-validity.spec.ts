@@ -15,8 +15,9 @@ test.describe('mock payload validity', () => {
     const stream = SUCCESS_STREAM(1);
     const failures = stream
       .map((message, index) => ({ index, parsed: GameStreamMessageSchema.safeParse(message) }))
-      .filter(({ parsed }) => !parsed.success)
-      .map(({ index, parsed }) => ({ index, issues: parsed.error.issues }));
+      .flatMap(({ index, parsed }) =>
+        parsed.success ? [] : [{ index, issues: parsed.error.issues }],
+      );
 
     expect(failures).toEqual([]);
   });

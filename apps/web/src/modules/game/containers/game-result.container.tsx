@@ -2,40 +2,13 @@ import type { ReactElement } from 'react';
 
 import { Alert, Button, Stack } from '@/packages/ui-primitives';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
-import { buildIndexedTestId } from '@/shared/testing/test-id.helper';
 
-import { ResultCard } from '../components/result-card.component';
-import { ResultDisclaimer } from '../components/result-disclaimer.component';
-import { ResultList } from '../components/result-list.component';
 import { RetryButton } from '../components/retry-button.component';
 import { ShareButton } from '../components/share-button.component';
-import type { GameResultView, ResultLabels } from '../model/game.types';
 import type { GameResultProps, TranslationStatusProps } from '../model/game-component.types';
 
 import { translationBannerClass } from './game-result.variants';
-import { ImageQuality } from './image-quality.container';
-import { ResultSummary } from './result-summary.container';
-import { TraitDetails } from './trait-details.container';
-
-/** The ranked style/vibe match cards (or the localized no-match fallback). */
-const renderResultList = (view: GameResultView, labels: ResultLabels): ReactElement => (
-  <ResultList
-    title={view.resultCountTitle}
-    fallbackTitle={labels.fallbackTitle}
-    fallbackMessage={view.fallbackMessage}
-    hasResults={view.hasResults}
-    testId={TEST_IDS.resultList}
-  >
-    {view.results.map((result) => (
-      <ResultCard
-        key={result.rank}
-        result={result}
-        labels={labels}
-        testId={buildIndexedTestId(TEST_IDS.resultCard, result.rank)}
-      />
-    ))}
-  </ResultList>
-);
+import { ResultSections } from './result-sections.container';
 
 /**
  * Language-switch status: the loading banner while translating, and — on
@@ -76,66 +49,53 @@ const renderTranslationStatus = ({
   </>
 );
 
+/** The score/uncertainty/mismatch explanation alert shown only in-game. */
+const renderExplanation = ({ labels }: GameResultProps): ReactElement => (
+  <Alert tone="info" testId={TEST_IDS.resultExplanation}>
+    <Stack gap="xs">
+      <p>{labels.scoreExplanation}</p>
+      <p>{labels.uncertaintyExplanation}</p>
+      <p>{labels.mismatchExplanation}</p>
+    </Stack>
+  </Alert>
+);
+
 /**
- * The success-phase view: compact summary + trait count first, the detailed
- * grouped accordion, image quality & uncertainty, the top style/vibe matches,
- * the safety disclaimer, and the share/retry actions — plus the translation
- * loading/error banner during a language switch. A container so it may map.
+ * The success-phase view: the shared {@link ResultSections} body (summary,
+ * detailed traits, image quality, ranked matches, disclaimer) with the in-game
+ * explanation alert slotted in, framed by the translation loading/error banner
+ * during a language switch and the share/retry actions. A container so it may map.
  */
-export const GameResult = ({
-  view,
-  labels,
-  traitCountLabel,
-  translatingLabel,
-  retryTranslationLabel,
-  isTranslating,
-  translationError,
-  canRetryTranslation,
-  onRetryTranslation,
-  shareFeedback,
-  onShare,
-  onRetry,
-}: GameResultProps): ReactElement => (
+export const GameResult = (props: GameResultProps): ReactElement => (
   <Stack gap="md">
     {renderTranslationStatus({
-      isTranslating,
-      translatingLabel,
-      error: translationError,
-      retryLabel: retryTranslationLabel,
-      canRetry: canRetryTranslation,
-      onRetry: onRetryTranslation,
+      isTranslating: props.isTranslating,
+      translatingLabel: props.translatingLabel,
+      error: props.translationError,
+      retryLabel: props.retryTranslationLabel,
+      canRetry: props.canRetryTranslation,
+      onRetry: props.onRetryTranslation,
     })}
-    <ResultSummary
-      title={labels.compactSummaryTitle}
-      traitCountLabel={traitCountLabel}
-      summary={view.compactTraitSummary}
+    <ResultSections
+      view={props.view}
+      labels={props.labels}
+      traitCountLabel={props.traitCountLabel}
+      explanation={renderExplanation(props)}
     />
-    <TraitDetails title={labels.detailedTraitsTitle} categories={view.categories} />
-    <ImageQuality
-      title={labels.imageQualityTitle}
-      uncertaintyTitle={labels.uncertaintyTitle}
-      fields={view.imageQuality}
-      uncertainty={view.uncertainty}
-    />
-    <Alert tone="info" testId={TEST_IDS.resultExplanation}>
-      <Stack gap="xs">
-        <p>{labels.scoreExplanation}</p>
-        <p>{labels.uncertaintyExplanation}</p>
-        <p>{labels.mismatchExplanation}</p>
-      </Stack>
-    </Alert>
-    {renderResultList(view, labels)}
-    <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
     <Stack direction="row" gap="sm" align="center" wrap="wrap">
-      {view.hasResults ? (
+      {props.view.hasResults ? (
         <ShareButton
-          label={labels.shareButton}
-          feedback={shareFeedback}
-          onShare={onShare}
+          label={props.labels.shareButton}
+          feedback={props.shareFeedback}
+          onShare={props.onShare}
           testId={TEST_IDS.shareButton}
         />
       ) : null}
-      <RetryButton label={labels.retryButton} onRetry={onRetry} testId={TEST_IDS.retryButton} />
+      <RetryButton
+        label={props.labels.retryButton}
+        onRetry={props.onRetry}
+        testId={TEST_IDS.retryButton}
+      />
     </Stack>
   </Stack>
 );
