@@ -291,8 +291,6 @@ export interface ResultLabels {
   fallbackTitle: string;
   retryButton: string;
   shareButton: string;
-  /** "Showing up to {count}" line above the ranked matches. */
-  resultCountTitle: string;
   /** Explains what the percentage score represents. */
   scoreExplanation: string;
   /** Explains why some traits are marked as uncertain. */
