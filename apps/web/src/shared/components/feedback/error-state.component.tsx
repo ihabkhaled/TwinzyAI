@@ -13,15 +13,24 @@ export function ErrorState({
   message,
   retryLabel,
   onRetry,
+  primaryRetryLabel,
+  onPrimaryRetry,
   testId,
 }: Readonly<ErrorStateProps>): ReactElement {
   return (
     <Alert testId={testId} tone="danger">
       <Stack gap="sm">
         {message}
-        <Button onClick={onRetry} variant="secondary">
-          {retryLabel}
-        </Button>
+        <Stack direction="row" gap="sm" wrap="wrap">
+          {primaryRetryLabel !== undefined && onPrimaryRetry !== undefined ? (
+            <Button onClick={onPrimaryRetry} variant="primary" testId="retry-same-photo">
+              {primaryRetryLabel}
+            </Button>
+          ) : null}
+          <Button onClick={onRetry} variant="secondary">
+            {retryLabel}
+          </Button>
+        </Stack>
       </Stack>
     </Alert>
   );

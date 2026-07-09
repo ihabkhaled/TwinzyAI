@@ -58,6 +58,7 @@
     "uncertaintyTitle": "What was unclear",
     "translating": "Translating your result…",
     "translatingHint": "Rewriting your full result in the new language — one moment.",
+    "retrySamePhoto": "Try again with the same photo",
     "retryTranslation": "Retry translation"
   },
   "upload": {
@@ -443,6 +444,7 @@
     "multipleFiles": "Please choose just one photo.",
     "consentRequired": "Please tick the consent box before playing.",
     "generic": "Something went wrong. Please try again.",
+    "failedDuringStage": "Step that failed: {stage}.",
     "network": "We could not reach the game server. Check your connection and try again.",
     "rateLimited": "Too many tries in a short time. Please wait a moment.",
     "serverBusy": "The vibe engine is busy right now. Please try again in a moment.",

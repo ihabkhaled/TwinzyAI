@@ -7,8 +7,16 @@ import { normalizeLanguageCode } from '@twinzy/shared';
 
 import { useAppLocale, useAppTranslation } from '@/packages/i18n';
 
-import { resolvePhase, resolveStageLabel } from '../helpers/game-display.helper';
-import { toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
+import {
+  composeErrorMessage,
+  resolvePhase,
+  resolveStageLabel,
+} from '../helpers/game-display.helper';
+import {
+  extractFailedStage,
+  isTransientGameError,
+  toFriendlyErrorMessageKey,
+} from '../helpers/game-error.helper';
 import {
   buildCameraViewModel,
   buildShareViewModel,
@@ -73,6 +81,17 @@ export const useGame = (): GameViewModel => {
     progress.reset();
   }, [cancelRun, reset, clearFile, resetFeedback, progress]);
 
+  const canRetrySamePhoto = isError && file !== undefined && isTransientGameError(error);
+
+  const onRetrySamePhoto = useCallback((): void => {
+    if (file !== undefined) {
+      reset();
+      resetFeedback();
+      progress.reset();
+      beginRun(file, resultCount);
+    }
+  }, [file, reset, resetFeedback, progress, beginRun, resultCount]);
+
   const resultView: GameResultView | undefined =
     translation.displayResult === undefined
       ? undefined
@@ -91,7 +110,11 @@ export const useGame = (): GameViewModel => {
     onRetry,
     onShareResult,
     resultView,
-    errorMessage: isError ? translate(toFriendlyErrorMessageKey(error)) : undefined,
+    errorMessage: isError
+      ? composeErrorMessage(translate, toFriendlyErrorMessageKey(error), extractFailedStage(error))
+      : undefined,
+    canRetrySamePhoto,
+    onRetrySamePhoto,
     stageLabel: resolveStageLabel(translate, progress.currentStage),
     liveTraitCount: progress.traitsProgress?.traitCount,
     liveSummary: [...(progress.traitsProgress?.compactTraitSummary ?? [])],

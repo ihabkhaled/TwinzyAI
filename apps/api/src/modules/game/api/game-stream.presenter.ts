@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import type { ErrorStreamMessage } from '@twinzy/shared';
-import { StreamStatus } from '@twinzy/shared';
+import type { ErrorStreamMessage, GameStreamStageValue } from '@twinzy/shared';
+import { GameStreamEvent, StreamStatus } from '@twinzy/shared';
 
 import { AppConfigService } from '../../../config/app-config.service';
 import { SseWriter } from '../../../core/http/sse-writer';
@@ -98,11 +98,15 @@ export class GameStreamPresenter {
       }
     });
 
+    let lastStage: GameStreamStageValue | undefined;
     try {
       await this.analyzeGameStreamUseCase.analyze(
         input.file,
         input.body,
         (message) => {
+          if (message.event === GameStreamEvent.Stage) {
+            lastStage = message.stage;
+          }
           sse.event(
             message.event,
             stampStreamFrame(message, { ...envelope, status: statusForStreamEvent(message.event) }),
@@ -115,7 +119,10 @@ export class GameStreamPresenter {
       if (termination !== null) {
         sse.event(
           termination.message.event,
-          stampStreamFrame(termination.message, { ...envelope, status: termination.status }),
+          stampStreamFrame(
+            { ...termination.message, ...(lastStage === undefined ? {} : { stage: lastStage }) },
+            { ...envelope, status: termination.status },
+          ),
         );
       }
     } finally {

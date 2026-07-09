@@ -99,6 +99,12 @@ export const ErrorStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Error),
   errorCode: z.string().min(1),
   message: z.string(),
+  /**
+   * The pipeline stage that was running when the failure happened (optional,
+   * backward compatible) — lets the client say "finding matches failed"
+   * instead of a generic error.
+   */
+  stage: z.enum(GAME_STREAM_STAGE_VALUES).optional(),
   ...streamEnvelopeShape,
 });
 

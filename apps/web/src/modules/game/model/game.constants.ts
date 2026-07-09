@@ -97,6 +97,20 @@ export const GAME_ERROR_MESSAGE_KEYS = {
 export type GameErrorMessageKey =
   (typeof GAME_ERROR_MESSAGE_KEYS)[keyof typeof GAME_ERROR_MESSAGE_KEYS];
 
+/**
+ * Error codes where retrying the SAME photo can genuinely succeed (quota,
+ * timeout, overload, provider blip). The error UI offers a non-destructive
+ * "try again" for these instead of forcing a re-pick.
+ */
+export const TRANSIENT_ERROR_CODES = [
+  'RATE_LIMITED',
+  'AI_RATE_LIMITED',
+  'SERVER_BUSY',
+  'AI_TIMEOUT',
+  'AI_PROVIDER_UNAVAILABLE',
+  'NETWORK_ERROR',
+] as const;
+
 /** Backend error codes mapped to friendly game i18n message keys. */
 export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   CONSENT_REQUIRED: GAME_ERROR_MESSAGE_KEYS.consentRequired,

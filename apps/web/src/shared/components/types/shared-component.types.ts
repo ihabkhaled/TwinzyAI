@@ -11,6 +11,9 @@ export interface ErrorStateProps {
   message: string;
   retryLabel: string;
   onRetry: () => void;
+  /** Optional non-destructive retry (same photo), shown first when present. */
+  primaryRetryLabel?: string | undefined;
+  onPrimaryRetry?: (() => void) | undefined;
   testId?: string;
 }
 

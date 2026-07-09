@@ -52,6 +52,24 @@ export const resolveStageLabel = (
 ): string =>
   stage === undefined ? translate('game.processingText') : translate(STAGE_LABEL_KEYS[stage]);
 
+/**
+ * The full error copy for the error phase: the friendly per-code message,
+ * prefixed with WHICH pipeline step failed when the backend reported one — the
+ * user always knows where the run stopped, never just "something went wrong".
+ */
+export const composeErrorMessage = (
+  translate: TranslateMessage,
+  friendlyKey: string,
+  failedStage: GameStreamStageValue | undefined,
+): string => {
+  const friendly = translate(friendlyKey);
+  if (failedStage === undefined) {
+    return friendly;
+  }
+  const stageLabel = translate(STAGE_LABEL_KEYS[failedStage]);
+  return `${translate('errors.failedDuringStage', { stage: stageLabel })} ${friendly}`;
+};
+
 /** Translated accordion title for one trait category. */
 export const resolveTraitCategoryTitle = (
   translate: TranslateMessage,
@@ -130,6 +148,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   },
   translating: translate('game.translating'),
   translatingHint: translate('game.translatingHint'),
+  retrySamePhoto: translate('game.retrySamePhoto'),
   retryTranslation: translate('game.retryTranslation'),
   privacyNotice: translate('home.privacyNotice'),
   upload: {

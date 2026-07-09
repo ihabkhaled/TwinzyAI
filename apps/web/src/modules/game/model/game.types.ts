@@ -309,6 +309,7 @@ export interface GameScreenLabels {
   liveCandidatesTitle: string;
   translating: string;
   translatingHint: string;
+  retrySamePhoto: string;
   retryTranslation: string;
   privacyNotice: string;
   upload: UploadLabels;
@@ -336,6 +337,10 @@ export interface GameViewModel {
   canAnalyze: boolean;
   onAnalyze: () => void;
   onRetry: () => void;
+  /** True when the failure is transient and the photo is still selected. */
+  canRetrySamePhoto: boolean;
+  /** Re-runs the analysis with the SAME photo (transient failures only). */
+  onRetrySamePhoto: () => void;
   onShareResult: () => void;
   resultView: GameResultView | undefined;
   errorMessage: string | undefined;

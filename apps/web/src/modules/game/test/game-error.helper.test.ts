@@ -4,7 +4,11 @@ import { HttpError } from '@/packages/axios';
 import { AppError } from '@/shared/errors/app-error';
 import { ERROR_MESSAGE_KEYS } from '@/shared/errors/error-keys.constants';
 
-import { toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
+import {
+  extractFailedStage,
+  isTransientGameError,
+  toFriendlyErrorMessageKey,
+} from '../helpers/game-error.helper';
 
 const withErrorCode = (errorCode: string, status: number | null = null): HttpError =>
   new HttpError('http', 'backend failure', status, { errorCode, message: 'backend failure' });
@@ -55,5 +59,50 @@ describe('toFriendlyErrorMessageKey', () => {
     expect(toFriendlyErrorMessageKey(new Error('boom'))).toBe(ERROR_MESSAGE_KEYS.generic);
     expect(toFriendlyErrorMessageKey('boom')).toBe(ERROR_MESSAGE_KEYS.generic);
     expect(toFriendlyErrorMessageKey(null)).toBe(ERROR_MESSAGE_KEYS.generic);
+  });
+});
+
+describe('extractFailedStage', () => {
+  it('returns the stage from a stream error body and validates it', () => {
+    const withStage = new HttpError('http', 'fail', null, {
+      errorCode: 'AI_TIMEOUT',
+      message: 'fail',
+      stage: 'judging',
+    });
+    expect(extractFailedStage(withStage)).toBe('judging');
+  });
+
+  it('returns undefined for a missing or unknown stage', () => {
+    expect(extractFailedStage(withErrorCode('AI_TIMEOUT'))).toBeUndefined();
+    const bogus = new HttpError('http', 'fail', null, {
+      errorCode: 'AI_TIMEOUT',
+      message: 'fail',
+      stage: 'not-a-stage',
+    });
+    expect(extractFailedStage(bogus)).toBeUndefined();
+    expect(extractFailedStage(new Error('boom'))).toBeUndefined();
+  });
+});
+
+describe('isTransientGameError', () => {
+  it.each([
+    'RATE_LIMITED',
+    'AI_RATE_LIMITED',
+    'SERVER_BUSY',
+    'AI_TIMEOUT',
+    'AI_PROVIDER_UNAVAILABLE',
+  ])('treats %s as transient (retry with the same photo can succeed)', (code) => {
+    expect(isTransientGameError(withErrorCode(code))).toBe(true);
+  });
+
+  it('treats a raw network failure as transient', () => {
+    expect(isTransientGameError(new HttpError('network', 'down', null, null))).toBe(true);
+  });
+
+  it('treats validation/consent/file errors and AppErrors as NOT transient', () => {
+    expect(isTransientGameError(withErrorCode('CONSENT_REQUIRED'))).toBe(false);
+    expect(isTransientGameError(withErrorCode('FILE_INVALID'))).toBe(false);
+    expect(isTransientGameError(new AppError(ERROR_MESSAGE_KEYS.upload))).toBe(false);
+    expect(isTransientGameError(new Error('boom'))).toBe(false);
   });
 });

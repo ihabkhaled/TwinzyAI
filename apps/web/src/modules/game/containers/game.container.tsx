@@ -39,11 +39,13 @@ const renderProcessing = (
   />
 );
 
-const renderError = (message: string, retryLabel: string, onRetry: () => void): ReactElement => (
+const renderError = (vm: GameViewModel, labels: GameScreenLabels): ReactElement => (
   <ErrorState
-    message={message}
-    retryLabel={retryLabel}
-    onRetry={onRetry}
+    message={vm.errorMessage ?? ''}
+    retryLabel={labels.result.retryButton}
+    onRetry={vm.onRetry}
+    primaryRetryLabel={vm.canRetrySamePhoto ? labels.retrySamePhoto : undefined}
+    onPrimaryRetry={vm.canRetrySamePhoto ? vm.onRetrySamePhoto : undefined}
     testId={TEST_IDS.errorState}
   />
 );
@@ -111,9 +113,7 @@ export const GameContainer = (): ReactElement => {
       <h1 className={gameTitleClass}>{labels.title}</h1>
       {vm.phase === GamePhase.Setup && <GameSetup vm={vm} labels={labels} />}
       {vm.phase === GamePhase.Processing && renderProcessing(vm, labels, translate)}
-      {vm.phase === GamePhase.Error &&
-        vm.errorMessage !== undefined &&
-        renderError(vm.errorMessage, labels.result.retryButton, vm.onRetry)}
+      {vm.phase === GamePhase.Error && vm.errorMessage !== undefined && renderError(vm, labels)}
       {vm.phase === GamePhase.Success && renderSuccess(vm, labels, translate)}
     </Stack>
   );
