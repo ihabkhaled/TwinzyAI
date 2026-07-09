@@ -1,13 +1,18 @@
 import { expect, test } from '@playwright/test';
 
-import { buildJpegPayload, mockAnalyzeSuccess, playHappyPathUntilAnalyze } from './helpers';
+import {
+  buildJpegPayload,
+  mockAnalyzeSuccess,
+  playHappyPathUntilAnalyze,
+  setInputFile,
+} from './helpers';
 
 test.describe('privacy', () => {
   test('refresh does not resurface the uploaded image or result', async ({ page }) => {
     await mockAnalyzeSuccess(page);
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 

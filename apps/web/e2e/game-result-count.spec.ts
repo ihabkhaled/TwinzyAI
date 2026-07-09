@@ -6,6 +6,7 @@ import {
   buildJpegPayload,
   mockAnalyzeSuccess,
   playHappyPathUntilAnalyze,
+  setInputFile,
   setResultCount,
   SUCCESS_STREAM,
   toEventStream,
@@ -27,7 +28,7 @@ test.describe('result-count selection', () => {
     await mockAnalyzeSuccess(page, MIN_RESULT_COUNT);
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await setResultCount(page, MIN_RESULT_COUNT);
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
@@ -40,7 +41,7 @@ test.describe('result-count selection', () => {
     await mockAnalyzeSuccess(page, 5);
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await setResultCount(page, 5);
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
@@ -65,7 +66,7 @@ test.describe('result-count selection', () => {
   test('analyze request body includes the selected result count', async ({ page }) => {
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await setResultCount(page, 5);
 

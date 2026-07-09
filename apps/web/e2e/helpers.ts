@@ -213,18 +213,6 @@ export const setInputFile = async (
   selector: string,
   filePath: string,
 ): Promise<void> => {
-  await page.evaluate((sel) => {
-    const input = document.querySelector<HTMLInputElement>(sel);
-    if (input === null) {
-      throw new Error(`File input not found: ${sel}`);
-    }
-    input.style.position = 'fixed';
-    input.style.opacity = '1';
-    input.style.width = '100px';
-    input.style.height = '100px';
-    input.style.clipPath = 'none';
-    input.style.zIndex = '9999';
-  }, selector);
   await page.locator(selector).setInputFiles(filePath);
 };
 

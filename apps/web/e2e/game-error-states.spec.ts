@@ -6,6 +6,7 @@ import {
   mockAnalyzeSafety,
   mockAnalyzeTimeout,
   playHappyPathUntilAnalyze,
+  setInputFile,
   SUCCESS_STREAM,
   toEventStream,
 } from './helpers';
@@ -15,7 +16,7 @@ test.describe('error states', () => {
     await mockAnalyzeOversized(page);
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
@@ -78,7 +79,7 @@ test.describe('error states', () => {
     await page.getByRole('button', { name: 'Try another photo' }).click();
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeDisabled();
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
     await expect(page.getByTestId('result-card-1')).toBeVisible();

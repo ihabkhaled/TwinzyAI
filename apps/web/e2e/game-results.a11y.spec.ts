@@ -8,7 +8,8 @@ test.describe('results accessibility', () => {
     await mockAnalyzeSuccess(page);
     await page.goto('/game');
     await playHappyPathUntilAnalyze(page);
-    await expect(page.getByText('Sample Star 1')).toBeVisible();
+    await expect(page.getByTestId('result-card-1')).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
 
     const results = await new AxeBuilder({ page }).analyze();
     const serious = results.violations.filter(

@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 
 import { expect, test } from '@playwright/test';
@@ -10,6 +9,7 @@ import {
   mockAnalyzeFailure,
   mockAnalyzeSuccess,
   playHappyPathUntilAnalyze,
+  setInputFile,
 } from './helpers';
 
 test.describe('game flow (mocked backend)', () => {
@@ -25,7 +25,7 @@ test.describe('game flow (mocked backend)', () => {
     const analyzeButton = page.getByRole('button', { name: 'Analyze my vibe' });
     await expect(analyzeButton).toBeDisabled();
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await expect(analyzeButton).toBeDisabled();
 
     await page.getByRole('checkbox').check();
@@ -47,11 +47,13 @@ test.describe('game flow (mocked backend)', () => {
   });
 
   test('invalid upload shows a friendly error and analyze stays disabled', async ({ page }) => {
-    const hugePath = path.join(os.tmpdir(), 'twinzy-huge.jpg');
+    const tmpDir = path.resolve(__dirname, '../test-results');
+    fs.mkdirSync(tmpDir, { recursive: true });
+    const hugePath = path.join(tmpDir, 'twinzy-huge.jpg');
     fs.writeFileSync(hugePath, Buffer.alloc(6_000_000, 0xff));
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(hugePath);
+    await setInputFile(page, '#game-photo-input', hugePath);
 
     await expect(
       page.getByText('That photo could not be uploaded. Please try a different one.'),

@@ -33,7 +33,7 @@ export function ResultCard({ result, labels, testId }: Readonly<ResultCardProps>
           <span className={resultRankClass}>
             {labels.rankLabel} #{result.rank}
           </span>
-          {result.name}
+          <span>{result.name}</span>
         </h3>
         <span className={resultScoreClass}>
           {labels.scoreLabel}: {result.scorePercent}%

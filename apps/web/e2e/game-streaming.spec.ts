@@ -2,14 +2,14 @@ import { expect, test } from '@playwright/test';
 
 import { DEFAULT_RESULT_COUNT } from '@twinzy/shared';
 
-import { buildJpegPayload, mockAnalyzeSuccess } from './helpers';
+import { buildJpegPayload, mockAnalyzeSuccess, setInputFile } from './helpers';
 
 test.describe('streaming progress', () => {
   test('analyze streams the final result successfully', async ({ page }) => {
     await mockAnalyzeSuccess(page, DEFAULT_RESULT_COUNT);
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
@@ -20,7 +20,7 @@ test.describe('streaming progress', () => {
     await mockAnalyzeSuccess(page, DEFAULT_RESULT_COUNT);
     await page.goto('/game');
 
-    await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+    await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
     await expect(page.getByTestId('result-card-1')).toBeVisible();
