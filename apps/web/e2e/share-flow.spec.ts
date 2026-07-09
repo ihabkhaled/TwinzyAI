@@ -45,8 +45,10 @@ test.describe('temporary shareable results (mocked backend)', () => {
     await expect(page.getByTestId('share-countdown')).toBeVisible();
     await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
     await expect(page.getByTestId('create-own-result')).toBeVisible();
-    // The uploaded image is never shown on the share page.
-    await expect(page.getByRole('img')).toHaveCount(0);
+    // The uploaded image is never shown on the share page. Element-level on
+    // purpose: a photo would render as an <img>; accessible icon SVGs carry
+    // role=img and are fine.
+    await expect(page.locator('img')).toHaveCount(0);
   });
 
   test('a direct visit to an expired/unknown link shows the not-found state', async ({ page }) => {
