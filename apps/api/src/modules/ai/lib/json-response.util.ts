@@ -64,15 +64,13 @@ export const parseAiJsonResponse = <TSchema extends z.ZodType>(
   onIssues?: AiIssueListener,
   normalize?: (parsed: unknown) => unknown,
 ): z.infer<TSchema> => {
-  const parsed = parseJsonBody(rawText);
-  if (!parsed.ok) {
+  const parseResult = parseJsonBody(rawText);
+  if (!parseResult.ok) {
     onIssues?.('response is not valid JSON');
     throw invalidResponse();
   }
 
-  if (normalize) {
-    parsed = normalize(parsed);
-  }
+  const parsed = normalize === undefined ? parseResult.value : normalize(parseResult.value);
 
   const result = schema.safeParse(parsed);
   if (!result.success) {

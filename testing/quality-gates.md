@@ -107,18 +107,18 @@ Hooks install on `npm install` (Husky `prepare`). If a fresh clone shows no enfo
 
 CI reproduces the authoritative scripts in a clean environment — never a divergent shadow set of steps. Required jobs are version-controlled and enforced; none is marked optional or allow-failure.
 
-```yaml
-# Conceptual pipeline — mirrors the local gates, in order
-steps:
-  - run: npm ci
-  - run: npm run lint            # Gate 1
-  - run: npm run typecheck       # Gate 2
-  - run: npm run test:coverage   # Gates 3 + 4 (all projects + thresholds)
-  - run: npm run build           # Gate 5
-  - run: npm run security:scan   # Gate 6 (mechanical half)
-```
+The gates are intentionally split into separate GitHub Actions workflows so branch protection can require each check independently:
 
-CI is the source of truth for merge eligibility: a pull request merges only when every required job is green. A flaky pipeline is a defect — fix the root cause; do not rerun until green.
+| Workflow | Required check | Command |
+| --- | --- | --- |
+| `.github/workflows/gate-lint.yml` | `lint` | `npm run lint` |
+| `.github/workflows/gate-typecheck.yml` | `typecheck` | `npm run typecheck` |
+| `.github/workflows/gate-unit-tests.yml` | `test:unit` | `npm run test:unit` |
+| `.github/workflows/gate-coverage.yml` | `test:coverage` | `npm run test:coverage` |
+| `.github/workflows/gate-build.yml` | `build` | `npm run build` |
+| `.github/workflows/gate-security-scan.yml` | `security:scan` | `npm run security:scan` |
+
+Do not combine these gates into one workflow job or one aggregate check. CI is the source of truth for merge eligibility: a pull request merges only when every required job is green. A flaky pipeline is a defect — fix the root cause; do not rerun until green.
 
 ## Do / Don't
 

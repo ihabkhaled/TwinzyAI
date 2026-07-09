@@ -27,6 +27,10 @@ import { LanguageCodeSchema } from './language.schema';
 /** Short localized trait-reference text used across judged detail arrays. */
 const traitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH);
 
+/** Gemini sometimes omits or mangles rank; keep the result and let backend sorting re-rank later. */
+const normalizeRank = (value: unknown): unknown =>
+  typeof value === 'number' && Number.isInteger(value) ? value : MIN_RESULT_COUNT;
+
 export const JudgeSafetyCheckSchema = z.strictObject({
   containsFaceRecognitionClaim: z.literal(false),
   containsBiometricClaim: z.literal(false),
@@ -42,7 +46,7 @@ export const JudgeSafetyCheckSchema = z.strictObject({
  */
 export const JudgedResultSchema = z.strictObject({
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
-  rank: z.number().int().min(1).max(MAX_RESULT_COUNT),
+  rank: z.preprocess(normalizeRank, z.number().int().min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT)),
   finalStyleVibeFitScore: z.number().int().min(MIN_SCORE).max(MAX_SCORE),
   confidenceLevel: z.enum(CONFIDENCE_LEVEL_VALUES),
   verdict: z.enum(VERDICT_VALUES),

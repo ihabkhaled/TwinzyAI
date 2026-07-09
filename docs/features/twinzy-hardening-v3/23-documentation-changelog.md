@@ -14,6 +14,7 @@
 | `memory/architecture-decisions.md` | Referenced ADR-003. |
 | `testing/frontend/coverage-policy.md` | Noted that `apps/web/vitest.config.mts` is being created in this workstream and the frontend is currently ungated mechanically. |
 | `testing/unit-testing-standard.md` | Noted the `test/` vs `tests/` naming drift in the web workspace. |
+| `testing/quality-gates.md` | Documented the split GitHub Actions gate workflows and required check names. |
 | `docs/features/twinzy-hardening-v3/15-dev-validation-report.md` | New artifact. |
 | `docs/features/twinzy-hardening-v3/23-documentation-changelog.md` | This file. |
 
