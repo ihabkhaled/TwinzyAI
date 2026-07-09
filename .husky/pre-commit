@@ -1,2 +1,6 @@
+# Build the shared package FIRST: lint-staged runs typed eslint, which resolves
+# @twinzy/shared through its dist/ types — a stale/missing dist makes every
+# shared import error-typed and floods no-unsafe-* false positives.
+npm run build:shared
 npx lint-staged
 npm run typecheck
