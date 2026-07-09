@@ -1,0 +1,167 @@
+{
+  "mode": "mock",
+  "startedAtIso": "2026-07-09T18:18:59.964Z",
+  "samplesPerEntry": 3,
+  "steps": [
+    {
+      "step": "extraction",
+      "entries": [
+        {
+          "entryKey": "mock:valid-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.998
+        },
+        {
+          "entryKey": "mock:schema-broken-model",
+          "samples": 3,
+          "schemaOkRate": 0,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.498
+        },
+        {
+          "entryKey": "mock:unsafe-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.998
+        }
+      ],
+      "recommendation": "mock:valid-model (score 0.998)",
+      "notes": [
+        "Expected shape: valid-model scores highest; schema-broken loses the schema axis; unsafe loses the safety axis."
+      ]
+    },
+    {
+      "step": "generation",
+      "entries": [
+        {
+          "entryKey": "mock:valid-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.998
+        },
+        {
+          "entryKey": "mock:schema-broken-model",
+          "samples": 3,
+          "schemaOkRate": 0,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.498
+        },
+        {
+          "entryKey": "mock:unsafe-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 0,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.698
+        }
+      ],
+      "recommendation": "mock:valid-model (score 0.998)",
+      "notes": [
+        "Expected shape: valid-model scores highest; schema-broken loses the schema axis; unsafe loses the safety axis."
+      ]
+    },
+    {
+      "step": "judge",
+      "entries": [
+        {
+          "entryKey": "mock:valid-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.998
+        },
+        {
+          "entryKey": "mock:schema-broken-model",
+          "samples": 3,
+          "schemaOkRate": 0,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.498
+        },
+        {
+          "entryKey": "mock:unsafe-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 0,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.698
+        }
+      ],
+      "recommendation": "mock:valid-model (score 0.998)",
+      "notes": [
+        "Expected shape: valid-model scores highest; schema-broken loses the schema axis; unsafe loses the safety axis."
+      ]
+    },
+    {
+      "step": "translation",
+      "entries": [
+        {
+          "entryKey": "mock:valid-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.998
+        },
+        {
+          "entryKey": "mock:schema-broken-model",
+          "samples": 3,
+          "schemaOkRate": 0,
+          "safetyOkRate": 1,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.498
+        },
+        {
+          "entryKey": "mock:unsafe-model",
+          "samples": 3,
+          "schemaOkRate": 1,
+          "safetyOkRate": 0,
+          "failureRate": 0,
+          "p50Ms": 1237,
+          "p95Ms": 1274,
+          "score": 0.698
+        }
+      ],
+      "recommendation": "mock:valid-model (score 0.998)",
+      "notes": [
+        "Expected shape: valid-model scores highest; schema-broken loses the schema axis; unsafe loses the safety axis."
+      ]
+    }
+  ],
+  "caveats": [
+    "MOCK MODE: responses are canned fixtures and latencies are synthetic — this run validates the harness, scoring, and report format, NOT real providers.",
+    "Run with --mode=real (and configured provider keys) to measure real models; real image steps additionally need --photo=<path>."
+  ]
+}

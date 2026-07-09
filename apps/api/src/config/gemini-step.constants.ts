@@ -39,3 +39,30 @@ export const GEMINI_STEP_ENV_KEYS = {
   GeminiStepValue,
   { model: keyof ParsedEnv; fallbacks: keyof ParsedEnv }
 >;
+
+/** Env key carrying each step's multi-provider route chain (`provider:model` list). */
+export const AI_STEP_ROUTE_ENV_KEYS = {
+  [GeminiStep.Extraction]: 'AI_ROUTE_EXTRACTION',
+  [GeminiStep.Generation]: 'AI_ROUTE_GENERATION',
+  [GeminiStep.Judge]: 'AI_ROUTE_JUDGE',
+  [GeminiStep.Translation]: 'AI_ROUTE_TRANSLATION',
+} as const satisfies Record<GeminiStepValue, keyof ParsedEnv>;
+
+/** Env key carrying each step's optional shadow route (single `provider:model`). */
+export const AI_STEP_SHADOW_ROUTE_ENV_KEYS = {
+  [GeminiStep.Extraction]: 'AI_SHADOW_ROUTE_EXTRACTION',
+  [GeminiStep.Generation]: 'AI_SHADOW_ROUTE_GENERATION',
+  [GeminiStep.Judge]: 'AI_SHADOW_ROUTE_JUDGE',
+  [GeminiStep.Translation]: 'AI_SHADOW_ROUTE_TRANSLATION',
+} as const satisfies Record<GeminiStepValue, keyof ParsedEnv>;
+
+/**
+ * The steps whose provider calls CARRY THE USER'S PHOTO (multimodal by the
+ * owner-approved visual-similarity pivot). Their routes are restricted to
+ * vision-capable entries; translation is text-only by construction.
+ */
+export const AI_IMAGE_STEPS = [
+  GeminiStep.Extraction,
+  GeminiStep.Generation,
+  GeminiStep.Judge,
+] as const satisfies readonly GeminiStepValue[];

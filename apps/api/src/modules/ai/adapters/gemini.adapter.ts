@@ -3,7 +3,6 @@ import { GoogleGenAI } from '@google/genai';
 import { Injectable } from '@nestjs/common';
 
 import { AppConfigService } from '../../../config/app-config.service';
-import type { GeminiStepValue } from '../../../config/gemini-step.constants';
 import {
   AppError,
   ERROR_MESSAGE_KEY_BY_CODE,
@@ -114,7 +113,7 @@ export class GeminiAdapter implements AiProviderAdapter {
    * model was rate-limited, otherwise a 502.
    */
   private async runAcrossModels(call: ModelCall, options?: AiStreamOptions): Promise<string> {
-    const models = this.requireModelChain(options?.step);
+    const models = this.requireModelChain(options);
     let sawRateLimit = false;
 
     for (const model of models) {
@@ -297,8 +296,13 @@ export class GeminiAdapter implements AiProviderAdapter {
     this.logger.warn(`Model ${model} failed (${kind}): ${redactForLog(rawMessage)}`);
   }
 
-  private requireModelChain(step?: GeminiStepValue): readonly string[] {
-    const models = this.config.geminiModelChainFor(step);
+  /**
+   * The models this call walks: the router's explicit per-dispatch override
+   * when present (one entry per cross-provider route hop), otherwise the
+   * step's env-configured chain, otherwise the global chain.
+   */
+  private requireModelChain(options?: AiStreamOptions): readonly string[] {
+    const models = options?.models ?? this.config.geminiModelChainFor(options?.step);
     if (models.length === 0) {
       throw this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE);
     }

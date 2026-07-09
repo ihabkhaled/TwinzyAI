@@ -52,3 +52,20 @@ export const DEFAULT_ANALYSIS_TIMEOUT_MS = 120_000;
 export const MIN_STREAM_TTL_MS = 1000;
 export const MAX_STREAM_TTL_MS = 1_800_000;
 export const DEFAULT_STREAM_TTL_MS = 180_000;
+
+// --- Temporary shareable-result cache (no database; TTL-only) ---
+// TTL bounds mirror the shared cross-side constants so the API, the frontend,
+// and the docs agree on one window. Default 10 minutes, min 1, max 60.
+export const MIN_SHARE_RESULT_TTL_SECONDS = 60;
+export const MAX_SHARE_RESULT_TTL_SECONDS = 3600;
+export const DEFAULT_SHARE_RESULT_TTL_SECONDS = 600;
+
+export const MIN_SHARE_RESULT_MAX_PAYLOAD_BYTES = 1024;
+export const MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES = 500_000;
+export const DEFAULT_SHARE_RESULT_MAX_PAYLOAD_BYTES = 50_000;
+
+export const MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS = 1;
+export const MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS = 100_000;
+export const DEFAULT_SHARE_RESULT_MAX_ACTIVE_ITEMS = 1000;
+
+export const DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL = 'http://localhost:3000';

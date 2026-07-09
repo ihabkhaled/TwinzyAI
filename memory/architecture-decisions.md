@@ -3,6 +3,28 @@
 Standing shape lives in [project-architecture.md](./project-architecture.md); this file records
 the individual decisions and their reasons.
 
+## Multi-provider AI routing (2026-07-09)
+
+- The `AI_PROVIDER_ADAPTER` port is served by `AiRouterService` (in `modules/ai/adapters/` —
+  the infrastructure/ folder is persistence-only by lint rule): it resolves each step's
+  env-configured `provider:model` route chain, walks entries ACROSS providers on recoverable
+  failures, and fires the sampled shadow run. Step services and their tests are untouched —
+  they still consume the same port. A Gemini-only config routes exactly as before (bare model
+  tokens mean `gemini:<model>`).
+- ONE `OpenAiCompatAdapter` (native `fetch`, zero new dependencies) serves OpenAI, DeepSeek,
+  Qwen, Kimi, and GLM, parameterized by config base URL + key. Key presence IS the provider
+  enable flag. Anthropic deferred: its OpenAI-compat layer lacks structured outputs and its
+  AUP refuses photo→name tasks (see the research doc).
+- **Fail-closed image rule:** photo-carrying steps dispatch only to gemini models or entries
+  explicitly declared in `AI_VISION_MODELS`. Rationale is privacy: research found e.g. Kimi
+  trains on API-submitted images — a photo must never reach a provider the operator did not
+  consciously approve. Boot validation crashes on an explicit route with zero usable entries;
+  implicit/keyless routes only warn (CI boots stay green).
+- Docs: [/docs/provider-routing.md](../docs/provider-routing.md),
+  [/docs/ai-benchmarking.md](../docs/ai-benchmarking.md), research + SDLC artifacts under
+  [/docs/features/multi-provider-ai/](../docs/features/multi-provider-ai/00-intake.md).
+  Rollback for any routing change is env-only.
+
 ## Engineering-OS adoption (ADR-001)
 
 - The repo adopted the strict engineering OS: canonical layered module anatomy

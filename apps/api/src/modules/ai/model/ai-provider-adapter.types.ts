@@ -28,12 +28,15 @@ export type AiContentValidator = (text: string) => AiValidationResult;
 /**
  * Per-call options shared by all provider methods. `step` selects the
  * env-configured model chain for that pipeline step (extraction, generation,
- * judge, translation); omitted → the global chain. Model ids themselves never
- * appear here — they come exclusively from configuration.
+ * judge, translation); omitted → the global chain. `models` is the ROUTER's
+ * override: when the AI router walks a cross-provider route it pins each
+ * dispatch to exactly one model. Model ids never originate in code — they
+ * come exclusively from configuration.
  */
 export interface AiCallOptions {
   readonly validate?: AiContentValidator;
   readonly step?: GeminiStepValue;
+  readonly models?: readonly string[];
 }
 
 /**

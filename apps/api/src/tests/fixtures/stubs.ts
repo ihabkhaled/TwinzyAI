@@ -1,5 +1,7 @@
 import { vi } from 'vitest';
 
+import { AiProvider, type AiProviderValue } from '../../config/ai-provider.constants';
+import { type AiRouteEntry, routeEntryKey } from '../../config/ai-route.types';
 import type { AppConfigService } from '../../config/app-config.service';
 import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import type { AppLogger } from '../../core/logger/app-logger.service';
@@ -66,16 +68,42 @@ const CONFIG_DEFAULTS = {
   // Per-step chain overrides for geminiModelChainFor; a step absent here
   // falls back to geminiModelChain, mirroring the real service's semantics.
   geminiStepModelChains: {} as Partial<Record<GeminiStepValue, readonly string[]>>,
+  // Multi-provider routing surface (mirrors AppConfigService semantics).
+  aiStepRoutes: {} as Partial<Record<GeminiStepValue, readonly AiRouteEntry[]>>,
+  enabledProviders: [AiProvider.Gemini] as readonly AiProviderValue[],
+  // Extra `provider:model` keys declared vision-capable (gemini always is).
+  visionCapableKeys: [] as readonly string[],
+  shadowEnabled: false,
+  shadowSampleRate: 0,
+  shadowAllowImage: false,
+  shadowTimeoutMs: 5000,
+  shadowStepRoutes: {} as Partial<Record<GeminiStepValue, AiRouteEntry>>,
 };
 
 export const buildConfigStub = (
   overrides: Partial<typeof CONFIG_DEFAULTS> = {},
 ): AppConfigService => {
   const values = { ...CONFIG_DEFAULTS, ...overrides };
+  const geminiModelChainFor = (step?: GeminiStepValue): readonly string[] =>
+    (step === undefined ? undefined : values.geminiStepModelChains[step]) ??
+    values.geminiModelChain;
   return {
     ...values,
-    geminiModelChainFor: (step?: GeminiStepValue): readonly string[] =>
-      (step === undefined ? undefined : values.geminiStepModelChains[step]) ??
-      values.geminiModelChain,
+    geminiModelChainFor,
+    aiRouteFor: (step: GeminiStepValue): readonly AiRouteEntry[] =>
+      values.aiStepRoutes[step] ??
+      geminiModelChainFor(step).map((model) => ({ provider: AiProvider.Gemini, model })),
+    hasExplicitAiRoute: (step: GeminiStepValue): boolean => values.aiStepRoutes[step] !== undefined,
+    isProviderEnabled: (provider: AiProviderValue): boolean =>
+      values.enabledProviders.includes(provider),
+    isVisionCapable: (entry: AiRouteEntry): boolean =>
+      entry.provider === AiProvider.Gemini ||
+      values.visionCapableKeys.includes(routeEntryKey(entry)),
+    openAiCompatCredential: (): { apiKey: string; baseUrl: string } => ({
+      apiKey: 'test-key',
+      baseUrl: 'https://provider.test/v1',
+    }),
+    shadowRouteFor: (step: GeminiStepValue): AiRouteEntry | undefined =>
+      values.shadowStepRoutes[step],
   } as unknown as AppConfigService;
 };

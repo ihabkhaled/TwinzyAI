@@ -1,0 +1,547 @@
+[
+  {
+    "provider": "google-gemini (Gemini Developer API, ai.google.dev — incumbent provider for TwinzyAI)",
+    "flagshipModels": [
+      {
+        "id": "gemini-3.1-pro-preview",
+        "vision": true,
+        "inputPricePerM": "$2.00 (<=200k tok), $4.00 (>200k)",
+        "outputPricePerM": "$12.00 (<=200k tok), $18.00 (>200k)",
+        "notes": "Flagship reasoner (released Feb 19, 2026) — STILL preview-only in July 2026, no GA SKU; #1 Arabic score on Artificial Analysis Multilingual Index; 1M context, adaptive thinking; ~123 tok/s; no free tier; batch -50%; preview class carries 2-week deprecation-notice risk."
+      },
+      {
+        "id": "gemini-3.5-flash",
+        "vision": true,
+        "inputPricePerM": "$1.50 (cached $0.15)",
+        "outputPricePerM": "$9.00",
+        "notes": "GA workhorse since May 19, 2026 — 'most intelligent Flash model'; 1M input / 65k output; thinking_level minimal|low|medium(default)|high; 167-278 tok/s measured; TTFT ~21-30s at HIGH thinking (thinking-inclusive) but low at minimal/low; NOTE: 3x the price of its Gemini 3 Flash Preview predecessor; batch -50%; free tier exists (never use for user photos — training)."
+      },
+      {
+        "id": "gemini-3.1-flash-lite",
+        "vision": true,
+        "inputPricePerM": "$0.25 ($0.50 audio)",
+        "outputPricePerM": "$1.50",
+        "notes": "GA budget tier (May 7, 2026; earliest shutdown May 7, 2027); vision + function calling + 1M context; ~311-382 tok/s, TTFT ~4.8s — fastest of the lineup; free tier exists (avoid for photos)."
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "vision": true,
+        "inputPricePerM": "$0.30",
+        "outputPricePerM": "$2.50",
+        "notes": "Legacy stable — SHUTDOWN Oct 16, 2026, migrate to gemini-3.5-flash. If TwinzyAI's GEMINI_MODEL env still points at any 2.5 model, migration is due within ~3 months."
+      },
+      {
+        "id": "gemini-2.5-flash-lite",
+        "vision": true,
+        "inputPricePerM": "$0.10",
+        "outputPricePerM": "$0.40",
+        "notes": "Cheapest option still listed stable, but the 2.5 family is sunsetting (flash/pro die Oct 16, 2026) — fine as a stop-gap translation model only, plan exit to 3.1-flash-lite."
+      }
+    ],
+    "visionSupport": "All three current text models take image input natively (gemini-3.5-flash, gemini-3.1-pro-preview, gemini-3.1-flash-lite); Google claims best-in-class common-vision performance and images work through both the native API and the OpenAI-compat layer. Critical for TwinzyAI: Gemini's real-people restrictions apply to image GENERATION, not image UNDERSTANDING — Gemini vision models identify public figures in input photos at >90% accuracy (minimaxir July-2025 analysis), so resemblance-to-celebrity flows are supported (and TwinzyAI already runs on Gemini today).",
+    "jsonReliability": "Native constrained-decoding structured output via responseSchema/responseJsonSchema (and response_format json_schema on the OpenAI-compat endpoint); Nov-2025 upgrade added real JSON Schema support ($ref, anyOf, additionalProperties). Output is guaranteed syntactically valid JSON; docs still advise validating values (TwinzyAI's Zod layer covers this). Known caveat directly relevant to the 221-field extraction schema: very large/complex schemas can be rejected with 'schema too complex / too many states' (long property names, many enums, min/max bounds, many optional props) — mitigations are shortening names, reducing enum/bound constraints, or splitting sub-schemas. The current TwinzyAI schema is proven in production on Gemini, so this is a managed rather than open risk.",
+    "arabicQuality": "Best-in-class among Western API providers: Gemini models hold the top slots on Artificial Analysis' Arabic Multilingual Index (gemini-3.1-pro-preview #1; Gemini 3 Flash also top-5, ahead of most GPT/Claude tiers). Strong Egyptian/regional cultural knowledge; independent studies show Gemini leading Arabic satisfaction vs GPT-4o-class models. en<->ar JSON translation is a solved problem even on flash-lite.",
+    "pricing": "Budget: gemini-3.1-flash-lite $0.25/$1.50. Workhorse: gemini-3.5-flash $1.50/$9.00 (cached input $0.15). Flagship: gemini-3.1-pro-preview $2/$12 rising to $4/$18 past 200k context. Batch API -50% on everything. Legacy 2.5-flash $0.30/$2.50 and 2.5-flash-lite $0.10/$0.40 until the Oct-2026 sunset. Watch-out: clear upward price trend — 3.5 Flash costs 3x its predecessor; thinking tokens bill as output tokens, so high thinking_level inflates judge-step cost.",
+    "latency": "Excellent throughput reputation: 3.5-flash measured 167-278 tok/s (top-2 in its Artificial Analysis price class; Google claims ~4x faster than comparable frontier models), 3.1-flash-lite ~311-382 tok/s with ~4.8s TTFT, 3.1-pro-preview ~123 tok/s. Caveat: TTFT at high thinking_level is 20-30s (thinking-inclusive) on 3.5-flash — for latency-sensitive steps use thinking_level minimal/low; translation on flash-lite is near-instant.",
+    "stability": "Mixed. Stable (GA) models get ~12+ month windows (3.1-flash-lite earliest shutdown May 7, 2027) and 'shutdown dates are earliest-possible dates' with advance notice. But churn is aggressive: 2.0 family shut down June 1, 2026; 2.5-flash and 2.5-pro shut down Oct 16, 2026 (forced migration to 3.5-flash / 3.1-pro-preview); previews can be deprecated with 2 weeks notice; and the flagship Pro tier has been preview-only for ~5 months (gemini-3.1-pro-preview, no GA id), which is a real production-dependency risk. -latest aliases auto-swap with 2-week notification. TwinzyAI's env-driven GEMINI_MODEL makes swaps operationally cheap, but expect ~2 forced migrations/year.",
+    "openaiCompatible": true,
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai/",
+    "privacy": "Paid tier: Google does NOT use prompts/responses (including images) to train or improve products; inputs are logged only 'for a limited period' solely for abuse/violation detection, then handled per Prohibited Use Policy monitoring — acceptable for TwinzyAI's no-persistence photo constraint. Unpaid/free tier: content IS used to 'provide, improve, and develop Google products' and human reviewers may read inputs/outputs — PROHIBITED for user photos; ensure Cloud Billing is active on every environment key (dev/staging included). EEA/UK/Switzerland users get paid-tier protections across services when billing is active. Residency caveat: developer-API data 'may be stored transiently or cached in any country' — no residency guarantee; use Vertex AI regional endpoints if residency ever becomes a requirement. OpenAI-compat layer is beta and inherits the same terms.",
+    "perStepFit": {
+      "extraction": "5/5 — Incumbent and best fit: top-tier vision + native constrained structured output on a GA model (gemini-3.5-flash, thinking low/medium), 1M context, image+schema work together. Only caveat is the documented large-schema rejection risk for 221 fields ('too many states') — already mitigated in practice since the current schema runs on Gemini today; keep property names short and enums lean.",
+      "generation": "5/5 — Best Egyptian/Arab regional celebrity recall of any Western provider (Gemini tops the Artificial Analysis Arabic index; strong MENA cultural coverage), vision input allowed for resemblance work (person-restriction applies to generation, not understanding; >90% public-figure recognition accuracy). gemini-3.1-pro-preview for max recall, gemini-3.5-flash for cost-balanced pools.",
+      "judge": "4/5 — gemini-3.1-pro-preview is the ideal judge on capability (top reasoning, vision, conservative instruction-following, #1 Arabic) but it is still PREVIEW-only in July 2026 — uncomfortable for the safety-critical step under a 2-week-notice deprecation class. GA fallback gemini-3.5-flash at thinking_level high is very good but adds 20-30s thinking-inclusive TTFT and thinking-token output cost. Content-level model fallback (already implemented in TwinzyAI) de-risks this.",
+      "translation": "5/5 — gemini-3.1-flash-lite is close to perfect for en<->ar JSON translation: $0.25/$1.50, ~311-382 tok/s, ~4.8s TTFT, GA until at least May 2027, top-tier Arabic, structured output + 1M context. Legacy 2.5-flash-lite ($0.10/$0.40) is cheaper but the 2.5 family sunsets Oct 16, 2026."
+    },
+    "risks": "1) Flagship gap: no GA Pro model — gemini-3.1-pro-preview can be deprecated on 2 weeks notice; pin per-step fallbacks. 2) Forced migration deadline: gemini-2.5-flash/pro shut down Oct 16, 2026 — if any GEMINI_MODEL env still references 2.5, migrate within ~3 months and re-run the 221-field schema-compatibility + safety-filter regression on 3.x. 3) Price escalation trend (3.5 Flash = 3x predecessor) plus thinking-tokens-as-output can silently multiply judge-step cost; cap thinking_level via env. 4) Large-schema 'too many states' rejections can reappear when models change — treat schema-complexity tests as part of migration gates. 5) High-thinking TTFT (20-30s) can stress SSE/stream timeouts and the multi-tab stream-isolation layer. 6) Free-tier keys train on data incl. images — an ops misconfiguration (missing billing on a dev key) becomes a privacy incident under TwinzyAI's consent copy. 7) No data-residency control on the developer API (any-country transient caching); Vertex AI is the escape hatch. 8) OpenAI-compat endpoint is beta — fine as a portability hedge, but keep the native SDK as primary.",
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/models",
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://ai.google.dev/gemini-api/docs/deprecations",
+      "https://ai.google.dev/gemini-api/docs/openai",
+      "https://ai.google.dev/gemini-api/terms",
+      "https://ai.google.dev/gemini-api/docs/structured-output",
+      "https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5",
+      "https://artificialanalysis.ai/models/gemini-3-5-flash/providers",
+      "https://artificialanalysis.ai/models/multilingual/arabic",
+      "https://artificialanalysis.ai/models/gemini-3-1-flash-lite-preview",
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/",
+      "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-structured-outputs/",
+      "https://minimaxir.com/2025/07/llms-identify-people/",
+      "https://openrouter.ai/google/gemini-3.5-flash",
+      "https://discuss.ai.google.dev/t/unexpected-invalidargument-error-for-large-response-schema/37272",
+      "https://devtk.ai/en/blog/gemini-api-pricing-guide-2026/"
+    ]
+  },
+  {
+    "provider": "OpenAI API (GPT-5.x line, as of July 9, 2026)",
+    "flagshipModels": [
+      {
+        "id": "gpt-5.6-sol",
+        "vision": true,
+        "inputPricePerM": "$5.00",
+        "outputPricePerM": "$30.00",
+        "notes": "New flagship (GA July 9, 2026 after gov-restricted preview since June 26). Hardest-problem tier; new 'max' reasoning effort + 'ultra' subagent mode; 1.05M context / 128K output; cached input $0.50. Brand-new — treat as unproven for production for a few weeks."
+      },
+      {
+        "id": "gpt-5.6-terra",
+        "vision": true,
+        "inputPricePerM": "$2.50",
+        "outputPricePerM": "$15.00",
+        "notes": "Balanced everyday-work tier of the 5.6 family (high-volume business tasks, document analysis); 1.05M context; cached input $0.25. Natural successor to gpt-5.4 as production workhorse."
+      },
+      {
+        "id": "gpt-5.6-luna",
+        "vision": true,
+        "inputPricePerM": "$1.00",
+        "outputPricePerM": "$6.00",
+        "notes": "Fast/affordable tier of 5.6; OpenAI docs now recommend Luna 'for most new speed- and cost-sensitive workloads'; ~150+ tok/s sustained per early third-party reports; cached input $0.10."
+      },
+      {
+        "id": "gpt-5.5",
+        "vision": true,
+        "inputPricePerM": "$5.00",
+        "outputPricePerM": "$30.00",
+        "notes": "Previous flagship (April 2026), proven in production; MMLU-Arabic 0.857. gpt-5.5-pro at $30/$180 for extreme reasoning. Safe conservative pick while 5.6 matures."
+      },
+      {
+        "id": "gpt-5.4",
+        "vision": true,
+        "inputPricePerM": "$2.50",
+        "outputPricePerM": "$15.00",
+        "notes": "Recommended production workhorse of the prior generation; same price as terra; gpt-5.4-pro $30/$180 also listed."
+      },
+      {
+        "id": "gpt-5.4-mini",
+        "vision": true,
+        "inputPricePerM": "$0.75",
+        "outputPricePerM": "$4.50",
+        "notes": "Compact tier: image input, tool use, structured outputs; 400K context; strong at extracting structured info from visual documents; cached input $0.075."
+      },
+      {
+        "id": "gpt-5.4-nano",
+        "vision": true,
+        "inputPricePerM": "$0.20",
+        "outputPricePerM": "$1.25",
+        "notes": "Cheapest current-gen model (API-only): classification, data extraction, lightweight subagents; supports image input + structured outputs; cached input $0.02. Legacy gpt-5-nano still listed at $0.05/$0.40 but its dated snapshot line retires Dec 11, 2026."
+      }
+    ],
+    "visionSupport": "All current GPT-5.x text models accept image input (input-only): gpt-5.6-sol/terra/luna, gpt-5.5, gpt-5.4, gpt-5.4-mini, gpt-5.4-nano. Vision quality is strong for OCR, document understanding, trait/attribute description, and UI interpretation. CRITICAL CAVEAT for TwinzyAI: OpenAI models are deliberately safety-trained to REFUSE identifying/naming people in photos — including famous public figures (\"Sorry, I can't help with that\" on a Barack Obama photo via API, per July 2025 testing of GPT-4.1; community threads confirm the same for 4o/5-era models, and no evidence the policy was relaxed in 5.5/5.6 — GPT-5.6 actually ADDS activation-classifier safety monitoring). Capability exists but is suppressed by policy; resemblance-to-named-celebrity queries sit adjacent to this refusal boundary and behave inconsistently. Images are billed as input tokens (patch-based: low fidelity ~65 base + 129/tile; high fidelity adds ~4,160 tokens square / ~6,240 portrait ≈ $0.016/photo on terra-class pricing).",
+    "jsonReliability": "Best-in-class. Strict Structured Outputs (response_format/text.format type json_schema, strict:true) uses constrained decoding at the token level — output is guaranteed to conform to the JSON Schema (Draft 2020-12), available on Responses and Chat Completions APIs, with SDK helpers for Zod (openai-node zodTextFormat/zodResponseFormat) and Pydantic. JSON mode (json_object) is now considered legacy. Schema-conformance is 100% by construction; semantic accuracy on complex nested JSON also improved generation-over-generation (~82% → 92%+ from 5.1 → 5.2 per third-party tracking, better since). A 221-field strict schema fits within the expanded structured-output limits and pairs perfectly with TwinzyAI's server-side Zod validation.",
+    "arabicQuality": "Tier-1 Arabic. GPT-5.5 scores 0.857 on 0-shot MMLU-Arabic (gpt-5-thinking variants ~0.903); a 2026 arXiv cultural-benchmarking study found the GPT-5 line the best-performing proprietary model at country-wise dialect-to-MSA translation, with strong scores across Gulf, Levant, and Nile River (Egyptian) dialects — directly relevant to TwinzyAI's Egyptian audience. Aggregate multilingual crown is contested (Claude Opus 4.7 reported slightly ahead overall), but for en<->ar translation of result JSON, even the nano/luna tiers are highly capable.",
+    "pricing": "Per 1M tokens (standard tier, July 2026 official sheet): gpt-5.6-sol $5/$30 (cached in $0.50), gpt-5.6-terra $2.50/$15 (cached $0.25), gpt-5.6-luna $1/$6 (cached $0.10), gpt-5.5 $5/$30, gpt-5.5-pro $30/$180, gpt-5.4 $2.50/$15, gpt-5.4-mini $0.75/$4.50 (cached $0.075), gpt-5.4-nano $0.20/$1.25 (cached $0.02); legacy gpt-5-nano $0.05/$0.40 still listed. Prompt caching gives ~90% off repeated prefixes (big win for TwinzyAI's long fixed prompts); Batch API and Flex processing are flat −50% (Flex/Batch too slow for interactive game flow, fine for offline evals). Images billed as input tokens: roughly $0.002–$0.02 per user photo depending on model tier and fidelity. Watch for repricing events — third parties recorded a GPT-5.2 price increase on July 2, 2026.",
+    "latency": "Good-to-excellent and tunable. Early GPT-5.6 numbers (third-party, day-one): Luna ~150+ tok/s sustained with sub-second TTFT; Sol/Terra TTFT reported in the ~180–680 ms range depending on tier and load; OpenAI is also launching Sol on Cerebras hardware at up to 750 tok/s in July 2026. Key nuance: these are reasoning models — end-to-end latency is dominated by reasoning effort (minimal/none → fast; high/'max' on Sol → seconds to tens of seconds of thinking before output). reasoning_effort is controllable per-request, and Priority Processing (paid) buys lower TTFT. Reputation overall: mid-pack raw tok/s on default infra, best-in-industry availability and rate-limit scale.",
+    "stability": "Very stable API surface, very fast model churn. Formal deprecation policy: >=6 months notice for GA models, >=3 months for specialized variants (chat/codex/deep-research), as little as ~2 weeks for previews. Concrete upcoming shutdowns: gpt-5-2025-08-07 + gpt-5-mini-2025-08-07 + gpt-5-pro + o3 retire Dec 11, 2026; gpt-5-chat-latest/gpt-5.1-chat-latest and gpt-5-codex/5.1-codex retire July 23, 2026; gpt-4o-2024-05-13 retires Oct 23, 2026; the Assistants API sunsets Aug 26, 2026. Chat Completions remains supported indefinitely; Responses API is the primary/recommended surface. Release cadence is ~quarterly (5.4 -> 5.5 April 2026 -> 5.6 July 9, 2026), so expect to re-evaluate model ids every 6-12 months — TwinzyAI's env-driven model-id pattern (like GEMINI_MODEL) is exactly the right mitigation; pin dated snapshots for reproducibility.",
+    "openaiCompatible": true,
+    "baseUrl": "https://api.openai.com/v1",
+    "privacy": "Good default posture: since March 1, 2023, data sent to the API (inputs AND outputs, including images) is NOT used to train or improve models unless you explicitly opt in. Default retention: API inputs/outputs may be securely retained up to 30 days for service operation and abuse monitoring, then deleted (unless legally required to hold). Zero Data Retention (ZDR) exists — prompts/outputs processed in memory, not retained — but it is NOT self-serve: eligibility per endpoint and enablement go through your OpenAI account team. Image-specific exception: content flagged by the CSAM classifier is retained for human review even under ZDR. US/EU data-residency options exist for the API; SOC 2 Type 2, DPA available. For TwinzyAI: the no-training default satisfies the 'no training on API inputs' preference, but the 30-day server-side retention of user photos conflicts with the spirit of the no-image-persistence constraint — negotiate ZDR before shipping photos to this provider, and note GPT-5.6's new in-flight safety monitoring (activation classifiers reviewing generations) as an additional processing disclosure consideration for consent copy.",
+    "perStepFit": {
+      "extraction": "4/5 — Near-ideal technically: strong vision, guaranteed strict-schema output via constrained decoding for the 221-field JSON (native Zod SDK support), low-hallucination reputation improving each generation, and ~90% prompt-cache discount on the long fixed prompt. Docked one point because describing a real person's face in fine detail occasionally triggers safety hedging/partial refusals on OpenAI models, which must be prompt-engineered around and monitored. Best picks: gpt-5.6-terra or gpt-5.4 (workhorse quality), gpt-5.4-mini for a cheaper fallback.",
+      "generation": "2/5 — The weakest step for OpenAI and the core product risk: models are hard-trained to refuse identifying/naming people in photos (blanket 'Sorry, I can't help with that' on even famous faces via API, confirmed through GPT-4.1 and no relaxation evidenced in 5.5/5.6 — 5.6 adds MORE safety monitoring). 'Which public figures does this person resemble' sits directly on that refusal boundary; behavior is inconsistent and known workarounds violate usage policies. Text-side celebrity knowledge (from extracted traits, no photo) is broad including Egyptian/Arab figures, so a traits-only generation prompt would fare better (~3/5), but with the photo in-loop as TwinzyAI now intends, expect refusals and suppressed recall.",
+      "judge": "3/5 — Reasoning quality for verification and conservative scoring is top-tier (Sol/5.5 with medium-high reasoning effort), and strict structured outputs guarantee the scored-result schema. But the judge must look at the user's photo and score resemblance against NAMED public figures — again adjacent to the person-identification refusal; careful framing (visible-feature similarity scoring, no identity claims — which TwinzyAI's constraints already require) may pass, but reliability at scale is unproven and refusal-rate monitoring plus a fallback provider are mandatory. Reasoning tokens also inflate output-side cost ($15-$30/M).",
+      "translation": "5/5 — Perfect fit: text-only en<->ar JSON translation with structured outputs to preserve shape, GPT-5 line is the best proprietary performer on Arabic dialect handling incl. Egyptian, and the budget tiers are cheap and fast (gpt-5.4-nano $0.20/$1.25, gpt-5.6-luna $1/$6 at 150+ tok/s, legacy gpt-5-nano $0.05/$0.40 while it lasts). No safety friction on this step."
+    },
+    "risks": "1) Person-in-photo identification refusals are the existential risk for the generation/judge steps — OpenAI capability is deliberately suppressed by policy, refusal behavior is inconsistent, and prompt-engineering around it breaches usage policies (account risk). Run a refusal-rate spike test on real prompts before committing. 2) Usage-policy sensitivity: a facial-resemblance app touches 'privacy of others'/likeness clauses; TwinzyAI's consent-first design helps but warrants a policy/legal read. 3) Fast churn: quarterly model releases, snapshots retired in ~12-16 months (gpt-5 line dies Dec 11, 2026; Assistants API Aug 26, 2026) — keep model ids env-driven and re-evaluate biannually. 4) GPT-5.6 GA'd literally today (July 9, 2026) after an unusual US-government-restricted preview — day-one models are unproven and the regulatory episode adds uncertainty; prefer gpt-5.4/5.5 for production until 5.6 stabilizes. 5) Default 30-day retention of uploaded photos unless ZDR is granted (not self-serve) — a gap against the no-image-persistence constraint. 6) Reasoning-token billing makes judge-step output costs spiky; cap via reasoning_effort. 7) Observed 2026 repricing events (e.g., GPT-5.2 raised July 2, 2026) — budget against the live price sheet, not cached numbers.",
+    "sources": [
+      "https://developers.openai.com/api/docs/pricing",
+      "https://developers.openai.com/api/docs/models",
+      "https://developers.openai.com/api/docs/models/gpt-5-nano",
+      "https://developers.openai.com/api/docs/deprecations",
+      "https://developers.openai.com/api/docs/guides/your-data",
+      "https://developers.openai.com/api/docs/guides/images-vision",
+      "https://openai.com/index/previewing-gpt-5-6-sol/",
+      "https://openai.com/index/introducing-gpt-5-5/",
+      "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/",
+      "https://openai.com/index/introducing-structured-outputs-in-the-api/",
+      "https://openai.com/enterprise-privacy/",
+      "https://openai.com/business-data/",
+      "https://openai.com/policies/usage-policies/",
+      "https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance",
+      "https://help.openai.com/en/articles/20001325-a-preview-of-gpt-56-sol-terra-and-luna",
+      "https://deploymentsafety.openai.com/gpt-5-6-preview",
+      "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/",
+      "https://venturebeat.com/technology/openai-unveils-gpt-5-6-sol-terra-and-luna-models-but-only-accessible-to-limited-preview-partners-for-now-per-us-gov",
+      "https://www.datacamp.com/blog/gpt-5-6-sol-luna-terra",
+      "https://www.datacamp.com/blog/gpt-5-4-mini-nano",
+      "https://kie.ai/blog/gpt-5-6-sol-terra-luna-deep-dive",
+      "https://minimaxir.com/2025/07/llms-identify-people/",
+      "https://community.openai.com/t/how-to-get-rid-of-the-im-sorry-i-cant-help-with-identifying-people-in-images-from-gpt-4o-response/1129105",
+      "https://github.com/openai/openai-python/discussions/2495",
+      "https://arxiv.org/pdf/2605.00119",
+      "https://benchlm.ai/models/gpt-5-5",
+      "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/introducing-openai%E2%80%99s-gpt-5-4-mini-and-gpt-5-4-nano-for-low-latency-ai/4500569",
+      "https://www.axios.com/2026/07/08/openai-gpt-trump-ban-lifted"
+    ]
+  },
+  {
+    "provider": "anthropic",
+    "flagshipModels": [
+      {
+        "id": "claude-fable-5",
+        "vision": true,
+        "inputPricePerM": "$10.00",
+        "outputPricePerM": "$50.00",
+        "notes": "Most capable model (GA 2026-06-09). 1M context / 128K output, always-on adaptive thinking, high-res vision (2576px). REQUIRES 30-day data retention — not available under Zero Data Retention, so it conflicts with TwinzyAI's no-persistence posture for photo steps. Slow (minutes-long turns); overkill for this pipeline."
+      },
+      {
+        "id": "claude-opus-4-8",
+        "vision": true,
+        "inputPricePerM": "$5.00",
+        "outputPricePerM": "$25.00",
+        "notes": "Flagship Opus tier. 1M context / 128K output, adaptive thinking + effort param (low..max), high-res vision (2576px long edge, up to 4784 image tokens). Optional fast mode (beta, ~2.5x output speed) at $10/$50. ZDR-eligible."
+      },
+      {
+        "id": "claude-sonnet-5",
+        "vision": true,
+        "inputPricePerM": "$3.00 ($2.00 intro through 2026-08-31)",
+        "outputPricePerM": "$15.00 ($10.00 intro through 2026-08-31)",
+        "notes": "Workhorse — near-Opus quality on agentic/structured work. 1M context / 128K output, adaptive thinking on by default, high-res vision (2576px). New tokenizer: ~30% more tokens for same text vs Sonnet 4.6. Best quality/cost for extraction + judge. Legacy claude-sonnet-4-6 remains active at $3/$15."
+      },
+      {
+        "id": "claude-haiku-4-5",
+        "vision": true,
+        "inputPricePerM": "$1.00",
+        "outputPricePerM": "$5.00",
+        "notes": "Budget/speed tier (full id claude-haiku-4-5-20251001). 200K context / 64K output, standard-res vision (1568px), extended thinking via budget_tokens (no adaptive). Fastest Anthropic model (~94-96 tok/s, ~1.0s TTFT). Supports structured outputs. Good for translation, though pricier than rival budget tiers."
+      }
+    ],
+    "visionSupport": "All current models take image input (base64, URL, or Files API): Fable 5, Opus 4.8, Sonnet 5, Haiku 4.5, plus legacy Opus 4.7/4.6/4.5, Sonnet 4.6/4.5. High-resolution tier (2576px long edge, up to 4784 visual tokens/image) on Fable 5 / Opus 4.8 / 4.7 / Sonnet 5; standard tier (1568px, ~1600 tokens) on Haiku 4.5 and older. Formats: JPEG/PNG/GIF/WebP, 10MB max/image, cost = ceil(w/28) x ceil(h/28) tokens (~1,296 tokens for 1000x1000). Vision quality is top-tier for trait description/document understanding. CRITICAL CAVEAT for TwinzyAI: official vision docs state 'People identification: Claude cannot be used to name people in images and refuses to do so' (Acceptable Use Policy-backed). Describing visible traits is fine; asking it to NAME public figures who resemble a photo triggers this trained refusal behavior and is policy-adjacent, even when framed as resemblance rather than identity.",
+    "jsonReliability": "Excellent — best-in-class. Structured outputs are GA on the native Messages API: output_config.format with json_schema uses grammar-constrained decoding (guaranteed schema-valid output), plus strict:true tool use; SDK messages.parse() validates against Zod (TS) / Pydantic (Python). Supported on Fable 5, Opus 4.8, Sonnet 5, Haiku 4.5 (and legacy Opus 4.5/4.1). Fits the 221-field extraction schema: no recursion allowed, additionalProperties:false required on every object, numeric/string constraints (min/max/minLength) are stripped server-side and validated client-side by the SDK — TwinzyAI's server-side Zod validation covers that gap anyway. One-time schema compilation latency on first request, then 24h schema cache. Caveats: a safety refusal (stop_reason:'refusal') may not match the schema; structured outputs incompatible with citations. Pre-feature JSON instruction-following reputation was already among the strongest in the industry.",
+    "arabicQuality": "Very strong. Official multilingual benchmark (human-translated MMLU, zero-shot CoT): Arabic at 97.2% of English performance on Sonnet 4.5, 97.1% on Opus 4.1, 92.5% on Haiku 4.5 — among the best Arabic retention rates of any provider. Fluent MSA and reasonable Egyptian colloquial awareness in practice; docs recommend pinning the target language in the system prompt and using native script. Newer Sonnet 5 / Opus 4.8 are expected at or above these levels (Jan 2026 knowledge cutoff). Arabic tokenizes to more tokens than English (cost multiplier applies), and the Opus 4.7+/Sonnet 5 tokenizer produces ~30% more tokens overall.",
+    "pricing": "Per 1M tokens (July 2026): Haiku 4.5 $1/$5; Sonnet 5 $3/$15 (intro $2/$10 through 2026-08-31); Sonnet 4.6/4.5 $3/$15; Opus 4.8/4.7/4.6/4.5 $5/$25; Fable 5 $10/$50; Opus 4.8 fast mode $10/$50. No long-context premium (1M ctx at standard price on Opus 4.8/Sonnet 5). Batch API -50% on everything; prompt-cache reads ~0.1x input price (writes 1.25x/2x). Vision: a 1MP selfie ≈ 1,296 input tokens (≈$0.0026 at Sonnet 5 intro, ≈$0.0013 at Haiku). Ballpark per game: extraction on Sonnet 5 (image + ~3K prompt + ~3K JSON out) ≈ $0.04; translation on Haiku ≈ $0.005-0.01.",
+    "latency": "Haiku 4.5 is the fastest Anthropic model: ~94-96 output tok/s, ~1.0s TTFT (Artificial Analysis). Sonnet 5 ~85 tok/s ('fast' tier per official docs); Opus 4.8 'moderate'; Fable 5 'slower' (minutes-long turns at high effort). Opus 4.8 fast mode (research preview beta) gives up to 2.5x output speed at 2x price. Adaptive thinking adds variable pre-output latency when it triggers (Sonnet 5 has it ON by default — set thinking disabled or effort low for latency-sensitive translation). Reputation: reliable but historically prone to 529 overloaded_error spikes at peak demand (retry/backoff needed); rate limits are tier-based (ITPM/OTPM).",
+    "stability": "Mature and versioned: Messages API stable under anthropic-version 2023-06-01; every model id is a pinned snapshot (dateless format from 4.6 generation on, e.g. claude-opus-4-8); Models API exposes capabilities programmatically. Formal deprecation process with migration guides and dated retirements — but model churn is fast: new generation roughly every 2-4 months in 2025-26; Opus 4.1 (deprecated) retires 2026-08-05, Haiku 3 retired 2026-04-19, Sonnet 3.7/Haiku 3.5 retired Feb 2026. Per-generation BREAKING request changes are a real maintenance cost: temperature/top_p/top_k and thinking budget_tokens removed (400) on Opus 4.7+/Sonnet 5, assistant prefill removed on 4.6+. Structured outputs and effort are GA; many adjacent features remain beta-gated via anthropic-beta headers. Status: status.anthropic.com.",
+    "openaiCompatible": true,
+    "baseUrl": "https://api.anthropic.com/v1/ (OpenAI SDK compatibility layer — official but explicitly for testing/evaluation only; it does NOT support structured outputs, prompt caching, or extended thinking, and ignores strict function calling. TwinzyAI needs structured outputs, so use the native Messages API at https://api.anthropic.com/v1/messages via @anthropic-ai/sdk)",
+    "privacy": "Strong — arguably the best-in-class posture for user photos. API inputs/outputs are NOT used for model training by default (commercial terms; 'retained data is never used for model training without your express permission'); the Sept 2025 consumer opt-in training change explicitly excluded the API. Vision docs FAQ: 'Image uploads are ephemeral and not stored beyond the duration of the API request... automatically deleted after they have been processed' and 'Anthropic does not use uploaded images to train models.' Conversation content is not retained by default (short-TTL design); Zero Data Retention (ZDR) arrangements available for the Messages API for qualifying orgs; HIPAA-ready option exists. Exceptions: trust-and-safety-flagged content may be kept up to 2 years; Batch API stores jobs 29 days; Files API persists until deleted (avoid for photos); Fable 5/Mythos 5 REQUIRE 30-day retention (not ZDR) — avoid Fable for photo steps. Structured outputs cache only the JSON schema (24h), not prompts. Residency: US-based processing by default; inference_geo parameter offers geographic routing on the 1P API; no MENA/Egypt region on first-party (Bedrock/Vertex regional endpoints are the alternative if data residency ever becomes a requirement).",
+    "perStepFit": {
+      "extraction": "5/5 — Best available fit. High-res vision + GA grammar-constrained structured outputs means the 221-field JSON is guaranteed schema-valid (no parse retries), and Claude's low-hallucination/honesty reputation is exactly what this step needs. Describing VISIBLE traits of a person is fully allowed (no naming involved). Sonnet 5 at intro $2/$10 is the sweet spot; Haiku 4.5 as cheap fallback. Minor caveats: schema must use additionalProperties:false and avoid numeric/string constraints server-side (TwinzyAI's own Zod layer already covers those), 24h schema cache after first-call compilation.",
+      "generation": "2/5 — Policy blocker. Official vision docs: 'Claude cannot be used to name people in images and refuses to do so' (AUP-backed). Photo-in-the-loop candidate generation asks for exactly that adjacent behavior — naming public figures from a user's photo — so expect high, content-level refusal rates and genuine acceptable-use risk for a production app. Text-only generation from extracted trait evidence (no photo) works and would score ~3.5: broad celebrity knowledge with Jan 2026 cutoff, but Egyptian/Arab regional long-tail recall is unproven vs providers with search/knowledge-graph grounding, and dropping the photo forfeits the visual-similarity pivot's core benefit at this step.",
+      "judge": "3/5 — Split verdict. Verification reasoning, instruction-following, conservative calibrated scoring, and safety-filtered wording are exactly Claude's strengths (Opus 4.8/Sonnet 5 are arguably the best judges on the market), and candidates arrive pre-named so the model isn't identifying anyone. But scoring facial resemblance between a real person's photo and named celebrities still brushes the same people-in-images guardrail — intermittent refusals/hedging likely, and the model cannot see the celebrities (no reference-image retrieval). Text-only judging over trait evidence would be 5/5; with the photo attached, reliability risk caps it at 3.",
+      "translation": "4/5 — Haiku 4.5 gives excellent Arabic (92.5% of English on MMLU; Sonnet-tier ~97%), structured outputs for reliable JSON-shaped translation, ~95 tok/s and ~1s TTFT. Only knock: $1/$5 is several times the price of budget-tier rivals (e.g. Gemini Flash-Lite class) for a task this easy, and thinking config differs from the 4.6+ models (budget_tokens style). Great choice if consolidating on one provider; not the absolute cheapest."
+    },
+    "risks": "1) The people-in-images AUP limitation is the dominant risk: photo->celebrity-name generation/judging may refuse intermittently AND sits close to a documented prohibited use — a provider-policy risk for the app's core loop (extraction-only usage avoids it entirely). 2) Sonnet 5 intro pricing expires 2026-08-31 (+50% cost overnight — budget at $3/$15). 3) Fast deprecation cadence + per-generation breaking request changes (sampling params/budget_tokens/prefill removals) mean env-driven model ids (GEMINI_MODEL-style) need migration testing every ~6-12 months. 4) Peak-load 529 overloaded errors require retry/fallback logic (TwinzyAI already has content-level model fallback — good). 5) OpenAI-compat layer unusable for this pipeline (no structured outputs) — requires the native Anthropic SDK, a second integration path alongside any OpenAI-compatible providers. 6) Haiku 4.5's 200K context and 64K output are ample here, but it lacks adaptive thinking and high-res vision. 7) If ZDR is negotiated, Fable 5 becomes unavailable and CORS is unsupported (irrelevant for a NestJS backend).",
+    "sources": [
+      "https://platform.claude.com/docs/en/about-claude/models/overview.md",
+      "https://platform.claude.com/docs/en/build-with-claude/vision",
+      "https://platform.claude.com/docs/en/build-with-claude/multilingual-support",
+      "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
+      "https://platform.claude.com/docs/en/api/openai-sdk",
+      "https://platform.claude.com/docs/en/about-claude/pricing",
+      "https://www.anthropic.com/legal/aup",
+      "https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training",
+      "https://www.anthropic.com/news/updates-to-our-consumer-terms",
+      "https://artificialanalysis.ai/providers/anthropic",
+      "https://artificialanalysis.ai/models/claude-4-5-haiku",
+      "https://www.anthropic.com/news/claude-sonnet-5",
+      "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "https://platform.claude.com/docs/en/about-claude/model-deprecations"
+    ]
+  },
+  {
+    "provider": "DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd. — platform.deepseek.com)",
+    "flagshipModels": [
+      {
+        "id": "deepseek-v4-pro",
+        "vision": false,
+        "inputPricePerM": "$0.435 (cache miss) / $0.003625 (cache hit)",
+        "outputPricePerM": "$0.87",
+        "notes": "Flagship (released as public preview 2026-04-24, official release mid-July 2026). 1.6T total params / 49B active MoE. 1M context, 384K max output. Thinking + non-thinking modes. JSON output + tool calls, no strict json_schema. Concurrency cap 500. Prices reflect a permanent ~75% cut announced May 2026; a peak/off-peak scheme arriving with the official V4 release DOUBLES listed prices during Beijing peak hours (09:00-12:00, 14:00-18:00 CST)."
+      },
+      {
+        "id": "deepseek-v4-flash",
+        "vision": false,
+        "inputPricePerM": "$0.14 (cache miss) / $0.0028 (cache hit)",
+        "outputPricePerM": "$0.28",
+        "notes": "Workhorse + budget model in one. 284B total / 13B active MoE. 1M context, 384K max output. Thinking + non-thinking modes, JSON output + tool calls, FIM (non-thinking only). Concurrency cap 2500. ~113 tok/s on first-party API. Same peak-hour price-doubling applies."
+      },
+      {
+        "id": "deepseek-chat",
+        "vision": false,
+        "inputPricePerM": "$0.14 (alias of v4-flash)",
+        "outputPricePerM": "$0.28",
+        "notes": "LEGACY ALIAS — currently points to deepseek-v4-flash non-thinking mode; DEPRECATED 2026-07-24 15:59 UTC (15 days after today). Do not put this id in new configs."
+      },
+      {
+        "id": "deepseek-reasoner",
+        "vision": false,
+        "inputPricePerM": "$0.14 (alias of v4-flash thinking)",
+        "outputPricePerM": "$0.28",
+        "notes": "LEGACY ALIAS — currently points to deepseek-v4-flash thinking mode; DEPRECATED 2026-07-24 15:59 UTC. Historically this name pointed to R1, then V3.1/V3.2 thinking — behavior has mutated repeatedly under the same id."
+      }
+    ],
+    "visionSupport": "NONE on the public API as of July 2026 — the API is text-only. Independently verified three ways (jocheojeda.com, 2026-06-24): the API rejects image content parts at the JSON-parsing layer (schema accepts only `text`), the model catalog lists text-only modalities for all 11 DeepSeek models, and official docs contain zero mention of image/vision input. The consumer chat app gained some vision features, and a DeepSeek research paper ('Thinking with Visual Primitives', a vision system built on V4-Flash) was published then quietly pulled with weights never released — vision may come 'in the future' but nothing is usable via API today. This alone disqualifies DeepSeek from TwinzyAI's extraction, generation, and judge steps as designed (all receive the photo).",
+    "jsonReliability": "Supports `response_format: {type:'json_object'}` (JSON mode) plus tool calls on both V4 models. NO OpenAI-style strict structured outputs / json_schema enforcement. Official docs openly warn the API 'may occasionally return empty content' in JSON mode and require the word 'json' plus an example schema in the prompt, and adequate max_tokens to avoid truncation. Third-party measurements put DeepSeek JSON mismatch at ~5-12% vs <0.1% for OpenAI structured outputs — workable for small payloads behind Zod validation + retry (which TwinzyAI has), but poor for a 221-field strict schema.",
+    "arabicQuality": "Good but second-tier. Training corpus is dominated by English + Chinese; Arabic sits in DeepSeek's 'Tier 2 strong' language band (with Spanish/French/Turkish etc.). Evidence is respectable: DeepSeek-V3.2 achieved near-parity between Arabic and English in a cross-lingual medical-QA evaluation (arXiv 2602.05374), and academic studies rate DeepSeek Arabic<->English translation as competitive on BLEU/COMET-style metrics. MSA translation quality is solid; Egyptian dialect nuance and especially Egyptian/Arab pop-culture knowledge (celebrity recall) are unverified and likely thinner than Gemini/GPT given the EN/ZH-heavy corpus.",
+    "pricing": "Extremely cheap, with a twist. deepseek-v4-flash: $0.14/1M input (cache miss), $0.0028/1M (cache hit, ~98% discount), $0.28/1M output. deepseek-v4-pro: $0.435/1M input (miss), $0.003625/1M (hit), $0.87/1M output — after a permanent ~75% price cut (May 2026). New users get 5M free tokens. CAVEAT: with the official V4 release (mid-July 2026) DeepSeek introduces peak/off-peak pricing — listed prices DOUBLE during Beijing peak hours (09:00-12:00 + 14:00-18:00 CST = roughly 04:00-07:00 and 09:00-13:00 Cairo time), which overlaps Egyptian morning traffic; off-peak stays at baseline. Even doubled, it remains among the cheapest frontier-class APIs.",
+    "latency": "Decent throughput, mediocre first-party consistency. deepseek-v4-flash: ~113 tok/s on DeepSeek's own API (Artificial Analysis), TTFT ~300-500ms in non-thinking mode; thinking mode adds tens of seconds before first answer token. v4-pro: ~107 tok/s first-party. Third-party hosts of the open weights (e.g. Makora ~245 tok/s, Novita ~115) beat first-party speed. Historical reputation: first-party API congestion/slowdowns during Chinese daytime peaks; the new peak-pricing scheme is partly a congestion-management response.",
+    "stability": "High churn — the main operational hazard. Model ids are mutable pointers: `deepseek-chat` has pointed to V3, V3-0324, V3.1, V3.1-Terminus, V3.2-Exp, V3.2, and now V4-Flash within ~18 months, with real behavior changes under the same name. Legacy ids `deepseek-chat`/`deepseek-reasoner` are hard-deprecated 2026-07-24 (≈2 weeks from today) with only 3 months' notice given. Release cadence is fast (V3.1 Aug 2025 → V3.2 Dec 2025 → V4 Apr 2026) and the pricing model itself is changing mid-July 2026. Pin `deepseek-v4-*` ids via env (Twinzy already mandates env-driven model ids) and watch the changelog; expect re-benchmarking every quarter.",
+    "openaiCompatible": true,
+    "baseUrl": "https://api.deepseek.com (also accepts https://api.deepseek.com/v1 for OpenAI SDK compatibility; an Anthropic-compatible interface was added with V4)",
+    "privacy": "Weakest posture of the major providers for this use case. Operator is Hangzhou DeepSeek AI Co. (PRC); the privacy policy states all collected data is processed and stored on servers in the People's Republic of China. Terms permit DeepSeek to use Inputs AND Outputs to 'provide, maintain, operate, develop or improve' the services (framed as de-identified and 'minimal extent') — i.e., API inputs may feed model improvement; the documented opt-out ('Improve the model for everyone') is a consumer-app toggle, and there is no clear API-tier zero-retention/no-training guarantee comparable to OpenAI/Anthropic API terms. Retention runs as long as the account exists or for 'legitimate business interests'. EU regulators have open investigations over PRC data transfers. For TwinzyAI: photos cannot be sent anyway (no vision), but even translation payloads contain user-derived facial-trait descriptions + lookalike results — personal data flowing to PRC servers with possible training use, which strains Twinzy's consent-copy accuracy requirement.",
+    "perStepFit": {
+      "extraction": "1/5 — Impossible: the public API accepts no image input, and extraction is inherently photo->JSON. Even hypothetically, no strict json_schema enforcement plus a documented 'occasionally returns empty content' JSON-mode bug make a 221-field strict schema a bad bet.",
+      "generation": "2/5 — Could run text-only from trait evidence (strong general model, huge 1M context, dirt cheap), but it cannot see the photo (the whole point of the visual-similarity pivot), and Egyptian/Arab regional celebrity recall is unverified on an EN/ZH-dominated corpus. Usable only as a degraded evidence-only fallback pool-generator.",
+      "judge": "1/5 — Safety-critical verification requires looking at the photo; DeepSeek cannot. v4-pro's thinking mode is genuinely strong at conservative reasoning over text evidence, but a judge that can't see the user can't verify resemblance, and JSON reliability is weaker than competitors. Disqualified as designed.",
+      "translation": "4/5 — The one real fit. Text-only en<->ar JSON translation plays to v4-flash: ~$0.14/$0.28 per 1M (cache hits near-free), ~113 tok/s, Tier-2-strong Arabic with V3.2 showing near Arabic/English parity, OpenAI-compatible drop-in, and Twinzy's Zod validation + canonical-field restoration absorbs JSON-mode flakiness. Docked one point for the empty-content JSON quirk (needs retry), peak-hour price doubling overlapping Egyptian mornings, id/deprecation churn, and PRC residency of user-derived trait text."
+    },
+    "risks": "1) Text-only API disqualifies 3 of 4 pipeline steps; vision is rumored (pulled 'Thinking with Visual Primitives' paper) but do not build on promises. 2) `deepseek-chat`/`deepseek-reasoner` ids stop working 2026-07-24 — any lingering config using them breaks in ~2 weeks; only 3 months' deprecation notice is the norm here. 3) Model behavior mutates under stable names (same id re-pointed across V3->V4 generations) — silent quality/behavior drift risk for a safety-filtered pipeline. 4) Peak/off-peak pricing (from mid-July 2026) doubles costs during Beijing peak hours that overlap Egyptian morning traffic, complicating cost forecasting. 5) PRC data residency + 'inputs may improve services' terms + no API-grade no-training guarantee + active EU investigations — reputational/compliance exposure even for text-only translation payloads containing facial-trait descriptions. 6) Documented JSON-mode empty-content bug and ~5-12% schema-mismatch rate require retry + validation hardening. 7) First-party API congestion history; third-party hosts are faster but change the privacy calculus again.",
+    "sources": [
+      "https://api-docs.deepseek.com/quick_start/pricing/",
+      "https://api-docs.deepseek.com/updates/",
+      "https://api-docs.deepseek.com/",
+      "https://api-docs.deepseek.com/guides/json_mode",
+      "https://www.jocheojeda.com/2026/06/24/deepseek-v4-vision-thinking-with-visual-primitives/",
+      "https://therouter.ai/news/deepseek-v4-api-migration-deprecation-2026/",
+      "https://artificialanalysis.ai/models/deepseek-v4-flash/providers",
+      "https://finance.biggo.com/news/385baf56-274e-457c-bcd7-d11657d93894",
+      "https://www.engadget.com/2180062/deepseek-permanently-reduces-the-price-of-its-flagship-v4-model-by-75-percent/",
+      "https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html",
+      "https://cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html",
+      "https://arxiv.org/pdf/2602.05374",
+      "https://medium.com/@leucopsis/deepseek-v4-review-a23ce940151c",
+      "https://deepseekai.guide/api/deepseek-api-json-mode/",
+      "https://docs.bswen.com/blog/2026-04-26-deepseek-v4-flash-performance-metrics/",
+      "https://www.tldl.io/resources/deepseek-api-pricing"
+    ]
+  },
+  {
+    "provider": "Alibaba Qwen (Alibaba Cloud Model Studio / DashScope, international Singapore endpoint)",
+    "flagshipModels": [
+      {
+        "id": "qwen3.7-max",
+        "vision": false,
+        "inputPricePerM": "$2.50",
+        "outputPricePerM": "$7.50",
+        "notes": "Current flagship (snapshots qwen3.7-max-2026-06-08, qwen3.7-max-2026-05-20; qwen3.7-max-preview is thinking-only). Strongest reasoning; official vision guide features qwen3.7-plus, not max, so treat max as text-focused. Prior gens still live: qwen3-max (tiered $1.20/$6.00 up to 32K) and qwen-max ($1.60/$6.40)."
+      },
+      {
+        "id": "qwen3.7-plus",
+        "vision": true,
+        "inputPricePerM": "$0.40",
+        "outputPricePerM": "$1.60",
+        "notes": "Workhorse; multimodal since ~June 1 2026 and the primary recommended model in the visual-understanding guide. Tiered: $0.40/$1.60 up to 256K, $1.20/$4.80 to 1M. Hybrid thinking (thinking on by default — must disable for JSON mode)."
+      },
+      {
+        "id": "qwen3-vl-plus",
+        "vision": true,
+        "inputPricePerM": "$0.20",
+        "outputPricePerM": "$1.60",
+        "notes": "Dedicated vision-language model, hybrid thinking (off by default). Tiered by input size: $0.20/$1.60 up to 32K, $0.30/$2.40 to 128K, $0.60/$4.80 to 256K. 'Recognize everything' celebrity/landmark recognition is an advertised capability. Legacy qwen-vl-max ($0.80/$3.20) and qwen-vl-plus ($0.21/$0.63) still available."
+      },
+      {
+        "id": "qwen3-vl-flash",
+        "vision": true,
+        "inputPricePerM": "$0.05",
+        "outputPricePerM": "$0.40",
+        "notes": "Budget vision model; tiered $0.05/$0.40 up to 32K, $0.075/$0.60 to 128K, $0.12/$0.96 to 256K. Good for cheap image-grounded steps."
+      },
+      {
+        "id": "qwen-flash",
+        "vision": false,
+        "inputPricePerM": "$0.05",
+        "outputPricePerM": "$0.40",
+        "notes": "Budget text workhorse (recommended replacement for deprecated qwen-turbo). Tiered $0.05/$0.40 up to 256K, $0.25/$2.00 to 1M. Alternatives: qwen3.5-flash flat $0.10/$0.40; qwen3.6-flash $0.25/$1.50."
+      },
+      {
+        "id": "qwen-turbo",
+        "vision": false,
+        "inputPricePerM": "$0.05",
+        "outputPricePerM": "$0.20",
+        "notes": "DEPRECATED — no longer updated; Alibaba explicitly recommends migrating to qwen-flash. Do not adopt."
+      }
+    ],
+    "visionSupport": "Broad. Dedicated VL line: qwen3-vl-plus and qwen3-vl-flash (hybrid thinking, off by default), legacy qwen-vl-max/qwen-vl-plus, plus qwen3-vl-235b-a22b open-weight variants. Mainline qwen3.7-plus (and qwen3.6/qwen3.5 series) now accept image input natively per the official vision guide; qwen3.7-max is text-focused. Qwen3-VL quality is regarded as the strongest open-weights multimodal family — fine-grained detail via DeepStack ViT fusion, robust 480x480 to 2560x2560, multi-image per request, video support. Advertised ability to 'recognize everything' including celebrities, and it is reputationally less refusal-prone on public-figure recognition than US providers (empirical validation still required for a lookalike flow).",
+    "jsonReliability": "Weakest structural link: DashScope supports only response_format {\"type\":\"json_object\"} — NO server-enforced json_schema / constrained decoding (official doc, checked July 2026). You must also include the word 'JSON' in the prompt. Thinking mode is INCOMPATIBLE with structured output (error if combined); official workaround is a two-step call (thinking model then a non-thinking JSON-mode repair pass). Qwen-VL/Omni support json_object only in non-thinking mode. Practical reputation: valid-JSON emission is decent, but a 221-field strict schema depends entirely on prompting + your Zod validation with retry/repair — expect a materially higher retry rate than providers with schema-constrained decoding; reasoning-content leakage into content under schema modes has been reported for open Qwen3.5 checkpoints on third-party runtimes.",
+    "arabicQuality": "A genuine strength. Qwen3 trained on 119 languages/dialects (36T tokens); Qwen3.5/3.6 expanded to 201 languages/dialects with a ~250K vocabulary that tokenizes Arabic significantly more efficiently (10-60% better encoding, fewer tokens = cheaper Arabic). Routinely cited among the best non-specialized models for Arabic; ranked a top open-source pick for Arabic in 2026 guides. Caveats: dedicated Arabic models (e.g. Falcon-H1 Arabic 34B) beat Qwen on the OALL leaderboard, and DialectalArabicMMLU shows dialectal Arabic (incl. Egyptian) is much weaker than MSA across models — Qwen included (large score gains when dialect is translated to English). For MSA UI/result translation it is excellent; Egyptian-dialect nuance is passable, not elite.",
+    "pricing": "Aggressively cheap, tiered by input size on newer models, all USD per 1M tokens (Singapore intl): flagship qwen3.7-max $2.50/$7.50; workhorse qwen3.7-plus $0.40/$1.60 (≤256K); vision qwen3-vl-plus $0.20/$1.60 (≤32K) and qwen3-vl-flash $0.05/$0.40 (≤32K); budget qwen-flash $0.05/$0.40, qwen3.5-flash $0.10/$0.40; legacy qwen-vl-max $0.80/$3.20. Batch API = 50% off both directions (not stackable with context-cache discount). New intl accounts: ~1M free tokens per model for 90 days (the old always-free developer tier was discontinued April 15 2026). Typical TwinzyAI request (one photo ≈ 1-2K image tokens + prompts) lands in the cheapest tier on every step.",
+    "latency": "Mixed reputation. Throughput on Alibaba Cloud's own intl endpoint is good (qwen3.7-max ~200 t/s; qwen3.6-35B ~184 t/s; qwen3-max ~61 t/s), but TTFT from the Singapore endpoint is mediocre: ~1.8s for qwen3-max, ~3.0s for qwen3.6-plus, and ~14.8s for qwen3.7-max in thinking mode (Artificial Analysis P50). Flash-tier models are fast (sub-second TTFT reported for small Qwen3.5 checkpoints on other hosts). Net: fine for a game-style pipeline if you disable thinking on latency-sensitive steps; thinking-mode judge calls would add double-digit seconds. From Egypt/Middle East, Singapore adds ~100-180ms network RTT (US Virginia and Frankfurt regions now exist as alternatives, but with separate keys and possibly different model coverage).",
+    "stability": "Fast-churning lineup with SHORT deprecation windows: official policy gives only a 30-day sunset notice for dated snapshots and 3 months for mainline models, and QPM/TPM quotas are progressively throttled from the notice date — much tighter than OpenAI/Anthropic/Google norms. Version cadence is aggressive (qwen3 -> 3.5 -> 3.6 -> 3.7 within ~9 months); qwen-turbo already deprecated in favor of qwen-flash; the free developer tier was withdrawn with notice in April 2026. Docs are China-first with occasional intl lag, and regional endpoints/API keys are not interchangeable. TwinzyAI's env-driven model ids fit this well, but plan on quarterly model-id reviews.",
+    "openaiCompatible": true,
+    "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+    "privacy": "Better on paper than reputation suggests, with one ambiguity. Official Model Studio FAQ states Alibaba Cloud 'strictly protects data privacy and never uses your data for model training' for standard API calls (the opt-in Coding Plan is an explicit exception that DOES authorize training use — do not enable it). Transport encrypted (AES-256 claimed). However, the service agreement says Model Studio 'will store data generated from model and application calls' in accordance with laws/regulations — i.e., request/response logs are retained, with no clearly published retention duration for the intl endpoint; user PHOTOS sent to vision models fall under this logging language. Data residency for the intl endpoint is Singapore (Virginia, Tokyo, Frankfurt regions now selectable with separate keys); China (Beijing) is a separate service. Residual concerns for a photos-of-faces product: unspecified log-retention window, PRC-parent-company perception/compliance optics for EU/GDPR users (Frankfurt region mitigates residency, not perception), and the need to verify via DPA whether image payloads are excluded from logs or deletable on request. Verdict: acceptable no-training posture, but weaker retention transparency than OpenAI (30-day stated) or Anthropic — get written DPA confirmation before sending user photos.",
+    "perStepFit": {
+      "extraction": "3/5 — Qwen3-VL-Plus vision quality is genuinely strong for fine-grained visible-trait description (DeepStack detail fusion, high-res support) at a very low price ($0.20/$1.60), BUT DashScope has no json_schema-constrained decoding — only json_object + prompt discipline — and thinking mode cannot be combined with JSON mode. A 221-field strict schema will lean hard on your Zod-validate-and-retry loop; expect more repair passes and occasional field-name drift versus Gemini/OpenAI structured outputs. Usable as a fallback tier, risky as the primary extractor.",
+      "generation": "4/5 — The best-fit step. Qwen3-VL advertises celebrity recognition ('recognize everything') and is reputationally less refusal-prone about public-figure resemblance than US providers; multilingual training (119->201 languages) plus Alibaba's Middle East market push give plausibly better-than-average Arab-world coverage, and Arabic-efficient tokenization helps bilingual candidate names. Egyptian/regional celebrity DEPTH is unverified — run a recall benchmark on Egyptian actors/footballers/singers before committing. Cheap enough (qwen3-vl-plus or qwen3.7-plus) to over-generate candidates.",
+      "judge": "3/5 — qwen3.7-max reasoning is flagship-grade and conservative-scoring instructions are followable, but the pieces fight each other: max is text-focused (vision judging must drop to qwen3-vl-plus hybrid or qwen3.7-plus), thinking mode — the thing you want for careful verification — cannot emit structured output directly (two-call workaround adds cost/latency), and thinking TTFT runs ~15s. Safety-filtering burden stays fully on your server-side Zod+safety layer. Workable, not ideal for the highest-stakes step.",
+      "translation": "5/5 — Ideal. en<->ar translation of a result JSON is exactly what qwen-flash/qwen3.5-flash excel at: top-tier Arabic among general models, token-efficient Arabic vocabulary (cheaper output), $0.05-$0.10/M input with fast non-thinking inference, and json_object mode is fully sufficient for a translate-fields task where the backend restores canonical fields anyway. MSA output quality excellent; minor dialect softness is irrelevant here."
+    },
+    "risks": "1) No schema-enforced structured output (json_object only) + thinking/JSON incompatibility — the extraction and judge steps carry retry-cost and drift risk. 2) Short deprecation windows (30 days for snapshots, 3 months for mainline, with quota throttling from notice date) and rapid 3.5->3.6->3.7 churn — model ids must stay env-driven and reviewed quarterly. 3) Privacy optics and unspecified log-retention duration for a product sending user face photos; PRC-parent perception may matter to users/partners even with Singapore/Frankfurt residency and a stated no-training policy; requires DPA verification. 4) TTFT from Singapore is mediocre and thinking-mode latency is poor (~15s). 5) Egyptian/regional celebrity recall is plausible but unproven — benchmark before adoption. 6) Regional API keys are not interchangeable and intl docs sometimes lag China docs. 7) Precedent of withdrawing free tiers/pricing promos on short notice; promotional prices (e.g. 50%-off qwen-max) can revert.",
+    "sources": [
+      "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "https://www.alibabacloud.com/help/en/model-studio/qwen-structured-output",
+      "https://www.alibabacloud.com/help/en/model-studio/vision",
+      "https://www.alibabacloud.com/help/en/model-studio/compatibility-of-openai-with-dashscope",
+      "https://help.aliyun.com/en/model-studio/base-url",
+      "https://help.aliyun.com/en/model-studio/faq-about-alibaba-cloud-model-studio",
+      "https://www.alibabacloud.com/help/en/model-studio/model-depreciation",
+      "https://help.aliyun.com/en/model-studio/coding-plan",
+      "https://artificialanalysis.ai/models/qwen3-7-max/providers",
+      "https://artificialanalysis.ai/models/qwen3-6-plus/providers",
+      "https://github.com/qwenlm/qwen3-vl",
+      "https://tokenmix.ai/blog/qwen3-vl-plus-review-multimodal-2026",
+      "https://arxiv.org/abs/2510.27543",
+      "https://www.eesel.ai/blog/qwen-pricing",
+      "https://huggingface.co/spaces/OALL/Open-Arabic-LLM-Leaderboard",
+      "https://www.siliconflow.com/articles/en/best-open-source-LLM-for-Arabic"
+    ]
+  },
+  {
+    "provider": "Moonshot AI — Kimi Open Platform (platform.moonshot.ai, rebranding to platform.kimi.ai; docs 301-redirect to the new domain)",
+    "flagshipModels": [
+      {
+        "id": "kimi-k2.6",
+        "vision": true,
+        "inputPricePerM": "$0.95 (cache hit $0.16)",
+        "outputPricePerM": "$4.00",
+        "notes": "Current general flagship (multimodal reasoning). 262,144-token context; native text+image+video input (base64 image_url/video_url) via MoonViT encoder; thinking toggled with thinking:{type:'enabled'|'disabled'}; temperature is FIXED (1.0 thinking / 0.6 non-thinking) — no determinism tuning. Open weights on HuggingFace (also hostable via Fireworks/DeepInfra/Crusoe/Cloudflare)."
+      },
+      {
+        "id": "kimi-k2.5",
+        "vision": true,
+        "inputPricePerM": "$0.60 (cache hit ~$0.10)",
+        "outputPricePerM": "$3.00",
+        "notes": "Workhorse/budget multimodal. 256K context, thinking + non-thinking modes. Strong published vision numbers: MMMU-Pro 78.5, OCRBench 92.3, OmniDocBench 88.8, InfoVQA 92.6, MathVista 90.1 (Kimi K2.5 'Visual Agentic Intelligence' report)."
+      },
+      {
+        "id": "kimi-k2.7-code",
+        "vision": true,
+        "inputPricePerM": "$0.95 (cache hit $0.19)",
+        "outputPricePerM": "$4.00 ($8.00 for kimi-k2.7-code-highspeed)",
+        "notes": "Newest release, coding-specialist flagship (agentic coding/UI generation); native multimodal (text/image/video), 262,144 ctx, 16,384 max output. Highspeed variant ~180 t/s (up to 260 t/s short-context). Not the right tool for TwinzyAI's steps but shows platform direction."
+      },
+      {
+        "id": "moonshot-v1-8k / -32k / -128k (+ moonshot-v1-8k-vision-preview etc.)",
+        "vision": false,
+        "inputPricePerM": "not re-verified this pass (legacy series — confirm on platform.kimi.ai/docs/pricing/chat)",
+        "outputPricePerM": "not re-verified this pass",
+        "notes": "Legacy 'Moonshot V1' text-generation series still listed as available; vision only in the '-vision-preview' variants (preview status = elevated deprecation risk). Given kimi-k2.5's price, there is little reason to build new work on moonshot-v1."
+      }
+    ],
+    "visionSupport": "kimi-k2.5, kimi-k2.6, and kimi-k2.7-code are natively multimodal (single architecture, MoonViT 400M encoder): images via base64 image_url content parts; K2.6/K2.7 add video (mp4/mov/webm, ≤2K res recommended); image/video token usage is dynamically calculated with a token-estimation API. moonshot-v1-*-vision-preview also accept images (legacy/preview). Quality assessment: genuinely strong — K2.5 reports OCRBench 92.3%, MMMU-Pro 78.5%, OmniDocBench 88.8%, MathVista 90.1%, BLINK 78.9%, i.e., top-tier open-weights document/visual understanding; K2.6 shares the architecture and adds stronger reasoning. Face/person-similarity judging quality specifically is unbenchmarked.",
+    "jsonReliability": "Good and improving: the official Chat Completion API supports response_format {type:'json_object'} AND {type:'json_schema'} (schema-constrained structured output) — a real upgrade over the 2024-25 era when Moonshot lacked response_format entirely (old Instructor GitHub issue #96). Official JSON-mode caveats: you must describe the target JSON in the prompt (example recommended), top-level must be a JSON object (arrays unsupported), and undersized max_tokens silently truncates (finish_reason='length'). K2 line has a strong tool-calling/agentic reliability reputation. For a 221-field strict schema, json_schema mode + Zod re-validation is plausible but the 16,384 max-output cap and fixed temperature (0.6 non-thinking) leave less headroom than Gemini/OpenAI strict modes; validate-and-retry remains necessary.",
+    "arabicQuality": "Middling-to-decent, unproven. Training is Chinese/English-centric; Moonshot publishes no Arabic benchmark. Independent K2.6 review showed it correctly identified Arabic, produced a full contextually-aware translation that cross-checked well against Google Translate, including Arabic OCR — so en<->ar translation of JSON is workable. However, Egyptian/Levantine dialect nuance and especially MENA/Egyptian celebrity recall are unverified and likely weaker than Gemini/GPT-class models trained on broader Arabic web data.",
+    "pricing": "kimi-k2.6: $0.95 in / $4.00 out per 1M (cache-hit input $0.16). kimi-k2.5: $0.60 / $3.00 (cache-hit ~$0.10). kimi-k2.7-code: $0.95 / $4.00 (cache-hit $0.19; highspeed variant $8.00 out). Automatic context caching gives ~80-85% input discount on hits; web-search tool $0.005/call. Image/video tokens dynamically counted (estimation endpoint available). Roughly 3-5x cheaper than western frontier flagships, but not cheaper than budget-tier western models for a pure translation step.",
+    "latency": "Two-tier reputation: Moonshot's native standard tier is modest (tens of t/s under load — historically criticized), with premium 'highspeed/turbo' tiers at ~180-260 t/s for ~2x output price; K2.6 thinking mode adds ~10s+ time-to-first-answer (Artificial Analysis measures ~10.8-16s TTFAT on reasoning traces). Because weights are open, third-party hosts are much faster: Crusoe 447 t/s and Fireworks 411 t/s on K2.6; DeepInfra TTFT 0.68s / Fireworks 344 t/s on K2.5 — but those are different providers with different privacy terms.",
+    "stability": "API shape is stable (OpenAI-compatible, also Anthropic-compatible per model cards), but MODEL churn is high: kimi-thinking-preview retired Nov 11 2025, kimi-latest retired Jan 28 2026, and the entire original K2 family (kimi-k2-0711/0905-preview, -turbo-preview, kimi-k2-thinking, -thinking-turbo) discontinued May 25 2026 — roughly 10-month model lifetimes with hard endpoint retirement. Platform is also mid-rebrand (platform.moonshot.ai -> platform.kimi.ai 301 redirects). Env-driven model ids (TwinzyAI's existing pattern) are mandatory; expect forced migrations ~2x/year.",
+    "openaiCompatible": true,
+    "baseUrl": "https://api.moonshot.ai/v1",
+    "privacy": "RED FLAG for TwinzyAI's photo-bearing steps. The Kimi OpenPlatform Privacy Policy states it collects 'prompts, audios, images, videos, files and other content that you input and generate' and uses this to 'optimize our models' — i.e., API inputs INCLUDING USER IMAGES are training-eligible. No zero-data-retention option is mentioned; retention is open-ended ('as long as necessary... varies based on information type'); data is stored on servers in Singapore; international-transfer safeguards are vague (no SCCs named). Parent company is PRC-based (consumer-app policies drew independent privacy criticism in 2026). This directly conflicts with TwinzyAI's 'no training on API inputs' preference and its no-persistence posture for user photos. Partial mitigation exists only OUTSIDE Moonshot: K2.5/K2.6 are open-weights (modified-MIT), so US hosts (Fireworks, DeepInfra, Together, Cloudflare Workers AI) can serve the same model under their own no-training/ZDR enterprise terms — but that is then a different provider decision, not the Moonshot API.",
+    "perStepFit": {
+      "extraction": "2/5 — Technically strong (top-tier open-weights vision/OCR, native json_schema structured output, 256K ctx, cheap at $0.60-0.95/M), but the user photo would be sent to an API whose policy makes images training-eligible with no ZDR — a hard conflict with TwinzyAI's privacy constraint. Secondary concerns: fixed temperature 0.6 (no determinism tuning for a 221-field low-hallucination task) and 16K output cap headroom.",
+      "generation": "2/5 — Vision input helps and world knowledge is broad (1T-param MoE), but Egyptian/Arab regional celebrity recall is unverified and likely below Gemini/GPT given Chinese/English-centric training; same photo-privacy blocker applies since the step receives the photo.",
+      "judge": "2/5 — kimi-k2.6 thinking mode is a capable, cheap verification reasoner and takes images, but the safety-critical judge step sends the photo (same training/retention conflict), thinking TTFT is ~10s+, and its conservatism/refusal behavior on face-resemblance scoring is unproven. Only viable via a ZDR third-party host of the open weights, not the Moonshot API.",
+      "translation": "3/5 — Text-only step, so the photo-privacy blocker mostly drops (trait text is still retained/training-eligible). Arabic translation quality independently reported good; kimi-k2.5 non-thinking at $0.60/$3.00 with json mode is serviceable but neither the cheapest nor fastest option (native standard tier is slow; budget western models undercut it for this easy step)."
+    },
+    "risks": "1) Privacy: API inputs incl. images usable for model 'optimization' (training), no ZDR, vague retention — likely a compliance/optics blocker for sending user photos; PRC-parent geopolitics add procurement risk. 2) Aggressive deprecation: whole model families hard-retired ~10 months after launch (K2 line EOL May 25 2026; kimi-latest EOL Jan 28 2026) — pinned ids WILL break; keep model id env-driven and plan ~2 migrations/year. 3) Brand/domain migration (moonshot.ai -> kimi.ai) may move docs/endpoints. 4) Fixed temperatures per mode limit extraction determinism. 5) JSON mode: object-only top level, truncation on low max_tokens; 221-field schema needs validate-and-retry (TwinzyAI's Zod layer covers this). 6) MENA celebrity recall and Arabic dialect quality unbenchmarked. 7) Native standard-tier throughput is slow; fast tiers cost 2x output. 8) If the open weights are hosted elsewhere (Fireworks/DeepInfra/etc.) to fix privacy, latency/pricing/JSON behavior differ per host and this research no longer fully applies.",
+    "sources": [
+      "https://platform.kimi.ai/docs/models",
+      "https://platform.kimi.ai/docs/guide/kimi-k2-6-quickstart",
+      "https://platform.kimi.ai/docs/pricing/chat-k26",
+      "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+      "https://platform.kimi.ai/docs/api/chat",
+      "https://platform.kimi.ai/docs/guide/use-json-mode-feature-of-kimi-api",
+      "https://platform.kimi.ai/docs/agreement/userprivacy",
+      "https://openrouter.ai/moonshotai/kimi-k2.6",
+      "https://openrouter.ai/moonshotai/kimi-k2.5",
+      "https://openrouter.ai/moonshotai/kimi-k2.7-code",
+      "https://artificialanalysis.ai/models/kimi-k2-6/providers",
+      "https://artificialanalysis.ai/models/kimi-k2-5/providers",
+      "https://deepinfra.com/blog/kimi-k2-5-api-benchmarks",
+      "https://www.crusoe.ai/resources/blog/430-tokens-per-second-optimizing-kimi-k2-6-and-k2-7-for-production",
+      "https://huggingface.co/moonshotai/Kimi-K2.5",
+      "https://huggingface.co/moonshotai/Kimi-K2.6",
+      "https://arxiv.org/html/2602.02276v1",
+      "https://costgoat.com/pricing/kimi-api",
+      "https://www.secondtalent.com/resources/every-kimi-ai-model-explained-compared/",
+      "https://sonusahani.com/blogs/kimi-k-2-6",
+      "https://gist.github.com/gadgetb0y/11931119946c2e9dcae0a438fdefe0d5",
+      "https://github.com/MoonshotAI/Kimi-K2/issues/96",
+      "https://developers.cloudflare.com/changelog/post/2026-04-20-kimi-k2-6-workers-ai/"
+    ]
+  },
+  {
+    "provider": "Z.ai (Zhipu AI) GLM API — international platform api.z.ai; parent Zhipu AI, Beijing (HKEX 2513.HK since Jan 2026); international API operated by JINGSHENG HENGXING TECHNOLOGY PTE. LTD., Singapore",
+    "flagshipModels": [
+      {
+        "id": "glm-5.2",
+        "vision": false,
+        "inputPricePerM": "$1.40",
+        "outputPricePerM": "$4.40",
+        "notes": "Current flagship (released 2026-06-16). 744B MoE / 40B active, 1M-token context, 128K max output, thinking mode with configurable reasoning effort, function calling, context caching ($0.26/M cached input). TEXT-ONLY — docs explicitly state input modality is text; cannot see the user photo. Open weights (MIT). ~191 tok/s, ~0.89s TTFT on first-party API."
+      },
+      {
+        "id": "glm-5",
+        "vision": false,
+        "inputPricePerM": "$1.00",
+        "outputPricePerM": "$3.20",
+        "notes": "Previous open-weight flagship (Feb 2026), still fully served. Ranked #2 overall on SILMA.AI Arabic Broad Benchmark (behind only Gemini 3, ahead of all other closed models). Slower (~54 tok/s, 1.11s TTFT). glm-5.1 ($1.40/$4.40) and glm-5-turbo ($1.20/$4.00) also available."
+      },
+      {
+        "id": "glm-5v-turbo",
+        "vision": true,
+        "inputPricePerM": "$1.20",
+        "outputPricePerM": "$4.00",
+        "notes": "Vision flagship (released ~April 2026). Native multimodal (image/video/file/text) via CogViT encoder, 200K context, 128K output, thinking modes, function calling, caching ($0.24/M cached). CLOSED-SOURCE, API-only — no open weights, cannot be de-risked via third-party/self hosting. No documented response_format/JSON mode."
+      },
+      {
+        "id": "glm-4.6v",
+        "vision": true,
+        "inputPricePerM": "$0.30",
+        "outputPricePerM": "$0.90",
+        "notes": "Vision workhorse. 128K context, image/video/file input, native multimodal tool calling ('visually comprehends tool results'). Very cheap for a capable VLM; cached input $0.05/M. Budget siblings: glm-4.6v-flashx ($0.04/$0.40) and glm-4.6v-flash (free). Older glm-4.5v ($0.60/$1.80, open-weight) still served. No documented response_format support."
+      },
+      {
+        "id": "glm-4.7",
+        "vision": false,
+        "inputPricePerM": "$0.60",
+        "outputPricePerM": "$2.20",
+        "notes": "Text workhorse, 200K context, supports response_format json_object, strong reasoning (HLE 42.8). Same price as glm-4.6/glm-4.5 which remain served."
+      },
+      {
+        "id": "glm-4.7-flashx",
+        "vision": false,
+        "inputPricePerM": "$0.07",
+        "outputPricePerM": "$0.40",
+        "notes": "Budget speed tier for text; glm-4.7-flash is FREE (rate-limited) — both attractive for the translation step. glm-4.5-air ($0.20/$1.10) and glm-4-32b-0414-128k ($0.10/$0.10) also available."
+      }
+    ],
+    "visionSupport": "Vision is a SEPARATE model line: glm-5v-turbo (flagship, 200K ctx, image/video/file, thinking mode), glm-4.6v / glm-4.6v-flashx / glm-4.6v-flash (workhorse→free), glm-4.5v (older, open-weight), glm-ocr ($0.03/$0.03, OCR only). The GLM-5.x text line (glm-5.2/5.1/5) does NOT accept images — confirmed in official docs — and vision in the open GLM-5.3 line is only a community demand as of July 2026 (Z.ai developer poll, June 29). VLM quality is well-regarded for open models (GLM-4.5V was a top open-source VLM; GLM-4.6V adds multimodal tool calling; GLM-5V-Turbo benchmarks well on vision-coding/design tasks), but the line is tuned toward documents/UI/video-agent work; fine-grained human-appearance description quality for a lookalike game is unproven and needs a bake-off, and best-vision (glm-5v-turbo) trails Western frontier VLMs on general reasoning.",
+    "jsonReliability": "Official structured output = response_format {type:\"json_object\"} ONLY, documented for TEXT models (glm-5 family, glm-4.7, glm-4.6, glm-4.5); docs still advise 'clearly request JSON output in the prompt'. No official strict json_schema mode on the first-party API (some third-party gateways layer schema enforcement on top). CRITICAL GAP: vision models (glm-5v-turbo, glm-4.6v, glm-4.5v) do NOT list response_format in their request schemas — strict JSON from vision calls relies on prompt engineering or a function-calling workaround (vision models do support tool calls), with server-side Zod + retries as the backstop. Community reputation for GLM text-model JSON adherence is decent, but for a 221-field strict schema from a vision input this is the weakest part of the offering.",
+    "arabicQuality": "Genuinely strong for a Chinese-lineage model: GLM-5 climbed to #2 OVERALL on SILMA.AI's Arabic Broad Benchmark (22 language skills), behind only Gemini 3 and ahead of all other popular closed models — excellent Modern Standard Arabic comprehension and generation. Known weakness: regional Arabic dialects/colloquialisms (Egyptian Arabic flavor) lag MSA. Broad multilingual standing is mid-pack (#31/124, avg 70.9 on aggregate multilingual benchmarks). For en↔ar translation of result JSON (MSA target), quality is near-frontier; for Egyptian-dialect nuance or deep Egyptian pop-culture knowledge, expect gaps vs Gemini/GPT.",
+    "pricing": "Aggressively cheap (per 1M tokens, official docs July 2026): TEXT — glm-5.2/5.1 $1.40/$4.40 (cache $0.26), glm-5 $1.00/$3.20, glm-5-turbo $1.20/$4.00, glm-4.7/4.6/4.5 $0.60/$2.20 (cache $0.11), glm-4.5-air $0.20/$1.10, glm-4.7-flashx $0.07/$0.40, glm-4.7-flash & glm-4.5-flash FREE, glm-4-32b-0414-128k $0.10/$0.10. VISION — glm-5v-turbo $1.20/$4.00 (cache $0.24), glm-4.6v $0.30/$0.90 (cache $0.05), glm-4.6v-flashx $0.04/$0.40, glm-4.6v-flash FREE, glm-4.5v $0.60/$1.80, glm-ocr $0.03/$0.03. Cached-input discounts ~80%; cache storage 'limited-time free'. A full 4-step TwinzyAI run on glm-4.6v + glm-4.7-flashx would cost fractions of a cent.",
+    "latency": "Good and improving: glm-5.2 ~191 tok/s output, ~0.89s TTFT (aggregator measurements); glm-5 was slower (~54 tok/s, 1.11s TTFT); '-X'/'FlashX' tiers are explicitly speed-optimized (>100 tok/s; glm-4.5-x/airx are premium-speed variants). Open-weight models also served faster by third parties (e.g., Together AI ~453 tok/s on glm-5.2). International API served from Singapore — fine RTT to Egypt/EU but no multi-region edge like hyperscalers; occasional congestion reports after big releases. Streaming supported on all chat models.",
+    "stability": "Rapid release cadence (4.5 Jul-2025 → 4.6 Oct-2025 → 4.7 Dec-2025 → 5 Feb-2026 → 5.1 → 5.2 Jun-2026) BUT old models stay served and billable (glm-4-32b from Apr-2024, glm-4.5/4.6 still on the current price list) — low forced-deprecation risk in practice; no published aggressive retirement schedule. Docs lag releases (e.g., structured-output page lists glm-5 but not 5.1/5.2). Company is financially solid (world's first listed LLM company, HKEX IPO Jan 2026). Structural risks: US Entity List (Jan 2025) constrains Zhipu's compute supply chain (not customer usage per se, but corporate/compliance optics); most models have MIT open weights so third-party hosting (Together/DeepInfra) is a credible continuity hedge — EXCEPT glm-5v-turbo (closed, API-only).",
+    "openaiCompatible": true,
+    "baseUrl": "https://api.z.ai/api/paas/v4/ (chat completions: https://api.z.ai/api/paas/v4/chat/completions; works with official OpenAI SDKs via baseURL override; separate Coding-Plan endpoint https://api.z.ai/api/coding/paas/v4; mainland-China platform is open.bigmodel.cn)",
+    "privacy": "On paper, better than reputation suggests — international API is operated by JINGSHENG HENGXING TECHNOLOGY PTE. LTD. (Singapore); 'Customer Data is generally processed in Singapore'. DPA states API content 'is processed in real-time... and is not saved on our servers' and 'we do not store any of the content the Customer or its End Users provide or generate'; data deleted after contract termination unless law requires. Training: policy describes training on publicly available internet data; no explicit clause permitting training on API inputs (the no-storage claim implies not), but ALSO no explicit contractual 'we will never train on API inputs' promise or opt-out mechanism, and no image/biometric-specific provisions. Material caveats for sending USER FACE PHOTOS: Beijing parent is subject to PRC National Intelligence Law (2017) — analysts note data routed through Chinese-controlled infrastructure is potentially accessible to PRC authorities regardless of the Singapore entity or policy text; PRC regulator flagged Zhipu's consumer app (not the API) for data over-collection in May 2025; Zhipu is on the US Entity List. Verdict: acceptable policy text, below-average verification/trust confidence — for photo-bearing steps prefer self/Western-hosted open weights (glm-4.5v) or restrict Z.ai first-party API to text-only steps.",
+    "perStepFit": {
+      "extraction": "2/5 — Capable VLMs exist (glm-5v-turbo $1.20/$4.00, glm-4.6v $0.30/$0.90) and are dirt-cheap, but NO response_format/JSON mode is documented on any vision model, so a 221-field strict schema rides on prompt-only JSON (or a tool-calling workaround) with elevated malformed-output/retry risk vs schema-enforced rivals; human-trait description fidelity unproven for this niche; and this step sends the user photo to a China-parent provider — the highest-sensitivity step is where the trust discount matters most.",
+      "generation": "3/5 — glm-5v-turbo can take the photo + evidence and reason well (thinking mode), pricing is excellent, and Arabic-language strength helps phrase regional candidates; but celebrity RECALL is knowledge, not language: a Chinese-trained corpus likely underrepresents Egyptian/Arab public figures vs Gemini/GPT, and there is no benchmark evidence either way — must be validated empirically before trusting the candidate pool.",
+      "judge": "3/5 — glm-5v-turbo offers vision + thinking-mode reasoning at low cost, plausibly adequate for conservative resemblance scoring; docked for no JSON mode on vision models (safety-critical output must survive prompt-only formatting + Zod), closed weights (no de-risking path for exactly this model), and less-proven instruction-following conservatism than frontier judges on a safety-critical step.",
+      "translation": "4/5 — Best fit of the four: text-only step avoids all photo-privacy concerns; GLM-5 is #2 on the SILMA Arabic Broad Benchmark and glm-4.7 ($0.60/$2.20) or glm-4.7-flashx ($0.07/$0.40, fast) — even free glm-4.7-flash for dev — are cheap and quick; response_format json_object IS supported on text models, and the backend restoring canonical fields absorbs residual JSON drift. Docked one point for regional-dialect weakness and json_object-only (no strict schema) enforcement."
+    },
+    "risks": "1) Vision models lack response_format/JSON mode — the pipeline's hardest step (221-field extraction) gets no schema enforcement; expect higher Zod-rejection/retry rates. 2) Sending user face photos to a Zhipu-parent API is a reputational/compliance exposure despite the Singapore entity and no-storage DPA (PRC National Intelligence Law analyst concerns; US Entity List optics; May-2025 consumer-app data-collection flag) — conflicts with TwinzyAI's 'acceptable data-use policy' bar unless the client explicitly accepts it in writing. 3) Egyptian/Arab celebrity recall unverified and plausibly weak (Chinese-centric training corpus; SILMA notes dialect weakness). 4) glm-5v-turbo is closed-source API-only — no third-party-hosting escape hatch for the best vision model (glm-4.5v open weights are the fallback, one generation behind). 5) Docs lag releases (structured-output page omits glm-5.1/5.2), so capability claims need empirical verification. 6) Rapid model churn means the env-driven GEMINI_MODEL-style config must be re-pointed ~quarterly to stay on the best tier, though old ids keep working. 7) No published rate-limit/SLA tiers found — capacity planning for launch spikes is unclear.",
+    "sources": [
+      "https://docs.z.ai/guides/overview/pricing",
+      "https://docs.z.ai/guides/llm/glm-5.2",
+      "https://docs.z.ai/guides/vlm/glm-5v-turbo",
+      "https://docs.z.ai/guides/vlm/glm-4.6v",
+      "https://docs.z.ai/guides/capabilities/struct-output",
+      "https://docs.z.ai/api-reference/llm/chat-completion",
+      "https://docs.z.ai/legal-agreement/privacy-policy",
+      "https://docs.z.ai/guides/overview/quick-start",
+      "https://huggingface.co/blog/silma-ai/glm-5-llm-arabic-language-performance",
+      "https://openrouter.ai/z-ai/glm-5.2",
+      "https://openrouter.ai/z-ai/glm-5",
+      "https://artificialanalysis.ai/models/glm-5-2/providers",
+      "https://pricepertoken.com/pricing-page/model/z-ai-glm-5.2",
+      "https://www.techtimes.com/articles/318543/20260617/glm-52-open-weights-live-top-coding-benchmark-api-use-carries-china-data-risk.htm",
+      "https://www.techtimes.com/articles/319547/20260702/glm-53-must-include-vision-zais-developer-poll-returns-unanimous-answer.htm",
+      "https://www.verdent.ai/guides/glm-5v-turbo",
+      "https://www.scmp.com/tech/tech-war/article/3295002/tech-war-us-adds-chinese-ai-unicorn-zhipu-trade-blacklist-bidens-exit",
+      "https://theairankings.com/zhipu/"
+    ]
+  }
+]

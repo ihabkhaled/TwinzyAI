@@ -15,6 +15,10 @@ import {
   DEFAULT_MAX_IMAGE_SIZE_BYTES,
   DEFAULT_RATE_LIMIT_MAX,
   DEFAULT_RATE_LIMIT_TTL_MS,
+  DEFAULT_SHARE_RESULT_MAX_ACTIVE_ITEMS,
+  DEFAULT_SHARE_RESULT_MAX_PAYLOAD_BYTES,
+  DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL,
+  DEFAULT_SHARE_RESULT_TTL_SECONDS,
   DEFAULT_STREAM_TTL_MS,
   MAX_ACTIVE_ANALYSES_PER_IP_LIMIT,
   MAX_ACTIVE_ANALYSES_PER_TAB_LIMIT,
@@ -26,6 +30,9 @@ import {
   MAX_QUEUE_SIZE,
   MAX_RATE_LIMIT_MAX,
   MAX_RATE_LIMIT_TTL_MS,
+  MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS,
+  MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES,
+  MAX_SHARE_RESULT_TTL_SECONDS,
   MAX_STREAM_TTL_MS,
   MIN_ANALYSIS_TIMEOUT_MS,
   MIN_CONCURRENCY_LIMIT,
@@ -36,8 +43,12 @@ import {
   MIN_QUEUE_SIZE,
   MIN_RATE_LIMIT_MAX,
   MIN_RATE_LIMIT_TTL_MS,
+  MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS,
+  MIN_SHARE_RESULT_MAX_PAYLOAD_BYTES,
+  MIN_SHARE_RESULT_TTL_SECONDS,
   MIN_STREAM_TTL_MS,
 } from './env-bounds.constants';
+import { SHARE_CACHE_DRIVERS } from './share-cache.constants';
 
 export const NODE_ENVIRONMENTS = ['development', 'test', 'production'] as const;
 
@@ -109,6 +120,50 @@ export const EnvSchema = z.object({
   GEMINI_FALLBACK_MODELS_JUDGE: z.string().default(''),
   GEMINI_MODEL_TRANSLATION: z.string().default(''),
   GEMINI_FALLBACK_MODELS_TRANSLATION: z.string().default(''),
+  // MULTI-PROVIDER ROUTES. Each is a comma-separated ordered chain of
+  // `provider:model` tokens (bare model = gemini:<model> for back-compat).
+  // When set, a step's route REPLACES its GEMINI_* chain; when empty, the
+  // GEMINI_* per-step chain (then the global chain) applies — so a
+  // Gemini-only configuration remains a fully valid production setup.
+  AI_ROUTE_EXTRACTION: z.string().default(''),
+  AI_ROUTE_GENERATION: z.string().default(''),
+  AI_ROUTE_JUDGE: z.string().default(''),
+  AI_ROUTE_TRANSLATION: z.string().default(''),
+  // Vision capability declarations for NON-Gemini entries, comma-separated
+  // `provider:model` tokens. FAIL-CLOSED: an image-carrying step may only be
+  // routed to gemini models (multimodal incumbents) or to entries explicitly
+  // declared here — a photo can never reach a provider the operator did not
+  // consciously allow to receive images.
+  AI_VISION_MODELS: z.string().default(''),
+  // OpenAI-compatible provider credentials + base-URL overrides. A provider is
+  // ENABLED iff its API key is non-empty (key presence is the enable flag).
+  OPENAI_API_KEY: z.string().default(''),
+  OPENAI_BASE_URL: z.string().default(''),
+  DEEPSEEK_API_KEY: z.string().default(''),
+  DEEPSEEK_BASE_URL: z.string().default(''),
+  QWEN_API_KEY: z.string().default(''),
+  QWEN_BASE_URL: z.string().default(''),
+  KIMI_API_KEY: z.string().default(''),
+  KIMI_BASE_URL: z.string().default(''),
+  GLM_API_KEY: z.string().default(''),
+  GLM_BASE_URL: z.string().default(''),
+  // SHADOW MODE: sampled, metrics-only comparison runs that never affect the
+  // user-visible result. Off by default; sample rate bounds cost.
+  AI_SHADOW_ENABLED: booleanFromString,
+  AI_SHADOW_SAMPLE_RATE: z.coerce.number().min(0).max(1).default(0),
+  AI_SHADOW_ROUTE_EXTRACTION: z.string().default(''),
+  AI_SHADOW_ROUTE_GENERATION: z.string().default(''),
+  AI_SHADOW_ROUTE_JUDGE: z.string().default(''),
+  AI_SHADOW_ROUTE_TRANSLATION: z.string().default(''),
+  // Images are NEVER sent to shadow routes unless this is true AND the shadow
+  // entry is vision-capable; otherwise the shadow run is skipped for image steps.
+  AI_SHADOW_ALLOW_IMAGE: booleanFromString,
+  AI_SHADOW_TIMEOUT_MS: z.coerce
+    .number()
+    .int()
+    .min(MIN_GEMINI_TIMEOUT_MS)
+    .max(MAX_GEMINI_TIMEOUT_MS)
+    .default(DEFAULT_GEMINI_TIMEOUT_MS),
   GEMINI_TIMEOUT_MS: z.coerce
     .number()
     .int()
@@ -189,6 +244,39 @@ export const EnvSchema = z.object({
     .min(MIN_STREAM_TTL_MS)
     .max(MAX_STREAM_TTL_MS)
     .default(DEFAULT_STREAM_TTL_MS),
+  // --- Temporary shareable-result cache (no database; TTL-only) ---
+  // How long a shared result stays reachable by its UUID link before the cache
+  // expires it. Default 10 minutes; the record is unreachable the instant it
+  // expires and is never persisted anywhere.
+  SHARE_RESULT_TTL_SECONDS: z.coerce
+    .number()
+    .int()
+    .min(MIN_SHARE_RESULT_TTL_SECONDS)
+    .max(MAX_SHARE_RESULT_TTL_SECONDS)
+    .default(DEFAULT_SHARE_RESULT_TTL_SECONDS),
+  // Cache backend. `memory` is a bounded in-memory TTL cache (single instance).
+  // Redis/Valkey is the documented production path; it is a deliberate code
+  // change, so `memory` is the only selectable value today.
+  SHARE_RESULT_CACHE_DRIVER: z.enum(SHARE_CACHE_DRIVERS).default('memory'),
+  // Hard cap on the stored result JSON size — bounds per-record memory so an
+  // oversized payload can never inflate the cache.
+  SHARE_RESULT_MAX_PAYLOAD_BYTES: z.coerce
+    .number()
+    .int()
+    .min(MIN_SHARE_RESULT_MAX_PAYLOAD_BYTES)
+    .max(MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES)
+    .default(DEFAULT_SHARE_RESULT_MAX_PAYLOAD_BYTES),
+  // Cap on concurrently-active share records — bounds total cache memory; new
+  // creates are rejected (after expired-record cleanup) once the cap is hit.
+  SHARE_RESULT_MAX_ACTIVE_ITEMS: z.coerce
+    .number()
+    .int()
+    .min(MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS)
+    .max(MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS)
+    .default(DEFAULT_SHARE_RESULT_MAX_ACTIVE_ITEMS),
+  // Public web origin used to build the shareable `/share/<uuid>` URL. Server
+  // config only — never user input — so the link can never be attacker-shaped.
+  SHARE_RESULT_PUBLIC_BASE_URL: z.url().default(DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL),
 });
 
 export type ParsedEnv = z.infer<typeof EnvSchema>;

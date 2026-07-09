@@ -1,8 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+import {
+  AiProvider,
+  type AiProviderValue,
+  OPENAI_COMPAT_DEFAULT_BASE_URLS,
+  OPENAI_COMPAT_PROVIDER_ENV_KEYS,
+  type OpenAiCompatProviderValue,
+} from './ai-provider.constants';
+import { type AiRouteEntry, routeEntryKey } from './ai-route.types';
+import { parseAiRouteList } from './ai-route.util';
 import type { LogLevelValue, NodeEnvironment, ParsedEnv } from './env.schema';
-import { GEMINI_STEP_ENV_KEYS, type GeminiStepValue } from './gemini-step.constants';
+import {
+  AI_STEP_ROUTE_ENV_KEYS,
+  AI_STEP_SHADOW_ROUTE_ENV_KEYS,
+  GEMINI_STEP_ENV_KEYS,
+  type GeminiStepValue,
+} from './gemini-step.constants';
+import type { ShareCacheDriverValue } from './share-cache.constants';
 
 /**
  * The only injectable configuration surface. Wraps the config vendor behind
@@ -99,6 +114,96 @@ export class AppConfigService {
     return chain.length > 0 ? chain : this.geminiModelChain;
   }
 
+  /**
+   * The MULTI-PROVIDER route chain for one step. An explicit AI_ROUTE_<STEP>
+   * fully replaces the Gemini chain for that step; when it is empty, the
+   * legacy Gemini per-step chain (then global chain) is mapped to
+   * `gemini:<model>` entries — a Gemini-only configuration stays valid.
+   */
+  public aiRouteFor(step: GeminiStepValue): readonly AiRouteEntry[] {
+    const routeKey = AI_STEP_ROUTE_ENV_KEYS[step];
+    const raw: string = this.configService.get(routeKey, { infer: true });
+    const explicit = parseAiRouteList(raw, routeKey);
+    if (explicit.length > 0) {
+      return explicit;
+    }
+    return this.geminiModelChainFor(step).map((model) => ({
+      provider: AiProvider.Gemini,
+      model,
+    }));
+  }
+
+  /** Whether this step's route chain was set explicitly via AI_ROUTE_<STEP>. */
+  public hasExplicitAiRoute(step: GeminiStepValue): boolean {
+    return this.configService.get(AI_STEP_ROUTE_ENV_KEYS[step], { infer: true }).length > 0;
+  }
+
+  /** Credential + base URL for one OpenAI-compatible provider (key may be empty). */
+  public openAiCompatCredential(provider: OpenAiCompatProviderValue): {
+    readonly apiKey: string;
+    readonly baseUrl: string;
+  } {
+    const keys = OPENAI_COMPAT_PROVIDER_ENV_KEYS[provider];
+    const apiKey: string = this.configService.get(keys.apiKey, { infer: true });
+    const overrideBaseUrl: string = this.configService.get(keys.baseUrl, { infer: true });
+    return {
+      apiKey,
+      baseUrl:
+        overrideBaseUrl.length > 0 ? overrideBaseUrl : OPENAI_COMPAT_DEFAULT_BASE_URLS[provider],
+    };
+  }
+
+  /** A provider is enabled iff its API key is configured (key = enable flag). */
+  public isProviderEnabled(provider: AiProviderValue): boolean {
+    if (provider === AiProvider.Gemini) {
+      return this.geminiApiKey.length > 0;
+    }
+    return this.openAiCompatCredential(provider).apiKey.length > 0;
+  }
+
+  /**
+   * FAIL-CLOSED image routing: an entry may receive the user's photo only if
+   * it is a Gemini model (the multimodal incumbent — today's behavior) or was
+   * explicitly declared vision-capable in AI_VISION_MODELS.
+   */
+  public isVisionCapable(entry: AiRouteEntry): boolean {
+    if (entry.provider === AiProvider.Gemini) {
+      return true;
+    }
+    const declared = parseAiRouteList(
+      this.configService.get('AI_VISION_MODELS', { infer: true }),
+      'AI_VISION_MODELS',
+    );
+    return declared.some((candidate) => routeEntryKey(candidate) === routeEntryKey(entry));
+  }
+
+  /** Shadow mode master switch (off by default). */
+  public get shadowEnabled(): boolean {
+    return this.configService.get('AI_SHADOW_ENABLED', { infer: true });
+  }
+
+  /** Fraction of eligible calls that also run the shadow route (0..1). */
+  public get shadowSampleRate(): number {
+    return this.configService.get('AI_SHADOW_SAMPLE_RATE', { infer: true });
+  }
+
+  /** Whether image-carrying steps may shadow at all (still needs vision capability). */
+  public get shadowAllowImage(): boolean {
+    return this.configService.get('AI_SHADOW_ALLOW_IMAGE', { infer: true });
+  }
+
+  /** Hard deadline for one shadow call — a slow shadow can never linger. */
+  public get shadowTimeoutMs(): number {
+    return this.configService.get('AI_SHADOW_TIMEOUT_MS', { infer: true });
+  }
+
+  /** The step's shadow route (first entry when several are configured). */
+  public shadowRouteFor(step: GeminiStepValue): AiRouteEntry | undefined {
+    const key = AI_STEP_SHADOW_ROUTE_ENV_KEYS[step];
+    const entries = parseAiRouteList(this.configService.get(key, { infer: true }), key);
+    return entries[0];
+  }
+
   public get geminiTimeoutMs(): number {
     return this.configService.get('GEMINI_TIMEOUT_MS', { infer: true });
   }
@@ -152,6 +257,31 @@ export class AppConfigService {
   /** How long an orphaned stream-registry entry survives before reclamation. */
   public get streamTtlMs(): number {
     return this.configService.get('STREAM_TTL_MS', { infer: true });
+  }
+
+  /** Time-to-live (seconds) for a temporary shared result before it expires. */
+  public get shareResultTtlSeconds(): number {
+    return this.configService.get('SHARE_RESULT_TTL_SECONDS', { infer: true });
+  }
+
+  /** Selected share-result cache driver (`memory` today; see share-cache.constants). */
+  public get shareResultCacheDriver(): ShareCacheDriverValue {
+    return this.configService.get('SHARE_RESULT_CACHE_DRIVER', { infer: true });
+  }
+
+  /** Hard cap on a stored shared-result payload's JSON byte size. */
+  public get shareResultMaxPayloadBytes(): number {
+    return this.configService.get('SHARE_RESULT_MAX_PAYLOAD_BYTES', { infer: true });
+  }
+
+  /** Cap on concurrently-active share records (bounds total cache memory). */
+  public get shareResultMaxActiveItems(): number {
+    return this.configService.get('SHARE_RESULT_MAX_ACTIVE_ITEMS', { infer: true });
+  }
+
+  /** Public web origin used to build the `/share/<uuid>` link (server config only). */
+  public get shareResultPublicBaseUrl(): string {
+    return this.configService.get('SHARE_RESULT_PUBLIC_BASE_URL', { infer: true });
   }
 
   private toList(value: string): string[] {

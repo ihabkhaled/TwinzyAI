@@ -78,3 +78,63 @@ describe('AppConfigService.geminiModelChainFor', () => {
     ]);
   });
 });
+
+describe('AppConfigService.aiRouteFor (multi-provider routes)', () => {
+  it('maps the legacy gemini chain when no explicit route is set', () => {
+    const config = buildService({ ...BASE_ENV, GEMINI_MODEL_JUDGE: 'judge-model' });
+    expect(config.hasExplicitAiRoute(GeminiStep.Judge)).toBe(false);
+    expect(config.aiRouteFor(GeminiStep.Judge)).toEqual([
+      { provider: 'gemini', model: 'judge-model' },
+    ]);
+  });
+
+  it('an explicit AI_ROUTE_<STEP> replaces the gemini chain entirely', () => {
+    const config = buildService({
+      ...BASE_ENV,
+      GEMINI_MODEL_TRANSLATION: 'gemini-lite',
+      AI_ROUTE_TRANSLATION: 'deepseek:deepseek-v4-flash,gemini-lite',
+    });
+    expect(config.hasExplicitAiRoute(GeminiStep.Translation)).toBe(true);
+    expect(config.aiRouteFor(GeminiStep.Translation)).toEqual([
+      { provider: 'deepseek', model: 'deepseek-v4-flash' },
+      { provider: 'gemini', model: 'gemini-lite' },
+    ]);
+  });
+
+  it('an invalid provider in a route throws a readable error', () => {
+    const config = buildService({ ...BASE_ENV, AI_ROUTE_JUDGE: 'nonsense:model' });
+    expect(() => config.aiRouteFor(GeminiStep.Judge)).toThrow(/unknown provider "nonsense"/);
+  });
+});
+
+describe('AppConfigService provider enablement + vision capability', () => {
+  it('a provider is enabled iff its API key is configured', () => {
+    const config = buildService({ ...BASE_ENV, GEMINI_API_KEY: 'g-key', QWEN_API_KEY: 'q-key' });
+    expect(config.isProviderEnabled('gemini')).toBe(true);
+    expect(config.isProviderEnabled('qwen')).toBe(true);
+    expect(config.isProviderEnabled('openai')).toBe(false);
+  });
+
+  it('applies the default base URL and honors an override', () => {
+    const config = buildService({ ...BASE_ENV, DEEPSEEK_BASE_URL: 'https://proxy.local/v1' });
+    expect(config.openAiCompatCredential('deepseek').baseUrl).toBe('https://proxy.local/v1');
+    expect(config.openAiCompatCredential('kimi').baseUrl).toContain('moonshot');
+  });
+
+  it('vision capability is fail-closed: gemini implicit, others only when declared', () => {
+    const config = buildService({ ...BASE_ENV, AI_VISION_MODELS: 'qwen:qwen3-vl-plus' });
+    expect(config.isVisionCapable({ provider: 'gemini', model: 'anything' })).toBe(true);
+    expect(config.isVisionCapable({ provider: 'qwen', model: 'qwen3-vl-plus' })).toBe(true);
+    expect(config.isVisionCapable({ provider: 'qwen', model: 'qwen-flash' })).toBe(false);
+    expect(config.isVisionCapable({ provider: 'openai', model: 'gpt-5.4' })).toBe(false);
+  });
+
+  it('shadowRouteFor returns the first configured entry or undefined', () => {
+    const config = buildService({ ...BASE_ENV, AI_SHADOW_ROUTE_JUDGE: 'openai:gpt-5.4-mini' });
+    expect(config.shadowRouteFor(GeminiStep.Judge)).toEqual({
+      provider: 'openai',
+      model: 'gpt-5.4-mini',
+    });
+    expect(config.shadowRouteFor(GeminiStep.Extraction)).toBeUndefined();
+  });
+});

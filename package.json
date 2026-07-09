@@ -64,6 +64,7 @@
     "quality:dead-code": "knip",
     "quality:circular": "madge apps/web/src apps/api/src --circular --extensions ts,tsx",
     "load-test": "node scripts/load-test.mjs",
+    "ai:benchmark": "npm run build --workspace apps/api && node apps/api/dist/benchmark/benchmark.main.js",
     "calibrate": "node scripts/calibrate.mjs",
     "test:a11y": "npm run test:e2e --workspace apps/web -- --project=a11y --pass-with-no-tests",
     "test:visual": "npm run test:e2e --workspace apps/web -- --project=visual --pass-with-no-tests",
