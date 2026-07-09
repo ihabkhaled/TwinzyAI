@@ -1,6 +1,7 @@
 import type { z } from 'zod';
 
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
+import type { AiContentValidator } from '../model/ai-provider-adapter.types';
 import { AI_INVALID_RESPONSE_MESSAGE } from '../model/gemini.constants';
 
 import { sanitizeAiResponseText } from './ai-response-sanitizer';
@@ -59,4 +60,20 @@ export const parseAiJsonResponse = <TSchema extends z.ZodType>(
   }
 
   return result.data;
+};
+
+/**
+ * Builds a silent content validator for the model chain. Returns true only when
+ * the raw text parses as JSON and satisfies the schema. Used by the adapter
+ * to fall through to the next model on malformed output without spamming logs.
+ */
+export const buildSchemaValidator = (schema: z.ZodType): AiContentValidator => {
+  return (text: string): boolean => {
+    try {
+      const parsed: unknown = JSON.parse(sanitizeAiResponseText(text));
+      return schema.safeParse(parsed).success;
+    } catch {
+      return false;
+    }
+  };
 };

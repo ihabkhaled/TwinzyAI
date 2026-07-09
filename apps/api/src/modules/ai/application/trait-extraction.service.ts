@@ -6,7 +6,7 @@ import { countPopulatedTraitFields, isRecord, TraitExtractionResponseSchema } fr
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
-import { parseAiJsonResponse } from '../lib/json-response.util';
+import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
 import { collectExtractionTextValues } from '../lib/trait-text.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
@@ -50,6 +50,7 @@ export class TraitExtractionService {
       { mimeType, base64Data: imageBuffer.toString('base64') },
       undefined,
       signal,
+      buildSchemaValidator(TraitExtractionResponseSchema),
     );
 
     const response = parseAiJsonResponse(

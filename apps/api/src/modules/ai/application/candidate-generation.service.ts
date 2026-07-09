@@ -5,7 +5,7 @@ import { CandidateGenerationResponseSchema, PROMPT_JSON_INDENT } from '@twinzy/s
 
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
-import { parseAiJsonResponse } from '../lib/json-response.util';
+import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
 import { PromptKey, PromptPlaceholder } from '../model/prompt-version.constants';
@@ -49,7 +49,12 @@ export class CandidateGenerationService {
       [PromptPlaceholder.ResultCount]: String(resultCount),
     });
 
-    const rawText = await this.aiProvider.generateFromTextStream(prompt, undefined, signal);
+    const rawText = await this.aiProvider.generateFromTextStream(
+      prompt,
+      undefined,
+      signal,
+      buildSchemaValidator(CandidateGenerationResponseSchema),
+    );
     const response = parseAiJsonResponse(rawText, CandidateGenerationResponseSchema, (issues) => {
       this.logger.warn(`Candidate response schema mismatch: ${issues}`);
     });

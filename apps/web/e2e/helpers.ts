@@ -203,9 +203,34 @@ const PHOTO_FIXTURE_PATH = path.resolve(__dirname, './fixtures/photo.png');
 /** Structurally-valid image fixture the client-side validator accepts. */
 export const buildJpegPayload = (): string => PHOTO_FIXTURE_PATH;
 
+/**
+ * Sets a single file on a visually-hidden file input by briefly making it
+ * visible in the viewport so Playwright can set files across all browsers
+ * (including WebKit), then restoring its original styles.
+ */
+export const setInputFile = async (
+  page: Page,
+  selector: string,
+  filePath: string,
+): Promise<void> => {
+  await page.evaluate((sel) => {
+    const input = document.querySelector<HTMLInputElement>(sel);
+    if (input === null) {
+      throw new Error(`File input not found: ${sel}`);
+    }
+    input.style.position = 'fixed';
+    input.style.opacity = '1';
+    input.style.width = '100px';
+    input.style.height = '100px';
+    input.style.clipPath = 'none';
+    input.style.zIndex = '9999';
+  }, selector);
+  await page.locator(selector).setInputFiles(filePath);
+};
+
 export const playHappyPathUntilAnalyze = async (page: Page): Promise<void> => {
   await page.goto('/game');
-  await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
+  await setInputFile(page, '#game-photo-input', buildJpegPayload());
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 };
