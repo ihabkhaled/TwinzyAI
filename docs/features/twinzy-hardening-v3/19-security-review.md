@@ -35,5 +35,4 @@ None blocking. One accepted waiver.
 - Advisory: GHSA-qx2v-qp2m-jg93 — PostCSS XSS via unescaped `</style>` in CSS stringify output (`postcss <8.5.10`), pulled transitively by `next` (bundled build-time postcss).
 - Severity: **Moderate**. No direct fix: `npm audit fix --force` would downgrade `next` 16 → 9 (unacceptable breaking change).
 - Exposure assessment: build-time CSS stringification path, not a runtime request path in this app; no user-controlled CSS is stringified. Practical risk to the running service: low.
-- Decision: **Accepted, time-boxed.** The dependency-audit CI gate runs at `--audit-level=high` (fails on High/Critical) so this Moderate does not red the pipeline while remaining visible in every `npm audit` run.
-- Remediation owner / plan: the dependency-upgrade slice will bump `next` to a release bundling patched postcss (`>=8.5.10`); once `npm audit` is clean the gate drops back to `--audit-level=low`. Tracked against `twinzy-hardening-v3`.
+- Decision: **RESOLVED (2026-07-09).** The dependency-upgrade slice ran `npm update`, which bumped the nested postcss to a patched version within Next 16's range — `npm audit` now reports **0 vulnerabilities**. The audit gate (`audit` / `security:audit`) has been tightened back to `--audit-level=low`, so any future advisory of any severity reds the pipeline. No open waiver remains.
