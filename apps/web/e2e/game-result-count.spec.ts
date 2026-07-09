@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { DEFAULT_RESULT_COUNT, isRecord, MAX_RESULT_COUNT, MIN_RESULT_COUNT } from '@twinzy/shared';
+import { DEFAULT_RESULT_COUNT, MAX_RESULT_COUNT, MIN_RESULT_COUNT } from '@twinzy/shared';
 
 import {
   buildJpegPayload,
@@ -69,11 +69,11 @@ test.describe('result-count selection', () => {
     await page.getByRole('checkbox').check();
     await setResultCount(page, 5);
 
-    let capturedBody: Record<string, unknown> | undefined;
+    let capturedResultCount: number | undefined;
     await page.route('**/api/v1/game/analyze/stream', async (route) => {
-      const rawPostData = route.request().postData();
-      const parsedBody = rawPostData === null ? undefined : (JSON.parse(rawPostData) as unknown);
-      capturedBody = isRecord(parsedBody) ? parsedBody : undefined;
+      const rawPostData = route.request().postData() ?? '';
+      const match = /name="resultCount"\r?\n\r?\n(\d+)/.exec(rawPostData);
+      capturedResultCount = match === null ? undefined : Number(match[1]);
       await route.fulfill({
         status: 200,
         contentType: 'text/event-stream',
@@ -84,7 +84,6 @@ test.describe('result-count selection', () => {
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
     await expect(page.getByTestId('result-card-1')).toBeVisible();
 
-    expect(capturedBody).toBeDefined();
-    expect(capturedBody?.resultCount).toBe(5);
+    expect(capturedResultCount).toBe(5);
   });
 });
