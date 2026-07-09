@@ -42,4 +42,8 @@ export const ERROR_MESSAGE_KEY_BY_CODE: Readonly<Record<ErrorCodeValue, ErrorMes
   [ErrorCode.AiTimeout]: 'errors.ai.timeout',
   [ErrorCode.ServerBusy]: 'errors.server.busy',
   [ErrorCode.AnalysisCancelled]: 'errors.analysis.cancelled',
+  [ErrorCode.ShareNotFound]: 'errors.share.notFound',
+  [ErrorCode.SharePayloadTooLarge]: 'errors.share.payloadTooLarge',
+  [ErrorCode.ShareResultUnsafe]: 'errors.share.unsafe',
+  [ErrorCode.ShareCapacityReached]: 'errors.share.capacity',
 };

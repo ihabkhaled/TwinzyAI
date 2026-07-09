@@ -65,3 +65,20 @@ export async function postJson<TSchema extends z.ZodType>(
 
   return parseSchema(schema, response.data, path);
 }
+
+/**
+ * Fetches JSON and validates the response against `schema`. Used by the public
+ * share page to read a temporary result by its UUID; a non-2xx (e.g. an expired
+ * 404) rethrows as the normalized {@link HttpError}, so callers branch on
+ * `isHttpError` + status without ever seeing an `AxiosError`.
+ */
+export async function getJson<TSchema extends z.ZodType>(
+  client: AxiosInstance,
+  path: string,
+  schema: TSchema,
+  config?: HttpRequestConfig,
+): Promise<z.output<TSchema>> {
+  const response = await client.get<unknown>(path, config);
+
+  return parseSchema(schema, response.data, path);
+}

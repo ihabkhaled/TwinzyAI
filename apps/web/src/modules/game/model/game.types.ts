@@ -10,6 +10,7 @@ import type {
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
 import type { GamePhaseValue } from './game.enums';
+import type { ShareModalViewModel } from './share-modal.types';
 
 /** Live mid-pipeline trait progress: the count + strongest written signals. */
 export interface TraitsProgress {
@@ -387,5 +388,6 @@ export interface GameViewModel {
   upload: UploadViewModel;
   camera: CameraViewModel;
   share: ShareViewModel;
+  shareModal: ShareModalViewModel;
   translation: TranslationViewModel;
 }

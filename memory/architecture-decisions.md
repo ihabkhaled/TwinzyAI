@@ -77,3 +77,28 @@ the individual decisions and their reasons.
   deferred; when needed, it requires a shared SSE/cancellation store and a shared per-IP
   rate-limit store before containers can be scaled. See
   [adr-003-horizontal-scaling-plan.md](../architecture/adrs/adr-003-horizontal-scaling-plan.md).
+
+## Ephemeral shareable results (TWZ-SHARE-001, 2026-07-08)
+
+- Sharing a finished result is ephemeral and database-free: the record lives behind
+  `ShareResultCachePort` (+ the `SHARE_RESULT_CACHE` DI token) in a single bounded in-memory TTL
+  adapter (`InMemoryShareResultCacheRepository`) — lazy expiry on read, a periodic sweeper,
+  `OnModuleDestroy` cleanup, and max-active-items + max-payload-bytes caps, so the cache can never
+  grow unbounded. Single-instance only (records are in-heap; a restart/redeploy drops live links;
+  multi-replica needs sticky sessions).
+- Redis/Valkey is the DOCUMENTED production adapter behind the same port, selected via
+  `SHARE_RESULT_CACHE_DRIVER` (only `memory` today). It is intentionally not built now — the repo
+  has no Redis infra and an untested/dead client would violate the no-dead-code + test-everything
+  gates. Rollback for any share change is env/commit-only (no DB, no migration; a redeploy also
+  clears the cache).
+- The create endpoint reuses the FULL existing `FinalGameResult` contract (not a slim payload): the
+  strict validated schema has no image/file slot by construction, ingest re-safety-filters and
+  rejects any `data:`/base64/embedded-image string, and the shared view is guaranteed identical to
+  the result view. Missing and expired ids return an identical safe 404 (no existence oracle).
+- The frontend share code (create + modal + countdown + public `/share/[shareId]` page) lives INSIDE
+  `apps/web/src/modules/game`, not a new `modules/share`, to reuse the result view and avoid a
+  circular module dependency; the route file only imports the container.
+- Deciding records: `docs/features/temporary-shareable-results/06-technical-refinement.md` and
+  `08-architecture-review.md`. A dedicated `adr-004-ephemeral-share-result-cache-port.md` was planned
+  in phase 13 but is not yet written (open doc gap tracked in this feature's
+  `23-documentation-changelog.md`).

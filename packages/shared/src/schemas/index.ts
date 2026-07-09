@@ -5,5 +5,6 @@ export * from './health.schema';
 export * from './judge.schema';
 export * from './language.schema';
 export * from './result-count.schema';
+export * from './share-result.schema';
 export * from './traits.schema';
 export * from './translate-result.schema';

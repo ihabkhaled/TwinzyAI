@@ -18,6 +18,7 @@ import { gameTitleClass } from './game.container.variants';
 import { GameProcessing } from './game-processing.container';
 import { GameResult } from './game-result.container';
 import { GameSetup } from './game-setup.container';
+import { ShareModal } from './share-modal.container';
 
 const renderProcessing = (
   vm: GameViewModel,
@@ -117,6 +118,7 @@ export const GameContainer = (): ReactElement => {
       {vm.phase === GamePhase.Processing && renderProcessing(vm, labels, translate)}
       {vm.phase === GamePhase.Error && vm.errorMessage !== undefined && renderError(vm, labels)}
       {vm.phase === GamePhase.Success && renderSuccess(vm, labels, translate)}
+      {vm.shareModal.isOpen ? <ShareModal {...vm.shareModal} /> : null}
     </Stack>
   );
 };

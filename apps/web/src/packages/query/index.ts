@@ -9,3 +9,4 @@ export {
   useAppSuspenseQuery,
 } from './query-hooks';
 export type { AppMutationOptions, AppQueryKey, AppQueryOptions } from './query-types';
+export type { UseQueryResult as AppQueryResult } from '@tanstack/react-query';

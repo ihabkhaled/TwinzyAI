@@ -20,6 +20,18 @@ no biometric comparison, and your photo is never stored. Fully localized in Engl
 8. Switching language calls `POST /api/v1/game/translate-result`, which translates the existing
    result only — the image is never re-uploaded or re-analyzed.
 
+## Share your result (temporary links)
+
+Sharing is optional and works without a database. The result screen's **Share** button
+mints a **temporary public link** (`POST /api/v1/share-results`) that carries only the
+already-safety-filtered result JSON — never the uploaded photo. It returns a UUID URL plus
+timing; opening `/share/<uuid>` shows the result with a live per-second countdown and
+auto-expires (default 10 minutes, configurable). The share sheet offers the native Web
+Share API, platform buttons (WhatsApp / Telegram / X / Facebook / LinkedIn / Reddit /
+Email), and copy-link. Still free, still no database, still no image shared — the link
+lives only in the API's in-memory cache, so it is unreachable the instant it expires (and
+an API restart may drop it earlier).
+
 ## Quick start
 
 ```bash

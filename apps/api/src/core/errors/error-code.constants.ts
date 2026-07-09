@@ -21,6 +21,10 @@ export const ErrorCode = {
   AiTimeout: 'AI_TIMEOUT',
   ServerBusy: 'SERVER_BUSY',
   AnalysisCancelled: 'ANALYSIS_CANCELLED',
+  ShareNotFound: 'SHARE_NOT_FOUND',
+  SharePayloadTooLarge: 'SHARE_PAYLOAD_TOO_LARGE',
+  ShareResultUnsafe: 'SHARE_RESULT_UNSAFE',
+  ShareCapacityReached: 'SHARE_CAPACITY_REACHED',
 } as const;
 
 export type ErrorCodeValue = (typeof ErrorCode)[keyof typeof ErrorCode];

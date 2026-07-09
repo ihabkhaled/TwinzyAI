@@ -63,3 +63,35 @@ export async function copyTextToClipboard(text: string): Promise<boolean> {
     return false;
   }
 }
+
+/** Whether the platform exposes the Web Share API (mobile browsers mostly). */
+export function canUseWebShare(): boolean {
+  const safeWindow = getSafeWindow();
+  return safeWindow !== null && typeof safeWindow.navigator.share === 'function';
+}
+
+/**
+ * Shares via the native Web Share sheet. Returns true when the share completed,
+ * false when it is unsupported or the user dismissed it — callers fall back to
+ * the copy-link / platform buttons. Only a safe URL (+ text/title) is shared;
+ * never an image.
+ */
+export async function shareViaWebShare(data: {
+  title?: string;
+  text?: string;
+  url: string;
+}): Promise<boolean> {
+  const safeWindow = getSafeWindow();
+
+  if (safeWindow === null || typeof safeWindow.navigator.share !== 'function') {
+    return false;
+  }
+
+  try {
+    await safeWindow.navigator.share(data);
+
+    return true;
+  } catch {
+    return false;
+  }
+}

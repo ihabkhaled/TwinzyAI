@@ -406,6 +406,37 @@
       }
     }
   },
+  "share": {
+    "metaTitle": "Twinzy temporary style/vibe result",
+    "metaDescription": "A temporary, playful style/vibe result based on written visible traits only.",
+    "shareText": "I tried Twinzy and got my public style/vibe matches. See the temporary result here:",
+    "modalTitle": "Share your result",
+    "modalDescription": "This creates a temporary link anyone can open for a short time. Your photo is never shared.",
+    "creating": "Creating your share link…",
+    "copyLink": "Copy link",
+    "copySuccess": "Link copied.",
+    "copyFailed": "Could not copy the link. Please copy it manually.",
+    "nativeShare": "Share…",
+    "platformsTitle": "Or share to",
+    "close": "Close",
+    "createFailed": "We could not create a share link. Please try again.",
+    "expiresIn": "This page disappears in {time}",
+    "expiredTitle": "This shared result has expired",
+    "expiredDescription": "Temporary results disappear after a short time. Create a new Twinzy result of your own.",
+    "notFoundTitle": "This shared result is unavailable",
+    "notFoundDescription": "This link has expired or was not found. Create a new Twinzy result of your own.",
+    "loading": "Loading the shared result…",
+    "createOwn": "Create your own result",
+    "platform": {
+      "whatsapp": "Share on WhatsApp",
+      "telegram": "Share on Telegram",
+      "facebook": "Share on Facebook",
+      "x": "Share on X",
+      "linkedin": "Share on LinkedIn",
+      "reddit": "Share on Reddit",
+      "email": "Share by email"
+    }
+  },
   "privacy": {
     "title": "Privacy",
     "intro": "Twinzy is built to know as little about you as possible.",

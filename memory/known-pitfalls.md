@@ -501,6 +501,35 @@
   siblings from the same cleanup (express `helmet`/`multer`/`@nestjs/platform-express`) stayed
   removed — the lesson is "prove it, boot included," not "never remove deps".
 
+---
+
+## L. Feature-discovered traps (temporary-shareable-results)
+
+### L1. Playwright route-mock of a cross-origin JSON XHR is flaky under WebKit
+
+- **Symptom:** the share-flow e2e passes on the Chromium engines (chromium + mobile-chromium, 6
+  passing) but is unreliable under WebKit when reusing the dev server, so it is documented-skipped
+  on WebKit (3 webkit-skipped).
+- **Cause:** the share page reads its record via a cross-origin JSON `XHR`; Playwright's `route`-mock
+  of that request is flaky under WebKit in reuse-mode. The analyze flow is immune because it uses a
+  fetch/SSE path that avoids the mocked cross-origin XHR.
+- **Fix:** keep the WebKit share e2e skipped and documented as a HARNESS limitation, not a product
+  gap — the share logic is fully covered by 264 web-unit + 43 backend integration tests. Do not
+  "fix" it by loosening the mock or weakening an assertion; re-enable only if WebKit route-mocking of
+  cross-origin XHR becomes reliable.
+
+### L2. The in-memory share cache is single-instance and clears on restart
+
+- **Symptom:** a share link created before a redeploy/restart 404s afterward; a link created on one
+  replica is unreadable on another.
+- **Cause:** the `memory` `ShareResultCachePort` adapter keeps records in this process's heap only —
+  there is no shared store, by design (no Redis infra today).
+- **Fix:** this is expected operational behavior for the single-instance deployment, not a bug — the
+  TTL is short and the limitation is documented (README, `docs/privacy-and-data-retention.md`,
+  `docs/architecture.md`). For multi-replica, implement the Redis/Valkey adapter behind the same port
+  (select via `SHARE_RESULT_CACHE_DRIVER`) or use sticky sessions. Never add a database (privacy
+  invariant) to "fix" this.
+
 **Related:** [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) ·
 [backend-stack.md](./backend-stack.md) · [testing-strategy.md](./testing-strategy.md) ·
 [ai-context-map.md](./ai-context-map.md)

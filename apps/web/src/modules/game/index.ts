@@ -9,6 +9,7 @@ export { LandingHero } from './components/landing-hero.component';
 export { PrivacyNotice } from './components/privacy-notice.component';
 export { GameContainer } from './containers/game.container';
 export { LandingContainer } from './containers/landing.container';
+export { SharePageContainer } from './containers/share-page.container';
 export { GamePhase, type GamePhaseValue } from './model/game.enums';
 export type { GameResultView, GameViewModel } from './model/game.types';
 export type {

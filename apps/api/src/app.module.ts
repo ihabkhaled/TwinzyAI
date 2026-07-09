@@ -6,6 +6,7 @@ import { LoggerModule } from './core/logger/logger.module';
 import { GameModule } from './modules/game/game.module';
 import { HealthModule } from './modules/health/health.module';
 import { PrivacyModule } from './modules/privacy/privacy.module';
+import { ShareResultsModule } from './modules/share-results';
 
 /**
  * Root module. Order matters: the global config module is validated first,
@@ -13,6 +14,14 @@ import { PrivacyModule } from './modules/privacy/privacy.module';
  * filter + rate limiting), then feature modules.
  */
 @Module({
-  imports: [AppConfigModule, LoggerModule, CoreModule, HealthModule, PrivacyModule, GameModule],
+  imports: [
+    AppConfigModule,
+    LoggerModule,
+    CoreModule,
+    HealthModule,
+    PrivacyModule,
+    GameModule,
+    ShareResultsModule,
+  ],
 })
 export class AppModule {}

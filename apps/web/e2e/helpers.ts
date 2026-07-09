@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import type { Page } from '@playwright/test';
+import type { Page, Route } from '@playwright/test';
 
 import {
   DEFAULT_RESULT_COUNT,
@@ -226,4 +226,77 @@ export const playHappyPathUntilAnalyze = async (page: Page): Promise<void> => {
 export const setResultCount = async (page: Page, value: number): Promise<void> => {
   const select = page.getByTestId('result-count-select');
   await select.selectOption(String(value));
+};
+
+/** A fixed UUID for the mocked share record. */
+export const SHARE_ID = '3f1c8b2a-9d4e-4c7a-8b1f-2e6a7c9d0e5b';
+
+const SHARE_CREATE_ROUTE = '**/api/v1/share-results';
+const SHARE_GET_ROUTE = `**/api/v1/share-results/${SHARE_ID}`;
+
+/**
+ * The share-results calls are cross-origin JSON (web:3000 → api:4000), which
+ * triggers a CORS preflight WebKit enforces strictly. A plain fulfill leaves
+ * the request pending there, so the mock answers OPTIONS and echoes CORS
+ * headers on every response.
+ */
+const CORS_HEADERS: Record<string, string> = {
+  'access-control-allow-origin': '*',
+  'access-control-allow-methods': 'GET,POST,DELETE,OPTIONS',
+  'access-control-allow-headers': 'content-type',
+};
+
+const fulfillJsonWithCors = async (
+  route: Route,
+  status: number,
+  body: Record<string, unknown>,
+): Promise<void> => {
+  if (route.request().method() === 'OPTIONS') {
+    await route.fulfill({ status: 204, headers: CORS_HEADERS });
+    return;
+  }
+  await route.fulfill({
+    status,
+    headers: { ...CORS_HEADERS, 'content-type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+};
+
+/** Mocks POST /share-results — returns a temporary link's metadata. */
+export const mockShareCreate = async (page: Page): Promise<void> => {
+  await page.route(SHARE_CREATE_ROUTE, (route) =>
+    fulfillJsonWithCors(route, 201, {
+      shareId: SHARE_ID,
+      shareUrl: `http://localhost/share/${SHARE_ID}`,
+      createdAt: '2026-07-08T10:00:00.000Z',
+      expiresAt: '2026-07-08T10:10:00.000Z',
+      ttlSeconds: 600,
+    }),
+  );
+};
+
+/** Mocks GET /share-results/:id — returns the active shared result. */
+export const mockShareGetActive = async (page: Page): Promise<void> => {
+  await page.route(SHARE_GET_ROUTE, (route) =>
+    fulfillJsonWithCors(route, 200, {
+      shareId: SHARE_ID,
+      languageCode: 'en',
+      result: buildSuccessBody(),
+      createdAt: '2026-07-08T10:00:00.000Z',
+      expiresAt: '2026-07-08T10:10:00.000Z',
+      remainingSeconds: 540,
+    }),
+  );
+};
+
+/** Mocks GET /share-results/:id — a safe 404 for an expired/unknown link. */
+export const mockShareGetExpired = async (page: Page): Promise<void> => {
+  await page.route(SHARE_GET_ROUTE, (route) =>
+    fulfillJsonWithCors(route, 404, {
+      statusCode: 404,
+      errorCode: 'SHARE_NOT_FOUND',
+      message: 'This shared result has expired or was not found.',
+      messageKey: 'errors.share.notFound',
+    }),
+  );
 };

@@ -23,3 +23,20 @@ policy doc: [/docs/privacy-and-data-retention.md](../docs/privacy-and-data-reten
   ([observability-decisions.md](./observability-decisions.md)).
 - Frontend (web workstream): the image never enters localStorage/sessionStorage/IndexedDB;
   preview uses an object URL revoked on cleanup.
+
+## Temporary shared results (TWZ-SHARE-001)
+
+- Shared result pages are **public-by-link and ephemeral**: viewable by anyone holding the
+  crypto-random UUID URL until a short TTL (default 10 min) expires, then gone. Intentional —
+  no accounts, no auth by product invariant; the page is `noindex/nofollow` and never identifies
+  the user.
+- **Never a database**: the shared record lives only in the API's in-memory TTL cache (no DB, file,
+  or queue) and may also clear on restart/redeploy. Nothing is persisted.
+- **The image is never shared**: the create request reuses the strict `FinalGameResult` contract
+  (no file slot) and ingest rejects any `data:`/base64/embedded-image string — no image
+  bytes/url/hash/metadata/embeddings can enter the cache, and the page never renders it.
+- **No existence oracle**: a missing and an expired share id return the identical safe 404
+  (`SHARE_NOT_FOUND`).
+- **Server-config link origin**: the `/share/<uuid>` URL is built from `SHARE_RESULT_PUBLIC_BASE_URL`
+  (server config only, never user input), so links can't be attacker-shaped or an open redirect. All
+  page text is escaped (no `dangerouslySetInnerHTML`).

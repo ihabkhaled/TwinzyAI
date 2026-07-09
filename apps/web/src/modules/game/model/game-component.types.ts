@@ -148,6 +148,13 @@ export interface TranslationStatusProps {
   onRetry: () => void;
 }
 
+/** Props for the reusable result body (summary + traits + quality + matches). */
+export interface ResultSectionsProps {
+  view: GameResultView;
+  labels: ResultLabels;
+  traitCountLabel: string;
+}
+
 /** Props for the compact "strongest signals" summary section. */
 export interface ResultSummaryProps {
   title: string;

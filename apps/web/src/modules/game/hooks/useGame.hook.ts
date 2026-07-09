@@ -19,6 +19,7 @@ import {
   buildTranslationViewModel,
   buildUploadViewModel,
 } from '../helpers/game-view-model.helper';
+import { buildShareModalViewModel } from '../helpers/share-view-model.helper';
 import { mapFinalResultToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
 import { useAnalyzeGameMutation } from '../queries/game.mutations';
@@ -29,6 +30,7 @@ import { useImageUpload } from './useImageUpload.hook';
 import { useResultCount } from './useResultCount.hook';
 import { useResultTranslation } from './useResultTranslation.hook';
 import { useRunRecovery } from './useRunRecovery.hook';
+import { useShareCreate } from './useShareCreate.hook';
 import { useShareResult } from './useShareResult.hook';
 import { useStreamProgress } from './useStreamProgress.hook';
 
@@ -46,7 +48,7 @@ export const useGame = (): GameViewModel => {
 
   const { file, previewUrl, fileErrorKey, onFileChange, acceptFile, clearFile } = useImageUpload();
   const camera = useCameraCapture(acceptFile);
-  const { feedbackKey, onShare, resetFeedback } = useShareResult();
+  const { feedbackKey, resetFeedback } = useShareResult();
   const progress = useStreamProgress();
   const { data, error, isPending, isSuccess, isError, analyze, reset } = useAnalyzeGameMutation(
     progress.handlers,
@@ -64,10 +66,12 @@ export const useGame = (): GameViewModel => {
   const canAnalyze = file !== undefined && consentGiven && !isPending;
 
   const onAnalyze = useCallback((): void => {
-    if (file !== undefined && consentGiven && !isPending) {
-      progress.reset();
-      beginRun(file, resultCount);
+    if (file === undefined || !consentGiven || isPending) {
+      return;
     }
+
+    progress.reset();
+    beginRun(file, resultCount);
   }, [file, consentGiven, isPending, beginRun, progress, resultCount]);
 
   const recovery = useRunRecovery({
@@ -88,9 +92,12 @@ export const useGame = (): GameViewModel => {
       ? undefined
       : mapFinalResultToView(translation.displayResult, translate);
 
-  const onShareResult = useCallback((): void => {
-    void onShare(resultView?.shareText ?? '');
-  }, [onShare, resultView]);
+  const shareText = resultView?.shareText ?? '';
+  const shareCreate = useShareCreate(translation.displayResult, shareText);
+
+  // The result "Share" button opens the temporary-link modal, which creates the
+  // link and offers copy / native / platform sharing.
+  const onShareResult = shareCreate.open;
 
   return {
     phase: resolvePhase(isPending, isSuccess, recovery.isRealError),
@@ -121,6 +128,7 @@ export const useGame = (): GameViewModel => {
     ),
     camera: buildCameraViewModel(camera, translate),
     share: buildShareViewModel({ feedbackKey }, translate),
+    shareModal: buildShareModalViewModel(shareCreate, shareText, translate),
     translation: buildTranslationViewModel(translation, translate),
   };
 };

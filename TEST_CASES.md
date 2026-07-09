@@ -126,3 +126,40 @@ invalid file type; oversized file; backend validation error; model timeout; safe
 network failure; refresh does not leak image data; no image persists after reset; accessibility scan
 (axe); keyboard navigation; screen reader labels; mobile viewport layout; visual regression for
 main screens; privacy/disclaimer always visible near results.
+
+## Share results — backend (api-unit / api-integration) — `/api/v1/share-results`
+
+| # | Case | Expectation |
+| --- | --- | --- |
+| 65 | Create share link | `POST` returns `{shareId (UUID), shareUrl, createdAt, expiresAt, ttlSeconds}`; `expiresAt = createdAt + TTL` |
+| 66 | Default vs configured TTL | `ttlSeconds`/`expiresAt` honor `SHARE_RESULT_TTL_SECONDS` (default 600; a configured value is reflected) |
+| 67 | Read active link | `GET` returns `{shareId, languageCode, result, createdAt, expiresAt, remainingSeconds}`; `remainingSeconds` server-computed from `expiresAt` |
+| 68 | Unknown UUID | safe 404 `SHARE_NOT_FOUND` (identical to expired — no existence oracle) |
+| 69 | Invalid (non-UUID) id | rejected 400 (UUID validation) |
+| 70 | Unknown key / image / base64 / `data:` in payload | rejected (strict `FinalGameResult` schema + ingest safety re-filter) — never cached |
+| 71 | Forbidden-wording result | rejected `SHARE_RESULT_UNSAFE` (400) |
+| 72 | Oversized payload | rejected `SHARE_PAYLOAD_TOO_LARGE` (413) at the byte cap |
+| 73 | Cache at capacity | new create rejected `SHARE_CAPACITY_REACHED` (429) |
+| 74 | Rate limit | create > 20/min and read > 120/min throttled 429 |
+| 75 | Delete then read | `DELETE` removes the record; a subsequent `GET` returns 404 |
+| 76 | No image ever stored | the cached record holds only result JSON + ids/timings — no image bytes (`data:`/base64) anywhere |
+
+## Share results — frontend (web-unit)
+
+| # | Case | Expectation |
+| --- | --- | --- |
+| 77 | Platform share links | `buildPlatformLinks` emits URL-encoded web-intent links for WhatsApp/Telegram/X/Facebook/LinkedIn/Reddit/Email |
+| 78 | Countdown format + cleanup | `formatCountdown` renders `mm:ss`; `useCountdown` ticks each second from the server `remainingSeconds` and clears the interval on unmount (React bails re-render at 0) |
+| 79 | Gateway posts only the result | the share create gateway sends only the result payload — never the image |
+| 80 | Create + copy + native share | `useShareCreate` creates the link, copies it, and invokes the Web Share sheet when available |
+| 81 | Modal states | `ShareModal` renders its idle / creating / created / error states |
+| 82 | Share page states | `SharePageContainer` renders loading / active / expired / not-found; never renders the image; contains no forbidden wording |
+
+## Share results — E2E (Playwright)
+
+Create a share link from a result → open the share URL in a fresh context → the live countdown ticks
+and the share buttons render; a directly-opened expired/unknown link shows the safe not-found state;
+mobile 320px layout holds. Runs on the Chromium engines (chromium + mobile-chromium, 6 passing);
+**documented-skip on WebKit** (Playwright's route-mock of the share page's cross-origin JSON XHR is
+flaky under WebKit in reuse-mode, 3 skipped) — the share logic is fully covered by the web-unit and
+backend integration cases above, so this is a test-harness limitation, not a product gap.

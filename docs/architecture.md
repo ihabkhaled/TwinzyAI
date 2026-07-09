@@ -43,3 +43,44 @@ translated text.
 
 Data both sides share (schemas, constants, enums) lives in packages/shared; neither app defines
 its own copy. Nothing is persisted server-side.
+
+## Temporary shareable results (TWZ-SHARE-001)
+
+apps/api/src/modules/share-results (api/application/infrastructure/lib/model/tests) adds an
+OPTIONAL, database-free way to share a finished result. The cache is a PORT — ShareResultCachePort
+plus the SHARE_RESULT_CACHE DI token — with exactly one bounded in-memory TTL adapter today
+(InMemoryShareResultCacheRepository): lazy expiry on read + a periodic sweeper + OnModuleDestroy
+cleanup + a max-active-items cap (new creates are rejected at capacity) + a max-payload-bytes cap,
+so memory can never grow unbounded. It is single-instance only: records live in this process's heap
+and are gone on restart/redeploy (multi-replica needs sticky sessions). Redis/Valkey is the
+DOCUMENTED production path — implement the same port as a Redis adapter and select it via
+SHARE_RESULT_CACHE_DRIVER (which accepts only "memory" today); it is intentionally NOT built now
+because the repo has no Redis infra and shipping an untested/dead client would violate the
+no-dead-code + test-everything gates.
+
+Endpoints (versioned, throttled, Zod-validated, AppError/messageKey envelope):
+
+    POST   /api/v1/share-results             create  (throttle 20/min)
+    GET    /api/v1/share-results/:shareId     read    (throttle 120/min)
+    DELETE /api/v1/share-results/:shareId     delete  (throttle 20/min)
+
+Create validates the FULL existing FinalGameResult (reusing the strict validated contract, so there
+is no image/file slot by construction), re-runs the safety filter (forbidden wording + rejects any
+data:/base64/embedded-image string), enforces the byte cap, mints a crypto randomUUID shareId,
+computes expiresAt, caches ONLY the safe result JSON + ids/timings, and returns {shareId, shareUrl,
+createdAt, expiresAt, ttlSeconds}. Read returns {shareId, languageCode, result, createdAt,
+expiresAt, remainingSeconds} or a safe 404 (errorCode SHARE_NOT_FOUND) for a missing OR expired id —
+an identical response, so there is no existence oracle. remainingSeconds is server-computed from the
+authoritative expiresAt. New error codes: SHARE_NOT_FOUND (404), SHARE_PAYLOAD_TOO_LARGE (413),
+SHARE_RESULT_UNSAFE (400), SHARE_CAPACITY_REACHED (429). Five zod-validated, fail-fast env vars drive
+every cap/timing/URL (see docs/env-vars.md).
+
+Frontend: the public route apps/web/src/app/share/[shareId]/page.tsx is an async server component
+with STATIC metadata (robots {index:false, follow:false} + generic safe Open Graph — no per-user
+data, no image, nothing fetched or stored at metadata time) that renders a client
+SharePageContainer. The share create/modal/countdown/public-page code lives INSIDE
+apps/web/src/modules/game (not a new modules/share) to reuse the result view and avoid a circular
+module dependency; the route file only imports the container. The result screen's Share button opens
+a ShareModal that creates the link (posting only the result, never the image) then offers
+copy/native/platform sharing. A packages/browser Web Share facade (canUseWebShare/shareViaWebShare)
+and a packages/axios getJson were added; all text is escaped (no dangerouslySetInnerHTML).
