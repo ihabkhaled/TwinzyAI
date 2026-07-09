@@ -81,6 +81,6 @@ test.describe('error states', () => {
     await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
-    await expect(page.getByText('Sample Star 1')).toBeVisible();
+    await expect(page.getByTestId('result-card-1')).toBeVisible();
   });
 });

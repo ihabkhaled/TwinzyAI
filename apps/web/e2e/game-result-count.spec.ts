@@ -4,10 +4,11 @@ import { DEFAULT_RESULT_COUNT, isRecord, MAX_RESULT_COUNT, MIN_RESULT_COUNT } fr
 
 import {
   buildJpegPayload,
-  buildSuccessBody,
   mockAnalyzeSuccess,
   playHappyPathUntilAnalyze,
   setResultCount,
+  SUCCESS_STREAM,
+  toEventStream,
 } from './helpers';
 
 test.describe('result-count selection', () => {
@@ -31,8 +32,8 @@ test.describe('result-count selection', () => {
     await setResultCount(page, MIN_RESULT_COUNT);
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
-    await expect(page.getByText('Sample Star 2', { exact: true })).toBeHidden();
+    await expect(page.getByTestId('result-card-1')).toBeVisible();
+    await expect(page.getByTestId('result-card-2')).toBeHidden();
   });
 
   test('selecting 5 results renders exactly five ranked cards', async ({ page }) => {
@@ -62,7 +63,6 @@ test.describe('result-count selection', () => {
   });
 
   test('analyze request body includes the selected result count', async ({ page }) => {
-    await mockAnalyzeSuccess(page, 5);
     await page.goto('/game');
 
     await page.locator('#game-photo-input').setInputFiles(buildJpegPayload());
@@ -77,10 +77,7 @@ test.describe('result-count selection', () => {
       await route.fulfill({
         status: 200,
         contentType: 'text/event-stream',
-        body: JSON.stringify({
-          event: 'result',
-          result: buildSuccessBody(5),
-        }),
+        body: toEventStream(SUCCESS_STREAM(5)),
       });
     });
 

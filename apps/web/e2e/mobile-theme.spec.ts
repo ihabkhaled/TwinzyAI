@@ -37,7 +37,9 @@ for (const viewport of MOBILE_VIEWPORTS) {
 
 test.describe('themes', () => {
   test('dark mode flow renders with dark background', async ({ page }) => {
-    await page.emulateMedia({ colorScheme: 'dark' });
+    await page
+      .context()
+      .addCookies([{ name: 'twinzy.theme', value: 'dark', domain: 'localhost', path: '/' }]);
     await page.goto('/');
 
     const background = await page.evaluate(
@@ -47,7 +49,9 @@ test.describe('themes', () => {
   });
 
   test('light mode renders with light background', async ({ page }) => {
-    await page.emulateMedia({ colorScheme: 'light' });
+    await page
+      .context()
+      .addCookies([{ name: 'twinzy.theme', value: 'light', domain: 'localhost', path: '/' }]);
     await page.goto('/');
 
     const background = await page.evaluate(

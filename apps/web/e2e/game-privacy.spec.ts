@@ -11,10 +11,10 @@ test.describe('privacy', () => {
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Analyze my vibe' }).click();
 
-    await expect(page.getByText('Sample Star 1')).toBeVisible();
+    await expect(page.getByTestId('result-card-1')).toBeVisible();
 
     await page.reload();
-    await expect(page.getByText('Sample Star 1')).toBeHidden();
+    await expect(page.getByTestId('result-card-1')).toBeHidden();
     await expect(page.locator('#game-photo-input')).toHaveValue('');
   });
 
@@ -23,10 +23,10 @@ test.describe('privacy', () => {
     await page.goto('/game');
 
     await playHappyPathUntilAnalyze(page);
-    await expect(page.getByText('Sample Star 1')).toBeVisible();
+    await expect(page.getByTestId('result-card-1')).toBeVisible();
 
     await page.getByRole('button', { name: 'Try another photo' }).click();
-    await expect(page.getByText('Sample Star 1')).toBeHidden();
+    await expect(page.getByTestId('result-card-1')).toBeHidden();
     await expect(page.locator('#game-photo-input')).toHaveValue('');
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeDisabled();
   });
