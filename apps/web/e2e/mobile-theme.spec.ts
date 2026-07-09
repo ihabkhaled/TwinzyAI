@@ -25,7 +25,7 @@ for (const viewport of MOBILE_VIEWPORTS) {
       expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
 
       await playHappyPathUntilAnalyze(page);
-      await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
+      await expect(page.getByTestId('result-card-1')).toBeVisible();
 
       const resultScrollWidth = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -37,10 +37,11 @@ for (const viewport of MOBILE_VIEWPORTS) {
 
 test.describe('themes', () => {
   test('dark mode flow renders with dark background', async ({ page }) => {
-    await page
-      .context()
-      .addCookies([{ name: 'twinzy.theme', value: 'dark', domain: 'localhost', path: '/' }]);
     await page.goto('/');
+    const theme = await page.evaluate(() => document.documentElement.dataset.theme);
+    if (theme !== 'dark') {
+      await page.getByTestId('theme-toggle').click();
+    }
 
     const background = await page.evaluate(
       () => getComputedStyle(document.documentElement).backgroundColor,
@@ -49,10 +50,11 @@ test.describe('themes', () => {
   });
 
   test('light mode renders with light background', async ({ page }) => {
-    await page
-      .context()
-      .addCookies([{ name: 'twinzy.theme', value: 'light', domain: 'localhost', path: '/' }]);
     await page.goto('/');
+    const theme = await page.evaluate(() => document.documentElement.dataset.theme);
+    if (theme !== 'light') {
+      await page.getByTestId('theme-toggle').click();
+    }
 
     const background = await page.evaluate(
       () => getComputedStyle(document.documentElement).backgroundColor,

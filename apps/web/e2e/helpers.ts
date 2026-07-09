@@ -171,18 +171,24 @@ export const mockAnalyzeOversized = async (page: Page): Promise<void> => {
 
 export const mockTranslateSuccess = async (page: Page): Promise<void> => {
   await page.route(TRANSLATE_ROUTE, async (route) => {
-    const body = (await route.request().postDataJSON()) as { results: Record<string, unknown>[] };
+    const body = (await route.request().postDataJSON()) as {
+      result: Record<string, unknown>;
+    };
+    const result = body.result;
+    const results = (result.results as Record<string, unknown>[]).map(
+      (item: Record<string, unknown>) => ({
+        ...item,
+        finalReason: 'تطابق أسلوبي عام بناءً على الملامح المرئية المكتوبة.',
+        judgeNotes: 'النقاط محفوظة بشكل محافظ.',
+      }),
+    );
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify({
-        ...body,
+        ...result,
         languageCode: 'ar',
-        results: body.results.map((result: Record<string, unknown>) => ({
-          ...result,
-          finalReason: 'تطابق أسلوبي عام بناءً على الملامح المرئية المكتوبة.',
-          judgeNotes: 'النقاط محفوظة بشكل محافظ.',
-        })),
+        results,
         disclaimer:
           'هذه نتيجة ممتعة عن الأسلوب والانطباع العام تعتمد على الملامح الظاهرة المكتوبة فقط. وهي ليست تعرّفًا على الوجه ولا مطابقة هوية ولا مقارنة بيومترية.',
       }),

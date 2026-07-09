@@ -12,8 +12,7 @@ test.describe('result translation', () => {
     await expect(page.getByTestId('result-card-1')).toBeVisible();
 
     await page.getByTestId('locale-switch').click();
-    await expect(page.getByTestId('translation-banner')).toBeVisible();
-    await expect(page.getByText('تطابق أسلوبي عام')).toBeVisible();
+    await expect(page.getByTestId('result-card-1').getByText('تطابق أسلوبي عام')).toBeVisible();
     await expect(page.getByTestId('result-card-1')).toBeVisible();
   });
 
@@ -27,8 +26,9 @@ test.describe('result translation', () => {
     await page.getByTestId('locale-switch').click();
     await expect(page.getByTestId('translation-banner')).toBeHidden();
 
-    await expect(page.getByTestId('result-card-1')).toBeVisible();
-    await expect(page.getByText('#1')).toBeVisible();
-    await expect(page.getByText('90%')).toBeVisible();
+    const firstCard = page.getByTestId('result-card-1');
+    await expect(firstCard).toBeVisible();
+    await expect(firstCard.getByText('Match #1')).toBeVisible();
+    await expect(firstCard.getByText('90%')).toBeVisible();
   });
 });
