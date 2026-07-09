@@ -63,6 +63,7 @@
     "deps:upgrade": "npm-check-updates --workspaces --root -u && npm install",
     "quality:dead-code": "knip",
     "quality:circular": "madge apps/web/src apps/api/src --circular --extensions ts,tsx",
+    "load-test": "node scripts/load-test.mjs",
     "test:a11y": "npm run test:e2e --workspace apps/web -- --project=a11y --pass-with-no-tests",
     "test:visual": "npm run test:e2e --workspace apps/web -- --project=visual --pass-with-no-tests",
     "quality:frontend": "npm run lint && npm run typecheck && npm run test:e2e"
