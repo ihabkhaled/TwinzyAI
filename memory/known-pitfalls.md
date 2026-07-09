@@ -484,6 +484,23 @@
   `npx eslint <file>` after touching `packages/shared/src` without `npm run build:shared`
   first — and never "fix" these errors with casts; rebuild the dist instead.
 
+### K5. A dependency reached only at boot (Swagger UI → `@fastify/static`) looks "dead" to grep + tests
+
+- **Symptom:** a dep with no `import`/`require` anywhere in `src` is removed as dead; every
+  gate stays green, but the running app logs at boot
+  `The "@fastify/static" package is missing … FastifyAdapter.useStaticAssets()` (and the
+  `/docs` UI breaks).
+- **Cause:** `SwaggerModule.setup()` mounts the OpenAPI UI via `useStaticAssets()`, which
+  *lazy-loads* `@fastify/static` — there is no static import to grep, and the mocked-route
+  integration tests boot through `createTestApp`, which never called `configureSwagger`, so
+  nothing exercised the Swagger boot path. "No import + green tests" did not mean "unused".
+- **Fix:** before deleting a dependency, check for lazy/transitive/framework-triggered uses
+  (Swagger UI, adapters, plugins loaded by a vendor at runtime), not just `grep import`. When
+  a boot-only path is untested, add a smoke test that exercises it — `createTestApp({ withSwagger: true })`
+  + `swagger-boot.integration.test.ts` now boot the UI so a re-removal fails fast. Verified-dead
+  siblings from the same cleanup (express `helmet`/`multer`/`@nestjs/platform-express`) stayed
+  removed — the lesson is "prove it, boot included," not "never remove deps".
+
 **Related:** [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) ·
 [backend-stack.md](./backend-stack.md) · [testing-strategy.md](./testing-strategy.md) ·
 [ai-context-map.md](./ai-context-map.md)
