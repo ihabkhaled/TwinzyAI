@@ -48,7 +48,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.0",
     "jsdom": "^26.1.0",
-    "msw": "^2.14.6",
+    "msw": "^2.15.0",
     "postcss": "^8.5.0",
     "tailwindcss": "^4.3.2"
   }
