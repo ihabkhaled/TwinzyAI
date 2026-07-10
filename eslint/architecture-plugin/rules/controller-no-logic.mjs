@@ -3,32 +3,55 @@ import { isApiControllerFile } from "../shared/path-utils.mjs";
 /**
  * Controllers are thin transport adapters. Every method (except the
  * constructor) must contain exactly one return statement whose value is a
- * direct delegation (`return this.useCase.execute(dto)`), an identifier, a
- * member access, or a literal. No branching, no transformation, no
+ * direct delegation (`return this.useCase.execute(dto)`). No branching,
+ * nested mapper calls, literals/member-only returns, constructor side effects, or
  * orchestration — that logic belongs in the application layer.
  *
  * Targeting is suffix-based (apps/api files ending in .controller.ts) so it
  * holds in any folder, before and after the anatomy migration. Broaden the
  * allowed return shapes only when controller delegation genuinely needs it.
  */
-const ALLOWED_RETURN_NODE_TYPES = new Set([
-  "CallExpression",
-  "ChainExpression",
-  "Identifier",
-  "Literal",
-  "MemberExpression",
-]);
+const unwrapExpression = (node) => {
+  if (node?.type === "AwaitExpression" || node?.type === "ChainExpression") {
+    return unwrapExpression(node.expression ?? node.argument);
+  }
+  return node;
+};
 
-const isAllowedReturnExpression = (node) => {
+const countCalls = (node, visitorKeys) => {
   if (!node) {
+    return 0;
+  }
+  const ownCount = node.type === "CallExpression" ? 1 : 0;
+  return (visitorKeys[node.type] ?? []).reduce((count, key) => {
+    const child = node[key];
+    if (Array.isArray(child)) {
+      return (
+        count +
+        child.reduce(
+          (childCount, entry) => childCount + countCalls(entry, visitorKeys),
+          0,
+        )
+      );
+    }
+    return count + countCalls(child, visitorKeys);
+  }, ownCount);
+};
+
+const isDirectDelegation = (node, visitorKeys) => {
+  const expression = unwrapExpression(node);
+  if (
+    expression?.type !== "CallExpression" ||
+    countCalls(expression, visitorKeys) !== 1
+  ) {
     return false;
   }
-
-  if (node.type === "AwaitExpression") {
-    return isAllowedReturnExpression(node.argument);
-  }
-
-  return ALLOWED_RETURN_NODE_TYPES.has(node.type);
+  const callee = expression.callee;
+  return (
+    callee.type === "MemberExpression" &&
+    callee.object.type === "MemberExpression" &&
+    callee.object.object.type === "ThisExpression"
+  );
 };
 
 export default {
@@ -43,7 +66,9 @@ export default {
       singleReturnOnly:
         "Controller methods must contain exactly one return statement and no extra logic.",
       invalidReturn:
-        "Controller methods may only return a direct delegation, identifier, member access, or literal.",
+        "Controller methods must return exactly one direct this.<collaborator>.<method>(...) delegation with no nested calls.",
+      constructorWiringOnly:
+        "Controller constructors may declare injected collaborators but must not execute statements.",
     },
   },
   create(context) {
@@ -53,7 +78,13 @@ export default {
 
     return {
       MethodDefinition(node) {
-        if (node.kind === "constructor" || node.value.body === null) {
+        if (node.value.body === null) {
+          return;
+        }
+        if (node.kind === "constructor") {
+          if (node.value.body.body.length > 0) {
+            context.report({ node, messageId: "constructorWiringOnly" });
+          }
           return;
         }
 
@@ -67,7 +98,12 @@ export default {
           return;
         }
 
-        if (!isAllowedReturnExpression(statements[0].argument)) {
+        if (
+          !isDirectDelegation(
+            statements[0].argument,
+            context.sourceCode.visitorKeys,
+          )
+        ) {
           context.report({ node: statements[0], messageId: "invalidReturn" });
         }
       },

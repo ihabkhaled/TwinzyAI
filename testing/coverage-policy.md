@@ -1,6 +1,6 @@
 # Coverage Policy
 
-> The coverage contract for this workspace: **statements 95% / branches 90% / functions 95% / lines 95%** on the gated scope, measured with Vitest 4 and the **v8 provider** (`@vitest/coverage-v8`), and enforced at **pre-push**. This implements the canon — [/context/architecture-map.md](../context/architecture-map.md), [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), and [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) — and is tied to the live root [vitest.config.ts](../vitest.config.ts).
+> The coverage contract for this workspace: **statements 95% / branches 90% / functions 95% / lines 95%** on the gated scope, measured with Vitest 4 and the **v8 provider** (`@vitest/coverage-v8`), and enforced at **pre-push**. This implements the canon — [/context/architecture-map.md](../context/architecture-map.md), [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md), and [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) — and is tied to root [vitest.config.mts](../vitest.config.mts).
 
 Coverage is a hard gate, not a vanity metric. A green coverage run proves *which lines executed*, not that behavior is correct — pair it with the scenario discipline in the sibling standards ([unit](./unit-testing-standard.md), [integration](./integration-testing-standard.md), [e2e](./e2e-testing-standard.md)).
 
@@ -19,13 +19,13 @@ Coverage is a hard gate, not a vanity metric. A green coverage run proves *which
 
 **Critical logic** here = the file-security chain, AI safety filtering, the buffer-wipe guarantee, consent gating, rate limiting, and error sanitization — any path whose failure is a privacy or safety incident. These aim for near-100% with rich scenario coverage (happy path + every rejection/boundary branch), not just a high number. A high percentage with shallow assertions is still inadequate.
 
-The four numbers live in the coverage configuration of the root [vitest.config.ts](../vitest.config.ts). Do **not** edit them down to make a red run pass — that is a silent waiver and is forbidden (§6).
+The four numbers live in root [vitest.config.mts](../vitest.config.mts). Do **not** edit them down to make a red run pass — that is a silent waiver and is forbidden (§6).
 
 ---
 
 ## 2. The gated scope — what the floor applies to
 
-The denominator is a **logic-bearing allowlist**, not "all of `src`". `coverage.include` names exactly the files whose behavior the floor guards (mirror of the live [vitest.config.ts](../vitest.config.ts) `include`):
+The denominator is a **logic-bearing allowlist**, not "all of `src`". `coverage.include` names exactly the files whose behavior the floor guards (mirror of [vitest.config.mts](../vitest.config.mts)):
 
 | In scope | Why |
 | --- | --- |
@@ -40,6 +40,9 @@ The denominator is a **logic-bearing allowlist**, not "all of `src`". `coverage.
 | `apps/api/src/modules/**/application/**/*.ts` | use-cases + services — orchestration, the buffer-wipe guarantee, business logic |
 | `apps/api/src/modules/**/infrastructure/**/*.ts` | repositories — parameterized, bounded data access |
 | `apps/api/src/modules/**/lib/**/*.ts` | sanitizers, guards, parsers, mappers — pure logic |
+| `apps/web/src/modules/**/{helpers,mappers,services,gateway,schemas}/**/*.ts` | frontend domain mapping, validation, transport, and orchestration |
+| Selected changed/critical web hooks and UI-preference store | browser lifecycle, sharing, locale/theme state |
+| Selected web package/shared wrappers | HTTP streaming, browser/storage boundaries, shared helpers/hooks |
 | `packages/shared/src/utils/**/*.ts` | the cross-side pure utilities |
 
 **Excluded from the denominator** — not in the allowlist because they carry no branchable logic or wrap an un-runnable external boundary exercised only through integration stubs. The vitest `exclude` list also strips `**/tests/**`, `**/*.test.ts(x)`, `**/*.d.ts`, and `**/index.ts` barrels outright:
@@ -56,7 +59,6 @@ The denominator is a **logic-bearing allowlist**, not "all of `src`". `coverage.
 | `apps/api/src/core/openapi/**` | Swagger surface, no branch logic |
 | `**/index.ts` barrels | re-exports only |
 | `**/tests/**`, `**/*.test.ts(x)`, `**/*.d.ts` | the tests, fixtures, and type declarations themselves |
-| **`apps/web/src/**`** | **waived to the web workstream — outside the allowlist until that workstream adopts the gate. Web code is still tested (`web-unit`, Playwright); it is not yet threshold-gated.** |
 
 > **Strategic consequence:** keeping types/enums/constants in dedicated declaration files (an architecture rule — [/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md)) also keeps them out of the coverage denominator. Clean architecture and a clean gate are the same move.
 
@@ -145,7 +147,7 @@ A waiver is only valid when **all** of the following hold:
 3. **Recorded as a decision** in [/memory/testing-strategy.md](../memory/testing-strategy.md) (or the feature's [12-coverage-plan.md](../docs/features/_template/12-coverage-plan.md) under `docs/features/<slug>/`) with: what was waived, why it is unreachable/unsafe-to-test, who approved it, and the residual risk.
 4. **Approved** by a reviewer with authority over the area — privacy/safety/upload/AI-output code requires the security reviewer ([/agents/backend-security-reviewer.md](../agents/backend-security-reviewer.md)).
 
-The one standing waiver: **`apps/web` is outside the gated scope until the web workstream adopts the gate** (owner: web workstream, recorded here and in [/memory/testing-strategy.md](../memory/testing-strategy.md)). It expires when that workstream turns the gate on — new API or shared code cannot cite it.
+There is no standing frontend waiver: the web logic allowlist is part of the root coverage gate.
 
 What is **not** a waiver: lowering a threshold, adding a logic file to the exclude list, deleting assertions to make a branch "covered", or `--no-verify`. Each of those is an unrecorded, blanket waiver and is forbidden.
 
@@ -170,4 +172,4 @@ Tests come **first** ([/rules/09-testing-coverage.md](../rules/09-testing-covera
 
 ## Related
 
-[/testing/quality-gates.md](./quality-gates.md) · [/testing/testing-strategy.md](./testing-strategy.md) · [/testing/unit-testing-standard.md](./unit-testing-standard.md) · [/testing/integration-testing-standard.md](./integration-testing-standard.md) · [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) · [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md) · [vitest.config.ts](../vitest.config.ts) · [/memory/testing-strategy.md](../memory/testing-strategy.md) · [/memory/known-pitfalls.md](../memory/known-pitfalls.md)
+[/testing/quality-gates.md](./quality-gates.md) · [/testing/testing-strategy.md](./testing-strategy.md) · [/testing/unit-testing-standard.md](./unit-testing-standard.md) · [/testing/integration-testing-standard.md](./integration-testing-standard.md) · [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md) · [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md) · [vitest.config.mts](../vitest.config.mts) · [/memory/testing-strategy.md](../memory/testing-strategy.md) · [/memory/known-pitfalls.md](../memory/known-pitfalls.md)

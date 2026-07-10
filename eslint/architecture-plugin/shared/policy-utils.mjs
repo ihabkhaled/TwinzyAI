@@ -94,7 +94,7 @@ export const FORBIDDEN_WEB_LAYER_IMPORTS = {
  * ------------------------------------------------------------------------ */
 
 /** Compile pattern strings to unicode-aware regexes. */
-export const toRegExps = (patterns) =>
+const toRegExps = (patterns) =>
   (patterns ?? []).map((pattern) => new RegExp(pattern, "u"));
 
 /** True when any compiled regex matches the value. */

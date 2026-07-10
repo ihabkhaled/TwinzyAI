@@ -44,6 +44,19 @@ export default [
     },
   },
   {
+    // Local operator-owned CLI tools intentionally read/write paths supplied
+    // on their own command line. They are never reachable from HTTP or user
+    // payloads; dynamic filenames are the tool contract, not an injection path.
+    files: [
+      "apps/api/src/benchmark/benchmark-real-runner.ts",
+      "apps/api/src/benchmark/benchmark.main.ts",
+      "scripts/calibrate.mjs",
+    ],
+    rules: {
+      "security/detect-non-literal-fs-filename": "off",
+    },
+  },
+  {
     // E2E tests create transient fixture files under project-controlled paths
     // (e.g., `test-results/`). Paths are built from `__dirname` and never from
     // user input, so the non-literal-filename warning is a false positive.

@@ -92,7 +92,8 @@ export default defineConfig({
       // adapters/ (Gemini SDK, clamd TCP), model/ + enums + constants + types,
       // dto/ (zod schema declarations), error subclasses (one-line status), the
       // *.vendor re-exports, bind-app-logger + module wiring, bootstrap/, main,
-      // and the openapi surface. apps/web is waived to the web workstream.
+      // and the openapi surface. Frontend modules/packages/shared code is
+      // included; declaration/constants/variant files remain excluded.
       include: [
         'apps/api/src/core/errors/error-body.mapper.ts',
         'apps/api/src/core/errors/app-exception.filter.ts',
@@ -107,9 +108,33 @@ export default defineConfig({
         'apps/api/src/modules/**/application/**/*.ts',
         'apps/api/src/modules/**/infrastructure/**/*.ts',
         'apps/api/src/modules/**/lib/**/*.ts',
+        'apps/web/src/modules/**/helpers/**/*.ts',
+        'apps/web/src/modules/**/mappers/**/*.ts',
+        'apps/web/src/modules/**/services/**/*.ts',
+        'apps/web/src/modules/**/gateway/**/*.ts',
+        'apps/web/src/modules/**/schemas/**/*.ts',
+        'apps/web/src/modules/game/hooks/useShareCreate.hook.ts',
+        'apps/web/src/modules/ui-preferences/hooks/**/*.ts',
+        'apps/web/src/modules/ui-preferences/store/**/*.ts',
+        'apps/web/src/packages/axios/{http-error,stream-request}.ts',
+        'apps/web/src/packages/browser/browser-environment.ts',
+        'apps/web/src/packages/storage/*.ts',
+        'apps/web/src/shared/helpers/**/*.ts',
+        'apps/web/src/shared/hooks/**/*.ts',
         'packages/shared/src/utils/**/*.ts',
       ],
-      exclude: ['**/tests/**', '**/*.test.ts', '**/*.test.tsx', '**/*.d.ts', '**/index.ts'],
+      exclude: [
+        '**/tests/**',
+        '**/test/**',
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '**/*.d.ts',
+        '**/index.ts',
+        '**/*.types.ts',
+        '**/*.constants.ts',
+        '**/*.variants.ts',
+        '**/*.enum.ts',
+      ],
       // Branch floor is 90 (not 95) because the decorator downlevel emits one
       // uncoverable synthetic branch per decorated class (@Injectable services),
       // plus a handful of provider I/O abort/error edges that are not worth the

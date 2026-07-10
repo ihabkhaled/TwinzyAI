@@ -6,26 +6,23 @@
     "@typescript-eslint/parser",
     "unplugin-swc",
     "@fastify/cors",
-    "@fastify/static",
     "pino-pretty",
     "jsdom",
     "tailwindcss",
-    "fastify",
-    "tsc7"
+    "fastify"
   ],
   "ignoreUnresolved": ["src/tests/setup.ts"],
   "rules": {
-    "files": "warn",
-    "dependencies": "warn",
-    "devDependencies": "warn",
-    "optionalPeerDependencies": "warn",
-    "exports": "warn",
-    "nsExports": "warn",
-    "types": "warn",
-    "nsTypes": "warn",
-    "enumMembers": "warn",
-    "classMembers": "warn",
-    "duplicates": "warn"
+    "files": "error",
+    "dependencies": "error",
+    "devDependencies": "error",
+    "optionalPeerDependencies": "error",
+    "exports": "error",
+    "nsExports": "error",
+    "types": "error",
+    "nsTypes": "error",
+    "enumMembers": "error",
+    "duplicates": "error"
   },
   "workspaces": {
     ".": {

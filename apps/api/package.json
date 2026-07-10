@@ -7,7 +7,7 @@
     "dev": "nest start --watch",
     "build": "nest build",
     "start": "node dist/main.js",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.0",

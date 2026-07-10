@@ -39,6 +39,18 @@ export default [
     },
   },
   {
+    // Focused application services read like short recipes. Use cases retain
+    // the broader orchestration limit; services split mapping/validation into
+    // named private methods or lib/domain helpers before they grow.
+    files: ["apps/api/src/modules/**/application/*.service.ts"],
+    rules: {
+      "max-lines-per-function": [
+        "error",
+        { max: 20, skipBlankLines: true, skipComments: true },
+      ],
+    },
+  },
+  {
     // CLI scripts are Node programs and may write to stdout/stderr. A secret
     // scanner intentionally walks dynamic paths, so the non-literal filename
     // warning is a false positive for this specific script family.

@@ -53,32 +53,20 @@ export const isInSrcFolder = (filePath, folderName) =>
 export const hasFileSuffix = (filePath, suffix) =>
   normalizePath(filePath).endsWith(suffix);
 
-export const isControllerFile = (filePath) =>
+const isControllerFile = (filePath) =>
   hasFileSuffix(filePath, ".controller.ts");
-export const isServiceFile = (filePath) =>
-  hasFileSuffix(filePath, ".service.ts");
-export const isUseCaseFile = (filePath) =>
-  hasFileSuffix(filePath, ".use-case.ts");
-export const isRepositoryFile = (filePath) =>
+const isServiceFile = (filePath) => hasFileSuffix(filePath, ".service.ts");
+const isUseCaseFile = (filePath) => hasFileSuffix(filePath, ".use-case.ts");
+const isRepositoryFile = (filePath) =>
   hasFileSuffix(filePath, ".repository.ts");
 export const isAdapterFile = (filePath) =>
   hasFileSuffix(filePath, ".adapter.ts");
 
 /** Folder-based layer detection for the backend anatomy. */
-export const isInApiLayerFolder = (filePath) => isInSrcFolder(filePath, "api");
 export const isInApplicationFolder = (filePath) =>
   isInSrcFolder(filePath, "application");
-export const isInDomainFolder = (filePath) => isInSrcFolder(filePath, "domain");
-export const isInInfrastructureFolder = (filePath) =>
+const isInInfrastructureFolder = (filePath) =>
   isInSrcFolder(filePath, "infrastructure");
-export const isInAdaptersFolder = (filePath) =>
-  isInSrcFolder(filePath, "adapters");
-export const isInModelFolder = (filePath) => isInSrcFolder(filePath, "model");
-export const isInLibFolder = (filePath) => isInSrcFolder(filePath, "lib");
-export const isInCoreFolder = (filePath) => isInSrcFolder(filePath, "core");
-export const isInConfigFolder = (filePath) => isInSrcFolder(filePath, "config");
-export const isInBootstrapFolder = (filePath) =>
-  isInSrcFolder(filePath, "bootstrap");
 
 /** Composite layer membership (folder OR suffix), scoped to apps/api. */
 export const isApiControllerFile = (filePath) =>

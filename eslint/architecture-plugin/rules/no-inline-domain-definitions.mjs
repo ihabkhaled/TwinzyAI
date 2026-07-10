@@ -70,10 +70,17 @@ const isFunctionValue = (init) =>
   (init.type === "ArrowFunctionExpression" ||
     init.type === "FunctionExpression");
 
-/** `new X()` / `factory()` wiring is DI/collaborator setup, not a definition. */
+const isInlineZodSchema = (init) =>
+  init?.type === "CallExpression" &&
+  init.callee.type === "MemberExpression" &&
+  init.callee.object.type === "Identifier" &&
+  init.callee.object.name === "z";
+
+/** `new X()` / non-schema `factory()` wiring is collaborator setup. */
 const isWiringValue = (init) =>
   init !== null &&
-  (init.type === "CallExpression" || init.type === "NewExpression");
+  (init.type === "NewExpression" ||
+    (init.type === "CallExpression" && !isInlineZodSchema(init)));
 
 /**
  * Report each module-level `const` value/config declaration in a layer file.

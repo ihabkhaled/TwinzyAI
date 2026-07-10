@@ -34,3 +34,12 @@ jobs:
 
       - name: Run Lint Gate
         run: npm run lint
+
+      - name: Check Formatting
+        run: npm run format:check
+
+      - name: Check Dead Code
+        run: npm run quality:dead-code
+
+      - name: Check Circular Dependencies
+        run: npm run quality:circular

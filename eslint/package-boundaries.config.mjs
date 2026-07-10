@@ -15,7 +15,7 @@
  * this list — never the rule implementation under architecture-plugin/.
  */
 
-export const vendorImportPolicies = [
+const vendorImportPolicies = [
   {
     // Logging vendor. Everything else logs through the core/logger wrapper.
     forbid: ["^nestjs-pino$", "^pino$", "^pino-http$", "^pino-pretty$"],
@@ -92,7 +92,7 @@ export const vendorImportPolicies = [
  * (config/, bootstrap/, scripts/, e2e/, *.config.* tooling files) so the two
  * rules agree on where process.env may be read.
  */
-export const restrictedRuntimeAccess = [
+const restrictedRuntimeAccess = [
   {
     object: "process",
     property: "env",

@@ -1,4 +1,9 @@
-import { isApplicationLayerFile, isTestFile } from "../shared/path-utils.mjs";
+import {
+  hasFileSuffix,
+  isApplicationLayerFile,
+  isInApplicationFolder,
+  isTestFile,
+} from "../shared/path-utils.mjs";
 import { SDK_PACKAGES } from "../shared/policy-utils.mjs";
 import {
   getImportSource,
@@ -28,6 +33,8 @@ export default {
         "Application-layer files must not import from api/. Controllers and DTOs stay at the HTTP boundary.",
       noSdk:
         'Application-layer files must never import the provider SDK "{{source}}". Use the adapter.',
+      imageOutsideExtraction:
+        "Only trait-extraction.service.ts may call image-capable AI provider methods. Candidate generation, judging, translation, and other application services are text-only.",
     },
   },
   create(context) {
@@ -36,6 +43,12 @@ export default {
     if (!isApplicationLayerFile(filename) || isTestFile(filename)) {
       return {};
     }
+
+    const isTraitExtractionService = hasFileSuffix(
+      filename,
+      "/modules/ai/application/trait-extraction.service.ts",
+    );
+    const enforcesImageBoundary = isInApplicationFolder(filename);
 
     return {
       ImportDeclaration(node) {
@@ -55,6 +68,31 @@ export default {
 
         if (importTargetsModuleFolder(filename, source, "api")) {
           context.report({ node, messageId: "noApiImport" });
+        }
+      },
+      CallExpression(node) {
+        if (
+          !enforcesImageBoundary ||
+          isTraitExtractionService ||
+          node.callee.type !== "MemberExpression"
+        ) {
+          return;
+        }
+        const property = node.callee.property;
+        let propertyName;
+        if (property.type === "Identifier") {
+          propertyName = property.name;
+        } else if (
+          property.type === "Literal" &&
+          typeof property.value === "string"
+        ) {
+          propertyName = property.value;
+        }
+        if (
+          propertyName === "generateFromImage" ||
+          propertyName === "generateFromImageStream"
+        ) {
+          context.report({ node, messageId: "imageOutsideExtraction" });
         }
       },
     };

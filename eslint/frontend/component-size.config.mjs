@@ -9,7 +9,7 @@
  * component is a small unit of composition, so 130 file lines and 60 lines per
  * function force decomposition long before a screen becomes unreadable.
  */
-export const COMPONENT_SIZE_FILES = [
+const COMPONENT_SIZE_FILES = [
   "apps/web/src/**/*.component.tsx",
   "apps/web/src/**/*.container.tsx",
 ];

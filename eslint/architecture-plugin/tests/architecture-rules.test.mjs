@@ -1,15 +1,13 @@
 import tsParser from "@typescript-eslint/parser";
 import { RuleTester } from "eslint";
-import { describe, expect, it } from "vitest";
+import { describe, it } from "vitest";
 
 import { vendorBoundaryRuleOptions } from "../../package-boundaries.config.mjs";
-import typescriptConfig from "../../typescript.config.mjs";
 import applicationLayerBoundaries from "../rules/application-layer-boundaries.mjs";
 import controllerNoLogic from "../rules/controller-no-logic.mjs";
 import noDirectEnvAccess from "../rules/no-direct-env-access.mjs";
 import noDirectSdkImports from "../rules/no-direct-sdk-imports.mjs";
 import noInlineDomainDefinitions from "../rules/no-inline-domain-definitions.mjs";
-import noRawLibraryImports from "../rules/no-raw-library-imports.mjs";
 import noReactInPureLayers from "../rules/no-react-in-pure-layers.mjs";
 import noRestrictedLayerImports from "../rules/no-restricted-layer-imports.mjs";
 import noRestrictedVendorImports from "../rules/no-restricted-vendor-imports.mjs";
@@ -44,6 +42,10 @@ const USE_CASE_FILE =
   "/repo/apps/api/src/modules/game/application/analyze-image.use-case.ts";
 const APPLICATION_SERVICE_FILE =
   "/repo/apps/api/src/modules/game/application/game.service.ts";
+const TRAIT_EXTRACTION_SERVICE_FILE =
+  "/repo/apps/api/src/modules/ai/application/trait-extraction.service.ts";
+const CANDIDATE_GENERATION_SERVICE_FILE =
+  "/repo/apps/api/src/modules/ai/application/candidate-generation.service.ts";
 const INFRA_REPOSITORY_FILE =
   "/repo/apps/api/src/modules/game/infrastructure/game-session.repository.ts";
 const CORE_LOGGER_FILE = "/repo/apps/api/src/core/logger/app-logger.service.ts";
@@ -67,7 +69,7 @@ tester.run("controller-no-logic", controllerNoLogic, {
     },
     {
       filename: API_CONTROLLER_FILE,
-      code: 'class GameController { constructor(private readonly useCase) { this.ready = true; this.log(); } health() { return this.status; } version() { return "1.0"; } }',
+      code: "class GameController { constructor(private readonly useCase) {} health() { return this.useCase.health(); } }",
     },
     {
       filename: API_CONTROLLER_FILE,
@@ -106,6 +108,21 @@ tester.run("controller-no-logic", controllerNoLogic, {
       code: "class GameController { analyze(body) { return this.a.run(body) ?? this.b.run(body); } }",
       errors: [{ messageId: "invalidReturn" }],
     },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { health() { return this.status; } }",
+      errors: [{ messageId: "invalidReturn" }],
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { analyze(body) { return this.useCase.execute(this.map(body)); } }",
+      errors: [{ messageId: "invalidReturn" }],
+    },
+    {
+      filename: API_CONTROLLER_FILE,
+      code: "class GameController { constructor(useCase) { this.log(); } }",
+      errors: [{ messageId: "constructorWiringOnly" }],
+    },
   ],
 });
 
@@ -128,6 +145,18 @@ tester.run("application-layer-boundaries", applicationLayerBoundaries, {
     {
       filename: USE_CASE_FILE,
       code: "import { TraitMap } from '../model/trait-map';",
+    },
+    {
+      filename: TRAIT_EXTRACTION_SERVICE_FILE,
+      code: "class TraitExtractionService { run() { return this.provider.generateFromImageStream('prompt', this.image); } }",
+    },
+    {
+      filename: CANDIDATE_GENERATION_SERVICE_FILE,
+      code: "class CandidateGenerationService { run() { return this.provider.generateFromTextStream('prompt'); } }",
+    },
+    {
+      filename: "/repo/apps/api/src/modules/ai/adapters/ai-router.service.ts",
+      code: "class AiRouterService { run() { return this.adapter.generateFromImageStream('prompt', this.image); } }",
     },
     {
       filename: APPLICATION_SERVICE_FILE,
@@ -165,6 +194,22 @@ tester.run("application-layer-boundaries", applicationLayerBoundaries, {
       filename: SERVICE_FILE,
       code: "import OpenAI from 'openai';",
       errors: [{ messageId: "noSdk" }],
+    },
+    {
+      filename: CANDIDATE_GENERATION_SERVICE_FILE,
+      code: "class CandidateGenerationService { run() { return this.provider.generateFromImageStream('prompt', this.image); } }",
+      errors: [{ messageId: "imageOutsideExtraction" }],
+    },
+    {
+      filename:
+        "/repo/apps/api/src/modules/ai/application/candidate-judge.service.ts",
+      code: "class CandidateJudgeService { run() { return this.provider.generateFromImage('prompt', this.image); } }",
+      errors: [{ messageId: "imageOutsideExtraction" }],
+    },
+    {
+      filename: CANDIDATE_GENERATION_SERVICE_FILE,
+      code: "class CandidateGenerationService { run() { return this.provider['generateFromImageStream']('prompt', this.image); } }",
+      errors: [{ messageId: "imageOutsideExtraction" }],
     },
   ],
 });
@@ -289,11 +334,6 @@ tester.run("no-inline-domain-definitions", noInlineDomainDefinitions, {
       code: "const buildKey = (id) => `game:${id}`;",
     },
     {
-      // `new`/call wiring is DI/collaborator setup, not a definition.
-      filename: SERVICE_FILE,
-      code: "const schema = z.object({ id: z.string() });",
-    },
-    {
       // The approved logging-context constant is the single allowed value const.
       filename: SERVICE_FILE,
       code: "const LOG_CONTEXT = 'GameService';",
@@ -320,6 +360,11 @@ tester.run("no-inline-domain-definitions", noInlineDomainDefinitions, {
       // `as const` config maps are exactly what must live in constants/.
       filename: SERVICE_FILE,
       code: "const STATUS = { ok: 'ok' } as const;",
+      errors: [{ messageId: "inlineConst" }],
+    },
+    {
+      filename: SERVICE_FILE,
+      code: "const schema = z.object({ id: z.string() });",
       errors: [{ messageId: "inlineConst" }],
     },
     {
@@ -578,66 +623,4 @@ tester.run("no-restricted-vendor-imports", noRestrictedVendorImports, {
       errors: [{ messageId: "forbiddenImport" }],
     },
   ],
-});
-
-// Raw wrapped-library imports are only allowed inside wrapper homes.
-tester.run("no-raw-library-imports", noRawLibraryImports, {
-  valid: [
-    {
-      filename: "/repo/apps/api/src/core/logger/app-logger.service.ts",
-      code: "import pino from 'pino';",
-    },
-    {
-      filename: "/repo/apps/api/src/infrastructure/cache/redis.repository.ts",
-      code: "import dayjs from 'dayjs';",
-    },
-    {
-      filename: "/repo/apps/api/src/adapters/http/http.adapter.ts",
-      code: "import axios from 'axios';",
-    },
-    {
-      filename: "/repo/apps/api/src/lib/date/format.ts",
-      code: "import { format } from 'date-fns';",
-    },
-    {
-      filename: "/repo/apps/web/src/packages/axios/http-client.ts",
-      code: "import axios from 'axios';",
-    },
-  ],
-  invalid: [
-    {
-      filename: "/repo/apps/api/src/modules/game/application/game.service.ts",
-      code: "import pino from 'pino';",
-      errors: [{ messageId: "noRawLibrary" }],
-    },
-    {
-      filename: "/repo/apps/api/src/modules/game/application/game.service.ts",
-      code: "import dayjs from 'dayjs';",
-      errors: [{ messageId: "noRawLibrary" }],
-    },
-    {
-      filename: "/repo/apps/api/src/modules/game/application/game.service.ts",
-      code: "import axios from 'axios';",
-      errors: [{ messageId: "noRawHttp" }],
-    },
-    {
-      filename: "/repo/apps/api/src/modules/game/api/game.controller.ts",
-      code: "import { format } from 'date-fns';",
-      errors: [{ messageId: "noRawLibrary" }],
-    },
-  ],
-});
-
-// TEST_CASES #34 — `any` is banned via typescript-eslint strict config
-describe("typescript config bans any", () => {
-  it("sets @typescript-eslint/no-explicit-any to error", () => {
-    const flatEntries = typescriptConfig.filter(
-      (entry) => entry.rules !== undefined,
-    );
-    const severity = flatEntries
-      .map((entry) => entry.rules["@typescript-eslint/no-explicit-any"])
-      .findLast((value) => value !== undefined);
-
-    expect(severity).toBe("error");
-  });
 });

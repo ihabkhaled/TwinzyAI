@@ -14,7 +14,7 @@ import tsxPureComposition from "./architecture-plugin/rules/tsx-pure-composition
  * Custom architecture ESLint plugin for the Twinzy monorepo.
  * Encodes the non-negotiable layer rules so they fail CI, not review.
  */
-export const architecturePlugin = {
+const architecturePlugin = {
   meta: {
     name: "eslint-plugin-twinzy-architecture",
     version: "0.2.0",

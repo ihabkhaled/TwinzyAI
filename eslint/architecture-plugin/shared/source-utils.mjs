@@ -9,13 +9,13 @@ export const getImportSource = (node) =>
     ? node.source.value
     : undefined;
 
-export const isRelativeImport = (source) => source.startsWith(".");
+const isRelativeImport = (source) => source.startsWith(".");
 
 /**
  * For a relative import, returns the resolved normalized path (without
  * extension resolution). For package imports, returns the source unchanged.
  */
-export const resolveImportPath = (importerPath, source) => {
+const resolveImportPath = (importerPath, source) => {
   if (!isRelativeImport(source)) {
     return source;
   }

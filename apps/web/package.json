@@ -6,13 +6,17 @@
   "scripts": {
     "dev": "next dev --turbopack --port 3000",
     "dev:turbo": "next dev --port 3000",
-    "dev:e2e": "next dev --turbopack --port 3100",
+    "dev:e2e": "next dev --turbopack",
     "build": "next build --turbopack",
     "build:turbo": "next build",
     "start": "next start --port 3000",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test:e2e": "playwright test",
-    "test:e2e:ci": "playwright test --project=chromium --project=a11y --project=mobile-chromium"
+    "typecheck": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json && node ../../node_modules/tsc7/bin/tsc --noEmit -p e2e/tsconfig.json",
+    "test:e2e": "playwright test --project=chromium --project=a11y --project=mobile-chromium",
+    "test:e2e:all": "playwright test",
+    "test:e2e:webkit": "playwright test --project=mobile-webkit",
+    "test:e2e:ci": "playwright test --project=chromium --project=a11y --project=mobile-chromium",
+    "test:a11y": "playwright test --project=a11y",
+    "test:visual": "playwright test --project=visual"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.101.2",

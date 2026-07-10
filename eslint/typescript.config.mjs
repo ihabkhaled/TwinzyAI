@@ -10,14 +10,14 @@ import tseslint from "typescript-eslint";
 export default [
   ...tseslint.configs.strictTypeChecked.map((config) => ({
     ...config,
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
   })),
   ...tseslint.configs.stylisticTypeChecked.map((config) => ({
     ...config,
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
   })),
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
     languageOptions: {
       parserOptions: {
         projectService: {
