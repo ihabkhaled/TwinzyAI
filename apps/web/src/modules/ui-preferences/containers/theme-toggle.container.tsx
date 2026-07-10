@@ -21,7 +21,7 @@ export const ThemeToggle = (): ReactElement => {
       size="sm"
       onClick={onToggleTheme}
       aria-label={t('app.themeToggle')}
-      aria-pressed={isDark}
+      aria-pressed={hasHydrated ? isDark : false}
       testId={TEST_IDS.themeToggle}
     >
       {hasHydrated && isDark ? (

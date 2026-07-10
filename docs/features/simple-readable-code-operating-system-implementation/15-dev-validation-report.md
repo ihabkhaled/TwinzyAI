@@ -45,3 +45,13 @@ engine warning only; clean Node 22 Docker installs/builds and runtime health che
 
 The optional `test:e2e:webkit` project is not a required gate and can hang in the local Windows
 runner. No test is marked skipped; the required Chromium/mobile/a11y matrix and visual project pass.
+
+## Hydration regression retest
+
+- A focused component test first reproduced the dark-system mismatch:
+  `aria-pressed="true"` before preferences hydration instead of the server-stable `false`.
+- After gating the attribute on `hasHydrated`, the focused test and all 24 UI-preferences tests pass.
+- Focused dark-theme Playwright retest passes in desktop and mobile Chromium (2/2) against the
+  existing local server.
+- `npm run validate` passes after the fix: formatting, lint 0/0, strict typecheck, 136 test files /
+  916 tests, coverage 97.39/93.29/97.65/97.45, production build, dead-code scan, and circular scan.

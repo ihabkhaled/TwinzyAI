@@ -9,6 +9,7 @@
 - Safety: existing schema, forbidden-wording, sensitive-topic, and safety-flag tests remain green.
 - Upload/privacy: existing file-security/security/integration suites remain green.
 - 320 px layout: focused `mobile-theme.spec.ts` in Chromium and mobile-Chromium, plus existing share/mobile/a11y flows.
+- Theme hydration: the toggle keeps server/client `aria-pressed` output stable until client preferences hydrate, then exposes the resolved dark state.
 - Governance/static enforcement: custom lint-rule tests and full lint 0/0.
 - Shared cleanup: unit/schema/config tests and public-export typecheck.
 

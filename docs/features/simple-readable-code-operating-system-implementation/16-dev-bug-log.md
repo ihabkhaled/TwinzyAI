@@ -10,6 +10,7 @@
 | Canonical disclaimer failed share safety scan | High functional | Negative disclaimer contained forbidden mechanism names | Require exact server disclaimer; scan all other text | Share unit/integration pass |
 | Translation accepted unsafe originals/shape drift | High safety | Only translated output was scanned; shallow canonical overwrite | Pre-scan original and recursive shape guard | Integration pass |
 | Frontend stale share URL after new/translated result | Medium functional/privacy | Link cache keyed only by hook lifetime | Result fingerprint resets link/mutation/modal state | Hook tests pass |
+| Dark-system theme toggle hydration mismatch | Medium UI/accessibility | `aria-pressed` exposed browser-resolved theme before the preferences store hydrated | Gate the pressed state on `hasHydrated`; cover provisional dark and hydrated dark states | UI-preferences unit tests pass |
 | Docker clean install failed peer resolution | Release blocker | Experimental TypeScript API package violated Madge/tool peers | Peer-compatible TS 5.9 API + explicit native TS7 checker scripts | Docker build/health pass |
 | Dead exports/config and stale wrappers | Maintainability | Partial cleanup slices and speculative surfaces | Knip-driven removal; dead driver/forms/virtualization guidance retired | Knip clean |
 

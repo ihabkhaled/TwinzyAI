@@ -11,6 +11,8 @@
 - Testing: root full-stack coverage allowlist/policy and warning/dead-code/circular CI gates.
 - Historical feature records: supersession/current-implementation notes added without erasing history.
 - Request record: complete 00–27 implementation trail under the owner-specified slug.
+- Hydration regression follow-up: test strategy, validation evidence, defect logs, known pitfalls,
+  and release notes record the theme-toggle fix.
 
 ## Why
 

@@ -13,6 +13,7 @@ only trait extraction receives the uploaded photo; every downstream AI step is t
 - Exact-lookalike, identity, face-recognition, biometric, and sensitive-inference wording is
   rejected.
 - The 320 px full-game Playwright flow is hardened against reuse of a devtools-enabled server.
+- The dark-mode toggle now keeps its accessibility state stable during hydration.
 
 ## Engineering changes
 

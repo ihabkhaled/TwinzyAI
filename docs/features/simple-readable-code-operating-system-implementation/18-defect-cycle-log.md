@@ -8,6 +8,7 @@
 | 4 | Share/translation safety drift | Canonical disclaimer, raw-image detection, no-store, pre-scan + recursive shape lock | Unit/integration pass |
 | 5 | Dead exports and clean-install failure | Knip sweep, dead config removal, peer-compatible TypeScript API | Knip, npm audit, Docker pass |
 | 6 | Documentation/toolchain drift | Canonical precedence, current paths/versions/testing ownership, historical supersession notes | Format/link review + gates pass |
+| 7 | Theme toggle rendered different `aria-pressed` values on the server and dark-system client | Hold the pressed state false until preferences hydration completes | Focused regression and all UI-preferences unit tests pass |
 
 Blocking defects after final regression: **0**. Behavior changes introduced during fixes are recorded
 in product requirements, release notes, support guidance, and the threat/security records.

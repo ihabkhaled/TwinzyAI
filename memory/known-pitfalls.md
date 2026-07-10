@@ -555,3 +555,13 @@
 - **Fix:** `AI_IMAGE_STEPS` contains extraction only; generation/judge input types have no image;
   `architecture/application-layer-boundaries` rejects image-provider calls outside
   `trait-extraction.service.ts`; pipeline tests assert one image call followed by text calls.
+
+### M3. Browser-resolved theme state mismatches the server during hydration
+
+- **Symptom:** React reports `aria-pressed="false"` from the server and `aria-pressed="true"` from
+  the first dark-system client render.
+- **Cause:** `system` theme resolution reads `matchMedia`; the SSR-safe browser facade returns
+  `false` without a window, while the browser can resolve dark before effects hydrate persisted
+  preferences.
+- **Fix:** every theme-dependent rendered attribute and icon must use the same `hasHydrated` gate.
+  Keep provisional server/client output identical, then expose the resolved state after hydration.
