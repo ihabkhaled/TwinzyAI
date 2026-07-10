@@ -48,5 +48,3 @@ export const TEST_IDS = {
   localeSwitch: 'locale-switch',
   themeToggle: 'theme-toggle',
 } as const;
-
-export type AppTestId = (typeof TEST_IDS)[keyof typeof TEST_IDS];

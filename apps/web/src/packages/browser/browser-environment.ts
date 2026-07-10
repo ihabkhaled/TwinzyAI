@@ -5,10 +5,6 @@
  * instead of throwing. App code consumes these facades so availability is
  * handled once, in one reviewed place.
  */
-export function isBrowser(): boolean {
-  return 'window' in globalThis && 'document' in globalThis;
-}
-
 export function getSafeWindow(): Window | null {
   if (!('window' in globalThis)) {
     return null;
@@ -33,10 +29,6 @@ export function matchesMediaQuery(query: string): boolean {
   }
 
   return safeWindow.matchMedia(query).matches;
-}
-
-export function prefersReducedMotion(): boolean {
-  return matchesMediaQuery('(prefers-reduced-motion: reduce)');
 }
 
 /**

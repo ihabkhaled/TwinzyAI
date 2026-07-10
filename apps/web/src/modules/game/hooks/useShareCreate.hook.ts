@@ -1,7 +1,7 @@
 'use client';
 // client-boundary-reason: owns modal open state, the create mutation, clipboard copy, and the native Web Share sheet — all browser-only interactions.
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import type { FinalGameResult } from '@twinzy/shared';
 
@@ -26,6 +26,16 @@ export const useShareCreate = (
   const [errorKey, setErrorKey] = useState<string | undefined>();
   const [copyFeedbackKey, setCopyFeedbackKey] = useState<string | undefined>();
   const mutation = useCreateShareMutation();
+  const resetMutation = mutation.reset;
+  const resultFingerprint = result === undefined ? undefined : JSON.stringify(result);
+
+  useEffect(() => {
+    setIsOpen(false);
+    setShareUrl(undefined);
+    setErrorKey(undefined);
+    setCopyFeedbackKey(undefined);
+    resetMutation();
+  }, [resultFingerprint, resetMutation]);
 
   const open = useCallback((): void => {
     if (result === undefined) {

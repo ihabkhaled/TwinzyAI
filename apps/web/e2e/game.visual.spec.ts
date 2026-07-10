@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 
 import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
 import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
@@ -10,14 +10,20 @@ import {
   setInputFile,
 } from './helpers';
 
+const waitForClientHydration = async (page: Page): Promise<void> => {
+  await expect(page.locator('html')).toHaveAttribute('data-theme', /^(dark|light)$/u);
+};
+
 test.describe('visual regression', () => {
   test('landing page', async ({ page }) => {
     await page.goto('/');
+    await waitForClientHydration(page);
     await expect(page).toHaveScreenshot('landing.png');
   });
 
   test('game setup', async ({ page }) => {
     await page.goto('/game');
+    await waitForClientHydration(page);
     await expect(page).toHaveScreenshot('game-setup.png');
   });
 
@@ -29,6 +35,7 @@ test.describe('visual regression', () => {
       timeout: 10_000,
     });
     await expect(page.getByText('Sample Star 1', { exact: true })).toBeVisible();
+    await waitForClientHydration(page);
     await expect(page).toHaveScreenshot('game-results.png');
   });
 
@@ -36,6 +43,7 @@ test.describe('visual regression', () => {
     await page.goto('/game');
     await setInputFile(page, '#game-photo-input', buildJpegPayload());
     await expect(page.getByRole('button', { name: 'Analyze my vibe' })).toBeDisabled();
+    await waitForClientHydration(page);
     await expect(page).toHaveScreenshot('game-upload-selected.png');
   });
 });

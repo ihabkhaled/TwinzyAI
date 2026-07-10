@@ -24,19 +24,15 @@ export {
   GAME_ANALYZE_PATH,
   GAME_ANALYZE_STREAM_PATH,
   GAME_TRANSLATE_RESULT_PATH,
-  MAX_RESULT_COUNT,
-  MIN_RESULT_COUNT,
   RESULT_COUNT_OPTIONS,
-  TRAIT_CATEGORY_FIELDS,
-  UNCERTAINTY_NOTE_FIELDS,
 } from '@twinzy/shared';
 
-/** Multipart form-field names the backend `/game/analyze` endpoint expects. */
-export { UPLOAD_FIELD_NAME } from '@twinzy/shared';
-
-export const CONSENT_FIELD_NAME = 'consent';
-
-export const CONSENT_FIELD_VALUE = 'true';
+/** Multipart fields shared with the backend parser. */
+export {
+  UPLOAD_CONSENT_FIELD_NAME as CONSENT_FIELD_NAME,
+  UPLOAD_CONSENT_GRANTED_VALUE as CONSENT_FIELD_VALUE,
+  UPLOAD_FIELD_NAME,
+} from '@twinzy/shared';
 
 /** Multipart form-field carrying the active UI language for localized AI output. */
 export const LANGUAGE_FIELD_NAME = 'languageCode';
@@ -83,7 +79,7 @@ export const STAGE_LABEL_KEYS: Record<GameStreamStageValue, string> = {
  * per-code copy (consent, rate-limit, AI-unavailable) the generic HTTP-status
  * mapper cannot express.
  */
-export const GAME_ERROR_MESSAGE_KEYS = {
+const GAME_ERROR_MESSAGE_KEYS = {
   fileMissing: 'errors.fileMissing',
   fileTooLarge: 'errors.fileTooLarge',
   fileTypeNotAllowed: 'errors.fileTypeNotAllowed',
@@ -108,7 +104,7 @@ export type GameErrorMessageKey =
  * code (connection drop mid-stream). Not an {@link ErrorCode} member because
  * the backend never emits it.
  */
-export const CLIENT_NETWORK_ERROR_CODE = 'NETWORK_ERROR';
+const CLIENT_NETWORK_ERROR_CODE = 'NETWORK_ERROR';
 
 export const TRANSIENT_ERROR_CODES = [
   ErrorCode.RateLimited,
@@ -137,14 +133,8 @@ export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   [CLIENT_NETWORK_ERROR_CODE]: GAME_ERROR_MESSAGE_KEYS.network,
 };
 
-/** i18n key shown while an existing result is being translated. */
-export const TRANSLATING_MESSAGE_KEY = 'game.translating';
-
 /** i18n key shown when translation fails and the old language is kept. */
 export const TRANSLATION_FAILED_MESSAGE_KEY = 'errors.translationFailed';
-
-/** i18n key for the button that re-attempts a failed translation. */
-export const RETRY_TRANSLATION_MESSAGE_KEY = 'game.retryTranslation';
 
 /**
  * Per-request timeout (ms) for the translate-result call. Real Gemini

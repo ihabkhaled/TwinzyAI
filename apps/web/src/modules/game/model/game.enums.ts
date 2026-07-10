@@ -10,11 +10,4 @@ export const GamePhase = {
   Error: 'error',
 } as const;
 
-export const GAME_PHASE_VALUES = [
-  GamePhase.Setup,
-  GamePhase.Processing,
-  GamePhase.Success,
-  GamePhase.Error,
-] as const;
-
-export type GamePhaseValue = (typeof GAME_PHASE_VALUES)[number];
+export type GamePhaseValue = (typeof GamePhase)[keyof typeof GamePhase];

@@ -20,8 +20,8 @@ export function buildAnalyzeFormData(
   resultCount: number,
 ): FormData {
   const formData = new FormData();
-  formData.append(UPLOAD_FIELD_NAME, file, file.name);
   formData.append(CONSENT_FIELD_NAME, CONSENT_FIELD_VALUE);
+  formData.append(UPLOAD_FIELD_NAME, file, file.name);
   formData.append(LANGUAGE_FIELD_NAME, languageCode);
   formData.append(RESULT_COUNT_FIELD_NAME, String(resultCount));
   return formData;

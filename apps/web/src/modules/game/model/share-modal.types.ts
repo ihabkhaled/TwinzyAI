@@ -20,7 +20,7 @@ export interface SharePlatformLink {
 }
 
 /** Translated copy for the share modal. */
-export interface ShareModalLabels {
+interface ShareModalLabels {
   title: string;
   description: string;
   creating: string;

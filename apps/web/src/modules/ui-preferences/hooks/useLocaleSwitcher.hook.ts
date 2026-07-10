@@ -5,7 +5,6 @@ import { useCallback } from 'react';
 
 import {
   DEFAULT_LOCALE,
-  getLocaleDirection,
   isSupportedLanguageCode,
   LANGUAGE_CODES,
   LOCALE_COOKIE_MAX_AGE_SECONDS,
@@ -15,30 +14,26 @@ import {
 import { useAppNavigation } from '@/packages/navigation';
 import { writeCookie } from '@/packages/storage';
 
-import { useUiPreferencesStore } from '../store/ui-preferences.store';
 import type { LocaleSwitcherController } from '../types/ui-preferences.types';
 
 /**
  * Header language-switch controller. Reports the active locale and the locale a
  * click switches to (the other supported one), and switches by writing the
- * locale cookie the server request config reads, updating the persisted writing
- * direction so it does not fight the new locale, and refreshing the server tree
- * so all copy re-renders in the new language.
+ * locale cookie the server request config reads and refreshing the server tree.
+ * Writing direction is derived from that locale and is never persisted separately.
  */
 export const useLocaleSwitcher = (): LocaleSwitcherController => {
   const rawLocale = useAppLocale();
   const activeLocale = isSupportedLanguageCode(rawLocale) ? rawLocale : DEFAULT_LOCALE;
   const nextLocale = LANGUAGE_CODES.find((locale) => locale !== activeLocale) ?? activeLocale;
-  const setDirection = useUiPreferencesStore((state) => state.setDirection);
   const navigation = useAppNavigation();
 
   const onSwitchLocale = useCallback((): void => {
     writeCookie(LOCALE_COOKIE_NAME, nextLocale, {
       maxAgeSeconds: LOCALE_COOKIE_MAX_AGE_SECONDS,
     });
-    setDirection(getLocaleDirection(nextLocale));
     navigation.refresh();
-  }, [nextLocale, setDirection, navigation]);
+  }, [nextLocale, navigation]);
 
   return { activeLocale, nextLocale, onSwitchLocale };
 };

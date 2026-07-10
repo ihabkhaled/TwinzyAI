@@ -31,6 +31,15 @@ describe('mapFinalResultToView', () => {
     expect(view.uncertainty[0]?.notes).toEqual(['slightly dim lighting']);
   });
 
+  it('renders a missing optional trait field as empty text', () => {
+    const result = buildFinalResult();
+    delete result.traits.hair['hairColor'];
+
+    const view = mapFinalResultToView(result, fakeTranslate);
+    const hair = view.categories.find((category) => category.key === 'hair');
+    expect(hair?.fields.find((field) => field.key === 'hairColor')?.value).toBe('');
+  });
+
   it('maps results with score, translated labels, and hasResults', () => {
     const view = mapFinalResultToView(buildFinalResult(), fakeTranslate);
 

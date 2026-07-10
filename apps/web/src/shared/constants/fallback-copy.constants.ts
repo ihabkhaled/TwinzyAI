@@ -10,5 +10,3 @@ export const FALLBACK_ERROR_COPY = {
     'Twinzy ran into an unexpected error. Your photo was never stored, and nothing was saved. Please reload and try again.',
   retry: 'Reload Twinzy',
 } as const;
-
-export type FallbackErrorCopyKey = keyof typeof FALLBACK_ERROR_COPY;

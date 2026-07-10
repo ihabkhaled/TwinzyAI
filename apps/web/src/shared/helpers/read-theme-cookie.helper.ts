@@ -7,14 +7,12 @@ import 'server-only';
 
 /**
  * Resolve the `data-theme` attribute to render on `<html>` from the theme
- * cookie, server-side. Defaults to light when the cookie is absent (first
- * visit) or holds anything other than the explicit dark scheme, so the very
- * first paint already matches the user's persisted choice.
+ * cookie, server-side. When no valid cookie exists, omit the attribute so the
+ * CSS `prefers-color-scheme` rule owns the first paint.
  */
-export const readThemeAttribute = async (): Promise<AppThemeValue> => {
+export const readThemeAttribute = async (): Promise<AppThemeValue | undefined> => {
   const cookieStore = await cookies();
+  const value = cookieStore.get(THEME_COOKIE_NAME)?.value;
 
-  return cookieStore.get(THEME_COOKIE_NAME)?.value === AppTheme.Dark
-    ? AppTheme.Dark
-    : AppTheme.Light;
+  return value === AppTheme.Dark || value === AppTheme.Light ? value : undefined;
 };

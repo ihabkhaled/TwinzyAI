@@ -11,7 +11,7 @@ export const ToastType = {
   Warning: 'warning',
 } as const;
 
-export type ToastTypeValue = (typeof ToastType)[keyof typeof ToastType];
+type ToastTypeValue = (typeof ToastType)[keyof typeof ToastType];
 
 export interface ShowToastOptions {
   type: ToastTypeValue;

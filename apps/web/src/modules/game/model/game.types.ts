@@ -273,8 +273,13 @@ export interface TranslationViewModel {
   onRetry: () => void;
 }
 
+export type TranslationViewModelInput = Pick<
+  ResultTranslationController,
+  'isTranslating' | 'errorKey' | 'retry'
+>;
+
 /** Translated copy for the upload/consent card. */
-export interface UploadLabels {
+interface UploadLabels {
   label: string;
   hint: string;
   changeButton: string;
@@ -285,13 +290,13 @@ export interface UploadLabels {
 }
 
 /** Translated copy for the result-count dropdown. */
-export interface ResultCountLabels {
+interface ResultCountLabels {
   label: string;
   hint: string;
 }
 
 /** Translated copy for the live-camera capture card. */
-export interface CameraLabels {
+interface CameraLabels {
   title: string;
   previewLabel: string;
   starting: string;

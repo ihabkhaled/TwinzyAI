@@ -1,12 +1,12 @@
 /** Class bundles for one ranked match card. */
-export const resultHeaderClass = 'mb-2 flex items-center justify-between gap-3';
+export const resultHeaderClass = 'mb-2 flex min-w-0 flex-wrap items-center justify-between gap-3';
 
-export const resultTitleClass = 'text-lg font-bold text-foreground';
+export const resultTitleClass = 'min-w-0 break-words text-lg font-bold text-foreground';
 
 export const resultRankClass = 'me-2 text-sm font-semibold text-muted-foreground';
 
 export const resultScoreClass =
-  'shrink-0 rounded-full bg-muted px-3 py-1 text-sm font-semibold text-foreground';
+  'min-w-0 max-w-full break-words rounded-full bg-muted px-3 py-1 text-center text-sm font-semibold text-foreground';
 
 export const resultBadgesClass = 'mb-2 flex flex-wrap items-center gap-2';
 

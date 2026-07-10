@@ -1,4 +1,3 @@
-import type { GameResultView, ResultLabels } from './game.types';
 import type { SharePlatformLink } from './share-modal.types';
 
 /** Props for the public share page (the UUID comes from the route). */
@@ -27,13 +26,4 @@ export interface ShareStateMessageProps {
 export interface SharePlatformLinksProps {
   title: string;
   links: SharePlatformLink[];
-}
-
-/** Props for the public share page's active result body. */
-export interface ShareResultBodyProps {
-  view: GameResultView;
-  labels: ResultLabels;
-  traitCountLabel: string;
-  countdownLabel: string;
-  createLabel: string;
 }

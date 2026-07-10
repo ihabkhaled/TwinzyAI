@@ -1,6 +1,5 @@
 import type { CreateShareResultResponse, FinalGameResult } from '@twinzy/shared';
 
-import type { GameResultView } from './game.types';
 import type { SharePagePhaseValue } from './share.enums';
 
 /** Internal create-share hook surface (raw keys; the container translates). */
@@ -31,7 +30,7 @@ export interface SharePageController {
 }
 
 /** Metadata a successful create returns to the UI. */
-export type ShareCreateResult = CreateShareResultResponse;
+type ShareCreateResult = CreateShareResultResponse;
 
 /** Narrowed surface of the create-share mutation the hook consumes. */
 export interface CreateShareMutation {
@@ -42,11 +41,4 @@ export interface CreateShareMutation {
     callbacks: { onSuccess: (data: ShareCreateResult) => void; onError: () => void },
   ) => void;
   reset: () => void;
-}
-
-/** The mapped share-page view model the public page renders. */
-export interface SharePageViewModel {
-  phase: SharePagePhaseValue;
-  countdownLabel: string;
-  resultView: GameResultView | undefined;
 }

@@ -4,5 +4,4 @@
  * imports the module's schema surface rather than reaching into `@twinzy/shared`
  * directly.
  */
-export type { FinalGameResult, ResultCount } from '@twinzy/shared';
 export { FinalGameResultSchema, ResultCountSchema } from '@twinzy/shared';

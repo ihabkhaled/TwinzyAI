@@ -5,6 +5,7 @@ import type {
   ShareViewModel,
   TranslateMessage,
   TranslationViewModel,
+  TranslationViewModelInput,
   UploadViewModel,
   UploadViewModelInput,
 } from '../model/game.types';
@@ -48,11 +49,7 @@ export const buildShareViewModel = (
 
 /** Build the translation status sub-view with translated error copy. */
 export const buildTranslationViewModel = (
-  translation: {
-    isTranslating: boolean;
-    errorKey: string | undefined;
-    retry: () => void;
-  },
+  translation: TranslationViewModelInput,
   translate: TranslateMessage,
 ): TranslationViewModel => ({
   isTranslating: translation.isTranslating,

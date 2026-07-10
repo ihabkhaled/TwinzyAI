@@ -1,13 +1,13 @@
 import type { ReactElement } from 'react';
 
 import { AppLink } from '@/packages/link';
-import { Card, CardDescription, CardTitle, Stack } from '@/packages/ui-primitives';
+import { Card, CardDescription, Stack } from '@/packages/ui-primitives';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import type { ShareStateMessageProps } from '../model/share-component.types';
 
-import { shareStateCtaClass } from './share-state-message.variants';
+import { shareStateCtaClass, shareStateTitleClass } from './share-state-message.variants';
 
 /**
  * Terminal share state (expired or not-found): a title, an explanation, and a
@@ -23,7 +23,7 @@ export function ShareStateMessage({
   return (
     <Card testId={testId}>
       <Stack gap="sm" align="center">
-        <CardTitle>{title}</CardTitle>
+        <h1 className={shareStateTitleClass}>{title}</h1>
         <CardDescription>{description}</CardDescription>
         <AppLink
           href={ROUTE_PATHS.game}

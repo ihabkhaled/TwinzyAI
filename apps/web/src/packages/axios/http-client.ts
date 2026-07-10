@@ -12,7 +12,7 @@ import type { HttpRequestConfig } from './http-types';
  * error as our normalized `HttpError`, so no `AxiosError` ever leaks past this
  * boundary.
  */
-export function createHttpClient(config?: HttpRequestConfig): AxiosInstance {
+function createHttpClient(config?: HttpRequestConfig): AxiosInstance {
   const client = axios.create({
     timeout: 15_000,
     baseURL: publicEnv.apiBaseUrl,

@@ -48,13 +48,18 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: `npm run dev:e2e`,
+    command: `npm run dev:e2e -- --port ${E2E_PORT}`,
     url: BASE_URL,
-    reuseExistingServer: true,
+    // CI must always launch the server with the test-only public environment;
+    // reusing a differently-configured server remounts the devtools launcher,
+    // whose fixed button overflows a 320px viewport by 16px.
+    reuseExistingServer: !IS_CI,
     // The documented e2e standard: the app runs as APP_ENV=test, which (among
     // other things) unmounts the ReactQueryDevtools floating launcher — its
     // logo overflows a 320px viewport by 16px and red-flagged the CI gate.
-    env: { NEXT_PUBLIC_APP_ENV: 'test' },
+    // Same-origin mocked API calls avoid browser-specific CORS interception
+    // differences; page.route still fulfills every backend request.
+    env: { NEXT_PUBLIC_APP_ENV: 'test', NEXT_PUBLIC_API_BASE_URL: BASE_URL },
     timeout: 180_000,
   },
   projects: [

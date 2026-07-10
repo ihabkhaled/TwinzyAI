@@ -26,11 +26,14 @@ export function ResultCountSelect({
   return (
     <div>
       <Label htmlFor={id}>{label}</Label>
-      <p className={resultCountHintClass}>{hint}</p>
+      <p id={`${id}-hint`} className={resultCountHintClass}>
+        {hint}
+      </p>
       <select
         id={id}
         value={value}
         onChange={onChange}
+        aria-describedby={`${id}-hint`}
         className={resultCountSelectClass}
         data-testid={testId ?? TEST_IDS.resultCountSelect}
       >

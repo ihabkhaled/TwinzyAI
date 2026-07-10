@@ -6,6 +6,7 @@ import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
 import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
 
 import {
+  ANALYZE_ROUTE,
   buildJpegPayload,
   mockAnalyzeSuccess,
   playHappyPathUntilAnalyze,
@@ -74,7 +75,7 @@ test.describe('result-count selection', () => {
     await setResultCount(page, 5);
 
     let capturedResultCount: number | undefined;
-    await page.route('**/api/v1/game/analyze/stream', async (route) => {
+    await page.route(ANALYZE_ROUTE, async (route) => {
       const rawPostData = route.request().postData() ?? '';
       const match = /name="resultCount"\r?\n\r?\n(\d+)/.exec(rawPostData);
       capturedResultCount = match === null ? undefined : Number(match[1]);

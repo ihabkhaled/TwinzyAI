@@ -11,7 +11,7 @@ import {
 import { DEFAULT_TEST_IMAGE_SIZE_BYTES } from '../model/game.constants';
 
 /** Full nested advanced traits: every field of every category filled. */
-export const buildTraits = (): Traits =>
+const buildTraits = (): Traits =>
   ({
     ...Object.fromEntries(
       Object.entries(TRAIT_CATEGORY_FIELDS).map(([category, fields]) => [

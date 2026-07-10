@@ -1,7 +1,5 @@
 import { getRootAttribute, matchesMediaQuery } from '@/packages/browser';
 import type { LanguageCodeValue } from '@/packages/i18n';
-import type { AppDirectionValue } from '@/shared/enums/app-direction.enum';
-import { AppDirection } from '@/shared/enums/app-direction.enum';
 import type { AppThemeValue } from '@/shared/enums/app-theme.enum';
 import { AppTheme } from '@/shared/enums/app-theme.enum';
 
@@ -55,16 +53,4 @@ export const resolveInitialTheme = (fallbackTheme: AppThemeValue): AppThemeValue
   const attribute = getRootAttribute(UI_PREFERENCE_DOM_ATTRIBUTES.theme);
 
   return attribute === AppTheme.Dark ? AppTheme.Dark : fallbackTheme;
-};
-
-/**
- * Resolve the initial writing direction from the server-rendered `<html dir>`
- * attribute, defaulting to left-to-right. Used only on first load when no
- * preference has been persisted yet, so the client adopts whatever the server
- * chose (locale-driven) instead of flashing a wrong direction.
- */
-export const resolveInitialDirection = (): AppDirectionValue => {
-  const attribute = getRootAttribute(UI_PREFERENCE_DOM_ATTRIBUTES.direction);
-
-  return attribute === AppDirection.Rtl ? AppDirection.Rtl : AppDirection.Ltr;
 };

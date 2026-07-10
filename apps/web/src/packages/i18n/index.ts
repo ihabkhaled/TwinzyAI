@@ -5,10 +5,9 @@
 
 export { AppIntlProvider } from './app-intl-provider';
 export { type AppMessages, IntlMessagesProvider } from './intl-messages-provider';
-export type { AppTextDirection, LanguageCodeValue } from './locale.constants';
+export type { LanguageCodeValue } from './locale.constants';
 export {
   DEFAULT_LOCALE,
-  DEFAULT_TIME_ZONE,
   getLocaleDirection,
   isSupportedLanguageCode,
   LANGUAGE_CODES,

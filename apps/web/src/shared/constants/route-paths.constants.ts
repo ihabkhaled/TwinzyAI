@@ -13,5 +13,3 @@ export const ROUTE_PATHS = {
   privacy: '/privacy' as Route,
   terms: '/terms' as Route,
 } as const;
-
-export type AppRoutePath = (typeof ROUTE_PATHS)[keyof typeof ROUTE_PATHS];

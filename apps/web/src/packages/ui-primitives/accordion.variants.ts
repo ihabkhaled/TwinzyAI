@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 
 /** Recipe for one accordion item shell. */
 export const accordionItemVariants = cva('rounded-xl border border-border bg-surface');
@@ -21,5 +21,3 @@ export const accordionChevronVariants = cva('shrink-0 motion-safe:transition-tra
 
 /** Recipe for the revealed content region. */
 export const accordionContentVariants = cva('border-t border-border px-4 py-3');
-
-export type AccordionItemVariantProps = VariantProps<typeof accordionItemVariants>;

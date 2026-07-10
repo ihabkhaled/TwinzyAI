@@ -1,14 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import { getRootAttribute, matchesMediaQuery } from '@/packages/browser';
-import { AppDirection } from '@/shared/enums/app-direction.enum';
 import { AppTheme } from '@/shared/enums/app-theme.enum';
 
-import {
-  resolveInitialDirection,
-  resolveInitialTheme,
-  resolveThemeAttribute,
-} from '../model/ui-preferences.constants';
+import { resolveInitialTheme, resolveThemeAttribute } from '../model/ui-preferences.constants';
 
 vi.mock('@/packages/browser', () => ({
   getRootAttribute: vi.fn(),
@@ -54,25 +49,5 @@ describe('resolveInitialTheme', () => {
     vi.mocked(getRootAttribute).mockReturnValue(null);
 
     expect(resolveInitialTheme(AppTheme.Light)).toBe(AppTheme.Light);
-  });
-});
-
-describe('resolveInitialDirection', () => {
-  it('adopts rtl from the server-rendered dir attribute', () => {
-    vi.mocked(getRootAttribute).mockReturnValue(AppDirection.Rtl);
-
-    expect(resolveInitialDirection()).toBe(AppDirection.Rtl);
-  });
-
-  it('falls back to ltr when no dir attribute is present', () => {
-    vi.mocked(getRootAttribute).mockReturnValue(null);
-
-    expect(resolveInitialDirection()).toBe(AppDirection.Ltr);
-  });
-
-  it('falls back to ltr for an unrecognized dir attribute', () => {
-    vi.mocked(getRootAttribute).mockReturnValue('sideways');
-
-    expect(resolveInitialDirection()).toBe(AppDirection.Ltr);
   });
 });

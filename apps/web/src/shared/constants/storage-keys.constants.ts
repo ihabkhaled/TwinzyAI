@@ -8,5 +8,3 @@ export const STORAGE_KEYS = {
   /** Per-tab uuid in sessionStorage; unversioned — the value is a plain uuid with no shape to migrate. */
   tabId: 'twinzy.tabId',
 } as const;
-
-export type AppStorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

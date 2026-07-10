@@ -44,9 +44,10 @@ describe('SharePageContainer', () => {
     expect(screen.getByText(RESULT_NAME)).toBeInTheDocument();
     // No uploaded image is ever rendered on the share page…
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
-    // …and no forbidden identity/biometric wording appears anywhere.
+    // …and no positive identity/exact-match claim appears. The mandatory
+    // disclaimer may name forbidden mechanisms only to state they are absent.
     expect(
-      screen.queryByText(/face recognition|biometric|identity match/iu),
+      screen.queryByText(/we identified|you are|same face|exact lookalike/iu),
     ).not.toBeInTheDocument();
   });
 

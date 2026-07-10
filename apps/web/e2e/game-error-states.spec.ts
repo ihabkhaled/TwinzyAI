@@ -4,6 +4,7 @@ import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
 import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
 
 import {
+  ANALYZE_ROUTE,
   buildJpegPayload,
   mockAnalyzeOversized,
   mockAnalyzeSafety,
@@ -45,7 +46,7 @@ test.describe('error states', () => {
   });
 
   test('network failure shows a friendly message and retry resets the flow', async ({ page }) => {
-    await page.route('**/api/v1/game/analyze/stream', (route) => route.abort('failed'));
+    await page.route(ANALYZE_ROUTE, (route) => route.abort('failed'));
     await playHappyPathUntilAnalyze(page);
 
     await expect(page.getByTestId(TEST_IDS.errorState)).toBeVisible();
@@ -55,7 +56,7 @@ test.describe('error states', () => {
 
   test('recoverable API failure can be retried into a success', async ({ page }) => {
     let first = true;
-    await page.route('**/api/v1/game/analyze/stream', async (route) => {
+    await page.route(ANALYZE_ROUTE, async (route) => {
       if (first) {
         first = false;
         await route.fulfill({

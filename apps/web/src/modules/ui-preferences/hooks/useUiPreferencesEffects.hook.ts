@@ -4,6 +4,12 @@
 import { useEffect } from 'react';
 
 import { getSafeWindow, setRootAttribute } from '@/packages/browser';
+import {
+  DEFAULT_LOCALE,
+  getLocaleDirection,
+  isSupportedLanguageCode,
+  useAppLocale,
+} from '@/packages/i18n';
 import { readStorageJson, writeCookie, writeStorageJson } from '@/packages/storage';
 import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constants';
 import {
@@ -14,23 +20,19 @@ import { AppTheme } from '@/shared/enums/app-theme.enum';
 
 import {
   DARK_COLOR_SCHEME_QUERY,
-  resolveInitialDirection,
   resolveInitialTheme,
   resolveThemeAttribute,
   UI_PREFERENCE_DOM_ATTRIBUTES,
 } from '../model/ui-preferences.constants';
 import { uiPreferencesSnapshotSchema } from '../schemas/ui-preferences.schema';
-import { selectDirection, selectTheme } from '../store/ui-preferences.selectors';
+import { selectTheme } from '../store/ui-preferences.selectors';
 import { useUiPreferencesStore } from '../store/ui-preferences.store';
 
 /**
  * Mounts the three UI-preference side effects, each gated on `hasHydrated`:
  *
- *  1. Hydrate the store once from local storage. When nothing is persisted yet
- *     the server-rendered `dir` and `data-theme` are adopted (so a locale-driven
- *     RTL page does not flash back to LTR, and a dark first paint driven by the
- *     theme cookie is not flipped back to the default by the first DOM mirror).
- *  2. Mirror theme + direction onto <html>, re-resolving `system` live whenever
+ *  1. Hydrate the theme once from local storage.
+ *  2. Mirror theme + locale-derived direction onto <html>, re-resolving `system` live whenever
  *     the OS `prefers-color-scheme` changes.
  *  3. Persist the snapshot to local storage whenever it changes.
  *
@@ -39,7 +41,9 @@ import { useUiPreferencesStore } from '../store/ui-preferences.store';
  */
 export function useUiPreferencesEffects(): void {
   const theme = useUiPreferencesStore(selectTheme);
-  const direction = useUiPreferencesStore(selectDirection);
+  const rawLocale = useAppLocale();
+  const activeLocale = isSupportedLanguageCode(rawLocale) ? rawLocale : DEFAULT_LOCALE;
+  const direction = getLocaleDirection(activeLocale);
   const hasHydrated = useUiPreferencesStore((state) => state.hasHydrated);
   const hydrate = useUiPreferencesStore((state) => state.hydrate);
 
@@ -55,7 +59,7 @@ export function useUiPreferencesEffects(): void {
     );
 
     if (stored === null) {
-      hydrate({ theme: resolveInitialTheme(theme), direction: resolveInitialDirection() });
+      hydrate({ theme: resolveInitialTheme(theme) });
 
       return;
     }
@@ -105,6 +109,6 @@ export function useUiPreferencesEffects(): void {
       return;
     }
 
-    writeStorageJson('local', STORAGE_KEYS.uiPreferences, { theme, direction });
-  }, [direction, hasHydrated, theme]);
+    writeStorageJson('local', STORAGE_KEYS.uiPreferences, { theme });
+  }, [hasHydrated, theme]);
 }

@@ -1,8 +1,6 @@
 import type { ComponentPropsWithRef, ReactElement } from 'react';
 
 import {
-  type CardContentVariantProps,
-  cardContentVariants,
   type CardDescriptionVariantProps,
   cardDescriptionVariants,
   type CardTitleVariantProps,
@@ -20,8 +18,6 @@ export type CardTitleProps = ComponentPropsWithRef<'h2'> & CardTitleVariantProps
 export type CardDescriptionProps = ComponentPropsWithRef<'p'> &
   CardDescriptionVariantProps &
   Testable;
-
-export type CardContentProps = ComponentPropsWithRef<'div'> & CardContentVariantProps & Testable;
 
 export function Card({ className, children, testId, ref, ...props }: CardProps): ReactElement {
   return (
@@ -61,19 +57,5 @@ export function CardDescription({
     >
       {children}
     </p>
-  );
-}
-
-export function CardContent({
-  className,
-  children,
-  testId,
-  ref,
-  ...props
-}: CardContentProps): ReactElement {
-  return (
-    <div ref={ref} data-testid={testId} className={cn(cardContentVariants(), className)} {...props}>
-      {children}
-    </div>
   );
 }

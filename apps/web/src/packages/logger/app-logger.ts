@@ -1,8 +1,8 @@
 import { publicEnv } from '@/packages/env';
 
-export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
-export type LogContext = Readonly<Record<string, unknown>>;
+type LogContext = Readonly<Record<string, unknown>>;
 
 export interface AppLogger {
   debug(message: string, context?: LogContext): void;

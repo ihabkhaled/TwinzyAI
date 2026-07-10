@@ -23,6 +23,7 @@ import { SharePagePhase } from '../model/share.enums';
 import type { SharePageProps } from '../model/share-component.types';
 
 import { ResultSections } from './result-sections.container';
+import { sharePageTitleClass } from './share-page.variants';
 
 /** The active share: countdown + the reused read-only result body + a CTA. */
 const renderActive = (
@@ -38,6 +39,7 @@ const renderActive = (
 
   return (
     <Stack gap="lg" testId={TEST_IDS.sharePage}>
+      <h1 className={sharePageTitleClass}>{labels.result.title}</h1>
       <CountdownTimer label={countdownLabel} />
       <ResultSections
         view={view}
@@ -70,6 +72,7 @@ export const SharePageContainer = ({ shareId }: SharePageProps): ReactElement =>
   if (phase === SharePagePhase.Loading) {
     return (
       <Stack align="center" testId={TEST_IDS.sharePage}>
+        <h1 className={sharePageTitleClass}>{t('result.title')}</h1>
         <Spinner label={t('share.loading')} />
       </Stack>
     );

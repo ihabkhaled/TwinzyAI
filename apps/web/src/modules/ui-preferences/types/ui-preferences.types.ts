@@ -1,5 +1,4 @@
 import type { LanguageCodeValue } from '@/packages/i18n';
-import type { AppDirectionValue } from '@/shared/enums/app-direction.enum';
 import type { AppTheme, AppThemeValue } from '@/shared/enums/app-theme.enum';
 
 import type { UiPreferencesSnapshot } from '../schemas/ui-preferences.schema';
@@ -17,10 +16,8 @@ export type ResolvedColorScheme = typeof AppTheme.Light | typeof AppTheme.Dark;
  */
 export interface UiPreferencesState {
   theme: AppThemeValue;
-  direction: AppDirectionValue;
   hasHydrated: boolean;
   setTheme: (theme: AppThemeValue) => void;
-  setDirection: (direction: AppDirectionValue) => void;
   hydrate: (snapshot: UiPreferencesSnapshot) => void;
 }
 

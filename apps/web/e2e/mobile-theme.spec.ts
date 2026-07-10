@@ -4,6 +4,7 @@ import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
 import { buildIndexedTestId } from '../src/shared/testing/test-id.helper';
 
 import { mockAnalyzeSuccess, playHappyPathUntilAnalyze } from './helpers';
+import { measureHorizontalOverflow } from './viewport.helper';
 
 const MOBILE_VIEWPORTS = [
   { name: '320px', width: 320, height: 568 },
@@ -18,9 +19,7 @@ for (const viewport of MOBILE_VIEWPORTS) {
       await mockAnalyzeSuccess(page);
 
       await page.goto('/');
-      const scrollWidth = await page.evaluate(
-        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      );
+      const scrollWidth = await measureHorizontalOverflow(page);
       expect(scrollWidth).toBeLessThanOrEqual(1);
 
       const startLink = page.getByRole('link', { name: 'Start the game' });
@@ -30,9 +29,7 @@ for (const viewport of MOBILE_VIEWPORTS) {
       await playHappyPathUntilAnalyze(page);
       await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
 
-      const resultScrollWidth = await page.evaluate(
-        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      );
+      const resultScrollWidth = await measureHorizontalOverflow(page);
       expect(resultScrollWidth).toBeLessThanOrEqual(1);
     });
   });

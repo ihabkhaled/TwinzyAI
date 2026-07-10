@@ -4,8 +4,11 @@ import type { Page, Route } from '@playwright/test';
 
 import {
   DEFAULT_RESULT_COUNT,
+  GAME_ANALYZE_STREAM_PATH,
   GAME_PROMPT_VERSION,
+  GAME_TRANSLATE_RESULT_PATH,
   RESULT_DISCLAIMER,
+  SHARE_RESULTS_PATH,
   TOTAL_TRAIT_FIELDS,
   TRAIT_CATEGORY_FIELDS,
   UNCERTAINTY_NOTE_FIELDS,
@@ -14,10 +17,10 @@ import {
 import { TEST_IDS } from '../src/shared/constants/test-ids.constants';
 
 /** The UI uses the streaming endpoint; the glob covers /analyze and /analyze/stream. */
-export const ANALYZE_ROUTE = '**/api/v1/game/analyze/stream';
+export const ANALYZE_ROUTE = `**${GAME_ANALYZE_STREAM_PATH}`;
 
 /** The text-only language-switch endpoint. */
-export const TRANSLATE_ROUTE = '**/api/v1/game/translate-result';
+export const TRANSLATE_ROUTE = `**${GAME_TRANSLATE_RESULT_PATH}`;
 
 export const DISCLAIMER = RESULT_DISCLAIMER;
 
@@ -233,14 +236,13 @@ export const setResultCount = async (page: Page, value: number): Promise<void> =
 /** A fixed UUID for the mocked share record. */
 export const SHARE_ID = '3f1c8b2a-9d4e-4c7a-8b1f-2e6a7c9d0e5b';
 
-const SHARE_CREATE_ROUTE = '**/api/v1/share-results';
-const SHARE_GET_ROUTE = `**/api/v1/share-results/${SHARE_ID}`;
+const SHARE_CREATE_ROUTE = `**${SHARE_RESULTS_PATH}`;
+const SHARE_GET_ROUTE = `**${SHARE_RESULTS_PATH}/${SHARE_ID}`;
 
 /**
- * The share-results calls are cross-origin JSON (web:3000 → api:4000), which
- * triggers a CORS preflight WebKit enforces strictly. A plain fulfill leaves
- * the request pending there, so the mock answers OPTIONS and echoes CORS
- * headers on every response.
+ * JSON route helper. E2E uses a same-origin mocked API, but answering OPTIONS
+ * and returning CORS-safe headers keeps this helper valid when a developer
+ * explicitly points the harness at another local API origin.
  */
 const CORS_HEADERS: Record<string, string> = {
   'access-control-allow-origin': '*',

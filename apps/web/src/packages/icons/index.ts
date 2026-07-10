@@ -5,23 +5,11 @@
  * later touches only this file.
  */
 
-export type { LucideIcon as AppIcon } from 'lucide-react';
 export {
-  AlertTriangle as AlertIcon,
-  ArrowLeft as ArrowLeftIcon,
-  Check as CheckIcon,
   ChevronDown as ChevronDownIcon,
-  X as CloseIcon,
   Globe as GlobeIcon,
   House as HomeIcon,
-  Image as ImageIcon,
-  Info as InfoIcon,
-  Loader2 as LoaderIcon,
   Moon as MoonIcon,
-  RotateCcw as RefreshIcon,
-  Share as ShareIcon,
   Sparkles as SparklesIcon,
   Sun as SunIcon,
-  Upload as UploadIcon,
-  X as XIcon,
 } from 'lucide-react';

@@ -91,13 +91,6 @@ export interface UploadConsentProps {
   testId?: string;
 }
 
-/** Props for the traits panel; individual trait rows arrive as children. */
-export interface TraitListProps {
-  title: string;
-  children: ReactNode;
-  testId?: string;
-}
-
 /** Props for one extracted-trait row. */
 export interface TraitItemProps {
   label: string;

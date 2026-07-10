@@ -11,16 +11,9 @@ import {
   playHappyPathUntilAnalyze,
   SHARE_ID,
 } from './helpers';
+import { measureHorizontalOverflow } from './viewport.helper';
 
 test.describe('temporary shareable results (mocked backend)', () => {
-  // The share page reads its result via a cross-origin JSON XHR (web:3000 →
-  // api:4000). Playwright's route-mock of that preflighted XHR is reliable on
-  // Blink but leaves the request pending under WebKit in reuse-mode, so this
-  // suite runs on the Chromium engines (which cover the flow end-to-end); the
-  // WebKit engine is exercised by the game-flow suite. The share logic itself
-  // is fully covered by the unit + integration suites.
-  test.skip(({ browserName }) => browserName === 'webkit', 'WebKit XHR route-mock is flaky here');
-
   test('create a share link from a result, then open it on the public page', async ({ page }) => {
     await mockAnalyzeSuccess(page);
     await mockShareCreate(page);
@@ -77,8 +70,6 @@ test.describe('temporary shareable results (mocked backend)', () => {
     await page.goto(`/share/${SHARE_ID}`);
     await expect(page.getByTestId(TEST_IDS.sharePage)).toBeVisible();
 
-    // Body must not be wider than the viewport (allowing 1px rounding).
-    const bodyBox = await page.locator('body').boundingBox();
-    expect(bodyBox?.width ?? 0).toBeLessThanOrEqual(321);
+    expect(await measureHorizontalOverflow(page)).toBeLessThanOrEqual(1);
   });
 });
