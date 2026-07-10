@@ -13,5 +13,3 @@ export const MULTIPART_PART_TYPE = {
   File: 'file',
   Field: 'field',
 } as const;
-
-export type MultipartPartTypeValue = (typeof MULTIPART_PART_TYPE)[keyof typeof MULTIPART_PART_TYPE];

@@ -12,6 +12,7 @@ import { createTestApp } from '../bootstrap/create-test-app';
 import { AppConfigService } from '../config';
 import { AI_PROVIDER_ADAPTER } from '../modules/ai';
 import { ClamAvAdapter } from '../modules/file-security/adapters/clamav.adapter';
+import { SHARE_CACHE_CONTROL_VALUE } from '../modules/share-results/model/share-result.constants';
 
 import { buildFinalGameResultPayload, FakeAiAdapter } from './fixtures/fake-ai-adapter';
 import { buildCleanClamAvStub } from './fixtures/stubs';
@@ -49,6 +50,7 @@ describe('share-results endpoints (integration)', () => {
     const response = await createShare().expect(201);
 
     expect(response.body.shareId).toMatch(UUID_PATTERN);
+    expect(response.headers['cache-control']).toBe(SHARE_CACHE_CONTROL_VALUE);
     expect(response.body.shareUrl).toContain(`/share/${response.body.shareId}`);
     expect(response.body.ttlSeconds).toBe(600);
     const window = Date.parse(response.body.expiresAt) - Date.parse(response.body.createdAt);
@@ -64,6 +66,7 @@ describe('share-results endpoints (integration)', () => {
 
     const expected = FinalGameResultSchema.parse(buildFinalGameResultPayload());
     expect(response.body.shareId).toBe(created.shareId);
+    expect(response.headers['cache-control']).toBe(SHARE_CACHE_CONTROL_VALUE);
     expect(response.body.languageCode).toBe('en');
     expect(response.body.result.results[0].name).toBe(expected.results[0]?.name);
     expect(response.body.remainingSeconds).toBeGreaterThan(0);

@@ -5,6 +5,8 @@ import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
+import { GAME_CANCEL_PATH } from '@twinzy/shared';
+
 import { AppModule } from '../app.module';
 import { createTestApp } from '../bootstrap/create-test-app';
 import { AI_PROVIDER_ADAPTER } from '../modules/ai';
@@ -13,7 +15,7 @@ import { ClamAvAdapter } from '../modules/file-security/adapters/clamav.adapter'
 import { FakeAiAdapter } from './fixtures/fake-ai-adapter';
 import { buildCleanClamAvStub } from './fixtures/stubs';
 
-const CANCEL_PATH = '/api/v1/game/cancel';
+const CANCEL_PATH = GAME_CANCEL_PATH;
 const A_UUID = '11111111-1111-4111-8111-111111111111';
 
 describe('POST /api/v1/game/cancel body cap (integration)', () => {

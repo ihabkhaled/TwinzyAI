@@ -1,24 +1,31 @@
 import { describe, expect, it } from 'vitest';
 
+import {
+  GAME_ANALYZE_PATH,
+  GAME_ANALYZE_STREAM_PATH,
+  GAME_CANCEL_PATH,
+  GAME_TRANSLATE_RESULT_PATH,
+} from '@twinzy/shared';
+
 import { JSON_ROUTE_BODY_LIMITS } from './bootstrap.constants';
 import { jsonRouteBodyLimitFor } from './json-route-body-limit.util';
 
 describe('jsonRouteBodyLimitFor', () => {
   it('caps the cancel route to its small JSON limit regardless of version prefix', () => {
-    expect(jsonRouteBodyLimitFor('/api/v1/game/cancel')).toBe(8192);
+    expect(jsonRouteBodyLimitFor(GAME_CANCEL_PATH)).toBe(8192);
   });
 
   it('caps the translate-result route to its larger JSON limit', () => {
-    expect(jsonRouteBodyLimitFor('/api/v1/game/translate-result')).toBe(262_144);
+    expect(jsonRouteBodyLimitFor(GAME_TRANSLATE_RESULT_PATH)).toBe(262_144);
   });
 
   it('leaves the multipart analyze routes on the global limit', () => {
-    expect(jsonRouteBodyLimitFor('/api/v1/game/analyze')).toBeUndefined();
-    expect(jsonRouteBodyLimitFor('/api/v1/game/analyze/stream')).toBeUndefined();
+    expect(jsonRouteBodyLimitFor(GAME_ANALYZE_PATH)).toBeUndefined();
+    expect(jsonRouteBodyLimitFor(GAME_ANALYZE_STREAM_PATH)).toBeUndefined();
   });
 
   it('never matches a route that merely contains a capped suffix mid-path', () => {
-    expect(jsonRouteBodyLimitFor('/api/v1/game/cancel/audit')).toBeUndefined();
+    expect(jsonRouteBodyLimitFor(`${GAME_CANCEL_PATH}/audit`)).toBeUndefined();
   });
 
   it('exposes each configured cap far below the multipart global limit', () => {

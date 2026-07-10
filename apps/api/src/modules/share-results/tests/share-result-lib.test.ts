@@ -90,6 +90,8 @@ describe('share safety scanning', () => {
   it('flags embedded image data (data: URLs and base64 blobs)', () => {
     expect(containsEmbeddedImageData('data:image/png;base64,AAAA')).toBe(true);
     expect(containsEmbeddedImageData('x;base64,QQ==')).toBe(true);
+    expect(containsEmbeddedImageData(`iVBORw0KGgo${'A'.repeat(300)}`)).toBe(true);
+    expect(containsEmbeddedImageData('A'.repeat(256))).toBe(true);
     expect(containsEmbeddedImageData('just words')).toBe(false);
   });
 

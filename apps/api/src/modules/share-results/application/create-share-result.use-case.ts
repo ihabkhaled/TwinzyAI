@@ -48,7 +48,7 @@ export class CreateShareResultUseCase {
     };
     await this.cache.store(record);
 
-    this.logger.info(`Created share ${shareId} (ttl ${ttlSeconds}s)`);
+    this.logger.info(`Created temporary share (ttl ${ttlSeconds}s)`);
     return {
       shareId,
       shareUrl: buildShareUrl(this.appConfig.shareResultPublicBaseUrl, shareId),

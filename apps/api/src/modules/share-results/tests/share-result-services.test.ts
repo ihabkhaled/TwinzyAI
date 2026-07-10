@@ -93,6 +93,14 @@ describe('ShareResultSafetyService', () => {
     }).toThrow(AppError);
   });
 
+  it('rejects a client-crafted disclaimer instead of publishing it', () => {
+    const service = buildSafety(50_000);
+    const unsafe = buildResult({ disclaimer: 'A custom disclaimer' });
+    expect(() => {
+      service.assertSafeToShare(unsafe);
+    }).toThrow(AppError);
+  });
+
   it('rejects a result with an embedded data: image URL smuggled into a field', () => {
     const service = buildSafety(50_000);
     const unsafe = buildResult({ disclaimer: 'safe text data:image/png;base64,AAAA more' });

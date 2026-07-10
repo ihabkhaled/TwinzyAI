@@ -14,14 +14,6 @@ export interface StoredShareRecord {
   readonly expiresAtMs: number;
 }
 
-/** The create result: the record's ids/timings, ready to shape into a response. */
-export interface CreatedShareRecord {
-  readonly shareId: string;
-  readonly createdAtMs: number;
-  readonly expiresAtMs: number;
-  readonly ttlSeconds: number;
-}
-
 /** The created/expiry timestamps for a share record (epoch milliseconds). */
 export interface ShareExpiryWindow {
   readonly createdAtMs: number;

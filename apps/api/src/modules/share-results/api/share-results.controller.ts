@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   HttpCode,
   HttpStatus,
   Param,
@@ -27,6 +28,8 @@ import {
   CREATE_SHARE_THROTTLE,
   DELETE_SHARE_THROTTLE,
   READ_SHARE_THROTTLE,
+  SHARE_CACHE_CONTROL_HEADER,
+  SHARE_CACHE_CONTROL_VALUE,
 } from '../model/share-result.constants';
 
 /**
@@ -44,6 +47,7 @@ export class ShareResultsController {
   ) {}
 
   @Post()
+  @Header(SHARE_CACHE_CONTROL_HEADER, SHARE_CACHE_CONTROL_VALUE)
   @Throttle(CREATE_SHARE_THROTTLE)
   @UsePipes(createZodValidationPipe(CreateShareResultRequestSchema))
   public create(@Body() body: CreateShareResultRequest): Promise<CreateShareResultResponse> {
@@ -51,6 +55,7 @@ export class ShareResultsController {
   }
 
   @Get(':shareId')
+  @Header(SHARE_CACHE_CONTROL_HEADER, SHARE_CACHE_CONTROL_VALUE)
   @Throttle(READ_SHARE_THROTTLE)
   public get(
     @Param('shareId', createZodValidationPipe(ShareIdSchema)) shareId: string,
@@ -59,6 +64,7 @@ export class ShareResultsController {
   }
 
   @Delete(':shareId')
+  @Header(SHARE_CACHE_CONTROL_HEADER, SHARE_CACHE_CONTROL_VALUE)
   @Throttle(DELETE_SHARE_THROTTLE)
   @HttpCode(HttpStatus.NO_CONTENT)
   public remove(

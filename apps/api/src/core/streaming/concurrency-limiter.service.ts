@@ -2,16 +2,12 @@ import { Injectable } from '@nestjs/common';
 
 import { AppConfigService } from '../../config/app-config.service';
 
-import type { AcquireOutcome, AnalysisSlotRequest } from './concurrency-limiter.types';
-
-const BUSY: AcquireOutcome = { granted: false };
-
-interface QueuedWaiter {
-  readonly request: AnalysisSlotRequest;
-  settled: boolean;
-  resolve: (outcome: AcquireOutcome) => void;
-  timer: ReturnType<typeof setTimeout> | undefined;
-}
+import { BUSY_ACQUIRE_OUTCOME } from './concurrency-limiter.constants';
+import type {
+  AcquireOutcome,
+  AnalysisSlotRequest,
+  QueuedAnalysisWaiter,
+} from './concurrency-limiter.types';
 
 /**
  * In-memory admission control for streaming analyses. Enforces three hard
@@ -31,7 +27,7 @@ export class ConcurrencyLimiter {
 
   private readonly perTab = new Map<string, number>();
 
-  private readonly queue: QueuedWaiter[] = [];
+  private readonly queue: QueuedAnalysisWaiter[] = [];
 
   public constructor(private readonly config: AppConfigService) {}
 
@@ -41,14 +37,17 @@ export class ConcurrencyLimiter {
    * slot frees or the watchdog window elapses; resolves `{ granted: false }`
    * when the queue is full or the wait times out.
    */
-  public acquire(request: AnalysisSlotRequest): Promise<AcquireOutcome> {
+  public acquire(request: AnalysisSlotRequest, signal?: AbortSignal): Promise<AcquireOutcome> {
+    if (signal?.aborted === true) {
+      return Promise.resolve(BUSY_ACQUIRE_OUTCOME);
+    }
     if (this.hasCapacity(request)) {
       return Promise.resolve(this.grant(request));
     }
     if (this.queue.length >= this.config.maxAnalysisQueueSize) {
-      return Promise.resolve(BUSY);
+      return Promise.resolve(BUSY_ACQUIRE_OUTCOME);
     }
-    return this.enqueue(request);
+    return this.enqueue(request, signal);
   }
 
   public get activeCount(): number {
@@ -101,27 +100,33 @@ export class ConcurrencyLimiter {
     }
   }
 
-  private enqueue(request: AnalysisSlotRequest): Promise<AcquireOutcome> {
+  private enqueue(request: AnalysisSlotRequest, signal?: AbortSignal): Promise<AcquireOutcome> {
     return new Promise<AcquireOutcome>((resolve) => {
-      const waiter: QueuedWaiter = { request, settled: false, resolve, timer: undefined };
-      waiter.timer = setTimeout(() => {
-        this.settle(waiter, BUSY);
-      }, this.config.analysisTimeoutMs);
-      if (typeof waiter.timer.unref === 'function') {
-        waiter.timer.unref();
-      }
+      const waiter: QueuedAnalysisWaiter = {
+        request,
+        settled: false,
+        resolve,
+        timer: setTimeout(() => {
+          this.settle(waiter, BUSY_ACQUIRE_OUTCOME);
+        }, this.config.analysisTimeoutMs),
+        signal,
+        abortListener: (): void => {
+          this.settle(waiter, BUSY_ACQUIRE_OUTCOME);
+        },
+      };
+      waiter.timer.unref();
       this.queue.push(waiter);
+      signal?.addEventListener('abort', waiter.abortListener, { once: true });
     });
   }
 
-  private settle(waiter: QueuedWaiter, outcome: AcquireOutcome): void {
+  private settle(waiter: QueuedAnalysisWaiter, outcome: AcquireOutcome): void {
     if (waiter.settled) {
       return;
     }
     waiter.settled = true;
-    if (waiter.timer !== undefined) {
-      clearTimeout(waiter.timer);
-    }
+    clearTimeout(waiter.timer);
+    waiter.signal?.removeEventListener('abort', waiter.abortListener);
     const index = this.queue.indexOf(waiter);
     if (index !== -1) {
       this.queue.splice(index, 1);

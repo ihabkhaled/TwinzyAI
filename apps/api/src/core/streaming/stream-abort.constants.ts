@@ -9,11 +9,3 @@ export const StreamAbortReason = {
   Disconnect: 'twinzy:stream-disconnect',
   Timeout: 'twinzy:stream-timeout',
 } as const;
-
-export const STREAM_ABORT_REASON_VALUES = [
-  StreamAbortReason.Cancel,
-  StreamAbortReason.Disconnect,
-  StreamAbortReason.Timeout,
-] as const;
-
-export type StreamAbortReasonValue = (typeof STREAM_ABORT_REASON_VALUES)[number];

@@ -28,3 +28,7 @@ export const SHARE_CACHE_SWEEP_INTERVAL_MS = 30_000;
 
 /** Milliseconds per second — for TTL / remaining-time conversions. */
 export const MILLISECONDS_PER_SECOND = 1000;
+
+export const SHARE_CACHE_CONTROL_HEADER = 'Cache-Control';
+
+export const SHARE_CACHE_CONTROL_VALUE = 'private, no-store';

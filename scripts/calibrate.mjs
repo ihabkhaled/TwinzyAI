@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 /**
- * Live accuracy-calibration harness for the visual-similarity pipeline. Sends
+ * Live quality-calibration harness for the written-traits pipeline. Sends
  * one or more real photos through a RUNNING Twinzy API and prints a compact,
- * accuracy-focused report per photo: the ranked public-figure matches with
- * their fit score / confidence, plus optional expected-name recall (did the
- * person people actually compare you to show up, and at what rank?).
+ * quality-focused report per photo: the ranked public-figure matches with
+ * their style/vibe score and confidence, plus optional expected-name recall
+ * for operator-owned test cases.
  *
  * This is the tool for the "rounds of testing with written conclusions" step:
  * run it against your own photos, read the report, and paste conclusions into
  * docs/features/visual-similarity-pivot/20-uat-report.md.
  *
  * It needs a real backend: the API must be running with a valid GEMINI_API_KEY
- * (the photo is sent to the model — the whole point of a live calibration).
+ * (the photo is sent only to the trait-extraction model).
  * The image is never stored server-side (policy); this script also never writes
  * the image anywhere, only the text results.
  *
@@ -31,6 +31,8 @@
 
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+
+import { GAME_ANALYZE_PATH } from '@twinzy/shared';
 
 const API_BASE = process.env.API_BASE ?? 'http://localhost:8080';
 const RESULT_COUNT = process.env.RESULT_COUNT ?? '10';
@@ -55,23 +57,31 @@ const mimeFor = (file) =>
 
 const analyzeOne = async (file) => {
   const buffer = readFileSync(file);
-  const form = new globalThis.FormData();
-  form.append('image', new globalThis.Blob([buffer], { type: mimeFor(file) }), path.basename(file));
-  form.append('consent', 'true');
-  form.append('languageCode', LANG);
-  form.append('resultCount', RESULT_COUNT);
-
-  const response = await globalThis.fetch(`${API_BASE}/api/v1/game/analyze`, {
-    method: 'POST',
-    body: form,
-  });
-  const payload = await response.json();
-  if (!response.ok) {
-    throw new Error(
-      `HTTP ${response.status}: ${payload.errorCode ?? 'unknown'} ${payload.message ?? ''}`,
+  try {
+    const form = new globalThis.FormData();
+    form.append(
+      'image',
+      new globalThis.Blob([buffer], { type: mimeFor(file) }),
+      path.basename(file),
     );
+    form.append('consent', 'true');
+    form.append('languageCode', LANG);
+    form.append('resultCount', RESULT_COUNT);
+
+    const response = await globalThis.fetch(`${API_BASE}${GAME_ANALYZE_PATH}`, {
+      method: 'POST',
+      body: form,
+    });
+    const payload = await response.json();
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}: ${payload.errorCode ?? 'unknown'} ${payload.message ?? ''}`,
+      );
+    }
+    return payload;
+  } finally {
+    buffer.fill(0);
   }
-  return payload;
 };
 
 const recallFor = (results) =>

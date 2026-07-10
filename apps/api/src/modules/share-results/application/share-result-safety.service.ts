@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import type { FinalGameResult } from '@twinzy/shared';
+import { RESULT_DISCLAIMER_BY_LANGUAGE } from '@twinzy/shared';
 
 import { AppConfigService } from '../../../config';
 import { AppLogger } from '../../../core/logger/app-logger.service';
@@ -11,9 +12,9 @@ import { SHARE_LOG_CONTEXT } from '../model/share-result.messages';
 /**
  * Gatekeeper for an untrusted create request. Even though the result already
  * passed the AI safety filter when it was produced, a share create is a FRESH
- * request anyone can craft — so every string leaf is re-scanned for forbidden
- * wording and embedded image bytes, and the whole payload is size-bounded,
- * before anything is cached or made publicly reachable.
+ * request anyone can craft — so the disclaimer must equal the server-owned
+ * localized copy, every other string leaf is re-scanned for forbidden wording
+ * and embedded image bytes, and the whole payload is size-bounded before cache.
  */
 @Injectable()
 export class ShareResultSafetyService {
@@ -35,8 +36,11 @@ export class ShareResultSafetyService {
 
   /** Rejects a result carrying forbidden wording or embedded image bytes anywhere. */
   public assertSafeToShare(result: FinalGameResult): void {
-    const hasUnsafeText = collectStringValues(result).some((text) => isUnshareableText(text));
-    if (hasUnsafeText) {
+    const hasInvalidDisclaimer =
+      result.disclaimer !== RESULT_DISCLAIMER_BY_LANGUAGE[result.languageCode];
+    const content = { ...result, disclaimer: '' };
+    const hasUnsafeText = collectStringValues(content).some((text) => isUnshareableText(text));
+    if (hasInvalidDisclaimer || hasUnsafeText) {
       this.logger.warn('Rejected unsafe share result');
       throw shareResultUnsafeError();
     }

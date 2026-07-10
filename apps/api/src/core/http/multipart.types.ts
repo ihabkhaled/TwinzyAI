@@ -42,6 +42,13 @@ export interface UploadedImagePayload {
   readonly body: Record<string, unknown>;
 }
 
+/** Mutable state used only while consuming one multipart iterator. */
+export interface MultipartCollectionState {
+  readonly body: Record<string, unknown>;
+  file: ParsedUploadedFile | undefined;
+  hasConsent: boolean;
+}
+
 /** Request augmentation carrying the parsed upload to the param decorators. */
 export interface UploadCarrierRequestLike {
   uploadedImagePayload?: UploadedImagePayload;

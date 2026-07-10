@@ -13,6 +13,10 @@ export const FILE_TOO_LARGE_MESSAGE = 'That photo is too big. Please pick one un
 
 export const ONE_FILE_MESSAGE = 'Please upload just one photo.';
 
+export const CONSENT_REQUIRED_MESSAGE = 'Please confirm consent before uploading a photo.';
+
+export const EXPECTED_FILE_FIELD_MESSAGE = 'Please upload the photo using the image field.';
+
 /**
  * Legacy transport-layer message markers: Nest re-wraps unexpected-field and
  * too-many-files upload errors into HttpExceptions carrying these phrases.

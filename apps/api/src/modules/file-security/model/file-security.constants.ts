@@ -4,10 +4,7 @@ export {
   ALLOWED_IMAGE_EXTENSIONS,
   ALLOWED_IMAGE_MIME_TYPES,
   type AllowedImageMimeType,
-  IMAGE_MIME,
-  DEFAULT_MAX_IMAGE_SIZE_BYTES as MAX_IMAGE_SIZE_BYTES,
   MIME_TYPE_BY_EXTENSION,
-  TEMP_FILE_PREFIX,
 } from '@twinzy/shared';
 
 const JPEG_MAGIC_BYTES: readonly number[] = [0xff, 0xd8, 0xff];

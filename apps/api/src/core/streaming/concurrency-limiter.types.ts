@@ -16,3 +16,13 @@ export interface AnalysisSlot {
  */
 export type AcquireOutcome =
   { readonly granted: true; readonly slot: AnalysisSlot } | { readonly granted: false };
+
+/** One bounded FIFO waiter, including cancellation cleanup. */
+export interface QueuedAnalysisWaiter {
+  readonly request: AnalysisSlotRequest;
+  readonly resolve: (outcome: AcquireOutcome) => void;
+  readonly signal: AbortSignal | undefined;
+  readonly abortListener: () => void;
+  settled: boolean;
+  readonly timer: ReturnType<typeof setTimeout>;
+}

@@ -1,5 +1,13 @@
 import {
+  UPLOAD_CONSENT_FIELD_NAME,
+  UPLOAD_CONSENT_GRANTED_VALUE,
+  UPLOAD_FIELD_NAME,
+} from '@twinzy/shared';
+
+import {
+  CONSENT_REQUIRED_MESSAGE,
   ERROR_MESSAGE_KEY_BY_CODE,
+  EXPECTED_FILE_FIELD_MESSAGE,
   FILE_TOO_LARGE_MESSAGE,
   ONE_FILE_MESSAGE,
 } from '../errors/error.constants';
@@ -14,7 +22,10 @@ import {
   MULTIPART_PART_TYPE,
 } from './multipart.constants';
 import type {
+  MultipartCollectionState,
+  MultipartFieldLike,
   MultipartFileLike,
+  MultipartPartLike,
   MultipartRequestLike,
   ParsedUploadedFile,
   UploadedImagePayload,
@@ -36,6 +47,20 @@ const fileTooLargeError = (): PayloadTooLargeError =>
     ErrorCode.FileTooLarge,
   );
 
+const consentRequiredError = (): ValidationError =>
+  new ValidationError(
+    CONSENT_REQUIRED_MESSAGE,
+    ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.ConsentRequired],
+    ErrorCode.ConsentRequired,
+  );
+
+const unexpectedFileFieldError = (): ValidationError =>
+  new ValidationError(
+    EXPECTED_FILE_FIELD_MESSAGE,
+    ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.FileMissing],
+    ErrorCode.FileMissing,
+  );
+
 const readErrorCode = (error: unknown): unknown =>
   error instanceof Error ? (error as Partial<Record<'code', unknown>>).code : undefined;
 
@@ -49,26 +74,61 @@ const bufferFilePart = async (part: MultipartFileLike): Promise<ParsedUploadedFi
   };
 };
 
-const collectParts = async (request: MultipartRequestLike): Promise<UploadedImagePayload> => {
-  let file: ParsedUploadedFile | undefined;
-  const body: Record<string, unknown> = {};
-
-  for await (const part of request.parts()) {
-    if (part.type === MULTIPART_PART_TYPE.File) {
-      if (file !== undefined) {
-        throw multipleFilesError();
-      }
-      file = await bufferFilePart(part);
-      continue;
-    }
-    body[part.fieldname] = part.value;
+const collectFieldPart = (part: MultipartFieldLike, state: MultipartCollectionState): void => {
+  state.body[part.fieldname] = part.value;
+  if (part.fieldname !== UPLOAD_CONSENT_FIELD_NAME) {
+    return;
   }
+  if (part.value !== UPLOAD_CONSENT_GRANTED_VALUE) {
+    throw consentRequiredError();
+  }
+  state.hasConsent = true;
+};
 
-  return { file, body };
+const collectFilePart = async (
+  part: MultipartFileLike,
+  state: MultipartCollectionState,
+): Promise<void> => {
+  if (!state.hasConsent) {
+    throw consentRequiredError();
+  }
+  if (part.fieldname !== UPLOAD_FIELD_NAME) {
+    throw unexpectedFileFieldError();
+  }
+  if (state.file !== undefined) {
+    throw multipleFilesError();
+  }
+  state.file = await bufferFilePart(part);
+};
+
+const collectPart = async (
+  part: MultipartPartLike,
+  state: MultipartCollectionState,
+): Promise<void> => {
+  if (part.type === MULTIPART_PART_TYPE.File) {
+    await collectFilePart(part, state);
+    return;
+  }
+  collectFieldPart(part, state);
+};
+
+const collectParts = async (request: MultipartRequestLike): Promise<UploadedImagePayload> => {
+  const state: MultipartCollectionState = { file: undefined, hasConsent: false, body: {} };
+
+  try {
+    for await (const part of request.parts()) {
+      await collectPart(part, state);
+    }
+    return { file: state.file, body: state.body };
+  } catch (error: unknown) {
+    state.file?.buffer.fill(0);
+    throw error;
+  }
 };
 
 /**
- * Streams the multipart request into memory only: exactly one file (extra
+ * Streams multipart in wire order: explicit consent must arrive before the
+ * canonical image field is buffered. Exactly one file is accepted (extra
  * files are rejected with the legacy MULTIPLE_FILES_NOT_ALLOWED envelope,
  * oversize files with FILE_TOO_LARGE) plus the text fields. A missing file
  * stays undefined so the downstream use case produces its own error, and a

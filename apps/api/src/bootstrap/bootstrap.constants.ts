@@ -12,7 +12,7 @@ export const LISTEN_HOST = '0.0.0.0';
  * multipart framing, so the plugin's fileSize limit (and its friendly
  * FILE_TOO_LARGE envelope) triggers before the raw transport limit does.
  */
-export const BODY_LIMIT_MARGIN_BYTES = 1_048_576;
+const BODY_LIMIT_MARGIN_BYTES = 1_048_576;
 
 export const BODY_LIMIT_BYTES = UPLOAD_HARD_CAP_BYTES + BODY_LIMIT_MARGIN_BYTES;
 
@@ -36,7 +36,7 @@ export const JSON_ROUTE_BODY_LIMITS: readonly {
 
 export const DEFAULT_API_VERSION = '1';
 
-export const CORS_ALLOWED_METHODS = ['GET', 'POST'] as const;
+export const CORS_ALLOWED_METHODS = ['GET', 'POST', 'DELETE'] as const;
 
 export const CORS_MAX_AGE_SECONDS = 3600;
 

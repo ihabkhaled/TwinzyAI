@@ -6,6 +6,7 @@ import { GameStreamEvent, GameStreamStage, StreamStatus } from '@twinzy/shared';
 import type { RawResponseLike, SseCapableReplyLike } from '../../../core/http/sse.types';
 import { ConcurrencyLimiter, StreamRegistry } from '../../../core/streaming';
 import { buildFinalGameResultPayload } from '../../../tests/fixtures/fake-ai-adapter';
+import { buildUploadFile } from '../../../tests/fixtures/image-fixtures';
 import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stubs';
 import { GameStreamPresenter } from '../api/game-stream.presenter';
 import type { AnalyzeGameStreamUseCase } from '../application/analyze-game-stream.use-case';
@@ -180,7 +181,8 @@ describe('GameStreamPresenter', () => {
     expect(held.granted).toBe(true);
 
     const reply = new FakeReply();
-    await presenter.stream(buildInput(reply));
+    const file = buildUploadFile();
+    await presenter.stream(buildInput(reply, { file }));
     const frames = parseFrames(reply.raw);
 
     expect(frames).toHaveLength(1);
@@ -189,6 +191,7 @@ describe('GameStreamPresenter', () => {
     expect(frames[0]?.['streamId']).toBeUndefined();
     expect(hasEvent(frames, GameStreamEvent.Accepted)).toBe(false);
     expect(reply.raw.writableEnded).toBe(true);
+    expect(file.buffer.every((byte) => byte === 0)).toBe(true);
   });
 
   it('rejects a duplicate in-flight request and releases the slot it briefly held', async () => {
@@ -201,13 +204,40 @@ describe('GameStreamPresenter', () => {
     });
 
     const reply = new FakeReply();
-    await presenter.stream(buildInput(reply));
+    const file = buildUploadFile();
+    await presenter.stream(buildInput(reply, { file }));
     const frames = parseFrames(reply.raw);
 
     expect(frames[0]?.['errorCode']).toBe('SERVER_BUSY');
     expect(frames[0]?.['status']).toBe(StreamStatus.Rejected);
     expect(hasEvent(frames, GameStreamEvent.Accepted)).toBe(false);
     expect(limiter.activeCount).toBe(0);
+    expect(file.buffer.every((byte) => byte === 0)).toBe(true);
+  });
+
+  it('removes a queued disconnected request and wipes its upload', async () => {
+    const analyze = vi.fn(emitAcceptedThenResolve);
+    const { presenter, limiter } = buildHarness(analyze, {
+      maxGlobalActiveAnalyses: 1,
+      maxAnalysisQueueSize: 1,
+    });
+    const held = await limiter.acquire({ ip: 'other', tabId: 'other-tab' });
+    expect(held.granted).toBe(true);
+    const reply = new FakeReply();
+    const file = buildUploadFile();
+
+    const pending = presenter.stream(buildInput(reply, { file }));
+    await tick();
+    expect(limiter.queuedCount).toBe(1);
+    reply.raw.emitClose();
+    await pending;
+
+    expect(limiter.queuedCount).toBe(0);
+    expect(analyze).not.toHaveBeenCalled();
+    expect(file.buffer.every((byte) => byte === 0)).toBe(true);
+    if (held.granted) {
+      held.slot.release();
+    }
   });
 
   it('emits a cancelled terminal frame when the run is cancelled through the registry', async () => {

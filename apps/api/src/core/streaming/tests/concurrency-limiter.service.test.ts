@@ -160,4 +160,32 @@ describe('ConcurrencyLimiter', () => {
     expect(outcome.granted).toBe(false);
     expect(limiter.queuedCount).toBe(0);
   });
+
+  it('removes a queued waiter when its request is aborted', async () => {
+    const limiter = buildLimiter({
+      maxActiveAnalysesPerIp: 5,
+      maxActiveAnalysesPerTab: 5,
+      maxAnalysisQueueSize: 5,
+    });
+    await limiter.acquire(req('ip-a', 'tabA'));
+    const controller = new AbortController();
+    const pending = limiter.acquire(req('ip-b', 'tabB'), controller.signal);
+
+    controller.abort();
+    const outcome = await pending;
+
+    expect(outcome.granted).toBe(false);
+    expect(limiter.queuedCount).toBe(0);
+  });
+
+  it('rejects an already-aborted request before granting capacity', async () => {
+    const limiter = buildLimiter({});
+    const controller = new AbortController();
+    controller.abort();
+
+    await expect(limiter.acquire(req('ip-a', 'tabA'), controller.signal)).resolves.toEqual({
+      granted: false,
+    });
+    expect(limiter.activeCount).toBe(0);
+  });
 });

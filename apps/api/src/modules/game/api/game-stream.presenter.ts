@@ -12,6 +12,7 @@ import {
   StreamAbortReason,
   StreamRegistry,
 } from '../../../core/streaming';
+import { wipeUploadedImageBuffer } from '../../file-security';
 import { AnalyzeGameStreamUseCase } from '../application/analyze-game-stream.use-case';
 import {
   buildBusyStreamMessage,
@@ -57,9 +58,27 @@ export class GameStreamPresenter {
       tabId: resolveCorrelationId(input.tabId),
       requestId: resolveCorrelationId(input.requestId),
     };
+    const controller = new AbortController();
+    sse.onClose(() => {
+      if (!controller.signal.aborted) {
+        controller.abort(StreamAbortReason.Disconnect);
+      }
+    });
 
-    const outcome = await this.limiter.acquire({ ip: input.ip, tabId: ids.tabId });
+    const outcome = await this.limiter.acquire(
+      { ip: input.ip, tabId: ids.tabId },
+      controller.signal,
+    );
+    if (controller.signal.aborted) {
+      if (outcome.granted) {
+        outcome.slot.release();
+      }
+      wipeUploadedImageBuffer(input.file);
+      sse.close();
+      return;
+    }
     if (!outcome.granted) {
+      wipeUploadedImageBuffer(input.file);
       this.logger.warn('Rejected stream: over capacity');
       this.emitRejection(sse, buildBusyStreamMessage(), ids);
       sse.close();
@@ -68,13 +87,14 @@ export class GameStreamPresenter {
 
     if (this.registry.isRequestActive(ids.requestId)) {
       outcome.slot.release();
+      wipeUploadedImageBuffer(input.file);
       this.logger.warn('Rejected stream: duplicate in-flight request');
       this.emitRejection(sse, buildDuplicateStreamMessage(), ids);
       sse.close();
       return;
     }
 
-    await this.runAdmittedStream(sse, input, ids, outcome.slot);
+    await this.runAdmittedStream(sse, input, ids, outcome.slot, controller);
   }
 
   private async runAdmittedStream(
@@ -82,9 +102,9 @@ export class GameStreamPresenter {
     input: GameStreamRequest,
     ids: StreamCorrelationIds,
     slot: AnalysisSlot,
+    controller: AbortController,
   ): Promise<void> {
     const streamId = randomStreamId();
-    const controller = new AbortController();
     this.registry.register({ streamId, tabId: ids.tabId, requestId: ids.requestId, controller });
     const envelope: OutboundStreamStamp = { ...ids, streamId, status: StreamStatus.Active };
 
@@ -92,12 +112,6 @@ export class GameStreamPresenter {
       sse.comment('keep-alive');
     }, STREAM_HEARTBEAT_INTERVAL_MS);
     const watchdog = this.startWatchdog(controller);
-    sse.onClose(() => {
-      if (!controller.signal.aborted) {
-        controller.abort(StreamAbortReason.Disconnect);
-      }
-    });
-
     let lastStage: GameStreamStageValue | undefined;
     try {
       await this.analyzeGameStreamUseCase.analyze(

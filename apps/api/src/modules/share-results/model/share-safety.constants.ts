@@ -20,4 +20,8 @@ export const EMBEDDED_IMAGE_PATTERNS: readonly RegExp[] = [
   /data:image\//i,
   /data:application\/octet-stream/i,
   /;base64,/i,
+  /(?:^|[^A-Za-z0-9+/])\/9j\/[A-Za-z0-9+/=]{16,}/u,
+  /(?:^|[^A-Za-z0-9+/])iVBORw0KGgo[A-Za-z0-9+/=]{16,}/u,
+  /(?:^|[^A-Za-z0-9+/])UklGR[A-Za-z0-9+/=]{16,}/u,
+  /^[A-Za-z0-9+/]{256,}={0,2}$/u,
 ];

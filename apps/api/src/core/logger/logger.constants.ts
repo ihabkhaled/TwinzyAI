@@ -5,6 +5,8 @@
 export const REDACT_PATHS: readonly string[] = [
   'req.headers.authorization',
   'req.headers.cookie',
+  // URLs can carry bearer-like temporary share ids and query values.
+  'req.url',
   'req.body.password',
   'req.body.token',
   'req.body.secret',
@@ -12,6 +14,9 @@ export const REDACT_PATHS: readonly string[] = [
 ];
 
 export const REDACT_CENSOR = '[Redacted]';
+
+/** Named path-to-regexp wildcard required by Nest 11 middleware routing. */
+export const LOGGER_ALL_ROUTES_PATH = '{*path}';
 
 /** Pretty, human-readable logs in local development only. Production stays JSON. */
 export const DEV_LOG_TRANSPORT = {

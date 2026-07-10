@@ -25,5 +25,3 @@ export const AnalyzeRequestBodySchema = z.object({
     .max(MAX_RESULT_COUNT)
     .default(DEFAULT_RESULT_COUNT),
 });
-
-export type AnalyzeRequestBody = z.infer<typeof AnalyzeRequestBodySchema>;
