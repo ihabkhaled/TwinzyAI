@@ -46,9 +46,9 @@ app/ (routes only)
 | Retrofit a wrapper around a directly-used package           | [modularize-existing-library.md](./modularize-existing-library.md)     |
 
 Owning wrappers: axios→`@/packages/axios` · @tanstack/react-query→`@/packages/query` ·
-zustand→`@/packages/zustand` · zod→`@/packages/zod` · react-hook-form→`@/packages/forms` ·
-next-intl→`@/packages/i18n` · sonner→`@/packages/toast` · lucide→`@/packages/icons` ·
-cva/clsx/tailwind-merge→`@/packages/ui-primitives` · react-virtuoso→`@/packages/virtuoso` ·
+zustand→`@/packages/zustand` · zod→`@/packages/zod` · next-intl→`@/packages/i18n` ·
+sonner→`@/packages/toast` · lucide→`@/packages/icons` ·
+cva/clsx/tailwind-merge→`@/packages/ui-primitives` ·
 next/link→`@/packages/link` · next/navigation→`@/packages/navigation` · env→`@/packages/env` ·
 browser/storage→`@/packages/browser` + `@/packages/storage`.
 
@@ -68,7 +68,7 @@ browser/storage→`@/packages/browser` + `@/packages/storage`.
 | Task                                                        | Skill                                                                   |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------- |
 | Write Vitest unit tests for module code                     | [write-unit-tests-frontend.md](./write-unit-tests-frontend.md)         |
-| Write cross-module integration tests with MSW              | [write-integration-tests-frontend.md](./write-integration-tests-frontend.md) |
+| Write cross-module integration tests at owned boundaries   | [write-integration-tests-frontend.md](./write-integration-tests-frontend.md) |
 | Write Playwright end-to-end tests                           | [write-e2e-tests-frontend.md](./write-e2e-tests-frontend.md)           |
 | Write axe-based accessibility tests                         | [write-accessibility-tests.md](./write-accessibility-tests.md)         |
 | Write Playwright visual regression tests                    | [write-visual-tests.md](./write-visual-tests.md)                       |
@@ -77,8 +77,8 @@ browser/storage→`@/packages/browser` + `@/packages/storage`.
 
 ```sh
 npm run lint            # ESLint flat config — 0 errors, 0 warnings
-npm run typecheck       # tsgo (tsc cross-check), strict
-npm run test:coverage   # Vitest — 95% global, 100% pure layers (utils/helpers/mappers/schemas/query-keys)
+npm run typecheck       # strict workspace + web E2E TypeScript
+npm run test:coverage   # Vitest — 95/90/95/95 full-stack logic gate
 npm run build           # next build (typedRoutes + env validation)
 npm run quality:dead-code   # knip — no orphaned exports/files
 npm run quality:circular    # madge — no import cycles

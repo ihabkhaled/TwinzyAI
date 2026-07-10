@@ -1,5 +1,10 @@
 # Known Pitfalls (Frontend)
 
+> Historical migration log. Current facts live in
+> [`context/stack-and-toolchain.md`](../../context/stack-and-toolchain.md) and root
+> [`memory/known-pitfalls.md`](../known-pitfalls.md): ESLint 10 is active, typechecks use workspace
+> `tsc`, and MSW is not installed. Do not apply superseded version pins below.
+
 Failures actually hit building strict Next.js 16 frontends on this stack, with their fixes. Consult
 this file before debugging toolchain, typing, or lint errors — most of them are already solved here.
 Adapted from the reference frontend OS for Twinzy (`apps/web`).

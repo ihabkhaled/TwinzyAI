@@ -335,7 +335,7 @@ export class AppExceptionFilter implements ExceptionFilter {
 }
 ```
 
-> Subclasses: `ValidationError` 400, `UnauthorizedError` 401, `ForbiddenError` 403, `NotFoundError` 404, `ConflictError` 409, `PayloadTooLargeError` 413, `IntegrationError` 502. The envelope never contains provider errors, stacks, or file contents. `HttpReplyLike` is the structural reply type in `core/http` — no raw Fastify types in business code.
+> Current subclasses cover validation, not-found, payload-too-large, rate-limit, integration, and feature-owned status variants. Add a new subclass only with its first real scenario—never keep reserved auth/conflict scaffolding. The envelope never contains provider errors, stacks, or file contents. `HttpReplyLike` is the structural reply type in `core/http`.
 
 ---
 
@@ -385,7 +385,7 @@ export const appendBounded = <T>(
 };
 ```
 
-> Every list an endpoint or service produces has a hard max; the game pipeline itself caps at 5 candidates / 4 displayed results. See [/rules/07-performance-scalability.md](../rules/07-performance-scalability.md).
+> Every list an endpoint or service produces has a hard max; the game candidate pool caps at 25 and displayed results at the shared 1–10 request bound. See [/rules/07-performance-scalability.md](../rules/07-performance-scalability.md).
 
 ---
 

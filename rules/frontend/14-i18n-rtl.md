@@ -61,9 +61,9 @@ Never build plurals by string concatenation or `count === 1` ternaries.
 
 ## Dates and numbers
 
-All date formatting goes through the date facade `apps/web/src/packages/date` (`formatDisplayDate`,
-`formatDisplayDateTime`, `formatRelativeToNow`) so locale handling is owned in one place. Raw `dayjs`
-imports are banned by [no-raw-package-imports](../../docs/eslint/no-raw-package-imports.md).
+Twinzy currently renders no user-facing dates. If date formatting is introduced, start with
+`Intl.DateTimeFormat` behind one app-owned package helper; do not add a date dependency or scatter
+locale formatting through components.
 
 Review: [agents/i18n-rtl-reviewer.md](../../agents/i18n-rtl-reviewer.md).
 Decisions: [memory/frontend/i18n-rtl-decisions.md](../../memory/frontend/i18n-rtl-decisions.md).

@@ -53,10 +53,9 @@ plus the SHARE_RESULT_CACHE DI token — with exactly one bounded in-memory TTL 
 cleanup + a max-active-items cap (new creates are rejected at capacity) + a max-payload-bytes cap,
 so memory can never grow unbounded. It is single-instance only: records live in this process's heap
 and are gone on restart/redeploy (multi-replica needs sticky sessions). Redis/Valkey is the
-DOCUMENTED production path — implement the same port as a Redis adapter and select it via
-SHARE_RESULT_CACHE_DRIVER (which accepts only "memory" today); it is intentionally NOT built now
-because the repo has no Redis infra and shipping an untested/dead client would violate the
-no-dead-code + test-everything gates.
+DOCUMENTED production path: implement and test the adapter behind the same port first, then add
+driver-selection configuration. No selector exists while memory is the sole implementation,
+because dead config/client code would violate the no-dead-code and test-everything gates.
 
 Endpoints (versioned, throttled, Zod-validated, AppError/messageKey envelope):
 

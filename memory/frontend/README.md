@@ -35,9 +35,9 @@ and [`rules/frontend/`](../../rules/frontend/). Adapted from the reference front
 
 | File                                                             | Contents                                                                       |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [known-pitfalls.md](./known-pitfalls.md)                         | Real Next.js/React/TanStack/Zustand/next-intl/tsgo/Tailwind/MSW failures and their exact fixes. |
+| [known-pitfalls.md](./known-pitfalls.md)                         | Historical migration pitfalls; current toolchain facts defer to the root context/memory. |
 | [package-decisions.md](./package-decisions.md)                   | Chosen packages vs rejected alternatives, with reasons.                        |
-| [testing-strategy.md](./testing-strategy.md)                     | Why the coverage bars, MSW-everywhere, and test-type split are what they are.  |
+| [testing-strategy.md](./testing-strategy.md)                     | Coverage and boundary-test decisions, including superseded migration choices. |
 | [security-decisions.md](./security-decisions.md)                 | CSP, session, BFF, image-privacy, and vulnerability-policy decisions.          |
 | [performance-decisions.md](./performance-decisions.md)           | Server-first rendering, memoization stance, virtualization and cache defaults. |
 | [i18n-rtl-decisions.md](./i18n-rtl-decisions.md)                 | Cookie-based locale, en/ar proof pair, logical properties, plurals.            |

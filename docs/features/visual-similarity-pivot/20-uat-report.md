@@ -1,5 +1,8 @@
 # 20 - UAT / Live Accuracy Calibration (Visual-Similarity Pivot)
 
+> Historical only. The 2026-07-10 extraction-only image policy supersedes this calibration target;
+> do not use expected-name/photo-resemblance criteria as a current release gate.
+
 - Feature: `visual-similarity-pivot` (owner-approved recognition pivot — see [00-intake.md](./00-intake.md))
 - Status: **Harness ready; live rounds are owner-executed.**
 - Why owner-executed: a live calibration round sends real photos to Gemini, so it requires a

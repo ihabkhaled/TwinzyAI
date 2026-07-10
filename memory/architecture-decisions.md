@@ -3,6 +3,18 @@
 Standing shape lives in [project-architecture.md](./project-architecture.md); this file records
 the individual decisions and their reasons.
 
+## Extraction-only image boundary (2026-07-10)
+
+- The 2026-07-09 multimodal visual-similarity pivot is superseded by the latest owner directive.
+- Only trait extraction may call the image-capable provider method. Candidate generation, judging,
+  translation, sharing, and frontend display receive written visible traits/result JSON only.
+- `AI_IMAGE_STEPS` contains extraction only; generation/judge input types have no image field; tests
+  assert one image call followed by text-only calls. The upload buffer is wiped immediately after
+  extraction in `finally`, before downstream matching starts.
+- Exact-lookalike, identity, face-recognition, biometric, and sensitive-inference wording remains
+  forbidden. Decision record:
+  [simple-readable-code-operating-system-implementation](../docs/features/simple-readable-code-operating-system-implementation/00-intake.md).
+
 ## Multi-provider AI routing (2026-07-09)
 
 - The `AI_PROVIDER_ADAPTER` port is served by `AiRouterService` (in `modules/ai/adapters/` —
@@ -15,11 +27,10 @@ the individual decisions and their reasons.
   Qwen, Kimi, and GLM, parameterized by config base URL + key. Key presence IS the provider
   enable flag. Anthropic deferred: its OpenAI-compat layer lacks structured outputs and its
   AUP refuses photo→name tasks (see the research doc).
-- **Fail-closed image rule:** photo-carrying steps dispatch only to gemini models or entries
-  explicitly declared in `AI_VISION_MODELS`. Rationale is privacy: research found e.g. Kimi
-  trains on API-submitted images — a photo must never reach a provider the operator did not
-  consciously approve. Boot validation crashes on an explicit route with zero usable entries;
-  implicit/keyless routes only warn (CI boots stay green).
+- **Fail-closed image rule (updated 2026-07-10):** only extraction is photo-carrying and always
+  dispatches through Gemini. Generation, judging, and translation may use any enabled text-capable
+  route. Boot validation crashes on an explicit route
+  with zero usable entries; implicit/keyless routes only warn (CI boots stay green).
 - Docs: [/docs/provider-routing.md](../docs/provider-routing.md),
   [/docs/ai-benchmarking.md](../docs/ai-benchmarking.md), research + SDLC artifacts under
   [/docs/features/multi-provider-ai/](../docs/features/multi-provider-ai/00-intake.md).
@@ -86,11 +97,10 @@ the individual decisions and their reasons.
   `OnModuleDestroy` cleanup, and max-active-items + max-payload-bytes caps, so the cache can never
   grow unbounded. Single-instance only (records are in-heap; a restart/redeploy drops live links;
   multi-replica needs sticky sessions).
-- Redis/Valkey is the DOCUMENTED production adapter behind the same port, selected via
-  `SHARE_RESULT_CACHE_DRIVER` (only `memory` today). It is intentionally not built now — the repo
-  has no Redis infra and an untested/dead client would violate the no-dead-code + test-everything
-  gates. Rollback for any share change is env/commit-only (no DB, no migration; a redeploy also
-  clears the cache).
+- Redis/Valkey is the DOCUMENTED production adapter behind the same port. It is intentionally not
+  built now; driver-selection config is added only with a tested second adapter. The repo has no
+  Redis infra and dead config/client code would violate the no-dead-code + test-everything gates.
+  Rollback for share changes is commit-only (no DB/migration; redeploy clears the cache).
 - The create endpoint reuses the FULL existing `FinalGameResult` contract (not a slim payload): the
   strict validated schema has no image/file slot by construction, ingest re-safety-filters and
   rejects any `data:`/base64/embedded-image string, and the shared view is guaranteed identical to

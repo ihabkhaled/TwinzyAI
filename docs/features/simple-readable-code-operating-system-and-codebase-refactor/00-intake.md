@@ -1,5 +1,9 @@
 # 00 - Intake: Simple Readable Code Operating System + Codebase Refactor
 
+> Continued under the owner-requested canonical slug
+> [`simple-readable-code-operating-system-implementation`](../simple-readable-code-operating-system-implementation/00-intake.md).
+> This earlier intake remains as the record for the already-landed governance/cleanup slices.
+
 - Request ID: `simple-readable-code-operating-system-and-codebase-refactor`
 - Type: governance update + full-repo maintainability/readability refactor (owner directive, 2026-07-10)
 - Classification: rules/skills/docs/memory/context/agent-readiness update · zero-inline enforcement · backend/frontend/shared cleanup · ESLint investigation · AI-safety/privacy PRESERVING refactor

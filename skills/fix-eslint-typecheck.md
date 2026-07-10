@@ -2,7 +2,8 @@
 
 > Applies rules/11. Fix the code, never the rules.
 
-1. `npm run typecheck` runs tsgo (`--noEmit`) across the workspaces — trust its strict
+1. `npm run typecheck` builds shared and runs strict `tsc --noEmit` across every workspace plus web
+   E2E — trust its
    output (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, ...); the error names
    the broken contract between layers.
 2. Read the failing lint rule name; custom rules live in `eslint/architecture-plugin/rules`:

@@ -19,7 +19,7 @@ One concern per slice; small reviewable commits; never mix opportunistic rewrite
 
 ## 2. What a refactor must preserve, verbatim
 
-- Image privacy: buffer wiped in `finally`; image never logged, persisted, or passed beyond its approved surface.
+- Image privacy: only extraction receives the photo; the buffer is wiped in `finally` immediately afterward; generation, judging, translation, sharing, and display are text-only; image data is never logged or persisted.
 - Consent-first upload chain and every validation step ([15-file-upload-security.md](./15-file-upload-security.md)).
 - AI safety: Zod validation + forbidden-wording filtering on EVERY provider output ([14-ai-safety.md](./14-ai-safety.md)).
 - Error envelopes, messageKeys, redaction, rate limits, cleanup blocks, cancellation paths.

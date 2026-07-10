@@ -34,7 +34,7 @@ You are the last reviewer between a diff and "done." You do not write features �
 
 **Types & lint**
 
-- [ ] No `any`; no `eslint-disable` / `@ts-ignore`; no `@ts-expect-error` (unless documented in [docs/package-decisions.md](../docs/package-decisions.md)); no non-null `!`; no TypeScript `enum` keyword — as-const objects + derived types only ([05-types-enums-constants.md](../rules/05-types-enums-constants.md)).
+- [ ] No `any`, inline ESLint/TypeScript suppression, non-null `!`, or TypeScript `enum` keyword — use real narrowing and as-const objects + derived types ([05-types-enums-constants.md](../rules/05-types-enums-constants.md)).
 - [ ] Public functions/methods have explicit return types; type-only imports use `import type`. `npm run lint` is 0 errors **and** 0 warnings ([11-eslint-typescript.md](../rules/11-eslint-typescript.md)).
 
 **Architecture & extraction**

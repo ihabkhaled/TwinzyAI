@@ -1,5 +1,9 @@
 # 00 - Request Intake and Classification
 
+> Current implementation note (2026-07-10): memory remains the sole cache adapter, so the unused
+> `SHARE_RESULT_CACHE_DRIVER` setting was removed. Add driver selection only with a tested second
+> adapter; historical planning references below remain decision history.
+
 ## Purpose
 
 Classify the `temporary-shareable-results` request — let a player share their Twinzy final result through a **temporary public page** opened by a UUID URL, with **no database**, that auto-expires (default 10 minutes, configurable), shows a live countdown, and offers many share targets — before any solutioning begins.

@@ -37,7 +37,7 @@ Use it to settle "what do we mean by X here?" Terms are grouped, not alphabetize
 | **Zero inline domain definitions** | No types/interfaces/enums/constants/DTOs/schemas declared inside controllers, services, use cases, adapters, or repositories — extract to `model/`, `dto/`, `lib/`, or `packages/shared`. | [/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md) |
 | **Zod DTO** | A strict zod schema in `api/dto/` (unknown keys rejected = whitelist behavior) plus its inferred type — zod everywhere, class-validator never. | [/rules/21-dto-validation.md](../rules/21-dto-validation.md) |
 | **Vendor swap surface** | The single folder a vendor may be imported in (ESLint-enforced), so replacing Gemini, ClamAV, pino, or fetch touches exactly one place. | [/rules/10-library-modularization.md](../rules/10-library-modularization.md) |
-| **Bounded list** | Any produced list has a hard cap (workspace max 100; the game caps at 5 candidates / 4 displayed results) — no unbounded accumulation. | [/rules/07-performance-scalability.md](../rules/07-performance-scalability.md) |
+| **Bounded list** | Any produced list has a hard cap (workspace max 100; candidate pool 25; requested results 1–10) — no unbounded accumulation. | [/rules/07-performance-scalability.md](../rules/07-performance-scalability.md) |
 
 ---
 
@@ -60,10 +60,10 @@ Use it to settle "what do we mean by X here?" Terms are grouped, not alphabetize
 
 | Term | One-line definition | Governed by |
 | --- | --- | --- |
-| **Trait** | One of the **exactly 15** visible, non-identifying appearance keys (`TRAIT_KEYS` in `@twinzy/shared` — face shape, hair color, jawline, ...) written as text; the only thing ever derived from the photo. | [/rules/14-ai-safety.md](../rules/14-ai-safety.md) |
-| **Trait extraction** | Pipeline step 1 and the **only image-facing step**: prompt 1 + the image → a zod-validated JSON of the 15 traits. | [ai-context.md](./ai-context.md) |
-| **Candidate** | A playful public style/vibe match generated in step 2 from the **written traits only** (1–5 per run, text-only prompt). | [ai-context.md](./ai-context.md) |
-| **Judge** | Pipeline step 3: a text-only pass that scores each candidate against the traits and returns judged results (max 4 displayed). | [ai-context.md](./ai-context.md) |
+| **Trait** | One field in the shared 221-field visible, non-identifying taxonomy, represented as localized text; unclear values stay honest. | [/rules/14-ai-safety.md](../rules/14-ai-safety.md) |
+| **Trait extraction** | Pipeline step 1 and the **only image-facing step**: prompt 1 + image → bounded Zod-validated written evidence; the image is then wiped. | [ai-context.md](./ai-context.md) |
+| **Candidate** | A playful public style/vibe match generated in step 2 from **written traits only** (pool capped at 25). | [ai-context.md](./ai-context.md) |
+| **Judge** | Pipeline step 3: a text-only pass that scores candidates against written evidence and returns up to the requested 1–10 results. | [ai-context.md](./ai-context.md) |
 | **Verdict** | The judged strength of a match — `strong` / `medium` / `weak` (as-const `Verdict` in `@twinzy/shared`) alongside a 0–100 score. | [/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md) |
 | **Public category** | The kind of public figure a candidate is — actor, singer, creator, athlete, public figure, other (as-const `PublicCategory` in `@twinzy/shared`). | [/rules/05-types-enums-constants.md](../rules/05-types-enums-constants.md) |
 | **Consent flag** | The explicit multipart `consent` field that must accompany every upload; anything other than affirmative consent fails the request before any processing. | [/rules/15-file-upload-security.md](../rules/15-file-upload-security.md) |

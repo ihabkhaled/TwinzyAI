@@ -50,7 +50,7 @@ No list method returns an unbounded result set. Every list takes `page`/`limit`,
 
 ## 5. Safe error surfacing
 
-Driver errors leak schema and SQL. The repository lets them bubble raw to its caller; the **service** maps known failures (unique violation → `ConflictError`) to typed `AppError`s with distinct `messageKey`s; the global filter sanitizes ([26-error-handling-and-exceptions.md](./26-error-handling-and-exceptions.md)). Raw driver text never reaches a client.
+Driver errors leak schema and SQL. The repository lets them bubble raw to its caller; the **service** maps known failures to typed `AppError`s with distinct `messageKey`s (a conflict subclass is created with the first real unique-violation caller, not before); the global filter sanitizes ([26-error-handling-and-exceptions.md](./26-error-handling-and-exceptions.md)). Raw driver text never reaches a client.
 
 ## 6. Prove it with tests
 

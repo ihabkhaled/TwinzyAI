@@ -1,7 +1,7 @@
 # 20 — PR Review Checklist
 
-The reviewer's working checklist for `apps/web`. Every box MUST be checked (or covered by a documented
-exception in [docs/exceptions/](../../docs/exceptions/)) before approval. Each group cites the rule that
+The reviewer's working checklist for `apps/web`. Every box MUST be checked before approval. Dated
+third-party risk decisions never authorize source suppressions or missing behavior. Each group cites the rule that
 defines it — when in doubt, the numbered rule wins. This is the engineering pass; the SDLC governance
 phases and approvals in [CLAUDE.md](../../CLAUDE.md) still apply on top of it.
 
@@ -17,7 +17,7 @@ phases and approvals in [CLAUDE.md](../../CLAUDE.md) still apply on top of it.
 
 ## Quality ([07](07-types-enums-constants.md), [08](08-utils-helpers-mappers.md), [10](10-eslint-typescript.md), [12](12-performance.md))
 
-- [ ] `npm run lint` and `npm run typecheck` pass; no new `eslint-disable` without an exception doc.
+- [ ] `npm run lint` and `npm run typecheck` pass; no inline ESLint/TypeScript suppression exists.
 - [ ] No magic strings: routes via `ROUTE_PATHS`, storage via `STORAGE_KEYS`, test ids via `TEST_IDS`.
 - [ ] No TypeScript `enum` keyword; enums are `as const` objects with derived types.
 - [ ] Server-component-first respected; every new `'use client'` boundary is justified.
@@ -52,7 +52,7 @@ phases and approvals in [CLAUDE.md](../../CLAUDE.md) still apply on top of it.
 
 - [ ] Tests exist at the right layer (module `test/`, `apps/web/src/tests/integration`, Playwright suites).
 - [ ] Coverage thresholds hold: 95% global, 100% utils/helpers/mappers/schemas/query-key builders.
-- [ ] API-touching tests use MSW handlers, not transport mocks.
+- [ ] API-touching tests fake the app-owned transport/gateway boundary and still execute the mapper/schema behavior under test.
 - [ ] No `.only`, no snapshot-only tests, no implementation-detail assertions.
 
 Final release verification is separate: [19-release-gates.md](19-release-gates.md) and

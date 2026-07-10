@@ -41,8 +41,9 @@ No one may modify code they have not read.
 ## Project purpose
 
 Twinzy is a **free**, mobile-first, privacy-safe AI game. A user uploads one photo; the backend
-uses Google Gemini to extract 15 visible, non-identifying appearance traits (text), then uses those
-**written traits only** to suggest playful public style/vibe matches. Entertainment only.
+extracts the shared 221-field visible, non-identifying trait taxonomy (targeting 100+ populated
+written traits when quality allows), then uses those **written traits only** to suggest playful
+public style/vibe matches. Entertainment only.
 
 The app is NEVER: face recognition, identity matching, biometric comparison, exact lookalike
 matching, or serious facial similarity analysis.

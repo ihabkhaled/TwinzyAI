@@ -33,19 +33,16 @@ render first.
 - Fonts load only via `next/font` through `apps/web/src/shared/fonts/app-fonts.ts` (`appFont`). Never
   add a `<link>` to a font CDN — it breaks the CSP and adds render-blocking requests.
 
-## Long lists: virtualize at 100+ rows
+## Long lists
 
-Any list that can plausibly exceed ~100 rows MUST render through `VirtualizedList`
-(`apps/web/src/packages/virtuoso/virtualized-list.tsx`), the owned wrapper around react-virtuoso. See
-[skills/add-virtualized-list.md](../../skills/add-virtualized-list.md). Never `.map()`
-an unbounded collection straight into the DOM.
+Current product lists are schema-bounded (results max 10; candidate names max 25), so native mapping
+is correct and no virtualization dependency exists. A future 100+ row surface needs measured
+profiling and an approved wrapper/dependency decision before implementation.
 
 ## Pagination is backend-driven
 
-Lists fetch pages from the gateway; the client MUST never download a full dataset and paginate, filter,
-or sort it in memory. Query keys include the pagination params (see `articleQueryKeys` in
-`apps/web/src/modules/articles/queries/article-query-keys.ts`) so TanStack Query caches each page
-separately.
+Future unbounded lists fetch bounded pages from the gateway; the client must not download an entire
+dataset to paginate, filter, or sort in memory. Query keys include pagination parameters.
 
 ## Memoization only when measured
 

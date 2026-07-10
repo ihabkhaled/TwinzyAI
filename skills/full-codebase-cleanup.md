@@ -10,7 +10,7 @@ Run a repo-wide simple-code sweep: find violations, fix by ownership, keep every
 ## Steps
 
 1. **Scan** — grep the sweep list: inline `const`/`type`/`interface`/as-const/`z.object`/`Record<` in layer files; magic strings (routes, statuses, keys, model names, TTLs, limits); `console.` / `process.env` outside sanctioned homes; nested ternaries; long files/functions/hooks/components; duplicates across shared/api/web. Run `npm run quality:dead-code` and `npm run quality:circular`.
-2. **Triage** — for each finding record: file, kind, correct owner, severity. Drop taste-only findings; the lint config is the arbiter of style.
+2. **Triage** — for each finding record: file, kind, correct owner, severity. Drop taste-only findings; the lint config is the arbiter of style. Knip warnings are not automatically dead code: verify callers and framework/runtime entrypoints, then remove/de-export only proven-unused symbols. Record any intentional public API that remains.
 3. **Fix in ownership order** — backend → frontend → shared/scripts; one domain per slice; tests first when behavior shifts; focused suite after each slice.
 4. **Safety-critical files** (upload chain, AI safety service, image handling, adapters) follow [cleanup-without-weakening-safety.md](./cleanup-without-weakening-safety.md) — behavior-identical, re-verified by their integration suites.
 5. **Validate** — full gates (`lint · typecheck · test:coverage · build`, plus `test:e2e:ci` when the web changed); update docs that described the old shape; commit per slice.

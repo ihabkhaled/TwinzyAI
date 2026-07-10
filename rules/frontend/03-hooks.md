@@ -50,6 +50,7 @@ are the only place where data, translation, and presentation decisions meet.
 3. Resolve `state` from pending/error/empty/ready in a small named function.
 4. Return the union: `{ state, items, loadingLabel, emptyMessage, errorMessage, retryLabel, onRetry }`.
 
-Testing: hooks are unit-tested in `apps/web/src/modules/<feature>/test/` with MSW-backed queries per
+Testing: hooks are unit-tested in `apps/web/src/modules/<feature>/test/` with owned service/query
+boundary fakes per
 [testing/frontend/unit-testing-standard.md](../../testing/frontend/unit-testing-standard.md). How-to:
 [skills/create-hook.md](../../skills/create-hook.md).

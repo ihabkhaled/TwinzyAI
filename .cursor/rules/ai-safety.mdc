@@ -5,5 +5,5 @@ alwaysApply: true
 - Image goes ONLY to trait extraction (1st prompt). Candidate (2nd) and judge (3rd) prompts are TEXT ONLY.
 - No face recognition, identity matching, biometrics, embeddings, or exact-lookalike claims — in code, prompts, or UI copy.
 - Validate every Gemini response with Zod; reject unsafe wording (shared FORBIDDEN_RESULT_PHRASES).
-- GEMINI_MODEL from .env only. Prompts loaded from files via PromptLoaderService — never inline in services.
+- GEMINI_MODEL from .env only. Prompts loaded from files via PromptTemplateRepository — never inline in services.
 - Results framed as playful style/vibe game; disclaimer always shown.

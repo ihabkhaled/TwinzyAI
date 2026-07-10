@@ -7,7 +7,7 @@
 - **Mock (default, CI-safe, zero keys):** `npm run ai:benchmark -- --mode=mock --samples=5`
   Runs deterministic canned fixtures (a valid model, a schema-broken model, an unsafe-worded model) through the metric pipeline. It validates the harness, the scoring, and the report format — NOT real providers. Byte-identical output for identical inputs (no randomness), so it is safe to assert on in CI.
 - **Real (explicit, billed):** `npm run ai:benchmark -- --mode=real --samples=3 [--photo=./me.jpg]`
-  Boots the app context and measures every **enabled + usable** route entry configured for each step (`AI_ROUTE_<STEP>` / legacy Gemini chains), live. Text-only translation always runs; the three image steps run **only** when `--photo` is provided (the photo is read locally, sent only to vision-declared entries, and never written anywhere). Generation/judge reuse the first schema-valid upstream output.
+  Boots the app context and measures every **enabled + usable** route entry configured for each step (`AI_ROUTE_<STEP>` / legacy Gemini chains), live. Only extraction receives `--photo` and requires a vision-capable entry. Generation and judging are text-only and reuse the first schema-valid extraction/generation output; translation is text-only and independent. The photo is read locally, never written, and never sent to downstream steps.
 
 ## Metrics + score
 

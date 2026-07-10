@@ -19,8 +19,8 @@ Related: [08-reliability-durability.md](./08-reliability-durability.md) · [19-s
 
 ## 1. Bounded work on the request path
 
-- The analyze pipeline is the hot path: one image in memory at a time per request, released promptly (zero-filled in `finally` — a privacy **and** memory rule).
-- No unbounded fan-out over user-controlled input: candidate generation is schema-capped (1–5 candidates, max 4 final results — [14-ai-safety.md](./14-ai-safety.md)); any fan-out over them is chunked and bounded.
+- The analyze pipeline is the hot path: one image in memory at a time per request, released immediately after extraction (zero-filled in `finally` — a privacy **and** memory rule).
+- No unbounded fan-out over user-controlled input: candidate generation is schema-capped at 25 and displayed results at the shared 1–10 request bound ([14-ai-safety.md](./14-ai-safety.md)); any fan-out over them is chunked and bounded.
 - No synchronous CPU-heavy work blocking the event loop (image decode checks are header-level, not full re-encodes).
 
 ## 2. Concurrency lives in use cases and `lib/` helpers

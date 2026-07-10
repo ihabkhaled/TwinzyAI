@@ -10,7 +10,11 @@ Hard boundaries:
   personality, background.
 
 Enforcement:
-- Zod-validate every model response (exactly 15 traits; 1-5 candidates; max 4 final results).
+- `architecture/application-layer-boundaries` rejects image-provider calls from every application
+  service except `trait-extraction.service.ts`; regression tests assert one image call followed by
+  text-only generation/judge calls.
+- Zod-validate every model response against the shared bounded taxonomy, candidate-pool, judge,
+  translation, and final-result schemas; result counts remain within the shared 1–10 contract.
 - AiSafetyService + ForbiddenWordingGuard reject or sanitize unsafe output (shared phrase list).
 - Model self-reported safetyCheck flags must all be false or the response is rejected.
 - Disclaimer is enforced server-side and always shown in the UI.

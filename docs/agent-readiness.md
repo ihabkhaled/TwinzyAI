@@ -17,11 +17,11 @@ Mirror contract ([rules/30 §3](../rules/30-refactor-discipline.md)): compact bo
 
 ## Precedence (identical for every agent)
 
-1. `rules/` are canonical engineering law — they win any conflict with mirrors, skills, or docs.
-2. `skills/` are procedures that apply the rules — they never override them.
-3. `/CLAUDE.md` governance (SDLC phases, artifacts, gates) wins everything not covered by rules.
-4. Where two rules overlap, the stricter wins.
+1. `/CLAUDE.md` is the canonical operating policy and always wins.
+2. `rules/` are canonical engineering law beneath it; they win conflicts with mirrors, skills, and ordinary docs.
+3. `skills/` are procedures that apply the rules and never override them.
+4. Where compatible rules overlap, the stricter one applies.
 
 ## Hard lines no agent may cross
 
-No inline reusable declarations in layer files · no clever/speculative code ([rules/28–29](../rules/28-simple-readable-code.md)) · no weakening privacy, AI safety, upload security, validation, a11y, i18n, or tests · no `eslint-disable`/`@ts-ignore` ever · no `--no-verify` / hook bypass · no payments, no biometrics, no image persistence · model/provider names env-driven only · every gate green before done is claimed.
+No inline reusable declarations in layer files · no clever/speculative code ([rules/28–29](../rules/28-simple-readable-code.md)) · no weakening privacy, AI safety, upload security, validation, a11y, i18n, or tests · only extraction receives the photo and every downstream AI step is text-only · no `eslint-disable`/`@ts-ignore` ever · no `--no-verify` / hook bypass · no payments, biometrics, or image persistence · model/provider names env-driven only · every gate green before done is claimed.

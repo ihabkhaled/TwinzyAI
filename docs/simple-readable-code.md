@@ -49,7 +49,7 @@ Clever one-liners · nested ternaries · hidden control flow · single-consumer 
 
 ## What simplicity never touches
 
-Minimum code = minimum **safe** code. Image privacy (wipe-in-`finally`, never logged/persisted), consent-first upload validation, Zod at every boundary, AI safety filtering on every provider output, error envelopes + redaction, rate limits, cancellation/cleanup paths, a11y, i18n/RTL, strict TS/ESLint, tests, and gates are constitutionally out of scope for "cleanup".
+Minimum code = minimum **safe** code. Image privacy (only extraction receives the photo; downstream AI is text-only; wipe-in-`finally`; never logged/persisted), consent-first upload validation, Zod at every boundary, AI safety filtering on every provider output, error envelopes + redaction, rate limits, cancellation/cleanup paths, a11y, i18n/RTL, strict TS/ESLint, tests, and gates are constitutionally out of scope for "cleanup".
 
 ## Reviewing AI-generated code
 

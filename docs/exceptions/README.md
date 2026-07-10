@@ -1,16 +1,12 @@
 # Exceptions Register
 
-This directory is the **only** sanctioned path around a gate for the `apps/web` frontend. If code
-needs an `eslint-disable`, a `@ts-expect-error`, a suppressed rule in an
-`apps/web/eslint/*.config.mjs` file, an accepted vulnerability, or a waiver of any policy in
-[docs/sdlc](../sdlc/README.md) — an exception document MUST exist here first. An undocumented
-suppression is a merge blocker, full stop.
+This directory records dated repository-level tool false positives, accepted third-party
+vulnerabilities, and external constraints with compensating controls. It never authorizes inline
+`eslint-disable`, `@ts-ignore`, `@ts-expect-error`, skipped required tests, lowered thresholds, or
+hook bypasses; those are forbidden without exception.
 
-> Scope: this register governs the `apps/web` frontend architecture plugin and its gates. Backend
-> (`apps/api`) relaxations are documented separately in
-> [docs/eslint-architecture.md](../eslint-architecture.md). The overriding governance is the root
-> [CLAUDE.md](../../CLAUDE.md), whose "Exceptions Register" and "Pre-Commit, Pre-Push, And Local
-> Gate Rules" this directory operationalizes for the frontend.
+> Scope: root [`CLAUDE.md`](../../CLAUDE.md) always wins. Static-rule configuration decisions are
+> also documented in [docs/eslint-architecture.md](../eslint-architecture.md).
 
 ## The contract
 
@@ -24,21 +20,18 @@ Every exception MUST be filed from [exception-template.md](./exception-template.
 - **Safer alternative considered** — what was tried or evaluated first, and why it lost.
 - **Mitigation** — the compensating control that covers the risk the gate would have covered.
 
-The suppression site in code MUST reference its exception (a comment naming the doc). The release
-checklist audits expiry dates on every release
+The owning configuration or risk artifact references the decision record without adding source
+suppression directives. The release checklist audits expiry dates on every release
 ([docs/sdlc/release-checklist.md](../sdlc/release-checklist.md)); an expired exception blocks
 release.
 
 ## What requires an exception
 
-| Suppression                                                       | Gate bypassed                                        |
-| ----------------------------------------------------------------- | ---------------------------------------------------- |
-| `// eslint-disable-*` in source                                   | `npm run lint` with `--max-warnings=0`               |
-| Rule set to `'off'`/downgraded in `apps/web/eslint/*.config.mjs`  | the rule's whole surface                             |
-| `@ts-expect-error` / `as unknown as` bridge                       | strict typecheck                                     |
-| Skipped test / lowered coverage threshold                         | `npm run test:coverage` gates in `vitest.config.mts` |
-| Accepted vulnerability / audit filter                             | `npm run security:audit` / `npm run security:scan`   |
-| Raw (untranslated) user-facing copy                               | `no-raw-i18n-text`                                   |
+| Decision | Required evidence |
+| --- | --- |
+| Repository rule disabled for a proven tool false positive | Minimal reproducer, narrow scope, compensating control, owner, expiry |
+| Accepted third-party vulnerability/audit filter | Upstream issue, exposure analysis, mitigation, owner, expiry |
+| Framework-bound fallback copy outside i18n runtime | Proven unavailable runtime, single owner, a11y/security review |
 
 ## Currently active exceptions
 
@@ -48,7 +41,7 @@ release.
 
 ### EXC-0001 — `sonarjs/no-hardcoded-passwords` off
 
-- **Where**: `apps/web/eslint/sonar.config.mjs` (rule set to `'off'`).
+- **Where**: `eslint/sonar.config.mjs` (rule set to `'off'`).
 - **Reason**: the rule cannot distinguish i18n keys, test ids, and form field ids that mention
   "password"/"secret" from real credentials; in this codebase every hit was a false positive.
 - **Mitigation / ownership**: secret detection is owned by the Trivy secret scanner
@@ -56,7 +49,7 @@ release.
 
 ### EXC-0002 — `security/detect-object-injection` off
 
-- **Where**: `apps/web/eslint/security.config.mjs` (rule set to `'off'`).
+- **Where**: `eslint/security.config.mjs` (rule set to `'off'`).
 - **Reason**: flags every computed property access; near-100% false positives in strictly typed
   code.
 - **Mitigation / ownership**: object-injection risk is controlled by TypeScript strictness
@@ -73,21 +66,15 @@ release.
 - **Mitigation**: copy is confined to one `as const` constant with three keys (title, description,
   retry); no other file may import untranslated copy.
 
-### EXC-0004 — resolver cast in the forms wrapper
+### EXC-0004 — resolver cast in the forms wrapper (superseded)
 
-- **Where**: `apps/web/src/packages/forms/use-app-zod-form.hook.ts` — the
-  `as unknown as Resolver<TFieldValues>` bridge around `zodResolver`.
-- **Reason**: `zodResolver` from `@hookform/resolvers` cannot carry an abstract `TFieldValues`
-  through its overloads under `exactOptionalPropertyTypes`; the cast is the single sanctioned
-  bridge between the vendor generics and our generic facade.
-- **Mitigation**: the runtime contract (schema output equals form values) is guaranteed by the
-  wrapper itself; the cast exists in exactly one file, owned by the forms package, and is
-  re-evaluated on every `@hookform/resolvers` upgrade.
+- **Status**: superseded 2026-07-09. The unused forms wrapper and dependencies were deleted in the
+  Simple Code cleanup; no cast or exception remains.
 
 ## Lifecycle
 
-1. File the doc from the template with a new `EXC-NNNN` id, get architect approval in the same PR
-   as the suppression.
+1. File the doc from the template with a new `EXC-NNNN` id and get architect/security approval in
+   the same PR as the repository-level configuration or risk decision.
 2. Add the register entry above.
 3. On expiry: remove the suppression, or re-justify with a new expiry and a note on why removal is
    still blocked.

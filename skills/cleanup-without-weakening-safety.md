@@ -13,10 +13,10 @@ Any refactor touching: `modules/file-security`, `modules/privacy`, `modules/ai` 
 
 ## Steps
 
-1. Before touching anything, write down the invariants the file enforces: consent-first, validation order, fail-closed paths, wipe-in-`finally`, no-image-logging, Zod + forbidden-wording filtering, text-only steps, redaction.
+1. Before touching anything, write down the invariants the file enforces: consent-first, validation order, fail-closed paths, wipe-in-`finally` immediately after extraction, no-image-logging, extraction as the sole image-provider call, text-only generation/judging/translation, Zod + forbidden-wording filtering, redaction.
 2. Run the surface's focused suites FIRST and record the pass state (`npm run test:file-security`, `npm run test:ai`, `npm run test:security`).
 3. Refactor with behavior-identical moves only: rename, extract pure helper, move declaration to owner, split by responsibility. Never reorder validation steps; never widen a catch; never make a fail-closed path fail-open; never move image bytes across a boundary.
-4. Diff-review your own change asking one question per invariant from step 1: "is this still enforced on every path?"
+4. Diff-review your own change asking one question per invariant from step 1: "is this still enforced on every path?" Confirm `AI_IMAGE_STEPS` contains extraction only and the pipeline tests record one image call followed by text calls.
 5. Re-run the same suites + the integration suite; any behavioral diff = revert and rethink.
 
 ## Checklist

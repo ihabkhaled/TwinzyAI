@@ -4,6 +4,10 @@ Rationale behind the Twinzy frontend testing standard. The normative rules live 
 [`rules/frontend/15-testing-and-coverage.md`](../../rules/frontend/15-testing-and-coverage.md); this
 file records why the bars sit where they sit. Adapted from the reference frontend OS.
 
+> Current decision (2026-07-10): the root full-stack coverage allowlist enforces 95/90/95/95 and
+> frontend tests fake app-owned transport/gateway/query boundaries. Historical MSW/100%-pure-layer
+> text below is superseded because those packages/configurations do not exist.
+
 ## Why 95% global / 100% pure-logic thresholds
 
 - **Decision:** coverage thresholds in the frontend Vitest config are 95% (lines, statements,

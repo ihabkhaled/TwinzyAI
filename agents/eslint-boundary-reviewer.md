@@ -4,14 +4,14 @@
 
 Own the custom `frontend-architecture` ESLint plugin as living law: review violations of its 13
 rules, keep the two config-driven maps (the layer policy table and the package ownership map) in
-sync with reality, and audit every `eslint-disable` against its documented exception. Lint runs
+sync with reality, and reject every inline suppression directive. Lint runs
 with `--max-warnings=0`; a warning is a failure.
 
 ## When to invoke
 
 - A diff touches the frontend ESLint config (`apps/web/eslint.config.mjs`), anything under the
   frontend architecture plugin (`apps/web/eslint/`), or the plugin's rule implementations.
-- Any `eslint-disable` comment is added or an exception is filed.
+- Any inline suppression or repository-level rule configuration decision is proposed.
 - A new vendor package or module layer is introduced (the maps need updating).
 - During [skills/fix-eslint-typecheck.md](../skills/fix-eslint-typecheck.md).
 
@@ -42,9 +42,9 @@ with `--max-warnings=0`; a warning is a failure.
 - `npm run lint` is green at `--max-warnings=0`. Never "fix" a violation by weakening a rule or
   widening an allowlist; fix the code. Config changes require this agent's explicit approval plus
   the frontend-architect's.
-- Every `eslint-disable` in the diff cites a documented, reviewed exception that names the rule,
-  the file, the reason, and an expiry/re-review condition (recorded in the feature's
-  [19-security-review.md](../docs/features/_template/19-security-review.md) or an ADR under
+- No inline ESLint/TypeScript suppression exists. Any narrow repository-level false-positive
+  configuration names the rule, scope, reason, compensating control, and expiry/re-review condition
+  (recorded in the feature's [19-security-review.md](../docs/features/_template/19-security-review.md) or an ADR under
   [architecture/adrs/](../architecture/adrs/README.md)). Disable-without-doc is `BLOCK`.
 - Map maintenance, both directions:
   - New vendor dependency in `apps/web/package.json` → a wrapper under `apps/web/src/packages/`

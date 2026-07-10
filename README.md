@@ -63,6 +63,16 @@ npm run security:scan
 Husky enforces pre-commit (lint-staged), commit-msg (commitlint, conventional commits), and
 pre-push validation. Never bypass hooks with `--no-verify`.
 
+## Simple readable code
+
+The best TwinzyAI code is the code the next developer understands immediately. Before writing:
+need it → reuse the existing owner → platform/native → existing wrapper → small helper → direct
+readable code → new abstraction only when justified. See
+[`rules/28-simple-readable-code.md`](rules/28-simple-readable-code.md) and
+[`context/declaration-ownership-map.md`](context/declaration-ownership-map.md). Minimum code always
+means minimum **safe** code—never less validation, privacy, AI safety, upload safety, a11y, i18n,
+tests, or documentation.
+
 ## Commands
 
 | Command | What it does |

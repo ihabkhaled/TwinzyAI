@@ -108,18 +108,17 @@ Before NestJS implementation: read this `claude.md`, then [`context/architecture
 
 These are product-defining and can never be relaxed by any request, ticket, or prompt:
 
-> **Policy revision (owner-approved, 2026-07-09, recorded in
-> `docs/features/visual-similarity-pivot/`):** the former "text-only after
-> extraction / no facial-similarity" constraints were explicitly relaxed by the
-> product owner in writing. Twinzy is now an honest, consent-first
-> **visual-similarity lookalike game**: the user's photo may be provided to all
-> three pipeline steps (extraction, candidate generation, judging) to assess
-> resemblance directly. The constraints below are the CURRENT non-negotiables.
+> **Policy revision (owner-approved, 2026-07-10, recorded in
+> `docs/features/simple-readable-code-operating-system-implementation/`):** the
+> 2026-07-09 visual-similarity pivot is superseded. Twinzy is a consent-first,
+> written-visible-traits style/vibe game. Only trait extraction may receive the
+> photo; candidate generation, judging, translation, sharing, and display are
+> text-only. The constraints below are the CURRENT non-negotiables.
 
 1. **The game is free.** Never add payment, subscription, or monetization logic.
-2. **Consent-first.** The photo is processed only after the explicit consent checkbox, whose copy accurately describes visual-similarity processing. User-facing copy must never claim the app does something its pipeline contradicts (and vice versa).
-3. **No image persistence.** Uploaded images live in request memory only, are wiped in `finally` on success/failure/abort, and are never logged, stored, embedded, cached, or returned. Registries, queues, and stores hold ids only — never image bytes.
-4. **No identification of the user.** The app never determines, guesses, or asserts WHO the user is — only which public figures they visually resemble. No identity assertions in any output.
+2. **Consent-first.** The photo is processed only after the explicit consent checkbox, whose copy accurately describes visible-trait extraction and text-only downstream matching. User-facing copy must never contradict the pipeline.
+3. **No image persistence or downstream image use.** Uploaded images live in request memory only, are wiped in `finally` immediately after extraction on success/failure/abort, and are never logged, stored, embedded, cached, returned, or passed to candidate generation, judging, translation, sharing, or display. Those stages receive no image URL, hash, crop, embedding, or raw metadata.
+4. **No identification of the user.** The app never determines, guesses, or asserts WHO the user is. It suggests playful public style/vibe matches from written visible traits only; no identity or exact-lookalike assertions may appear.
 5. **No sensitive inference.** No ethnicity/religion/health/sexuality/personality/attractiveness/income judgments, ever. Visible descriptors (skin tone, hair texture) are fine; claims about who or what the person IS are not.
 6. **`GEMINI_MODEL` comes from `.env`** — never hardcode a model name; every operational cap is env-driven.
 7. **Every AI response is Zod-validated and safety-filtered** before use; forbidden wording (identity assertions, sensitive topics, clinical biometric phrasing) is rejected or sanitized (see `packages/shared/src/constants/safety.constants.ts`).

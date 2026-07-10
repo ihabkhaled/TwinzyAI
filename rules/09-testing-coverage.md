@@ -61,7 +61,7 @@ Tests assert **behavior**, not implementation details.
 | Adapter | mapping + error translation with the SDK doubled; timeout behavior | — |
 | DTO/schema | valid passes; each missing/invalid/oversized field rejected; boundary values; unknown-key rejection | malformed body → 400 envelope, never 500 |
 | Upload chain | every link rejects correctly, in order; fail-closed ClamAV path | end-to-end reject/accept flows |
-| AI safety | forbidden wording rejected/sanitized; safetyCheck flags enforced; schema caps (15 traits, 1–5 candidates, ≤4 results) | — |
+| AI safety | forbidden wording rejected/sanitized; safetyCheck flags enforced; extraction-only image call; shared schema caps (221-field taxonomy, candidate pool ≤25, requested results 1–10) | — |
 | Frontend hook/service/gateway | state transitions, mapping, zod response validation | Playwright flows with mocked routes |
 
 **Boundary discipline:** mock the system's *dependencies*, never the subject. **Always mock external providers (Gemini, ClamAV) — never call a real provider in any test or CI run.** Real-Gemini runs are manual and documented. Isolate every test (`vi.clearAllMocks()` in `beforeEach`); type doubles with `import type { Mock } from 'vitest'` — never `any` or `@ts-ignore`, even in tests.

@@ -9,7 +9,7 @@
 - Question: [e.g. "Why was my photo rejected?"]
   Answer: [e.g. consent must be given, one photo only, under 5 MB, standard image format; rejections are safety features — pick another photo or retry]
 - Question: [e.g. "Is my photo stored anywhere?"]
-  Answer: No — never. Images are processed in memory for the single request and are not saved; Twinzy stores no user data at all.
+  Answer: No — never. Images are processed in memory only for trait extraction and are not saved. Optional share links hold only safety-filtered result JSON in a short-lived in-memory cache, never the photo.
 - Question: [e.g. "The game says try again later — is my data lost?"]
   Answer: Nothing is lost (nothing is stored). The AI provider is temporarily unavailable; trying again later is the fix.
 

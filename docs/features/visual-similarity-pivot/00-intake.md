@@ -1,5 +1,10 @@
 # 00 - Request Intake and Classification
 
+> Superseded on 2026-07-10 by
+> [`simple-readable-code-operating-system-implementation`](../simple-readable-code-operating-system-implementation/00-intake.md).
+> This remains a historical decision record; current policy allows the photo only in trait
+> extraction and requires candidate generation/judging to be text-only.
+
 ## Request Record
 
 | Field | Value |

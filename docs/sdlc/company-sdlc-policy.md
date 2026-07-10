@@ -4,7 +4,10 @@
 
 This document defines the delivery operating model for the Twinzy repository. It applies to all software and system changes in this monorepo — the NestJS API (`apps/api`), the Next.js frontend (`apps/web`), the shared zod contracts (`packages/shared`), tooling, infrastructure, and documentation.
 
-The canonical governance chain is: [`CLAUDE.md`](../../CLAUDE.md) (compact mirror) → [`AGENTS.md`](../../AGENTS.md) (canonical entry point) → [`rules/`](../../rules/README.md) (full rule bodies — rules win all conflicts).
+The canonical governance chain is: [`CLAUDE.md`](../../CLAUDE.md) (canonical operating policy) →
+[`rules/`](../../rules/README.md) and the architecture map (engineering canon beneath it) →
+[`AGENTS.md`](../../AGENTS.md) and other compact agent mirrors. Skills and ordinary docs defer to
+the rules; nothing overrides `CLAUDE.md`.
 
 ## Policy Statement
 

@@ -30,7 +30,7 @@ Use this checklist for every pull request or change review in this repository. A
 
 ### Architecture and Design
 
-- [ ] The change respects module and layer boundaries: backend `Controller → Manager → Service → Repository`; frontend `Component → Hook → Service → Gateway` ([`rules/01-architecture.md`](../../rules/01-architecture.md), [`rules/16-backend-architecture.md`](../../rules/16-backend-architecture.md)).
+- [ ] The change respects module and layer boundaries: backend `Controller → Use case/Service → Adapter/Repository`; frontend `Component → Hook → Service → Gateway` ([`rules/01-architecture.md`](../../rules/01-architecture.md), [`rules/16-backend-architecture.md`](../../rules/16-backend-architecture.md)).
 - [ ] Third-party libraries stay behind their wrappers/adapters; no raw SDK/`fetch`/`axios`/storage in business code ([`rules/10-library-modularization.md`](../../rules/10-library-modularization.md)).
 - [ ] No `process.env` outside the config modules.
 - [ ] Architectural impacts are documented; a new ADR exists in [`architecture/adrs/`](../../architecture/adrs/README.md) when architecture changed.
@@ -39,15 +39,16 @@ Use this checklist for every pull request or change review in this repository. A
 ### Code Quality
 
 - [ ] Naming is clear and consistent; no `any`, no `eslint-disable`, no `@ts-ignore`, no non-null `!`, no TypeScript `enum` ([`rules/00-non-negotiable-rules.md`](../../rules/00-non-negotiable-rules.md)).
+- [ ] The Simple Code Ladder was applied: need it → reuse owner → native/platform → existing wrapper → small helper → direct readable code → justified abstraction.
 - [ ] Domain types/constants/DTOs/schemas live in dedicated folders, not inline ([`rules/05-types-enums-constants.md`](../../rules/05-types-enums-constants.md)).
-- [ ] Complexity is proportionate to the problem.
-- [ ] Duplication is avoided or justified.
+- [ ] The code is junior-readable in one pass: no clever chains, speculative abstraction, oversized units, or token-burning boilerplate.
+- [ ] Duplication and dead exports/helpers/config are removed or explicitly proven intentional.
 - [ ] Error handling is explicit and maps to the `ApiErrorResponse` envelope.
 - [ ] Logging and observability are present where needed ([`rules/22-observability-logging.md`](../../rules/22-observability-logging.md)).
 
 ### Security and Privacy
 
-- [ ] Privacy invariants hold: no image persistence, no biometrics, only the trait-extraction prompt sees the image ([`rules/14-ai-safety.md`](../../rules/14-ai-safety.md)).
+- [ ] Privacy invariants hold: no image persistence or biometrics; only extraction sees the image; generation, judging, translation, sharing, and display are text-only ([`rules/14-ai-safety.md`](../../rules/14-ai-safety.md)).
 - [ ] The upload security chain is intact when touched: consent, single file, size, MIME, extension, magic bytes, decode check, optional ClamAV fail-closed ([`rules/15-file-upload-security.md`](../../rules/15-file-upload-security.md)).
 - [ ] Sensitive data is protected and redacted in logs.
 - [ ] Input validation (zod) and output safety filtering are covered ([`rules/06-security.md`](../../rules/06-security.md)).

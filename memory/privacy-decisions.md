@@ -3,10 +3,11 @@
 The product-defining invariants. Rule: [/rules/14-ai-safety.md](../rules/14-ai-safety.md);
 policy doc: [/docs/privacy-and-data-retention.md](../docs/privacy-and-data-retention.md).
 
-- **No persistence, by design**: no database, cache, queue, or file storage anywhere
-  ([database-decisions.md](./database-decisions.md)). Nothing survives the request.
+- **No durable persistence, by design**: no database, queue, or file storage
+  ([database-decisions.md](./database-decisions.md)). The only cache is the bounded, short-lived
+  safe-result share cache documented below; it can never contain an image.
 - **Images**: processed in memory, sent to exactly one AI call (trait extraction), zero-filled
-  in `finally` on success AND failure. Never written to disk, logged, cached, persisted, or
+  in `finally` immediately after extraction on success AND failure. Never written to disk, logged, cached, persisted, or
   returned. The `@fastify/multipart` pipeline keeps parsing in memory — no temp files.
 - **Structural enforcement**: the AI provider port splits the image-capable method from the
   text-only methods — only the trait-extraction call can receive an image; candidate
@@ -15,8 +16,9 @@ policy doc: [/docs/privacy-and-data-retention.md](../docs/privacy-and-data-reten
 - **Never**: face recognition, identity matching, biometric anything (no embeddings, no
   templates), image storage, image URLs, analytics on photos. Not revisitable by ADR
   ([database-decisions.md](./database-decisions.md) Decision 3).
-- Traits are 15 **visible, non-identifying** style/vibe attributes as text; trait text and
-  results are transient per-request and never stored server-side.
+- Traits use the shared 221-field **visible, non-identifying** taxonomy (targeting 100+ populated
+  written values when image quality allows); analyze results are transient unless the user
+  explicitly creates the bounded temporary share described below.
 - No accounts; the game is free — **never add payment logic** (payments would create identity
   and financial data).
 - Logs carry identifiers and outcomes only — nothing derived from the image is loggable

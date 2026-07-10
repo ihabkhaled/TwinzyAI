@@ -1,6 +1,9 @@
 # rules/ — Full Rule Bodies
 
-> These files are the single source of truth for engineering rules. **They win every conflict** with AGENTS.md, CLAUDE.md, CODEX.md, .cursorrules, or docs. Read [00](./00-non-negotiable-rules.md) first, then the file for the layer you're touching, then follow the matching [skill](../skills/README.md).
+> Root [`CLAUDE.md`](../CLAUDE.md) is the canonical operating policy and always wins. These files
+> are the canonical **engineering rule bodies** beneath it; they win conflicts with skills, agent
+> mirrors, and ordinary docs. Read [00](./00-non-negotiable-rules.md) first, then the layer rule,
+> then the matching [skill](../skills/README.md).
 
 **Precedence:** the governance lifecycle in [`/CLAUDE.md`](../CLAUDE.md)/[`/AGENTS.md`](../AGENTS.md) defines *which phases and artifacts* a change passes through; [`/context/architecture-map.md`](../context/architecture-map.md) + [`00-non-negotiable-rules.md`](./00-non-negotiable-rules.md) are the engineering canon these numbered files apply; the numbered rules carry the layer detail. Where two rules could both apply, **the stricter one wins**.
 

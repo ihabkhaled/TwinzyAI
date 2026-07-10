@@ -6,6 +6,10 @@ ownership map: [`context/frontend/package-boundaries.md`](../../context/frontend
 This file records **why each package won** over its alternatives. Propose a replacement only with a
 new dated entry here. Adapted from the reference frontend OS.
 
+> Current decision (2026-07-10): `dayjs`, `react-hook-form`, `@hookform/resolvers`,
+> `react-virtuoso`, and MSW were removed as unused. Their historical sections below are superseded;
+> do not recreate wrappers without a present measured requirement and a new approval record.
+
 ## dayjs over date-fns (and Luxon)
 
 - **Decision:** `dayjs`, wrapped at `packages/date` (`formatDisplayDate`, `formatDisplayDateTime`,

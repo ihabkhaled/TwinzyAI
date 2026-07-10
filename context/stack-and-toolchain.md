@@ -11,9 +11,12 @@
 
 ## Runtime & language
 
-- **Node.js >= 22** (`engines.node >= 22`; developed on Node 24).
-- **TypeScript ~6.0.3**, maximally strict via [`tsconfig.base.json`](../tsconfig.base.json): `strict` plus `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noImplicitReturns`, `noImplicitOverride`, `noPropertyAccessFromIndexSignature`, `noUnusedLocals`, `noUnusedParameters`, `useUnknownInCatchVariables`, `noFallthroughCasesInSwitch`, `allowUnreachableCode: false`, `noEmitOnError`, `noUncheckedSideEffectImports`, `isolatedModules`. These flags are why "no `any`", "no `!`", and "handle every nullable" are mechanically true here.
-- **Typecheck** is per-workspace behind `npm run typecheck` (root builds shared first): every workspace type-checks with the native `tsc` from **TypeScript 7** (installed via the `tsc7` npm alias; the `typescript` package name resolves to the official 6.0 API shim `@typescript/typescript6` for API consumers: nest CLI, Next, typescript-eslint, sonarjs).
+- **Node.js >=22.20 <23** (root `engines` + `.nvmrc`).
+- **TypeScript 5.9 API + native TypeScript 7 checker**, maximally strict via
+  [`tsconfig.base.json`](../tsconfig.base.json). The ecosystem-facing `typescript` package stays on
+  peer-compatible 5.9; workspace scripts explicitly invoke the `tsc7` alias for the native checker.
+- **Typecheck** is per-workspace behind `npm run typecheck` (root builds shared first), including the
+  dedicated web E2E project.
 
 ## Backend libraries (apps/api)
 
@@ -29,18 +32,18 @@
 
 ## Frontend (apps/web) — summary
 
-Next.js (App Router) + React with Tailwind CSS, TanStack Query, React Hook Form, and zod, following the Component → Hook → Service → Gateway layering ([rules/02](../rules/02-frontend-components-tsx.md)–[04](../rules/04-frontend-services-gateways.md)); all HTTP/storage/share/theme access goes through wrappers in `apps/web/src/lib`, contracts come from `@twinzy/shared`, unit tests run in the `web-unit` vitest project (jsdom), and e2e tests use Playwright. Details live in the frontend rules and `docs/frontend-architecture.md`.
+Next.js (App Router) + React with Tailwind CSS, TanStack Query, and zod, following the Component → Hook → Service → Gateway layering ([rules/02](../rules/02-frontend-components-tsx.md)–[04](../rules/04-frontend-services-gateways.md)); all HTTP/storage/share/theme access goes through wrappers in `apps/web/src/packages`, contracts come from `@twinzy/shared`, unit tests run in the `web-unit` Vitest project (jsdom), and E2E tests use Playwright.
 
 ## Lint & format
 
-- **ESLint 9 flat config** ([`eslint.config.mjs`](../eslint.config.mjs)) composed from modular files under [`/eslint`](../eslint/index.mjs): base → typescript → imports → promise/security/sonarjs/unicorn/regexp → react/react-hooks/next → **architecture** → test overrides → prettier last. Target: **0 errors AND 0 warnings**.
+- **ESLint 10 flat config** ([`eslint.config.mjs`](../eslint.config.mjs)) composed from modular files under [`/eslint`](../eslint/index.mjs): base → typescript → imports → promise/security/sonarjs/unicorn/regexp → react/react-hooks/next → **architecture** → test overrides → prettier last. `--max-warnings=0` makes the target mechanically **0 errors / 0 warnings**.
   - typescript-eslint strict type-checked presets; plugins: import-x, simple-import-sort, unused-imports, promise, regexp, security, sonarjs, unicorn, jsx-a11y, react, react-hooks, @next/next, testing-library, playwright, vitest.
   - **Custom architecture plugin** ([`eslint/architecture-plugin`](../eslint/architecture-plugin/rules/controller-no-logic.mjs), config [`eslint/architecture.config.mjs`](../eslint/architecture.config.mjs)) — the mechanical enforcement of [architecture-map.md](./architecture-map.md) §6, with its own vitest project (`lint-rules`).
 - **Prettier 3** ([`.prettierrc.json`](../.prettierrc.json)) — single quotes, trailing commas, `printWidth: 100`, `arrowParens: always`, LF line endings.
 
 ## Test toolchain
 
-- **Vitest 4 multi-project** ([`vitest.config.ts`](../vitest.config.ts)): `api-unit` and `api-integration` (node env, SWC transform for Nest decorator metadata), `web-unit` (jsdom), `shared-unit`, and `lint-rules` (the architecture plugin's own tests). Naming: `*.test.ts` (unit) / `*.integration.test.ts` (api integration).
+- **Vitest 4 multi-project** ([`vitest.config.mts`](../vitest.config.mts)): `api-unit` and `api-integration` (node env, SWC transform for Nest decorator metadata), `web-unit` (jsdom), `shared-unit`, and `lint-rules`. Naming: `*.test.ts` (unit) / `*.integration.test.ts` (api integration).
 - **@nestjs/testing + supertest** — module-level unit tests and HTTP integration tests against the real Fastify app (`await app.getHttpAdapter().getInstance().ready()` before requests).
 - **Playwright** — web e2e (`npm run test:e2e`).
 - **Coverage: @vitest/coverage-v8** with thresholds **95 statements / 90 branches / 95 functions / 95 lines** on a **gated scope** — an explicit `include`/`exclude` set that measures logic-bearing source and excludes composition roots (e.g. `main.ts`, `apps/web/src/app`), test scaffolding, and declaration files.
@@ -77,7 +80,7 @@ Next.js (App Router) + React with Tailwind CSS, TanStack Query, React Hook Form,
 | `test:e2e` | Playwright (web) |
 | `test:coverage` | Coverage with thresholds on the gated scope |
 | `test:security` / `test:file-security` / `test:ai` / `test:pwa` | Focused suites |
-| `validate` | lint + typecheck + test:coverage + build |
+| `validate` | format check + lint + typecheck + coverage + build + dead-code + circular checks |
 | `security:scan` / `security:scan:full` | Trivy |
 | `deps:check` / `deps:upgrade` | npm-check-updates |
 | `docker:*` | Compose lifecycle |
@@ -90,6 +93,7 @@ npm run typecheck       # shared build + per-workspace check
 npm run test:unit       # unit projects
 npm run test:coverage   # thresholds 95/90/95/95 on the gated scope
 npm run build           # shared → api → web compiles clean
+npm run security:scan   # no HIGH/CRITICAL vulnerabilities/misconfiguration
 ```
 
 A green build is **not** proof of correctness — walk [rules/23](../rules/23-review-checklist.md) and prove behavior with tests before [rules/24](../rules/24-release-gate.md).

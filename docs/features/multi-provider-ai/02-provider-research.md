@@ -1,5 +1,9 @@
 # TwinzyAI Multi-Provider Routing — Provider Comparison Research (July 9, 2026)
 
+> Historical research warning: the 2026-07-10 owner directive supersedes the photo-to-generation
+> and photo-to-judge assumptions below. Current routing sends images only to extraction; generation,
+> judging, and translation are text-only. Re-evaluate recommendations under that boundary before use.
+
 ## 1. Introduction
 
 TwinzyAI's pipeline has four AI steps with distinct risk profiles: (1) **extraction** (photo → 221-field strict JSON; vision + structured output + low hallucination), (2) **generation** (photo + evidence → lookalike candidate pool; regional celebrity recall critical), (3) **judge** (photo + evidence + candidates → conservative verified scores; safety-critical), (4) **translation** (text-only en↔ar of the result JSON; cost/speed win).

@@ -21,39 +21,35 @@ Skills: [skills/write-unit-tests.md](../../skills/write-unit-tests.md),
 | Category      | Location                                | Runner                         | Script                        |
 | ------------- | --------------------------------------- | ------------------------------ | ----------------------------- |
 | Unit          | `apps/web/src/modules/<feature>/test/`  | Vitest (jsdom, `web-unit`)     | `npm run test:unit`           |
-| Integration   | `apps/web/src/tests/integration/`       | Vitest + `renderWithProviders` | `npm run test`                |
-| E2E           | `apps/web/e2e/*.e2e.ts`                 | Playwright                     | `npm run test:e2e`            |
-| Accessibility | `apps/web/e2e/*.a11y.ts`                | Playwright + axe               | `npm run test:e2e`            |
-| Visual        | `apps/web/e2e/*.visual.ts`              | Playwright screenshots         | `npm run test:e2e`            |
+| Integration   | module `test/` / `apps/web/src/tests/`  | Vitest + Testing Library       | `npm run test:unit`           |
+| E2E           | `apps/web/e2e/*.spec.ts`                | Playwright                     | `npm run test:e2e`            |
+| Accessibility | `apps/web/e2e/*.a11y.spec.ts`           | Playwright + axe               | `npm run test:a11y`           |
+| Visual        | `apps/web/e2e/*.visual.spec.ts`         | Playwright screenshots         | `npm run test:visual`         |
 
-Setup: `apps/web/src/tests/setup/vitest.setup.ts` (jest-dom, MSW server, `server-only` mock).
-Integration rendering uses `apps/web/src/tests/helpers/render-with-providers.tsx`.
+Setup: `apps/web/src/tests/setup.ts` (jest-dom + browser polyfills).
+Provider-aware rendering uses `apps/web/src/tests/helpers/render-with-providers.tsx`.
 
-## Coverage thresholds (enforced in vitest.config.ts)
+## Coverage thresholds (enforced in vitest.config.mts)
 
-[vitest.config.ts](../../vitest.config.ts) enforces:
+[vitest.config.mts](../../vitest.config.mts) enforces the root full-stack logic allowlist:
 
-- **95%** lines / statements / functions / branches globally over the `apps/web` source
-  (`src/modules`, `src/shared`, `src/packages`).
-- **100%** on all four axes for `apps/web/src/**/{utils,helpers,mappers,schemas}/**` and for query-key
-  builder files (`apps/web/src/**/queries/*query-keys*.ts`). Pure functions have no excuse for untested
-  branches.
+- **95%** lines / statements / functions and **90%** branches.
+- Web helpers, mappers, services, gateways, schemas, critical hooks/store, and browser/storage
+  wrappers are included alongside API/shared logic.
 
 Thresholds MUST never be lowered to make a PR pass. Full policy:
 [testing/frontend/coverage-policy.md](../../testing/frontend/coverage-policy.md).
 
-## MSW is mandatory for API tests
+## Mock the owned boundary
 
-Any test that exercises code touching `httpClient` MUST go through MSW — the node server at
-`apps/web/src/tests/msw/server.ts` with handlers in `apps/web/src/tests/msw/handlers/`. Never mock
-`httpClient`, a gateway function, or axios directly: mocking the transport hides mapper/schema bugs that
-MSW-served fixtures catch. Fixtures policy:
+Gateway tests fake the owned `@/packages/axios` transport; service tests fake gateways; hook tests
+fake query/service seams. Playwright uses `page.route` against the same-origin test API. Never mock
+the transformation or validation logic being proved. Fixtures policy:
 [testing/frontend/test-data-and-fixtures.md](../../testing/frontend/test-data-and-fixtures.md).
 
 ## Anti-patterns (each one blocks review)
 
-- **No `.only`** and no skipped tests without a documented exception in
-  [docs/exceptions/](../../docs/exceptions/). CI runs full suites only.
+- **No `.only` and no skipped required tests.** CI runs full suites only.
 - **No snapshot-only component tests.** Snapshots may complement, never replace, behavioral assertions.
   Visual regressions belong in the Playwright visual suite
   ([testing/frontend/visual-testing-standard.md](../../testing/frontend/visual-testing-standard.md)).

@@ -1,5 +1,8 @@
 # 08 - Architecture Review: Current State → Provider-Agnostic Routing
 
+> Superseded detail (2026-07-10): only extraction may use `*FromImage*`; generation, judging, and
+> translation use text methods. The provider-agnostic routing architecture remains current.
+
 ## Current state (investigated 2026-07-09)
 
 The investigation found the codebase already **80% provider-agnostic** — the pivot work and the per-step model chains (commit `66c260b`) put the right seams in place:

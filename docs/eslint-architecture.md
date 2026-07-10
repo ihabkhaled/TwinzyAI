@@ -9,7 +9,7 @@ eslint.config.mjs re-exports it. Custom plugin: eslint/architecture-plugin.mjs
 | Rule | Targets | Contract |
 | --- | --- | --- |
 | `controller-no-logic` | apps/api files ending `.controller.ts` (any folder) | Every method (except the constructor) is exactly one return statement whose value — after unwrapping `await` — is a call, optional chain, identifier, literal, or member access. Message ids: `singleReturnOnly`, `invalidReturn`. |
-| `application-layer-boundaries` | apps/api files in `application/` or ending `.use-case.ts` / `.service.ts` | May import infrastructure/, adapters/, domain/, model/, lib/; must never import from api/ (controllers or DTOs) or provider SDKs. Replaces the former `manager-layer-boundaries`. |
+| `application-layer-boundaries` | apps/api files in `application/` or ending `.use-case.ts` / `.service.ts` | May import infrastructure/, adapters/, domain/, model/, lib/; must never import from api/ or provider SDKs. Image-capable provider methods may be called only by `trait-extraction.service.ts`; all other application services are text-only. |
 | `repository-persistence-only` | apps/api files in `infrastructure/` or ending `.repository.ts` | Persistence only: no imports from api/, application/, adapters/, no provider SDKs. |
 | `no-restricted-layer-imports` | apps/api + apps/web layer folders | One-directional layer flow. API legacy map: controllers/managers/services/repositories/adapters. Canonical additions: `api/` must not import infrastructure/ or adapters/ directly; `dto/` must not import application/ or infrastructure/. Web map (Component → Hook → Service → Gateway) untouched. |
 | `no-inline-domain-definitions` | Layer files (controllers, managers, services, repositories, gateways, components, ui + api/, application/, infrastructure/, adapters/) | Interfaces, type aliases, and enums live in definition homes (types/, interfaces/, enums/, constants/, dto/, schemas/, model/, domain/, config/). A single `*Props` interface stays allowed in TSX components. |
@@ -72,6 +72,9 @@ rules agree.
 - security/detect-object-injection OFF — near-100% false positives on typed code.
 - security/detect-non-literal-fs-filename OFF for the prompt loader only — paths come from a
   hardcoded candidate list, no user input.
+- security/detect-non-literal-fs-filename OFF for the local benchmark/calibration CLIs — dynamic
+  operator-supplied input/output paths are their explicit contract; these tools are not reachable
+  from HTTP, application services, or untrusted request data.
 - security/detect-non-literal-regexp OFF for architecture-plugin/shared/policy-utils.mjs only —
   the policy engine compiles regexes from the static pattern lists in
   package-boundaries.config.mjs, no user input.

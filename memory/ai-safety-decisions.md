@@ -24,13 +24,14 @@ Rule: [/rules/14-ai-safety.md](../rules/14-ai-safety.md). Privacy invariants:
 - Prompts stored as versioned .md files in apps/api/src/modules/ai/prompts (four templates:
   extraction, candidates, judge, translation), loaded by PromptTemplateRepository with
   placeholder validation ([TRAITS_JSON], [CANDIDATES_JSON], [RESULT_JSON], [LANGUAGE_CODE],
-  [TARGET_LANGUAGE_CODE], [APP_NAME], [MODEL_PROVIDER]).
-- Gemini model id comes exclusively from `GEMINI_MODEL` env — never hardcoded
+  [TARGET_LANGUAGE_CODE], [RESULT_COUNT], [REGION_HINT]).
+- Provider/model routes come exclusively from validated environment configuration
+  (`GEMINI_MODEL` remains the required default) — never hardcoded
   ([backend-stack.md](./backend-stack.md)).
 - Responses failing schema or safety checks are rejected (AI_RESPONSE_INVALID/UNSAFE); we do not
   silently "fix" unsafe model output beyond dropping offending candidates. Response schemas are
-  zod 4 strict schemas — unknown keys reject, promptVersion is the literal
-  `advanced-global-traits-v2`, and the forbidden-wording safety filter runs over every free-text
+  bounded zod 4 schemas, promptVersion is the literal `written-traits-v5`, and the
+  forbidden-wording safety filter runs over every free-text
   leaf (all trait values, summary entries, and candidate/judge/translation text fields).
 - **Language echo is asserted**: every prompt receives [LANGUAGE_CODE] (en|ar) and every response
   schema requires the languageCode echo; trait extraction additionally asserts the echoed
@@ -45,11 +46,9 @@ Rule: [/rules/14-ai-safety.md](../rules/14-ai-safety.md). Privacy invariants:
   promptVersion) from the original result; a changed/reordered name or any shape drift rejects
   the whole response (AI_RESPONSE_INVALID) and the client keeps showing the previous result. The
   model's output only survives in localized text positions.
-- **traitCount is model-reported display metadata**, bounded by schema (0..MAX_TRAIT_COUNT). The
-  server cannot recompute it because "unclear" values are localized per language — accepted
-  decision; it is copied from extraction and preserved verbatim through translation.
-- More than 5 candidates from the model: response rejected by schema (documented choice: strict
-  contract over silent capping at the generation step; the judge returns up to 5 final results,
-  schema-capped by MAX_FINAL_RESULTS).
+- **traitCount is backend-derived display metadata**: extraction recomputes populated taxonomy
+  fields after parsing, and translation preserves the canonical count.
+- More than 25 candidates is rejected by schema; final results are bounded by the user's shared
+  1–10 request count and re-ranked/filtered before display.
 - Results are playful public style matches — entertainment only; that framing is part of the
   product contract, not marketing copy.

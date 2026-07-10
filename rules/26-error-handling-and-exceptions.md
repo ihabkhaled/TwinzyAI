@@ -13,12 +13,14 @@ Defined once in `core/errors`. Every subclass is a real domain concept with a fi
 | Class | HTTP | Throw when |
 | --- | --- | --- |
 | `ValidationError` | 400 | Input/precondition fails beyond the schema (incl. missing consent) |
-| `UnauthorizedError` | 401 | Reserved — no identity exists today; binds if auth ever arrives ([06-security.md](./06-security.md)) |
-| `ForbiddenError` | 403 | Reserved — allowed-but-not-permitted, for future gated capabilities |
 | `NotFoundError` | 404 | A referenced resource/route does not resolve |
-| `ConflictError` | 409 | Duplicate / conflicting state |
 | `PayloadTooLargeError` | 413 | Upload exceeds `MAX_IMAGE_SIZE_BYTES` (distinct from generic validation — clients handle it differently) |
+| `TooManyRequestsError` | 429 | A bounded provider/rate-limit condition is exhausted |
 | `IntegrationError` | 502 | A wrapped external provider (Gemini, ClamAV) failed |
+
+Feature modules own additional status-specific subclasses only when a current scenario needs them
+(for example file-security 415/422/503). Do not pre-create reserved auth/conflict classes; create
+one with its first real caller.
 
 ```ts
 // core/errors/app-error.ts — the base. Never subclass inline elsewhere.
@@ -49,7 +51,7 @@ export abstract class AppError extends Error {
 | Layer | Throws | Never |
 | --- | --- | --- |
 | Controller | nothing — lets it bubble | `try/catch`, building error bodies |
-| Use case / service | `ValidationError`, `NotFoundError`, `ConflictError`, `PayloadTooLargeError` | swallowing errors; setting HTTP status |
+| Use case / service | The currently-owned `AppError` matching the failure | swallowing errors; setting HTTP status |
 | Domain | invariant `ValidationError`s | touching HTTP |
 | Adapter | `IntegrationError` wrapping a safe cause | leaking vendor error objects upward |
 

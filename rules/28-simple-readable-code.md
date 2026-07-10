@@ -38,7 +38,7 @@ Banned styles (reviewers block these):
 
 ## 3. What simple never removes
 
-Simplicity means **minimum safe code**, not minimum code. Never simplified away: image privacy + wipe-in-finally, consent-first upload validation, Zod validation, AI safety filters + forbidden-wording guards, error handling, typed config, log redaction, rate limits, tests, observability, accessibility, i18n/RTL, strict TS/ESLint, architecture boundaries, release gates.
+Simplicity means **minimum safe code**, not minimum code. Never simplified away: extraction-only image use + wipe-in-finally, text-only downstream AI, consent-first upload validation, Zod validation, AI safety filters + forbidden-wording guards, error handling, typed config, log redaction, rate limits, tests, observability, accessibility, i18n/RTL, strict TS/ESLint, architecture boundaries, release gates.
 
 ## 4. Review lens
 

@@ -37,9 +37,9 @@ core/errors (typed AppError subclasses + AppExceptionFilter + the stable ErrorCo
 messageKey catalog), core/validation, core/http, core/rate-limit, and bootstrap/ (Fastify app
 assembly, including create-test-app.ts for integration boots).
 
-Errors are typed AppError subclasses (ValidationError 400, UnauthorizedError 401,
-ForbiddenError 403, NotFoundError 404, ConflictError 409, PayloadTooLargeError 413,
-IntegrationError 502, plus file-security's UnsupportedImageTypeError 415, InvalidImageError 422,
+Errors are typed, currently-used AppError subclasses (ValidationError 400, NotFoundError 404,
+PayloadTooLargeError 413, TooManyRequestsError 429, IntegrationError 502, plus file-security's
+UnsupportedImageTypeError 415, InvalidImageError 422,
 InfectedFileError 422, VirusScanUnavailableError 503). Each carries a stable `errorCode` and a
 `messageKey` (errors.<feature>.<key>); the global filter (core/errors/app-exception.filter.ts)
 maps any throw to the sanitized envelope `{ statusCode, errorCode, message, messageKey }`.

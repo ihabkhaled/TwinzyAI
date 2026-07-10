@@ -23,4 +23,4 @@ Rules are canonical. Skills are procedures. If there is a conflict, rules win. I
 
 ## Hard lines
 
-No inline reusable declarations in layer files. Reuse before creating; no clever or speculative code. Never weaken: image privacy (no persistence, wipe-in-finally, never logged), consent-first upload validation, AI safety (Zod + forbidden-wording filtering on every provider output), no payments, no biometrics/face recognition, accessibility, i18n/RTL, strict TS/ESLint, tests. Never use eslint-disable/@ts-ignore. Never bypass hooks or gates (no --no-verify). All gates green before claiming done.
+No inline reusable declarations in layer files. Reuse before creating; no clever or speculative code. Never weaken: image privacy (only extraction receives the photo; downstream AI is text-only; no persistence; wipe-in-finally; never logged), consent-first upload validation, AI safety (Zod + forbidden-wording filtering on every provider output), no payments, no biometrics/face recognition, accessibility, i18n/RTL, strict TS/ESLint, tests. Never use eslint-disable/@ts-ignore. Never bypass hooks or gates (no --no-verify). All gates green before claiming done.

@@ -4,12 +4,11 @@
 
 These roles are **lenses on the specification**, not a substitute for it. The canonical sources, in precedence order:
 
-1. [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) — the hard rules. **Overrides everything else.**
-2. [/AGENTS.md](../AGENTS.md) — the canonical agent entry point (project purpose, stack, workflow).
-3. [/CLAUDE.md](../CLAUDE.md) — the compact mirror of the operating policy.
-4. [/context/architecture-map.md](../context/architecture-map.md) — the layered architecture, the single source of truth for where code lives.
-5. [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md) — the locked runtime, lint, test, and build toolchain.
-6. [/rules/README.md](../rules/README.md) — the full numbered rules pack (00–27).
+1. [/CLAUDE.md](../CLAUDE.md) — canonical governance and engineering operating policy; always wins.
+2. [/context/architecture-map.md](../context/architecture-map.md) + [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) — engineering canon beneath `CLAUDE.md`.
+3. [/rules/README.md](../rules/README.md) — full numbered engineering rules.
+4. [/AGENTS.md](../AGENTS.md) — compact agent bootstrap; never overrides the canon.
+5. [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md) — current runtime, lint, test, and build facts.
 
 > If a role file ever contradicts the rules pack or the architecture map, the canon wins. Fix the role file.
 
@@ -87,7 +86,7 @@ Never bypass hooks (`--no-verify`) and never weaken a gate to make it pass. A gr
 
 No role may relax these. Full text in [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md); the load-bearing summary:
 
-- **Strict types.** No `any`, no `eslint-disable`, no `@ts-ignore`, no `@ts-expect-error` (unless documented in [docs/package-decisions.md](../docs/package-decisions.md)), no `!` non-null assertion.
+- **Strict types.** No `any`, no inline ESLint suppression, no TypeScript suppression comments, and no `!` non-null assertion.
 - **No TypeScript `enum`; no magic values.** Domain values are `as const` objects + derived types + `*_VALUES` arrays in dedicated enum/constant files; compare against those members, never raw literals.
 - **No inline declarations** (types, interfaces, constants, DTOs, Zod schemas, request/response shapes, config maps) inside controllers, use-cases, services, repositories, guards, interceptors, pipes, or adapters. Extract to `model/`, `api/dto/`, `lib/`, or `packages/shared`.
 - **One-way layering.** Controller (thin, exactly one use-case delegation per handler) → Application (use-case orchestrates the workflow; service owns one focused capability) → Domain (pure) → Infrastructure/Adapters (leaves). Use-cases call services; services never call use-cases ([/rules/16-backend-architecture.md](../rules/16-backend-architecture.md), [/rules/17-manager-layer.md](../rules/17-manager-layer.md), [/rules/19-services-application-layer.md](../rules/19-services-application-layer.md)).

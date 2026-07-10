@@ -36,12 +36,12 @@ Start with [00-non-negotiable-rules.md](00-non-negotiable-rules.md); every other
 | [07-types-enums-constants.md](07-types-enums-constants.md)               | `as const` enums, types-only files, the shared constants catalogs.                                 |
 | [08-utils-helpers-mappers.md](08-utils-helpers-mappers.md)               | Utils vs helpers vs mappers vs schemas, and their 100% coverage bar.                               |
 | [09-library-wrapping.md](09-library-wrapping.md)                         | One owning wrapper per vendor package under `apps/web/src/packages/`.                               |
-| [10-eslint-typescript.md](10-eslint-typescript.md)                       | Flat-config layout, the custom `frontend-architecture` rules, strict TypeScript, tsgo.             |
+| [10-eslint-typescript.md](10-eslint-typescript.md)                       | Flat-config layout, custom architecture rules, strict TypeScript + E2E typecheck.                   |
 | [11-security.md](11-security.md)                                         | CSP nonces, static headers, error sanitization, dependency scanning policy.                        |
 | [12-performance.md](12-performance.md)                                   | Rendering discipline, memo boundaries, virtualization, bundle hygiene.                             |
 | [13-accessibility.md](13-accessibility.md)                               | Landmarks, keyboard support, axe-clean requirement, `LANDMARK_IDS`.                                |
 | [14-i18n-rtl.md](14-i18n-rtl.md)                                         | next-intl wrapper usage, en/ar catalogs, cookie locale, RTL via `dir`.                             |
-| [15-testing-and-coverage.md](15-testing-and-coverage.md)                 | Test pyramid, MSW, coverage thresholds, no `.only`/skips.                                          |
+| [15-testing-and-coverage.md](15-testing-and-coverage.md)                 | Test pyramid, boundary fakes, coverage thresholds, no `.only`/skips.                               |
 | [16-observability-analytics.md](16-observability-analytics.md)           | Logging through `appLogger`, event discipline, no raw `console`.                                   |
 | [17-configuration-environment.md](17-configuration-environment.md)       | `publicEnv`/`getServerEnv`, Zod-validated env, `.env.example` contract.                            |
 | [18-error-handling.md](18-error-handling.md)                             | `AppError`, `toAppError`, message-key mapping, error boundaries.                                   |

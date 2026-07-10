@@ -12,7 +12,7 @@ still apply.
 | --- | --------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------- |
 | 1   | Lint (zero warnings)                    | `npm run lint`                                        | CI, `.husky/pre-commit` (staged via lint-staged)         |
 | 2   | Formatting                              | `npm run format:check`                               | CI, `.husky/pre-commit` (staged)                         |
-| 3   | Typecheck (strict, tsgo + tsc)          | `npm run typecheck`                                  | CI, `.husky/pre-push`                                    |
+| 3   | Typecheck (strict TypeScript + E2E)     | `npm run typecheck`                                  | CI, `.husky/pre-push`                                    |
 | 4   | Unit + integration with coverage 95/100 | `npm run test:coverage`                              | CI, `.husky/pre-push`                                    |
 | 5   | Production build                        | `npm run build` (or `npm run build:web`)             | CI                                                       |
 | 6   | E2E                                     | `npm run test:e2e`                                   | CI (Playwright, `apps/web`)                              |
@@ -33,21 +33,16 @@ Any of the following is an automatic no-go — there is no severity triage on ga
   [vitest.config.ts](../../vitest.config.ts), one axe violation, or one Trivy finding at the enforced
   severity.
 - A `.only` or undocumented skipped test ([15-testing-and-coverage.md](15-testing-and-coverage.md)).
-- An `eslint-disable` without a matching exception document in [docs/exceptions/](../../docs/exceptions/).
+- Any inline ESLint or TypeScript suppression directive.
 - An unresolved item on the [docs/sdlc/release-checklist.md](../../docs/sdlc/release-checklist.md) or the
   release smoke test under [runbooks/](../../runbooks/README.md).
 
 ## Exception process
 
-Gates are bypassed only through the written exception process — never by editing thresholds, skipping
-hooks, or force-merging:
-
-1. Copy [docs/exceptions/exception-template.md](../../docs/exceptions/exception-template.md) into
-   `docs/exceptions/` with the finding, why it cannot be fixed now, scope, owner, and expiry date.
-2. Reference the exception file from the suppression site (e.g. the `eslint-disable` comment or the audit
-   note). Prefer fixing a transitive dependency with an `overrides` entry in
-   [package.json](../../package.json) over excepting it.
-3. Expired exceptions fail review — they MUST be renewed with a new justification or resolved.
+Inline suppression, skipped required tests, lowered thresholds, hook bypasses, and force-merges have
+no exception path. Repository-level vendor false-positive configuration or accepted third-party
+vulnerabilities still require a dated, owned decision record, compensating control, and security
+approval; they never authorize source suppression comments.
 
 ## Ownership
 

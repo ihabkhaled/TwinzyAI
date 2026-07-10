@@ -1,6 +1,6 @@
 # Skill: Fix ESLint and Typecheck Failures (Frontend)
 
-Lint runs with `--max-warnings=0` and typecheck runs `tsgo` (with `tsc` as the cross-check), so
+Lint runs with `--max-warnings=0` and typecheck runs strict `tsc --noEmit` for app and E2E, so
 "mostly green" does not exist. The prime directive: **fix violations by moving code to the layer the
 rule points at — never by disabling the rule.** An `eslint-disable` without a documented, approved
 waiver is itself a lint failure.
@@ -38,10 +38,9 @@ waiver is itself a lint failure.
 
 ## Triage protocol (typecheck)
 
-1. Run `npm run typecheck` (tsgo, `tsc --noEmit` for `apps/web`). Note which workspace/project
+1. Run `npm run typecheck`. Note which workspace/project
    failed; that tells you whether the error is app code, test code, or tooling config.
-2. If a tsgo message looks wrong or truncated, cross-check with the stock compiler
-   (`tsc --noEmit`). Same error in both means the code is wrong.
+2. Read the full compiler diagnostic and the owning contract before editing.
 3. Fix causes, not symptoms: no `any`, no `as` casts to silence a mismatch, no `!` assertions.
    Typical real fixes: narrow with `isDefined`, exhaust unions with `assertNever`, parse unknown
    data with `parseSchema`/`safeParseSchema` from `@/packages/zod` instead of asserting a shape, and
@@ -49,27 +48,22 @@ waiver is itself a lint failure.
 4. Errors in route files about href strings usually mean typedRoutes rejected a path — use
    `ROUTE_PATHS` (`apps/web/src/shared/constants/route-paths.constants.ts`) with `AppLink`.
 
-## When an exception is genuinely needed
+## Suppressions are not a fix
 
-Rare, and never for architecture rules in feature code. If a rule is truly wrong for a specific line
-(e.g. a vendor type hole inside a package wrapper):
-
-1. Record the waiver (rationale, scope, owner, expiry) and get it approved per the governance in the
-   root `CLAUDE.md` and [rules/frontend/00-non-negotiable-rules.md](../rules/frontend/00-non-negotiable-rules.md).
-2. Only then add the narrowest possible `// eslint-disable-next-line <rule> -- <approved-waiver-ref>`.
-3. Undocumented disables are rejected in review per
-   [rules/frontend/20-review-checklist.md](../rules/frontend/20-review-checklist.md).
+Inline ESLint and TypeScript suppressions are absolutely forbidden. If a rule appears wrong, prove
+the false positive with a minimal fixture, fix the owning rule/config with tests, or move the code
+to its correct boundary. Never add `eslint-disable`, `@ts-ignore`, `@ts-expect-error`, or a cast
+whose only purpose is silencing the checker.
 
 ## Done when
 
-`npm run lint` and `npm run typecheck` both exit 0 with no new disables, or every remaining disable
-points at an approved waiver.
+`npm run lint` and `npm run typecheck` both exit 0 with no suppression directives.
 
 ## Validation (gate)
 
 ```bash
-npm run lint                # ESLint flat config — 0 errors, 0 warnings, no undocumented disables
-npm run typecheck           # tsgo, strict — no `any`/casts/`!` to silence errors
+npm run lint                # ESLint flat config — 0 errors, 0 warnings, no suppression directives
+npm run typecheck           # strict app + E2E TypeScript
 npm run test:coverage       # Vitest — behavior still covered
 npm run build               # next build
 npm run quality:dead-code   # knip

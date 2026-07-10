@@ -2,7 +2,11 @@
 
 These documents are the permanent delivery baselines for the Twinzy repository. They define the standing rules that every request-specific feature folder under `docs/features/` must inherit and follow.
 
-They should be read as operating manuals, not short summaries. If a new recurring expectation appears in delivery, testing, release, security, QA, documentation, or support, it belongs in this folder and in the governance chain: [`CLAUDE.md`](../../CLAUDE.md) (compact mirror), [`AGENTS.md`](../../AGENTS.md) (canonical entry point), and the full rule bodies in [`rules/`](../../rules/README.md) — rules win all conflicts.
+They should be read as operating manuals, not short summaries. Root
+[`CLAUDE.md`](../../CLAUDE.md) is the canonical operating policy; the architecture map and
+[`rules/`](../../rules/README.md) are the engineering canon beneath it; [`AGENTS.md`](../../AGENTS.md)
+and other agent files are compact mirrors only. New recurring expectations update that chain in
+the same delivery stream.
 
 ## Contents
 

@@ -505,18 +505,17 @@
 
 ## L. Feature-discovered traps (temporary-shareable-results)
 
-### L1. Playwright route-mock of a cross-origin JSON XHR is flaky under WebKit
+### L1. Playwright route-mock of a cross-origin JSON XHR was flaky under WebKit
 
-- **Symptom:** the share-flow e2e passes on the Chromium engines (chromium + mobile-chromium, 6
-  passing) but is unreliable under WebKit when reusing the dev server, so it is documented-skipped
-  on WebKit (3 webkit-skipped).
-- **Cause:** the share page reads its record via a cross-origin JSON `XHR`; Playwright's `route`-mock
-  of that request is flaky under WebKit in reuse-mode. The analyze flow is immune because it uses a
-  fetch/SSE path that avoids the mocked cross-origin XHR.
-- **Fix:** keep the WebKit share e2e skipped and documented as a HARNESS limitation, not a product
-  gap — the share logic is fully covered by 264 web-unit + 43 backend integration tests. Do not
-  "fix" it by loosening the mock or weakening an assertion; re-enable only if WebKit route-mocking of
-  cross-origin XHR becomes reliable.
+- **Symptom:** the share-flow e2e passed on Chromium but hung under WebKit when the mocked API
+  request crossed origins.
+- **Cause:** the share page formerly read through a cross-origin JSON request; WebKit route
+  interception was unreliable in reuse-mode.
+- **Fix (2026-07-10):** the E2E server injects its own origin as
+  `NEXT_PUBLIC_API_BASE_URL`, so every mocked backend request is same-origin. No test carries a
+  WebKit-specific skip. The required `test:e2e`/CI matrix is Chromium + mobile Chromium + a11y;
+  the full mobile-WebKit project remains an opt-in `test:e2e:webkit` harness because the Windows
+  runner can hang at navigation. Do not weaken Chromium assertions to mask that tooling limitation.
 
 ### L2. The in-memory share cache is single-instance and clears on restart
 
@@ -526,10 +525,33 @@
   there is no shared store, by design (no Redis infra today).
 - **Fix:** this is expected operational behavior for the single-instance deployment, not a bug — the
   TTL is short and the limitation is documented (README, `docs/privacy-and-data-retention.md`,
-  `docs/architecture.md`). For multi-replica, implement the Redis/Valkey adapter behind the same port
-  (select via `SHARE_RESULT_CACHE_DRIVER`) or use sticky sessions. Never add a database (privacy
-  invariant) to "fix" this.
+  `docs/architecture.md`). For multi-replica, implement/test the Redis/Valkey adapter behind the
+  same port and only then add driver selection, or use sticky sessions. Never add a database.
 
 **Related:** [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) ·
 [backend-stack.md](./backend-stack.md) · [testing-strategy.md](./testing-strategy.md) ·
 [ai-context-map.md](./ai-context-map.md)
+
+---
+
+## M. Feature-discovered traps (simple-readable-code implementation)
+
+### M1. React Query devtools creates exactly 16 px of mobile overflow
+
+- **Symptom:** `mobile-theme.spec.ts` fails only at 320 px with
+  `documentElement.scrollWidth - clientWidth === 16`; 375 px and the product layout look correct.
+- **Cause:** the local React Query devtools fixed launcher is mounted because Playwright reused a
+  server that was not started with `NEXT_PUBLIC_APP_ENV=test`.
+- **Fix:** Playwright starts the CI web server itself (`reuseExistingServer: false` in CI) and passes
+  the test public environment, which unmounts devtools. Do not hide product overflow globally or
+  loosen the 320 px assertion.
+
+### M2. Policy text can drift from the provider-call modality
+
+- **Symptom:** rules say "text-only after extraction" while generation/judging call
+  `generateFromImageStream`.
+- **Cause:** a product pivot changed runtime and one governance file without keeping all canonical
+  owners aligned.
+- **Fix:** `AI_IMAGE_STEPS` contains extraction only; generation/judge input types have no image;
+  `architecture/application-layer-boundaries` rejects image-provider calls outside
+  `trait-extraction.service.ts`; pipeline tests assert one image call followed by text calls.

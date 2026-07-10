@@ -11,7 +11,7 @@ The four prompts differ sharply in difficulty and risk (see `docs/features/multi
 ```
 Step service ──(AI_PROVIDER_ADAPTER port)──▶ AiRouterService
                                                │ resolves the step's route chain (config)
-                                               │ filters: provider enabled + vision-capable (image steps)
+                                               │ filters: provider enabled + vision-capable (extraction only)
                                                │ walks entries across providers on recoverable failures
                                                │ fires the sampled shadow run after primary success
                                                ▼
@@ -23,19 +23,19 @@ Step service ──(AI_PROVIDER_ADAPTER port)──▶ AiRouterService
 
 - **Route chains**: `AI_ROUTE_<STEP>` = comma-separated `provider:model` tokens. A bare model id means `gemini:<model>` (legacy compatible). An explicit route **replaces** the step's `GEMINI_*` chain; empty falls back to the `GEMINI_MODEL_<STEP>`/global chain mapped to gemini entries.
 - **Enablement**: a provider is enabled iff its API key env var is non-empty (`<PROVIDER>_API_KEY`). Remove the key to disable — that is the rollback lever.
-- **Fail-closed vision rule**: photo-carrying steps (extraction/generation/judge) dispatch only to gemini models (multimodal incumbents) or entries explicitly listed in `AI_VISION_MODELS`. A photo can never reach a provider the operator did not consciously allow. Check the provider's image data-use policy before declaring one (research doc: Kimi trains on API images — never declare it; OpenAI/Anthropic refuse photo→name tasks anyway).
+- **Fail-closed image rule**: extraction is the only photo-carrying step and always dispatches through Gemini. Generation, judging, translation, shadow calls, sharing, and display are text-only by contract. Other providers cannot be configured to receive a photo.
 - **Fallback semantics**: a hop advances on `AI_RATE_LIMITED`, `AI_PROVIDER_UNAVAILABLE`, `AI_TIMEOUT`, `AI_RESPONSE_INVALID` (schema-rejected content). Client cancellations and unexpected errors propagate immediately. Chain exhaustion → 429 if any hop was rate-limited, else 502 — identical envelopes to today.
 - **Boot validation (fail fast)**: route parsing errors and an explicit route with zero usable entries crash the boot with a readable message. Implicit/legacy routes with no key only warn (CI and keyless dev boots stay green).
 - **Observability**: every successful serve logs `Step <step> served by <provider>:<model> …`; every failed hop logs the entry and the privacy-safe reason (field paths only, never content).
 
 ## Shadow mode (metrics-only)
 
-`AI_SHADOW_ENABLED=true` + `AI_SHADOW_SAMPLE_RATE=0.05` + `AI_SHADOW_ROUTE_<STEP>=provider:model` runs a sampled background copy of the step call on the shadow entry **after** the primary result was produced. Shadow output is never shown, never affects the result, failures are swallowed, and the run is bounded by `AI_SHADOW_TIMEOUT_MS`. Images are withheld unless `AI_SHADOW_ALLOW_IMAGE=true` **and** the entry is declared in `AI_VISION_MODELS`. The outcome is one log line: `shadow step=… route=… ms=… chars=… schemaOk=…` — grep these to compare a candidate provider against production traffic before promoting it into a real route.
+`AI_SHADOW_ENABLED=true` + `AI_SHADOW_SAMPLE_RATE=0.05` + `AI_SHADOW_ROUTE_<STEP>=provider:model` runs a sampled background copy of a **text-only** step after the primary result. Shadow output is never shown, never affects the result, failures are swallowed, and the run is bounded by `AI_SHADOW_TIMEOUT_MS`. Extraction images are never shadowed. The outcome is one metadata-only log line: `shadow step=… route=… ms=… chars=… schemaOk=…`.
 
 ## How to add a provider
 
 1. If it exposes an OpenAI-compatible chat-completions endpoint: add its id to `AiProvider` + env keys/base URL in `apps/api/src/config/ai-provider.constants.ts`, extend the env schema, done — the shared adapter covers it. Otherwise write a new adapter in `modules/ai/adapters/` (SDK/HTTP confined there) and register it in `ProviderRegistryService`.
-2. Document its image data-use policy; only then consider `AI_VISION_MODELS`.
+2. The provider is eligible only for text-only generation, judging, translation, and shadow routes; extraction remains Gemini-only.
 3. Add its key to the deployment env; put it in a shadow route first; graduate to a fallback, then primary, based on the shadow logs/benchmark.
 
 ## Rollout / rollback
@@ -44,4 +44,4 @@ Ship dark (no non-Gemini keys set) → shadow a candidate on one step at a low s
 
 ## Invariants that never change
 
-Every provider's output passes the same Zod schemas and safety filter; the image is never persisted or logged; provider keys live only in backend env; translation and any text-only step never receive the image; no model or provider id is hardcoded in code.
+Every provider's output passes the same Zod schemas and safety filter; the image is never persisted or logged; only extraction may receive it; generation, judging, translation, sharing, and display are text-only; provider keys live only in backend env; no model or provider id is hardcoded in code.

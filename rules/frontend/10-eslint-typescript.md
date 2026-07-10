@@ -71,15 +71,12 @@ When a view must map a list or hold body variables it becomes a container (e.g.
 `noPropertyAccessFromIndexSignature`, `noFallthroughCasesInSwitch`, `noImplicitReturns`,
 `noUnusedLocals`, `noUnusedParameters`, `useUnknownInCatchVariables`, `verbatimModuleSyntax`,
 `isolatedModules`. None of these flags may be weakened; scoped configs extend the base rather than fork
-it. Path aliases (`@/*` and the `@modules`/`@shared`/`@packages` roots) are the only import roots — no
-relative walks across top-level areas.
+it. The web workspace uses the `@/*` path alias; no relative walks across top-level areas.
 
-## Typecheck via tsgo
+## Typecheck
 
-`npm run typecheck` runs across the workspaces; the monorepo ships **tsgo**
-(`@typescript/native-preview`) at the root for a dramatically faster check than `tsc`, and `apps/web`
-runs strict `tsc --noEmit -p tsconfig.json`. Typecheck gates [.husky/pre-push](../../.husky/). Both
-tsgo and `tsc` MUST be clean; there is no "warnings allowed" mode.
+`npm run typecheck` builds shared, then runs strict `tsc --noEmit` for the shared, API, web, and web
+E2E projects. Typecheck gates [.husky/pre-push](../../.husky/); there is no warnings-allowed mode.
 
 ## No inline suppression (absolute)
 

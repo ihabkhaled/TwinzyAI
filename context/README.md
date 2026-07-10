@@ -5,9 +5,9 @@ which knowledge file to open for a given task.
 
 ## Read order
 
-1. [/CLAUDE.md](../CLAUDE.md) — the compact non-negotiables (canonical entry: [/AGENTS.md](../AGENTS.md)).
+1. [/CLAUDE.md](../CLAUDE.md) — canonical governance and engineering operating policy.
 2. [architecture-map.md](./architecture-map.md) — the single source of truth for backend structure.
-3. [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) — the rules that win all conflicts.
+3. [/rules/00-non-negotiable-rules.md](../rules/00-non-negotiable-rules.md) — canonical engineering rules beneath `CLAUDE.md`.
 4. [codebase-navigation.md](./codebase-navigation.md) — task router, "where does X live", and the current→target migration map.
 5. [stack-and-toolchain.md](./stack-and-toolchain.md) — runtime, libraries, lint/test/gates.
 

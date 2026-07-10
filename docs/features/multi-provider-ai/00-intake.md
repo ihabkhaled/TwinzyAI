@@ -1,5 +1,9 @@
 # 00 - Intake: Multi-Provider AI Routing
 
+> Current-policy note (2026-07-10): only extraction is an image step. Generation, judging, and
+> translation remain independently routable but are text-only. Historical wording below records
+> the design context at the time and must not override current `CLAUDE.md`/rules.
+
 - Request ID: `multi-provider-ai`
 - Title: Provider-agnostic AI routing — best provider/model per pipeline step, with fallbacks, shadow mode, and benchmark-based selection
 - Type: feature (architecture evolution)

@@ -1,95 +1,47 @@
-# Skill: Add a Form
+# Skill: Add a Frontend Form
 
-Use this skill for any user-input form. Twinzy's **photo-upload + consent** flow is the end-to-end
-reference — follow its files layer by layer. Doctrine:
-[rules/frontend/02-components-and-containers.md](../rules/frontend/02-components-and-containers.md),
-[rules/frontend/03-hooks.md](../rules/frontend/03-hooks.md). (There is no login form — Twinzy has no
-identity or accounts.)
+> Intent: add a small accessible form using the current TwinzyAI stack. There is no
+> `react-hook-form` package or forms wrapper; use native React controls and Zod at the owning
+> boundary. Rules 02–04, 12–13, 28–30 apply.
 
-## Reference implementation (game upload form)
+## When to use
 
-| Layer        | File                                                                          |
-| ------------ | ----------------------------------------------------------------------------- |
-| Schema       | `apps/web/src/modules/game/schemas/upload-form.schema.ts` (`uploadFormSchema`)|
-| Message keys | `apps/web/src/modules/game/constants/game-message-keys.constants.ts`          |
-| Field ids    | `apps/web/src/modules/game/constants/game.constants.ts` (`UPLOAD_FIELD_IDS`)  |
-| Mutation     | `apps/web/src/modules/game/queries/game.mutations.ts` (`useSubmitPhotoMutation`) |
-| Hook         | `apps/web/src/modules/game/hooks/use-upload-form.hook.ts` (`useUploadForm`)   |
-| Component    | `apps/web/src/modules/game/components/upload-form.component.tsx` (JSX-only)    |
-| Container    | `apps/web/src/modules/game/containers/upload-form.container.tsx`               |
+Use for a real user-input workflow approved in product requirements. Do not use for a single button,
+display-only filter, speculative account/auth flow, or payment form (payments are forbidden).
 
 ## Steps
 
-1. **Schema with i18n-key messages.** Define the form schema in
-   `apps/web/src/modules/<feature>/schemas/` using `z` from `@/packages/zod`. Every error message is
-   an i18n KEY from the module's `*-message-keys.constants.ts`, never copy:
+1. Read the feature hook/component/gateway and its tests; search for an existing form owner first.
+2. Put field ids, limits, and message keys in the feature `model/`; put reusable validation in the
+   feature schema owner or `@twinzy/shared` when the API shares it.
+3. Keep the component pure JSX: labels, descriptions, `aria-describedby`, invalid state, and ready
+   handlers arrive as props.
+4. Put state, events, and cleanup in one focused hook. Prefer native input/select/checkbox behavior;
+   do not add a dependency for capabilities React/browser already provide.
+5. Send data through Service → Gateway. The backend remains the validation source of truth.
+6. Add localized English/Arabic copy, keyboard/focus checks, RTL-safe layout, loading, error, and
+   disabled states.
+7. Write behavior-first unit tests and a Playwright journey when the workflow is user-visible.
 
-   ```ts
-   consentGiven: z.literal(true, GAME_VALIDATION_MESSAGE_KEYS.consentRequired),
-   photo: z
-     .instanceof(File, GAME_VALIDATION_MESSAGE_KEYS.photoRequired)
-     .refine((file) => file.size <= MAX_UPLOAD_BYTES, GAME_VALIDATION_MESSAGE_KEYS.photoTooLarge),
-   ```
+## Checklist
 
-   Add the corresponding keys to both catalogs per
-   [skills/add-i18n-message-key.md](./add-i18n-message-key.md). Numeric limits (`MAX_UPLOAD_BYTES`)
-   live in `constants/`, not inline. Client-side checks are UX only — the backend is the
-   authoritative validator for size/MIME/magic-bytes/consent.
+- [ ] Existing owner reused; no inline types/constants/schema
+- [ ] Native semantic controls, labels, descriptions, keyboard/focus behavior
+- [ ] Zod boundary + backend validation; no unsafe casts
+- [ ] i18n/RTL/a11y and mobile 320 px behavior verified
+- [ ] No image persisted; object URLs revoked when uploads are involved
 
-2. **Wire react-hook-form through the wrapper.** In the hook, call `useAppZodForm` from
-   `@/packages/forms` with `schema` and `defaultValues` — never raw `useForm` or ad-hoc validate
-   callbacks (the wrapper fixes `mode: 'onSubmit'`, `reValidateMode: 'onChange'`).
-3. **Create the submit mutation** in `queries/` via `useAppMutation` from `@/packages/query`,
-   delegating to a React-free service ([skills/create-mutation.md](./create-mutation.md)).
-   `useSubmitPhotoMutation` is the minimal example.
-4. **Build field view models in the hook.** The hook (`use-upload-form.hook.ts`) returns one
-   fully-translated view model: per-field `{ fieldId, label, error, testId, inputProps }` plus
-   `title`, `submitLabel`, `isSubmitting`, `formError`, and `onSubmit`. Key rules:
-   - Field error keys come off `form.formState.errors.<field>?.message` and are translated with
-     `t(...)` before display.
-   - `inputProps` is `form.register('<field>')` (`AppRegisteredFieldProps`); the file input is
-     wired with `setValue` on `change` since files are not native RHF values.
-   - On valid submit: `await mutateAsync(values)`, `showToast` with translated copy, then navigate
-     to the result view via `@/packages/navigation`. Drop the `File` reference afterward — never
-     stash the image in a store or cache.
-   - `formError` is the translated generic error when `mutation.isError` — never the raw error
-     message (error-sanitization doctrine,
-     [rules/frontend/18-error-handling.md](../rules/frontend/18-error-handling.md)).
-5. **Render through `FormField` for accessibility.** The JSX-only component wraps each control in
-   `FormField` (`apps/web/src/shared/components/forms/form-field.component.tsx`), which binds `Label`
-   via `htmlFor={fieldId}` and renders the error in a `role="alert"` region whose id is the field id
-   suffixed with `-error`. The control MUST carry `aria-invalid` and the matching
-   `aria-describedby`, plus `data-testid` from `TEST_IDS`. The `<form>` uses `noValidate` (the schema
-   is the validator) and the submit `Button` is `disabled={isSubmitting}`. The consent control is a
-   real, labeled checkbox — not a styled `div`.
-6. **Container connects hook to component.** A `'use client'` file with a
-   `// client-boundary-reason:` comment that calls the hook and passes the view model — nothing else.
-7. **Test both paths.**
-   - Unit tests: schema table-driven cases (valid, each invalid variant → expected key) at 100%
-     coverage ([skills/write-unit-tests-frontend.md](./write-unit-tests-frontend.md)).
-   - Integration: `renderWithProviders`, submit with consent unchecked / no file → assert the
-     translated validation copy in the alert regions; submit valid → assert the success flow. Drive
-     the negative server path with a rejection sentinel in the mock fixtures
-     (`apps/web/src/modules/game/api/game.mock.ts`) so the failure branch is deterministic — assert
-     the generic form error appears. See
-     [skills/write-integration-tests-frontend.md](./write-integration-tests-frontend.md).
-   - E2e: happy submit + rejected-submit negative path per
-     [skills/write-e2e-tests-frontend.md](./write-e2e-tests-frontend.md).
-
-## Definition of done
-
-- Schema keys translated in the hook; component JSX-only; `FormField` wiring intact; consent is a
-  labeled checkbox.
-- Negative-path test exists at integration and e2e level; the image is never persisted client-side.
-
-## Validation (gate)
+## Quality gates
 
 ```bash
-npm run lint                # ESLint flat config — 0 errors, 0 warnings
-npm run typecheck           # tsgo, strict
-npm run test:coverage       # Vitest — 95% global, 100% for the schema
-npm run build               # next build
-npm run quality:dead-code   # knip — no orphaned exports
-npm run quality:circular    # madge — no import cycles
-npm run test:e2e            # upload happy + rejected paths (+ test:a11y for the form)
+npm run lint
+npm run typecheck
+npm run test:unit
+npm run test:coverage
+npm run test:e2e:ci
+npm run build
+npm run security:scan
 ```
+
+Related: [create-hook.md](./create-hook.md) · [create-component.md](./create-component.md) ·
+[write-accessibility-tests.md](./write-accessibility-tests.md)
