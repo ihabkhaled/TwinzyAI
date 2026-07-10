@@ -9,7 +9,6 @@ import {
 } from '@twinzy/shared';
 
 import { routeEntryKey } from '../config/ai-route.types';
-import type { AppConfigService } from '../config/app-config.service';
 import { AI_IMAGE_STEPS, GeminiStep, type GeminiStepValue } from '../config/gemini-step.constants';
 import type { ProviderRegistryService } from '../modules/ai/adapters/provider-registry.service';
 import type { PromptTemplateRepository } from '../modules/ai/infrastructure/prompt-template.repository';
@@ -30,7 +29,6 @@ import type {
 
 /** Everything the real-mode runner borrows from the booted application. */
 export interface RealBenchmarkDeps {
-  readonly config: AppConfigService;
   readonly registry: ProviderRegistryService;
   readonly promptTemplate: PromptTemplateRepository;
 }
@@ -44,7 +42,7 @@ const REAL_RESULT_COUNT = 5;
 
 const REAL_CAVEATS = [
   'REAL MODE: every sample is a live, billed provider call.',
-  'Image steps measure only entries that are enabled AND vision-declared; text steps measure enabled entries.',
+  'Extraction measures enabled vision-declared entries; all downstream steps are text-only.',
   'Generation/judge inputs reuse the first schema-valid upstream output, so their scores share that dependency.',
 ] as const;
 
@@ -160,6 +158,26 @@ const runRealEntry = async (
   return samples;
 };
 
+const skipReasonForStep = (
+  step: GeminiStepValue,
+  image: AiImageInput | undefined,
+  state: RealRunState,
+): string | undefined => {
+  if (step === GeminiStep.Extraction && image === undefined) {
+    return 'image step needs --photo=<path>';
+  }
+  if (step === GeminiStep.Generation && state.extraction === undefined) {
+    return 'generation needs a valid extraction';
+  }
+  if (
+    step === GeminiStep.Judge &&
+    (state.extraction === undefined || state.generation === undefined)
+  ) {
+    return 'judge needs valid extraction + generation';
+  }
+  return undefined;
+};
+
 const runRealStep = async (
   deps: RealBenchmarkDeps,
   step: GeminiStepValue,
@@ -168,12 +186,19 @@ const runRealStep = async (
   state: RealRunState,
 ): Promise<StepBenchmarkResult> => {
   const carriesImage = (AI_IMAGE_STEPS as readonly GeminiStepValue[]).includes(step);
-  if (carriesImage && image === undefined) {
-    return { step, entries: [], notes: ['skipped: image step needs --photo=<path>'] };
+  const skipReason = skipReasonForStep(step, image, state);
+  if (skipReason !== undefined) {
+    return { step, entries: [], notes: [`skipped: ${skipReason}`] };
   }
   const entries = deps.registry.usableEntriesFor(step, carriesImage);
   if (entries.length === 0) {
-    return { step, entries: [], notes: ['skipped: no enabled (and vision-capable) entries'] };
+    return {
+      step,
+      entries: [],
+      notes: [
+        carriesImage ? 'skipped: no enabled vision-capable entries' : 'skipped: no enabled entries',
+      ],
+    };
   }
   const notes: string[] = [];
   const measured = [];
@@ -199,14 +224,22 @@ export const runRealBenchmark = async (
   startedAtIso: string,
   photoPath?: string,
 ): Promise<BenchmarkReport> => {
-  const image =
-    photoPath === undefined
-      ? undefined
-      : buildAiImageInput({ buffer: readFileSync(photoPath), mimetype: 'image/jpeg' });
+  let image: AiImageInput | undefined;
+  if (photoPath !== undefined) {
+    const buffer = readFileSync(photoPath);
+    try {
+      image = buildAiImageInput({ buffer, mimetype: 'image/jpeg' });
+    } finally {
+      buffer.fill(0);
+    }
+  }
   const state: RealRunState = {};
   const steps: StepBenchmarkResult[] = [];
   for (const step of Object.values(GeminiStep)) {
     steps.push(await runRealStep(deps, step, image, samplesPerEntry, state));
+    if (step === GeminiStep.Extraction) {
+      image = undefined;
+    }
   }
   return { mode: 'real', startedAtIso, samplesPerEntry, steps, caveats: [...REAL_CAVEATS] };
 };

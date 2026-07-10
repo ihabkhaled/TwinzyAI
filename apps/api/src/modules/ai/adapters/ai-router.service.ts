@@ -110,11 +110,7 @@ export class AiRouterService implements AiProviderAdapter {
     carriesImage: boolean,
   ): Promise<string> {
     const step = options?.step;
-    const entries = this.registry.usableEntriesFor(step, carriesImage);
-    if (entries.length === 0) {
-      throw this.integrationError(ErrorCode.AiProviderUnavailable);
-    }
-
+    const entries = this.requireEntries(step, carriesImage);
     let sawRateLimit = false;
     for (const entry of entries) {
       options?.signal?.throwIfAborted();
@@ -124,22 +120,53 @@ export class AiRouterService implements AiProviderAdapter {
       }
       try {
         const text = await dispatch(adapter, [entry.model]);
-        this.shadow.maybeRun(step, carriesImage, dispatch, options);
+        this.runTextShadow(carriesImage, step, dispatch, options);
         return text;
       } catch (error: unknown) {
-        sawRateLimit ||= error instanceof TooManyRequestsError;
-        if (!this.isRouteHoppable(error, options)) {
-          throw error;
-        }
-        this.logger.warn(
-          `Route entry ${routeEntryKey(entry)} failed for step ${step ?? 'default'}; trying next entry`,
-        );
+        sawRateLimit ||= this.handleRouteError(error, options, routeEntryKey(entry), step);
       }
     }
 
     throw sawRateLimit
       ? buildTooManyRequestsError(ErrorCode.AiRateLimited, AI_RATE_LIMITED_MESSAGE)
       : this.integrationError(ErrorCode.AiProviderUnavailable);
+  }
+
+  private requireEntries(
+    step: AiStreamOptions['step'],
+    carriesImage: boolean,
+  ): ReturnType<ProviderRegistryService['usableEntriesFor']> {
+    const entries = this.registry.usableEntriesFor(step, carriesImage);
+    if (entries.length === 0) {
+      throw this.integrationError(ErrorCode.AiProviderUnavailable);
+    }
+    return entries;
+  }
+
+  private runTextShadow(
+    carriesImage: boolean,
+    step: AiStreamOptions['step'],
+    dispatch: RouteDispatch,
+    options: AiStreamOptions | undefined,
+  ): void {
+    if (!carriesImage) {
+      this.shadow.maybeRun(step, dispatch, options);
+    }
+  }
+
+  private handleRouteError(
+    error: unknown,
+    options: AiStreamOptions | undefined,
+    entryKey: string,
+    step: AiStreamOptions['step'],
+  ): boolean {
+    if (!this.isRouteHoppable(error, options)) {
+      throw error;
+    }
+    this.logger.warn(
+      `Route entry ${entryKey} failed for step ${step ?? 'default'}; trying next entry`,
+    );
+    return error instanceof TooManyRequestsError;
   }
 
   /**

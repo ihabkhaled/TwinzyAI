@@ -2,14 +2,6 @@
  * Phrases that must never appear in any AI output or user-facing result.
  * The backend rejects/sanitizes responses containing them; frontend tests
  * assert they never render. Single source of truth for both sides.
- *
- * Post-pivot semantics (visual-similarity mode, owner-approved): graded
- * resemblance language ("closely resembles", "strong visual match", lookalike
- * phrasing) is ALLOWED — it is the product. What stays banned:
- * - identity ASSERTIONS about who the user is ("you are …", "we identified"),
- * - clinical biometric-identification phrasing ("face recognition",
- *   "identity match", "biometric") — the product voice is playful resemblance,
- *   never surveillance vocabulary.
  */
 export const FORBIDDEN_RESULT_PHRASES = [
   'face recognition',
@@ -17,10 +9,34 @@ export const FORBIDDEN_RESULT_PHRASES = [
   'identity match',
   'identity matching',
   'biometric',
+  'exact lookalike',
+  'exact-lookalike',
+  'exact look-alike',
+  'looks exactly like',
+  'you look exactly',
+  'same face',
+  'identical face',
+  'visual twin',
   'you are ',
   'the person is ',
   'recognized you',
   'we identified',
+  'identified as',
+  'تعرّف على الوجه',
+  'التعرف على الوجه',
+  'مطابقة الهوية',
+  'مطابقة هوية',
+  'بيومتري',
+  'بيومترية',
+  'شبيه مطابق',
+  'يشبه تمامًا',
+  'نفس الوجه',
+  'أنت هو ',
+  'أنت هي ',
+  'الشخص هو ',
+  'تم التعرف عليك',
+  'تم التعرّف عليك',
+  'حددنا هويتك',
 ] as const;
 
 /**
@@ -30,8 +46,34 @@ export const FORBIDDEN_SENSITIVE_TOPICS = [
   'ethnicity',
   'religion',
   'health condition',
+  'medical condition',
+  'diagnosis',
   'attractiveness rating',
+  'attractive',
+  'beautiful',
+  'handsome',
   'income',
+  'wealthy',
   'nationality guess',
   'personality diagnosis',
+  'sexual orientation',
+  'sexuality',
+  'religious belief',
+  'years old',
+  'age estimate',
+  'الأصل العرقي',
+  'العرق',
+  'الدين',
+  'المعتقد الديني',
+  'الحالة الصحية',
+  'تشخيص',
+  'تقييم الجاذبية',
+  'جذاب',
+  'جميل',
+  'وسيم',
+  'الدخل',
+  'جنسيتك',
+  'تشخيص الشخصية',
+  'شخصيته انطوائية',
+  'الميول الجنسية',
 ] as const;

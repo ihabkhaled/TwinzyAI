@@ -5,7 +5,7 @@ import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 
-import { FinalGameResultSchema, RESULT_DISCLAIMER } from '@twinzy/shared';
+import { FinalGameResultSchema, GAME_ANALYZE_PATH, RESULT_DISCLAIMER } from '@twinzy/shared';
 
 import { AppModule } from '../app.module';
 import { createTestApp } from '../bootstrap/create-test-app';
@@ -21,8 +21,6 @@ import {
 } from './fixtures/fake-ai-adapter';
 import { buildJpegBuffer, buildPngBuffer } from './fixtures/image-fixtures';
 import { buildCleanClamAvStub } from './fixtures/stubs';
-
-const ANALYZE_PATH = '/api/v1/game/analyze';
 
 describe('POST /api/v1/game/analyze (integration)', () => {
   let app: INestApplication;
@@ -44,6 +42,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
   afterEach(() => {
     adapter.imageCalls.length = 0;
     adapter.textCalls.length = 0;
+    adapter.textSteps.length = 0;
   });
 
   afterAll(async () => {
@@ -54,11 +53,11 @@ describe('POST /api/v1/game/analyze (integration)', () => {
 
   it('returns a schema-valid final result on the happy path', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .attach('image', buildJpegBuffer(), { filename: 'photo.jpg', contentType: 'image/jpeg' })
       .expect(201);
@@ -66,13 +65,15 @@ describe('POST /api/v1/game/analyze (integration)', () => {
     const parsed = FinalGameResultSchema.safeParse(response.body);
     expect(parsed.success).toBe(true);
     expect((response.body as { disclaimer: string }).disclaimer).toBe(RESULT_DISCLAIMER);
-    expect(adapter.imageCalls).toHaveLength(3);
-    expect(adapter.textCalls).toHaveLength(0);
+    expect(adapter.imageCalls).toHaveLength(1);
+    expect(adapter.imageCalls[0]?.step).toBe('extraction');
+    expect(adapter.textCalls).toHaveLength(2);
+    expect(adapter.textSteps).toEqual(['generation', 'judge']);
   });
 
   it('rejects a request without consent', async () => {
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .attach('image', buildJpegBuffer(), { filename: 'photo.jpg', contentType: 'image/jpeg' })
       .expect(400);
 
@@ -82,7 +83,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
 
   it('rejects a request without a file', async () => {
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .expect(400);
 
@@ -91,7 +92,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
 
   it('rejects a disallowed file type', async () => {
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .attach('image', Buffer.from('GIF89a-not-really'), {
         filename: 'photo.gif',
@@ -104,7 +105,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
 
   it('rejects a renamed file whose bytes do not match the declared type', async () => {
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .attach('image', buildPngBuffer(), { filename: 'photo.jpg', contentType: 'image/jpeg' })
       .expect(422);
@@ -114,7 +115,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
 
   it('rejects a second file on the upload field', async () => {
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .attach('image', buildJpegBuffer(), { filename: 'a.jpg', contentType: 'image/jpeg' })
       .attach('image', buildJpegBuffer(), { filename: 'b.jpg', contentType: 'image/jpeg' })
@@ -127,7 +128,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
     const oversizeBuffer = Buffer.alloc(UPLOAD_HARD_CAP_BYTES + 1024, 0x41);
 
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .attach('image', oversizeBuffer, { filename: 'huge.jpg', contentType: 'image/jpeg' })
       .expect(413);
@@ -141,7 +142,7 @@ describe('POST /api/v1/game/analyze (integration)', () => {
     adapter.queueImageResponse(new Error('raw provider stack trace with apiKey=abc123'));
 
     const response = await request(server())
-      .post(ANALYZE_PATH)
+      .post(GAME_ANALYZE_PATH)
       .field('consent', 'true')
       .attach('image', buildJpegBuffer(), { filename: 'photo.jpg', contentType: 'image/jpeg' })
       .expect(500);

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
+import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
 import { GameStreamEvent, GameStreamStage } from '@twinzy/shared';
 
 import { buildAiImageInput, TraitExtractionService } from '../../ai';
@@ -16,15 +17,9 @@ import { resolveRequestResultCount } from '../lib/request-result-count';
 import { StyleMatchService } from './style-match.service';
 
 /**
- * The streaming counterpart of AnalyzeGameUseCase (visual-similarity mode). It
- * runs the identical pipeline with the identical safety guarantees — the photo
- * is encoded once and provided to extraction, candidate generation, and
- * judging; the buffer is zero-filled in finally on success, failure, AND abort
- * — while reporting each milestone through the emitter as it happens: the
- * scanning/extraction stages, the trait count + compact summary, the candidate
- * names, and the final localized result. The HTTP layer turns those messages
- * into SSE frames, so the long multi-step call streams progress and never
- * idles into a timeout.
+ * Streaming counterpart of AnalyzeGameUseCase. The image is validated, sent
+ * only to extraction, and wiped before text-only candidate generation/judging.
+ * Progress is emitted as SSE-safe milestones throughout the remaining flow.
  */
 @Injectable()
 export class AnalyzeGameStreamUseCase {
@@ -46,41 +41,57 @@ export class AnalyzeGameStreamUseCase {
     emit({ event: GameStreamEvent.Accepted });
     emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Validating });
 
+    const extraction = await this.extractTraitsAndDestroyImage(
+      file,
+      isConsentGiven(body),
+      languageCode,
+      emit,
+      signal,
+    );
+    emit({
+      event: GameStreamEvent.Traits,
+      traitCount: extraction.traitCount,
+      compactTraitSummary: extraction.compactTraitSummary,
+    });
+
+    signal?.throwIfAborted();
+    const result = await this.styleMatch.matchFromTraits({
+      extraction,
+      languageCode,
+      resultCount,
+      progress: {
+        onStage: (stage) => {
+          emit({ event: GameStreamEvent.Stage, stage });
+        },
+        onCandidates: (names) => {
+          emit({ event: GameStreamEvent.Candidates, resultCount, names: [...names] });
+        },
+      },
+      signal,
+    });
+
+    emit({ event: GameStreamEvent.Result, result });
+  }
+
+  /** Bounds image lifetime to validation + extraction, including abort paths. */
+  private async extractTraitsAndDestroyImage(
+    file: UploadedImageFile | undefined,
+    consent: boolean,
+    languageCode: LanguageCodeValue,
+    emit: GameStreamEmitter,
+    signal?: AbortSignal,
+  ): Promise<TraitExtractionResponse> {
     try {
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Scanning });
-      const safeFile = await this.fileSecurity.assertSafeImage(file, isConsentGiven(body));
+      const safeFile = await this.fileSecurity.assertSafeImage(file, consent);
       signal?.throwIfAborted();
-      const image = buildAiImageInput(safeFile);
-
       emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.ExtractingTraits });
-      const extraction = await this.traitExtraction.extractTraits(image, languageCode, signal);
-      emit({
-        event: GameStreamEvent.Traits,
-        traitCount: extraction.traitCount,
-        compactTraitSummary: extraction.compactTraitSummary,
-      });
-
-      signal?.throwIfAborted();
-      const result = await this.styleMatch.matchFromTraits({
-        extraction,
-        image,
+      return await this.traitExtraction.extractTraits(
+        buildAiImageInput(safeFile),
         languageCode,
-        resultCount,
-        progress: {
-          onStage: (stage) => {
-            emit({ event: GameStreamEvent.Stage, stage });
-          },
-          onCandidates: (names) => {
-            emit({ event: GameStreamEvent.Candidates, resultCount, names: [...names] });
-          },
-        },
         signal,
-      });
-
-      emit({ event: GameStreamEvent.Result, result });
+      );
     } finally {
-      // The image lives exactly as long as the pipeline: zero-filled no matter
-      // what happened — success, failure, or cancellation mid-judge.
       this.cleanup.wipe(file);
     }
   }

@@ -7,6 +7,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import type { GameStreamMessage } from '@twinzy/shared';
 import {
+  GAME_ANALYZE_STREAM_PATH,
   GAME_CANCEL_PATH,
   GameStreamEvent,
   GameStreamMessageSchema,
@@ -27,7 +28,6 @@ import {
 import { buildJpegBuffer } from './fixtures/image-fixtures';
 import { buildCleanClamAvStub } from './fixtures/stubs';
 
-const STREAM_PATH = '/api/v1/game/analyze/stream';
 const TAB_ID = '111e4567-e89b-42d3-a456-426614174000';
 const REQUEST_ID = '222e4567-e89b-42d3-a456-426614174001';
 const STREAM_ID = '333e4567-e89b-42d3-a456-426614174002';
@@ -62,11 +62,11 @@ describe('streaming isolation + cancellation (integration)', () => {
 
   it('echoes the client tab/request ids and mints a streamId + status on every frame', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     const response = await request(server())
-      .post(STREAM_PATH)
+      .post(GAME_ANALYZE_STREAM_PATH)
       .field('consent', 'true')
       .set(STREAM_ID_HEADERS.tabId, TAB_ID)
       .set(STREAM_ID_HEADERS.requestId, REQUEST_ID)

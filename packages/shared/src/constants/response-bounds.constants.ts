@@ -73,6 +73,9 @@ export const MAX_HTTP_STATUS_CODE = 599;
 /** Maximum length of a machine-readable error code. */
 export const MAX_ERROR_CODE_LENGTH = 80;
 
+/** Maximum length of an i18n error message key (`errors.<feature>.<key>`). */
+export const MAX_ERROR_MESSAGE_KEY_LENGTH = 120;
+
 /** Maximum length of a user-facing error message. */
 export const MAX_ERROR_MESSAGE_LENGTH = 500;
 

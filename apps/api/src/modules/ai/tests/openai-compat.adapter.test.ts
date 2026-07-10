@@ -5,8 +5,12 @@ import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stu
 import { OpenAiCompatAdapter } from '../adapters/openai-compat.adapter';
 import type { AiImageInput } from '../model/gemini.types';
 
-const buildAdapter = (): OpenAiCompatAdapter =>
-  new OpenAiCompatAdapter('deepseek', buildConfigStub(), buildAppLoggerStub().logger);
+const buildAdapter = (aiMaxResponseBytes = 500_000): OpenAiCompatAdapter =>
+  new OpenAiCompatAdapter(
+    'deepseek',
+    buildConfigStub({ aiMaxResponseBytes }),
+    buildAppLoggerStub().logger,
+  );
 
 const okResponse = (content: string): Response =>
   Response.json({ choices: [{ message: { content } }] }, { status: 200 });
@@ -46,19 +50,15 @@ describe('OpenAiCompatAdapter', () => {
     expect(body.messages[0]?.content).toBe('the prompt');
   });
 
-  it('sends the photo as a data-URL image part on image calls', async () => {
-    const fetchMock = vi.fn(() => Promise.resolve(okResponse('{"ok":true}')));
+  it('fails closed before transport when an image call reaches a text-only provider', async () => {
+    const fetchMock = vi.fn();
     vi.stubGlobal('fetch', fetchMock);
 
-    await buildAdapter().generateFromImageStream('describe', image, { models: ['m'] });
+    await expect(
+      buildAdapter().generateFromImageStream('describe', image, { models: ['m'] }),
+    ).rejects.toMatchObject({ errorCode: ErrorCode.AiProviderUnavailable });
 
-    const { init } = lastFetchCall(fetchMock);
-    const body = JSON.parse(init.body as string) as {
-      messages: { content: { type: string; image_url?: { url: string } }[] }[];
-    };
-    const parts = body.messages[0]?.content ?? [];
-    expect(parts[0]).toEqual({ type: 'text', text: 'describe' });
-    expect(parts[1]?.image_url?.url).toBe('data:image/jpeg;base64,aW1n');
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it('maps HTTP 429 to the typed rate-limit error', async () => {
@@ -91,6 +91,17 @@ describe('OpenAiCompatAdapter', () => {
 
     await expect(
       buildAdapter().generateFromTextStream('p', { models: ['m'] }),
+    ).rejects.toMatchObject({ errorCode: ErrorCode.AiResponseInvalid });
+  });
+
+  it('rejects a response body above the configured byte cap', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => Promise.resolve(okResponse('x'.repeat(100)))),
+    );
+
+    await expect(
+      buildAdapter(50).generateFromTextStream('p', { models: ['m'] }),
     ).rejects.toMatchObject({ errorCode: ErrorCode.AiResponseInvalid });
   });
 

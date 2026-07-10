@@ -27,7 +27,7 @@ describe('AiShadowService', () => {
       buildAppLoggerStub().logger,
     );
 
-    service.maybeRun('judge', false, execute);
+    service.maybeRun('judge', execute);
     expect(execute).not.toHaveBeenCalled();
   });
 
@@ -49,54 +49,10 @@ describe('AiShadowService', () => {
     );
 
     // maybeRun is fire-and-forget: it returns void immediately.
-    service.maybeRun('judge', false, execute);
+    service.maybeRun('judge', execute);
     await flushBackground();
     expect(execute).toHaveBeenCalledTimes(1);
     expect(dispatchedModels).toEqual(['gpt-x']);
-  });
-
-  it('never sends an image to a shadow entry unless explicitly allowed AND vision-capable', async () => {
-    const execute = vi.fn(() => Promise.resolve('x'));
-    const baseline = {
-      shadowEnabled: true,
-      shadowSampleRate: 1,
-      enabledProviders: ['gemini', 'qwen'] as const,
-      shadowStepRoutes: { extraction: { provider: 'qwen', model: 'qwen3-vl-plus' } as const },
-    };
-
-    // Not allowed to carry images at all.
-    new AiShadowService(
-      buildConfigStub({
-        ...baseline,
-        shadowAllowImage: false,
-        visionCapableKeys: ['qwen:qwen3-vl-plus'],
-      }),
-      registry,
-      buildAppLoggerStub().logger,
-    ).maybeRun('extraction', true, execute);
-
-    // Allowed, but the entry is not vision-declared.
-    new AiShadowService(
-      buildConfigStub({ ...baseline, shadowAllowImage: true, visionCapableKeys: [] }),
-      registry,
-      buildAppLoggerStub().logger,
-    ).maybeRun('extraction', true, execute);
-
-    await flushBackground();
-    expect(execute).not.toHaveBeenCalled();
-
-    // Allowed AND vision-declared → runs.
-    new AiShadowService(
-      buildConfigStub({
-        ...baseline,
-        shadowAllowImage: true,
-        visionCapableKeys: ['qwen:qwen3-vl-plus'],
-      }),
-      registry,
-      buildAppLoggerStub().logger,
-    ).maybeRun('extraction', true, execute);
-    await flushBackground();
-    expect(execute).toHaveBeenCalledTimes(1);
   });
 
   it('swallows shadow failures silently', async () => {
@@ -112,7 +68,7 @@ describe('AiShadowService', () => {
       buildAppLoggerStub().logger,
     );
 
-    service.maybeRun('judge', false, execute);
+    service.maybeRun('judge', execute);
     await flushBackground();
     expect(execute).toHaveBeenCalledTimes(1);
     // Reaching here without an unhandled rejection IS the assertion.
@@ -131,7 +87,7 @@ describe('AiShadowService', () => {
       buildAppLoggerStub().logger,
     );
 
-    service.maybeRun('judge', false, execute);
+    service.maybeRun('judge', execute);
     await flushBackground();
     expect(execute).not.toHaveBeenCalled();
   });

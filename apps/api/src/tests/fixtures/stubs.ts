@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
 
 import { AiProvider, type AiProviderValue } from '../../config/ai-provider.constants';
-import { type AiRouteEntry, routeEntryKey } from '../../config/ai-route.types';
+import type { AiRouteEntry } from '../../config/ai-route.types';
 import type { AppConfigService } from '../../config/app-config.service';
 import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import type { AppLogger } from '../../core/logger/app-logger.service';
@@ -55,6 +55,7 @@ const CONFIG_DEFAULTS = {
   geminiModelChain: ['test-model'] as readonly string[],
   geminiTimeoutMs: 5000,
   geminiStreamIdleTimeoutMs: 60_000,
+  aiMaxResponseBytes: 500_000,
   maxImageSizeBytes: 5_242_880,
   enableClamAv: false,
   clamAvHosts: ['localhost'] as readonly string[],
@@ -71,11 +72,8 @@ const CONFIG_DEFAULTS = {
   // Multi-provider routing surface (mirrors AppConfigService semantics).
   aiStepRoutes: {} as Partial<Record<GeminiStepValue, readonly AiRouteEntry[]>>,
   enabledProviders: [AiProvider.Gemini] as readonly AiProviderValue[],
-  // Extra `provider:model` keys declared vision-capable (gemini always is).
-  visionCapableKeys: [] as readonly string[],
   shadowEnabled: false,
   shadowSampleRate: 0,
-  shadowAllowImage: false,
   shadowTimeoutMs: 5000,
   shadowStepRoutes: {} as Partial<Record<GeminiStepValue, AiRouteEntry>>,
 };
@@ -96,9 +94,6 @@ export const buildConfigStub = (
     hasExplicitAiRoute: (step: GeminiStepValue): boolean => values.aiStepRoutes[step] !== undefined,
     isProviderEnabled: (provider: AiProviderValue): boolean =>
       values.enabledProviders.includes(provider),
-    isVisionCapable: (entry: AiRouteEntry): boolean =>
-      entry.provider === AiProvider.Gemini ||
-      values.visionCapableKeys.includes(routeEntryKey(entry)),
     openAiCompatCredential: (): { apiKey: string; baseUrl: string } => ({
       apiKey: 'test-key',
       baseUrl: 'https://provider.test/v1',

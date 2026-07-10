@@ -29,7 +29,7 @@ export const CANCEL_THROTTLE = {
  * for anything between the two. Enforced by the multipart plugin registered
  * in src/bootstrap (memory only: the image never touches disk).
  */
-export const UPLOAD_HARD_CAP_BYTES = 10_485_760;
+export { UPLOAD_TRANSPORT_HARD_CAP_BYTES as UPLOAD_HARD_CAP_BYTES } from '@twinzy/shared';
 
 /** Exactly one file per request; extras are rejected at the transport edge. */
 export const UPLOAD_MAX_FILES = 1;

@@ -2,7 +2,7 @@ import type { AiRouteEntry } from '../../config/ai-route.types';
 import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import type { AiImageInput } from '../../modules/ai/model/gemini.types';
 
-export type BenchmarkMode = 'mock' | 'real';
+type BenchmarkMode = 'mock' | 'real';
 
 /** Parsed CLI options for one benchmark run. */
 export interface BenchmarkCliOptions {
@@ -56,12 +56,6 @@ export interface RealEntryRunInput {
   readonly entry: AiRouteEntry;
   readonly image: AiImageInput | undefined;
   readonly samplesPerEntry: number;
-}
-
-/** A step's benchmark candidates: the route entries to measure. */
-export interface StepCandidates {
-  readonly step: GeminiStepValue;
-  readonly entries: readonly AiRouteEntry[];
 }
 
 /** Scoring weights (schema validity dominates; safety close behind; speed last). */

@@ -8,6 +8,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 import type { ErrorStreamMessage, GameStreamMessage, ResultStreamMessage } from '@twinzy/shared';
 import {
   FinalGameResultSchema,
+  GAME_ANALYZE_STREAM_PATH,
   GameStreamEvent,
   GameStreamMessageSchema,
   GameStreamStage,
@@ -27,8 +28,6 @@ import {
 } from './fixtures/fake-ai-adapter';
 import { buildJpegBuffer } from './fixtures/image-fixtures';
 import { buildCleanClamAvStub } from './fixtures/stubs';
-
-const STREAM_PATH = '/api/v1/game/analyze/stream';
 
 /** Parses a buffered SSE body into validated protocol messages. */
 const parseStream = (body: string): GameStreamMessage[] =>
@@ -64,6 +63,7 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
   afterEach(() => {
     adapter.imageCalls.length = 0;
     adapter.textCalls.length = 0;
+    adapter.textSteps.length = 0;
   });
 
   afterAll(async () => {
@@ -73,7 +73,7 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
   const server = (): Server => app.getHttpServer();
 
   const postImage = (consent: boolean): request.Test => {
-    const req = request(server()).post(STREAM_PATH);
+    const req = request(server()).post(GAME_ANALYZE_STREAM_PATH);
     if (consent) {
       void req.field('consent', 'true');
     }
@@ -85,8 +85,8 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
 
   it('streams an event/stream response, not JSON', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     const response = await postImage(true).expect(200);
 
@@ -95,8 +95,8 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
 
   it('echoes CORS headers for an allowed origin (hijacked SSE keeps cross-origin working)', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     const response = await postImage(true).set('Origin', 'http://localhost:3000').expect(200);
 
@@ -105,8 +105,8 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
 
   it('emits accepted → ordered stages + intermediate traits/candidates → result', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     const response = await postImage(true).expect(200);
     const messages = parseStream(response.text);
@@ -140,33 +140,27 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
     expect(resultMessage?.result.disclaimer).toBe(RESULT_DISCLAIMER);
   });
 
-  it('provides the image to all three steps; prompt text never embeds the bytes', async () => {
+  it('sends the image only to extraction; later text steps never carry its bytes', async () => {
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     await postImage(true).expect(200);
 
-    expect(adapter.imageCalls).toHaveLength(3);
-    expect(adapter.textCalls).toHaveLength(0);
+    expect(adapter.imageCalls).toHaveLength(1);
+    expect(adapter.imageCalls[0]?.step).toBe('extraction');
+    expect(adapter.textCalls).toHaveLength(2);
+    expect(adapter.textSteps).toEqual(['generation', 'judge']);
     const base64Marker = buildJpegBuffer().toString('base64').slice(0, 24);
-    for (const call of adapter.imageCalls) {
-      expect(call.prompt).not.toContain(base64Marker);
+    for (const prompt of adapter.textCalls) {
+      expect(prompt).not.toContain(base64Marker);
     }
-    // Single-encode guarantee: every step reuses the exact same payload object.
-    expect(adapter.imageCalls[1]?.image).toBe(adapter.imageCalls[0]?.image);
-    expect(adapter.imageCalls[2]?.image).toBe(adapter.imageCalls[0]?.image);
   });
 
-  it('emits a safe in-band error event when consent is missing, with no result', async () => {
-    const response = await postImage(false).expect(200);
-    const messages = parseStream(response.text);
-    const errorMessage = messages.find((message): message is ErrorStreamMessage =>
-      isErrorMessage(message),
-    );
+  it('rejects before streaming or buffering when consent is missing', async () => {
+    const response = await postImage(false).expect(400);
 
-    expect(errorMessage?.errorCode).toBe('CONSENT_REQUIRED');
-    expect(messages.some((message) => isResultMessage(message))).toBe(false);
+    expect((response.body as { errorCode: string }).errorCode).toBe('CONSENT_REQUIRED');
     expect(adapter.imageCalls).toHaveLength(0);
   });
 

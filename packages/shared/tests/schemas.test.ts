@@ -427,6 +427,7 @@ describe('ApiErrorResponseSchema', () => {
         statusCode: 422,
         errorCode: 'FILE_INVALID',
         message: 'The uploaded file could not be processed.',
+        messageKey: 'errors.upload.fileInvalid',
       }).success,
     ).toBe(true);
 
@@ -435,6 +436,7 @@ describe('ApiErrorResponseSchema', () => {
         statusCode: 422,
         errorCode: 'FILE_INVALID',
         message: 'The uploaded file could not be processed.',
+        messageKey: 'errors.upload.fileInvalid',
         stack: 'at foo',
       }).success,
     ).toBe(false);
@@ -452,5 +454,27 @@ describe('TraitExtractionResponseSchema traitCount derivation', () => {
     const parsed = TraitExtractionResponseSchema.safeParse(extraction);
     expect(parsed.success).toBe(true);
     expect(parsed.success && parsed.data.traitCount).toBe(TOTAL_TRAIT_FIELDS);
+  });
+
+  it('does not count localized unclear markers as observed traits', () => {
+    const extraction = buildExtraction();
+    const traits = extraction['traits'] as Record<string, Record<string, string>>;
+    const hair = traits['hair'];
+    const eyes = traits['eyes'];
+    if (hair === undefined || eyes === undefined) {
+      throw new Error('Expected hair and eyes fixture categories');
+    }
+    hair['hairColor'] = 'unclear due to lighting';
+    eyes['visibleEyeColor'] = 'غير واضح بسبب الإضاءة';
+
+    const parsed = TraitExtractionResponseSchema.parse(extraction);
+    expect(parsed.traitCount).toBe(TOTAL_TRAIT_FIELDS - 2);
+  });
+
+  it('rejects an unknown image-quality level instead of silently upgrading it', () => {
+    const extraction = buildExtraction();
+    extraction['imageQualityCaps'] = [{ quality: 'excellent', impact: 'unknown' }];
+
+    expect(TraitExtractionResponseSchema.safeParse(extraction).success).toBe(false);
   });
 });

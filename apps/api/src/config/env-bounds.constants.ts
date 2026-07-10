@@ -1,6 +1,9 @@
 /**
  * Canonical numeric bounds and defaults for the environment schema. Centralized
- * here so the config schema, tests, and docs share the same numbers.
+ * here so the config schema, tests, and docs share the same numbers. Values
+ * that are cross-side contracts (upload size, share-result cache window) are
+ * imported from @twinzy/shared and only aliased here, so the backend default
+ * and the frontend pre-check can never drift.
  */
 
 export const MIN_PORT_NUMBER = 1;
@@ -25,8 +28,17 @@ export const MIN_GEMINI_STREAM_IDLE_TIMEOUT_MS = 1000;
 export const MAX_GEMINI_STREAM_IDLE_TIMEOUT_MS = 300_000;
 export const DEFAULT_GEMINI_STREAM_IDLE_TIMEOUT_MS = 60_000;
 
+export const MIN_AI_RESPONSE_BYTES = 1024;
+export const MAX_AI_RESPONSE_BYTES = 2_000_000;
+export const DEFAULT_AI_RESPONSE_BYTES = 500_000;
+
 export const MIN_IMAGE_SIZE_BYTES = 1024;
-export const DEFAULT_MAX_IMAGE_SIZE_BYTES = 5_242_880;
+
+/** Cross-side limits keep transport and application validation in sync. */
+export {
+  DEFAULT_MAX_IMAGE_SIZE_BYTES,
+  UPLOAD_TRANSPORT_HARD_CAP_BYTES as MAX_IMAGE_SIZE_BYTES,
+} from '@twinzy/shared';
 
 export const DEFAULT_CLAMAV_PORT = 3310;
 export const DEFAULT_CLAMAV_HOSTS = '127.0.0.1,clamav';
@@ -54,18 +66,21 @@ export const MAX_STREAM_TTL_MS = 1_800_000;
 export const DEFAULT_STREAM_TTL_MS = 180_000;
 
 // --- Temporary shareable-result cache (no database; TTL-only) ---
-// TTL bounds mirror the shared cross-side constants so the API, the frontend,
-// and the docs agree on one window. Default 10 minutes, min 1, max 60.
-export const MIN_SHARE_RESULT_TTL_SECONDS = 60;
-export const MAX_SHARE_RESULT_TTL_SECONDS = 3600;
-export const DEFAULT_SHARE_RESULT_TTL_SECONDS = 600;
+// TTL window and defaults come straight from the shared cross-side constants
+// so the API, the frontend, and the docs agree on one window (10 min default,
+// 1 min..1 h). Only the backend-only payload/item BOUNDS are declared here.
+export {
+  SHARE_RESULT_DEFAULT_MAX_ACTIVE_ITEMS as DEFAULT_SHARE_RESULT_MAX_ACTIVE_ITEMS,
+  SHARE_RESULT_DEFAULT_MAX_PAYLOAD_BYTES as DEFAULT_SHARE_RESULT_MAX_PAYLOAD_BYTES,
+  SHARE_RESULT_DEFAULT_TTL_SECONDS as DEFAULT_SHARE_RESULT_TTL_SECONDS,
+  SHARE_RESULT_MAX_TTL_SECONDS as MAX_SHARE_RESULT_TTL_SECONDS,
+  SHARE_RESULT_MIN_TTL_SECONDS as MIN_SHARE_RESULT_TTL_SECONDS,
+} from '@twinzy/shared';
 
 export const MIN_SHARE_RESULT_MAX_PAYLOAD_BYTES = 1024;
 export const MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES = 500_000;
-export const DEFAULT_SHARE_RESULT_MAX_PAYLOAD_BYTES = 50_000;
 
 export const MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS = 1;
 export const MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS = 100_000;
-export const DEFAULT_SHARE_RESULT_MAX_ACTIVE_ITEMS = 1000;
 
 export const DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL = 'http://localhost:3000';

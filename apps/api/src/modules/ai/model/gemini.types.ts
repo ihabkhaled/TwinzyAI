@@ -1,7 +1,6 @@
 /**
- * Image payload for the image-capable AI calls. Post visual-similarity pivot
- * the photo goes to ALL THREE pipeline steps (extraction, candidate
- * generation, judging); it is encoded ONCE per request and reused.
+ * Image payload for trait extraction, the only image-capable pipeline step.
+ * Text-only generation/judging contracts cannot accept this type.
  */
 export interface AiImageInput {
   mimeType: string;
@@ -12,13 +11,6 @@ export interface AiImageInput {
 export interface AiImageSource {
   readonly buffer: Buffer;
   readonly mimetype: string;
-}
-
-/** Result of one provider call, with metadata safe to log. */
-export interface AiCallMetadata {
-  provider: string;
-  model: string;
-  durationMs: number;
 }
 
 /** One attempt against a specific model; throws the raw provider error to classify. */

@@ -4,14 +4,9 @@
  * actually reads/writes — everything else a provider returns is ignored.
  */
 
-/** A text part or an image part of a user message's content array. */
-export type OpenAiCompatContentPart =
-  | { readonly type: 'text'; readonly text: string }
-  | { readonly type: 'image_url'; readonly image_url: { readonly url: string } };
-
-export interface OpenAiCompatMessage {
+interface OpenAiCompatMessage {
   readonly role: 'user';
-  readonly content: string | readonly OpenAiCompatContentPart[];
+  readonly content: string;
 }
 
 export interface OpenAiCompatRequestBody {

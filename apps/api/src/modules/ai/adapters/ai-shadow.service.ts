@@ -17,8 +17,7 @@ const LOG_CONTEXT = 'AiShadow';
 /**
  * Sampled, metrics-only shadow execution: after the primary route has already
  * produced the user's result, the step's shadow entry (if configured, enabled,
- * sampled in, and — for image calls — vision-capable AND explicitly allowed to
- * receive images) runs the same call in the background under its own timeout.
+ * and sampled in) runs the same TEXT-ONLY call in the background under its own timeout.
  * The outcome is a single structured log line (validity + latency + size);
  * shadow output NEVER touches the user-visible result, and shadow failures are
  * swallowed. Content and images are never logged.
@@ -35,7 +34,6 @@ export class AiShadowService {
 
   public maybeRun(
     step: GeminiStepValue | undefined,
-    carriesImage: boolean,
     execute: RouteDispatch,
     options?: AiStreamOptions,
   ): void {
@@ -44,9 +42,6 @@ export class AiShadowService {
     }
     const entry = this.config.shadowRouteFor(step);
     if (entry === undefined || !this.config.isProviderEnabled(entry.provider)) {
-      return;
-    }
-    if (carriesImage && (!this.config.shadowAllowImage || !this.config.isVisionCapable(entry))) {
       return;
     }
     if (

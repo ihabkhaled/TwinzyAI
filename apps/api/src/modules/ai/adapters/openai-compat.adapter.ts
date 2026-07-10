@@ -17,6 +17,7 @@ import type {
   AiStreamOptions,
 } from '../model/ai-provider-adapter.types';
 import {
+  AI_INVALID_RESPONSE_MESSAGE,
   AI_RATE_LIMITED_MESSAGE,
   AI_TIMEOUT_MESSAGE,
   AI_UNAVAILABLE_MESSAGE,
@@ -24,7 +25,6 @@ import {
 import type { AiImageInput } from '../model/gemini.types';
 import { CHAT_COMPLETIONS_PATH, OPENAI_COMPAT_TEMPERATURE } from '../model/openai-compat.constants';
 import type {
-  OpenAiCompatContentPart,
   OpenAiCompatRequestBody,
   OpenAiCompatResponseBody,
 } from '../model/openai-compat.types';
@@ -54,26 +54,26 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
     this.logger.setContext(`AiProvider:${provider}`);
   }
 
-  public async generateFromImage(
-    prompt: string,
-    image: AiImageInput,
-    options?: AiCallOptions,
+  public generateFromImage(
+    _prompt: string,
+    _image: AiImageInput,
+    _options?: AiCallOptions,
   ): Promise<string> {
-    return this.generateOnce(this.imageContent(prompt, image), options);
+    return Promise.reject(
+      this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE),
+    );
   }
 
   public async generateFromText(prompt: string, options?: AiCallOptions): Promise<string> {
     return this.generateOnce(prompt, options);
   }
 
-  public async generateFromImageStream(
+  public generateFromImageStream(
     prompt: string,
     image: AiImageInput,
     options?: AiStreamOptions,
   ): Promise<string> {
-    const text = await this.generateOnce(this.imageContent(prompt, image), options);
-    options?.onChunk?.(text);
-    return text;
+    return this.generateFromImage(prompt, image, options);
   }
 
   public async generateFromTextStream(prompt: string, options?: AiStreamOptions): Promise<string> {
@@ -82,26 +82,13 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
     return text;
   }
 
-  private imageContent(prompt: string, image: AiImageInput): readonly OpenAiCompatContentPart[] {
-    return [
-      { type: 'text', text: prompt },
-      {
-        type: 'image_url',
-        image_url: { url: `data:${image.mimeType};base64,${image.base64Data}` },
-      },
-    ];
-  }
-
   /**
    * One bounded chat-completions call for the single model the router pinned.
    * 429 → typed rate-limit (router may hop providers); timeout → AI_TIMEOUT;
    * other HTTP/network failures → AI_PROVIDER_UNAVAILABLE; empty content or a
    * failing content validation → AI_RESPONSE_INVALID.
    */
-  private async generateOnce(
-    content: string | readonly OpenAiCompatContentPart[],
-    options?: AiStreamOptions,
-  ): Promise<string> {
+  private async generateOnce(content: string, options?: AiStreamOptions): Promise<string> {
     const model = this.requireModel(options);
     const startedAt = Date.now();
     const text = await this.postChatCompletion(model, content, options?.signal);
@@ -131,7 +118,7 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
 
   private async postChatCompletion(
     model: string,
-    content: string | readonly OpenAiCompatContentPart[],
+    content: string,
     externalSignal?: AbortSignal,
   ): Promise<string> {
     const credential = this.config.openAiCompatCredential(this.provider);
@@ -168,6 +155,18 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
   }
 
   private async readResponseText(response: Response, model: string): Promise<string> {
+    this.assertResponseAllowed(response, model);
+    const rawBody = await response.text();
+    this.assertResponseSize(rawBody);
+    const payload = this.parseResponseBody(rawBody);
+    const text = payload?.choices?.[0]?.message?.content;
+    if (typeof text !== 'string' || text.trim().length === 0) {
+      throw this.integrationError(ErrorCode.AiResponseInvalid, AI_UNAVAILABLE_MESSAGE);
+    }
+    return text;
+  }
+
+  private assertResponseAllowed(response: Response, model: string): void {
     if (response.status === HTTP_STATUS_TOO_MANY_REQUESTS) {
       this.logger.warn(`Model ${model} rate-limited (429)`);
       throw buildTooManyRequestsError(ErrorCode.AiRateLimited, AI_RATE_LIMITED_MESSAGE);
@@ -176,17 +175,26 @@ export class OpenAiCompatAdapter implements AiProviderAdapter {
       this.logger.warn(`Model ${model} failed with HTTP ${response.status}`);
       throw this.integrationError(ErrorCode.AiProviderUnavailable, AI_UNAVAILABLE_MESSAGE);
     }
+    const declaredLength = Number(response.headers.get('content-length'));
+    if (Number.isFinite(declaredLength) && declaredLength > this.config.aiMaxResponseBytes) {
+      throw this.integrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
+    }
+  }
+
+  private assertResponseSize(rawBody: string): void {
+    if (Buffer.byteLength(rawBody, 'utf8') > this.config.aiMaxResponseBytes) {
+      throw this.integrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
+    }
+  }
+
+  private parseResponseBody(rawBody: string): OpenAiCompatResponseBody | undefined {
     let payload: OpenAiCompatResponseBody | undefined;
     try {
-      payload = (await response.json()) as OpenAiCompatResponseBody;
+      payload = JSON.parse(rawBody) as OpenAiCompatResponseBody;
     } catch {
       // Non-JSON body — treated as an invalid response below.
     }
-    const text = payload?.choices?.[0]?.message?.content;
-    if (typeof text !== 'string' || text.trim().length === 0) {
-      throw this.integrationError(ErrorCode.AiResponseInvalid, AI_UNAVAILABLE_MESSAGE);
-    }
-    return text;
+    return payload;
   }
 
   /** Preserve typed errors; map an abort to AI_TIMEOUT and anything else to 502. */

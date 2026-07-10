@@ -24,4 +24,25 @@ describe('trait-text util', () => {
     const values = collectExtractionTextValues(extraction);
     expect(values).toContain('clear oval face');
   });
+
+  it('collects every matching-evidence text leaf', () => {
+    const extraction = buildTraitExtraction();
+    extraction.highSignalTraitTokens = ['high signal'];
+    extraction.weightedTraitEvidence = [{ token: 'weighted signal', weight: 8 }];
+    extraction.visualArchetypeHints = ['archetype hint'];
+    extraction.imageQualityCaps = [{ quality: 'moderate', impact: 'quality impact' }];
+    extraction.candidateSearchHints = [{ archetype: 'search archetype', why: 'search reason' }];
+
+    expect(collectExtractionTextValues(extraction)).toEqual(
+      expect.arrayContaining([
+        'high signal',
+        'weighted signal',
+        'archetype hint',
+        'moderate',
+        'quality impact',
+        'search archetype',
+        'search reason',
+      ]),
+    );
+  });
 });

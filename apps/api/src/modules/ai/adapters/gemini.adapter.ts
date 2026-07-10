@@ -27,6 +27,7 @@ import type {
   AiStreamOptions,
 } from '../model/ai-provider-adapter.types';
 import {
+  AI_INVALID_RESPONSE_MESSAGE,
   AI_RATE_LIMITED_MESSAGE,
   AI_TIMEOUT_MESSAGE,
   AI_UNAVAILABLE_MESSAGE,
@@ -204,6 +205,9 @@ export class GeminiAdapter implements AiProviderAdapter {
     const controller = new AbortController();
     const detachExternalAbort = attachExternalAbort(controller, externalSignal);
     const startedAt = Date.now();
+    const totalTimer = setTimeout(() => {
+      controller.abort();
+    }, this.config.geminiTimeoutMs);
     let idleTimer: ReturnType<typeof setTimeout> | undefined;
     const resetIdleTimer = (): void => {
       if (idleTimer !== undefined) {
@@ -223,22 +227,32 @@ export class GeminiAdapter implements AiProviderAdapter {
       });
 
       let assembled = '';
+      let assembledBytes = 0;
       for await (const chunk of stream) {
         resetIdleTimer();
         const chunkText = chunk.text;
         if (chunkText !== undefined && chunkText.length > 0) {
+          assembledBytes += Buffer.byteLength(chunkText, 'utf8');
+          if (assembledBytes > this.config.aiMaxResponseBytes) {
+            controller.abort();
+            throw this.integrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
+          }
           assembled += chunkText;
           onChunk?.(chunkText);
         }
       }
       return this.requireText(assembled, model, startedAt, 'Stream');
     } catch (error: unknown) {
+      if (error instanceof AppError) {
+        throw error;
+      }
       if (controller.signal.aborted) {
         throw this.timeoutError();
       }
       throw error;
     } finally {
       detachExternalAbort?.();
+      clearTimeout(totalTimer);
       if (idleTimer !== undefined) {
         clearTimeout(idleTimer);
       }
@@ -261,6 +275,9 @@ export class GeminiAdapter implements AiProviderAdapter {
   ): string {
     if (text === undefined || text.trim().length === 0) {
       throw this.integrationError(ErrorCode.AiResponseInvalid, AI_UNAVAILABLE_MESSAGE);
+    }
+    if (Buffer.byteLength(text, 'utf8') > this.config.aiMaxResponseBytes) {
+      throw this.integrationError(ErrorCode.AiResponseInvalid, AI_INVALID_RESPONSE_MESSAGE);
     }
     this.logger.info(`${label} ok (model=${model}, ms=${Date.now() - startedAt})`);
     return text;

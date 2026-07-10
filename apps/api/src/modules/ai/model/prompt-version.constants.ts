@@ -23,8 +23,6 @@ export const PromptPlaceholder = {
   ResultJson: '[RESULT_JSON]',
   LanguageCode: '[LANGUAGE_CODE]',
   TargetLanguageCode: '[TARGET_LANGUAGE_CODE]',
-  AppName: '[APP_NAME]',
-  ModelProvider: '[MODEL_PROVIDER]',
   ResultCount: '[RESULT_COUNT]',
   RegionHint: '[REGION_HINT]',
 } as const;

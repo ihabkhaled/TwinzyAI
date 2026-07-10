@@ -26,8 +26,13 @@ export const collectTraitTextValues = (traits: Traits): string[] => {
   return values;
 };
 
-/** All free-text leaves of a full extraction response (traits + summary). */
+/** Every free-text leaf forwarded from extraction into downstream matching. */
 export const collectExtractionTextValues = (response: TraitExtractionResponse): string[] => [
   ...collectTraitTextValues(response.traits),
   ...response.compactTraitSummary,
+  ...response.highSignalTraitTokens,
+  ...response.weightedTraitEvidence.map((evidence) => evidence.token),
+  ...response.visualArchetypeHints,
+  ...response.imageQualityCaps.flatMap((cap) => [cap.quality, cap.impact]),
+  ...response.candidateSearchHints.flatMap((hint) => [hint.archetype, hint.why]),
 ];

@@ -13,14 +13,16 @@ import {
   MAX_VISUAL_ARCHETYPE_HINTS,
   MAX_WEIGHTED_EVIDENCE_ITEMS,
 } from '../constants/response-bounds.constants';
+import { IMAGE_QUALITY_LEVELS } from '../constants/trait.constants';
 import {
   MAX_COMPACT_TRAIT_SUMMARY,
-  MAX_TRAIT_COUNT,
   MAX_TRAIT_TEXT_LENGTH,
   MAX_UNCERTAINTY_NOTES_PER_FIELD,
+  TOTAL_TRAIT_FIELDS,
   TRAIT_CATEGORY_FIELDS,
   UNCERTAINTY_NOTE_FIELDS,
 } from '../constants/trait-category.constants';
+import { countPopulatedTraitFields } from '../utils/trait-count.util';
 
 import { LanguageCodeSchema } from './language.schema';
 
@@ -63,7 +65,7 @@ const uncertaintyNotesShape = Object.fromEntries(
 export const UncertaintyNotesSchema = z.object(uncertaintyNotesShape);
 
 /**
- * The visual-similarity-v4 nested trait payload: all 16 categories (221 named
+ * The written-traits-v5 nested trait payload: all 16 categories (221 named
  * fields, every populated value localized text) plus the uncertainty-notes
  * block. Each category is required, but individual fields are tolerant (see
  * `optionalTraitValue`): a model that omits/nulls a few of 221 fields yields a
@@ -98,7 +100,7 @@ const weightedEvidenceSchema = z.object({
 });
 
 const imageQualityCapSchema = z.object({
-  quality: z.enum(['clear', 'moderate', 'low', 'very-low']).catch('moderate'),
+  quality: z.enum(IMAGE_QUALITY_LEVELS),
   impact: z.string().trim().min(1).max(MAX_IMAGE_QUALITY_IMPACT_LENGTH),
 });
 
@@ -106,22 +108,6 @@ const candidateSearchHintSchema = z.object({
   archetype: z.string().trim().min(1).max(MAX_ARCHETYPE_LENGTH),
   why: z.string().trim().min(1).max(MAX_SEARCH_HINT_REASON_LENGTH),
 });
-
-/**
- * Count the number of populated (non-empty) trait fields across all categories.
- * Uncertainty notes are not counted as trait observations.
- */
-export const countPopulatedTraitFields = (traits: Record<string, unknown>): number =>
-  Object.entries(traits).reduce((count, [key, value]) => {
-    if (key === 'uncertaintyNotes') return count;
-    if (typeof value !== 'object' || value === null) return count;
-    return (
-      count +
-      Object.values(value as Record<string, unknown>).filter(
-        (fieldValue) => typeof fieldValue === 'string' && fieldValue.trim().length > 0,
-      ).length
-    );
-  }, 0);
 
 /**
  * Full Prompt 1 response contract. `promptVersion` is a literal — a stale
@@ -135,7 +121,7 @@ export const TraitExtractionResponseSchema = z
     // over/under-count) and then overwritten by the authoritative transform
     // below. `.catch` keeps an out-of-range or missing value from failing the
     // whole extraction.
-    traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT).catch(0),
+    traitCount: z.number().int().min(0).max(TOTAL_TRAIT_FIELDS).catch(0),
     traits: TraitsSchema,
     compactTraitSummary: z.array(traitValueSchema).min(1).max(MAX_COMPACT_TRAIT_SUMMARY),
     highSignalTraitTokens: z.array(tokenSchema).max(MAX_HIGH_SIGNAL_TOKENS),

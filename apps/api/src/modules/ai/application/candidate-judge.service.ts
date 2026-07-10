@@ -8,6 +8,7 @@ import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
 import { buildMatchingEvidence } from '../lib/matching-evidence.util';
+import { assertResponseLanguage } from '../lib/response-language.guard';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
 import type { JudgeCandidatesInput } from '../model/judge-input.types';
@@ -18,11 +19,10 @@ import { AiSafetyService } from './ai-safety.service';
 const LOG_CONTEXT = 'CandidateJudge';
 
 /**
- * MULTIMODAL strict-judge step (visual-similarity mode): receives the photo,
- * the distilled matching evidence, and the candidate pool; verifies each
- * candidate's claimed feature agreements against the image, re-scores, filters
- * weak/unsafe entries, and returns the final safe set localized to the
- * requested language. The image payload is never logged and never persisted.
+ * TEXT-ONLY strict-judge step: receives written matching evidence and the
+ * candidate pool, re-scores conservatively, filters weak/unsafe entries, and
+ * returns the final localized safe set. The provider method has no image slot,
+ * so the photo cannot cross this boundary.
  */
 @Injectable()
 export class CandidateJudgeService {
@@ -36,7 +36,21 @@ export class CandidateJudgeService {
   }
 
   public async judgeCandidates(input: JudgeCandidatesInput): Promise<CandidateJudgeResponse> {
-    const prompt = this.promptTemplate.buildPrompt(PromptKey.CandidateJudge, {
+    const prompt = this.buildPrompt(input);
+    const rawText = await this.aiProvider.generateFromTextStream(prompt, {
+      signal: input.signal,
+      validate: buildSchemaValidator(CandidateJudgeResponseSchema),
+      step: GeminiStep.Judge,
+    });
+    const response = this.parseResponse(rawText);
+    assertResponseLanguage(response.languageCode, input.languageCode);
+    const safeResults = this.aiSafety.filterJudgedResults(response.results);
+    this.logger.info(`Judge kept ${safeResults.length} safe result(s)`);
+    return { ...response, results: safeResults };
+  }
+
+  private buildPrompt(input: JudgeCandidatesInput): string {
+    return this.promptTemplate.buildPrompt(PromptKey.CandidateJudge, {
       [PromptPlaceholder.TraitsJson]: JSON.stringify(
         buildMatchingEvidence(input.extraction),
         null,
@@ -50,19 +64,11 @@ export class CandidateJudgeService {
       [PromptPlaceholder.LanguageCode]: input.languageCode,
       [PromptPlaceholder.ResultCount]: String(input.resultCount),
     });
+  }
 
-    const rawText = await this.aiProvider.generateFromImageStream(prompt, input.image, {
-      signal: input.signal,
-      validate: buildSchemaValidator(CandidateJudgeResponseSchema),
-      step: GeminiStep.Judge,
-    });
-    const response = parseAiJsonResponse(rawText, CandidateJudgeResponseSchema, (issues) => {
+  private parseResponse(rawText: string): CandidateJudgeResponse {
+    return parseAiJsonResponse(rawText, CandidateJudgeResponseSchema, (issues) => {
       this.logger.warn(`Judge response schema mismatch: ${issues}`);
     });
-
-    const safeResults = this.aiSafety.filterJudgedResults(response.results);
-
-    this.logger.info(`Judge kept ${safeResults.length} safe result(s)`);
-    return { ...response, results: safeResults };
   }
 }

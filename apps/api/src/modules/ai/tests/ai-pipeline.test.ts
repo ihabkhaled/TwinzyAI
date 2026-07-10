@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_RESULT_COUNT, TRAIT_CATEGORY_FIELDS } from '@twinzy/shared';
+import { DEFAULT_RESULT_COUNT, FinalGameResultSchema, TRAIT_CATEGORY_FIELDS } from '@twinzy/shared';
 
 import {
   AppError,
@@ -11,6 +11,7 @@ import {
 import {
   buildCandidatePayload,
   buildCandidatesJson,
+  buildFinalGameResultPayload,
   buildJudgedResultPayload,
   buildJudgeJson,
   buildTraitExtraction,
@@ -22,6 +23,7 @@ import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stu
 import { AiSafetyService } from '../application/ai-safety.service';
 import { CandidateGenerationService } from '../application/candidate-generation.service';
 import { CandidateJudgeService } from '../application/candidate-judge.service';
+import { ResultTranslationService } from '../application/result-translation.service';
 import { TraitExtractionService } from '../application/trait-extraction.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildAiImageInput } from '../lib/image-input.util';
@@ -31,6 +33,7 @@ interface Pipeline {
   traitExtraction: TraitExtractionService;
   candidateGeneration: CandidateGenerationService;
   candidateJudge: CandidateJudgeService;
+  resultTranslation: ResultTranslationService;
 }
 
 const buildPipeline = (): Pipeline => {
@@ -44,6 +47,7 @@ const buildPipeline = (): Pipeline => {
     traitExtraction: new TraitExtractionService(adapter, promptTemplate, safety, logger),
     candidateGeneration: new CandidateGenerationService(adapter, promptTemplate, safety, logger),
     candidateJudge: new CandidateJudgeService(adapter, promptTemplate, safety, logger),
+    resultTranslation: new ResultTranslationService(adapter, promptTemplate, safety, logger),
   };
 };
 
@@ -104,6 +108,13 @@ describe('TraitExtractionService', () => {
   it('rejects invalid JSON from the provider', async () => {
     const { adapter, traitExtraction } = buildPipeline();
     adapter.queueImageResponse('this is not json at all');
+
+    await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseInvalid);
+  });
+
+  it('rejects a non-object traits payload before count normalization', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(JSON.stringify({ traits: 'invalid' }));
 
     await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseInvalid);
   });
@@ -181,10 +192,10 @@ describe('TraitExtractionService', () => {
   });
 });
 
-describe('CandidateGenerationService (multimodal)', () => {
-  it('returns candidates ranked by score from a single multimodal call', async () => {
+describe('CandidateGenerationService (text only)', () => {
+  it('returns candidates ranked by score and never sends an image', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
-    adapter.queueImageResponse(
+    adapter.queueTextResponse(
       buildCandidatesJson([
         buildCandidatePayload({ name: 'Lower', styleVibeFitScore: 71 }),
         buildCandidatePayload({ name: 'Higher', styleVibeFitScore: 90 }),
@@ -193,23 +204,22 @@ describe('CandidateGenerationService (multimodal)', () => {
 
     const candidates = await candidateGeneration.generateCandidates(
       extraction,
-      image,
       'en',
       DEFAULT_RESULT_COUNT,
     );
 
     expect(candidates.map((candidate) => candidate.name)).toEqual(['Higher', 'Lower']);
-    expect(adapter.imageCalls).toHaveLength(1);
-    expect(adapter.textCalls).toHaveLength(0);
+    expect(adapter.imageCalls).toHaveLength(0);
+    expect(adapter.textCalls).toHaveLength(1);
   });
 
-  it('embeds the full matching evidence into the prompt text (image rides as a separate part)', async () => {
+  it('embeds the full written matching evidence into the prompt without an image', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
-    adapter.queueImageResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildCandidatesJson());
 
-    await candidateGeneration.generateCandidates(extraction, image, 'en', DEFAULT_RESULT_COUNT);
+    await candidateGeneration.generateCandidates(extraction, 'en', DEFAULT_RESULT_COUNT);
 
-    const prompt = adapter.imageCalls[0]?.prompt ?? '';
+    const prompt = adapter.textCalls[0] ?? '';
     expect(prompt).toContain('observed hairColor');
     expect(prompt).toContain('compactTraitSummary');
     expect(prompt).toContain('weightedTraitEvidence');
@@ -221,7 +231,7 @@ describe('CandidateGenerationService (multimodal)', () => {
 
   it('rejects more than 25 candidates (strict schema, documented)', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
-    adapter.queueImageResponse(
+    adapter.queueTextResponse(
       buildCandidatesJson(
         Array.from({ length: 26 }, (_unused, index) =>
           buildCandidatePayload({ name: `Candidate ${index}` }),
@@ -231,14 +241,14 @@ describe('CandidateGenerationService (multimodal)', () => {
     );
 
     await expectRejection(
-      candidateGeneration.generateCandidates(extraction, image, 'en', DEFAULT_RESULT_COUNT),
+      candidateGeneration.generateCandidates(extraction, 'en', DEFAULT_RESULT_COUNT),
       ErrorCode.AiResponseInvalid,
     );
   });
 
   it('drops candidates that contain unsafe wording', async () => {
     const { adapter, candidateGeneration } = buildPipeline();
-    adapter.queueImageResponse(
+    adapter.queueTextResponse(
       buildCandidatesJson([
         buildCandidatePayload({ name: 'Safe Star' }),
         buildCandidatePayload({
@@ -250,36 +260,46 @@ describe('CandidateGenerationService (multimodal)', () => {
 
     const candidates = await candidateGeneration.generateCandidates(
       extraction,
-      image,
       'en',
       DEFAULT_RESULT_COUNT,
     );
 
     expect(candidates.map((candidate) => candidate.name)).toEqual(['Safe Star']);
   });
+
+  it('rejects candidates returned in the wrong language', async () => {
+    const { adapter, candidateGeneration } = buildPipeline();
+    const payload = JSON.parse(buildCandidatesJson()) as Record<string, unknown>;
+    payload['languageCode'] = 'ar';
+    adapter.queueTextResponse(JSON.stringify(payload));
+
+    await expectRejection(
+      candidateGeneration.generateCandidates(extraction, 'en', DEFAULT_RESULT_COUNT),
+      ErrorCode.AiResponseInvalid,
+    );
+  });
 });
 
-describe('CandidateJudgeService (multimodal)', () => {
-  it('judges candidates through a single multimodal call', async () => {
+describe('CandidateJudgeService (text only)', () => {
+  it('judges candidates without ever sending an image', async () => {
     const { adapter, candidateJudge } = buildPipeline();
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     const response = await candidateJudge.judgeCandidates({
       extraction,
       candidates: [],
-      image,
       languageCode: 'en',
       resultCount: DEFAULT_RESULT_COUNT,
     });
 
     expect(response.results).toHaveLength(1);
-    expect(adapter.imageCalls).toHaveLength(1);
-    expect(adapter.textCalls).toHaveLength(0);
+    expect(adapter.imageCalls).toHaveLength(0);
+    expect(adapter.textCalls).toHaveLength(1);
   });
 
   it('drops judged results with unsafe wording', async () => {
     const { adapter, candidateJudge } = buildPipeline();
-    adapter.queueImageResponse(
+    adapter.queueTextResponse(
       buildJudgeJson([
         buildJudgedResultPayload({ name: 'Safe Star' }),
         buildJudgedResultPayload({
@@ -293,7 +313,6 @@ describe('CandidateJudgeService (multimodal)', () => {
     const response = await candidateJudge.judgeCandidates({
       extraction,
       candidates: [],
-      image,
       languageCode: 'en',
       resultCount: DEFAULT_RESULT_COUNT,
     });
@@ -303,13 +322,29 @@ describe('CandidateJudgeService (multimodal)', () => {
 
   it('rejects an invalid judge response shape', async () => {
     const { adapter, candidateJudge } = buildPipeline();
-    adapter.queueImageResponse(JSON.stringify({ results: 'not-an-array' }));
+    adapter.queueTextResponse(JSON.stringify({ results: 'not-an-array' }));
 
     await expectRejection(
       candidateJudge.judgeCandidates({
         extraction,
         candidates: [],
-        image,
+        languageCode: 'en',
+        resultCount: DEFAULT_RESULT_COUNT,
+      }),
+      ErrorCode.AiResponseInvalid,
+    );
+  });
+
+  it('rejects judge output returned in the wrong language', async () => {
+    const { adapter, candidateJudge } = buildPipeline();
+    const payload = JSON.parse(buildJudgeJson()) as Record<string, unknown>;
+    payload['languageCode'] = 'ar';
+    adapter.queueTextResponse(JSON.stringify(payload));
+
+    await expectRejection(
+      candidateJudge.judgeCandidates({
+        extraction,
+        candidates: [],
         languageCode: 'en',
         resultCount: DEFAULT_RESULT_COUNT,
       }),
@@ -322,23 +357,32 @@ describe('per-step model chain declaration', () => {
   it('each pipeline service declares its own step so config can route its model chain', async () => {
     const { adapter, traitExtraction, candidateGeneration, candidateJudge } = buildPipeline();
     adapter.queueImageResponse(buildTraitExtractionJson());
-    adapter.queueImageResponse(buildCandidatesJson());
-    adapter.queueImageResponse(buildJudgeJson());
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
 
     await traitExtraction.extractTraits(image, 'en');
-    await candidateGeneration.generateCandidates(extraction, image, 'en', DEFAULT_RESULT_COUNT);
+    await candidateGeneration.generateCandidates(extraction, 'en', DEFAULT_RESULT_COUNT);
     await candidateJudge.judgeCandidates({
       extraction,
       candidates: [],
-      image,
       languageCode: 'en',
       resultCount: DEFAULT_RESULT_COUNT,
     });
 
-    expect(adapter.imageCalls.map((call) => call.step)).toEqual([
-      'extraction',
-      'generation',
-      'judge',
-    ]);
+    expect(adapter.imageCalls.map((call) => call.step)).toEqual(['extraction']);
+    expect(adapter.textSteps).toEqual(['generation', 'judge']);
+  });
+});
+
+describe('ResultTranslationService', () => {
+  it('rejects an invalid provider response shape', async () => {
+    const { adapter, resultTranslation } = buildPipeline();
+    adapter.queueTextResponse('{}');
+    const original = FinalGameResultSchema.parse(buildFinalGameResultPayload());
+
+    await expectRejection(
+      resultTranslation.translateResult(original, 'ar'),
+      ErrorCode.AiResponseInvalid,
+    );
   });
 });

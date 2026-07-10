@@ -56,8 +56,16 @@ class FakeGoogleClient {
   }
 }
 
-const buildAdapter = (fake: FakeGoogleClient, chain: string[]): GeminiAdapter => {
-  const config = buildConfigStub({ geminiModelChain: chain, geminiApiKey: 'test-key' });
+const buildAdapter = (
+  fake: FakeGoogleClient,
+  chain: string[],
+  aiMaxResponseBytes = 500_000,
+): GeminiAdapter => {
+  const config = buildConfigStub({
+    geminiModelChain: chain,
+    geminiApiKey: 'test-key',
+    aiMaxResponseBytes,
+  });
   const adapter = new GeminiAdapter(config, buildAppLoggerStub().logger);
   (adapter as unknown as { client: unknown }).client = fake;
   return adapter;
@@ -139,6 +147,13 @@ describe('GeminiAdapter model-fallback chain', () => {
       adapter.generateFromTextStream('prompt'),
       ErrorCode.AiProviderUnavailable,
     );
+  });
+
+  it('rejects a raw response above the configured byte cap', async () => {
+    fake.setResponse('primary', 'x'.repeat(20));
+    const adapter = buildAdapter(fake, ['primary'], 10);
+
+    await expectErrorCode(adapter.generateFromTextStream('prompt'), ErrorCode.AiResponseInvalid);
   });
 });
 

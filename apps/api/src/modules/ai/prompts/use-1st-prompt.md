@@ -1,4 +1,4 @@
-# Use 1stPrompt.md — Image to Advanced Visible Traits (visual-similarity-v4)
+# Use 1stPrompt.md — Image to Advanced Visible Traits (written-traits-v5)
 
 You are analyzing an uploaded person image for a fun style/vibe game.
 
@@ -51,7 +51,7 @@ You must not infer private or sensitive attributes.
 ## Required JSON output
 
 {
-  "promptVersion": "visual-similarity-v4",
+  "promptVersion": "written-traits-v5",
   "languageCode": "[LANGUAGE_CODE]",
   "traitCount": 0,
   "traits": {

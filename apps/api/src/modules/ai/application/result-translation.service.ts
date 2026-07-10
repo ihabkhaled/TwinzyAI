@@ -13,6 +13,7 @@ import { buildIntegrationError, ErrorCode, type IntegrationError } from '../../.
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
+import { hasSameJsonShape } from '../lib/json-shape.util';
 import { collectTraitTextValues } from '../lib/trait-text.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
@@ -49,6 +50,18 @@ export class ResultTranslationService {
     original: FinalGameResult,
     targetLanguageCode: LanguageCodeValue,
   ): Promise<FinalGameResult> {
+    this.assertTranslatedTextSafe(original);
+    const translated = await this.requestTranslation(original, targetLanguageCode);
+    const preserved = this.preserveCanonicalFields(original, translated, targetLanguageCode);
+    this.assertTranslatedTextSafe(preserved);
+    this.logger.info(`Translated result to ${targetLanguageCode}`);
+    return preserved;
+  }
+
+  private async requestTranslation(
+    original: FinalGameResult,
+    targetLanguageCode: LanguageCodeValue,
+  ): Promise<FinalGameResult> {
     const prompt = this.promptTemplate.buildPrompt(PromptKey.TranslateResult, {
       [PromptPlaceholder.ResultJson]: JSON.stringify(original, null, PROMPT_JSON_INDENT),
       [PromptPlaceholder.TargetLanguageCode]: targetLanguageCode,
@@ -61,12 +74,7 @@ export class ResultTranslationService {
     const translated = parseAiJsonResponse(rawText, FinalGameResultSchema, (issues) => {
       this.logger.warn(`Translated result schema mismatch: ${issues}`);
     });
-
-    const preserved = this.preserveCanonicalFields(original, translated, targetLanguageCode);
-    this.assertTranslatedTextSafe(preserved);
-
-    this.logger.info(`Translated result to ${targetLanguageCode}`);
-    return preserved;
+    return translated;
   }
 
   /**
@@ -79,21 +87,8 @@ export class ResultTranslationService {
     translated: FinalGameResult,
     targetLanguageCode: LanguageCodeValue,
   ): FinalGameResult {
-    if (
-      translated.results.length !== original.results.length ||
-      translated.compactTraitSummary.length !== original.compactTraitSummary.length
-    ) {
-      throw this.invalidTranslation('Translated result changed the response shape');
-    }
-
-    const results = original.results.map((originalItem, index) => {
-      const translatedItem = translated.results[index];
-      if (translatedItem?.name !== originalItem.name) {
-        throw this.invalidTranslation('Translated result changed or reordered names');
-      }
-      return this.preserveResultItem(originalItem, translatedItem);
-    });
-
+    this.assertSameShape(original, translated);
+    const results = this.preserveResults(original, translated);
     return {
       ...translated,
       promptVersion: original.promptVersion,
@@ -105,6 +100,25 @@ export class ResultTranslationService {
       fallbackMessage:
         original.fallbackMessage === '' ? '' : NO_MATCH_FALLBACK_BY_LANGUAGE[targetLanguageCode],
     };
+  }
+
+  private assertSameShape(original: FinalGameResult, translated: FinalGameResult): void {
+    if (!hasSameJsonShape(original, translated)) {
+      throw this.invalidTranslation('Translated result changed the response shape');
+    }
+  }
+
+  private preserveResults(
+    original: FinalGameResult,
+    translated: FinalGameResult,
+  ): FinalResultItem[] {
+    return original.results.map((originalItem, index) => {
+      const translatedItem = translated.results[index];
+      if (translatedItem?.name !== originalItem.name) {
+        throw this.invalidTranslation('Translated result changed or reordered names');
+      }
+      return this.preserveResultItem(originalItem, translatedItem);
+    });
   }
 
   /** Localized text comes from the translation; everything else is canonical. */

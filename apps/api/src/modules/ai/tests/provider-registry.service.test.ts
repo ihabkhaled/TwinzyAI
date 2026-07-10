@@ -25,11 +25,10 @@ describe('ProviderRegistryService', () => {
     expect(registry.adapterFor('openai')).toBeUndefined();
   });
 
-  it('filters usable entries by enablement and, for image calls, vision capability', async () => {
+  it('allows only Gemini for image calls while text calls use any enabled provider', async () => {
     const registry = buildRegistry(
       buildConfigStub({
         enabledProviders: ['gemini', 'qwen'],
-        visionCapableKeys: ['qwen:qwen3-vl-plus'],
         aiStepRoutes: {
           judge: [
             { provider: 'gemini', model: 'g-model' },
@@ -42,12 +41,10 @@ describe('ProviderRegistryService', () => {
     );
     await registry.onModuleInit();
 
-    // Image call: openai disabled out, qwen-flash vision-filtered out.
     expect(registry.usableEntriesFor('judge', true)).toEqual([
       { provider: 'gemini', model: 'g-model' },
-      { provider: 'qwen', model: 'qwen3-vl-plus' },
     ]);
-    // Text call: vision filter not applied.
+    // Text calls may use every enabled route entry.
     expect(registry.usableEntriesFor('judge', false)).toEqual([
       { provider: 'gemini', model: 'g-model' },
       { provider: 'qwen', model: 'qwen3-vl-plus' },
@@ -84,5 +81,19 @@ describe('ProviderRegistryService', () => {
     );
 
     await expect(registry.onModuleInit()).rejects.toThrow(/AI_ROUTE_EXTRACTION/);
+  });
+
+  it('allows text-only generation and judge routes without vision capability', async () => {
+    const registry = buildRegistry(
+      buildConfigStub({
+        enabledProviders: ['kimi'],
+        aiStepRoutes: {
+          generation: [{ provider: 'kimi', model: 'kimi-k2.5' }],
+          judge: [{ provider: 'kimi', model: 'kimi-k2.5' }],
+        },
+      }),
+    );
+
+    await expect(registry.onModuleInit()).resolves.toBeUndefined();
   });
 });

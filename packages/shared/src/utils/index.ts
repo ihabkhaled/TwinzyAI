@@ -1,2 +1,2 @@
 export * from './guards.util';
-export * from './number.util';
+export * from './trait-count.util';

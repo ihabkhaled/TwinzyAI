@@ -6,11 +6,10 @@ import type {
 
 import type { SseCapableReplyLike } from '../../../core/http/sse.types';
 import type { StreamRequestMeta } from '../../../core/http/stream-meta.types';
-import type { AiImageInput } from '../../ai';
 import type { UploadedImageFile } from '../../file-security';
 
 /** Optional progress sink so the streaming flow can report matching stages. */
-export type StyleMatchStageListener = (stage: GameStreamStageValue) => void;
+type StyleMatchStageListener = (stage: GameStreamStageValue) => void;
 
 /** The resolved (always-present) tab + request correlation ids for one stream. */
 export interface StreamCorrelationIds {
@@ -34,19 +33,18 @@ export interface GameStreamRequest extends StreamRequestMeta {
  * candidate public-figure names being considered ("rough examples"), reported
  * as they become available so the stream can render each step live.
  */
-export interface StyleMatchProgressListener {
+interface StyleMatchProgressListener {
   onStage?: StyleMatchStageListener;
   onCandidates?: (names: readonly string[]) => void;
 }
 
 /**
- * Everything one matching run needs: the extraction evidence, the photo
- * payload (reused, single-encode), the output language, the requested display
- * count, the optional progress sink, and the run's cancel signal.
+ * Everything the text-only matching phase needs: written extraction evidence,
+ * output language, requested count, optional progress sink, and cancel signal.
+ * There is deliberately no image field.
  */
 export interface StyleMatchInput {
   readonly extraction: TraitExtractionResponse;
-  readonly image: AiImageInput;
   readonly languageCode: LanguageCodeValue;
   readonly resultCount: number;
   readonly progress?: StyleMatchProgressListener | undefined;

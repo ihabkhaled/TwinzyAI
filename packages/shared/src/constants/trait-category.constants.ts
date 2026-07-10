@@ -280,14 +280,11 @@ export const UNCERTAINTY_NOTE_FIELDS = [
 
 export type UncertaintyNoteField = (typeof UNCERTAINTY_NOTE_FIELDS)[number];
 
-/** Total named trait fields across all categories (excluding uncertainty). */
+/** Total named trait fields and canonical traitCount upper bound (excluding uncertainty). */
 export const TOTAL_TRAIT_FIELDS = Object.values(TRAIT_CATEGORY_FIELDS).reduce(
   (total, fields) => total + fields.length,
   0,
 );
-
-/** Upper bound accepted for the model-reported (and server-recomputed) traitCount. */
-export const MAX_TRAIT_COUNT = TOTAL_TRAIT_FIELDS;
 
 /** Longest accepted localized text for a single trait value. */
 export const MAX_TRAIT_TEXT_LENGTH = 300;

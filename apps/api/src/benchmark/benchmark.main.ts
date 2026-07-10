@@ -4,7 +4,6 @@ import path from 'node:path';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from '../app.module';
-import { AppConfigService } from '../config/app-config.service';
 import { ProviderRegistryService } from '../modules/ai/adapters/provider-registry.service';
 import { PromptTemplateRepository } from '../modules/ai/infrastructure/prompt-template.repository';
 
@@ -50,7 +49,6 @@ const runReal = async (options: BenchmarkCliOptions): Promise<BenchmarkReport> =
   try {
     return await runRealBenchmark(
       {
-        config: app.get(AppConfigService),
         registry: app.get(ProviderRegistryService),
         promptTemplate: app.get(PromptTemplateRepository),
       },

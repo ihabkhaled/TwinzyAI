@@ -68,6 +68,21 @@ describe('AiRouterService', () => {
     expect(shadowRuns).toHaveBeenCalledTimes(1);
   });
 
+  it('never shadows an image-carrying extraction call', async () => {
+    const gemini = buildAdapter(() => Promise.resolve('ok'));
+    const { router, shadowRuns } = buildRouter([{ provider: 'gemini', model: 'model-a' }], {
+      gemini,
+    });
+
+    await router.generateFromImageStream(
+      'p',
+      { mimeType: 'image/jpeg', base64Data: 'aW1n' },
+      { step: 'extraction' },
+    );
+
+    expect(shadowRuns).not.toHaveBeenCalled();
+  });
+
   it('hops ACROSS providers on a recoverable failure', async () => {
     const gemini = buildAdapter(() => Promise.reject(rateLimited()));
     const qwen = buildAdapter(() => Promise.resolve('qwen-ok'));

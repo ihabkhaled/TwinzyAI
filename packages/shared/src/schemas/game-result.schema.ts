@@ -8,7 +8,6 @@ import {
   MAX_NAME_LENGTH,
   MAX_REASON_LENGTH,
   MAX_TRAIT_ARRAY_ITEMS,
-  MAX_TRAIT_REFERENCE_LENGTH,
 } from '../constants/response-bounds.constants';
 import {
   MAX_RESULT_COUNT,
@@ -18,27 +17,23 @@ import {
 } from '../constants/trait.constants';
 import {
   MAX_COMPACT_TRAIT_SUMMARY,
-  MAX_TRAIT_COUNT,
   MAX_TRAIT_TEXT_LENGTH,
+  TOTAL_TRAIT_FIELDS,
 } from '../constants/trait-category.constants';
 import { CONFIDENCE_LEVEL_VALUES } from '../enums/confidence.enum';
 import { PUBLIC_CATEGORY_VALUES } from '../enums/public-category.enum';
 import { VERDICT_VALUES } from '../enums/verdict.enum';
 
+import { JudgeSafetyCheckSchema, TraitReferenceSchema } from './judge.schema';
 import { LanguageCodeSchema } from './language.schema';
 import { TraitsSchema } from './traits.schema';
 
-/** Short localized trait-reference text shown in result detail lists. */
-const traitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH);
-
-export const FinalResultSafetyCheckSchema = z.strictObject({
-  containsFaceRecognitionClaim: z.literal(false),
-  containsBiometricClaim: z.literal(false),
-  containsIdentityClaim: z.literal(false),
-  containsExactLookalikeClaim: z.literal(false),
-  containsSensitiveInference: z.literal(false),
-  meetsMinimumEvidence: z.boolean(),
-});
+/**
+ * Strict variant of the judge safety check for the final API response —
+ * derived from {@link JudgeSafetyCheckSchema} so the two shapes can never
+ * drift; strictObject additionally rejects unknown keys at the response edge.
+ */
+export const FinalResultSafetyCheckSchema = z.strictObject(JudgeSafetyCheckSchema.shape);
 
 /**
  * One displayed match in the final API response: identity-safe name, rank,
@@ -53,10 +48,10 @@ export const FinalResultItemSchema = z.strictObject({
   countryOrRegion: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   publicCategory: z.enum(PUBLIC_CATEGORY_VALUES),
   finalReason: z.string().trim().min(1).max(MAX_REASON_LENGTH),
-  topMatchingTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
-  secondaryMatchingTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
-  weakOrUncertainTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
-  mismatchWarnings: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  topMatchingTraits: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  secondaryMatchingTraits: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  weakOrUncertainTraits: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  mismatchWarnings: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   judgeNotes: z.string().trim().min(1).max(MAX_JUDGE_NOTES_LENGTH),
   safetyCheck: FinalResultSafetyCheckSchema,
 });
@@ -72,7 +67,7 @@ export const FinalGameResultSchema = z
     promptVersion: z.literal(GAME_PROMPT_VERSION),
     languageCode: LanguageCodeSchema,
     resultCount: z.number().int().min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT),
-    traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT),
+    traitCount: z.number().int().min(0).max(TOTAL_TRAIT_FIELDS),
     traits: TraitsSchema,
     compactTraitSummary: z
       .array(z.string().trim().min(1).max(MAX_TRAIT_TEXT_LENGTH))

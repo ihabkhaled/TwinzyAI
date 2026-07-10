@@ -1,5 +1,3 @@
-export const GEMINI_PROVIDER_NAME = 'gemini';
-
 /** Deterministic-ish output for a judging/extraction pipeline. */
 export const GEMINI_TEMPERATURE = 0.4;
 

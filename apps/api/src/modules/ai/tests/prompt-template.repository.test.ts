@@ -2,8 +2,6 @@ import type * as NodeFs from 'node:fs';
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { APP_NAME, MODEL_PROVIDER } from '@twinzy/shared';
-
 import { AppError, ErrorCode } from '../../../core/errors';
 import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stubs';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
@@ -53,7 +51,7 @@ describe('PromptTemplateRepository', () => {
   it('replaces every placeholder and caches the template across repeat builds', () => {
     existsSyncMock.mockReturnValue(true);
     readFileSyncMock.mockReturnValue(
-      `Traits: ${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} for ${PromptPlaceholder.AppName} via ${PromptPlaceholder.ModelProvider} count ${PromptPlaceholder.ResultCount} region ${PromptPlaceholder.RegionHint}`,
+      `Traits: ${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount} region ${PromptPlaceholder.RegionHint}`,
     );
     const repository = buildRepository();
 
@@ -71,11 +69,8 @@ describe('PromptTemplateRepository', () => {
     });
 
     expect(first).toContain('{"a":1}');
-    expect(first).toContain(APP_NAME);
-    expect(first).toContain(MODEL_PROVIDER);
     expect(first).not.toContain(PromptPlaceholder.TraitsJson);
     expect(first).not.toContain(PromptPlaceholder.LanguageCode);
-    expect(first).not.toContain(PromptPlaceholder.AppName);
     expect(second).toContain('{"b":2}');
     // Second build must not re-read the file: the template is cached.
     expect(readFileSyncMock).toHaveBeenCalledTimes(1);
@@ -149,6 +144,7 @@ describe('PromptTemplateRepository', () => {
         [PromptPlaceholder.TraitsJson]: '{"d":4}',
         [PromptPlaceholder.LanguageCode]: 'en',
         [PromptPlaceholder.ResultCount]: '10',
+        [PromptPlaceholder.RegionHint]: 'global audience',
       }),
     );
 
@@ -160,7 +156,7 @@ describe('PromptTemplateRepository', () => {
     // CandidateGeneration does not require CandidatesJson; the extra
     // placeholder is never provided, so it survives replacement and must fail.
     readFileSyncMock.mockReturnValue(
-      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount} and ${PromptPlaceholder.CandidatesJson}`,
+      `${PromptPlaceholder.TraitsJson} in ${PromptPlaceholder.LanguageCode} count ${PromptPlaceholder.ResultCount} region ${PromptPlaceholder.RegionHint} and ${PromptPlaceholder.CandidatesJson}`,
     );
     const repository = buildRepository();
 
@@ -169,6 +165,7 @@ describe('PromptTemplateRepository', () => {
         [PromptPlaceholder.TraitsJson]: '{"e":5}',
         [PromptPlaceholder.LanguageCode]: 'en',
         [PromptPlaceholder.ResultCount]: '10',
+        [PromptPlaceholder.RegionHint]: 'global audience',
       }),
     );
 

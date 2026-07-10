@@ -25,7 +25,7 @@ import { Verdict, VERDICT_VALUES } from '../enums/verdict.enum';
 import { LanguageCodeSchema } from './language.schema';
 
 /** Short localized trait-reference text used across judged detail arrays. */
-const traitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH);
+export const TraitReferenceSchema = z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH);
 
 /** Gemini sometimes omits or mangles rank; keep the result and let backend sorting re-rank later. */
 const normalizeRank = (value: unknown): unknown =>
@@ -53,10 +53,10 @@ export const JudgedResultSchema = z.object({
   countryOrRegion: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   publicCategory: z.enum(PUBLIC_CATEGORY_VALUES).catch(PublicCategory.Other),
   finalReason: z.string().trim().min(1).max(MAX_REASON_LENGTH),
-  topMatchingTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
-  secondaryMatchingTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
-  weakOrUncertainTraits: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
-  mismatchWarnings: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  topMatchingTraits: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  secondaryMatchingTraits: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  weakOrUncertainTraits: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  mismatchWarnings: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   judgeNotes: z.string().trim().min(1).max(MAX_JUDGE_NOTES_LENGTH),
   shouldDisplay: z.boolean(),
   safetyCheck: JudgeSafetyCheckSchema,

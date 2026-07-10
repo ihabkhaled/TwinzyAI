@@ -1,5 +1,6 @@
 import { AI_PROVIDER_VALUES, AiProvider, type AiProviderValue } from './ai-provider.constants';
-import type { AiRouteEntry } from './ai-route.types';
+import { MAX_AI_ROUTE_ENTRIES } from './ai-route.constants';
+import { type AiRouteEntry, routeEntryKey } from './ai-route.types';
 
 const isKnownProvider = (value: string): value is AiProviderValue =>
   (AI_PROVIDER_VALUES as readonly string[]).includes(value);
@@ -29,10 +30,24 @@ export const parseAiRouteToken = (token: string, sourceKey: string): AiRouteEntr
   return { provider, model };
 };
 
-/** Parse a comma-separated route list, trimming and dropping empty tokens. */
-export const parseAiRouteList = (raw: string, sourceKey: string): AiRouteEntry[] =>
-  raw
+/** Parse a bounded, de-duplicated comma-separated route list. */
+export const parseAiRouteList = (raw: string, sourceKey: string): AiRouteEntry[] => {
+  const tokens = raw
     .split(',')
     .map((token) => token.trim())
-    .filter((token) => token.length > 0)
-    .map((token) => parseAiRouteToken(token, sourceKey));
+    .filter((token) => token.length > 0);
+  if (tokens.length > MAX_AI_ROUTE_ENTRIES) {
+    throw new Error(`Invalid AI route in ${sourceKey}: more than ${MAX_AI_ROUTE_ENTRIES} entries`);
+  }
+  const entries: AiRouteEntry[] = [];
+  const seen = new Set<string>();
+  for (const token of tokens) {
+    const entry = parseAiRouteToken(token, sourceKey);
+    const key = routeEntryKey(entry);
+    if (!seen.has(key)) {
+      seen.add(key);
+      entries.push(entry);
+    }
+  }
+  return entries;
+};

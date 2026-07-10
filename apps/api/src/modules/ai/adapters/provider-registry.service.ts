@@ -79,7 +79,7 @@ export class ProviderRegistryService implements OnModuleInit {
     return resolved.filter(
       (entry) =>
         this.config.isProviderEnabled(entry.provider) &&
-        (!carriesImage || this.config.isVisionCapable(entry)),
+        (!carriesImage || entry.provider === AiProvider.Gemini),
     );
   }
 

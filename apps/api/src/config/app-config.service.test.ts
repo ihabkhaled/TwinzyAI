@@ -1,6 +1,7 @@
 import type { ConfigService } from '@nestjs/config';
 import { describe, expect, it } from 'vitest';
 
+import { MAX_AI_ROUTE_ENTRIES } from './ai-route.constants';
 import { AppConfigService } from './app-config.service';
 import type { ParsedEnv } from './env.schema';
 import { GeminiStep } from './gemini-step.constants';
@@ -105,9 +106,28 @@ describe('AppConfigService.aiRouteFor (multi-provider routes)', () => {
     const config = buildService({ ...BASE_ENV, AI_ROUTE_JUDGE: 'nonsense:model' });
     expect(() => config.aiRouteFor(GeminiStep.Judge)).toThrow(/unknown provider "nonsense"/);
   });
+
+  it('de-duplicates route entries and rejects an unbounded chain', () => {
+    const deduped = buildService({
+      ...BASE_ENV,
+      AI_ROUTE_JUDGE: 'gemini:model-a,gemini:model-a',
+    });
+    expect(deduped.aiRouteFor(GeminiStep.Judge)).toEqual([
+      { provider: 'gemini', model: 'model-a' },
+    ]);
+
+    const unbounded = buildService({
+      ...BASE_ENV,
+      AI_ROUTE_JUDGE: Array.from(
+        { length: MAX_AI_ROUTE_ENTRIES + 1 },
+        (_unused, index) => `gemini:model-${index}`,
+      ).join(','),
+    });
+    expect(() => unbounded.aiRouteFor(GeminiStep.Judge)).toThrow(/more than/u);
+  });
 });
 
-describe('AppConfigService provider enablement + vision capability', () => {
+describe('AppConfigService provider enablement + shadow routing', () => {
   it('a provider is enabled iff its API key is configured', () => {
     const config = buildService({ ...BASE_ENV, GEMINI_API_KEY: 'g-key', QWEN_API_KEY: 'q-key' });
     expect(config.isProviderEnabled('gemini')).toBe(true);
@@ -119,14 +139,6 @@ describe('AppConfigService provider enablement + vision capability', () => {
     const config = buildService({ ...BASE_ENV, DEEPSEEK_BASE_URL: 'https://proxy.local/v1' });
     expect(config.openAiCompatCredential('deepseek').baseUrl).toBe('https://proxy.local/v1');
     expect(config.openAiCompatCredential('kimi').baseUrl).toContain('moonshot');
-  });
-
-  it('vision capability is fail-closed: gemini implicit, others only when declared', () => {
-    const config = buildService({ ...BASE_ENV, AI_VISION_MODELS: 'qwen:qwen3-vl-plus' });
-    expect(config.isVisionCapable({ provider: 'gemini', model: 'anything' })).toBe(true);
-    expect(config.isVisionCapable({ provider: 'qwen', model: 'qwen3-vl-plus' })).toBe(true);
-    expect(config.isVisionCapable({ provider: 'qwen', model: 'qwen-flash' })).toBe(false);
-    expect(config.isVisionCapable({ provider: 'openai', model: 'gpt-5.4' })).toBe(false);
   });
 
   it('shadowRouteFor returns the first configured entry or undefined', () => {

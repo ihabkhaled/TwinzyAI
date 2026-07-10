@@ -4,8 +4,8 @@ import { MAX_NAME_LENGTH } from '../constants/response-bounds.constants';
 import { MAX_CANDIDATE_POOL, MAX_RESULT_COUNT } from '../constants/trait.constants';
 import {
   MAX_COMPACT_TRAIT_SUMMARY,
-  MAX_TRAIT_COUNT,
   MAX_TRAIT_TEXT_LENGTH,
+  TOTAL_TRAIT_FIELDS,
 } from '../constants/trait-category.constants';
 import { GAME_STREAM_STAGE_VALUES, GameStreamEvent } from '../enums/game-stream.enum';
 import { STREAM_STATUS_VALUES } from '../enums/stream-status.enum';
@@ -69,7 +69,7 @@ export const AcceptedStreamMessageSchema = z.object({
  */
 export const TraitsStreamMessageSchema = z.object({
   event: z.literal(GameStreamEvent.Traits),
-  traitCount: z.number().int().min(0).max(MAX_TRAIT_COUNT),
+  traitCount: z.number().int().min(0).max(TOTAL_TRAIT_FIELDS),
   compactTraitSummary: z
     .array(z.string().trim().min(1).max(MAX_TRAIT_TEXT_LENGTH))
     .min(1)

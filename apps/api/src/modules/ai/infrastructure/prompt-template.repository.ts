@@ -3,8 +3,6 @@ import path from 'node:path';
 
 import { Injectable } from '@nestjs/common';
 
-import { APP_NAME, MODEL_PROVIDER } from '@twinzy/shared';
-
 import { AppConfigService } from '../../../config/app-config.service';
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
@@ -76,12 +74,6 @@ export class PromptTemplateRepository {
       }
       prompt = prompt.split(placeholder).join(value);
     }
-
-    prompt = prompt
-      .split(PromptPlaceholder.AppName)
-      .join(APP_NAME)
-      .split(PromptPlaceholder.ModelProvider)
-      .join(MODEL_PROVIDER);
 
     this.assertNoUnreplacedPlaceholders(key, prompt);
 

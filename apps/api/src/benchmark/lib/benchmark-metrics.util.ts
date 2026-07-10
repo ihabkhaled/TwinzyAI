@@ -4,12 +4,12 @@ import {
   CandidateGenerationResponseSchema,
   CandidateJudgeResponseSchema,
   FinalGameResultSchema,
-  FORBIDDEN_RESULT_PHRASES,
   TraitExtractionResponseSchema,
 } from '@twinzy/shared';
 
 import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import { GeminiStep } from '../../config/gemini-step.constants';
+import { containsForbiddenWording } from '../../modules/ai/lib/forbidden-wording.guard';
 import { buildSchemaValidator } from '../../modules/ai/lib/json-response.util';
 import type { AiContentValidator } from '../../modules/ai/model/ai-provider-adapter.types';
 import {
@@ -30,8 +30,10 @@ const SCHEMA_BY_STEP: Record<GeminiStepValue, z.ZodType> = {
   [GeminiStep.Translation]: FinalGameResultSchema,
 };
 
+const SERVER_OWNED_TEXT_FIELDS = new Set(['disclaimer', 'fallbackMessage']);
+
 /** The exact validator each step's service uses in production. */
-export const validatorForStep = (step: GeminiStepValue): AiContentValidator =>
+const validatorForStep = (step: GeminiStepValue): AiContentValidator =>
   buildSchemaValidator(SCHEMA_BY_STEP[step]);
 
 /** Collect every string leaf of a parsed JSON value (bounded by JSON size). */
@@ -47,13 +49,20 @@ const collectStrings = (value: unknown, sink: string[]): void => {
     return;
   }
   if (typeof value === 'object' && value !== null) {
-    for (const item of Object.values(value)) {
+    for (const [key, item] of Object.entries(value)) {
+      if (SERVER_OWNED_TEXT_FIELDS.has(key)) {
+        continue;
+      }
       collectStrings(item, sink);
     }
   }
 };
 
-/** True when no string leaf contains a forbidden phrase (case-insensitive). */
+/**
+ * True when no string leaf contains forbidden wording. Reuses the exact
+ * production guard (merged result-phrase + sensitive-topic lists), so the
+ * benchmark's safety axis measures the same policy the pipeline enforces.
+ */
 export const passesSafetyScan = (rawText: string): boolean => {
   let parsed: unknown;
   try {
@@ -63,10 +72,7 @@ export const passesSafetyScan = (rawText: string): boolean => {
   }
   const leaves: string[] = [];
   collectStrings(parsed, leaves);
-  return !leaves.some((leaf) => {
-    const lowered = leaf.toLowerCase();
-    return FORBIDDEN_RESULT_PHRASES.some((phrase) => lowered.includes(phrase));
-  });
+  return leaves.every((leaf) => !containsForbiddenWording(leaf));
 };
 
 /** Evaluate one raw model response on the three benchmark axes. */

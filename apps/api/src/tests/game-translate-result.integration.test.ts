@@ -5,7 +5,7 @@ import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 
-import { GAME_PROMPT_VERSION, RESULT_DISCLAIMER_BY_LANGUAGE } from '@twinzy/shared';
+import { GAME_TRANSLATE_RESULT_PATH, RESULT_DISCLAIMER_BY_LANGUAGE } from '@twinzy/shared';
 
 import { AppModule } from '../app.module';
 import { createTestApp } from '../bootstrap/create-test-app';
@@ -15,7 +15,7 @@ import { ClamAvAdapter } from '../modules/file-security/adapters/clamav.adapter'
 import { buildFinalGameResultPayload, FakeAiAdapter } from './fixtures/fake-ai-adapter';
 import { buildCleanClamAvStub } from './fixtures/stubs';
 
-const TRANSLATE_PATH = '/api/v1/game/translate-result';
+const TRANSLATE_PATH = GAME_TRANSLATE_RESULT_PATH;
 
 /** A faithful Arabic-side translation the fake model returns. */
 const buildTranslatedPayload = (): Record<string, unknown> =>
@@ -57,7 +57,7 @@ describe('POST /api/v1/game/translate-result (integration)', () => {
     adapter.queueTextResponse(JSON.stringify(buildTranslatedPayload()));
 
     const response = await request(server())
-      .post(TRANSLATE_PATH)
+      .post(GAME_TRANSLATE_RESULT_PATH)
       .send({ targetLanguageCode: 'ar', result: buildFinalGameResultPayload() })
       .expect(201);
 
@@ -114,6 +114,29 @@ describe('POST /api/v1/game/translate-result (integration)', () => {
     );
   });
 
+  it('enforces the localized fallback when the original has no results', async () => {
+    const original = buildFinalGameResultPayload({
+      results: [],
+      fallbackMessage: 'No match',
+      compactTraitSummary: ['clear oval face', 'wavy dark hair'],
+    });
+    const translated = {
+      ...original,
+      languageCode: 'ar',
+      fallbackMessage: 'model fallback',
+    };
+    adapter.queueTextResponse(JSON.stringify(translated));
+
+    const response = await request(server())
+      .post(TRANSLATE_PATH)
+      .send({ targetLanguageCode: 'ar', result: original })
+      .expect(201);
+
+    expect((response.body as { fallbackMessage: string }).fallbackMessage).not.toBe(
+      'model fallback',
+    );
+  });
+
   it('rejects a translation that changes names (no new matching possible)', async () => {
     const renamed = buildTranslatedPayload();
     const results = renamed['results'] as Record<string, unknown>[];
@@ -121,6 +144,23 @@ describe('POST /api/v1/game/translate-result (integration)', () => {
       results[0]['name'] = 'A Completely Different Person';
     }
     adapter.queueTextResponse(JSON.stringify(renamed));
+
+    const response = await request(server())
+      .post(TRANSLATE_PATH)
+      .send({ targetLanguageCode: 'ar', result: buildFinalGameResultPayload() })
+      .expect(502);
+
+    expect((response.body as { errorCode: string }).errorCode).toBe('AI_RESPONSE_INVALID');
+  });
+
+  it('rejects nested trait-shape drift', async () => {
+    const drifted = buildTranslatedPayload();
+    const traits = drifted['traits'] as Record<string, Record<string, unknown>>;
+    const hair = traits['hair'];
+    if (hair !== undefined) {
+      delete hair['hairColor'];
+    }
+    adapter.queueTextResponse(JSON.stringify(drifted));
 
     const response = await request(server())
       .post(TRANSLATE_PATH)
@@ -160,14 +200,19 @@ describe('POST /api/v1/game/translate-result (integration)', () => {
     expect(adapter.textCalls).toHaveLength(0);
   });
 
-  it('echoes the active prompt version on the translated payload', async () => {
-    adapter.queueTextResponse(JSON.stringify(buildTranslatedPayload()));
+  it('rejects unsafe original text before calling the translation provider', async () => {
+    const unsafe = buildFinalGameResultPayload();
+    const results = unsafe['results'] as Record<string, unknown>[];
+    if (results[0] !== undefined) {
+      results[0]['finalReason'] = 'we identified this person';
+    }
 
     const response = await request(server())
       .post(TRANSLATE_PATH)
-      .send({ targetLanguageCode: 'ar', result: buildFinalGameResultPayload() })
-      .expect(201);
+      .send({ targetLanguageCode: 'ar', result: unsafe })
+      .expect(502);
 
-    expect((response.body as { promptVersion: string }).promptVersion).toBe(GAME_PROMPT_VERSION);
+    expect((response.body as { errorCode: string }).errorCode).toBe('AI_RESPONSE_UNSAFE');
+    expect(adapter.textCalls).toHaveLength(0);
   });
 });

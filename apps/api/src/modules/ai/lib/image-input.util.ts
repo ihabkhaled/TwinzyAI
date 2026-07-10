@@ -1,10 +1,8 @@
 import type { AiImageInput, AiImageSource } from '../model/gemini.types';
 
 /**
- * Encodes the validated upload into the provider image payload EXACTLY ONCE per
- * request — the base64 of a multi-MB photo is the request path's biggest
- * synchronous CPU cost, so the result is built by the use-case and reused across
- * all three model calls, never re-encoded per step.
+ * Encodes a validated upload for the single image-capable extraction call.
+ * The result never crosses into candidate generation or judging.
  */
 export const buildAiImageInput = (source: AiImageSource): AiImageInput => ({
   mimeType: source.mimetype,
