@@ -63,6 +63,11 @@ export default defineConfig({
       NEXT_PUBLIC_APP_ENV: 'test',
       NEXT_PUBLIC_API_BASE_URL: BASE_URL,
       NEXT_PUBLIC_PAYPAL_ME_USERNAME: 'twinzye2e',
+      // Pin the paid-analysis paywall OFF for the whole e2e suite so the free
+      // flow is exercised deterministically. Set explicitly (not just omitted)
+      // because next.config's root-.env loader would otherwise inject the
+      // developer's real client id; an already-set key always wins.
+      NEXT_PUBLIC_PAYPAL_CLIENT_ID: '',
     },
     timeout: 180_000,
   },

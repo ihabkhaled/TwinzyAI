@@ -10,6 +10,7 @@ import type {
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
 import type { GamePhaseValue } from './game.enums';
+import type { PaymentViewModel } from './payment.types';
 import type { ShareModalViewModel } from './share-modal.types';
 
 /** Live mid-pipeline trait progress: the count + strongest written signals. */
@@ -118,6 +119,8 @@ export interface AnalyzeRunInput {
   requestId: string;
   signal: AbortSignal;
   resultCount: number;
+  /** Present only when the paid-analysis gate is on (approved PayPal order). */
+  paypalOrderId?: string;
 }
 
 /** Per-run correlation + cancel controls + result count threaded to the streaming gateway. */
@@ -125,11 +128,18 @@ export interface AnalyzeStreamOptions {
   requestId: string;
   signal: AbortSignal;
   resultCount: number;
+  paypalOrderId?: string;
 }
 
 /** The run-control surface: start a fresh analyze run, or cancel the in-flight one. */
+/** Optional payment binding threaded into a paid run (shared requestId + order). */
+export interface AnalyzeRunPayment {
+  requestId: string;
+  paypalOrderId: string;
+}
+
 export interface AnalyzeRunControl {
-  beginRun: (file: File, resultCount: number) => void;
+  beginRun: (file: File, resultCount: number, payment?: AnalyzeRunPayment) => void;
   cancelRun: () => void;
 }
 
@@ -346,6 +356,9 @@ export interface GameScreenLabels {
   cancelProcessing: string;
   retryTranslation: string;
   privacyNotice: string;
+  paymentTitle: string;
+  paymentDescription: string;
+  paymentCancel: string;
   upload: UploadLabels;
   resultCount: ResultCountLabels;
   camera: CameraLabels;
@@ -399,4 +412,7 @@ export interface GameViewModel {
   share: ShareViewModel;
   shareModal: ShareModalViewModel;
   translation: TranslationViewModel;
+  payment: PaymentViewModel;
+  /** Recoverable payment error copy (order/approval failed); undefined otherwise. */
+  paymentErrorMessage: string | undefined;
 }

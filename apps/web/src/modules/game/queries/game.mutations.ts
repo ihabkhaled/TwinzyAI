@@ -32,6 +32,7 @@ export const useAnalyzeGameMutation = (
         requestId: input.requestId,
         signal: input.signal,
         resultCount: input.resultCount,
+        ...(input.paypalOrderId !== undefined && { paypalOrderId: input.paypalOrderId }),
       }),
   });
 

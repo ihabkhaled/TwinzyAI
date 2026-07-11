@@ -34,8 +34,7 @@ export const HTTP_STATUS_NOT_FOUND = 404;
  */
 export const PAYPAL_ORDER_ID_PATTERN = /^[A-Z0-9-]{8,64}$/;
 
-/** Multipart field on the analyze request carrying the approved order id. */
-export const PAYMENT_ORDER_FIELD_NAME = 'paypalOrderId';
+export { PAYMENT_ORDER_FIELD_NAME } from '@twinzy/shared';
 
 /** Order/capture statuses the gate accepts as "money actually moved". */
 export const PAYPAL_STATUS_COMPLETED = 'COMPLETED';

@@ -14,5 +14,6 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_APP_ENV?: string;
     readonly NEXT_PUBLIC_API_BASE_URL?: string;
     readonly NEXT_PUBLIC_PAYPAL_ME_USERNAME?: string;
+    readonly NEXT_PUBLIC_PAYPAL_CLIENT_ID?: string;
   }
 }

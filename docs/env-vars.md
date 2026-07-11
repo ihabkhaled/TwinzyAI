@@ -22,6 +22,12 @@
 | NEXT_PUBLIC_API_BASE_URL | web | http://localhost:4000 | baked at build; safe public value |
 | NEXT_PUBLIC_APP_ENV | web | local | local, test, staging, production; controls dev-only tools |
 | NEXT_PUBLIC_PAYPAL_ME_USERNAME | web | (empty = link hidden) | voluntary donate link handle; alphanumeric 1-50 only (zod fail-fast); app never processes money |
+| NEXT_PUBLIC_PAYPAL_CLIENT_ID | web | (empty = paywall off) | public PayPal Buttons client id; enables the $0.50 payment step; charset+length bounded |
+| PAYPAL_CLIENT_ID | api | (empty = paywall off) | PayPal REST client id (server secret); with the secret, turns the paid-analysis gate ON |
+| PAYPAL_CLIENT_SECRET | api | (empty = paywall off) | PayPal REST secret (server secret; never NEXT_PUBLIC) |
+| PAYPAL_ENV | api | sandbox | sandbox | live — which PayPal endpoint the credentials target |
+| PAYMENT_PRICE_VALUE | api | 0.50 | server-authoritative price per analysis (dot-decimal); never trusted from clients |
+| PAYMENT_PRICE_CURRENCY | api | USD | ISO-4217 currency for the price |
 
 Only `apps/api/src/config`, API bootstrap, web/tooling config, and
 `apps/web/src/packages/env` may read `process.env` (lint-enforced).

@@ -5,6 +5,7 @@
  */
 export const GamePhase = {
   Setup: 'setup',
+  Payment: 'payment',
   Processing: 'processing',
   Success: 'success',
   Error: 'error',

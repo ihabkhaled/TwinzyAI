@@ -8,10 +8,12 @@ export const appHeaderInnerClass =
 export const appHeaderBrandClass =
   'inline-flex items-center gap-2 text-base font-semibold text-foreground';
 
-export const appHeaderControlsClass = 'inline-flex items-center gap-1';
+export const appHeaderControlsClass = 'inline-flex items-center gap-0.5 sm:gap-1';
 
+// Padding tightens on phones so all four controls (home, donate, language,
+// theme) fit a 320px header without horizontal scroll; roomier from sm up.
 export const headerIconLinkClass =
-  'inline-flex h-9 cursor-pointer items-center justify-center rounded-xl px-3 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
+  'inline-flex h-9 cursor-pointer items-center justify-center rounded-xl px-2 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-3';
 
 /** Donate nav link: the icon link recipe plus a small gap for its label. */
 export const headerDonateLinkClass = `${headerIconLinkClass} gap-1.5`;

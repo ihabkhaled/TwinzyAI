@@ -1,4 +1,5 @@
 import type { LanguageCodeValue } from '@twinzy/shared';
+import { PAYMENT_ORDER_FIELD_NAME } from '@twinzy/shared';
 
 import {
   CONSENT_FIELD_NAME,
@@ -18,11 +19,15 @@ export function buildAnalyzeFormData(
   file: File,
   languageCode: LanguageCodeValue,
   resultCount: number,
+  paypalOrderId?: string,
 ): FormData {
   const formData = new FormData();
   formData.append(CONSENT_FIELD_NAME, CONSENT_FIELD_VALUE);
   formData.append(UPLOAD_FIELD_NAME, file, file.name);
   formData.append(LANGUAGE_FIELD_NAME, languageCode);
   formData.append(RESULT_COUNT_FIELD_NAME, String(resultCount));
+  if (paypalOrderId !== undefined) {
+    formData.append(PAYMENT_ORDER_FIELD_NAME, paypalOrderId);
+  }
   return formData;
 }

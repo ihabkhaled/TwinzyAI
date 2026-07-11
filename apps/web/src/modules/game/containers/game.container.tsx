@@ -18,6 +18,7 @@ import { gameTitleClass } from './game.container.variants';
 import { GameProcessing } from './game-processing.container';
 import { GameResult } from './game-result.container';
 import { GameSetup } from './game-setup.container';
+import { PaymentStep } from './payment-step.container';
 import { ShareModal } from './share-modal.container';
 
 const renderProcessing = (
@@ -115,6 +116,15 @@ export const GameContainer = (): ReactElement => {
     <Stack gap="lg">
       <h1 className={gameTitleClass}>{labels.title}</h1>
       {vm.phase === GamePhase.Setup && <GameSetup vm={vm} labels={labels} />}
+      {vm.phase === GamePhase.Payment && (
+        <PaymentStep
+          title={labels.paymentTitle}
+          description={labels.paymentDescription}
+          cancelLabel={labels.paymentCancel}
+          errorMessage={vm.paymentErrorMessage}
+          payment={vm.payment}
+        />
+      )}
       {vm.phase === GamePhase.Processing && renderProcessing(vm, labels, translate)}
       {vm.phase === GamePhase.Error && vm.errorMessage !== undefined && renderError(vm, labels)}
       {vm.phase === GamePhase.Success && renderSuccess(vm, labels, translate)}

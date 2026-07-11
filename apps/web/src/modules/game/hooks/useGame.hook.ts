@@ -7,19 +7,9 @@ import { normalizeLanguageCode } from '@twinzy/shared';
 
 import { useAppLocale, useAppTranslation } from '@/packages/i18n';
 
-import {
-  composeErrorMessage,
-  resolvePhase,
-  resolveStageLabel,
-} from '../helpers/game-display.helper';
+import { composeErrorMessage, resolvePhase } from '../helpers/game-display.helper';
 import { extractFailedStage, toFriendlyErrorMessageKey } from '../helpers/game-error.helper';
-import {
-  buildCameraViewModel,
-  buildShareViewModel,
-  buildTranslationViewModel,
-  buildUploadViewModel,
-} from '../helpers/game-view-model.helper';
-import { buildShareModalViewModel } from '../helpers/share-view-model.helper';
+import { assembleGameViewModel } from '../helpers/game-view-model.assembler';
 import { mapFinalResultToView } from '../mappers/game.mapper';
 import type { GameResultView, GameViewModel, TranslateMessage } from '../model/game.types';
 import { useAnalyzeGameMutation } from '../queries/game.mutations';
@@ -27,6 +17,7 @@ import { useAnalyzeGameMutation } from '../queries/game.mutations';
 import { useAnalyzeRunControl } from './useAnalyzeRunControl.hook';
 import { useCameraCapture } from './useCameraCapture.hook';
 import { useImageUpload } from './useImageUpload.hook';
+import { usePaymentFlow } from './usePaymentFlow.hook';
 import { useResultCount } from './useResultCount.hook';
 import { useResultTranslation } from './useResultTranslation.hook';
 import { useRunRecovery } from './useRunRecovery.hook';
@@ -58,21 +49,22 @@ export const useGame = (): GameViewModel => {
   const [consentGiven, setConsentGiven] = useState(false);
   const { resultCount, resultCountOptions, onResultCountChange } = useResultCount();
   const { beginRun, cancelRun } = useAnalyzeRunControl(analyze);
+  const payment = usePaymentFlow({ beginRun });
 
   const onConsentChange = useCallback((checked: boolean): void => {
     setConsentGiven(checked);
   }, []);
 
-  const canAnalyze = file !== undefined && consentGiven && !isPending;
+  const canAnalyze = file !== undefined && consentGiven && !isPending && !payment.isPaying;
 
   const onAnalyze = useCallback((): void => {
-    if (file === undefined || !consentGiven || isPending) {
+    if (file === undefined || !consentGiven || isPending || payment.isPaying) {
       return;
     }
 
     progress.reset();
-    beginRun(file, resultCount);
-  }, [file, consentGiven, isPending, beginRun, progress, resultCount]);
+    payment.beginPaidRun(file, resultCount);
+  }, [file, consentGiven, isPending, payment, progress, resultCount]);
 
   const recovery = useRunRecovery({
     file,
@@ -93,42 +85,38 @@ export const useGame = (): GameViewModel => {
       : mapFinalResultToView(translation.displayResult, translate);
 
   const shareText = resultView?.shareText ?? '';
+  // The result "Share" button opens the temporary-link modal (copy/native/platform).
   const shareCreate = useShareCreate(translation.displayResult, shareText);
 
-  // The result "Share" button opens the temporary-link modal, which creates the
-  // link and offers copy / native / platform sharing.
-  const onShareResult = shareCreate.open;
-
-  return {
-    phase: resolvePhase(isPending, isSuccess, recovery.isRealError),
+  return assembleGameViewModel({
+    translate,
+    phase: resolvePhase(isPending, isSuccess, recovery.isRealError, payment.isPaying),
     consentGiven,
     onConsentChange,
     canAnalyze,
     onAnalyze,
-    onRetry: recovery.onRetry,
-    onShareResult,
-    resultView,
     errorMessage: recovery.isRealError
       ? composeErrorMessage(translate, toFriendlyErrorMessageKey(error), extractFailedStage(error))
       : undefined,
-    onCancelProcessing: recovery.onCancelProcessing,
-    canRetrySamePhoto: recovery.canRetrySamePhoto,
-    onRetrySamePhoto: recovery.onRetrySamePhoto,
-    stageLabel: resolveStageLabel(translate, progress.currentStage),
-    liveTraitCount: progress.traitsProgress?.traitCount,
-    liveSummary: [...(progress.traitsProgress?.compactTraitSummary ?? [])],
-    liveCandidates: [...progress.candidateNames],
+    payment,
+    paymentPriceLabel: translate('game.paymentTitle'),
+    onPaymentError: payment.onError,
+    paymentErrorMessage:
+      payment.errorKey === undefined
+        ? undefined
+        : composeErrorMessage(translate, payment.errorKey, undefined),
+    resultView,
+    recovery,
+    progress,
     resultCount,
-    resultCountOptions: [...resultCountOptions],
+    resultCountOptions,
     onResultCountChange,
-    upload: buildUploadViewModel(
-      { file, onFileChange, clearFile, fileErrorKey },
-      previewUrl,
-      translate,
-    ),
-    camera: buildCameraViewModel(camera, translate),
-    share: buildShareViewModel({ feedbackKey }, translate),
-    shareModal: buildShareModalViewModel(shareCreate, shareText, translate),
-    translation: buildTranslationViewModel(translation, translate),
-  };
+    upload: { file, previewUrl, fileErrorKey, onFileChange, acceptFile, clearFile },
+    camera,
+    onShareResult: shareCreate.open,
+    feedbackKey,
+    shareCreate,
+    shareText,
+    translation,
+  });
 };

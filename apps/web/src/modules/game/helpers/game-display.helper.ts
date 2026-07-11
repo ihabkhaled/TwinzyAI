@@ -29,6 +29,7 @@ export const resolvePhase = (
   isPending: boolean,
   isSuccess: boolean,
   isError: boolean,
+  isPaying = false,
 ): GamePhaseValue => {
   if (isPending) {
     return GamePhase.Processing;
@@ -38,6 +39,9 @@ export const resolvePhase = (
   }
   if (isError) {
     return GamePhase.Error;
+  }
+  if (isPaying) {
+    return GamePhase.Payment;
   }
   return GamePhase.Setup;
 };
@@ -151,6 +155,9 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   cancelProcessing: translate('game.cancelProcessing'),
   retryTranslation: translate('game.retryTranslation'),
   privacyNotice: translate('home.privacyNotice'),
+  paymentTitle: translate('game.paymentTitle'),
+  paymentDescription: translate('game.paymentDescription'),
+  paymentCancel: translate('game.paymentCancel'),
   upload: {
     label: translate('upload.label'),
     hint: translate('upload.hint'),

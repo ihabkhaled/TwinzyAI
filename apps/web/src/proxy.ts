@@ -2,9 +2,18 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { isDevRuntime, publicEnv } from '@/packages/env';
+import { PAYPAL_CSP_ORIGINS } from '@/packages/paypal';
 
 const NONCE_HEADER = 'x-nonce';
 const CSP_HEADER = 'content-security-policy';
+
+/**
+ * PayPal origins added to the CSP only when the paywall is configured, so the
+ * Buttons SDK script, its checkout iframe, and its API calls are permitted
+ * without loosening the policy for the free game. Empty otherwise.
+ */
+const paypalCspOrigins = (): string =>
+  publicEnv.paypalClientId === undefined ? '' : ` ${PAYPAL_CSP_ORIGINS.join(' ')}`;
 
 /**
  * Build the per-request Content-Security-Policy. A fresh nonce authorizes only
@@ -16,17 +25,21 @@ const CSP_HEADER = 'content-security-policy';
  * environment stays eval-free.
  */
 const buildContentSecurityPolicy = (nonce: string): string => {
+  const paypal = paypalCspOrigins();
+  // The PayPal SDK loads its own further scripts, so it needs host-based
+  // allowance here (nonce/strict-dynamic alone cannot authorize them).
   const scriptSrc = isDevRuntime
-    ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'`
-    : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`;
+    ? `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval'${paypal}`
+    : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${paypal}`;
 
   return [
     `default-src 'self'`,
     scriptSrc,
     `style-src 'self' 'unsafe-inline'`,
-    `img-src 'self' blob: data:`,
+    `img-src 'self' blob: data:${paypal}`,
     `font-src 'self'`,
-    `connect-src 'self' ${publicEnv.apiBaseUrl}`,
+    `connect-src 'self' ${publicEnv.apiBaseUrl}${paypal}`,
+    `frame-src 'self'${paypal}`,
     `object-src 'none'`,
     `base-uri 'self'`,
     `form-action 'self'`,

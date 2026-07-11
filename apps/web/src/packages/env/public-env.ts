@@ -16,6 +16,9 @@ import { parseSchema, z } from '@/packages/zod';
  */
 export const PAYPAL_ME_USERNAME_PATTERN = /^[A-Z0-9]{1,50}$/i;
 
+/** PayPal REST client ids are URL-safe base64-ish tokens; bound charset + length. */
+export const PAYPAL_CLIENT_ID_PATTERN = /^[\w-]{20,120}$/;
+
 /** Treat an unset OR empty-string env value as "feature off" (link hidden). */
 const emptyToUndefined = (value: unknown): unknown => (value === '' ? undefined : value);
 
@@ -25,6 +28,12 @@ export const publicEnvSchema = z.object({
   paypalMeUsername: z.preprocess(
     emptyToUndefined,
     z.string().regex(PAYPAL_ME_USERNAME_PATTERN).optional(),
+  ),
+  // Public PayPal client id for the browser Buttons SDK (safe to expose).
+  // Charset-bounded so it can only ever be a query-param value, never markup.
+  paypalClientId: z.preprocess(
+    emptyToUndefined,
+    z.string().regex(PAYPAL_CLIENT_ID_PATTERN).optional(),
   ),
 });
 
@@ -36,6 +45,7 @@ export const publicEnv: PublicEnv = parseSchema(
     appEnv: process.env.NEXT_PUBLIC_APP_ENV,
     apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     paypalMeUsername: process.env.NEXT_PUBLIC_PAYPAL_ME_USERNAME,
+    paypalClientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   },
   'public environment',
 );

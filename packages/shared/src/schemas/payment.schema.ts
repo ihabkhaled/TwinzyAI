@@ -22,3 +22,6 @@ export const CreatePaymentOrderResponseSchema = z.strictObject({
 });
 
 export type CreatePaymentOrderResponse = z.infer<typeof CreatePaymentOrderResponseSchema>;
+
+/** Multipart field on the analyze request carrying the approved PayPal order id. */
+export const PAYMENT_ORDER_FIELD_NAME = 'paypalOrderId';
