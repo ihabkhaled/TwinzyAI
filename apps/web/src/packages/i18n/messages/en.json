@@ -473,6 +473,8 @@
     "a5": "Sometimes the traits are too generic or unclear for a confident playful match. Try a clearer, well-lit photo."
   },
   "errors": {
+    "payment": "Payment could not be completed. You have not been charged; please try again.",
+    "paymentRequired": "This analysis requires a small payment before it can run.",
     "fileMissing": "Please choose a photo first.",
     "fileTooLarge": "That photo is too big. Please pick one under 5 MB.",
     "fileTypeNotAllowed": "Please use a JPG, PNG, or WebP photo.",

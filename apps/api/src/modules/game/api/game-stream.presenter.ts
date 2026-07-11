@@ -126,6 +126,7 @@ export class GameStreamPresenter {
             stampStreamFrame(message, { ...envelope, status: statusForStreamEvent(message.event) }),
           );
         },
+        ids.requestId,
         controller.signal,
       );
     } catch (error: unknown) {

@@ -22,6 +22,7 @@ type AnalyzeImpl = (
   file: unknown,
   body: unknown,
   emit: GameStreamEmitter,
+  requestId: string,
   signal: AbortSignal,
 ) => Promise<void>;
 
@@ -110,7 +111,7 @@ const buildHarness = (
   return { presenter, limiter, registry };
 };
 
-const emitStageAndResult: AnalyzeImpl = (_file, _body, emit) => {
+const emitStageAndResult: AnalyzeImpl = (_file, _body, emit, _requestId) => {
   emit({ event: GameStreamEvent.Stage, stage: GameStreamStage.Validating });
   emit({
     event: GameStreamEvent.Result,
@@ -119,12 +120,12 @@ const emitStageAndResult: AnalyzeImpl = (_file, _body, emit) => {
   return Promise.resolve();
 };
 
-const emitAcceptedThenResolve: AnalyzeImpl = (_file, _body, emit) => {
+const emitAcceptedThenResolve: AnalyzeImpl = (_file, _body, emit, _requestId) => {
   emit({ event: GameStreamEvent.Accepted });
   return Promise.resolve();
 };
 
-const emitAcceptedThenAwaitAbort: AnalyzeImpl = (_file, _body, emit, signal) => {
+const emitAcceptedThenAwaitAbort: AnalyzeImpl = (_file, _body, emit, _requestId, signal) => {
   emit({ event: GameStreamEvent.Accepted });
   return new Promise((_resolve, reject) => {
     signal.addEventListener(

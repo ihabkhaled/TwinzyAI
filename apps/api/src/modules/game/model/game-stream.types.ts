@@ -7,9 +7,28 @@ import type {
 import type { SseCapableReplyLike } from '../../../core/http/sse.types';
 import type { StreamRequestMeta } from '../../../core/http/stream-meta.types';
 import type { UploadedImageFile } from '../../file-security';
+import type { PaymentHolder } from '../../payments';
+import type { GameStreamEmitter } from '../lib/game-stream';
 
 /** Optional progress sink so the streaming flow can report matching stages. */
 type StyleMatchStageListener = (stage: GameStreamStageValue) => void;
+
+/**
+ * Everything one streaming analyze run threads through its private steps,
+ * bundled so the pipeline methods stay within the parameter budget. The
+ * `payment` holder is mutated in place when a capture succeeds so the outer
+ * refund-on-failure handler can see it.
+ */
+export interface StreamAnalysisContext {
+  readonly file: UploadedImageFile | undefined;
+  readonly body: unknown;
+  readonly emit: GameStreamEmitter;
+  readonly requestId: string;
+  readonly payment: PaymentHolder;
+  readonly languageCode: LanguageCodeValue;
+  readonly resultCount: number;
+  readonly signal: AbortSignal | undefined;
+}
 
 /** The resolved (always-present) tab + request correlation ids for one stream. */
 export interface StreamCorrelationIds {

@@ -1,6 +1,7 @@
 import { ERROR_MESSAGE_KEY_BY_CODE } from './error.constants';
 import type { ErrorCodeValue } from './error-code.constants';
 import { IntegrationError } from './integration.error';
+import { PaymentError } from './payment.error';
 import { TooManyRequestsError } from './too-many-requests.error';
 
 /**
@@ -20,3 +21,6 @@ export const buildTooManyRequestsError = (
   message: string,
 ): TooManyRequestsError =>
   new TooManyRequestsError(message, ERROR_MESSAGE_KEY_BY_CODE[errorCode], errorCode);
+
+export const buildPaymentError = (errorCode: ErrorCodeValue, message: string): PaymentError =>
+  new PaymentError(message, ERROR_MESSAGE_KEY_BY_CODE[errorCode], errorCode);

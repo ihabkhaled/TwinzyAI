@@ -51,6 +51,8 @@ import {
   MIN_SHARE_RESULT_MAX_PAYLOAD_BYTES,
   MIN_SHARE_RESULT_TTL_SECONDS,
   MIN_STREAM_TTL_MS,
+  PAYMENT_PRICE_CURRENCY_PATTERN,
+  PAYMENT_PRICE_VALUE_PATTERN,
 } from './env-bounds.constants';
 
 const NODE_ENVIRONMENTS = ['development', 'test', 'production'] as const;
@@ -108,6 +110,16 @@ const EnvSchema = z
       .max(MAX_RATE_LIMIT_MAX)
       .default(DEFAULT_RATE_LIMIT_MAX),
     GEMINI_API_KEY: z.string().default(''),
+    /**
+     * PayPal REST credentials. BOTH present ⇒ the paid-analysis gate is ON;
+     * either empty ⇒ the game is free and no payment code path executes.
+     */
+    PAYPAL_CLIENT_ID: z.string().default(''),
+    PAYPAL_CLIENT_SECRET: z.string().default(''),
+    PAYPAL_ENV: z.enum(['sandbox', 'live']).default('sandbox'),
+    /** Server-authoritative price per analysis (never trusted from clients). */
+    PAYMENT_PRICE_VALUE: z.string().regex(PAYMENT_PRICE_VALUE_PATTERN).default('0.50'),
+    PAYMENT_PRICE_CURRENCY: z.string().regex(PAYMENT_PRICE_CURRENCY_PATTERN).default('USD'),
     GEMINI_MODEL: z.string().default(''),
     // Comma-separated ordered fallback model ids. If the primary GEMINI_MODEL is
     // rate-limited (429), overloaded, or unavailable, the adapter retries the

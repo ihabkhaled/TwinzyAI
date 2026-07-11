@@ -26,6 +26,7 @@ import type { AppLoggerStub } from '../../../tests/fixtures/stubs';
 import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stubs';
 import { AI_PROVIDER_ADAPTER, AiModule } from '../../ai';
 import { FileSecurityModule } from '../../file-security';
+import { PaymentsModule } from '../../payments';
 import { PrivacyModule } from '../../privacy';
 import { ResultAggregationModule } from '../../result-aggregation';
 import { AnalyzeGameUseCase } from '../application/analyze-game.use-case';
@@ -56,6 +57,7 @@ const buildHarness = async (): Promise<Harness> => {
       PrivacyModule,
       AiModule,
       FileSecurityModule,
+      PaymentsModule,
       ResultAggregationModule,
     ],
     providers: [AnalyzeGameUseCase, StyleMatchService],

@@ -33,6 +33,11 @@ export default defineConfig({
           environment: 'node',
           include: ['src/**/*.test.ts'],
           exclude: [NODE_MODULES_GLOB, 'src/**/*.integration.test.ts'],
+          // Pin the paid-analysis paywall OFF so tests are deterministic
+          // regardless of a developer's local .env credentials. dotenv never
+          // overrides an already-set process.env key, so these empty values
+          // win; the paywall suite opts back in with vi.stubEnv.
+          env: { PAYPAL_CLIENT_ID: '', PAYPAL_CLIENT_SECRET: '' },
         },
       },
       {
@@ -44,6 +49,7 @@ export default defineConfig({
           environment: 'node',
           include: ['src/**/*.integration.test.ts'],
           exclude: [NODE_MODULES_GLOB],
+          env: { PAYPAL_CLIENT_ID: '', PAYPAL_CLIENT_SECRET: '' },
         },
       },
       {

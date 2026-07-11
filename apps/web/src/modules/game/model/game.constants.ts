@@ -89,6 +89,8 @@ const GAME_ERROR_MESSAGE_KEYS = {
   serverBusy: 'errors.serverBusy',
   aiUnavailable: 'errors.aiUnavailable',
   network: 'errors.network',
+  payment: 'errors.payment',
+  paymentRequired: 'errors.paymentRequired',
 } as const;
 
 export type GameErrorMessageKey =
@@ -131,6 +133,9 @@ export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   [ErrorCode.AiResponseInvalid]: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
   [ErrorCode.AiResponseUnsafe]: GAME_ERROR_MESSAGE_KEYS.aiUnavailable,
   [CLIENT_NETWORK_ERROR_CODE]: GAME_ERROR_MESSAGE_KEYS.network,
+  [ErrorCode.PaymentRequired]: GAME_ERROR_MESSAGE_KEYS.paymentRequired,
+  [ErrorCode.PaymentOrderInvalid]: GAME_ERROR_MESSAGE_KEYS.payment,
+  [ErrorCode.PaymentProviderUnavailable]: GAME_ERROR_MESSAGE_KEYS.payment,
 };
 
 /** i18n key shown when translation fails and the old language is kept. */

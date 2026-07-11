@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { StreamingModule } from '../../core/streaming';
 import { AiModule } from '../ai';
 import { FileSecurityModule } from '../file-security';
+import { PaymentsModule } from '../payments';
 import { PrivacyModule } from '../privacy';
 import { ResultAggregationModule } from '../result-aggregation';
 
@@ -15,7 +16,14 @@ import { StyleMatchService } from './application/style-match.service';
 import { TranslateResultUseCase } from './application/translate-result.use-case';
 
 @Module({
-  imports: [StreamingModule, AiModule, FileSecurityModule, ResultAggregationModule, PrivacyModule],
+  imports: [
+    StreamingModule,
+    AiModule,
+    FileSecurityModule,
+    PaymentsModule,
+    ResultAggregationModule,
+    PrivacyModule,
+  ],
   controllers: [GameController],
   providers: [
     AnalyzeGameUseCase,

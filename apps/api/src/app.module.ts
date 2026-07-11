@@ -5,6 +5,7 @@ import { CoreModule } from './core/core.module';
 import { LoggerModule } from './core/logger/logger.module';
 import { GameModule } from './modules/game';
 import { HealthModule } from './modules/health';
+import { PaymentsModule } from './modules/payments';
 import { PrivacyModule } from './modules/privacy/privacy.module';
 import { ShareResultsModule } from './modules/share-results';
 
@@ -21,6 +22,7 @@ import { ShareResultsModule } from './modules/share-results';
     HealthModule,
     PrivacyModule,
     GameModule,
+    PaymentsModule,
     ShareResultsModule,
   ],
 })

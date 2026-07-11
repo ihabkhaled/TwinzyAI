@@ -35,6 +35,13 @@ export const GAME_CANCEL_PATH = `${API_BASE_PATH}/game/cancel`;
 export const HEALTH_PATH = `${API_BASE_PATH}/health`;
 
 /**
+ * Creates a server-side PayPal order for one paid analysis run. Only exists
+ * when the operator configured the paywall (PayPal credentials present) — the
+ * game is otherwise free and the endpoint answers 502 when unconfigured.
+ */
+export const PAYMENTS_ORDERS_PATH = `${API_BASE_PATH}/payments/orders`;
+
+/**
  * The active prompt-contract version. Every AI response must echo it; a
  * mismatch fails schema validation, so a stale model/template pairing can
  * never silently serve the old contract.

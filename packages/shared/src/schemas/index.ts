@@ -4,6 +4,7 @@ export * from './game-stream.schema';
 export * from './health.schema';
 export * from './judge.schema';
 export * from './language.schema';
+export * from './payment.schema';
 export * from './result-count.schema';
 export * from './share-result.schema';
 export * from './traits.schema';

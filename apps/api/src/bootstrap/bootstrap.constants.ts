@@ -4,6 +4,10 @@ import {
   GAME_ROUTE_TRANSLATE_RESULT,
   UPLOAD_HARD_CAP_BYTES,
 } from '../modules/game/model/game.constants';
+import {
+  PAYMENTS_ROUTE_ORDERS,
+  PAYMENTS_ROUTE_ROOT,
+} from '../modules/payments/model/payment.constants';
 
 export const LISTEN_HOST = '0.0.0.0';
 
@@ -32,6 +36,7 @@ export const JSON_ROUTE_BODY_LIMITS: readonly {
 }[] = [
   { suffix: `/${GAME_ROUTE_ROOT}/${GAME_ROUTE_CANCEL}`, limitBytes: 8192 },
   { suffix: `/${GAME_ROUTE_ROOT}/${GAME_ROUTE_TRANSLATE_RESULT}`, limitBytes: 262_144 },
+  { suffix: `/${PAYMENTS_ROUTE_ROOT}/${PAYMENTS_ROUTE_ORDERS}`, limitBytes: 4096 },
 ];
 
 export const DEFAULT_API_VERSION = '1';

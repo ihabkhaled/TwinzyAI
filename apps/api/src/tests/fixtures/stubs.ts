@@ -65,6 +65,12 @@ const CONFIG_DEFAULTS = {
   maxActiveAnalysesPerTab: 1,
   maxAnalysisQueueSize: 100,
   analysisTimeoutMs: 120_000,
+  // Paid-analysis gate (off by default so every existing suite stays free).
+  isPaywallEnabled: false,
+  paypalClientId: '',
+  paypalClientSecret: '',
+  paypalEnv: 'sandbox' as const,
+  paymentPrice: { value: '0.50', currencyCode: 'USD' },
   streamTtlMs: 180_000,
   // Per-step chain overrides for geminiModelChainFor; a step absent here
   // falls back to geminiModelChain, mirroring the real service's semantics.

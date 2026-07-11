@@ -14,6 +14,7 @@ export const ERROR_MESSAGE_KEYS = {
   validation: 'errors.validation',
   upload: 'errors.upload',
   safety: 'errors.safety',
+  payment: 'errors.payment',
 } as const;
 
 export type ErrorMessageKey = (typeof ERROR_MESSAGE_KEYS)[keyof typeof ERROR_MESSAGE_KEYS];

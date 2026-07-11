@@ -83,4 +83,11 @@ export const MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES = 500_000;
 export const MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS = 1;
 export const MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS = 100_000;
 
+// --- Paid analysis (PayPal Orders v2; enabled only when credentials exist) ---
+/** Money as PayPal expects it: dot-decimal with exactly two places. */
+export const PAYMENT_PRICE_VALUE_PATTERN = /^\d{1,6}\.\d{2}$/;
+
+/** ISO-4217 alpha currency code. */
+export const PAYMENT_PRICE_CURRENCY_PATTERN = /^[A-Z]{3}$/;
+
 export const DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL = 'http://localhost:3000';

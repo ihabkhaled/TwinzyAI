@@ -18,6 +18,7 @@ import {
   GEMINI_STEP_ENV_KEYS,
   type GeminiStepValue,
 } from './gemini-step.constants';
+import type { PaymentPrice, PaypalEnvValue } from './payment.constants';
 
 /**
  * The only injectable configuration surface. Wraps the config vendor behind
@@ -256,6 +257,32 @@ export class AppConfigService {
   /** Public web origin used to build the `/share/<uuid>` link (server config only). */
   public get shareResultPublicBaseUrl(): string {
     return this.configService.get('SHARE_RESULT_PUBLIC_BASE_URL', { infer: true });
+  }
+
+  /** Paid-analysis gate: ON iff BOTH PayPal credentials are configured. */
+  public get isPaywallEnabled(): boolean {
+    return this.paypalClientId.length > 0 && this.paypalClientSecret.length > 0;
+  }
+
+  public get paypalClientId(): string {
+    return this.configService.get('PAYPAL_CLIENT_ID', { infer: true });
+  }
+
+  public get paypalClientSecret(): string {
+    return this.configService.get('PAYPAL_CLIENT_SECRET', { infer: true });
+  }
+
+  /** Which PayPal environment the credentials belong to (sandbox by default). */
+  public get paypalEnv(): PaypalEnvValue {
+    return this.configService.get('PAYPAL_ENV', { infer: true });
+  }
+
+  /** Server-authoritative price of one analysis (value + ISO currency). */
+  public get paymentPrice(): PaymentPrice {
+    return {
+      value: this.configService.get('PAYMENT_PRICE_VALUE', { infer: true }),
+      currencyCode: this.configService.get('PAYMENT_PRICE_CURRENCY', { infer: true }),
+    };
   }
 
   private toList(value: string): string[] {
