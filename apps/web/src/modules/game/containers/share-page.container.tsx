@@ -22,6 +22,7 @@ import type { TranslateMessage } from '../model/game.types';
 import { SharePagePhase } from '../model/share.enums';
 import type { SharePageProps } from '../model/share-component.types';
 
+import { DonateLink } from './donate-link.container';
 import { ResultSections } from './result-sections.container';
 import { sharePageTitleClass } from './share-page.variants';
 
@@ -53,6 +54,7 @@ const renderActive = (
       >
         {translate('share.createOwn')}
       </AppLink>
+      <DonateLink label={translate('result.donate')} />
     </Stack>
   );
 };

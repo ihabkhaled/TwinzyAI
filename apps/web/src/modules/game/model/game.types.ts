@@ -322,6 +322,8 @@ export interface ResultLabels {
   fallbackTitle: string;
   retryButton: string;
   shareButton: string;
+  /** Voluntary PayPal support-link text (never implies payment is required). */
+  donateLabel: string;
   /** Explains what the percentage score represents. */
   scoreExplanation: string;
   /** Explains why some traits are marked as uncertain. */

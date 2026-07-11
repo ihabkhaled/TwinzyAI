@@ -24,7 +24,9 @@ Precedence: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` > `CODEX.md` / `cu
 - No phase skipping; no implementation before phases `00`–`13` are documented.
 - Tests + docs ship in the same delivery stream as behavior (tests first).
 - Coverage on touched modules, per file: 95 statements / 90 branches / 95 functions / 95 lines.
-- Twinzy is a free game: no payments, no biometrics/identity matching, no image storage;
+- Twinzy is a free game: no payment capture or paid gating (sole exception: the voluntary
+  env-driven PayPal.me donate LINK — the app never processes money), no biometrics/identity
+  matching, no image storage;
   only the trait-extraction prompt sees the image; `GEMINI_MODEL` from `.env`.
 - Conventional commits via Husky hooks; never `--no-verify`; do not commit/push unless asked.
 

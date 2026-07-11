@@ -183,6 +183,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
     fallbackTitle: translate('result.fallbackTitle'),
     retryButton: translate('result.retryButton'),
     shareButton: translate('result.shareButton'),
+    donateLabel: translate('result.donate'),
     scoreExplanation: translate('result.scoreExplanation'),
     uncertaintyExplanation: translate('result.uncertaintyExplanation'),
     mismatchExplanation: translate('result.mismatchExplanation'),

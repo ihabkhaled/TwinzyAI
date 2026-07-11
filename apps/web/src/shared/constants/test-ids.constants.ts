@@ -40,6 +40,7 @@ export const TEST_IDS = {
   shareButton: 'share-button',
   retryButton: 'retry-button',
   retrySamePhoto: 'retry-same-photo',
+  donateLink: 'donate-link',
   errorState: 'error-state',
   disclaimer: 'disclaimer',
   privacyNotice: 'privacy-notice',

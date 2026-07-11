@@ -59,7 +59,11 @@ export default defineConfig({
     // logo overflows a 320px viewport by 16px and red-flagged the CI gate.
     // Same-origin mocked API calls avoid browser-specific CORS interception
     // differences; page.route still fulfills every backend request.
-    env: { NEXT_PUBLIC_APP_ENV: 'test', NEXT_PUBLIC_API_BASE_URL: BASE_URL },
+    env: {
+      NEXT_PUBLIC_APP_ENV: 'test',
+      NEXT_PUBLIC_API_BASE_URL: BASE_URL,
+      NEXT_PUBLIC_PAYPAL_ME_USERNAME: 'twinzye2e',
+    },
     timeout: 180_000,
   },
   projects: [

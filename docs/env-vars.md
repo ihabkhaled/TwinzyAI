@@ -21,6 +21,7 @@
 | SHARE_RESULT_PUBLIC_BASE_URL | api | http://localhost:3000 | server-only origin for the `/share/<uuid>` link; never user input; set to the real frontend origin in prod; non-secret |
 | NEXT_PUBLIC_API_BASE_URL | web | http://localhost:4000 | baked at build; safe public value |
 | NEXT_PUBLIC_APP_ENV | web | local | local, test, staging, production; controls dev-only tools |
+| NEXT_PUBLIC_PAYPAL_ME_USERNAME | web | (empty = link hidden) | voluntary donate link handle; alphanumeric 1-50 only (zod fail-fast); app never processes money |
 
 Only `apps/api/src/config`, API bootstrap, web/tooling config, and
 `apps/web/src/packages/env` may read `process.env` (lint-enforced).

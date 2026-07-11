@@ -50,8 +50,11 @@ matching, or serious facial similarity analysis.
 
 The app NEVER stores: uploaded images, face embeddings, biometric templates, or raw image bytes.
 
-There are NO payments. The game is free forever — never add payment, subscription, or
-monetization logic.
+There is NO payment capture and NO paid gating. The game is free forever — never add
+payment processing, subscription, or result-gating logic. Sole owner-approved exception
+(2026-07-10, docs/features/paypal-donations-and-paid-results/): a voluntary outbound
+PayPal.me donation LINK (env-driven, validated, hidden when unset); the app never
+processes, verifies, or records money.
 
 ## Stack
 

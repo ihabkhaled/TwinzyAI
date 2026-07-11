@@ -25,6 +25,34 @@ describe('publicEnvSchema', () => {
   it('rejects a malformed api base url', () => {
     expect(publicEnvSchema.safeParse({ apiBaseUrl: 'not-a-url' }).success).toBe(false);
   });
+
+  it('accepts a valid alphanumeric paypal.me handle', () => {
+    expect(publicEnvSchema.parse({ paypalMeUsername: 'ihabkhaled94' }).paypalMeUsername).toBe(
+      'ihabkhaled94',
+    );
+  });
+
+  it('treats an unset or empty paypal.me handle as feature-off', () => {
+    expect(publicEnvSchema.parse({}).paypalMeUsername).toBeUndefined();
+    expect(publicEnvSchema.parse({ paypalMeUsername: '' }).paypalMeUsername).toBeUndefined();
+  });
+
+  it('fails fast on any handle that could alter the donate URL', () => {
+    const hostileHandles = [
+      'a/b',
+      '../evil',
+      'user?x=1',
+      'user#frag',
+      'user name',
+      'user@evil.com',
+      'a%2Fb',
+      'паypal',
+      'x'.repeat(51),
+    ];
+    for (const handle of hostileHandles) {
+      expect(publicEnvSchema.safeParse({ paypalMeUsername: handle }).success).toBe(false);
+    }
+  });
 });
 
 describe('publicEnv', () => {

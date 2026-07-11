@@ -7,6 +7,7 @@ import { RetryButton } from '../components/retry-button.component';
 import { ShareButton } from '../components/share-button.component';
 import type { GameResultProps, TranslationStatusProps } from '../model/game-component.types';
 
+import { DonateLink } from './donate-link.container';
 import { translationBannerClass } from './game-result.variants';
 import { ResultSections } from './result-sections.container';
 
@@ -96,6 +97,7 @@ export const GameResult = (props: GameResultProps): ReactElement => (
         onRetry={props.onRetry}
         testId={TEST_IDS.retryButton}
       />
+      <DonateLink label={props.labels.donateLabel} />
     </Stack>
   </Stack>
 );

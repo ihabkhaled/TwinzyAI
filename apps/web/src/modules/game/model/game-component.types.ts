@@ -115,6 +115,11 @@ export interface ResultCardProps {
   testId?: string;
 }
 
+/** Props for the voluntary PayPal donate link (label already translated). */
+export interface DonateLinkProps {
+  label: string;
+}
+
 /** Props for the success-phase result view (ranked matches + traits + actions). */
 export interface GameResultProps {
   view: GameResultView;
