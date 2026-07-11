@@ -41,6 +41,7 @@ export const TEST_IDS = {
   retryButton: 'retry-button',
   retrySamePhoto: 'retry-same-photo',
   donateLink: 'donate-link',
+  navDonateLink: 'nav-donate-link',
   errorState: 'error-state',
   disclaimer: 'disclaimer',
   privacyNotice: 'privacy-notice',

@@ -12,3 +12,9 @@ export const appHeaderControlsClass = 'inline-flex items-center gap-1';
 
 export const headerIconLinkClass =
   'inline-flex h-9 cursor-pointer items-center justify-center rounded-xl px-3 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
+
+/** Donate nav link: the icon link recipe plus a small gap for its label. */
+export const headerDonateLinkClass = `${headerIconLinkClass} gap-1.5`;
+
+/** Donate label is icon-only on phones to protect the 320px header layout. */
+export const headerDonateLabelClass = 'hidden sm:inline';

@@ -1,6 +1,5 @@
 import { PAYPAL_ME_USERNAME_PATTERN, publicEnv } from '@/packages/env';
-
-import { PAYPAL_ME_BASE_URL } from '../model/donate.constants';
+import { PAYPAL_ME_BASE_URL } from '@/shared/constants/donate.constants';
 
 /**
  * Build the outbound PayPal.me donation URL for an already-validated handle.

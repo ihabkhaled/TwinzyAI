@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import type * as EnvModule from '@/packages/env';
 
-import { buildPayPalDonateUrl, resolveDonateUrl } from '../helpers/donate-link.helper';
+import { buildPayPalDonateUrl, resolveDonateUrl } from './donate-link.helper';
 
 const envState: { paypalMeUsername: string | undefined } = { paypalMeUsername: undefined };
 

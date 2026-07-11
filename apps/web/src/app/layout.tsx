@@ -13,10 +13,12 @@ import {
 } from '@/packages/i18n';
 import { AppToaster } from '@/packages/toast';
 import { AppHeader } from '@/shared/components/layout/app-header.component';
+import { DonateNavLink } from '@/shared/components/layout/donate-nav-link.component';
 import { HomeLink } from '@/shared/components/layout/home-link.component';
 import { SkipLink } from '@/shared/components/primitives/skip-link.component';
 import { THEME_PALETTE } from '@/shared/constants/theme-palette.constants';
 import { interFont } from '@/shared/fonts/app-fonts';
+import { resolveDonateUrl } from '@/shared/helpers/donate-link.helper';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { readThemeAttribute } from '@/shared/helpers/read-theme-cookie.helper';
 
@@ -65,6 +67,7 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
   const t = await getServerTranslations();
   const messages = await getServerMessages();
   const themeAttribute = await readThemeAttribute();
+  const donateUrl = resolveDonateUrl();
 
   return (
     <html
@@ -80,6 +83,9 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
             <SkipLink targetHref="#main-content" label={t('nav.skipToContent')} />
             <AppHeader brandLabel={t('app.name')}>
               <HomeLink label={t('nav.home')} />
+              {donateUrl === undefined ? null : (
+                <DonateNavLink href={donateUrl} label={t('nav.donate')} />
+              )}
               <LocaleSwitcher />
               <ThemeToggle />
             </AppHeader>

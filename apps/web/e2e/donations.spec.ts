@@ -12,6 +12,19 @@ import { mockAnalyzeSuccess, playHappyPathUntilAnalyze } from './helpers';
  * never gate the result, which renders fully without any interaction with it.
  */
 test.describe('donations', () => {
+  test('navbar shows the donate link on every page, safely', async ({ page }) => {
+    await page.goto('/');
+    const navDonate = page.getByTestId(TEST_IDS.navDonateLink);
+    await expect(navDonate).toBeVisible();
+    await expect(navDonate).toHaveAttribute('href', 'https://paypal.me/twinzye2e');
+    await expect(navDonate).toHaveAttribute('target', '_blank');
+    await expect(navDonate).toHaveAttribute('rel', 'noopener noreferrer');
+    await expect(navDonate).toHaveAttribute('aria-label', 'Donate');
+
+    await page.goto('/game');
+    await expect(page.getByTestId(TEST_IDS.navDonateLink)).toBeVisible();
+  });
+
   test('result page shows a safe voluntary PayPal link that never gates the result', async ({
     page,
   }) => {

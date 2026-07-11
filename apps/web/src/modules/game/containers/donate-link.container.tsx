@@ -2,8 +2,8 @@ import type { ReactElement } from 'react';
 
 import { ExternalLink } from '@/packages/link';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
+import { resolveDonateUrl } from '@/shared/helpers/donate-link.helper';
 
-import { resolveDonateUrl } from '../helpers/donate-link.helper';
 import type { DonateLinkProps } from '../model/game-component.types';
 
 import { donateLinkClass } from './donate-link.variants';

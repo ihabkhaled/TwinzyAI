@@ -35,6 +35,12 @@ export interface AppHeaderProps {
   children: ReactNode;
 }
 
+/** Props for {@link DonateNavLink}: resolved outbound URL + translated label. */
+export interface DonateNavLinkProps {
+  href: string;
+  label: string;
+}
+
 /** Props for {@link HomeLink}: the accessible label for the icon link home. */
 export interface HomeLinkProps {
   label: string;
