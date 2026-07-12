@@ -23,8 +23,8 @@ export const usePayPalButtons = (config: PayPalButtonsConfig): PayPalButtonsCont
     if (container === null) {
       return;
     }
+    const controller = new AbortController();
     let handle: PayPalButtonsHandle | undefined;
-    let cancelled = false;
 
     const bridge: PayPalButtonsConfig = {
       createOrder: () => configRef.current.createOrder(),
@@ -35,21 +35,26 @@ export const usePayPalButtons = (config: PayPalButtonsConfig): PayPalButtonsCont
 
     const mount = async (): Promise<void> => {
       try {
-        const rendered = await renderPayPalButtons(container, bridge);
-        if (cancelled) {
+        const rendered = await renderPayPalButtons(container, bridge, controller.signal);
+        if (controller.signal.aborted) {
           rendered.close();
           return;
         }
         handle = rendered;
       } catch (error: unknown) {
-        configRef.current.onError?.(error);
+        if (!controller.signal.aborted) {
+          configRef.current.onError?.(error);
+        }
       }
     };
     void mount();
 
+    // Abort a StrictMode/unmount teardown BEFORE the async render paints, close
+    // any rendered instance, and clear the container so no buttons linger.
     return (): void => {
-      cancelled = true;
+      controller.abort();
       handle?.close();
+      container.replaceChildren();
     };
   }, []);
 

@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { StrictMode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { PaymentStep } from '../containers/payment-step.container';
@@ -15,20 +16,26 @@ vi.mock('@/packages/paypal', () => ({
   // Inlined (not a top-level const) because vi.mock factories are hoisted
   // above module-scope declarations. Renders a plain button that drives the
   // app's createOrder + onApprove — the exact bridge the real SDK provides.
+  // Honors the abort signal exactly like the real wrapper, so the StrictMode
+  // double-render is exercised (a cancelled render must not paint a button).
   renderPayPalButtons: (
     container: HTMLElement,
     config: {
       createOrder: () => Promise<string>;
       onApprove: (orderId: string) => void | Promise<void>;
     },
+    signal?: AbortSignal,
   ): Promise<{ close: () => void }> => {
+    if (signal?.aborted === true) {
+      return Promise.resolve({ close: (): void => undefined });
+    }
     const button = document.createElement('button');
     button.type = 'button';
     button.dataset['testid'] = 'fake-paypal-pay';
     button.addEventListener('click', () => {
       void Promise.resolve(config.createOrder()).then((id) => config.onApprove(id));
     });
-    container.append(button);
+    container.replaceChildren(button);
     return Promise.resolve({ close: (): void => undefined });
   },
 }));
@@ -59,6 +66,20 @@ describe('PaymentStep', () => {
     await waitFor(() => {
       expect(screen.getByTestId('fake-paypal-pay')).toBeInTheDocument();
     });
+  });
+
+  it('renders exactly ONE button under StrictMode (no double-render flash)', async () => {
+    render(
+      <StrictMode>
+        <PaymentStep {...labels} errorMessage={undefined} payment={buildPayment()} />
+      </StrictMode>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('fake-paypal-pay')).toBeInTheDocument();
+    });
+    // The StrictMode mount→unmount→mount cycle must not leave two button sets.
+    expect(screen.getAllByTestId('fake-paypal-pay')).toHaveLength(1);
   });
 
   it('drives createOrder then onApprove when the buyer pays', async () => {

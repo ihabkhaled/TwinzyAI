@@ -76,20 +76,36 @@ const injectScript = (clientId: string): Promise<void> =>
     doc.head.append(script);
   });
 
+/** A handle for a render that was cancelled before it painted anything. */
+const NOOP_HANDLE: PayPalButtonsHandle = { close: (): void => undefined };
+
 /**
  * Render the PayPal buttons into `container`. Bridges our typed config onto the
  * SDK's callback shape; `onApprove` captures server-side (our backend verifies
  * the capture) before resolving. Returns a handle to tear the buttons down.
+ *
+ * `signal` cancels the render: because loading the SDK is async, a React
+ * StrictMode remount (or an unmount) can happen mid-load. Checking the signal
+ * BEFORE painting means a cancelled render never appends buttons — without it,
+ * the first, soon-to-be-discarded mount briefly flashes a second set of buttons.
+ * The container is also cleared before rendering so no stale buttons linger.
  */
 export const renderPayPalButtons = async (
   container: HTMLElement,
   config: PayPalButtonsConfig,
+  signal?: AbortSignal,
 ): Promise<PayPalButtonsHandle> => {
   await loadPayPalSdk();
+  // The only async gap where a StrictMode/unmount teardown can land is the SDK
+  // load above; bail before building or painting anything so no buttons flash.
+  if (signal?.aborted ?? false) {
+    return NOOP_HANDLE;
+  }
   const paypal = getPayPal();
   if (paypal === undefined) {
     throw new Error('PayPal SDK unavailable after load.');
   }
+  container.replaceChildren();
   const instance = paypal.Buttons({
     createOrder: config.createOrder,
     onApprove: async (data) => {
