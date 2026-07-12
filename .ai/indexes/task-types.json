@@ -1,0 +1,1022 @@
+{
+  "accessibility-change": {
+    "keywords": [
+      "a11y",
+      "accessibility",
+      "aria",
+      "contrast",
+      "focus",
+      "keyboard",
+      "screen reader"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "rules/13-accessibility.md",
+      "rules/frontend/13-accessibility.md"
+    ],
+    "pack": "accessibility-change",
+    "pathHints": [],
+    "reviewers": [
+      "agents/accessibility-reviewer.md"
+    ],
+    "rules": [
+      "rules/13-accessibility.md"
+    ],
+    "skills": [
+      "skills/accessibility-review.md",
+      "skills/write-accessibility-tests.md"
+    ],
+    "title": "A11y behavior and audits",
+    "validation": [
+      "npm run test:a11y",
+      "npm run test:e2e"
+    ]
+  },
+  "ai-pipeline-change": {
+    "keywords": [
+      "ai step",
+      "arabic",
+      "candidate generation",
+      "candidates",
+      "extraction",
+      "first step",
+      "gemini call",
+      "image analysis",
+      "judge",
+      "judging",
+      "language switch",
+      "localization of result",
+      "matching",
+      "pipeline",
+      "recall",
+      "rerank",
+      "scoring",
+      "second step",
+      "style match",
+      "third step",
+      "trait extraction",
+      "translate result",
+      "translation",
+      "verdict",
+      "visible traits"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "context/ai-context.md",
+      "docs/ai-safety.md",
+      "docs/provider-routing.md"
+    ],
+    "pack": "ai-pipeline-change",
+    "pathHints": [
+      "apps/api/src/modules/ai/",
+      "apps/api/src/modules/result-aggregation/"
+    ],
+    "reviewers": [
+      "agents/backend-security-reviewer.md",
+      "agents/backend-test-engineer.md"
+    ],
+    "rules": [
+      "rules/14-ai-safety.md",
+      "rules/00-non-negotiable-rules.md"
+    ],
+    "skills": [
+      "skills/add-ai-provider.md",
+      "skills/write-integration-tests.md"
+    ],
+    "title": "Trait extraction / candidates / judge / translation behavior",
+    "validation": [
+      "npm run test:ai",
+      "npm run lint",
+      "npm run typecheck"
+    ]
+  },
+  "ai-prompt-change": {
+    "keywords": [
+      "instruction file",
+      "placeholder",
+      "prompt",
+      "prompt template",
+      "system prompt",
+      "template",
+      "wording"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "docs/ai-safety.md",
+      "context/ai-context.md"
+    ],
+    "pack": "ai-prompt-change",
+    "pathHints": [
+      "apps/api/src/modules/ai/prompts/"
+    ],
+    "reviewers": [
+      "agents/backend-security-reviewer.md"
+    ],
+    "rules": [
+      "rules/14-ai-safety.md"
+    ],
+    "skills": [
+      "skills/write-integration-tests.md"
+    ],
+    "title": "Prompt template wording/placeholders",
+    "validation": [
+      "npm run test:ai",
+      "npm run ai:benchmark"
+    ]
+  },
+  "ai-provider-change": {
+    "keywords": [
+      "deepseek",
+      "fallback",
+      "gemini",
+      "glm",
+      "kimi",
+      "model routing",
+      "openai",
+      "provider",
+      "qwen",
+      "shadow"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "docs/provider-routing.md",
+      "docs/ai-benchmarking.md",
+      "context/ai-context.md"
+    ],
+    "pack": "ai-provider-change",
+    "pathHints": [
+      "apps/api/src/modules/ai/adapters/"
+    ],
+    "reviewers": [
+      "agents/backend-architect.md",
+      "agents/reliability-engineer.md"
+    ],
+    "rules": [
+      "rules/14-ai-safety.md",
+      "rules/10-library-modularization.md",
+      "rules/25-configuration-and-environment.md"
+    ],
+    "skills": [
+      "skills/add-ai-provider.md"
+    ],
+    "title": "Provider adapters, routing chains, fallback/shadow",
+    "validation": [
+      "npm run test:ai",
+      "npm run ai:benchmark"
+    ]
+  },
+  "api-contract-change": {
+    "keywords": [
+      "api shape",
+      "breaking",
+      "contract",
+      "dto",
+      "endpoint contract",
+      "endpoint shape",
+      "request shape",
+      "response shape",
+      "schema",
+      "sse event",
+      "zod"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "context/declaration-ownership-map.md",
+      "rules/21-dto-validation.md"
+    ],
+    "pack": "api-contract-change",
+    "pathHints": [
+      "packages/shared/src/schemas/",
+      "apps/api/src/modules/game/api/dto/"
+    ],
+    "reviewers": [
+      "agents/backend-architect.md",
+      "agents/frontend-architect.md"
+    ],
+    "rules": [
+      "rules/21-dto-validation.md",
+      "rules/05-types-enums-constants.md"
+    ],
+    "skills": [
+      "skills/create-dto-validation.md",
+      "skills/add-api-service-method.md"
+    ],
+    "title": "Endpoint shapes, shared schemas, DTOs, SSE events",
+    "validation": [
+      "npm run validate"
+    ]
+  },
+  "architecture-change": {
+    "keywords": [
+      "adr",
+      "architecture",
+      "boundary",
+      "layer",
+      "module topology",
+      "restructure repo"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "context/architecture-map.md",
+      "docs/eslint-architecture.md",
+      "rules/01-architecture.md"
+    ],
+    "pack": "architecture-change",
+    "pathHints": [
+      "eslint/",
+      "context/architecture-map.md"
+    ],
+    "reviewers": [
+      "agents/backend-architect.md",
+      "agents/eslint-boundary-reviewer.md"
+    ],
+    "rules": [
+      "rules/00-non-negotiable-rules.md",
+      "rules/16-backend-architecture.md",
+      "rules/10-library-modularization.md"
+    ],
+    "skills": [
+      "skills/create-module.md",
+      "skills/add-library.md"
+    ],
+    "title": "Layer boundaries, module topology, cross-cutting structure",
+    "validation": [
+      "npm run validate"
+    ]
+  },
+  "backend-feature": {
+    "keywords": [
+      "adapter",
+      "api",
+      "backend",
+      "controller",
+      "endpoint",
+      "fastify",
+      "nest",
+      "repository",
+      "service",
+      "use case"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "context/architecture-map.md",
+      "context/reference-patterns.md"
+    ],
+    "pack": "backend-feature",
+    "pathHints": [
+      "apps/api/src/"
+    ],
+    "reviewers": [
+      "agents/backend-architect.md",
+      "agents/backend-test-engineer.md"
+    ],
+    "rules": [
+      "rules/00-non-negotiable-rules.md",
+      "rules/16-backend-architecture.md",
+      "rules/18-routes-controllers.md",
+      "rules/19-services-application-layer.md"
+    ],
+    "skills": [
+      "skills/create-feature.md",
+      "skills/create-controller.md",
+      "skills/create-use-case.md"
+    ],
+    "title": "New or changed NestJS behavior in apps/api",
+    "validation": [
+      "npm run lint",
+      "npm run typecheck",
+      "npm run test:coverage",
+      "npm run build"
+    ]
+  },
+  "configuration-change": {
+    "keywords": [
+      "config",
+      "dotenv",
+      "env",
+      "environment variable",
+      "flag",
+      "setting",
+      "toggle"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "docs/env-vars.md",
+      "rules/25-configuration-and-environment.md"
+    ],
+    "pack": "configuration-change",
+    "pathHints": [
+      "apps/api/src/config/",
+      "apps/web/src/packages/env/",
+      ".env.example"
+    ],
+    "reviewers": [
+      "agents/backend-release-gatekeeper.md"
+    ],
+    "rules": [
+      "rules/25-configuration-and-environment.md"
+    ],
+    "skills": [
+      "skills/add-config-value.md"
+    ],
+    "title": "Env vars, config schema, toggles",
+    "validation": [
+      "npm run lint",
+      "npm run typecheck",
+      "npm run test:unit",
+      "npm run security:scan:secrets"
+    ]
+  },
+  "dependency-change": {
+    "keywords": [
+      "audit",
+      "cve",
+      "dependency",
+      "library",
+      "npm",
+      "package",
+      "upgrade",
+      "vendor"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "docs/package-decisions.md",
+      "docs/library-wrapping.md"
+    ],
+    "pack": "dependency-change",
+    "pathHints": [
+      "package.json",
+      "package-lock.json"
+    ],
+    "reviewers": [
+      "agents/backend-release-gatekeeper.md"
+    ],
+    "rules": [
+      "rules/10-library-modularization.md",
+      "rules/frontend/09-library-wrapping.md"
+    ],
+    "skills": [
+      "skills/add-library.md",
+      "skills/create-package-wrapper.md",
+      "skills/modularize-existing-library.md"
+    ],
+    "title": "Package upgrades/additions/removals",
+    "validation": [
+      "npm run audit",
+      "npm run validate"
+    ]
+  },
+  "frontend-feature": {
+    "keywords": [
+      "component",
+      "container",
+      "css",
+      "frontend",
+      "hook",
+      "next",
+      "page",
+      "react",
+      "styling",
+      "tsx",
+      "ui"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "rules/frontend/00-non-negotiable-rules.md",
+      "context/codebase-navigation.md"
+    ],
+    "pack": "frontend-feature",
+    "pathHints": [
+      "apps/web/src/"
+    ],
+    "reviewers": [
+      "agents/frontend-architect.md",
+      "agents/frontend-test-engineer.md"
+    ],
+    "rules": [
+      "rules/frontend/01-next-app-router-architecture.md",
+      "rules/frontend/02-components-and-containers.md",
+      "rules/frontend/03-hooks.md",
+      "rules/02-frontend-components-tsx.md"
+    ],
+    "skills": [
+      "skills/create-component.md",
+      "skills/create-container.md",
+      "skills/create-hook.md"
+    ],
+    "title": "New or changed Next.js behavior in apps/web",
+    "validation": [
+      "npm run lint",
+      "npm run typecheck",
+      "npm run test:unit",
+      "npm run test:e2e"
+    ]
+  },
+  "full-stack-feature": {
+    "keywords": [
+      "api and ui",
+      "both sides",
+      "end to end feature",
+      "full stack"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "context/architecture-map.md",
+      "context/declaration-ownership-map.md"
+    ],
+    "pack": "full-stack-feature",
+    "pathHints": [
+      "packages/shared/src/"
+    ],
+    "reviewers": [
+      "agents/backend-architect.md",
+      "agents/frontend-architect.md"
+    ],
+    "rules": [
+      "rules/00-non-negotiable-rules.md",
+      "rules/05-types-enums-constants.md",
+      "rules/21-dto-validation.md"
+    ],
+    "skills": [
+      "skills/create-feature.md",
+      "skills/create-dto-validation.md",
+      "skills/add-api-service-method.md"
+    ],
+    "title": "Feature spanning api + web + shared contracts",
+    "validation": [
+      "npm run validate"
+    ]
+  },
+  "incident": {
+    "keywords": [
+      "down",
+      "emergency",
+      "incident",
+      "on call",
+      "on-call",
+      "outage",
+      "postmortem",
+      "production bug",
+      "sev"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "runbooks/README.md",
+      "memory/known-pitfalls.md"
+    ],
+    "pack": "incident",
+    "pathHints": [
+      "incidents/"
+    ],
+    "reviewers": [
+      "agents/reliability-engineer.md"
+    ],
+    "rules": [
+      "rules/22-observability-logging.md",
+      "rules/24-release-gate.md"
+    ],
+    "skills": [
+      "skills/investigate-production-bug.md"
+    ],
+    "title": "Live incident response",
+    "validation": [
+      "npm run test:integration"
+    ]
+  },
+  "knowledge-change": {
+    "keywords": [
+      ".ai",
+      "bootstrap",
+      "claude.md",
+      "context pack",
+      "context routing",
+      "docs system",
+      "knowledge",
+      "knowledge os",
+      "manifest",
+      "pack",
+      "resolver"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "knowledge/README.md",
+      "rules/31-knowledge-management.md"
+    ],
+    "pack": "knowledge-change",
+    "pathHints": [
+      "knowledge/",
+      "scripts/knowledge/",
+      ".ai/",
+      "context/",
+      "memory/"
+    ],
+    "reviewers": [],
+    "rules": [
+      "rules/31-knowledge-management.md"
+    ],
+    "skills": [
+      "skills/resolve-task-context.md",
+      "skills/prepare-agent-mirrors.md"
+    ],
+    "title": "Knowledge OS — docs, routing, packs, compiler",
+    "validation": [
+      "npm run knowledge:build",
+      "npm run knowledge:validate",
+      "npm run knowledge:benchmark"
+    ]
+  },
+  "localization-change": {
+    "keywords": [
+      "arabic",
+      "arabic copy",
+      "copy",
+      "i18n",
+      "localization",
+      "message key",
+      "rtl",
+      "translation catalog"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "rules/12-i18n.md",
+      "rules/frontend/14-i18n-rtl.md"
+    ],
+    "pack": "localization-change",
+    "pathHints": [
+      "apps/web/src/packages/i18n/"
+    ],
+    "reviewers": [
+      "agents/i18n-rtl-reviewer.md"
+    ],
+    "rules": [
+      "rules/12-i18n.md"
+    ],
+    "skills": [
+      "skills/add-i18n-message-key.md"
+    ],
+    "title": "i18n catalogs, RTL, language behavior",
+    "validation": [
+      "npm run lint",
+      "npm run test:unit",
+      "npm run test:e2e"
+    ]
+  },
+  "payments-change": {
+    "keywords": [
+      "402",
+      "capture",
+      "checkout",
+      "donate",
+      "donation",
+      "order",
+      "paid analysis",
+      "payment",
+      "paypal",
+      "paypal.me",
+      "paywall",
+      "price",
+      "refund",
+      "tip"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
+      "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md"
+    ],
+    "pack": "payments-change",
+    "pathHints": [
+      "apps/api/src/modules/payments/",
+      "apps/web/src/packages/paypal/"
+    ],
+    "reviewers": [
+      "agents/backend-security-reviewer.md",
+      "agents/frontend-security-reviewer.md"
+    ],
+    "rules": [
+      "rules/00-non-negotiable-rules.md",
+      "rules/06-security.md",
+      "rules/25-configuration-and-environment.md"
+    ],
+    "skills": [
+      "skills/security-review.md",
+      "skills/add-config-value.md"
+    ],
+    "title": "Paywall / PayPal / donation surfaces (owner-gated program)",
+    "validation": [
+      "npm run test:coverage",
+      "npm run test:e2e:ci",
+      "npm run security:scan:secrets"
+    ]
+  },
+  "performance-change": {
+    "keywords": [
+      "bundle",
+      "bundle size",
+      "latency",
+      "lighthouse",
+      "load",
+      "memory",
+      "memory leak",
+      "optimize",
+      "performance",
+      "profile",
+      "slow",
+      "throughput"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "rules/07-performance-scalability.md",
+      "docs/performance-review-report.md"
+    ],
+    "pack": "performance-change",
+    "pathHints": [],
+    "reviewers": [
+      "agents/backend-performance-reviewer.md",
+      "agents/react-performance-reviewer.md"
+    ],
+    "rules": [
+      "rules/07-performance-scalability.md",
+      "rules/frontend/12-performance.md"
+    ],
+    "skills": [
+      "skills/performance-review.md",
+      "skills/performance-review-frontend.md"
+    ],
+    "title": "Latency, memory, throughput, bundle size",
+    "validation": [
+      "npm run test:coverage",
+      "npm run load-test"
+    ]
+  },
+  "privacy-change": {
+    "keywords": [
+      "agreement",
+      "checkbox",
+      "consent",
+      "data handling",
+      "image lifecycle",
+      "logging leak",
+      "opt-in",
+      "pii",
+      "privacy",
+      "privacy consent",
+      "redaction",
+      "retention",
+      "wipe"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "docs/privacy-and-data-retention.md",
+      "docs/ai-safety.md"
+    ],
+    "pack": "privacy-change",
+    "pathHints": [
+      "apps/api/src/modules/privacy/",
+      "apps/api/src/modules/game/lib/"
+    ],
+    "reviewers": [
+      "agents/backend-security-reviewer.md"
+    ],
+    "rules": [
+      "rules/14-ai-safety.md",
+      "rules/06-security.md",
+      "rules/22-observability-logging.md"
+    ],
+    "skills": [
+      "skills/security-review.md",
+      "skills/cleanup-without-weakening-safety.md"
+    ],
+    "title": "Image lifecycle, consent, redaction, data handling",
+    "validation": [
+      "npm run test:security",
+      "npm run test:coverage"
+    ]
+  },
+  "production-bug": {
+    "keywords": [
+      "broken",
+      "defect",
+      "error in prod",
+      "investigate",
+      "production",
+      "regression"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "memory/known-pitfalls.md",
+      "docs/architecture.md"
+    ],
+    "pack": "production-bug",
+    "pathHints": [],
+    "reviewers": [
+      "agents/reliability-engineer.md",
+      "agents/observability-reviewer.md"
+    ],
+    "rules": [
+      "rules/22-observability-logging.md",
+      "rules/26-error-handling-and-exceptions.md"
+    ],
+    "skills": [
+      "skills/investigate-production-bug.md"
+    ],
+    "title": "Investigating/fixing a production defect",
+    "validation": [
+      "npm run test:integration",
+      "npm run test:e2e:ci"
+    ]
+  },
+  "refactor": {
+    "keywords": [
+      "decompose",
+      "extract",
+      "move",
+      "refactor",
+      "restructure",
+      "simplify"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "rules/30-refactor-discipline.md",
+      "rules/29-reuse-before-creating.md"
+    ],
+    "pack": "refactor",
+    "pathHints": [],
+    "reviewers": [
+      "agents/backend-refactor-agent.md"
+    ],
+    "rules": [
+      "rules/28-simple-readable-code.md",
+      "rules/00-non-negotiable-rules.md"
+    ],
+    "skills": [
+      "skills/refactor-feature.md",
+      "skills/decompose-large-file.md",
+      "skills/simplify-existing-code.md"
+    ],
+    "title": "Structure-preserving refactor",
+    "validation": [
+      "npm run lint",
+      "npm run typecheck",
+      "npm run test:coverage",
+      "npm run quality:dead-code"
+    ]
+  },
+  "release": {
+    "keywords": [
+      "deploy",
+      "deployment",
+      "docker",
+      "go live",
+      "go-live",
+      "production rollout",
+      "release",
+      "ship",
+      "smoke test"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "docs/release-checklist.md",
+      "rules/24-release-gate.md",
+      "docs/sdlc/release-checklist.md"
+    ],
+    "pack": "release",
+    "pathHints": [
+      "docker-compose.yml",
+      "Dockerfile.api",
+      "Dockerfile.web",
+      ".github/workflows/"
+    ],
+    "reviewers": [
+      "agents/backend-release-gatekeeper.md",
+      "agents/frontend-release-gatekeeper.md"
+    ],
+    "rules": [
+      "rules/24-release-gate.md",
+      "rules/frontend/19-release-gates.md"
+    ],
+    "skills": [
+      "skills/final-validation.md",
+      "skills/final-validation-frontend.md"
+    ],
+    "title": "Preparing/executing a release",
+    "validation": [
+      "npm run validate",
+      "npm run security:scan",
+      "npm run test:e2e:ci"
+    ]
+  },
+  "reliability-change": {
+    "keywords": [
+      "abort",
+      "backpressure",
+      "cancel",
+      "event stream",
+      "heartbeat",
+      "overload",
+      "progress events",
+      "rate limit",
+      "resilience",
+      "retry",
+      "server-sent events",
+      "sse",
+      "stream",
+      "streaming",
+      "timeout"
+    ],
+    "lane": "standard",
+    "mustRead": [
+      "rules/08-reliability-durability.md",
+      "rules/27-async-events-and-jobs.md"
+    ],
+    "pack": "reliability-change",
+    "pathHints": [
+      "apps/api/src/core/rate-limit/"
+    ],
+    "reviewers": [
+      "agents/reliability-engineer.md"
+    ],
+    "rules": [
+      "rules/08-reliability-durability.md",
+      "rules/26-error-handling-and-exceptions.md"
+    ],
+    "skills": [
+      "skills/reliability-review.md"
+    ],
+    "title": "Timeouts, retries, cancellation, rate limits, overload",
+    "validation": [
+      "npm run test:integration",
+      "npm run load-test"
+    ]
+  },
+  "rollback": {
+    "keywords": [
+      "hotfix rollback",
+      "restore previous",
+      "revert",
+      "rollback",
+      "undo release"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "runbooks/rollback-template.md",
+      "docs/release-checklist.md"
+    ],
+    "pack": "rollback",
+    "pathHints": [],
+    "reviewers": [
+      "agents/backend-release-gatekeeper.md"
+    ],
+    "rules": [
+      "rules/24-release-gate.md"
+    ],
+    "skills": [
+      "skills/migration-plan.md"
+    ],
+    "title": "Rolling back a release or change",
+    "validation": [
+      "npm run validate"
+    ]
+  },
+  "routine-fix": {
+    "keywords": [
+      "bug",
+      "cleanup",
+      "dead code",
+      "fix",
+      "rename",
+      "small",
+      "typo"
+    ],
+    "lane": "fast",
+    "mustRead": [
+      "context/architecture-map.md"
+    ],
+    "pack": "fast-routine-fix",
+    "pathHints": [],
+    "reviewers": [
+      "agents/backend-code-reviewer.md"
+    ],
+    "rules": [
+      "rules/00-non-negotiable-rules.md",
+      "rules/28-simple-readable-code.md"
+    ],
+    "skills": [
+      "skills/investigate-production-bug.md",
+      "skills/write-unit-tests.md"
+    ],
+    "title": "Small localized bug fix or cleanup",
+    "validation": [
+      "npm run lint",
+      "npm run typecheck",
+      "npm run test:unit"
+    ]
+  },
+  "support-change": {
+    "keywords": [
+      "faq",
+      "help copy",
+      "known issue",
+      "support",
+      "troubleshooting"
+    ],
+    "lane": "fast",
+    "mustRead": [
+      "support/README.md"
+    ],
+    "pack": "support-change",
+    "pathHints": [
+      "support/"
+    ],
+    "reviewers": [],
+    "rules": [
+      "rules/23-review-checklist.md"
+    ],
+    "skills": [],
+    "title": "Support docs, troubleshooting, FAQs, known issues",
+    "validation": [
+      "npm run knowledge:validate"
+    ]
+  },
+  "testing-change": {
+    "keywords": [
+      "coverage",
+      "e2e",
+      "fixture",
+      "flaky",
+      "integration test",
+      "mock",
+      "playwright",
+      "spec",
+      "test",
+      "unit test",
+      "vitest"
+    ],
+    "lane": "fast",
+    "mustRead": [
+      "testing/testing-strategy.md",
+      "rules/09-testing-coverage.md"
+    ],
+    "pack": "testing-change",
+    "pathHints": [
+      "apps/api/src/tests/",
+      "apps/web/e2e/",
+      "testing/"
+    ],
+    "reviewers": [
+      "agents/backend-test-engineer.md",
+      "agents/frontend-test-engineer.md"
+    ],
+    "rules": [
+      "rules/09-testing-coverage.md",
+      "rules/frontend/15-testing-and-coverage.md"
+    ],
+    "skills": [
+      "skills/write-unit-tests.md",
+      "skills/write-integration-tests.md",
+      "skills/write-e2e-tests.md"
+    ],
+    "title": "Adding/repairing tests, fixtures, harnesses",
+    "validation": [
+      "npm run test:coverage"
+    ]
+  },
+  "upload-security-change": {
+    "keywords": [
+      "clamav",
+      "file security",
+      "file upload",
+      "image upload",
+      "image validation",
+      "magic bytes",
+      "mime",
+      "multipart",
+      "photo",
+      "upload"
+    ],
+    "lane": "critical",
+    "mustRead": [
+      "rules/15-file-upload-security.md",
+      "docs/file-upload-security.md"
+    ],
+    "pack": "upload-security-change",
+    "pathHints": [
+      "apps/api/src/modules/file-security/"
+    ],
+    "reviewers": [
+      "agents/backend-security-reviewer.md"
+    ],
+    "rules": [
+      "rules/06-security.md",
+      "rules/15-file-upload-security.md"
+    ],
+    "skills": [
+      "skills/secure-file-upload.md",
+      "skills/security-review.md"
+    ],
+    "title": "File upload validation chain",
+    "validation": [
+      "npm run test:file-security",
+      "npm run test:security"
+    ]
+  }
+}

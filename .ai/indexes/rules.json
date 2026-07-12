@@ -1,0 +1,670 @@
+{
+  "rules/00-non-negotiable-rules.md": {
+    "keywords": [
+      "negotiable",
+      "non",
+      "rules"
+    ],
+    "summary": "> These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m...",
+    "title": "00 — The Non-Negotiable Rules",
+    "tokens": 3708
+  },
+  "rules/01-architecture.md": {
+    "keywords": [
+      "architecture",
+      "boundaries",
+      "module",
+      "rules"
+    ],
+    "summary": "> The monorepo layout, the one-way layering rule, and the module boundary rule that everything else builds on. This file implements [`/context/architecture-map.md`](../context/architecture-map.md) and rules 16–23 of [00-non-negotiable-ru...",
+    "title": "01 — Architecture & Module Boundaries",
+    "tokens": 1348
+  },
+  "rules/02-frontend-components-tsx.md": {
+    "keywords": [
+      "components",
+      "frontend",
+      "rules",
+      "tsx"
+    ],
+    "summary": "> Superseded for apps/web by the frontend engineering track in [rules/frontend/](frontend/README.md). Retained for backend/monorepo cross-reference.",
+    "title": "02 — Frontend Components (TSX)",
+    "tokens": 438
+  },
+  "rules/03-frontend-hooks.md": {
+    "keywords": [
+      "frontend",
+      "hooks",
+      "rules"
+    ],
+    "summary": "> Superseded for apps/web by the frontend engineering track in [rules/frontend/](frontend/README.md). Retained for backend/monorepo cross-reference.",
+    "title": "03 — Frontend Hooks",
+    "tokens": 195
+  },
+  "rules/04-frontend-services-gateways.md": {
+    "keywords": [
+      "frontend",
+      "gateways",
+      "rules",
+      "services"
+    ],
+    "summary": "> Superseded for apps/web by the frontend engineering track in [rules/frontend/](frontend/README.md). Retained for backend/monorepo cross-reference.",
+    "title": "04 — Frontend Services & Gateways",
+    "tokens": 211
+  },
+  "rules/05-types-enums-constants.md": {
+    "keywords": [
+      "constants",
+      "enums",
+      "rules",
+      "types"
+    ],
+    "summary": "> The zero-inline policy in depth. Every type, enum-map, and reusable constant lives in its own dedicated file; every domain value is an as-const member, never a raw string literal. **The TypeScript `enum` keyword is banned repo-wide** —...",
+    "title": "05 — Types, Enums & Constants",
+    "tokens": 2326
+  },
+  "rules/06-security.md": {
+    "keywords": [
+      "rules",
+      "security"
+    ],
+    "summary": "> The house standard for securing a privacy-first, anonymous, stateless product. Twinzy has **no accounts, no auth, no database** — the attack surface is the upload pipeline, the AI boundary, and the HTTP edge. Implements rules 30–35 of ...",
+    "title": "06 — Security",
+    "tokens": 1519
+  },
+  "rules/07-performance-scalability.md": {
+    "keywords": [
+      "performance",
+      "rules",
+      "scalability"
+    ],
+    "summary": "> Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r...",
+    "title": "07 — Performance & Scalability",
+    "tokens": 1332
+  },
+  "rules/08-reliability-durability.md": {
+    "keywords": [
+      "durability",
+      "reliability",
+      "rules"
+    ],
+    "summary": "> The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl...",
+    "title": "08 — Reliability & Durability",
+    "tokens": 1383
+  },
+  "rules/09-testing-coverage.md": {
+    "keywords": [
+      "coverage",
+      "rules",
+      "testing"
+    ],
+    "summary": "> Tests are the proof a change is safe — written **first**, run at every gate, enforced by a coverage floor. Runner: **Vitest** (multi-project) + `@nestjs/testing` + supertest (api) + Testing Library (web) + Playwright (e2e). **Never Jes...",
+    "title": "09 — Testing & Coverage",
+    "tokens": 1746
+  },
+  "rules/10-library-modularization.md": {
+    "keywords": [
+      "library",
+      "modularization",
+      "rules",
+      "wrapping"
+    ],
+    "summary": "> Every external library that touches product behavior is owned by **exactly one adapter/module**. Business code depends on *our* interface — never the vendor SDK. Swapping a vendor touches one folder. Implements rules 30 and 39 of [00-n...",
+    "title": "10 — Library Wrapping & Modularization",
+    "tokens": 1544
+  },
+  "rules/11-eslint-typescript.md": {
+    "keywords": [
+      "catalog",
+      "eslint",
+      "rules",
+      "strictness",
+      "typescript"
+    ],
+    "summary": "> The complete lint + type gate and how to pass it. When this doc and the config disagree, **the config wins** — then fix this doc.",
+    "title": "11 — ESLint & TypeScript: The Strictness Catalog",
+    "tokens": 2528
+  },
+  "rules/12-i18n.md": {
+    "keywords": [
+      "i18n",
+      "messaging",
+      "rules"
+    ],
+    "summary": "> Two surfaces, one discipline: the **frontend** renders every user-facing string from the typed dictionary; the **backend** never returns human sentences as a contract — it returns stable `messageKey`s the frontend maps to localized cop...",
+    "title": "12 — i18n & Messaging",
+    "tokens": 939
+  },
+  "rules/13-accessibility.md": {
+    "keywords": [
+      "accessibility",
+      "rules"
+    ],
+    "summary": "> Superseded for apps/web by the frontend engineering track in [rules/frontend/](frontend/README.md). Retained for backend/monorepo cross-reference.",
+    "title": "13 — Accessibility",
+    "tokens": 200
+  },
+  "rules/14-ai-safety.md": {
+    "keywords": [
+      "rules",
+      "safety"
+    ],
+    "summary": "> Related: [00-non-negotiable-rules.md](./00-non-negotiable-rules.md) (rules 43–46) · [15-file-upload-security.md](./15-file-upload-security.md) · [17-manager-layer.md](./17-manager-layer.md) (the analyze pipeline) · [26-error-handling-a...",
+    "title": "14 — AI Safety",
+    "tokens": 419
+  },
+  "rules/15-file-upload-security.md": {
+    "keywords": [
+      "file",
+      "rules",
+      "security",
+      "upload"
+    ],
+    "summary": "> Related: [00-non-negotiable-rules.md](./00-non-negotiable-rules.md) (rules 33, 44, 47) · [06-security.md](./06-security.md) · [08-reliability-durability.md](./08-reliability-durability.md) (fail-closed, wipe in finally) · [26-error-han...",
+    "title": "15 — File Upload Security",
+    "tokens": 283
+  },
+  "rules/16-backend-architecture.md": {
+    "keywords": [
+      "architecture",
+      "backend",
+      "rules"
+    ],
+    "summary": "> The canonical anatomy of `apps/api`. This file applies [`/context/architecture-map.md`](../context/architecture-map.md) to Twinzy and implements rules 16–23 of [00-non-negotiable-rules.md](./00-non-negotiable-rules.md). If anything her...",
+    "title": "16 — Backend Architecture",
+    "tokens": 1603
+  },
+  "rules/17-manager-layer.md": {
+    "keywords": [
+      "application",
+      "cases",
+      "formerly",
+      "layer",
+      "manager",
+      "managers",
+      "rules",
+      "use"
+    ],
+    "summary": "> **The manager tier is retired.** Its responsibilities live in `application/<action>.use-case.ts`. A use case owns one multi-step, multi-collaborator business operation: the ordered sequence, its side effects, and its cleanup guarantees...",
+    "title": "17 — Application Layer: Use Cases (formerly Managers)",
+    "tokens": 1237
+  },
+  "rules/18-routes-controllers.md": {
+    "keywords": [
+      "controllers",
+      "routes",
+      "rules"
+    ],
+    "summary": "> Controllers are the **transport adapter**: they translate HTTP ⇄ application calls and contain **zero business logic**. One delegation per method, mechanically enforced by `architecture/controller-no-logic`. Implements rule 16 of [00-n...",
+    "title": "18 — Routes & Controllers",
+    "tokens": 1369
+  },
+  "rules/19-services-application-layer.md": {
+    "keywords": [
+      "application",
+      "layer",
+      "rules",
+      "services"
+    ],
+    "summary": "> A service owns **one focused capability** and stays small: guard preconditions → delegate → return a typed result. It never parses HTTP, never holds utility logic, never reads `process.env`, never orchestrates multi-service pipelines (...",
+    "title": "19 — Services (Application Layer)",
+    "tokens": 1277
+  },
+  "rules/20-repositories-database.md": {
+    "keywords": [
+      "database",
+      "repositories",
+      "rules"
+    ],
+    "summary": "> **Twinzy has no database — by standing decision, not omission.** The product is stateless: no images, no results, no user rows are persisted anywhere, ever. This file exists so that *if* persistence is ever introduced (for future non-s...",
+    "title": "20 — Repositories & Database",
+    "tokens": 1430
+  },
+  "rules/21-dto-validation.md": {
+    "keywords": [
+      "dto",
+      "rules",
+      "validation",
+      "zod"
+    ],
+    "summary": "> Validate **every** boundary with a zod schema before anything reaches the application layer. **Zod is the validation vendor; `class-validator` and `class-transformer` are forbidden repo-wide.** DTO schemas live in `api/dto/` backed by ...",
+    "title": "21 — DTO & Validation (Zod)",
+    "tokens": 1556
+  },
+  "rules/22-observability-logging.md": {
+    "keywords": [
+      "logging",
+      "observability",
+      "rules"
+    ],
+    "summary": "> How Twinzy stays diagnosable without ever leaking what it exists to protect: the **AppLogger port only** (never `console.*`), structured logs at correct levels, a request id flowing through every line, and redaction that treats image d...",
+    "title": "22 — Observability & Logging",
+    "tokens": 1429
+  },
+  "rules/23-review-checklist.md": {
+    "keywords": [
+      "checklist",
+      "merge",
+      "pre",
+      "review",
+      "rules"
+    ],
+    "summary": "> The consolidated review gate. Every box is checked or justified `N/A` before a change merges. This is the gate, not the spec — each section links to its canonical rule file. A green build is **not** proof of correctness: lint green is ...",
+    "title": "23 — The Pre-Merge Review Checklist",
+    "tokens": 1562
+  },
+  "rules/24-release-gate.md": {
+    "keywords": [
+      "gate",
+      "release",
+      "rules"
+    ],
+    "summary": "> The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook.",
+    "title": "24 — Release Gate",
+    "tokens": 577
+  },
+  "rules/25-configuration-and-environment.md": {
+    "keywords": [
+      "configuration",
+      "environment",
+      "rules"
+    ],
+    "summary": "> All configuration is typed, zod-validated at startup, and read through `@nestjs/config` behind **`AppConfigService` — the only injectable config surface**. `process.env` never appears outside `config/` and `bootstrap/` (ESLint-enforced...",
+    "title": "25 — Configuration & Environment",
+    "tokens": 1399
+  },
+  "rules/26-error-handling-and-exceptions.md": {
+    "keywords": [
+      "error",
+      "exceptions",
+      "handling",
+      "rules"
+    ],
+    "summary": "> Every failure is a **typed `AppError`** carrying a `messageKey`, raised in the layer that detects it and translated **once** at the edge by the global exception filter into the sanitized envelope. Full detail is logged server-side; cli...",
+    "title": "26 — Error Handling & Exceptions",
+    "tokens": 1656
+  },
+  "rules/27-async-events-and-jobs.md": {
+    "keywords": [
+      "async",
+      "events",
+      "jobs",
+      "rules"
+    ],
+    "summary": "> **Twinzy has no message broker, no queues, no domain-event bus, and no background jobs — by standing decision.** The product is a synchronous request/response pipeline: upload → analyze → result. This file governs the async work that *...",
+    "title": "27 — Async, Events & Jobs",
+    "tokens": 1405
+  },
+  "rules/28-simple-readable-code.md": {
+    "keywords": [
+      "code",
+      "readable",
+      "rules",
+      "simple"
+    ],
+    "summary": "> The best TwinzyAI code is the code the next developer understands immediately. Code is written once and read hundreds of times — by juniors, seniors, QA, security/privacy reviewers, and AI coding agents. Optimize for the reader under p...",
+    "title": "28 — Simple Readable Code",
+    "tokens": 859
+  },
+  "rules/29-reuse-before-creating.md": {
+    "keywords": [
+      "before",
+      "creating",
+      "minimalism",
+      "reuse",
+      "rules",
+      "yagni"
+    ],
+    "summary": "> Every new constant, type, helper, service, hook, component, wrapper, or abstraction must first prove that TwinzyAI does not already own it. Duplication is a defect; speculation is a defect. Extends the search-then-extend workflow of [0...",
+    "title": "29 — Reuse Before Creating (YAGNI & Minimalism)",
+    "tokens": 597
+  },
+  "rules/30-refactor-discipline.md": {
+    "keywords": [
+      "agent",
+      "discipline",
+      "mirrors",
+      "refactor",
+      "rules"
+    ],
+    "summary": "> Refactors move code to its correct owner without changing behavior — and never weaken privacy, AI safety, upload security, validation, accessibility, i18n, tests, or gates. Agent mirror files stay compact, aligned, and defer to the can...",
+    "title": "30 — Refactor Discipline & Agent Mirrors",
+    "tokens": 722
+  },
+  "rules/31-knowledge-management.md": {
+    "keywords": [
+      "knowledge",
+      "planes",
+      "ownership",
+      "authority",
+      "compiled",
+      "canonical",
+      "bootstrap"
+    ],
+    "summary": "The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change.",
+    "title": "31 — Knowledge Management (planes, ownership, authority)",
+    "tokens": 778
+  },
+  "rules/32-documentation-quality.md": {
+    "keywords": [
+      "documentation",
+      "frontmatter",
+      "evidence",
+      "links",
+      "quality",
+      "validation"
+    ],
+    "summary": "Every canonical document carries machine-readable frontmatter, cites evidence, stays focused, and is validated by knowledge:validate.",
+    "title": "32 — Documentation Quality (frontmatter, evidence, structure)",
+    "tokens": 622
+  },
+  "rules/33-fast-context-routing.md": {
+    "keywords": [
+      "routing",
+      "resolver",
+      "context budget",
+      "fast task",
+      "packs",
+      "tiers"
+    ],
+    "summary": "Agents route through the compiled plane instead of reading the repository wholesale; context budgets are hard and expansion needs evidence.",
+    "title": "33 — Fast Context Routing (resolver-first, budgets, no wandering)",
+    "tokens": 583
+  },
+  "rules/34-memory-lifecycle.md": {
+    "keywords": [
+      "memory",
+      "hot memory",
+      "decisions",
+      "pitfalls",
+      "lifecycle",
+      "superseded"
+    ],
+    "summary": "Memory entries are dated, evidenced, scoped, and lifecycle-managed; hot memory holds only active facts and is pruned aggressively.",
+    "title": "34 — Memory Lifecycle (hot memory, standing decisions, retirement)",
+    "tokens": 542
+  },
+  "rules/35-generated-artifacts-and-freshness.md": {
+    "keywords": [
+      "generated",
+      "freshness",
+      "hashes",
+      "stale",
+      "deterministic",
+      "drift"
+    ],
+    "summary": "Generated files declare their inputs, are rebuilt deterministically, are never edited by hand, and go stale by hash triggers — never by calendar age.",
+    "title": "35 — Generated Artifacts & Freshness (hash-triggered, never hand-edited)",
+    "tokens": 626
+  },
+  "rules/36-delivery-lanes-and-traceability.md": {
+    "keywords": [
+      "lanes",
+      "fast lane",
+      "critical lane",
+      "traceability",
+      "artifacts",
+      "risk"
+    ],
+    "summary": "Every change rides a deterministic risk lane (fast/standard/critical) that scales artifact weight — never phase existence — and stays traceable to its record.",
+    "title": "36 — Delivery Lanes & Change Traceability",
+    "tokens": 626
+  },
+  "rules/frontend/00-non-negotiable-rules.md": {
+    "keywords": [
+      "frontend",
+      "negotiable",
+      "non",
+      "rules"
+    ],
+    "summary": "These 21 rules are the contract of the `apps/web` frontend. They are never waived in review, never",
+    "title": "00 — Non-Negotiable Rules",
+    "tokens": 2415
+  },
+  "rules/frontend/01-next-app-router-architecture.md": {
+    "keywords": [
+      "app",
+      "architecture",
+      "frontend",
+      "next",
+      "router",
+      "rules"
+    ],
+    "summary": "`apps/web/src/app` is a routing shell, not a feature area. Every file in it MUST be one of the App",
+    "title": "01 — Next.js App Router Architecture",
+    "tokens": 1130
+  },
+  "rules/frontend/02-components-and-containers.md": {
+    "keywords": [
+      "components",
+      "containers",
+      "frontend",
+      "rules"
+    ],
+    "summary": "The view layer is split in two: **components** (`*.component.tsx`) render, **containers**",
+    "title": "02 — Components and Containers",
+    "tokens": 1078
+  },
+  "rules/frontend/03-hooks.md": {
+    "keywords": [
+      "frontend",
+      "hooks",
+      "rules"
+    ],
+    "summary": "Module hooks (`apps/web/src/modules/<feature>/hooks/*.hook.ts`) are the orchestration layer: they",
+    "title": "03 — Hooks",
+    "tokens": 888
+  },
+  "rules/frontend/04-services-api-gateway.md": {
+    "keywords": [
+      "api",
+      "frontend",
+      "gateway",
+      "rules",
+      "services",
+      "types"
+    ],
+    "summary": "Server data flows through a fixed pipeline, one direction only:",
+    "title": "04 — Services, API Types, and the Gateway",
+    "tokens": 913
+  },
+  "rules/frontend/05-tanstack-query.md": {
+    "keywords": [
+      "frontend",
+      "query",
+      "rules",
+      "tanstack"
+    ],
+    "summary": "All server state lives in the TanStack Query cache, accessed exclusively through the wrapper",
+    "title": "05 — TanStack Query",
+    "tokens": 879
+  },
+  "rules/frontend/06-zustand.md": {
+    "keywords": [
+      "frontend",
+      "rules",
+      "zustand"
+    ],
+    "summary": "Zustand holds **client-owned global state** and nothing else. Stores are created only through",
+    "title": "06 — Zustand",
+    "tokens": 856
+  },
+  "rules/frontend/07-types-enums-constants.md": {
+    "keywords": [
+      "constants",
+      "enums",
+      "frontend",
+      "rules",
+      "types"
+    ],
+    "summary": "Every name a human might retype — route, key, id, status, message key — exists exactly once, in a",
+    "title": "07 — Types, Enums, and Constants",
+    "tokens": 1431
+  },
+  "rules/frontend/08-utils-helpers-mappers.md": {
+    "keywords": [
+      "frontend",
+      "helpers",
+      "mappers",
+      "rules",
+      "schemas",
+      "utils"
+    ],
+    "summary": "Four small layers do all the pure computation in this codebase. Getting a function into the right one",
+    "title": "08 — Utils, Helpers, Mappers, and Schemas",
+    "tokens": 1012
+  },
+  "rules/frontend/09-library-wrapping.md": {
+    "keywords": [
+      "frontend",
+      "library",
+      "rules",
+      "wrapping"
+    ],
+    "summary": "Every third-party package has exactly **one owner**: a wrapper directory under",
+    "title": "09 — Library Wrapping",
+    "tokens": 1527
+  },
+  "rules/frontend/10-eslint-typescript.md": {
+    "keywords": [
+      "eslint",
+      "frontend",
+      "rules",
+      "typescript"
+    ],
+    "summary": "Static analysis is the primary enforcement layer of this OS: if a rule in `rules/frontend/` matters,",
+    "title": "10 — ESLint and TypeScript",
+    "tokens": 2348
+  },
+  "rules/frontend/11-security.md": {
+    "keywords": [
+      "frontend",
+      "rules",
+      "security"
+    ],
+    "summary": "Security is enforced by code owned inside the repository, not by convention. Every control below maps",
+    "title": "11 — Security",
+    "tokens": 1235
+  },
+  "rules/frontend/12-performance.md": {
+    "keywords": [
+      "frontend",
+      "performance",
+      "rules"
+    ],
+    "summary": "Performance is an architectural property here, not an optimization pass. The rules below keep the",
+    "title": "12 — Performance",
+    "tokens": 982
+  },
+  "rules/frontend/13-accessibility.md": {
+    "keywords": [
+      "accessibility",
+      "frontend",
+      "rules"
+    ],
+    "summary": "Target: WCAG 2.2 AA. Accessibility is verified by an automated axe gate plus the review checklist —",
+    "title": "13 — Accessibility",
+    "tokens": 905
+  },
+  "rules/frontend/14-i18n-rtl.md": {
+    "keywords": [
+      "frontend",
+      "i18n",
+      "rtl",
+      "rules"
+    ],
+    "summary": "Every user-visible string is translated, and every layout works mirrored. English (`en`) and Arabic",
+    "title": "14 — i18n and RTL",
+    "tokens": 904
+  },
+  "rules/frontend/15-testing-and-coverage.md": {
+    "keywords": [
+      "coverage",
+      "frontend",
+      "rules",
+      "testing"
+    ],
+    "summary": "Testing here is TDD-shaped and gate-enforced. The full standards live under",
+    "title": "15 — Testing and Coverage",
+    "tokens": 947
+  },
+  "rules/frontend/16-observability-analytics.md": {
+    "keywords": [
+      "analytics",
+      "frontend",
+      "observability",
+      "rules"
+    ],
+    "summary": "Console output, error reporting, and (future) product analytics all follow the same doctrine as every",
+    "title": "16 — Observability and Analytics",
+    "tokens": 893
+  },
+  "rules/frontend/17-configuration-environment.md": {
+    "keywords": [
+      "configuration",
+      "environment",
+      "frontend",
+      "rules"
+    ],
+    "summary": "Environment variables are configuration inputs with a typed, validated contract — never ambient strings",
+    "title": "17 — Configuration and Environment",
+    "tokens": 998
+  },
+  "rules/frontend/18-error-handling.md": {
+    "keywords": [
+      "error",
+      "frontend",
+      "handling",
+      "rules"
+    ],
+    "summary": "One doctrine: vendor errors are normalized at the boundary, carried as typed app errors, and reach the",
+    "title": "18 — Error Handling",
+    "tokens": 966
+  },
+  "rules/frontend/19-release-gates.md": {
+    "keywords": [
+      "frontend",
+      "gates",
+      "release",
+      "rules"
+    ],
+    "summary": "A release candidate is a commit on `main` with every gate green. Gates are executable — each maps to an",
+    "title": "19 — Release Gates",
+    "tokens": 1093
+  },
+  "rules/frontend/20-review-checklist.md": {
+    "keywords": [
+      "checklist",
+      "frontend",
+      "review",
+      "rules"
+    ],
+    "summary": "The reviewer's working checklist for `apps/web`. Every box MUST be checked before approval. Dated",
+    "title": "20 — PR Review Checklist",
+    "tokens": 1084
+  },
+  "rules/frontend/README.md": {
+    "keywords": [
+      "apps",
+      "frontend",
+      "readme",
+      "rules",
+      "web"
+    ],
+    "summary": "This folder is the **frontend engineering canon** for `apps/web` (the Next.js App Router client).",
+    "title": "Frontend Rules (`apps/web`)",
+    "tokens": 1554
+  },
+  "rules/README.md": {
+    "keywords": [
+      "bodies",
+      "full",
+      "readme",
+      "rule",
+      "rules"
+    ],
+    "summary": "> Root [`CLAUDE.md`](../CLAUDE.md) is the canonical operating policy and always wins. These files",
+    "title": "rules/ — Full Rule Bodies",
+    "tokens": 1545
+  }
+}

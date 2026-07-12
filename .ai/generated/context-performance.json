@@ -1,0 +1,185 @@
+{
+  "docCountMax": 6,
+  "failures": [],
+  "missingQuestionSources": [],
+  "p50Ms": 3.56,
+  "p95Ms": 4.12,
+  "results": [
+    {
+      "docCount": 6,
+      "elapsedMs": 3.62,
+      "failures": [],
+      "id": "backend-endpoint",
+      "taskType": "backend-feature",
+      "tokens": 18820
+    },
+    {
+      "docCount": 6,
+      "elapsedMs": 3.74,
+      "failures": [],
+      "id": "frontend-component",
+      "taskType": "frontend-feature",
+      "tokens": 10240
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.51,
+      "failures": [],
+      "id": "bug-fix",
+      "taskType": "routine-fix",
+      "tokens": 10153
+    },
+    {
+      "docCount": 4,
+      "elapsedMs": 3.57,
+      "failures": [],
+      "id": "refactor",
+      "taskType": "refactor",
+      "tokens": 5886
+    },
+    {
+      "docCount": 2,
+      "elapsedMs": 3.56,
+      "failures": [],
+      "id": "config-addition",
+      "taskType": "configuration-change",
+      "tokens": 2082
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.54,
+      "failures": [],
+      "id": "error-addition",
+      "taskType": "upload-security-change",
+      "tokens": 2110
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 4.12,
+      "failures": [],
+      "id": "prompt-change",
+      "taskType": "ai-prompt-change",
+      "tokens": 1315
+    },
+    {
+      "docCount": 6,
+      "elapsedMs": 4.24,
+      "failures": [],
+      "id": "provider-change",
+      "taskType": "ai-provider-change",
+      "tokens": 5369
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.8,
+      "failures": [],
+      "id": "upload-security",
+      "taskType": "upload-security-change",
+      "tokens": 2110
+    },
+    {
+      "docCount": 5,
+      "elapsedMs": 3.89,
+      "failures": [],
+      "id": "privacy-change",
+      "taskType": "privacy-change",
+      "tokens": 4622
+    },
+    {
+      "docCount": 5,
+      "elapsedMs": 3.87,
+      "failures": [],
+      "id": "payments-guard",
+      "taskType": "payments-change",
+      "tokens": 8290
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.6,
+      "failures": [],
+      "id": "sse-change",
+      "taskType": "reliability-change",
+      "tokens": 4444
+    },
+    {
+      "docCount": 2,
+      "elapsedMs": 3.38,
+      "failures": [],
+      "id": "localization",
+      "taskType": "localization-change",
+      "tokens": 1843
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.39,
+      "failures": [],
+      "id": "test-addition",
+      "taskType": "testing-change",
+      "tokens": 7647
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.42,
+      "failures": [],
+      "id": "performance-issue",
+      "taskType": "performance-change",
+      "tokens": 2661
+    },
+    {
+      "docCount": 4,
+      "elapsedMs": 3.68,
+      "failures": [],
+      "id": "production-incident",
+      "taskType": "incident",
+      "tokens": 10763
+    },
+    {
+      "docCount": 4,
+      "elapsedMs": 3.29,
+      "failures": [],
+      "id": "release-prep",
+      "taskType": "release",
+      "tokens": 2826
+    },
+    {
+      "docCount": 3,
+      "elapsedMs": 3.21,
+      "failures": [],
+      "id": "rollback-run",
+      "taskType": "rollback",
+      "tokens": 1216
+    },
+    {
+      "docCount": 4,
+      "elapsedMs": 3.23,
+      "failures": [],
+      "id": "dependency-upgrade",
+      "taskType": "dependency-change",
+      "tokens": 3683
+    },
+    {
+      "docCount": 2,
+      "elapsedMs": 3.49,
+      "failures": [],
+      "id": "a11y-audit",
+      "taskType": "accessibility-change",
+      "tokens": 1105
+    },
+    {
+      "docCount": 2,
+      "elapsedMs": 3.52,
+      "failures": [],
+      "id": "knowledge-edit",
+      "taskType": "knowledge-change",
+      "tokens": 1869
+    }
+  ],
+  "targets": {
+    "p50TargetMs": 300,
+    "p95TargetMs": 1000,
+    "routineTaskInitialDocumentsMax": 15,
+    "routineTaskInitialTokensMax": 8000
+  },
+  "taskCount": 21,
+  "tokensMax": 18820
+}

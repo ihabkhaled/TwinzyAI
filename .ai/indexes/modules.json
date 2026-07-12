@@ -1,0 +1,558 @@
+{
+  "api:ai": {
+    "docs": [
+      "structure/modules/api-ai.md",
+      "docs/ai-safety.md",
+      "docs/provider-routing.md",
+      "rules/14-ai-safety.md"
+    ],
+    "fileCount": 50,
+    "lane": "standard",
+    "layers": [
+      "adapters",
+      "application",
+      "infrastructure",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "AI provider pipeline (extraction/generation/judge/translation) behind the AI_PROVIDER_ADAPTER port with safety filtering and prompt templates.",
+    "root": "apps"
+  },
+  "api:benchmark": {
+    "docs": [
+      "docs/ai-benchmarking.md"
+    ],
+    "fileCount": 8,
+    "lane": "standard",
+    "layers": [
+      "benchmark"
+    ],
+    "responsibility": "ai:benchmark CLI - deterministic mock mode and live real mode scoring providers with production schemas + safety guard.",
+    "root": "apps"
+  },
+  "api:bootstrap": {
+    "docs": [
+      "structure/entrypoint-catalog.yaml",
+      "structure/runtime-topology.md",
+      "docs/backend-architecture.md"
+    ],
+    "fileCount": 13,
+    "lane": "critical",
+    "layers": [
+      "bootstrap"
+    ],
+    "responsibility": "Fastify app assembly - security (helmet, multipart caps, CORS closed by default), validation wiring, versioned lifecycle, optional swagger, test harness.",
+    "root": "apps"
+  },
+  "api:config": {
+    "docs": [
+      "structure/configuration-map.md",
+      "docs/env-vars.md",
+      "rules/25-configuration-and-environment.md"
+    ],
+    "fileCount": 14,
+    "lane": "critical",
+    "layers": [
+      "config"
+    ],
+    "responsibility": "Typed zod-validated fail-fast env configuration - env.schema.ts single source, AppConfigService the only injectable surface.",
+    "root": "apps"
+  },
+  "api:core": {
+    "docs": [
+      "structure/layer-map.md",
+      "docs/backend-architecture.md",
+      "rules/26-error-handling-and-exceptions.md",
+      "rules/22-observability-logging.md"
+    ],
+    "fileCount": 63,
+    "lane": "standard",
+    "layers": [
+      "core"
+    ],
+    "responsibility": "Cross-cutting backend platform - typed errors + global exception filter, pino logger, zod validation pipes, throttling, openapi shim, multipart/SSE http helpers, streaming admission + cancel registry.",
+    "root": "apps"
+  },
+  "api:file-security": {
+    "docs": [
+      "structure/modules/api-file-security.md",
+      "docs/file-upload-security.md",
+      "rules/15-file-upload-security.md"
+    ],
+    "fileCount": 22,
+    "lane": "critical",
+    "layers": [
+      "adapters",
+      "application",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Upload verification chain (consent, size, MIME, magic bytes, decode, optional ClamAV fail-closed) plus in-memory buffer zero-fill.",
+    "root": "apps"
+  },
+  "api:game": {
+    "docs": [
+      "structure/modules/api-game.md",
+      "structure/flows/analyze-flow.md",
+      "docs/backend-architecture.md"
+    ],
+    "fileCount": 27,
+    "lane": "standard",
+    "layers": [
+      "api",
+      "application",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Analyze-game transport and orchestration - /api/v1/game analyze, SSE stream, cancel, translate-result.",
+    "root": "apps"
+  },
+  "api:health": {
+    "docs": [
+      "structure/modules/api-health.md"
+    ],
+    "fileCount": 6,
+    "lane": "standard",
+    "layers": [
+      "api",
+      "application",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Liveness endpoint GET /api/v1/health.",
+    "root": "apps"
+  },
+  "api:payments": {
+    "docs": [
+      "structure/modules/api-payments.md",
+      "structure/flows/payment-flow.md",
+      "docs/features/paypal-donations-and-paid-results/22-go-no-go.md"
+    ],
+    "fileCount": 11,
+    "lane": "critical",
+    "layers": [
+      "adapters",
+      "api",
+      "application",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Env-gated PayPal Orders v2 paid-analysis gate - server-priced orders, capture-at-consumption, best-effort refunds, no persistence.",
+    "root": "apps"
+  },
+  "api:privacy": {
+    "docs": [
+      "structure/modules/api-privacy.md",
+      "docs/privacy-and-data-retention.md"
+    ],
+    "fileCount": 7,
+    "lane": "critical",
+    "layers": [
+      "application",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Log redaction (base64 runs, secrets) and the no-persistence guarantee.",
+    "root": "apps"
+  },
+  "api:result-aggregation": {
+    "docs": [
+      "structure/modules/api-result-aggregation.md"
+    ],
+    "fileCount": 9,
+    "lane": "standard",
+    "layers": [
+      "application",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Pure final-response shaping - displayability filter, re-rank, server-owned disclaimer and fallback.",
+    "root": "apps"
+  },
+  "api:root": {
+    "docs": [],
+    "fileCount": 2,
+    "lane": null,
+    "layers": [
+      "root"
+    ],
+    "responsibility": "",
+    "root": "apps"
+  },
+  "api:share-results": {
+    "docs": [
+      "structure/modules/api-share-results.md",
+      "structure/flows/share-flow.md"
+    ],
+    "fileCount": 23,
+    "lane": "standard",
+    "layers": [
+      "api",
+      "application",
+      "infrastructure",
+      "lib",
+      "model",
+      "root",
+      "tests"
+    ],
+    "responsibility": "Temporary shareable results over an in-memory TTL cache port - no DB, no images, safety re-scan on create.",
+    "root": "apps"
+  },
+  "api:tests": {
+    "docs": [
+      "docs/testing-strategy.md",
+      "rules/09-testing-coverage.md"
+    ],
+    "fileCount": 12,
+    "lane": "standard",
+    "layers": [
+      "tests"
+    ],
+    "responsibility": "Integration suites booting production wiring via createTestApp with FakeAiAdapter and ClamAV stubs, plus shared fixtures.",
+    "root": "apps"
+  },
+  "shared": {
+    "docs": [
+      "structure/modules/shared.md",
+      "docs/ai-safety.md"
+    ],
+    "fileCount": 36,
+    "lane": "standard",
+    "layers": [
+      "constants",
+      "enums",
+      "root",
+      "schemas",
+      "types",
+      "utils"
+    ],
+    "responsibility": "Cross-side contracts package - constants, frozen ErrorCode catalog, safety wordlists, trait taxonomy, as-const enums, all shared Zod schemas, utils.",
+    "root": "packages"
+  },
+  "web:app": {
+    "docs": [
+      "structure/repository-map.md",
+      "docs/frontend-architecture.md"
+    ],
+    "fileCount": 14,
+    "lane": "standard",
+    "layers": [
+      "app"
+    ],
+    "responsibility": "Next.js App Router routes, root layout, providers, error boundaries; no route handlers.",
+    "root": "apps"
+  },
+  "web:e2e": {
+    "docs": [
+      "docs/testing-strategy.md"
+    ],
+    "fileCount": 17,
+    "lane": "standard",
+    "layers": [
+      "root"
+    ],
+    "responsibility": "Playwright suites (functional/a11y/visual/mobile) against a mocked backend with the paywall pinned off.",
+    "root": "apps"
+  },
+  "web:game": {
+    "docs": [
+      "structure/modules/web-game.md",
+      "structure/flows/analyze-flow.md",
+      "docs/frontend-architecture.md"
+    ],
+    "fileCount": 140,
+    "lane": "standard",
+    "layers": [
+      "components",
+      "containers",
+      "gateway",
+      "helpers",
+      "hooks",
+      "mappers",
+      "model",
+      "queries",
+      "root",
+      "schemas",
+      "services",
+      "test"
+    ],
+    "responsibility": "Core game feature module - setup, payment step, SSE progress, results, translation, share.",
+    "root": "apps"
+  },
+  "web:pkg-axios": {
+    "docs": [
+      "docs/library-wrapping.md",
+      "structure/layer-map.md"
+    ],
+    "fileCount": 9,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Single axios owner - HttpError normalization, zod-validated requests, and the app's only streaming fetch + SSE parser.",
+    "root": "apps"
+  },
+  "web:pkg-browser": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 4,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "SSR-safe browser-globals facade (window/document, matchMedia, uuid, object URLs, clipboard, Web Share).",
+    "root": "apps"
+  },
+  "web:pkg-camera": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 6,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Camera wrapper - stream lifecycle and frame capture to File.",
+    "root": "apps"
+  },
+  "web:pkg-env": {
+    "docs": [
+      "structure/configuration-map.md",
+      "docs/env-vars.md"
+    ],
+    "fileCount": 3,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Zod-validated publicEnv - the only sanctioned client process.env reader (apiBaseUrl, paypal ids, display-only price).",
+    "root": "apps/web"
+  },
+  "web:pkg-i18n": {
+    "docs": [
+      "rules/12-i18n.md",
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 8,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "next-intl facade - cookie-based locale, en + ar (RTL) catalogs, server/client translation helpers.",
+    "root": "apps"
+  },
+  "web:pkg-icons": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 1,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "lucide-react facade with an explicit *Icon allowlist.",
+    "root": "apps/web/src/packages"
+  },
+  "web:pkg-image": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 2,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "AppImage - next/image wrapper making alt text mandatory.",
+    "root": "apps/web/src"
+  },
+  "web:pkg-link": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 2,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "AppLink (typed internal routes) + ExternalLink (outbound-safe) - the only next/link import site.",
+    "root": "apps/web/src"
+  },
+  "web:pkg-logger": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 3,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Leveled app logger; debug/info muted in production appEnv.",
+    "root": "apps/web"
+  },
+  "web:pkg-navigation": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 3,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "useAppNavigation - typed wrapper over next/navigation.",
+    "root": "apps/web"
+  },
+  "web:pkg-paypal": {
+    "docs": [
+      "structure/flows/payment-flow.md",
+      "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 4,
+    "lane": "critical",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Single PayPal JS Buttons SDK wrapper - lazy one-time script injection, StrictMode-safe render, CSP origin list.",
+    "root": "apps"
+  },
+  "web:pkg-query": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 6,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "TanStack Query facade - client factory, provider, useAppQuery/useAppMutation.",
+    "root": "apps"
+  },
+  "web:pkg-storage": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 6,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Cookie + schema-validated web-storage wrappers, SSR-safe.",
+    "root": "apps"
+  },
+  "web:pkg-toast": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 4,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "sonner facade - ToastType, showToast, AppToaster.",
+    "root": "apps"
+  },
+  "web:pkg-ui-primitives": {
+    "docs": [
+      "docs/frontend-architecture.md",
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 32,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "Design-system primitives (Button, Card, Input, Alert, Spinner, ...) with CVA variants and cn().",
+    "root": "apps"
+  },
+  "web:pkg-zod": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 3,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "zod facade - parseSchema with SchemaParseError, re-exported z.",
+    "root": "apps/web"
+  },
+  "web:pkg-zustand": {
+    "docs": [
+      "docs/library-wrapping.md"
+    ],
+    "fileCount": 3,
+    "lane": "standard",
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "The app's only zustand owner (createAppStore); client global state only.",
+    "root": "apps/web"
+  },
+  "web:root": {
+    "docs": [],
+    "fileCount": 1,
+    "lane": null,
+    "layers": [
+      "root"
+    ],
+    "responsibility": "",
+    "root": "apps/web"
+  },
+  "web:shared": {
+    "docs": [
+      "structure/layer-map.md",
+      "docs/frontend-architecture.md"
+    ],
+    "fileCount": 46,
+    "lane": "standard",
+    "layers": [
+      "shared"
+    ],
+    "responsibility": "Cross-module app code - shared components, constants, errors, helpers, hooks, CSP builder, test-id registry.",
+    "root": "apps"
+  },
+  "web:tests": {
+    "docs": [],
+    "fileCount": 3,
+    "lane": null,
+    "layers": [
+      "tests"
+    ],
+    "responsibility": "",
+    "root": "apps/web"
+  },
+  "web:ui-preferences": {
+    "docs": [
+      "structure/modules/web-ui-preferences.md",
+      "docs/frontend-architecture.md"
+    ],
+    "fileCount": 20,
+    "lane": "standard",
+    "layers": [
+      "containers",
+      "hooks",
+      "model",
+      "root",
+      "schemas",
+      "store",
+      "test",
+      "types"
+    ],
+    "responsibility": "Theme + locale preferences (cookies, html attributes, the only zustand store).",
+    "root": "apps"
+  }
+}

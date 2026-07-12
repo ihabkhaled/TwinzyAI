@@ -1,0 +1,566 @@
+{
+  "configs": [
+    {
+      "description": "Maximum raw provider response accepted before parsing (all providers).",
+      "example": "500000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_MAX_RESPONSE_BYTES",
+      "readBy": []
+    },
+    {
+      "description": "--- Multi-provider AI routing (all optional; see docs/provider-routing.md) --- Each step may carry a cross-provider route chain of comma-separated `provider:model` tokens (bare model = gemini:<model>). An explicit route REPLACES the step's GEMINI_* chain; empty = Gemini-only behavior above. Known providers: gemini, openai, deepseek, qwen, kimi, glm. Example: AI_ROUTE_TRANSLATION=deepseek:deepseek-v4-flash,gemini-3.1-flash-lite",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ROUTE_EXTRACTION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ROUTE_GENERATION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ROUTE_JUDGE",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ROUTE_TRANSLATION",
+      "readBy": []
+    },
+    {
+      "description": "Shadow mode: sampled, metrics-only comparison runs; never affects results.",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SHADOW_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SHADOW_ROUTE_GENERATION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SHADOW_ROUTE_JUDGE",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SHADOW_ROUTE_TRANSLATION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "0",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SHADOW_SAMPLE_RATE",
+      "readBy": []
+    },
+    {
+      "description": "Shadow runs are text-only; extraction images are never duplicated to shadows.",
+      "example": "120000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SHADOW_TIMEOUT_MS",
+      "readBy": []
+    },
+    {
+      "description": "Watchdog: an analysis (and a queued waiter) is aborted after this long so a stuck provider call never holds a slot forever.",
+      "example": "120000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "ANALYSIS_TIMEOUT_MS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "4000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "API_PORT",
+      "readBy": []
+    },
+    {
+      "description": "Comma-separated ordered clamd hosts. The adapter tries each in turn and caches the first reachable one, so the same value works whether the API runs inside docker-compose (`clamav`) or on your host (`127.0.0.1`) against a ClamAV container started with: docker compose --profile clamav up -d clamav (port 3310).",
+      "example": "127.0.0.1,clamav",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CLAMAV_HOSTS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "3310",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CLAMAV_PORT",
+      "readBy": []
+    },
+    {
+      "description": "--- CORS --- Comma-separated list of allowed web origins for the API.",
+      "example": "http://localhost:3000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CORS_ALLOWED_ORIGINS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "DEEPSEEK_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "DEEPSEEK_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "--- Optional virus scanning --- When true in production, a failing/unreachable ClamAV fails CLOSED (uploads rejected).",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "ENABLE_CLAMAV",
+      "readBy": []
+    },
+    {
+      "description": "--- API docs --- Swagger UI at /docs. Defaults to enabled everywhere except production.",
+      "example": "true",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "ENABLE_SWAGGER",
+      "readBy": []
+    },
+    {
+      "description": "--- Gemini (backend only — NEVER expose to the frontend) ---",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-3.1-pro-preview,gemini-2.5-pro,gemini-2.5-flash,gemini-2.5-flash-lite",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_FALLBACK_MODELS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "gemini-3.1-pro-preview,gemini-3-flash-preview,gemini-2.5-pro,gemini-2.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_FALLBACK_MODELS_EXTRACTION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "gemini-3-flash-preview,gemini-3.1-pro-preview,gemini-2.5-pro,gemini-2.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_FALLBACK_MODELS_GENERATION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "gemini-3.1-pro-preview,gemini-3-flash-preview,gemini-2.5-pro,gemini-2.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_FALLBACK_MODELS_JUDGE",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_FALLBACK_MODELS_TRANSLATION",
+      "readBy": []
+    },
+    {
+      "description": "Model id is loaded from env. Never hardcoded. Example: gemini-2.5-flash This global chain is the safety net: any pipeline step WITHOUT its own per-step variables below uses this primary + fallbacks.",
+      "example": "gemini-3.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_MODEL",
+      "readBy": []
+    },
+    {
+      "description": "--- Per-step Gemini model chains (all optional) --- Each pipeline step may pin its own primary + fallbacks so the hardest steps run on the strongest models and cheap mechanical steps run on the fastest/cheapest. Semantics: a step's chain is EXACTLY what its two vars configure (they replace, not merge with, the global chain); leave both empty to use the global chain for that step.  Extraction (hardest: vision + 221-field structured JSON; a weak extraction silently poisons everything downstream — power-first fallbacks, no lite tiers).",
+      "example": "gemini-3.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_MODEL_EXTRACTION",
+      "readBy": []
+    },
+    {
+      "description": "Candidate generation (recall breadth; the judge verifies its output, so a cheaper-but-smart first fallback is safe).",
+      "example": "gemini-3.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_MODEL_GENERATION",
+      "readBy": []
+    },
+    {
+      "description": "Judge (final scores + safety; nothing checks the judge's work — power-first fallbacks, no lite tiers).",
+      "example": "gemini-3.5-flash",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_MODEL_JUDGE",
+      "readBy": []
+    },
+    {
+      "description": "Result translation (easy text-only step; the backend restores every canonical field afterwards — fastest/cheapest models win here).",
+      "example": "gemini-3.1-flash-lite",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_MODEL_TRANSLATION",
+      "readBy": []
+    },
+    {
+      "description": "Idle (inter-chunk) timeout for STREAMING calls: the stream is aborted only after this long with no new token, so a long generation is never cut off while the model is still producing. Used by the /game/analyze/stream route.",
+      "example": "60000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_STREAM_IDLE_TIMEOUT_MS",
+      "readBy": []
+    },
+    {
+      "description": "Total deadline for a single non-streaming Gemini call.",
+      "example": "120000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GEMINI_TIMEOUT_MS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GLM_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "GLM_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "KIMI_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "KIMI_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "--- Logging --- One of: fatal | error | warn | info | debug | trace",
+      "example": "info",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "LOG_LEVEL",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "3",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "MAX_ACTIVE_ANALYSES_PER_IP",
+      "readBy": []
+    },
+    {
+      "description": "One active analysis per browser tab (the client aborts a prior run before starting a new one); a spamming tab is queued then rejected.",
+      "example": "1",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "MAX_ACTIVE_ANALYSES_PER_TAB",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "100",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "MAX_ANALYSIS_QUEUE_SIZE",
+      "readBy": []
+    },
+    {
+      "description": "--- Streaming concurrency / overload protection --- Hard caps on concurrent streaming analyses. Over-capacity runs queue up to MAX_ANALYSIS_QUEUE_SIZE, then are rejected in-band with SERVER_BUSY so a burst can never exhaust memory or the model quota.",
+      "example": "50",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "MAX_GLOBAL_ACTIVE_ANALYSES",
+      "readBy": []
+    },
+    {
+      "description": "--- Upload limits ---",
+      "example": "5242880",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "MAX_IMAGE_SIZE_BYTES",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "http://localhost:4000",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_API_BASE_URL",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "--- Frontend (public, safe values only) ---",
+      "example": "local",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_APP_ENV",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "",
+      "example": "USD",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "Display-only price on the payment step (mirror the server PAYMENT_PRICE_* above).",
+      "example": "0.50",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_PAYMENT_PRICE_VALUE",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "Public PayPal client id for the browser Buttons SDK (safe to expose; enables the frontend payment step). Leave blank to keep the free UI.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_PAYPAL_CLIENT_ID",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "PayPal.me handle for the voluntary \"Support Twinzy\" link (letters/digits only, max 50). Leave empty to hide the donate link entirely. This renders a plain outbound https://paypal.me/<handle> link and never gates anything. Paid gating exists ONLY through the env-gated PayPal Orders v2 paywall above, per the recorded owner decision (docs/features/paypal-donations-and-paid-results/ 22-go-no-go.md); blank PAYPAL_* credentials keep the game fully free.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_PAYPAL_ME_USERNAME",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "--- Runtime ---",
+      "example": "development",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "NODE_ENV",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
+      "description": "FAIL-CLOSED image capability: extraction is the ONLY photo-carrying step and always routes through Gemini. Generation, judge, and translation are text-only. A provider is ENABLED iff its API key is set (remove the key to disable). Keys are backend-only; never expose them to the frontend.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "OPENAI_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "OPENAI_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "USD",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMENT_PRICE_CURRENCY",
+      "readBy": []
+    },
+    {
+      "description": "Server-authoritative price (clients can never change it). Dot-decimal + ISO currency. Must mirror NEXT_PUBLIC_PAYMENT_PRICE_* below (checked by npm run knowledge:contradictions).",
+      "example": "0.50",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMENT_PRICE_VALUE",
+      "readBy": []
+    },
+    {
+      "description": "--- Paid analysis (PayPal Orders v2) — OPTIONAL --- Leave BOTH blank to keep the game free (no payment code runs). Set BOTH to a PayPal REST app.s credentials to require a $0.50 payment before each analysis. SANDBOX first: create the app at developer.paypal.com (Apps & Credentials). Server-side secrets — NEVER prefixed NEXT_PUBLIC and never committed.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYPAL_CLIENT_ID",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYPAL_CLIENT_SECRET",
+      "readBy": []
+    },
+    {
+      "description": "sandbox | live — which credentials the values above belong to. Keep sandbox until every LIVE condition in docs/features/paypal-donations-and-paid-results/ 22-go-no-go.md is recorded as met.",
+      "example": "sandbox",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYPAL_ENV",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "QWEN_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "QWEN_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "30",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "RATE_LIMIT_MAX",
+      "readBy": []
+    },
+    {
+      "description": "--- Rate limiting --- Global limit: RATE_LIMIT_MAX requests per RATE_LIMIT_TTL_MS window per client.",
+      "example": "60000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "RATE_LIMIT_TTL_MS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "1000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "SHARE_RESULT_MAX_ACTIVE_ITEMS",
+      "readBy": []
+    },
+    {
+      "description": "Memory is the only built driver. A future Redis/Valkey adapter must land before any driver-selection configuration is introduced. Per-record and total caps so the cache can never grow unbounded.",
+      "example": "50000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "SHARE_RESULT_MAX_PAYLOAD_BYTES",
+      "readBy": []
+    },
+    {
+      "description": "Public web origin used to build the /share/<uuid> link (server config only, never user input). Point this at your deployed frontend origin in production.",
+      "example": "http://localhost:3000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "SHARE_RESULT_PUBLIC_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "--- Temporary shareable-result cache (no database; TTL-only) --- A shared result is cached ONLY in memory (or a future Redis/Valkey driver) and auto-expires. There is no database and no image is ever stored. Default TTL is 10 minutes (min 60s, max 3600s). The record is unreachable the instant it expires; the in-memory cache also clears on API restart/redeploy.",
+      "example": "600",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "SHARE_RESULT_TTL_SECONDS",
+      "readBy": []
+    },
+    {
+      "description": "Safety-net TTL for orphaned stream-registry entries. Keep above ANALYSIS_TIMEOUT_MS so healthy runs always finish before reclamation.",
+      "example": "180000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "STREAM_TTL_MS",
+      "readBy": []
+    },
+    {
+      "description": "Set true only behind a trusted reverse proxy that overwrites forwarding headers.",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "TRUST_PROXY",
+      "readBy": [
+        "apps/api/src/bootstrap/fastify-adapter.ts"
+      ]
+    },
+    {
+      "description": "",
+      "example": "3000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "WEB_PORT",
+      "readBy": []
+    }
+  ],
+  "count": 68,
+  "undocumented": []
+}

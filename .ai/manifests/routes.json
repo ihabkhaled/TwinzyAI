@@ -1,0 +1,97 @@
+{
+  "api": [
+    {
+      "file": "apps/api/src/modules/game/api/game.controller.ts",
+      "handler": "analyze",
+      "method": "POST",
+      "path": "/game/analyze"
+    },
+    {
+      "file": "apps/api/src/modules/game/api/game.controller.ts",
+      "handler": "analyzeStream",
+      "method": "POST",
+      "path": "/game/analyze/stream"
+    },
+    {
+      "file": "apps/api/src/modules/game/api/game.controller.ts",
+      "handler": "cancelAnalysis",
+      "method": "POST",
+      "path": "/game/cancel"
+    },
+    {
+      "file": "apps/api/src/modules/game/api/game.controller.ts",
+      "handler": "translateResult",
+      "method": "POST",
+      "path": "/game/translate-result"
+    },
+    {
+      "file": "apps/api/src/modules/health/api/health.controller.ts",
+      "handler": "getHealth",
+      "method": "GET",
+      "path": "/health"
+    },
+    {
+      "file": "apps/api/src/modules/payments/api/payments.controller.ts",
+      "handler": "createOrder",
+      "method": "POST",
+      "path": "/payments/orders"
+    },
+    {
+      "file": "apps/api/src/modules/share-results/api/share-results.controller.ts",
+      "handler": "create",
+      "method": "POST",
+      "path": "/share-results"
+    },
+    {
+      "file": "apps/api/src/modules/share-results/api/share-results.controller.ts",
+      "handler": "remove",
+      "method": "DELETE",
+      "path": "/share-results/:shareId"
+    },
+    {
+      "file": "apps/api/src/modules/share-results/api/share-results.controller.ts",
+      "handler": "get",
+      "method": "GET",
+      "path": "/share-results/:shareId"
+    }
+  ],
+  "apiCount": 9,
+  "web": [
+    {
+      "file": "apps/web/src/app/layout.tsx",
+      "kind": "layout",
+      "path": "/"
+    },
+    {
+      "file": "apps/web/src/app/page.tsx",
+      "kind": "page",
+      "path": "/"
+    },
+    {
+      "file": "apps/web/src/app/game/page.tsx",
+      "kind": "page",
+      "path": "/game"
+    },
+    {
+      "file": "apps/web/src/app/help/page.tsx",
+      "kind": "page",
+      "path": "/help"
+    },
+    {
+      "file": "apps/web/src/app/privacy/page.tsx",
+      "kind": "page",
+      "path": "/privacy"
+    },
+    {
+      "file": "apps/web/src/app/share/[shareId]/page.tsx",
+      "kind": "page",
+      "path": "/share/[shareId]"
+    },
+    {
+      "file": "apps/web/src/app/terms/page.tsx",
+      "kind": "page",
+      "path": "/terms"
+    }
+  ],
+  "webCount": 7
+}

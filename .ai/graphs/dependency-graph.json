@@ -1,0 +1,254 @@
+{
+  "edges": [
+    {
+      "count": 17,
+      "from": "api:ai",
+      "to": "api:config"
+    },
+    {
+      "count": 20,
+      "from": "api:ai",
+      "to": "api:core"
+    },
+    {
+      "count": 2,
+      "from": "api:ai",
+      "to": "api:privacy"
+    },
+    {
+      "count": 15,
+      "from": "api:ai",
+      "to": "shared"
+    },
+    {
+      "count": 13,
+      "from": "api:benchmark",
+      "to": "api:ai"
+    },
+    {
+      "count": 7,
+      "from": "api:benchmark",
+      "to": "api:config"
+    },
+    {
+      "count": 1,
+      "from": "api:benchmark",
+      "to": "api:root"
+    },
+    {
+      "count": 3,
+      "from": "api:benchmark",
+      "to": "shared"
+    },
+    {
+      "count": 2,
+      "from": "api:bootstrap",
+      "to": "api:config"
+    },
+    {
+      "count": 4,
+      "from": "api:bootstrap",
+      "to": "api:core"
+    },
+    {
+      "count": 2,
+      "from": "api:bootstrap",
+      "to": "api:game"
+    },
+    {
+      "count": 1,
+      "from": "api:bootstrap",
+      "to": "api:payments"
+    },
+    {
+      "count": 1,
+      "from": "api:bootstrap",
+      "to": "api:root"
+    },
+    {
+      "count": 1,
+      "from": "api:bootstrap",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "api:config",
+      "to": "shared"
+    },
+    {
+      "count": 5,
+      "from": "api:core",
+      "to": "api:config"
+    },
+    {
+      "count": 4,
+      "from": "api:core",
+      "to": "shared"
+    },
+    {
+      "count": 3,
+      "from": "api:file-security",
+      "to": "api:config"
+    },
+    {
+      "count": 7,
+      "from": "api:file-security",
+      "to": "api:core"
+    },
+    {
+      "count": 3,
+      "from": "api:file-security",
+      "to": "shared"
+    },
+    {
+      "count": 5,
+      "from": "api:game",
+      "to": "api:ai"
+    },
+    {
+      "count": 1,
+      "from": "api:game",
+      "to": "api:config"
+    },
+    {
+      "count": 19,
+      "from": "api:game",
+      "to": "api:core"
+    },
+    {
+      "count": 6,
+      "from": "api:game",
+      "to": "api:file-security"
+    },
+    {
+      "count": 4,
+      "from": "api:game",
+      "to": "api:payments"
+    },
+    {
+      "count": 1,
+      "from": "api:game",
+      "to": "api:privacy"
+    },
+    {
+      "count": 2,
+      "from": "api:game",
+      "to": "api:result-aggregation"
+    },
+    {
+      "count": 14,
+      "from": "api:game",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "api:health",
+      "to": "api:core"
+    },
+    {
+      "count": 2,
+      "from": "api:health",
+      "to": "shared"
+    },
+    {
+      "count": 3,
+      "from": "api:payments",
+      "to": "api:config"
+    },
+    {
+      "count": 6,
+      "from": "api:payments",
+      "to": "api:core"
+    },
+    {
+      "count": 4,
+      "from": "api:payments",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "api:result-aggregation",
+      "to": "api:core"
+    },
+    {
+      "count": 3,
+      "from": "api:result-aggregation",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:bootstrap"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:config"
+    },
+    {
+      "count": 2,
+      "from": "api:root",
+      "to": "api:core"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:game"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:health"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:payments"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:privacy"
+    },
+    {
+      "count": 1,
+      "from": "api:root",
+      "to": "api:share-results"
+    },
+    {
+      "count": 3,
+      "from": "api:share-results",
+      "to": "api:config"
+    },
+    {
+      "count": 8,
+      "from": "api:share-results",
+      "to": "api:core"
+    },
+    {
+      "count": 7,
+      "from": "api:share-results",
+      "to": "shared"
+    },
+    {
+      "count": 26,
+      "from": "web:game",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "web:pkg-axios",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "web:pkg-i18n",
+      "to": "shared"
+    },
+    {
+      "count": 1,
+      "from": "web:shared",
+      "to": "shared"
+    }
+  ]
+}

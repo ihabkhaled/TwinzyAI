@@ -1,0 +1,8 @@
+{
+  "prompt-template.repository.ts": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+  "prompt-version.constants.ts": "apps/api/src/modules/ai/model/prompt-version.constants.ts",
+  "translate-result-prompt.md": "apps/api/src/modules/ai/prompts/translate-result-prompt.md",
+  "use-1st-prompt.md": "apps/api/src/modules/ai/prompts/use-1st-prompt.md",
+  "use-2nd-prompt.md": "apps/api/src/modules/ai/prompts/use-2nd-prompt.md",
+  "use-3rd-prompt.md": "apps/api/src/modules/ai/prompts/use-3rd-prompt.md"
+}

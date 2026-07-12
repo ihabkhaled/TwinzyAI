@@ -1,0 +1,277 @@
+{
+  "a11y": {
+    "synonyms": [
+      "accessibility",
+      "aria",
+      "screen reader",
+      "keyboard",
+      "focus"
+    ]
+  },
+  "backend": {
+    "synonyms": [
+      "controller",
+      "use case",
+      "service",
+      "adapter",
+      "repository",
+      "nest",
+      "fastify",
+      "api"
+    ]
+  },
+  "candidates": {
+    "synonyms": [
+      "candidate generation",
+      "matching",
+      "style match",
+      "recall",
+      "second step"
+    ]
+  },
+  "config": {
+    "synonyms": [
+      "env",
+      "environment variable",
+      "dotenv",
+      "setting",
+      "flag",
+      "toggle"
+    ]
+  },
+  "consent": {
+    "synonyms": [
+      "checkbox",
+      "agreement",
+      "privacy consent",
+      "opt-in"
+    ]
+  },
+  "contract": {
+    "synonyms": [
+      "schema",
+      "dto",
+      "zod",
+      "api shape",
+      "request shape",
+      "response shape",
+      "endpoint contract"
+    ]
+  },
+  "dependency": {
+    "synonyms": [
+      "package",
+      "npm",
+      "upgrade",
+      "library",
+      "vendor",
+      "cve",
+      "audit"
+    ]
+  },
+  "donation": {
+    "synonyms": [
+      "donate",
+      "paypal.me",
+      "tip"
+    ]
+  },
+  "extraction": {
+    "synonyms": [
+      "trait extraction",
+      "visible traits",
+      "first step",
+      "image analysis"
+    ]
+  },
+  "frontend": {
+    "synonyms": [
+      "component",
+      "container",
+      "hook",
+      "page",
+      "tsx",
+      "react",
+      "next",
+      "ui",
+      "styling",
+      "css"
+    ]
+  },
+  "i18n": {
+    "synonyms": [
+      "localization",
+      "translation catalog",
+      "message key",
+      "rtl",
+      "arabic copy"
+    ]
+  },
+  "incident": {
+    "synonyms": [
+      "outage",
+      "production bug",
+      "sev",
+      "postmortem",
+      "on-call"
+    ]
+  },
+  "judge": {
+    "synonyms": [
+      "judging",
+      "scoring",
+      "verdict",
+      "third step",
+      "rerank"
+    ]
+  },
+  "knowledge": {
+    "synonyms": [
+      "docs system",
+      "bootstrap",
+      "context pack",
+      "resolver",
+      "manifest",
+      "knowledge os",
+      ".ai"
+    ]
+  },
+  "paywall": {
+    "synonyms": [
+      "payment",
+      "paypal",
+      "checkout",
+      "paid analysis",
+      "price",
+      "capture",
+      "order",
+      "refund",
+      402
+    ]
+  },
+  "performance": {
+    "synonyms": [
+      "latency",
+      "slow",
+      "memory leak",
+      "throughput",
+      "bundle size",
+      "lighthouse"
+    ]
+  },
+  "privacy": {
+    "synonyms": [
+      "image lifecycle",
+      "wipe",
+      "redaction",
+      "retention",
+      "data handling",
+      "pii"
+    ]
+  },
+  "prompt": {
+    "synonyms": [
+      "prompt template",
+      "placeholder",
+      "system prompt",
+      "instruction file"
+    ]
+  },
+  "provider": {
+    "synonyms": [
+      "gemini",
+      "openai",
+      "deepseek",
+      "qwen",
+      "kimi",
+      "glm",
+      "model routing",
+      "fallback",
+      "shadow"
+    ]
+  },
+  "release": {
+    "synonyms": [
+      "deploy",
+      "deployment",
+      "ship",
+      "go-live",
+      "docker",
+      "smoke test"
+    ]
+  },
+  "reliability": {
+    "synonyms": [
+      "timeout",
+      "retry",
+      "cancellation",
+      "abort",
+      "rate limit",
+      "overload",
+      "backpressure"
+    ]
+  },
+  "rollback": {
+    "synonyms": [
+      "revert",
+      "undo release",
+      "hotfix rollback"
+    ]
+  },
+  "safety": {
+    "synonyms": [
+      "forbidden wording",
+      "sensitive inference",
+      "identity claim",
+      "safety filter",
+      "guardrail"
+    ]
+  },
+  "share": {
+    "synonyms": [
+      "share results",
+      "share link",
+      "shareid",
+      "temporary share"
+    ]
+  },
+  "sse": {
+    "synonyms": [
+      "stream",
+      "streaming",
+      "server-sent events",
+      "event stream",
+      "progress events"
+    ]
+  },
+  "test": {
+    "synonyms": [
+      "unit test",
+      "integration test",
+      "e2e",
+      "playwright",
+      "vitest",
+      "coverage",
+      "spec"
+    ]
+  },
+  "translation": {
+    "synonyms": [
+      "translate result",
+      "arabic",
+      "language switch",
+      "localization of result"
+    ]
+  },
+  "upload": {
+    "synonyms": [
+      "image upload",
+      "file upload",
+      "multipart",
+      "photo",
+      "magic bytes",
+      "clamav",
+      "mime"
+    ]
+  }
+}

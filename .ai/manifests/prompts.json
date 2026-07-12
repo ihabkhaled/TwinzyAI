@@ -1,0 +1,35 @@
+{
+  "count": 6,
+  "prompts": [
+    {
+      "kind": "prompt-infrastructure",
+      "name": "prompt-template.repository.ts",
+      "path": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts"
+    },
+    {
+      "kind": "prompt-source",
+      "name": "prompt-version.constants.ts",
+      "path": "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+    },
+    {
+      "kind": "prompt-template",
+      "name": "translate-result-prompt.md",
+      "path": "apps/api/src/modules/ai/prompts/translate-result-prompt.md"
+    },
+    {
+      "kind": "prompt-template",
+      "name": "use-1st-prompt.md",
+      "path": "apps/api/src/modules/ai/prompts/use-1st-prompt.md"
+    },
+    {
+      "kind": "prompt-template",
+      "name": "use-2nd-prompt.md",
+      "path": "apps/api/src/modules/ai/prompts/use-2nd-prompt.md"
+    },
+    {
+      "kind": "prompt-template",
+      "name": "use-3rd-prompt.md",
+      "path": "apps/api/src/modules/ai/prompts/use-3rd-prompt.md"
+    }
+  ]
+}

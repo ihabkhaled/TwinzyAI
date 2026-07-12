@@ -1,0 +1,11 @@
+{
+  "DELETE /share-results/:shareId": "apps/api/src/modules/share-results/api/share-results.controller.ts",
+  "GET /health": "apps/api/src/modules/health/api/health.controller.ts",
+  "GET /share-results/:shareId": "apps/api/src/modules/share-results/api/share-results.controller.ts",
+  "POST /game/analyze": "apps/api/src/modules/game/api/game.controller.ts",
+  "POST /game/analyze/stream": "apps/api/src/modules/game/api/game.controller.ts",
+  "POST /game/cancel": "apps/api/src/modules/game/api/game.controller.ts",
+  "POST /game/translate-result": "apps/api/src/modules/game/api/game.controller.ts",
+  "POST /payments/orders": "apps/api/src/modules/payments/api/payments.controller.ts",
+  "POST /share-results": "apps/api/src/modules/share-results/api/share-results.controller.ts"
+}

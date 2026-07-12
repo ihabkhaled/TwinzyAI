@@ -1,0 +1,14 @@
+{
+  "staleItems": [
+    {
+      "kind": "artifact",
+      "reason": "inputs changed since last build",
+      "target": ".ai/generated/broken-links.json"
+    },
+    {
+      "kind": "artifact",
+      "reason": "inputs changed since last build",
+      "target": ".ai/generated/unresolved-references.json"
+    }
+  ]
+}

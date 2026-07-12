@@ -1,0 +1,243 @@
+{
+  "agents/accessibility-reviewer.md": {
+    "keywords": [
+      "accessibility",
+      "agent",
+      "agents",
+      "reviewer"
+    ],
+    "summary": "Guarantee every screen of the Twinzy frontend (`apps/web`) is operable by keyboard, legible to",
+    "title": "Agent: Accessibility Reviewer",
+    "tokens": 952
+  },
+  "agents/backend-architect.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "architect",
+      "backend",
+      "role"
+    ],
+    "summary": "> The architecture/design gate for `apps/api`. Decides where code lives, validates layer fit and module boundaries, rules on service-vs-use-case, confirms every external library is adapter-wrapped, and proves import legality. Implements ...",
+    "title": "Agent Role: Backend Architect",
+    "tokens": 3409
+  },
+  "agents/backend-code-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "backend",
+      "code",
+      "reviewer"
+    ],
+    "summary": "> The consolidating final gate before a change is declared done: walk the full review checklist against the diff, confirm every quality gate is green, and issue **APPROVE** or **REQUEST CHANGES**. Implements the canon in [/context/archit...",
+    "title": "Agent: Backend Code Reviewer",
+    "tokens": 2906
+  },
+  "agents/backend-performance-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "backend",
+      "performance",
+      "reviewer",
+      "role"
+    ],
+    "summary": "> Audit gate for a stateless, memory-sensitive pipeline: hunt missing timeouts, unbounded concurrency, buffer/memory growth, payload bloat, await-in-loop, and hot-path waste — then deliver a verdict with file:line findings and concrete f...",
+    "title": "Agent Role: Backend Performance Reviewer",
+    "tokens": 2745
+  },
+  "agents/backend-refactor-agent.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "backend",
+      "refactor",
+      "role"
+    ],
+    "summary": "> Behavior-preserving facade decomposition and extraction for NestJS modules: split god-files, move logic to its correct layer, and extract inline declarations while keeping the public API byte-identical. Implements the canon in [/contex...",
+    "title": "Agent Role: Backend Refactor Agent",
+    "tokens": 2620
+  },
+  "agents/backend-release-gatekeeper.md": {
+    "keywords": [
+      "agents",
+      "backend",
+      "gatekeeper",
+      "release"
+    ],
+    "summary": "> The final GO / NO-GO authority. Implements the canon: nothing reaches a protected branch or a production deploy until every hard gate is green — including the Trivy scan and the Docker Compose smoke — the diff is clean and scoped, docs...",
+    "title": "Backend Release Gatekeeper",
+    "tokens": 3323
+  },
+  "agents/backend-security-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "backend",
+      "reviewer",
+      "security"
+    ],
+    "summary": "> The application-security gate for the Twinzy backend. Block upload-chain, AI-safety, privacy, leakage, injection, header, and rate-limit defects before they merge. Implements the security canon in [/rules/06-security.md](../rules/06-se...",
+    "title": "Agent: Backend Security Reviewer",
+    "tokens": 3974
+  },
+  "agents/backend-test-engineer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "backend",
+      "engineer",
+      "role",
+      "test"
+    ],
+    "summary": "> The owner of test depth and the coverage gate. Implements the testing canon in [/rules/09-testing-coverage.md](../rules/09-testing-coverage.md), [/testing/testing-strategy.md](../testing/testing-strategy.md), and [/testing/coverage-pol...",
+    "title": "Agent Role: Backend Test Engineer",
+    "tokens": 3438
+  },
+  "agents/database-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "boundary",
+      "database",
+      "guardian",
+      "persistence",
+      "reviewer",
+      "role"
+    ],
+    "summary": "> Twinzy has **no database, no cache of user data, and no file storage — by standing decision** ([/memory/database-decisions.md](../memory/database-decisions.md), [/rules/20-repositories-database.md](../rules/20-repositories-database.md)...",
+    "title": "Agent Role: Database Reviewer (Persistence-Boundary Guardian)",
+    "tokens": 3026
+  },
+  "agents/eslint-boundary-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "boundary",
+      "eslint",
+      "reviewer"
+    ],
+    "summary": "Own the custom `frontend-architecture` ESLint plugin as living law: review violations of its 13",
+    "title": "Agent: ESLint Boundary Reviewer",
+    "tokens": 1168
+  },
+  "agents/frontend-architect.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "architect",
+      "frontend"
+    ],
+    "summary": "Guard the module-first architecture of the Twinzy frontend (`apps/web`): one-way layer",
+    "title": "Agent: Frontend Architect",
+    "tokens": 991
+  },
+  "agents/frontend-release-gatekeeper.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "frontend",
+      "gatekeeper",
+      "release"
+    ],
+    "summary": "Run the full validation pipeline for the Twinzy frontend (`apps/web`) before anything ships, block",
+    "title": "Agent: Frontend Release Gatekeeper",
+    "tokens": 1098
+  },
+  "agents/frontend-security-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "frontend",
+      "reviewer",
+      "security"
+    ],
+    "summary": "Hold the security and privacy baseline of the Twinzy frontend (`apps/web`): nonce-based CSP, strict",
+    "title": "Agent: Frontend Security Reviewer",
+    "tokens": 1094
+  },
+  "agents/frontend-test-engineer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "engineer",
+      "frontend",
+      "test"
+    ],
+    "summary": "Enforce the frontend testing standard: tests exist before or with the code (TDD), coverage",
+    "title": "Agent: Frontend Test Engineer",
+    "tokens": 997
+  },
+  "agents/i18n-rtl-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "i18n",
+      "reviewer",
+      "rtl"
+    ],
+    "summary": "Guarantee that every piece of user-visible copy in the Twinzy frontend (`apps/web`) is a translated",
+    "title": "Agent: i18n / RTL Reviewer",
+    "tokens": 974
+  },
+  "agents/next-app-router-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "app",
+      "next",
+      "reviewer",
+      "router"
+    ],
+    "summary": "Keep `apps/web/src/app` a thin routing shell that follows Next.js 16 App Router conventions",
+    "title": "Agent: Next App Router Reviewer",
+    "tokens": 992
+  },
+  "agents/observability-reviewer.md": {
+    "keywords": [
+      "agents",
+      "observability",
+      "reviewer"
+    ],
+    "summary": "> The reviewer who guarantees a change is diagnosable in production with zero sensitive leakage. Implements the canon in [/rules/22-observability-logging.md](../rules/22-observability-logging.md) and the redaction/error rules of [/rules/...",
+    "title": "Observability Reviewer",
+    "tokens": 3113
+  },
+  "agents/react-performance-reviewer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "performance",
+      "react",
+      "reviewer"
+    ],
+    "summary": "Prevent the two ways strict frontends rot: client-bundle bloat (client boundaries pushed too high,",
+    "title": "Agent: React Performance Reviewer",
+    "tokens": 909
+  },
+  "agents/README.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "index",
+      "readme",
+      "roles"
+    ],
+    "summary": "> The roster of review roles for the Twinzy backend (`apps/api`), the shared workflow every role runs, the universal guardrails none may relax, and the exact quality-gate commands. Each role is a focused operating manual that implements ...",
+    "title": "Agent Roles — Index",
+    "tokens": 3968
+  },
+  "agents/reliability-engineer.md": {
+    "keywords": [
+      "agent",
+      "agents",
+      "engineer",
+      "reliability",
+      "role"
+    ],
+    "summary": "> Reviews a change for failure-mode robustness — timeouts, fail-closed security checks, cleanup guarantees, bounded retries, graceful startup/shutdown, and terminal states. Implements the canon in [/rules/08-reliability-durability.md](.....",
+    "title": "Agent Role: Reliability Engineer",
+    "tokens": 3271
+  }
+}

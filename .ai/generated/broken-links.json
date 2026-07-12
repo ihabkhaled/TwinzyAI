@@ -1,0 +1,49 @@
+{
+  "brokenLinks": [
+    {
+      "doc": "memory/known-pitfalls.md",
+      "strict": false,
+      "target": "../vitest.config.ts"
+    },
+    {
+      "doc": "rules/frontend/00-non-negotiable-rules.md",
+      "strict": false,
+      "target": "../../vitest.config.ts"
+    },
+    {
+      "doc": "rules/frontend/08-utils-helpers-mappers.md",
+      "strict": false,
+      "target": "../../vitest.config.ts"
+    },
+    {
+      "doc": "rules/frontend/19-release-gates.md",
+      "strict": false,
+      "target": "../../vitest.config.ts"
+    },
+    {
+      "doc": "testing/e2e-testing-standard.md",
+      "strict": false,
+      "target": "../vitest.config.ts"
+    },
+    {
+      "doc": "testing/integration-testing-standard.md",
+      "strict": false,
+      "target": "../vitest.config.ts"
+    },
+    {
+      "doc": "testing/README.md",
+      "strict": false,
+      "target": "../vitest.config.ts"
+    },
+    {
+      "doc": "testing/testing-strategy.md",
+      "strict": false,
+      "target": "../vitest.config.ts"
+    },
+    {
+      "doc": "testing/unit-testing-standard.md",
+      "strict": false,
+      "target": "../vitest.config.ts"
+    }
+  ]
+}

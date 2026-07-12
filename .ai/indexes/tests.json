@@ -1,0 +1,227 @@
+{
+  "byModule": {
+    "api:ai": [
+      "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
+      "apps/api/src/modules/ai/tests/ai-response-sanitizer.test.ts",
+      "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
+      "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
+      "apps/api/src/modules/ai/tests/json-response.util.test.ts",
+      "apps/api/src/modules/ai/tests/json-shape.util.test.ts",
+      "apps/api/src/modules/ai/tests/openai-compat.adapter.test.ts",
+      "apps/api/src/modules/ai/tests/prompt-template.repository.test.ts",
+      "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
+      "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
+      "apps/api/src/modules/ai/tests/trait-text.util.test.ts"
+    ],
+    "api:benchmark": [
+      "apps/api/src/benchmark/tests/benchmark.test.ts"
+    ],
+    "api:bootstrap": [
+      "apps/api/src/bootstrap/json-route-body-limit.util.test.ts"
+    ],
+    "api:config": [
+      "apps/api/src/config/ai-route.util.test.ts",
+      "apps/api/src/config/app-config.service.test.ts",
+      "apps/api/src/config/env.schema.test.ts"
+    ],
+    "api:core": [
+      "apps/api/src/core/errors/tests/app-exception.filter.test.ts",
+      "apps/api/src/core/errors/tests/error-body.mapper.test.ts",
+      "apps/api/src/core/http/tests/multipart-upload.parser.test.ts",
+      "apps/api/src/core/http/tests/sse-writer.test.ts",
+      "apps/api/src/core/logger/tests/app-logger.service.test.ts",
+      "apps/api/src/core/logger/tests/http-logging.options.test.ts",
+      "apps/api/src/core/streaming/tests/concurrency-limiter.service.test.ts",
+      "apps/api/src/core/streaming/tests/stream-registry.service.test.ts",
+      "apps/api/src/core/validation/tests/validation-exception.factory.test.ts",
+      "apps/api/src/core/validation/tests/zod-issue.mapper.test.ts"
+    ],
+    "api:file-security": [
+      "apps/api/src/modules/file-security/tests/file-security.service.test.ts",
+      "apps/api/src/modules/file-security/tests/image-decode-validation.service.test.ts",
+      "apps/api/src/modules/file-security/tests/image-dimensions.helpers.test.ts",
+      "apps/api/src/modules/file-security/tests/magic-byte-validation.service.test.ts",
+      "apps/api/src/modules/file-security/tests/upload-buffer-cleanup.util.test.ts",
+      "apps/api/src/modules/file-security/tests/virus-scan.service.test.ts"
+    ],
+    "api:game": [
+      "apps/api/src/modules/game/lib/request-result-count.test.ts",
+      "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
+      "apps/api/src/modules/game/tests/cancel-analysis.use-case.test.ts",
+      "apps/api/src/modules/game/tests/consent.test.ts",
+      "apps/api/src/modules/game/tests/game-stream-lib.test.ts",
+      "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
+      "apps/api/src/modules/game/tests/request-language.test.ts",
+      "apps/api/src/modules/game/tests/stream-cors.test.ts"
+    ],
+    "api:health": [
+      "apps/api/src/modules/health/tests/health.service.test.ts"
+    ],
+    "api:payments": [
+      "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
+      "apps/api/src/modules/payments/tests/paypal.adapter.test.ts"
+    ],
+    "api:privacy": [
+      "apps/api/src/modules/privacy/tests/log-redaction.helpers.test.ts",
+      "apps/api/src/modules/privacy/tests/log-redaction.service.test.ts"
+    ],
+    "api:result-aggregation": [
+      "apps/api/src/modules/result-aggregation/tests/result-aggregation.helpers.test.ts",
+      "apps/api/src/modules/result-aggregation/tests/result-aggregation.mapper.test.ts",
+      "apps/api/src/modules/result-aggregation/tests/result-aggregation.service.test.ts"
+    ],
+    "api:share-results": [
+      "apps/api/src/modules/share-results/tests/in-memory-share-result-cache.repository.test.ts",
+      "apps/api/src/modules/share-results/tests/share-result-lib.test.ts",
+      "apps/api/src/modules/share-results/tests/share-result-services.test.ts",
+      "apps/api/src/modules/share-results/tests/share-result-use-cases.test.ts"
+    ],
+    "api:tests": [
+      "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "apps/api/src/tests/fixtures/image-fixtures.ts",
+      "apps/api/src/tests/fixtures/stubs.ts",
+      "apps/api/src/tests/game-analyze-paywall.integration.test.ts",
+      "apps/api/src/tests/game-analyze-stream.integration.test.ts",
+      "apps/api/src/tests/game-analyze.integration.test.ts",
+      "apps/api/src/tests/game-cancel-body-limit.integration.test.ts",
+      "apps/api/src/tests/game-stream-isolation.integration.test.ts",
+      "apps/api/src/tests/game-translate-result.integration.test.ts",
+      "apps/api/src/tests/health.integration.test.ts",
+      "apps/api/src/tests/share-results.integration.test.ts",
+      "apps/api/src/tests/swagger-boot.integration.test.ts"
+    ],
+    "web:e2e": [
+      "apps/web/e2e/donations.spec.ts",
+      "apps/web/e2e/game-cancel.spec.ts",
+      "apps/web/e2e/game-error-states.spec.ts",
+      "apps/web/e2e/game-flow.spec.ts",
+      "apps/web/e2e/game-mock-validity.spec.ts",
+      "apps/web/e2e/game-privacy.spec.ts",
+      "apps/web/e2e/game-result-count.spec.ts",
+      "apps/web/e2e/game-results.a11y.spec.ts",
+      "apps/web/e2e/game-streaming.spec.ts",
+      "apps/web/e2e/game-translate.spec.ts",
+      "apps/web/e2e/game.visual.spec.ts",
+      "apps/web/e2e/helpers.ts",
+      "apps/web/e2e/mobile-theme.spec.ts",
+      "apps/web/e2e/paywall.spec.ts",
+      "apps/web/e2e/pwa-a11y.spec.ts",
+      "apps/web/e2e/share-flow.spec.ts",
+      "apps/web/e2e/viewport.helper.ts"
+    ],
+    "web:game": [
+      "apps/web/src/modules/game/test/camera-capture.component.test.tsx",
+      "apps/web/src/modules/game/test/countdown.helper.test.ts",
+      "apps/web/src/modules/game/test/donate-and-payment-env.test.ts",
+      "apps/web/src/modules/game/test/donate-link.container.test.tsx",
+      "apps/web/src/modules/game/test/game-display.helper.test.ts",
+      "apps/web/src/modules/game/test/game-error.helper.test.ts",
+      "apps/web/src/modules/game/test/game-fixtures.ts",
+      "apps/web/src/modules/game/test/game-processing.container.test.tsx",
+      "apps/web/src/modules/game/test/game-result.container.test.tsx",
+      "apps/web/src/modules/game/test/game-stream.gateway.test.ts",
+      "apps/web/src/modules/game/test/game-translate.gateway.test.ts",
+      "apps/web/src/modules/game/test/game-validation.helper.test.ts",
+      "apps/web/src/modules/game/test/game-view-model.helper.test.ts",
+      "apps/web/src/modules/game/test/game.mapper.test.ts",
+      "apps/web/src/modules/game/test/game.service.test.ts",
+      "apps/web/src/modules/game/test/payment-price.helper.test.ts",
+      "apps/web/src/modules/game/test/payment-step.container.test.tsx",
+      "apps/web/src/modules/game/test/result-count-select.component.test.tsx",
+      "apps/web/src/modules/game/test/share-modal.container.test.tsx",
+      "apps/web/src/modules/game/test/share-page.container.test.tsx",
+      "apps/web/src/modules/game/test/share-platform.helper.test.ts",
+      "apps/web/src/modules/game/test/share-view-model.helper.test.ts",
+      "apps/web/src/modules/game/test/share.gateway.test.ts",
+      "apps/web/src/modules/game/test/share.service.test.ts",
+      "apps/web/src/modules/game/test/stream-frame.helper.test.ts",
+      "apps/web/src/modules/game/test/stream-identity.helper.test.ts",
+      "apps/web/src/modules/game/test/use-analyze-run-control.hook.test.ts",
+      "apps/web/src/modules/game/test/use-camera-capture.hook.test.ts",
+      "apps/web/src/modules/game/test/use-countdown.hook.test.tsx",
+      "apps/web/src/modules/game/test/use-payment-flow.hook.test.tsx",
+      "apps/web/src/modules/game/test/use-result-translation.hook.test.tsx",
+      "apps/web/src/modules/game/test/use-share-create.hook.test.tsx"
+    ],
+    "web:pkg-axios": [
+      "apps/web/src/packages/axios/http-error.test.ts",
+      "apps/web/src/packages/axios/sse-parser.test.ts",
+      "apps/web/src/packages/axios/stream-request.test.ts"
+    ],
+    "web:pkg-browser": [
+      "apps/web/src/packages/browser/browser-environment.test.ts"
+    ],
+    "web:pkg-camera": [
+      "apps/web/src/packages/camera/camera-stream.test.ts",
+      "apps/web/src/packages/camera/capture-frame.test.ts"
+    ],
+    "web:pkg-env": [
+      "apps/web/src/packages/env/public-env.test.ts"
+    ],
+    "web:pkg-i18n": [
+      "apps/web/src/packages/i18n/locale.constants.test.ts"
+    ],
+    "web:pkg-logger": [
+      "apps/web/src/packages/logger/app-logger.test.ts"
+    ],
+    "web:pkg-query": [
+      "apps/web/src/packages/query/query-client.test.ts"
+    ],
+    "web:pkg-storage": [
+      "apps/web/src/packages/storage/cookie-storage.test.ts",
+      "apps/web/src/packages/storage/web-storage.ssr.test.ts",
+      "apps/web/src/packages/storage/web-storage.test.ts"
+    ],
+    "web:pkg-toast": [
+      "apps/web/src/packages/toast/show-toast.test.ts"
+    ],
+    "web:pkg-ui-primitives": [
+      "apps/web/src/packages/ui-primitives/alert.test.tsx",
+      "apps/web/src/packages/ui-primitives/button.test.tsx",
+      "apps/web/src/packages/ui-primitives/button.variants.test.ts",
+      "apps/web/src/packages/ui-primitives/checkbox.test.tsx",
+      "apps/web/src/packages/ui-primitives/cn.test.ts",
+      "apps/web/src/packages/ui-primitives/spinner.test.tsx",
+      "apps/web/src/packages/ui-primitives/stack.variants.test.ts"
+    ],
+    "web:pkg-zod": [
+      "apps/web/src/packages/zod/parse-schema.test.ts"
+    ],
+    "web:pkg-zustand": [
+      "apps/web/src/packages/zustand/create-app-store.test.ts"
+    ],
+    "web:shared": [
+      "apps/web/src/shared/api/api-routes.constants.test.ts",
+      "apps/web/src/shared/components/layout/app-header.component.test.tsx",
+      "apps/web/src/shared/errors/app-error.test.ts",
+      "apps/web/src/shared/errors/http-error-to-message-key.mapper.test.ts",
+      "apps/web/src/shared/helpers/donate-link.helper.test.ts",
+      "apps/web/src/shared/helpers/page-title.helper.test.ts",
+      "apps/web/src/shared/helpers/read-theme-cookie.helper.test.ts",
+      "apps/web/src/shared/hooks/shared-hooks.test.ts",
+      "apps/web/src/shared/security/content-security-policy.test.ts",
+      "apps/web/src/shared/security/external-url.helper.test.ts",
+      "apps/web/src/shared/testing/test-id.helper.test.ts",
+      "apps/web/src/shared/utils/assert-never.util.test.ts",
+      "apps/web/src/shared/utils/is-defined.util.test.ts"
+    ],
+    "web:tests": [
+      "apps/web/src/tests/helpers/render-with-providers.tsx",
+      "apps/web/src/tests/pwa.test.ts",
+      "apps/web/src/tests/setup.ts"
+    ],
+    "web:ui-preferences": [
+      "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
+      "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
+      "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
+      "apps/web/src/modules/ui-preferences/test/ui-preferences.selectors.test.ts",
+      "apps/web/src/modules/ui-preferences/test/ui-preferences.store.test.ts",
+      "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts",
+      "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
+      "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts"
+    ]
+  }
+}

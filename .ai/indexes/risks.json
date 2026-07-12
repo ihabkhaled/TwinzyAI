@@ -1,0 +1,105 @@
+{
+  "critical": {
+    "keywords": [
+      "payment",
+      "paywall",
+      "paypal",
+      "price",
+      "consent",
+      "privacy",
+      "image lifecycle",
+      "upload security",
+      "clamav",
+      "magic bytes",
+      "prompt",
+      "safety filter",
+      "forbidden wording",
+      "identity",
+      "sensitive inference",
+      "auth",
+      "authentication",
+      "authorization",
+      "csp",
+      "secret",
+      "credential",
+      "persistence",
+      "database",
+      "incident",
+      "breaking change"
+    ],
+    "pathPatterns": [
+      "apps/api/src/modules/payments/",
+      "apps/api/src/modules/file-security/",
+      "apps/api/src/modules/privacy/",
+      "apps/api/src/modules/ai/prompts/",
+      "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts",
+      "packages/shared/src/constants/safety.constants.ts",
+      "packages/shared/src/schemas/",
+      "apps/web/src/shared/security/",
+      "apps/web/src/packages/paypal/",
+      "apps/api/src/config/env.schema.ts",
+      "apps/api/src/bootstrap/",
+      ".github/workflows/",
+      "Dockerfile",
+      "docker-compose",
+      ".husky/"
+    ]
+  },
+  "fast": {
+    "keywords": [
+      "typo",
+      "copy fix",
+      "comment",
+      "doc fix",
+      "rename local",
+      "dead code"
+    ],
+    "pathPatterns": [
+      "docs/",
+      "context/",
+      "memory/",
+      "support/",
+      "runbooks/",
+      "release-notes/",
+      "README"
+    ]
+  },
+  "standard": {
+    "keywords": [
+      "feature",
+      "endpoint",
+      "route",
+      "component",
+      "hook",
+      "service",
+      "adapter",
+      "schema",
+      "migration",
+      "config",
+      "provider",
+      "model routing",
+      "sse",
+      "stream",
+      "i18n",
+      "localization",
+      "accessibility",
+      "performance",
+      "dependency",
+      "refactor"
+    ],
+    "pathPatterns": [
+      "apps/api/src/modules/",
+      "apps/api/src/core/",
+      "apps/api/src/config/",
+      "apps/web/src/modules/",
+      "apps/web/src/app/",
+      "apps/web/src/shared/",
+      "apps/web/src/packages/",
+      "packages/shared/src/",
+      "eslint/",
+      "knowledge/",
+      "scripts/"
+    ]
+  }
+}

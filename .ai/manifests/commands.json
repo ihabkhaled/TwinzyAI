@@ -1,0 +1,410 @@
+{
+  "commands": [
+    {
+      "command": "nest build",
+      "name": "build",
+      "workspace": "@twinzy/api"
+    },
+    {
+      "command": "nest start --watch",
+      "name": "dev",
+      "workspace": "@twinzy/api"
+    },
+    {
+      "command": "node dist/main.js",
+      "name": "start",
+      "workspace": "@twinzy/api"
+    },
+    {
+      "command": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json",
+      "name": "typecheck",
+      "workspace": "@twinzy/api"
+    },
+    {
+      "command": "node ../../node_modules/tsc7/bin/tsc -p tsconfig.build.json",
+      "name": "build",
+      "workspace": "@twinzy/shared"
+    },
+    {
+      "command": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json",
+      "name": "typecheck",
+      "workspace": "@twinzy/shared"
+    },
+    {
+      "command": "next build --turbopack",
+      "name": "build",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "next build",
+      "name": "build:turbo",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "next dev --turbopack --port 3000",
+      "name": "dev",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "next dev --turbopack",
+      "name": "dev:e2e",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "next dev --port 3000",
+      "name": "dev:turbo",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "next start --port 3000",
+      "name": "start",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "playwright test --project=a11y",
+      "name": "test:a11y",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "playwright test --project=chromium --project=a11y --project=mobile-chromium",
+      "name": "test:e2e",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "playwright test",
+      "name": "test:e2e:all",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "playwright test --project=chromium --project=a11y --project=mobile-chromium",
+      "name": "test:e2e:ci",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "playwright test --project=mobile-webkit",
+      "name": "test:e2e:webkit",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "playwright test --project=visual",
+      "name": "test:visual",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json && node ../../node_modules/tsc7/bin/tsc --noEmit -p e2e/tsconfig.json",
+      "name": "typecheck",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "npm run build --workspace apps/api && node apps/api/dist/benchmark/benchmark.main.js",
+      "name": "ai:benchmark",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm audit --audit-level=low",
+      "name": "audit",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && npm run build:api && npm run build:web",
+      "name": "build",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build --workspace apps/api",
+      "name": "build:api",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build --workspace packages/shared",
+      "name": "build:shared",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build --workspace apps/web",
+      "name": "build:web",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && node scripts/calibrate.mjs",
+      "name": "calibrate",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm-check-updates --workspaces --root",
+      "name": "deps:check",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm-check-updates --workspaces --root -u && npm install",
+      "name": "deps:upgrade",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+      "name": "dev",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run dev --workspace apps/api",
+      "name": "dev:api",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run dev --workspace apps/web",
+      "name": "dev:web",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "docker compose down",
+      "name": "docker:down",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "docker compose logs -f",
+      "name": "docker:logs",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "docker compose build --no-cache",
+      "name": "docker:rebuild",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "docker compose up -d --build",
+      "name": "docker:up",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "prettier --write .",
+      "name": "format",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "prettier --check .",
+      "name": "format:check",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/benchmark-context.mjs",
+      "name": "knowledge:benchmark",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/build.mjs",
+      "name": "knowledge:build",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/build-incremental.mjs",
+      "name": "knowledge:build:incremental",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/classify-task.mjs",
+      "name": "knowledge:classify",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/resolve-context.mjs",
+      "name": "knowledge:context",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/find-contradictions.mjs",
+      "name": "knowledge:contradictions",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/find-duplicates.mjs",
+      "name": "knowledge:duplicates",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/build-graphs.mjs",
+      "name": "knowledge:graphs",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/validate-links.mjs",
+      "name": "knowledge:links",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/find-orphans.mjs",
+      "name": "knowledge:orphans",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/build-packs.mjs",
+      "name": "knowledge:packs",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/build.mjs && node scripts/knowledge/report.mjs",
+      "name": "knowledge:refresh",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/report.mjs",
+      "name": "knowledge:report",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/find-stale-items.mjs",
+      "name": "knowledge:stale",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/estimate-tokens.mjs",
+      "name": "knowledge:tokens",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/knowledge/validate-frontmatter.mjs && node scripts/knowledge/validate-links.mjs && node scripts/knowledge/validate-source-references.mjs && node scripts/knowledge/validate-generated-files.mjs && node scripts/knowledge/validate-context-packs.mjs && node scripts/knowledge/find-contradictions.mjs",
+      "name": "knowledge:validate",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && eslint . --concurrency 10 --max-warnings 0",
+      "name": "lint",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && eslint . --concurrency 10 --max-warnings 0 --fix",
+      "name": "lint:fix",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/load-test.mjs",
+      "name": "load-test",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "husky",
+      "name": "prepare",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "madge apps/web/src apps/api/src --circular --extensions ts,tsx",
+      "name": "quality:circular",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "knip",
+      "name": "quality:dead-code",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run lint && npm run typecheck && npm run test:e2e",
+      "name": "quality:frontend",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm audit --audit-level=low",
+      "name": "security:audit",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" --exit-code 1 --severity HIGH,CRITICAL .",
+      "name": "security:scan",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" .",
+      "name": "security:scan:full",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "trivy image --exit-code 1 --severity HIGH,CRITICAL twinzy-api:local && trivy image --exit-code 1 --severity HIGH,CRITICAL twinzy-web:local",
+      "name": "security:scan:images",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "node scripts/scan-secrets.mjs",
+      "name": "security:scan:secrets",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "concurrently -n api,web -c blue,green \"npm:start --workspace apps/api\" \"npm:start --workspace apps/web\"",
+      "name": "start",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run",
+      "name": "test",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run test:a11y --workspace apps/web -- --pass-with-no-tests",
+      "name": "test:a11y",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --project api-unit --project api-integration -- modules/ai modules/game modules/result-aggregation",
+      "name": "test:ai",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --coverage",
+      "name": "test:coverage",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run test:e2e --workspace apps/web",
+      "name": "test:e2e",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && npm run test:e2e:ci --workspace apps/web",
+      "name": "test:e2e:ci",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --project api-unit --project api-integration -- modules/file-security",
+      "name": "test:file-security",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --project api-integration",
+      "name": "test:integration",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --project web-unit -- pwa",
+      "name": "test:pwa",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --project api-unit --project api-integration -- modules/file-security modules/privacy common",
+      "name": "test:security",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && vitest run --project api-unit --project web-unit --project shared-unit --project lint-rules",
+      "name": "test:unit",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run test:visual --workspace apps/web -- --pass-with-no-tests",
+      "name": "test:visual",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "vitest",
+      "name": "test:watch",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run build:shared && node node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json && npm run typecheck --workspaces --if-present",
+      "name": "typecheck",
+      "workspace": "twinzy"
+    },
+    {
+      "command": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run quality:dead-code && npm run quality:circular",
+      "name": "validate",
+      "workspace": "twinzy"
+    }
+  ],
+  "count": 81
+}

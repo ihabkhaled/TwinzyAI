@@ -1,0 +1,113 @@
+{
+  ".ai/": [
+    "knowledge-change"
+  ],
+  ".env.example": [
+    "configuration-change"
+  ],
+  ".github/workflows/": [
+    "release"
+  ],
+  "apps/api/src/": [
+    "backend-feature"
+  ],
+  "apps/api/src/config/": [
+    "configuration-change"
+  ],
+  "apps/api/src/core/rate-limit/": [
+    "reliability-change"
+  ],
+  "apps/api/src/modules/ai/": [
+    "ai-pipeline-change"
+  ],
+  "apps/api/src/modules/ai/adapters/": [
+    "ai-provider-change"
+  ],
+  "apps/api/src/modules/ai/prompts/": [
+    "ai-prompt-change"
+  ],
+  "apps/api/src/modules/file-security/": [
+    "upload-security-change"
+  ],
+  "apps/api/src/modules/game/api/dto/": [
+    "api-contract-change"
+  ],
+  "apps/api/src/modules/game/lib/": [
+    "privacy-change"
+  ],
+  "apps/api/src/modules/payments/": [
+    "payments-change"
+  ],
+  "apps/api/src/modules/privacy/": [
+    "privacy-change"
+  ],
+  "apps/api/src/modules/result-aggregation/": [
+    "ai-pipeline-change"
+  ],
+  "apps/api/src/tests/": [
+    "testing-change"
+  ],
+  "apps/web/e2e/": [
+    "testing-change"
+  ],
+  "apps/web/src/": [
+    "frontend-feature"
+  ],
+  "apps/web/src/packages/env/": [
+    "configuration-change"
+  ],
+  "apps/web/src/packages/i18n/": [
+    "localization-change"
+  ],
+  "apps/web/src/packages/paypal/": [
+    "payments-change"
+  ],
+  "context/": [
+    "knowledge-change"
+  ],
+  "context/architecture-map.md": [
+    "architecture-change"
+  ],
+  "docker-compose.yml": [
+    "release"
+  ],
+  "Dockerfile.api": [
+    "release"
+  ],
+  "Dockerfile.web": [
+    "release"
+  ],
+  "eslint/": [
+    "architecture-change"
+  ],
+  "incidents/": [
+    "incident"
+  ],
+  "knowledge/": [
+    "knowledge-change"
+  ],
+  "memory/": [
+    "knowledge-change"
+  ],
+  "package-lock.json": [
+    "dependency-change"
+  ],
+  "package.json": [
+    "dependency-change"
+  ],
+  "packages/shared/src/": [
+    "full-stack-feature"
+  ],
+  "packages/shared/src/schemas/": [
+    "api-contract-change"
+  ],
+  "scripts/knowledge/": [
+    "knowledge-change"
+  ],
+  "support/": [
+    "support-change"
+  ],
+  "testing/": [
+    "testing-change"
+  ]
+}

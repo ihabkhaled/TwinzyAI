@@ -1,0 +1,5147 @@
+{
+  "2026": [
+    "docs/features/multi-provider-ai/02-provider-research.md",
+    "release-notes/2026-07-12-ai-knowledge-os.md"
+  ],
+  "<5-12 lowercase routing keywords>": [
+    "knowledge/templates/canonical-doc.md"
+  ],
+  "0001": [
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md"
+  ],
+  "0002": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
+  ],
+  "001": [
+    "architecture/adrs/adr-001-strict-engineering-os.md"
+  ],
+  "002": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md"
+  ],
+  "003": [
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md"
+  ],
+  "4xx": [
+    "contracts/api/error-envelope.md"
+  ],
+  "5xx": [
+    "contracts/api/error-envelope.md"
+  ],
+  "a11y": [
+    "knowledge/summaries/testing.md",
+    "product/accessibility-expectations.md"
+  ],
+  "abort": [
+    "docs/ai/retry-timeout-policy.md"
+  ],
+  "abuse": [
+    "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md"
+  ],
+  "acceleration": [
+    "knowledge/templates/ai-readme.md"
+  ],
+  "accessibility": [
+    "agents/accessibility-reviewer.md",
+    "docs/features/_template-frontend/10-accessibility-review.md",
+    "memory/frontend/accessibility-decisions.md",
+    "product/accessibility-expectations.md",
+    "rules/13-accessibility.md",
+    "rules/frontend/13-accessibility.md",
+    "skills/accessibility-review-frontend.md",
+    "skills/accessibility-review.md",
+    "skills/write-accessibility-tests.md",
+    "testing/frontend/accessibility-testing-standard.md"
+  ],
+  "accounts": [
+    "product/non-goals.md"
+  ],
+  "accuracy": [
+    "docs/features/visual-similarity-pivot/20-uat-report.md"
+  ],
+  "active": [
+    "incidents/active/README.md",
+    "incidents/README.md"
+  ],
+  "active facts": [
+    "knowledge/hot-memory.md"
+  ],
+  "adapter": [
+    "contracts/ai/README.md",
+    "contracts/integrations/gemini.md",
+    "contracts/integrations/openai-compat.md",
+    "docs/ai/provider-change-checklist.md",
+    "structure/modules/api-payments.md"
+  ],
+  "adapters": [
+    "docs/ai/provider-catalog.md",
+    "structure/layer-map.md"
+  ],
+  "add": [
+    "skills/add-ai-provider.md",
+    "skills/add-api-service-method.md",
+    "skills/add-config-value.md",
+    "skills/add-event-handler.md",
+    "skills/add-form.md",
+    "skills/add-guard-and-permission.md",
+    "skills/add-i18n-message-key.md",
+    "skills/add-library.md",
+    "skills/add-migration-backfill.md",
+    "skills/add-notification.md",
+    "skills/add-route.md",
+    "skills/add-virtualized-list.md"
+  ],
+  "admission": [
+    "docs/ai/concurrency-policy.md",
+    "operations/scaling-model.md"
+  ],
+  "adopt": [
+    "architecture/adrs/adr-001-strict-engineering-os.md"
+  ],
+  "adr": [
+    "architecture/adrs/adr-001-strict-engineering-os.md",
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
+    "architecture/adrs/adr-template.md",
+    "quality/architecture-review-standard.md"
+  ],
+  "adr-003": [
+    "operations/scaling-model.md",
+    "runbooks/latency.md"
+  ],
+  "adrs": [
+    "architecture/adrs/adr-001-strict-engineering-os.md",
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
+    "architecture/adrs/adr-template.md",
+    "architecture/adrs/README.md"
+  ],
+  "advanced": [
+    "docs/features/advanced-global-traits-v2/00-intake.md",
+    "docs/features/advanced-global-traits-v2/01-business-analysis.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/03-product-requirements.md",
+    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
+    "docs/features/advanced-global-traits-v2/05-delivery-plan.md",
+    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
+    "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
+    "docs/features/advanced-global-traits-v2/08-architecture-review.md",
+    "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
+    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
+    "docs/features/advanced-global-traits-v2/11-test-strategy.md",
+    "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
+    "docs/features/advanced-global-traits-v2/13-implementation-readiness.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/advanced-global-traits-v2/23-documentation-changelog.md"
+  ],
+  "agent entrypoint": [
+    "knowledge/bootstrap.md"
+  ],
+  "agents": [
+    "AGENTS.md",
+    "agents/accessibility-reviewer.md",
+    "agents/backend-architect.md",
+    "agents/backend-code-reviewer.md",
+    "agents/backend-performance-reviewer.md",
+    "agents/backend-refactor-agent.md",
+    "agents/backend-release-gatekeeper.md",
+    "agents/backend-security-reviewer.md",
+    "agents/backend-test-engineer.md",
+    "agents/database-reviewer.md",
+    "agents/eslint-boundary-reviewer.md",
+    "agents/frontend-architect.md",
+    "agents/frontend-release-gatekeeper.md",
+    "agents/frontend-security-reviewer.md",
+    "agents/frontend-test-engineer.md",
+    "agents/i18n-rtl-reviewer.md",
+    "agents/next-app-router-reviewer.md",
+    "agents/observability-reviewer.md",
+    "agents/react-performance-reviewer.md",
+    "agents/README.md",
+    "agents/reliability-engineer.md"
+  ],
+  "aggregation": [
+    "docs/ai/pipeline.md",
+    "domain/result-ranking.md",
+    "domain/ubiquitous-language.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-result-aggregation.md"
+  ],
+  "agnostic": [
+    "docs/features/multi-provider-ai/08-architecture-review.md"
+  ],
+  "ai unavailable": [
+    "knowledge/summaries/support.md"
+  ],
+  "ai-rate-limited": [
+    "runbooks/provider-rate-limiting.md"
+  ],
+  "ai-route": [
+    "contracts/ai/README.md",
+    "docs/ai/model-routing.md",
+    "runbooks/provider-outage.md"
+  ],
+  "ai-safety": [
+    "runbooks/privacy-incident.md"
+  ],
+  "ai-unavailable": [
+    "support/provider-outage-messaging.md"
+  ],
+  "alerts": [
+    "operations/observability-map.md"
+  ],
+  "already": [
+    "memory/README.md"
+  ],
+  "analysis": [
+    "docs/features/_template-frontend/01-business-analysis.md",
+    "docs/features/_template-frontend/03-ux-ui-analysis.md",
+    "docs/features/_template/01-business-analysis.md",
+    "docs/features/_template/09-impact-analysis.md",
+    "docs/features/advanced-global-traits-v2/01-business-analysis.md",
+    "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
+    "docs/features/ai-knowledge-os/09-impact-analysis.md",
+    "docs/features/engineering-os-migration/01-business-analysis.md",
+    "docs/features/engineering-os-migration/09-impact-analysis.md",
+    "docs/features/multi-provider-ai/09-impact-analysis.md",
+    "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/simple-readable-code-operating-system-implementation/01-business-analysis.md",
+    "docs/features/simple-readable-code-operating-system-implementation/09-impact-analysis.md",
+    "docs/features/temporary-shareable-results/01-business-analysis.md",
+    "docs/features/temporary-shareable-results/09-impact-analysis.md",
+    "docs/features/twinzy-hardening-v3/01-business-analysis.md",
+    "docs/features/twinzy-hardening-v3/09-impact-analysis.md"
+  ],
+  "analytics": [
+    "rules/frontend/16-observability-analytics.md"
+  ],
+  "analyze": [
+    "contracts/api/analyze.md",
+    "product/user-journeys.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-game.md"
+  ],
+  "anonymous": [
+    "product/personas.md"
+  ],
+  "anthropic": [
+    "ANTHROPIC.md"
+  ],
+  "any": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
+  "api": [
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "contracts/api/README.md",
+    "contracts/README.md",
+    "docs/eslint/no-direct-browser-api-outside-packages.md",
+    "knowledge/summaries/backend.md",
+    "rules/frontend/04-services-api-gateway.md",
+    "runbooks/api-outage.md",
+    "skills/add-api-service-method.md",
+    "structure/modules/api-health.md",
+    "structure/repository-map.md"
+  ],
+  "api-keys": [
+    "runbooks/secret-rotation.md"
+  ],
+  "app": [
+    "agents/next-app-router-reviewer.md",
+    "rules/frontend/01-next-app-router-architecture.md"
+  ],
+  "app router": [
+    "knowledge/summaries/frontend.md"
+  ],
+  "app-config": [
+    "structure/configuration-map.md"
+  ],
+  "appconfigservice": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "application": [
+    "rules/17-manager-layer.md",
+    "rules/19-services-application-layer.md",
+    "structure/layer-map.md"
+  ],
+  "approval": [
+    "docs/features/_template/21-client-approval.md",
+    "docs/features/simple-readable-code-operating-system-implementation/21-client-approval.md",
+    "quality/code-review-standard.md",
+    "quality/release-readiness.md",
+    "quality/waiver-register.md"
+  ],
+  "apps": [
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
+    "docs/features/_template-frontend/README.md",
+    "rules/frontend/README.md",
+    "skills/README-frontend.md",
+    "structure/repository-map.md",
+    "testing/frontend/accessibility-testing-standard.md",
+    "testing/frontend/coverage-policy.md",
+    "testing/frontend/e2e-testing-standard.md",
+    "testing/frontend/integration-testing-standard.md",
+    "testing/frontend/quality-gates.md",
+    "testing/frontend/README.md",
+    "testing/frontend/test-data-and-fixtures.md",
+    "testing/frontend/testing-strategy.md",
+    "testing/frontend/unit-testing-standard.md",
+    "testing/frontend/visual-testing-standard.md"
+  ],
+  "ar": [
+    "domain/language-lifecycle.md"
+  ],
+  "arabic": [
+    "docs/ai/forbidden-wording.md",
+    "product/localization-expectations.md",
+    "product/personas.md",
+    "support/localization-troubleshooting.md"
+  ],
+  "architect": [
+    "agents/backend-architect.md",
+    "agents/frontend-architect.md"
+  ],
+  "archive": [
+    "incidents/resolved/README.md"
+  ],
+  "artifact debt": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "artifacts": [
+    "docs/features/README.md",
+    "rules/36-delivery-lanes-and-traceability.md"
+  ],
+  "async": [
+    "rules/27-async-events-and-jobs.md"
+  ],
+  "audience": [
+    "product/personas.md"
+  ],
+  "audit": [
+    "docs/features/simple-readable-code-operating-system-implementation/00-audit-crosswalk.md",
+    "docs/features/twinzy-hardening-v3/00-audit-report.md",
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "authority": [
+    "knowledge/bootstrap.md",
+    "rules/31-knowledge-management.md"
+  ],
+  "availability": [
+    "operations/availability-expectations.md",
+    "operations/SLIs.md",
+    "operations/SLOs.md"
+  ],
+  "axe": [
+    "product/accessibility-expectations.md"
+  ],
+  "backend": [
+    "agents/backend-architect.md",
+    "agents/backend-code-reviewer.md",
+    "agents/backend-performance-reviewer.md",
+    "agents/backend-refactor-agent.md",
+    "agents/backend-release-gatekeeper.md",
+    "agents/backend-security-reviewer.md",
+    "agents/backend-test-engineer.md",
+    "architecture/adrs/adr-001-strict-engineering-os.md",
+    "context/architecture-map.md",
+    "contracts/frontend-backend/shared-schemas.md",
+    "docs/backend-architecture.md",
+    "knowledge/summaries/backend.md",
+    "memory/backend-stack.md",
+    "rules/16-backend-architecture.md",
+    "skills/create-controller.md",
+    "skills/create-module.md",
+    "skills/create-service.md"
+  ],
+  "backfill": [
+    "skills/add-migration-backfill.md"
+  ],
+  "backlog": [
+    "quality/technical-debt-register.md"
+  ],
+  "banding": [
+    "domain/calculations.md"
+  ],
+  "base-url": [
+    "contracts/integrations/openai-compat.md"
+  ],
+  "base64": [
+    "docs/ai/image-lifecycle.md",
+    "runbooks/accidental-image-exposure.md",
+    "structure/modules/api-privacy.md"
+  ],
+  "baseline": [
+    "docs/sdlc/documentation-baseline.md",
+    "docs/sdlc/qa-baseline.md",
+    "docs/sdlc/risk-baseline.md",
+    "docs/sdlc/security-baseline.md",
+    "docs/sdlc/uat-baseline.md"
+  ],
+  "baselines": [
+    "docs/sdlc/README.md"
+  ],
+  "before": [
+    "rules/29-reuse-before-creating.md"
+  ],
+  "behavioral": [
+    "TEST_CASES.md"
+  ],
+  "benchmark": [
+    "docs/ai/benchmark-methodology.md",
+    "docs/ai/evaluation-framework.md",
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/regression-evaluation.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "operations/AI-cost-budget.md",
+    "quality/quality-metrics.md"
+  ],
+  "benchmarking": [
+    "docs/ai-benchmarking.md"
+  ],
+  "benchmarks": [
+    "docs/ai/README.md"
+  ],
+  "best-effort": [
+    "operations/availability-expectations.md"
+  ],
+  "between": [
+    "skills/refactor-feature.md"
+  ],
+  "bilingual": [
+    "domain/safety-boundaries.md",
+    "product/localization-expectations.md",
+    "product/principles.md",
+    "product/vision.md"
+  ],
+  "billed": [
+    "operations/AI-cost-budget.md"
+  ],
+  "biometrics": [
+    "product/non-goals.md",
+    "support/AI-result-expectations.md"
+  ],
+  "blameless": [
+    "incidents/README.md",
+    "incidents/templates/postmortem.md"
+  ],
+  "blocked": [
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md"
+  ],
+  "blocker": [
+    "quality/code-review-standard.md"
+  ],
+  "blockers": [
+    "quality/waiver-register.md"
+  ],
+  "blocking": [
+    "runbooks/event-loop-lag.md"
+  ],
+  "bodies": [
+    "rules/README.md"
+  ],
+  "body-limit": [
+    "contracts/api/README.md",
+    "operations/performance-budgets.md"
+  ],
+  "boot": [
+    "operations/graceful-shutdown.md"
+  ],
+  "bootstrap": [
+    "AGENTS.md",
+    "CODEX.md",
+    "cursor.md",
+    "knowledge/bootstrap.md",
+    "knowledge/README.md",
+    "rules/31-knowledge-management.md",
+    "runbooks/environment-bootstrap.md",
+    "skills/resolve-task-context.md"
+  ],
+  "boundaries": [
+    "context/frontend/package-boundaries.md",
+    "domain/safety-boundaries.md",
+    "knowledge/summaries/architecture.md",
+    "memory/library-boundaries.md",
+    "quality/architecture-review-standard.md",
+    "rules/01-architecture.md",
+    "structure/layer-map.md"
+  ],
+  "boundary": [
+    "agents/database-reviewer.md",
+    "agents/eslint-boundary-reviewer.md",
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "docs/ai/written-traits-only-boundary.md"
+  ],
+  "bounded": [
+    "runbooks/memory-growth.md"
+  ],
+  "bounds": [
+    "domain/invariants.md"
+  ],
+  "brain": [
+    "CLAUDE.md"
+  ],
+  "browser": [
+    "docs/eslint/no-direct-browser-api-outside-packages.md"
+  ],
+  "budget": [
+    "docs/ai/cost-policy.md",
+    "docs/ai/latency-budget.md",
+    "operations/AI-cost-budget.md",
+    "operations/retry-budget.md",
+    "operations/timeout-budget.md"
+  ],
+  "budgets": [
+    "operations/performance-budgets.md",
+    "operations/README.md"
+  ],
+  "buffer": [
+    "docs/ai/image-lifecycle.md",
+    "structure/modules/api-file-security.md"
+  ],
+  "buffer wipe": [
+    "knowledge/summaries/privacy.md"
+  ],
+  "buffering": [
+    "runbooks/streaming-disconnects.md"
+  ],
+  "buffers": [
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/memory-growth.md"
+  ],
+  "bug": [
+    "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md",
+    "skills/investigate-production-bug.md",
+    "testing/bug-triage-and-retest.md"
+  ],
+  "build": [
+    "quality/quality-model.md"
+  ],
+  "build-shared": [
+    "runbooks/local-development.md"
+  ],
+  "business": [
+    "docs/features/_template-frontend/01-business-analysis.md",
+    "docs/features/_template/01-business-analysis.md",
+    "docs/features/_template/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/01-business-analysis.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/engineering-os-migration/01-business-analysis.md",
+    "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/simple-readable-code-operating-system-implementation/01-business-analysis.md",
+    "docs/features/simple-readable-code-operating-system-implementation/02-business-development.md",
+    "docs/features/temporary-shareable-results/01-business-analysis.md",
+    "docs/features/temporary-shareable-results/02-business-development.md",
+    "docs/features/twinzy-hardening-v3/01-business-analysis.md",
+    "docs/features/twinzy-hardening-v3/02-business-development.md",
+    "test-cases/business/business-test-case-template.md"
+  ],
+  "byte-cap": [
+    "contracts/integrations/gemini.md",
+    "docs/ai/output-validation.md"
+  ],
+  "cache": [
+    "contracts/api/share-results.md",
+    "domain/sharing-lifecycle.md",
+    "runbooks/memory-growth.md",
+    "structure/flows/share-flow.md",
+    "structure/modules/api-share-results.md"
+  ],
+  "calibration": [
+    "docs/ai/evaluation-framework.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md",
+    "domain/calculations.md"
+  ],
+  "called": [
+    "skills/create-manager-use-case.md"
+  ],
+  "cancel": [
+    "contracts/api/analyze.md",
+    "domain/state-machines.md",
+    "product/user-journeys.md",
+    "runbooks/streaming-disconnects.md",
+    "structure/modules/api-game.md"
+  ],
+  "cancellation": [
+    "contracts/api/sse-events.md",
+    "docs/ai/retry-timeout-policy.md",
+    "docs/features/multi-tab-stream-isolation/README.md"
+  ],
+  "cancelled": [
+    "support/user-visible-error-guide.md"
+  ],
+  "candidate": [
+    "domain/entities.md",
+    "domain/ubiquitous-language.md",
+    "product/terminology.md"
+  ],
+  "candidates": [
+    "contracts/ai/prompt-io.md",
+    "docs/ai/pipeline.md",
+    "docs/ai/schema-contracts.md",
+    "knowledge/summaries/domain.md",
+    "product/game-rules.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-ai.md"
+  ],
+  "canonical": [
+    "context/architecture-map.md",
+    "rules/31-knowledge-management.md"
+  ],
+  "canonical-fields": [
+    "domain/language-lifecycle.md"
+  ],
+  "capacity": [
+    "contracts/api/share-results.md",
+    "domain/sharing-lifecycle.md",
+    "structure/modules/api-share-results.md",
+    "support/sharing-troubleshooting.md"
+  ],
+  "caps": [
+    "docs/ai/cost-policy.md",
+    "operations/AI-cost-budget.md",
+    "operations/performance-budgets.md",
+    "operations/scaling-model.md"
+  ],
+  "capture": [
+    "contracts/api/payments.md",
+    "contracts/integrations/paypal.md",
+    "structure/flows/payment-flow.md",
+    "structure/modules/api-payments.md"
+  ],
+  "capture-verification": [
+    "domain/invariants.md"
+  ],
+  "case": [
+    "skills/create-manager-use-case.md",
+    "skills/create-use-case.md",
+    "test-cases/business/business-test-case-template.md",
+    "test-cases/e2e/e2e-test-case-template.md",
+    "test-cases/integration/integration-test-case-template.md",
+    "test-cases/security/security-test-case-template.md",
+    "test-cases/unit/unit-test-case-template.md"
+  ],
+  "cases": [
+    "rules/17-manager-layer.md",
+    "TEST_CASES.md",
+    "test-cases/business/business-test-case-template.md",
+    "test-cases/e2e/e2e-test-case-template.md",
+    "test-cases/integration/integration-test-case-template.md",
+    "test-cases/security/security-test-case-template.md",
+    "test-cases/unit/unit-test-case-template.md"
+  ],
+  "catalog": [
+    "contracts/api/error-envelope.md",
+    "contracts/frontend-backend/shared-schemas.md",
+    "operations/logging-catalog.md",
+    "rules/11-eslint-typescript.md"
+  ],
+  "categories": [
+    "domain/trait-taxonomy.md"
+  ],
+  "caveats": [
+    "support/known-issues.md"
+  ],
+  "ceiling": [
+    "docs/ai/latency-budget.md"
+  ],
+  "chains": [
+    "docs/ai/model-routing.md"
+  ],
+  "change": [
+    "docs/ai/provider-change-checklist.md"
+  ],
+  "changelog": [
+    "docs/features/_template/23-documentation-changelog.md",
+    "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
+    "docs/features/ai-knowledge-os/23-documentation-changelog.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/simple-readable-code-operating-system-implementation/23-documentation-changelog.md",
+    "docs/features/temporary-shareable-results/23-documentation-changelog.md",
+    "docs/features/twinzy-hardening-v3/23-documentation-changelog.md"
+  ],
+  "chat-completions": [
+    "contracts/integrations/openai-compat.md"
+  ],
+  "check": [
+    "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
+    "docs/features/engineering-os-migration/10-engineering-standards-check.md",
+    "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
+    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
+    "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md"
+  ],
+  "checkbox": [
+    "domain/consent-model.md",
+    "support/consent-troubleshooting.md"
+  ],
+  "checklist": [
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/prompt-change-checklist.md",
+    "docs/ai/provider-change-checklist.md",
+    "docs/manual-qa-checklist.md",
+    "docs/release-checklist.md",
+    "docs/sdlc/code-review-checklist.md",
+    "docs/sdlc/release-checklist.md",
+    "memory/release-checklist.md",
+    "operations/readiness-checklist.md",
+    "quality/code-review-standard.md",
+    "quality/release-readiness.md",
+    "rules/23-review-checklist.md",
+    "rules/frontend/20-review-checklist.md",
+    "support/release-support-checklist.md"
+  ],
+  "checklists": [
+    "docs/ai/README.md"
+  ],
+  "ci": [
+    "quality/quality-model.md"
+  ],
+  "clamav": [
+    "contracts/integrations/clamav.md",
+    "knowledge/summaries/operations.md",
+    "knowledge/summaries/security.md",
+    "operations/retry-budget.md",
+    "operations/timeout-budget.md",
+    "runbooks/docker.md",
+    "runbooks/upload-failures.md",
+    "structure/modules/api-file-security.md",
+    "support/feature-catalog.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "clamd": [
+    "contracts/integrations/clamav.md"
+  ],
+  "classification": [
+    "docs/features/_template/00-intake.md",
+    "docs/features/advanced-global-traits-v2/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/temporary-shareable-results/00-intake.md",
+    "docs/features/visual-similarity-pivot/00-intake.md"
+  ],
+  "classify": [
+    "skills/resolve-task-context.md"
+  ],
+  "classname": [
+    "docs/eslint/no-inline-classname-outside-design-system.md"
+  ],
+  "claude": [
+    "CLAUDE.md"
+  ],
+  "clean": [
+    "skills/cleanup-without-weakening-safety.md"
+  ],
+  "cleanup": [
+    "skills/cleanup-without-weakening-safety.md",
+    "skills/full-codebase-cleanup.md"
+  ],
+  "client": [
+    "docs/eslint/no-server-only-import-in-client.md",
+    "docs/eslint/require-client-component-reason.md",
+    "docs/features/_template/21-client-approval.md",
+    "docs/features/simple-readable-code-operating-system-implementation/21-client-approval.md"
+  ],
+  "clipboard": [
+    "support/sharing-troubleshooting.md"
+  ],
+  "closure": [
+    "runbooks/hypercare.md"
+  ],
+  "code-review": [
+    "quality/code-review-standard.md"
+  ],
+  "codebase": [
+    "context/codebase-navigation.md",
+    "context/frontend/codebase-navigation.md",
+    "docs/features/simple-readable-code-operating-system-and-codebase-refactor/00-intake.md",
+    "skills/full-codebase-cleanup.md"
+  ],
+  "codex": [
+    "CODEX.md"
+  ],
+  "commands": [
+    "knowledge/summaries/testing.md",
+    "structure/README.md"
+  ],
+  "commercial": [
+    "docs/features/_template/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/temporary-shareable-results/02-business-development.md"
+  ],
+  "communication": [
+    "support/communication-templates.md"
+  ],
+  "company": [
+    "docs/sdlc/company-sdlc-policy.md"
+  ],
+  "comparison": [
+    "docs/ai/shadow-routing.md",
+    "docs/features/multi-provider-ai/02-provider-research.md"
+  ],
+  "compatibility": [
+    "contracts/README.md"
+  ],
+  "compiled": [
+    "rules/31-knowledge-management.md"
+  ],
+  "compiler": [
+    "knowledge/README.md"
+  ],
+  "completion": [
+    "quality/definition-of-done.md"
+  ],
+  "compliance": [
+    "docs/features/_template/24-risk-compliance-ops.md",
+    "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md"
+  ],
+  "component": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
+    "docs/eslint/no-inline-component-logic.md",
+    "docs/eslint/require-client-component-reason.md",
+    "skills/create-component.md"
+  ],
+  "components": [
+    "docs/eslint/no-hooks-in-components.md",
+    "rules/02-frontend-components-tsx.md",
+    "rules/frontend/02-components-and-containers.md"
+  ],
+  "compose": [
+    "knowledge/summaries/operations.md",
+    "operations/deployment-model.md",
+    "runbooks/deployment.md",
+    "runbooks/docker.md",
+    "structure/runtime-topology.md"
+  ],
+  "compressed": [
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-provider-ai/13-implementation-readiness.md"
+  ],
+  "concurrency": [
+    "docs/ai/concurrency-policy.md",
+    "operations/scaling-model.md",
+    "runbooks/provider-rate-limiting.md"
+  ],
+  "config": [
+    "docs/eslint/no-process-env-outside-config.md",
+    "knowledge/summaries/backend.md",
+    "operations/readiness-checklist.md",
+    "runbooks/config-change.md",
+    "runbooks/environment-bootstrap.md",
+    "skills/add-config-value.md"
+  ],
+  "configuration": [
+    "contracts/configuration/env-contract.md",
+    "knowledge/summaries/configuration.md",
+    "rules/25-configuration-and-environment.md",
+    "rules/frontend/17-configuration-environment.md",
+    "structure/configuration-map.md"
+  ],
+  "consent": [
+    "contracts/api/analyze.md",
+    "domain/consent-model.md",
+    "domain/policies.md",
+    "domain/README.md",
+    "knowledge/summaries/privacy.md",
+    "knowledge/summaries/product.md",
+    "product/constraints.md",
+    "product/principles.md",
+    "product/privacy-promises.md",
+    "product/user-facing-copy-principles.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-file-security.md",
+    "support/consent-troubleshooting.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "consent-required": [
+    "support/consent-troubleshooting.md"
+  ],
+  "constants": [
+    "rules/05-types-enums-constants.md",
+    "rules/frontend/07-types-enums-constants.md",
+    "structure/modules/shared.md"
+  ],
+  "constraints": [
+    "knowledge/summaries/product.md",
+    "product/constraints.md",
+    "product/README.md"
+  ],
+  "container": [
+    "skills/create-container.md",
+    "structure/modules/web-game.md"
+  ],
+  "containers": [
+    "rules/frontend/02-components-and-containers.md",
+    "runbooks/docker.md"
+  ],
+  "containment": [
+    "runbooks/security-incident.md"
+  ],
+  "context": [
+    "context/ai-context.md",
+    "context/architecture-map.md",
+    "context/code-map.md",
+    "context/codebase-navigation.md",
+    "context/declaration-ownership-map.md",
+    "context/frontend/architecture-map.md",
+    "context/frontend/codebase-navigation.md",
+    "context/frontend/glossary.md",
+    "context/frontend/package-boundaries.md",
+    "context/frontend/README.md",
+    "context/frontend/reference-patterns.md",
+    "context/frontend/stack-and-toolchain.md",
+    "context/glossary.md",
+    "context/product-context.md",
+    "context/README.md",
+    "context/reference-patterns.md",
+    "context/stack-and-toolchain.md",
+    "context/task-router.md",
+    "knowledge/README.md",
+    "memory/ai-context-map.md",
+    "skills/resolve-task-context.md"
+  ],
+  "context budget": [
+    "rules/33-fast-context-routing.md"
+  ],
+  "contract": [
+    "contracts/api/analyze.md",
+    "contracts/api/error-envelope.md",
+    "contracts/api/share-results.md",
+    "contracts/configuration/env-contract.md"
+  ],
+  "contracts": [
+    "contracts/frontend-backend/shared-schemas.md",
+    "contracts/README.md",
+    "docs/ai/schema-contracts.md",
+    "structure/modules/shared.md"
+  ],
+  "contradictions": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "contrast": [
+    "product/accessibility-expectations.md"
+  ],
+  "controller": [
+    "skills/create-controller.md",
+    "structure/layer-map.md"
+  ],
+  "controllers": [
+    "rules/18-routes-controllers.md"
+  ],
+  "cookie": [
+    "structure/modules/web-ui-preferences.md",
+    "support/localization-troubleshooting.md"
+  ],
+  "copy": [
+    "context/reference-patterns.md",
+    "memory/release-checklist.md",
+    "product/localization-expectations.md",
+    "product/user-facing-copy-principles.md",
+    "support/consent-troubleshooting.md",
+    "support/known-issues.md",
+    "support/provider-outage-messaging.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "copy-accuracy": [
+    "domain/consent-model.md"
+  ],
+  "core": [
+    "knowledge/summaries/backend.md"
+  ],
+  "corrective-actions": [
+    "incidents/templates/postmortem.md"
+  ],
+  "correlation": [
+    "contracts/api/sse-events.md",
+    "operations/observability-map.md",
+    "support/evidence-collection.md"
+  ],
+  "cors": [
+    "knowledge/summaries/security.md",
+    "operations/readiness-checklist.md",
+    "runbooks/streaming-disconnects.md"
+  ],
+  "cost": [
+    "docs/ai/cost-policy.md",
+    "operations/AI-cost-budget.md"
+  ],
+  "countdown": [
+    "structure/flows/share-flow.md"
+  ],
+  "coverage": [
+    "docs/ai/regression-evaluation.md",
+    "docs/features/_template/12-coverage-plan.md",
+    "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
+    "docs/features/ai-knowledge-os/11-test-strategy.md",
+    "docs/features/engineering-os-migration/12-coverage-plan.md",
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
+    "docs/features/temporary-shareable-results/12-coverage-plan.md",
+    "docs/features/twinzy-hardening-v3/12-coverage-plan.md",
+    "knowledge/summaries/testing.md",
+    "quality/quality-metrics.md",
+    "quality/quality-model.md",
+    "quality/README.md",
+    "quality/test-review-standard.md",
+    "quality/waiver-register.md",
+    "rules/09-testing-coverage.md",
+    "rules/frontend/15-testing-and-coverage.md",
+    "testing/coverage-policy.md",
+    "testing/frontend/coverage-policy.md"
+  ],
+  "cpu": [
+    "runbooks/event-loop-lag.md"
+  ],
+  "create": [
+    "skills/create-component.md",
+    "skills/create-container.md",
+    "skills/create-controller.md",
+    "skills/create-dto-validation.md",
+    "skills/create-error.md",
+    "skills/create-feature.md",
+    "skills/create-hook.md",
+    "skills/create-manager-use-case.md",
+    "skills/create-module-frontend.md",
+    "skills/create-module.md",
+    "skills/create-mutation.md",
+    "skills/create-package-wrapper.md",
+    "skills/create-query.md",
+    "skills/create-repository.md",
+    "skills/create-service-frontend.md",
+    "skills/create-service-layer.md",
+    "skills/create-service.md",
+    "skills/create-use-case.md",
+    "skills/create-zustand-store.md"
+  ],
+  "creating": [
+    "rules/29-reuse-before-creating.md"
+  ],
+  "critical lane": [
+    "rules/36-delivery-lanes-and-traceability.md"
+  ],
+  "critical-lane": [
+    "docs/ai/forbidden-wording.md"
+  ],
+  "cross": [
+    "docs/eslint/no-cross-module-deep-imports.md",
+    "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
+    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
+    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
+    "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md"
+  ],
+  "cross-side": [
+    "contracts/frontend-backend/shared-schemas.md"
+  ],
+  "crosswalk": [
+    "docs/features/simple-readable-code-operating-system-implementation/00-audit-crosswalk.md"
+  ],
+  "csp": [
+    "knowledge/summaries/security.md"
+  ],
+  "curation": [
+    "docs/ai/golden-dataset-policy.md"
+  ],
+  "current": [
+    "docs/features/multi-provider-ai/08-architecture-review.md"
+  ],
+  "cursor": [
+    "cursor.md"
+  ],
+  "custom": [
+    "docs/eslint/README.md"
+  ],
+  "custom-id": [
+    "contracts/api/payments.md"
+  ],
+  "cve": [
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "cycle": [
+    "docs/features/_template/18-defect-cycle-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/18-defect-cycle-log.md"
+  ],
+  "dark-mode": [
+    "structure/modules/web-ui-preferences.md"
+  ],
+  "dark-patterns": [
+    "product/user-facing-copy-principles.md"
+  ],
+  "data": [
+    "docs/privacy-and-data-retention.md",
+    "testing/frontend/test-data-and-fixtures.md",
+    "testing/test-data-and-fixtures.md"
+  ],
+  "data retention": [
+    "knowledge/summaries/privacy.md"
+  ],
+  "data-handling": [
+    "support/privacy-and-data-handling.md"
+  ],
+  "database": [
+    "agents/database-reviewer.md",
+    "memory/database-decisions.md",
+    "product/non-goals.md",
+    "rules/20-repositories-database.md"
+  ],
+  "dataset": [
+    "docs/ai/golden-dataset-policy.md"
+  ],
+  "deadline": [
+    "operations/timeout-budget.md"
+  ],
+  "debt": [
+    "quality/README.md"
+  ],
+  "debugging": [
+    "runbooks/safe-diagnostics.md"
+  ],
+  "decision": [
+    "memory/project-architecture.md"
+  ],
+  "decision-logic": [
+    "domain/policies.md"
+  ],
+  "decisions": [
+    "docs/package-decisions.md",
+    "memory/ai-safety-decisions.md",
+    "memory/architecture-decisions.md",
+    "memory/code-simplicity-decisions.md",
+    "memory/database-decisions.md",
+    "memory/event-notification-decisions.md",
+    "memory/frontend/accessibility-decisions.md",
+    "memory/frontend/i18n-rtl-decisions.md",
+    "memory/frontend/package-decisions.md",
+    "memory/frontend/performance-decisions.md",
+    "memory/frontend/security-decisions.md",
+    "memory/frontend/testing-strategy.md",
+    "memory/frontend/ui-design-system-decisions.md",
+    "memory/observability-decisions.md",
+    "memory/performance-decisions.md",
+    "memory/privacy-decisions.md",
+    "memory/README.md",
+    "memory/security-decisions.md",
+    "memory/ui-design-system-decisions.md",
+    "rules/34-memory-lifecycle.md"
+  ],
+  "declaration": [
+    "context/declaration-ownership-map.md"
+  ],
+  "declarations": [
+    "docs/eslint/no-inline-declarations.md"
+  ],
+  "decompose": [
+    "skills/decompose-large-file.md"
+  ],
+  "deep": [
+    "docs/eslint/no-cross-module-deep-imports.md"
+  ],
+  "deepseek": [
+    "contracts/integrations/openai-compat.md",
+    "DEEPSEEK.md",
+    "docs/ai/provider-catalog.md"
+  ],
+  "defect": [
+    "docs/features/_template/18-defect-cycle-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/18-defect-cycle-log.md"
+  ],
+  "deferred": [
+    "operations/SLOs.md"
+  ],
+  "definition-of-done": [
+    "quality/definition-of-done.md",
+    "quality/README.md"
+  ],
+  "definition-of-ready": [
+    "quality/definition-of-ready.md"
+  ],
+  "degradation": [
+    "runbooks/provider-outage.md"
+  ],
+  "delete": [
+    "domain/sharing-lifecycle.md",
+    "skills/simplify-existing-code.md"
+  ],
+  "delivery": [
+    "docs/features/_template/05-delivery-plan.md",
+    "docs/features/advanced-global-traits-v2/05-delivery-plan.md",
+    "docs/features/engineering-os-migration/05-delivery-plan.md",
+    "docs/features/simple-readable-code-operating-system-implementation/05-delivery-plan.md",
+    "docs/features/temporary-shareable-results/05-delivery-plan.md",
+    "docs/features/twinzy-hardening-v3/05-delivery-plan.md"
+  ],
+  "dependency": [
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "deploy": [
+    "operations/readiness-checklist.md"
+  ],
+  "deployment": [
+    "operations/deployment-model.md",
+    "operations/README.md",
+    "runbooks/deployment.md",
+    "runbooks/README.md"
+  ],
+  "design": [
+    "docs/eslint/no-inline-classname-outside-design-system.md",
+    "memory/frontend/ui-design-system-decisions.md",
+    "memory/ui-design-system-decisions.md"
+  ],
+  "detection": [
+    "incidents/templates/postmortem.md"
+  ],
+  "determinism": [
+    "quality/test-review-standard.md"
+  ],
+  "deterministic": [
+    "rules/35-generated-artifacts-and-freshness.md"
+  ],
+  "dev": [
+    "docs/docker-local-dev.md",
+    "docs/features/_template/15-dev-validation-report.md",
+    "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/ai-knowledge-os/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md",
+    "docs/features/twinzy-hardening-v3/15-dev-validation-report.md",
+    "runbooks/local-development.md"
+  ],
+  "developer": [
+    "docs/features/_template/15-dev-validation-report.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md"
+  ],
+  "development": [
+    "docs/docker-local-dev.md",
+    "docs/features/_template/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/simple-readable-code-operating-system-implementation/02-business-development.md",
+    "docs/features/temporary-shareable-results/02-business-development.md",
+    "docs/features/twinzy-hardening-v3/02-business-development.md",
+    "runbooks/local-development.md"
+  ],
+  "diagnostics": [
+    "runbooks/safe-diagnostics.md"
+  ],
+  "direct": [
+    "docs/eslint/no-direct-browser-api-outside-packages.md"
+  ],
+  "discipline": [
+    "rules/30-refactor-discipline.md"
+  ],
+  "disclaimer": [
+    "domain/invariants.md",
+    "knowledge/summaries/domain.md",
+    "product/game-rules.md",
+    "product/terminology.md",
+    "product/user-facing-copy-principles.md",
+    "structure/modules/api-result-aggregation.md",
+    "support/AI-result-expectations.md"
+  ],
+  "disclosure": [
+    "runbooks/security-incident.md"
+  ],
+  "disconnect": [
+    "runbooks/streaming-disconnects.md"
+  ],
+  "display-gate": [
+    "domain/policies.md",
+    "domain/result-ranking.md"
+  ],
+  "displayable": [
+    "structure/modules/api-result-aggregation.md"
+  ],
+  "docker": [
+    "docs/docker-local-dev.md",
+    "knowledge/summaries/operations.md",
+    "operations/deployment-model.md",
+    "operations/health-checks.md",
+    "runbooks/docker.md",
+    "structure/runtime-topology.md"
+  ],
+  "docker-stats": [
+    "runbooks/memory-growth.md"
+  ],
+  "documentation": [
+    "docs/features/_template/23-documentation-changelog.md",
+    "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
+    "docs/features/ai-knowledge-os/23-documentation-changelog.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/simple-readable-code-operating-system-implementation/23-documentation-changelog.md",
+    "docs/features/temporary-shareable-results/23-documentation-changelog.md",
+    "docs/features/twinzy-hardening-v3/23-documentation-changelog.md",
+    "docs/README.md",
+    "docs/sdlc/documentation-baseline.md",
+    "quality/documentation-review-standard.md",
+    "rules/32-documentation-quality.md"
+  ],
+  "does": [
+    "context/codebase-navigation.md"
+  ],
+  "domain": [
+    "domain/README.md",
+    "knowledge/summaries/domain.md"
+  ],
+  "donate": [
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "product/user-journeys.md",
+    "structure/flows/payment-flow.md",
+    "support/feature-catalog.md"
+  ],
+  "donation": [
+    "knowledge/summaries/product.md",
+    "product/monetization-policy.md"
+  ],
+  "donations": [
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md"
+  ],
+  "done": [
+    "quality/definition-of-done.md"
+  ],
+  "dotenv": [
+    "contracts/configuration/env-contract.md",
+    "runbooks/environment-bootstrap.md"
+  ],
+  "downtime": [
+    "operations/availability-expectations.md"
+  ],
+  "drift": [
+    "docs/ai/regression-evaluation.md",
+    "knowledge/summaries/current-risks.md",
+    "rules/35-generated-artifacts-and-freshness.md",
+    "runbooks/config-change.md"
+  ],
+  "dsr": [
+    "knowledge/summaries/privacy.md",
+    "product/privacy-promises.md",
+    "support/privacy-and-data-handling.md"
+  ],
+  "dto": [
+    "rules/21-dto-validation.md",
+    "skills/create-dto-validation.md"
+  ],
+  "durability": [
+    "rules/08-reliability-durability.md"
+  ],
+  "e2e": [
+    "knowledge/summaries/testing.md",
+    "skills/write-e2e-tests-frontend.md",
+    "skills/write-e2e-tests.md",
+    "test-cases/e2e/e2e-test-case-template.md",
+    "testing/e2e-testing-standard.md",
+    "testing/frontend/e2e-testing-standard.md"
+  ],
+  "echo-guard": [
+    "domain/language-lifecycle.md"
+  ],
+  "emergency": [
+    "runbooks/emergency-rollback.md",
+    "runbooks/hotfix.md"
+  ],
+  "en": [
+    "domain/language-lifecycle.md"
+  ],
+  "enablement": [
+    "support/feature-catalog.md"
+  ],
+  "enacted": [
+    "docs/features/paypal-donations-and-paid-results/00-intake.md"
+  ],
+  "end": [
+    "testing/e2e-testing-standard.md",
+    "testing/frontend/e2e-testing-standard.md"
+  ],
+  "endpoint": [
+    "operations/health-checks.md",
+    "structure/modules/api-health.md"
+  ],
+  "endpoints": [
+    "contracts/api/README.md",
+    "contracts/README.md",
+    "knowledge/summaries/backend.md"
+  ],
+  "enforcement": [
+    "domain/invariants.md",
+    "product/privacy-promises.md",
+    "quality/architecture-review-standard.md",
+    "structure/layer-map.md"
+  ],
+  "engineer": [
+    "agents/backend-test-engineer.md",
+    "agents/frontend-test-engineer.md",
+    "agents/reliability-engineer.md"
+  ],
+  "engineering": [
+    "architecture/adrs/adr-001-strict-engineering-os.md",
+    "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
+    "docs/features/engineering-os-migration/00-intake.md",
+    "docs/features/engineering-os-migration/01-business-analysis.md",
+    "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/engineering-os-migration/03-product-requirements.md",
+    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/engineering-os-migration/05-delivery-plan.md",
+    "docs/features/engineering-os-migration/06-technical-refinement.md",
+    "docs/features/engineering-os-migration/07-technical-roadmap.md",
+    "docs/features/engineering-os-migration/08-architecture-review.md",
+    "docs/features/engineering-os-migration/09-impact-analysis.md",
+    "docs/features/engineering-os-migration/10-engineering-standards-check.md",
+    "docs/features/engineering-os-migration/11-test-strategy.md",
+    "docs/features/engineering-os-migration/12-coverage-plan.md",
+    "docs/features/engineering-os-migration/13-implementation-readiness.md",
+    "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
+    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
+    "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md",
+    "docs/sdlc/engineering-standards.md",
+    "testing/README.md"
+  ],
+  "english": [
+    "docs/ai/forbidden-wording.md"
+  ],
+  "enterprise": [
+    "CLAUDE.md"
+  ],
+  "entities": [
+    "domain/entities.md",
+    "domain/README.md"
+  ],
+  "entrypoint": [
+    "ANTHROPIC.md",
+    "DEEPSEEK.md",
+    "GEMINI.md",
+    "GLM.md",
+    "KIMI.md",
+    "MISTRAL.md",
+    "OPENAI.md",
+    "QWEN.md"
+  ],
+  "entrypoints": [
+    "structure/README.md"
+  ],
+  "enum": [
+    "product/constraints.md"
+  ],
+  "enums": [
+    "rules/05-types-enums-constants.md",
+    "rules/frontend/07-types-enums-constants.md",
+    "structure/modules/shared.md"
+  ],
+  "env": [
+    "contracts/configuration/env-contract.md",
+    "docs/ai/cost-policy.md",
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/model-routing.md",
+    "docs/ai/provider-change-checklist.md",
+    "docs/env-vars.md",
+    "docs/eslint/no-process-env-outside-config.md",
+    "operations/readiness-checklist.md",
+    "product/constraints.md",
+    "runbooks/environment-bootstrap.md",
+    "structure/configuration-map.md",
+    "support/feature-catalog.md"
+  ],
+  "env vars": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "env-example": [
+    "runbooks/config-change.md"
+  ],
+  "env-gated": [
+    "product/monetization-policy.md",
+    "structure/flows/payment-flow.md"
+  ],
+  "env-levers": [
+    "runbooks/rollback.md"
+  ],
+  "env-var": [
+    "runbooks/config-change.md"
+  ],
+  "env.example": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "envelope": [
+    "contracts/api/error-envelope.md",
+    "domain/failure-semantics.md",
+    "runbooks/release-smoke-test-template.md",
+    "support/error-code-catalog.md"
+  ],
+  "environment": [
+    "contracts/configuration/env-contract.md",
+    "docs/env-vars.md",
+    "rules/25-configuration-and-environment.md",
+    "rules/frontend/17-configuration-environment.md",
+    "runbooks/environment-bootstrap.md",
+    "structure/configuration-map.md"
+  ],
+  "error": [
+    "contracts/api/error-envelope.md",
+    "operations/logging-catalog.md",
+    "rules/26-error-handling-and-exceptions.md",
+    "rules/frontend/18-error-handling.md",
+    "skills/create-error.md"
+  ],
+  "error codes": [
+    "knowledge/summaries/support.md"
+  ],
+  "error-budget": [
+    "operations/SLOs.md"
+  ],
+  "error-codes": [
+    "contracts/README.md",
+    "domain/failure-semantics.md",
+    "structure/modules/shared.md",
+    "support/error-code-catalog.md"
+  ],
+  "error-rate": [
+    "operations/SLIs.md"
+  ],
+  "error-states": [
+    "support/product-behavior-guide.md"
+  ],
+  "errorcode": [
+    "contracts/api/error-envelope.md"
+  ],
+  "errors": [
+    "docs/ai/fallback-routing.md",
+    "domain/failure-semantics.md",
+    "knowledge/summaries/backend.md",
+    "knowledge/summaries/support.md",
+    "support/error-code-catalog.md",
+    "support/troubleshooting-index.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "escalation": [
+    "docs/ai/incident-response.md",
+    "knowledge/summaries/support.md",
+    "support/escalation-matrix.md",
+    "support/known-issues-template.md",
+    "support/README.md"
+  ],
+  "eslint": [
+    "agents/eslint-boundary-reviewer.md",
+    "docs/eslint-architecture.md",
+    "docs/eslint/no-cross-module-deep-imports.md",
+    "docs/eslint/no-direct-browser-api-outside-packages.md",
+    "docs/eslint/no-hooks-in-components.md",
+    "docs/eslint/no-inline-classname-outside-design-system.md",
+    "docs/eslint/no-inline-component-logic.md",
+    "docs/eslint/no-inline-declarations.md",
+    "docs/eslint/no-inline-query-keys.md",
+    "docs/eslint/no-process-env-outside-config.md",
+    "docs/eslint/no-raw-i18n-text.md",
+    "docs/eslint/no-raw-package-imports.md",
+    "docs/eslint/no-restricted-layer-imports.md",
+    "docs/eslint/no-server-only-import-in-client.md",
+    "docs/eslint/README.md",
+    "docs/eslint/require-client-component-reason.md",
+    "quality/exception-policy.md",
+    "rules/11-eslint-typescript.md",
+    "rules/frontend/10-eslint-typescript.md",
+    "skills/fix-eslint-typecheck-frontend.md",
+    "skills/fix-eslint-typecheck.md",
+    "structure/layer-map.md"
+  ],
+  "eslint enforcement": [
+    "knowledge/summaries/architecture.md"
+  ],
+  "evaluation": [
+    "docs/ai/evaluation-framework.md",
+    "docs/ai/golden-dataset-policy.md",
+    "docs/ai/regression-evaluation.md",
+    "docs/ai/shadow-routing.md"
+  ],
+  "event": [
+    "memory/event-notification-decisions.md",
+    "skills/add-event-handler.md"
+  ],
+  "event-loop": [
+    "runbooks/event-loop-lag.md"
+  ],
+  "events": [
+    "contracts/api/sse-events.md",
+    "rules/27-async-events-and-jobs.md"
+  ],
+  "evidence": [
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md",
+    "quality/definition-of-done.md",
+    "quality/quality-metrics.md",
+    "rules/32-documentation-quality.md",
+    "runbooks/safe-diagnostics.md",
+    "runbooks/security-incident.md",
+    "support/evidence-collection.md"
+  ],
+  "exception": [
+    "contracts/api/error-envelope.md",
+    "docs/exceptions/exception-template.md"
+  ],
+  "exceptions": [
+    "docs/exceptions/exception-template.md",
+    "docs/exceptions/README.md",
+    "quality/exception-policy.md",
+    "quality/waiver-register.md",
+    "rules/26-error-handling-and-exceptions.md"
+  ],
+  "exhaustion": [
+    "docs/ai/fallback-routing.md"
+  ],
+  "existing": [
+    "skills/modularize-existing-library.md",
+    "skills/simplify-existing-code.md"
+  ],
+  "expectations": [
+    "operations/availability-expectations.md",
+    "support/AI-result-expectations.md"
+  ],
+  "expiry": [
+    "domain/sharing-lifecycle.md",
+    "domain/state-machines.md",
+    "quality/exception-policy.md",
+    "quality/waiver-register.md",
+    "support/FAQ.md",
+    "support/sharing-troubleshooting.md"
+  ],
+  "exposure": [
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/secret-rotation.md"
+  ],
+  "extract": [
+    "skills/simplify-existing-code.md"
+  ],
+  "extraction": [
+    "docs/ai/image-lifecycle.md",
+    "docs/ai/pipeline.md",
+    "docs/ai/prompt-catalog.md",
+    "docs/ai/system-overview.md",
+    "docs/ai/written-traits-only-boundary.md",
+    "domain/entities.md",
+    "domain/trait-taxonomy.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-ai.md"
+  ],
+  "extraction-only": [
+    "domain/image-lifecycle.md"
+  ],
+  "fail-closed": [
+    "contracts/ai/README.md",
+    "contracts/integrations/clamav.md",
+    "docs/ai/model-routing.md",
+    "docs/ai/written-traits-only-boundary.md",
+    "runbooks/upload-failures.md"
+  ],
+  "fail-fast": [
+    "contracts/configuration/env-contract.md",
+    "knowledge/summaries/configuration.md",
+    "runbooks/environment-bootstrap.md",
+    "structure/configuration-map.md"
+  ],
+  "failure": [
+    "domain/failure-semantics.md"
+  ],
+  "failures": [
+    "skills/fix-eslint-typecheck-frontend.md",
+    "skills/fix-eslint-typecheck.md"
+  ],
+  "fallback": [
+    "docs/ai/fallback-routing.md",
+    "domain/result-ranking.md",
+    "operations/retry-budget.md",
+    "product/game-rules.md",
+    "runbooks/provider-outage.md",
+    "structure/modules/api-result-aggregation.md",
+    "support/AI-result-expectations.md"
+  ],
+  "faq": [
+    "support/FAQ.md"
+  ],
+  "fast lane": [
+    "rules/36-delivery-lanes-and-traceability.md"
+  ],
+  "fast task": [
+    "rules/33-fast-context-routing.md",
+    "skills/resolve-task-context.md"
+  ],
+  "fast task protocol": [
+    "knowledge/bootstrap.md"
+  ],
+  "fast-track": [
+    "runbooks/hotfix.md"
+  ],
+  "fastify": [
+    "knowledge/summaries/backend.md"
+  ],
+  "feature": [
+    "docs/features/_template-frontend/README.md",
+    "docs/features/_template/README.md",
+    "docs/features/multi-tab-stream-isolation/README.md",
+    "skills/create-feature.md",
+    "skills/create-module-frontend.md",
+    "skills/refactor-feature.md"
+  ],
+  "feeds": [
+    "product/non-goals.md"
+  ],
+  "fetch": [
+    "contracts/integrations/openai-compat.md"
+  ],
+  "fields": [
+    "domain/trait-taxonomy.md"
+  ],
+  "file": [
+    "docs/features/simple-readable-code-operating-system-implementation/00-audit-crosswalk.md",
+    "docs/file-upload-security-review-report.md",
+    "docs/file-upload-security.md",
+    "rules/15-file-upload-security.md",
+    "skills/decompose-large-file.md",
+    "skills/secure-file-upload.md"
+  ],
+  "file-security": [
+    "runbooks/upload-failures.md",
+    "structure/modules/api-file-security.md"
+  ],
+  "file-size": [
+    "support/upload-troubleshooting.md"
+  ],
+  "files": [
+    "context/README.md",
+    "skills/prepare-agent-mirrors.md"
+  ],
+  "filter": [
+    "contracts/api/error-envelope.md",
+    "domain/safety-boundaries.md"
+  ],
+  "filters": [
+    "docs/ai/safety-filters.md"
+  ],
+  "final": [
+    "docs/final-validation-report.md",
+    "skills/final-validation-frontend.md",
+    "skills/final-validation.md"
+  ],
+  "final-result": [
+    "domain/entities.md"
+  ],
+  "first-gate": [
+    "domain/consent-model.md"
+  ],
+  "fix": [
+    "skills/fix-eslint-typecheck-frontend.md",
+    "skills/fix-eslint-typecheck.md"
+  ],
+  "fixtures": [
+    "docs/ai/golden-dataset-policy.md",
+    "knowledge/summaries/testing.md",
+    "testing/frontend/test-data-and-fixtures.md",
+    "testing/test-data-and-fixtures.md"
+  ],
+  "flow": [
+    "structure/flows/analyze-flow.md",
+    "structure/flows/payment-flow.md",
+    "structure/flows/share-flow.md"
+  ],
+  "flows": [
+    "product/user-journeys.md",
+    "structure/README.md"
+  ],
+  "focus": [
+    "product/accessibility-expectations.md"
+  ],
+  "folders": [
+    "structure/repository-map.md"
+  ],
+  "forbidden": [
+    "docs/ai/forbidden-wording.md",
+    "docs/ai/safety-filters.md"
+  ],
+  "forbidden-wording": [
+    "domain/safety-boundaries.md"
+  ],
+  "form": [
+    "skills/add-form.md"
+  ],
+  "formerly": [
+    "rules/17-manager-layer.md",
+    "skills/create-manager-use-case.md"
+  ],
+  "free": [
+    "product/monetization-policy.md",
+    "product/principles.md",
+    "product/vision.md",
+    "support/FAQ.md"
+  ],
+  "free game": [
+    "knowledge/summaries/product.md"
+  ],
+  "freshness": [
+    "rules/35-generated-artifacts-and-freshness.md"
+  ],
+  "frontmatter": [
+    "quality/documentation-review-standard.md",
+    "rules/32-documentation-quality.md"
+  ],
+  "full": [
+    "docs/features/_template/09-impact-analysis.md",
+    "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
+    "docs/features/temporary-shareable-results/09-impact-analysis.md",
+    "rules/README.md",
+    "skills/full-codebase-cleanup.md"
+  ],
+  "functional": [
+    "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
+    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
+    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
+    "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md"
+  ],
+  "game": [
+    "contracts/api/analyze.md",
+    "product/game-rules.md",
+    "product/vision.md",
+    "structure/modules/api-game.md",
+    "structure/modules/web-game.md",
+    "support/product-behavior-guide.md"
+  ],
+  "gate": [
+    "quality/definition-of-ready.md",
+    "quality/release-readiness.md",
+    "rules/24-release-gate.md",
+    "structure/modules/api-payments.md"
+  ],
+  "gatekeeper": [
+    "agents/backend-release-gatekeeper.md",
+    "agents/frontend-release-gatekeeper.md"
+  ],
+  "gates": [
+    "quality/definition-of-done.md",
+    "quality/quality-model.md",
+    "quality/README.md",
+    "quality/waiver-register.md",
+    "rules/frontend/19-release-gates.md",
+    "runbooks/deployment.md",
+    "runbooks/hotfix.md",
+    "runbooks/local-development.md",
+    "testing/frontend/quality-gates.md",
+    "testing/quality-gates.md"
+  ],
+  "gateway": [
+    "rules/frontend/04-services-api-gateway.md",
+    "structure/layer-map.md",
+    "structure/modules/web-game.md"
+  ],
+  "gateways": [
+    "rules/04-frontend-services-gateways.md"
+  ],
+  "gdpr": [
+    "support/privacy-and-data-handling.md"
+  ],
+  "gemini": [
+    "contracts/ai/README.md",
+    "contracts/integrations/gemini.md",
+    "docs/ai/provider-catalog.md",
+    "docs/ai/system-overview.md",
+    "GEMINI.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "operations/AI-cost-budget.md",
+    "runbooks/ai-provider-outage.md",
+    "runbooks/provider-outage.md",
+    "runbooks/secret-rotation.md",
+    "structure/modules/api-ai.md"
+  ],
+  "gemini env": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "gemini-model": [
+    "docs/ai/model-routing.md"
+  ],
+  "generated": [
+    "knowledge/templates/ai-readme.md",
+    "rules/35-generated-artifacts-and-freshness.md"
+  ],
+  "generation": [
+    "docs/ai/prompt-catalog.md",
+    "docs/ai/system-overview.md"
+  ],
+  "generic": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
+  "glm": [
+    "contracts/integrations/openai-compat.md",
+    "docs/ai/provider-catalog.md",
+    "GLM.md"
+  ],
+  "global": [
+    "docs/features/advanced-global-traits-v2/00-intake.md",
+    "docs/features/advanced-global-traits-v2/01-business-analysis.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/03-product-requirements.md",
+    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
+    "docs/features/advanced-global-traits-v2/05-delivery-plan.md",
+    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
+    "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
+    "docs/features/advanced-global-traits-v2/08-architecture-review.md",
+    "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
+    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
+    "docs/features/advanced-global-traits-v2/11-test-strategy.md",
+    "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
+    "docs/features/advanced-global-traits-v2/13-implementation-readiness.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/advanced-global-traits-v2/23-documentation-changelog.md"
+  ],
+  "glossary": [
+    "context/frontend/glossary.md",
+    "context/glossary.md",
+    "domain/README.md",
+    "domain/ubiquitous-language.md",
+    "product/terminology.md"
+  ],
+  "go-no-go": [
+    "product/monetization-policy.md",
+    "quality/release-readiness.md",
+    "runbooks/deployment.md"
+  ],
+  "golden": [
+    "docs/ai/golden-dataset-policy.md"
+  ],
+  "google-genai": [
+    "contracts/integrations/gemini.md"
+  ],
+  "guard": [
+    "docs/ai/safety-filters.md",
+    "domain/safety-boundaries.md",
+    "skills/add-guard-and-permission.md"
+  ],
+  "guardian": [
+    "agents/database-reviewer.md"
+  ],
+  "handler": [
+    "skills/add-event-handler.md"
+  ],
+  "handling": [
+    "rules/26-error-handling-and-exceptions.md",
+    "rules/frontend/18-error-handling.md"
+  ],
+  "hardening": [
+    "docs/features/twinzy-hardening-v3/00-audit-report.md",
+    "docs/features/twinzy-hardening-v3/00-intake.md",
+    "docs/features/twinzy-hardening-v3/01-business-analysis.md",
+    "docs/features/twinzy-hardening-v3/02-business-development.md",
+    "docs/features/twinzy-hardening-v3/03-product-requirements.md",
+    "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md",
+    "docs/features/twinzy-hardening-v3/05-delivery-plan.md",
+    "docs/features/twinzy-hardening-v3/06-technical-refinement.md",
+    "docs/features/twinzy-hardening-v3/07-technical-roadmap.md",
+    "docs/features/twinzy-hardening-v3/08-architecture-review.md",
+    "docs/features/twinzy-hardening-v3/09-impact-analysis.md",
+    "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md",
+    "docs/features/twinzy-hardening-v3/11-test-strategy.md",
+    "docs/features/twinzy-hardening-v3/12-coverage-plan.md",
+    "docs/features/twinzy-hardening-v3/13-implementation-readiness.md",
+    "docs/features/twinzy-hardening-v3/15-dev-validation-report.md",
+    "docs/features/twinzy-hardening-v3/19-security-review.md",
+    "docs/features/twinzy-hardening-v3/23-documentation-changelog.md",
+    "release-notes/twinzy-hardening-v3.md",
+    "runbooks/docker.md"
+  ],
+  "harness": [
+    "docs/ai/benchmark-methodology.md",
+    "docs/ai/evaluation-framework.md"
+  ],
+  "hashes": [
+    "rules/35-generated-artifacts-and-freshness.md"
+  ],
+  "health": [
+    "operations/health-checks.md",
+    "operations/README.md",
+    "operations/SLIs.md",
+    "runbooks/event-loop-lag.md",
+    "runbooks/release-smoke-test-template.md",
+    "structure/modules/api-health.md"
+  ],
+  "health check": [
+    "knowledge/summaries/operations.md"
+  ],
+  "healthcheck": [
+    "operations/deployment-model.md",
+    "operations/health-checks.md",
+    "runbooks/docker.md"
+  ],
+  "heap": [
+    "runbooks/memory-growth.md"
+  ],
+  "heartbeat": [
+    "contracts/api/sse-events.md",
+    "runbooks/event-loop-lag.md",
+    "runbooks/streaming-disconnects.md"
+  ],
+  "heic": [
+    "support/known-issues.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "helmet": [
+    "knowledge/summaries/security.md"
+  ],
+  "helpers": [
+    "rules/frontend/08-utils-helpers-mappers.md"
+  ],
+  "history": [
+    "incidents/resolved/README.md"
+  ],
+  "honesty-caps": [
+    "domain/calculations.md"
+  ],
+  "hook": [
+    "skills/create-hook.md"
+  ],
+  "hooks": [
+    "docs/eslint/no-hooks-in-components.md",
+    "operations/graceful-shutdown.md",
+    "rules/03-frontend-hooks.md",
+    "rules/frontend/03-hooks.md",
+    "structure/layer-map.md",
+    "structure/modules/web-game.md"
+  ],
+  "hops": [
+    "docs/ai/fallback-routing.md"
+  ],
+  "horizontal": [
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md"
+  ],
+  "hot memory": [
+    "knowledge/hot-memory.md",
+    "rules/34-memory-lifecycle.md"
+  ],
+  "hotfix": [
+    "runbooks/emergency-rollback.md",
+    "runbooks/hotfix.md"
+  ],
+  "http": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "contracts/api/README.md"
+  ],
+  "http-status": [
+    "support/error-code-catalog.md"
+  ],
+  "https": [
+    "runbooks/deployment.md"
+  ],
+  "husky": [
+    "quality/quality-model.md"
+  ],
+  "hypercare": [
+    "docs/features/_template-frontend/12-hypercare.md",
+    "docs/features/_template/26-hypercare-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/26-hypercare-report.md",
+    "runbooks/hypercare.md",
+    "support/known-issues-template.md",
+    "support/release-support-checklist.md"
+  ],
+  "i18n": [
+    "agents/i18n-rtl-reviewer.md",
+    "docs/eslint/no-raw-i18n-text.md",
+    "domain/consent-model.md",
+    "domain/language-lifecycle.md",
+    "knowledge/summaries/frontend.md",
+    "memory/frontend/i18n-rtl-decisions.md",
+    "product/localization-expectations.md",
+    "product/user-facing-copy-principles.md",
+    "quality/technical-debt-register.md",
+    "rules/12-i18n.md",
+    "rules/frontend/14-i18n-rtl.md",
+    "skills/add-i18n-message-key.md",
+    "structure/modules/web-ui-preferences.md",
+    "support/feature-catalog.md",
+    "support/localization-troubleshooting.md",
+    "support/product-behavior-guide.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "i18n copy": [
+    "knowledge/summaries/support.md"
+  ],
+  "idempotency": [
+    "contracts/integrations/paypal.md",
+    "operations/retry-budget.md"
+  ],
+  "identity": [
+    "domain/safety-boundaries.md",
+    "product/non-goals.md",
+    "product/user-facing-copy-principles.md",
+    "runbooks/privacy-incident.md",
+    "support/AI-result-expectations.md"
+  ],
+  "idle": [
+    "docs/ai/retry-timeout-policy.md"
+  ],
+  "idle-timeout": [
+    "contracts/integrations/gemini.md"
+  ],
+  "image": [
+    "contracts/ai/README.md",
+    "docs/ai/image-lifecycle.md",
+    "docs/ai/written-traits-only-boundary.md",
+    "domain/image-lifecycle.md",
+    "product/privacy-promises.md",
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/privacy-incident.md"
+  ],
+  "image lifecycle": [
+    "knowledge/summaries/privacy.md"
+  ],
+  "image-lifecycle": [
+    "support/privacy-and-data-handling.md"
+  ],
+  "images": [
+    "operations/deployment-model.md"
+  ],
+  "impact": [
+    "docs/features/_template/02-business-development.md",
+    "docs/features/_template/09-impact-analysis.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
+    "docs/features/ai-knowledge-os/09-impact-analysis.md",
+    "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/engineering-os-migration/09-impact-analysis.md",
+    "docs/features/multi-provider-ai/09-impact-analysis.md",
+    "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/simple-readable-code-operating-system-implementation/09-impact-analysis.md",
+    "docs/features/temporary-shareable-results/02-business-development.md",
+    "docs/features/temporary-shareable-results/09-impact-analysis.md",
+    "docs/features/twinzy-hardening-v3/09-impact-analysis.md",
+    "incidents/templates/incident-record.md"
+  ],
+  "import": [
+    "docs/eslint/no-server-only-import-in-client.md"
+  ],
+  "imports": [
+    "docs/eslint/no-cross-module-deep-imports.md",
+    "docs/eslint/no-raw-package-imports.md",
+    "docs/eslint/no-restricted-layer-imports.md"
+  ],
+  "in-memory": [
+    "domain/sharing-lifecycle.md"
+  ],
+  "in-progress": [
+    "incidents/active/README.md"
+  ],
+  "incident": [
+    "docs/ai/incident-response.md",
+    "incidents/templates/incident-record.md",
+    "runbooks/emergency-rollback.md",
+    "runbooks/incident-response-template.md",
+    "runbooks/privacy-incident.md",
+    "runbooks/README.md",
+    "runbooks/security-incident.md",
+    "support/escalation-matrix.md"
+  ],
+  "incidents": [
+    "incidents/active/README.md",
+    "incidents/README.md",
+    "incidents/resolved/README.md"
+  ],
+  "including": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md"
+  ],
+  "index": [
+    "agents/README.md",
+    "contracts/api/README.md",
+    "docs/ai/README.md",
+    "product/README.md",
+    "runbooks/README.md",
+    "structure/README.md",
+    "support/README.md",
+    "support/troubleshooting-index.md",
+    "testing/README.md"
+  ],
+  "indicators": [
+    "operations/SLIs.md"
+  ],
+  "injection": [
+    "skills/injection-safety-review.md"
+  ],
+  "inline": [
+    "docs/eslint/no-inline-classname-outside-design-system.md",
+    "docs/eslint/no-inline-component-logic.md",
+    "docs/eslint/no-inline-declarations.md",
+    "docs/eslint/no-inline-query-keys.md",
+    "skills/simplify-existing-code.md"
+  ],
+  "instead": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
+  ],
+  "instream": [
+    "contracts/integrations/clamav.md"
+  ],
+  "intake": [
+    "docs/features/_template-frontend/00-intake.md",
+    "docs/features/_template/00-intake.md",
+    "docs/features/advanced-global-traits-v2/00-intake.md",
+    "docs/features/ai-knowledge-os/00-intake.md",
+    "docs/features/engineering-os-migration/00-intake.md",
+    "docs/features/multi-provider-ai/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/simple-readable-code-operating-system-and-codebase-refactor/00-intake.md",
+    "docs/features/simple-readable-code-operating-system-implementation/00-intake.md",
+    "docs/features/temporary-shareable-results/00-intake.md",
+    "docs/features/twinzy-hardening-v3/00-intake.md",
+    "docs/features/visual-similarity-pivot/00-intake.md",
+    "quality/definition-of-ready.md"
+  ],
+  "integration": [
+    "skills/write-integration-tests-frontend.md",
+    "skills/write-integration-tests.md",
+    "test-cases/integration/integration-test-case-template.md",
+    "testing/frontend/integration-testing-standard.md",
+    "testing/integration-testing-standard.md"
+  ],
+  "integration tests": [
+    "knowledge/summaries/testing.md"
+  ],
+  "internal": [
+    "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md"
+  ],
+  "invariants": [
+    "domain/invariants.md",
+    "domain/README.md",
+    "knowledge/bootstrap.md",
+    "knowledge/summaries/domain.md"
+  ],
+  "investigate": [
+    "skills/investigate-production-bug.md"
+  ],
+  "isolation": [
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/multi-tab-stream-isolation/08-architecture-review.md",
+    "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/multi-tab-stream-isolation/README.md"
+  ],
+  "jobs": [
+    "rules/27-async-events-and-jobs.md"
+  ],
+  "journeys": [
+    "product/README.md",
+    "product/user-journeys.md"
+  ],
+  "json": [
+    "docs/ai/output-validation.md"
+  ],
+  "jsx": [
+    "skills/create-component.md"
+  ],
+  "judge": [
+    "contracts/ai/prompt-io.md",
+    "docs/ai/pipeline.md",
+    "docs/ai/prompt-catalog.md",
+    "docs/ai/schema-contracts.md",
+    "docs/ai/system-overview.md",
+    "domain/ubiquitous-language.md",
+    "knowledge/summaries/domain.md",
+    "product/game-rules.md",
+    "product/terminology.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-ai.md"
+  ],
+  "judge-rank": [
+    "domain/result-ranking.md"
+  ],
+  "judged-result": [
+    "domain/entities.md"
+  ],
+  "july": [
+    "docs/features/multi-provider-ai/02-provider-research.md"
+  ],
+  "key": [
+    "skills/add-i18n-message-key.md"
+  ],
+  "keys": [
+    "docs/eslint/no-inline-query-keys.md"
+  ],
+  "kimi": [
+    "contracts/integrations/openai-compat.md",
+    "docs/ai/provider-catalog.md",
+    "KIMI.md"
+  ],
+  "knip": [
+    "quality/quality-model.md"
+  ],
+  "knowledge": [
+    "docs/features/ai-knowledge-os/00-intake.md",
+    "docs/features/ai-knowledge-os/03-product-requirements.md",
+    "docs/features/ai-knowledge-os/08-architecture-review.md",
+    "docs/features/ai-knowledge-os/09-impact-analysis.md",
+    "docs/features/ai-knowledge-os/11-test-strategy.md",
+    "docs/features/ai-knowledge-os/13-implementation-readiness.md",
+    "docs/features/ai-knowledge-os/15-dev-validation-report.md",
+    "docs/features/ai-knowledge-os/23-documentation-changelog.md",
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "knowledge/README.md",
+    "knowledge/templates/ai-readme.md",
+    "quality/documentation-review-standard.md",
+    "release-notes/2026-07-12-ai-knowledge-os.md",
+    "rules/31-knowledge-management.md"
+  ],
+  "knowledge-build": [
+    "runbooks/config-change.md"
+  ],
+  "known": [
+    "memory/frontend/known-pitfalls.md",
+    "memory/known-pitfalls.md"
+  ],
+  "known issues": [
+    "knowledge/summaries/support.md"
+  ],
+  "known-issues": [
+    "support/known-issues-template.md",
+    "support/known-issues.md",
+    "support/README.md",
+    "support/release-support-checklist.md"
+  ],
+  "lag": [
+    "runbooks/event-loop-lag.md"
+  ],
+  "lanes": [
+    "rules/36-delivery-lanes-and-traceability.md"
+  ],
+  "language": [
+    "docs/ai/output-validation.md",
+    "domain/language-lifecycle.md",
+    "domain/ubiquitous-language.md"
+  ],
+  "languages": [
+    "support/FAQ.md"
+  ],
+  "large": [
+    "skills/add-virtualized-list.md",
+    "skills/decompose-large-file.md"
+  ],
+  "latency": [
+    "docs/ai/latency-budget.md",
+    "operations/SLIs.md",
+    "operations/SLOs.md",
+    "runbooks/latency.md"
+  ],
+  "layer": [
+    "context/reference-patterns.md",
+    "docs/eslint/no-restricted-layer-imports.md",
+    "rules/17-manager-layer.md",
+    "rules/19-services-application-layer.md",
+    "skills/create-manager-use-case.md",
+    "skills/create-service-layer.md"
+  ],
+  "layered": [
+    "architecture/adrs/adr-001-strict-engineering-os.md"
+  ],
+  "layers": [
+    "docs/ai/safety-filters.md",
+    "knowledge/summaries/architecture.md",
+    "quality/architecture-review-standard.md",
+    "skills/refactor-feature.md",
+    "structure/layer-map.md",
+    "structure/README.md"
+  ],
+  "layout": [
+    "structure/repository-map.md"
+  ],
+  "leak": [
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/memory-growth.md",
+    "runbooks/privacy-incident.md"
+  ],
+  "learnings": [
+    "incidents/README.md",
+    "incidents/templates/postmortem.md"
+  ],
+  "levels": [
+    "operations/logging-catalog.md"
+  ],
+  "library": [
+    "docs/library-wrapping.md",
+    "memory/library-boundaries.md",
+    "rules/10-library-modularization.md",
+    "rules/frontend/09-library-wrapping.md",
+    "skills/add-library.md",
+    "skills/modularize-existing-library.md"
+  ],
+  "lifecycle": [
+    "docs/ai/image-lifecycle.md",
+    "docs/features/_template-frontend/README.md",
+    "domain/image-lifecycle.md",
+    "domain/README.md",
+    "domain/state-machines.md",
+    "operations/graceful-shutdown.md",
+    "rules/34-memory-lifecycle.md"
+  ],
+  "limits": [
+    "docs/ai/concurrency-policy.md",
+    "knowledge/summaries/domain.md"
+  ],
+  "link": [
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md"
+  ],
+  "links": [
+    "quality/documentation-review-standard.md",
+    "rules/32-documentation-quality.md"
+  ],
+  "lint": [
+    "quality/quality-metrics.md",
+    "quality/quality-model.md"
+  ],
+  "list": [
+    "skills/add-virtualized-list.md"
+  ],
+  "literal-false": [
+    "domain/safety-boundaries.md"
+  ],
+  "literal-true": [
+    "domain/consent-model.md"
+  ],
+  "live": [
+    "context/codebase-navigation.md",
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md",
+    "product/monetization-policy.md"
+  ],
+  "liveness": [
+    "operations/health-checks.md",
+    "structure/modules/api-health.md"
+  ],
+  "load-test": [
+    "runbooks/latency.md"
+  ],
+  "loading-states": [
+    "support/product-behavior-guide.md"
+  ],
+  "local": [
+    "docs/docker-local-dev.md",
+    "runbooks/local-development.md"
+  ],
+  "locale": [
+    "product/localization-expectations.md",
+    "structure/modules/web-ui-preferences.md",
+    "support/localization-troubleshooting.md"
+  ],
+  "localization": [
+    "domain/language-lifecycle.md",
+    "domain/trait-taxonomy.md",
+    "product/localization-expectations.md",
+    "support/localization-troubleshooting.md"
+  ],
+  "lock-step": [
+    "domain/trait-taxonomy.md"
+  ],
+  "locked": [
+    "memory/backend-stack.md"
+  ],
+  "log": [
+    "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/_template/18-defect-cycle-log.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
+    "docs/features/simple-readable-code-operating-system-implementation/18-defect-cycle-log.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md"
+  ],
+  "log-level": [
+    "operations/logging-catalog.md",
+    "runbooks/safe-diagnostics.md"
+  ],
+  "logging": [
+    "knowledge/summaries/operations.md",
+    "knowledge/summaries/privacy.md",
+    "operations/logging-catalog.md",
+    "operations/observability-map.md",
+    "operations/README.md",
+    "rules/22-observability-logging.md",
+    "runbooks/safe-diagnostics.md"
+  ],
+  "logic": [
+    "docs/eslint/no-inline-component-logic.md"
+  ],
+  "logs": [
+    "operations/SLIs.md",
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/docker.md",
+    "runbooks/hypercare.md",
+    "structure/modules/api-privacy.md",
+    "support/evidence-collection.md",
+    "support/privacy-and-data-handling.md"
+  ],
+  "made": [
+    "memory/README.md"
+  ],
+  "madge": [
+    "quality/quality-model.md"
+  ],
+  "magic-bytes": [
+    "structure/modules/api-file-security.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "manager": [
+    "rules/17-manager-layer.md",
+    "skills/create-manager-use-case.md"
+  ],
+  "managers": [
+    "rules/17-manager-layer.md"
+  ],
+  "manual": [
+    "docs/manual-qa-checklist.md"
+  ],
+  "map": [
+    "context/architecture-map.md",
+    "context/code-map.md",
+    "context/declaration-ownership-map.md",
+    "context/frontend/architecture-map.md",
+    "docs/agent-code-map.md",
+    "docs/agent-product-map.md",
+    "memory/ai-context-map.md",
+    "memory/library-boundaries.md"
+  ],
+  "mappers": [
+    "rules/frontend/08-utils-helpers-mappers.md"
+  ],
+  "matrix": [
+    "TEST_CASES.md"
+  ],
+  "measurement": [
+    "operations/SLIs.md",
+    "quality/quality-metrics.md"
+  ],
+  "memory-only": [
+    "domain/image-lifecycle.md"
+  ],
+  "merge": [
+    "rules/23-review-checklist.md"
+  ],
+  "message": [
+    "skills/add-i18n-message-key.md"
+  ],
+  "message-key": [
+    "domain/failure-semantics.md"
+  ],
+  "messagekey": [
+    "contracts/api/error-envelope.md",
+    "knowledge/summaries/support.md",
+    "support/error-code-catalog.md"
+  ],
+  "messaging": [
+    "rules/12-i18n.md",
+    "support/provider-outage-messaging.md"
+  ],
+  "method": [
+    "skills/add-api-service-method.md"
+  ],
+  "methodology": [
+    "docs/ai/benchmark-methodology.md"
+  ],
+  "metrics": [
+    "docs/ai/benchmark-methodology.md",
+    "docs/ai/evaluation-framework.md",
+    "docs/ai/shadow-routing.md",
+    "knowledge/summaries/operations.md",
+    "operations/observability-map.md",
+    "quality/quality-metrics.md"
+  ],
+  "migration": [
+    "docs/features/engineering-os-migration/00-intake.md",
+    "docs/features/engineering-os-migration/01-business-analysis.md",
+    "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/engineering-os-migration/03-product-requirements.md",
+    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/engineering-os-migration/05-delivery-plan.md",
+    "docs/features/engineering-os-migration/06-technical-refinement.md",
+    "docs/features/engineering-os-migration/07-technical-roadmap.md",
+    "docs/features/engineering-os-migration/08-architecture-review.md",
+    "docs/features/engineering-os-migration/09-impact-analysis.md",
+    "docs/features/engineering-os-migration/10-engineering-standards-check.md",
+    "docs/features/engineering-os-migration/11-test-strategy.md",
+    "docs/features/engineering-os-migration/12-coverage-plan.md",
+    "docs/features/engineering-os-migration/13-implementation-readiness.md",
+    "skills/add-migration-backfill.md",
+    "skills/migration-plan.md"
+  ],
+  "mime": [
+    "structure/modules/api-file-security.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "min-display-score": [
+    "domain/calculations.md"
+  ],
+  "minimalism": [
+    "rules/29-reuse-before-creating.md"
+  ],
+  "mirror": [
+    "CODEX.md",
+    "cursor.md",
+    "skills/prepare-agent-mirrors.md"
+  ],
+  "mirrors": [
+    "quality/technical-debt-register.md",
+    "rules/30-refactor-discipline.md",
+    "skills/prepare-agent-mirrors.md"
+  ],
+  "mistral": [
+    "MISTRAL.md"
+  ],
+  "mitigation": [
+    "incidents/templates/incident-record.md",
+    "quality/risk-register.md",
+    "runbooks/emergency-rollback.md"
+  ],
+  "mitigations": [
+    "docs/ai/prompt-injection-threat-model.md"
+  ],
+  "mobile": [
+    "docs/mobile-pwa-standards.md",
+    "product/principles.md",
+    "product/vision.md"
+  ],
+  "mock": [
+    "docs/ai/benchmark-methodology.md"
+  ],
+  "mocking": [
+    "quality/test-review-standard.md"
+  ],
+  "model": [
+    "docs/ai/model-change-checklist.md",
+    "docs/features/_template/19-threat-model.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "docs/features/simple-readable-code-operating-system-implementation/19-threat-model.md",
+    "docs/security-threat-model.md",
+    "skills/create-hook.md"
+  ],
+  "model-behavior": [
+    "runbooks/ai-schema-failures.md"
+  ],
+  "model-chain": [
+    "contracts/integrations/gemini.md",
+    "operations/retry-budget.md"
+  ],
+  "models": [
+    "docs/ai/model-routing.md"
+  ],
+  "modularization": [
+    "rules/10-library-modularization.md"
+  ],
+  "modularize": [
+    "skills/modularize-existing-library.md"
+  ],
+  "module": [
+    "docs/eslint/no-cross-module-deep-imports.md",
+    "rules/01-architecture.md",
+    "skills/create-module-frontend.md",
+    "skills/create-module.md"
+  ],
+  "modules": [
+    "knowledge/summaries/architecture.md",
+    "knowledge/summaries/backend.md",
+    "knowledge/summaries/frontend.md",
+    "structure/README.md"
+  ],
+  "monetization": [
+    "product/monetization-policy.md",
+    "product/README.md"
+  ],
+  "money": [
+    "structure/flows/payment-flow.md",
+    "structure/modules/api-payments.md"
+  ],
+  "monitoring": [
+    "runbooks/hypercare.md",
+    "structure/modules/api-health.md"
+  ],
+  "monorepo": [
+    "knowledge/summaries/architecture.md",
+    "structure/README.md",
+    "structure/repository-map.md"
+  ],
+  "move": [
+    "skills/refactor-feature.md"
+  ],
+  "moved": [
+    "skills/create-feature.md",
+    "skills/create-service-layer.md"
+  ],
+  "multi": [
+    "docs/features/multi-provider-ai/00-intake.md",
+    "docs/features/multi-provider-ai/02-provider-research.md",
+    "docs/features/multi-provider-ai/08-architecture-review.md",
+    "docs/features/multi-provider-ai/09-impact-analysis.md",
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-provider-ai/13-implementation-readiness.md",
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/multi-tab-stream-isolation/08-architecture-review.md",
+    "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/multi-tab-stream-isolation/README.md",
+    "docs/provider-routing.md"
+  ],
+  "multipart": [
+    "contracts/api/analyze.md",
+    "support/consent-troubleshooting.md"
+  ],
+  "must-fix": [
+    "quality/code-review-standard.md"
+  ],
+  "mutation": [
+    "skills/create-mutation.md"
+  ],
+  "navigation": [
+    "context/codebase-navigation.md",
+    "context/frontend/codebase-navigation.md"
+  ],
+  "negotiable": [
+    "rules/00-non-negotiable-rules.md",
+    "rules/frontend/00-non-negotiable-rules.md"
+  ],
+  "nestjs": [
+    "knowledge/summaries/architecture.md",
+    "knowledge/summaries/backend.md"
+  ],
+  "next": [
+    "agents/next-app-router-reviewer.md",
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
+    "rules/frontend/01-next-app-router-architecture.md"
+  ],
+  "next-intl": [
+    "support/localization-troubleshooting.md"
+  ],
+  "next-public": [
+    "contracts/configuration/env-contract.md"
+  ],
+  "nextjs": [
+    "knowledge/summaries/architecture.md",
+    "knowledge/summaries/frontend.md"
+  ],
+  "no persistence": [
+    "knowledge/summaries/privacy.md"
+  ],
+  "no-database": [
+    "runbooks/rollback.md",
+    "structure/modules/api-share-results.md",
+    "structure/runtime-topology.md"
+  ],
+  "no-existence-oracle": [
+    "domain/sharing-lifecycle.md"
+  ],
+  "no-persistence": [
+    "domain/image-lifecycle.md",
+    "structure/flows/share-flow.md",
+    "structure/modules/api-privacy.md"
+  ],
+  "node": [
+    "runbooks/event-loop-lag.md",
+    "runbooks/local-development.md"
+  ],
+  "non": [
+    "rules/00-non-negotiable-rules.md",
+    "rules/frontend/00-non-negotiable-rules.md"
+  ],
+  "non-goals": [
+    "product/non-goals.md"
+  ],
+  "non-negotiable": [
+    "quality/exception-policy.md"
+  ],
+  "non-negotiables": [
+    "product/constraints.md"
+  ],
+  "non-root": [
+    "operations/deployment-model.md"
+  ],
+  "normalization": [
+    "domain/language-lifecycle.md",
+    "domain/policies.md"
+  ],
+  "notes": [
+    "release-notes/2026-07-12-ai-knowledge-os.md",
+    "release-notes/README.md",
+    "release-notes/release-notes-template.md",
+    "release-notes/simple-readable-code-operating-system-implementation.md",
+    "release-notes/twinzy-hardening-v3.md"
+  ],
+  "notification": [
+    "memory/event-notification-decisions.md",
+    "skills/add-notification.md"
+  ],
+  "npm": [
+    "runbooks/local-development.md"
+  ],
+  "oauth": [
+    "contracts/integrations/paypal.md"
+  ],
+  "objectives": [
+    "operations/SLOs.md"
+  ],
+  "observability": [
+    "agents/observability-reviewer.md",
+    "memory/observability-decisions.md",
+    "operations/observability-map.md",
+    "operations/README.md",
+    "rules/22-observability-logging.md",
+    "rules/frontend/16-observability-analytics.md",
+    "skills/observability-review.md"
+  ],
+  "oncall": [
+    "runbooks/README.md"
+  ],
+  "one": [
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md"
+  ],
+  "one-fact-one-owner": [
+    "quality/documentation-review-standard.md"
+  ],
+  "only": [
+    "docs/eslint/no-server-only-import-in-client.md",
+    "skills/create-component.md"
+  ],
+  "open": [
+    "incidents/active/README.md"
+  ],
+  "open items": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "openai": [
+    "contracts/integrations/openai-compat.md",
+    "docs/ai/provider-catalog.md",
+    "OPENAI.md"
+  ],
+  "operational": [
+    "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md"
+  ],
+  "operations": [
+    "docs/ai/incident-response.md",
+    "knowledge/summaries/operations.md",
+    "operations/README.md",
+    "runbooks/README.md"
+  ],
+  "ops": [
+    "docs/features/_template/24-risk-compliance-ops.md",
+    "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md"
+  ],
+  "orchestration": [
+    "structure/modules/api-game.md"
+  ],
+  "ordering": [
+    "domain/result-ranking.md"
+  ],
+  "orders": [
+    "contracts/api/payments.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "structure/flows/payment-flow.md",
+    "structure/modules/api-payments.md"
+  ],
+  "orders-v2": [
+    "contracts/integrations/paypal.md"
+  ],
+  "orientation": [
+    "context/README.md"
+  ],
+  "outage": [
+    "docs/ai/incident-response.md",
+    "runbooks/ai-provider-outage.md",
+    "runbooks/api-outage.md",
+    "runbooks/provider-outage.md",
+    "runbooks/README.md",
+    "support/communication-templates.md",
+    "support/provider-outage-messaging.md"
+  ],
+  "outside": [
+    "docs/eslint/no-direct-browser-api-outside-packages.md",
+    "docs/eslint/no-inline-classname-outside-design-system.md",
+    "docs/eslint/no-process-env-outside-config.md"
+  ],
+  "over": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
+  ],
+  "overload": [
+    "docs/ai/concurrency-policy.md",
+    "docs/features/multi-tab-stream-isolation/README.md"
+  ],
+  "overview": [
+    "docs/ai/system-overview.md",
+    "docs/product-overview.md"
+  ],
+  "ownership": [
+    "context/declaration-ownership-map.md",
+    "memory/library-boundaries.md",
+    "rules/31-knowledge-management.md"
+  ],
+  "pack": [
+    "skills/resolve-task-context.md"
+  ],
+  "package": [
+    "context/frontend/package-boundaries.md",
+    "docs/eslint/no-raw-package-imports.md",
+    "docs/package-decisions.md",
+    "memory/frontend/package-decisions.md",
+    "skills/create-package-wrapper.md"
+  ],
+  "packages": [
+    "docs/eslint/no-direct-browser-api-outside-packages.md",
+    "structure/repository-map.md"
+  ],
+  "packs": [
+    "knowledge/README.md",
+    "rules/33-fast-context-routing.md"
+  ],
+  "paid": [
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md"
+  ],
+  "parsing": [
+    "docs/ai/output-validation.md"
+  ],
+  "patterns": [
+    "context/frontend/reference-patterns.md",
+    "context/reference-patterns.md",
+    "memory/reliability-patterns.md"
+  ],
+  "payload": [
+    "operations/performance-budgets.md"
+  ],
+  "payment": [
+    "structure/flows/payment-flow.md",
+    "structure/modules/web-game.md",
+    "support/error-code-catalog.md",
+    "support/product-behavior-guide.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "payment-capture": [
+    "domain/entities.md"
+  ],
+  "payments": [
+    "contracts/api/payments.md",
+    "structure/modules/api-payments.md",
+    "support/communication-templates.md",
+    "support/escalation-matrix.md",
+    "support/FAQ.md"
+  ],
+  "payments security": [
+    "knowledge/summaries/security.md"
+  ],
+  "paypal": [
+    "contracts/api/payments.md",
+    "contracts/integrations/paypal.md",
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md",
+    "operations/timeout-budget.md",
+    "product/monetization-policy.md",
+    "runbooks/secret-rotation.md",
+    "structure/flows/payment-flow.md",
+    "structure/modules/api-payments.md",
+    "support/FAQ.md"
+  ],
+  "paypal env": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "paypalorderid": [
+    "contracts/api/analyze.md"
+  ],
+  "paywall": [
+    "contracts/api/payments.md",
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "domain/state-machines.md",
+    "domain/ubiquitous-language.md",
+    "knowledge/hot-memory.md",
+    "knowledge/summaries/product.md",
+    "operations/readiness-checklist.md",
+    "product/constraints.md",
+    "product/monetization-policy.md",
+    "product/user-journeys.md",
+    "quality/risk-register.md",
+    "quality/technical-debt-register.md",
+    "runbooks/rollback.md",
+    "structure/flows/payment-flow.md",
+    "structure/modules/api-payments.md",
+    "support/feature-catalog.md",
+    "support/known-issues.md"
+  ],
+  "paywall live conditions": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "pentest": [
+    "docs/features/_template/19-pentest-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md"
+  ],
+  "performance": [
+    "agents/backend-performance-reviewer.md",
+    "agents/react-performance-reviewer.md",
+    "docs/ai/latency-budget.md",
+    "docs/features/_template-frontend/09-performance-review.md",
+    "docs/performance-review-report.md",
+    "memory/frontend/performance-decisions.md",
+    "memory/performance-decisions.md",
+    "operations/performance-budgets.md",
+    "rules/07-performance-scalability.md",
+    "rules/frontend/12-performance.md",
+    "runbooks/latency.md",
+    "skills/performance-review-frontend.md",
+    "skills/performance-review.md"
+  ],
+  "permission": [
+    "skills/add-guard-and-permission.md"
+  ],
+  "persistence": [
+    "agents/database-reviewer.md",
+    "product/non-goals.md",
+    "product/privacy-promises.md"
+  ],
+  "personas": [
+    "product/personas.md",
+    "product/README.md"
+  ],
+  "phase-08": [
+    "quality/architecture-review-standard.md"
+  ],
+  "phases": [
+    "quality/definition-of-ready.md"
+  ],
+  "photo": [
+    "domain/image-lifecycle.md",
+    "support/FAQ.md"
+  ],
+  "phrases": [
+    "docs/ai/forbidden-wording.md"
+  ],
+  "pino": [
+    "operations/logging-catalog.md",
+    "operations/observability-map.md"
+  ],
+  "pipeline": [
+    "docs/ai/pipeline.md",
+    "docs/ai/README.md",
+    "docs/ai/system-overview.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "knowledge/summaries/domain.md",
+    "structure/flows/analyze-flow.md"
+  ],
+  "pitfalls": [
+    "knowledge/hot-memory.md",
+    "memory/frontend/known-pitfalls.md",
+    "memory/known-pitfalls.md",
+    "rules/34-memory-lifecycle.md"
+  ],
+  "pivot": [
+    "docs/features/visual-similarity-pivot/00-intake.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md"
+  ],
+  "placeholders": [
+    "contracts/ai/prompt-io.md",
+    "docs/ai/prompt-catalog.md",
+    "docs/ai/prompt-change-checklist.md",
+    "docs/ai/prompt-injection-threat-model.md"
+  ],
+  "plan": [
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "docs/features/_template-frontend/07-implementation-plan.md",
+    "docs/features/_template/05-delivery-plan.md",
+    "docs/features/_template/12-coverage-plan.md",
+    "docs/features/advanced-global-traits-v2/05-delivery-plan.md",
+    "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
+    "docs/features/engineering-os-migration/05-delivery-plan.md",
+    "docs/features/engineering-os-migration/12-coverage-plan.md",
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/simple-readable-code-operating-system-implementation/05-delivery-plan.md",
+    "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
+    "docs/features/temporary-shareable-results/05-delivery-plan.md",
+    "docs/features/temporary-shareable-results/12-coverage-plan.md",
+    "docs/features/twinzy-hardening-v3/00-audit-report.md",
+    "docs/features/twinzy-hardening-v3/05-delivery-plan.md",
+    "docs/features/twinzy-hardening-v3/12-coverage-plan.md",
+    "docs/implementation-plan.md",
+    "skills/migration-plan.md"
+  ],
+  "plane": [
+    "knowledge/templates/ai-readme.md"
+  ],
+  "planes": [
+    "rules/31-knowledge-management.md"
+  ],
+  "play": [
+    "product/user-journeys.md"
+  ],
+  "playbooks": [
+    "skills/README.md"
+  ],
+  "player-flow": [
+    "support/product-behavior-guide.md"
+  ],
+  "players": [
+    "product/personas.md"
+  ],
+  "playful": [
+    "product/principles.md"
+  ],
+  "playwright": [
+    "knowledge/summaries/testing.md"
+  ],
+  "points": [
+    "docs/sdlc/public-reference-points.md"
+  ],
+  "policies": [
+    "domain/policies.md"
+  ],
+  "policy": [
+    "docs/ai/golden-dataset-policy.md",
+    "docs/sdlc/company-sdlc-policy.md",
+    "quality/exception-policy.md",
+    "testing/coverage-policy.md",
+    "testing/frontend/coverage-policy.md"
+  ],
+  "port": [
+    "contracts/ai/README.md",
+    "structure/modules/api-share-results.md"
+  ],
+  "portable": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
+  "ports": [
+    "operations/deployment-model.md",
+    "structure/runtime-topology.md"
+  ],
+  "post-release": [
+    "runbooks/hypercare.md"
+  ],
+  "postmortem": [
+    "docs/features/_template/27-postmortem.md",
+    "incidents/README.md",
+    "incidents/templates/postmortem.md",
+    "runbooks/security-incident.md"
+  ],
+  "postmortems": [
+    "incidents/resolved/README.md"
+  ],
+  "pr": [
+    "quality/code-review-standard.md"
+  ],
+  "pre": [
+    "rules/23-review-checklist.md"
+  ],
+  "pre-implementation": [
+    "quality/definition-of-ready.md"
+  ],
+  "prefix": [
+    "contracts/api/README.md"
+  ],
+  "prepare": [
+    "skills/prepare-agent-mirrors.md"
+  ],
+  "presenter": [
+    "structure/modules/api-game.md"
+  ],
+  "price": [
+    "contracts/api/payments.md"
+  ],
+  "pricing": [
+    "product/monetization-policy.md"
+  ],
+  "principles": [
+    "product/principles.md"
+  ],
+  "prioritized": [
+    "docs/features/twinzy-hardening-v3/00-audit-report.md"
+  ],
+  "privacy": [
+    "docs/ai/image-lifecycle.md",
+    "docs/ai/written-traits-only-boundary.md",
+    "docs/privacy-and-data-retention.md",
+    "domain/consent-model.md",
+    "domain/image-lifecycle.md",
+    "knowledge/summaries/privacy.md",
+    "memory/privacy-decisions.md",
+    "operations/logging-catalog.md",
+    "product/constraints.md",
+    "product/personas.md",
+    "product/principles.md",
+    "product/privacy-promises.md",
+    "product/README.md",
+    "product/vision.md",
+    "runbooks/privacy-incident.md",
+    "runbooks/safe-diagnostics.md",
+    "structure/modules/api-privacy.md",
+    "support/communication-templates.md",
+    "support/consent-troubleshooting.md",
+    "support/escalation-matrix.md",
+    "support/evidence-collection.md",
+    "support/FAQ.md",
+    "support/privacy-and-data-handling.md"
+  ],
+  "probe": [
+    "operations/health-checks.md"
+  ],
+  "process": [
+    "docs/eslint/no-process-env-outside-config.md",
+    "incidents/README.md"
+  ],
+  "processes": [
+    "structure/runtime-topology.md"
+  ],
+  "product": [
+    "context/product-context.md",
+    "docs/agent-product-map.md",
+    "docs/features/_template-frontend/02-product-requirements.md",
+    "docs/features/_template/03-product-requirements.md",
+    "docs/features/advanced-global-traits-v2/03-product-requirements.md",
+    "docs/features/ai-knowledge-os/03-product-requirements.md",
+    "docs/features/engineering-os-migration/03-product-requirements.md",
+    "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/simple-readable-code-operating-system-implementation/03-product-requirements.md",
+    "docs/features/temporary-shareable-results/03-product-requirements.md",
+    "docs/features/twinzy-hardening-v3/03-product-requirements.md",
+    "docs/product-overview.md",
+    "knowledge/summaries/product.md",
+    "product/README.md",
+    "product/vision.md"
+  ],
+  "production": [
+    "skills/investigate-production-bug.md"
+  ],
+  "project": [
+    "docs/README.md",
+    "memory/project-architecture.md"
+  ],
+  "promises": [
+    "product/privacy-promises.md"
+  ],
+  "prompt": [
+    "contracts/ai/prompt-io.md",
+    "docs/ai/prompt-change-checklist.md",
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
+    "runbooks/ai-schema-failures.md"
+  ],
+  "prompt-drift": [
+    "quality/risk-register.md"
+  ],
+  "prompt-injection": [
+    "docs/ai/prompt-injection-threat-model.md"
+  ],
+  "prompt-version": [
+    "domain/invariants.md",
+    "structure/modules/shared.md"
+  ],
+  "promptkey": [
+    "docs/ai/prompt-catalog.md"
+  ],
+  "prompts": [
+    "docs/ai/prompt-catalog.md",
+    "docs/ai/README.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "structure/modules/api-ai.md"
+  ],
+  "protection": [
+    "docs/features/multi-tab-stream-isolation/README.md"
+  ],
+  "provider": [
+    "contracts/ai/README.md",
+    "docs/ai/incident-response.md",
+    "docs/ai/provider-change-checklist.md",
+    "docs/features/multi-provider-ai/00-intake.md",
+    "docs/features/multi-provider-ai/02-provider-research.md",
+    "docs/features/multi-provider-ai/08-architecture-review.md",
+    "docs/features/multi-provider-ai/09-impact-analysis.md",
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-provider-ai/13-implementation-readiness.md",
+    "docs/provider-routing.md",
+    "runbooks/ai-provider-outage.md",
+    "runbooks/latency.md",
+    "runbooks/provider-outage.md",
+    "skills/add-ai-provider.md",
+    "structure/modules/api-ai.md",
+    "support/provider-outage-messaging.md"
+  ],
+  "provider outage": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "provider-outage": [
+    "quality/risk-register.md"
+  ],
+  "providers": [
+    "docs/ai/provider-catalog.md",
+    "docs/ai/README.md",
+    "knowledge/summaries/ai-pipeline.md"
+  ],
+  "proxy": [
+    "operations/readiness-checklist.md",
+    "runbooks/streaming-disconnects.md"
+  ],
+  "public": [
+    "docs/sdlc/public-reference-points.md"
+  ],
+  "public env": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "public-env": [
+    "structure/configuration-map.md"
+  ],
+  "pwa": [
+    "docs/mobile-pwa-standards.md",
+    "knowledge/summaries/frontend.md",
+    "product/user-journeys.md",
+    "support/feature-catalog.md"
+  ],
+  "quality": [
+    "docs/ai/evaluation-framework.md",
+    "docs/ai/golden-dataset-policy.md",
+    "docs/ai/regression-evaluation.md",
+    "quality/README.md",
+    "rules/32-documentation-quality.md",
+    "testing/frontend/quality-gates.md",
+    "testing/quality-gates.md"
+  ],
+  "query": [
+    "docs/eslint/no-inline-query-keys.md",
+    "rules/frontend/05-tanstack-query.md",
+    "skills/create-query.md"
+  ],
+  "queue": [
+    "docs/ai/concurrency-policy.md",
+    "operations/scaling-model.md"
+  ],
+  "queueing": [
+    "runbooks/latency.md"
+  ],
+  "quota": [
+    "docs/ai/cost-policy.md",
+    "runbooks/provider-rate-limiting.md"
+  ],
+  "qwen": [
+    "contracts/integrations/openai-compat.md",
+    "docs/ai/provider-catalog.md",
+    "QWEN.md"
+  ],
+  "ranking": [
+    "domain/README.md",
+    "domain/result-ranking.md",
+    "structure/modules/api-result-aggregation.md"
+  ],
+  "rate limits": [
+    "knowledge/summaries/security.md"
+  ],
+  "rate-limit": [
+    "docs/ai/concurrency-policy.md",
+    "docs/ai/fallback-routing.md",
+    "docs/ai/incident-response.md",
+    "operations/performance-budgets.md",
+    "runbooks/provider-rate-limiting.md",
+    "support/provider-outage-messaging.md"
+  ],
+  "raw": [
+    "docs/eslint/no-raw-i18n-text.md",
+    "docs/eslint/no-raw-package-imports.md"
+  ],
+  "re-rank": [
+    "domain/result-ranking.md"
+  ],
+  "react": [
+    "agents/react-performance-reviewer.md"
+  ],
+  "readiness": [
+    "docs/agent-readiness.md",
+    "docs/features/_template-frontend/11-release-readiness.md",
+    "docs/features/_template/13-implementation-readiness.md",
+    "docs/features/advanced-global-traits-v2/13-implementation-readiness.md",
+    "docs/features/ai-knowledge-os/13-implementation-readiness.md",
+    "docs/features/engineering-os-migration/13-implementation-readiness.md",
+    "docs/features/multi-provider-ai/13-implementation-readiness.md",
+    "docs/features/simple-readable-code-operating-system-implementation/13-implementation-readiness.md",
+    "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md",
+    "docs/features/temporary-shareable-results/13-implementation-readiness.md",
+    "docs/features/twinzy-hardening-v3/13-implementation-readiness.md",
+    "operations/health-checks.md",
+    "operations/readiness-checklist.md",
+    "operations/README.md",
+    "quality/definition-of-ready.md",
+    "quality/release-readiness.md",
+    "support/README.md",
+    "support/release-support-checklist.md",
+    "support/simple-readable-code-operating-system-implementation.md",
+    "support/support-readiness-template.md"
+  ],
+  "readme": [
+    "agents/README.md",
+    "architecture/adrs/README.md",
+    "context/frontend/README.md",
+    "context/README.md",
+    "docs/eslint/README.md",
+    "docs/exceptions/README.md",
+    "docs/features/_template-frontend/README.md",
+    "docs/features/_template/README.md",
+    "docs/features/multi-tab-stream-isolation/README.md",
+    "docs/features/README.md",
+    "docs/README.md",
+    "docs/sdlc/README.md",
+    "knowledge/templates/ai-readme.md",
+    "memory/frontend/README.md",
+    "memory/README.md",
+    "README.md",
+    "release-notes/README.md",
+    "rules/frontend/README.md",
+    "rules/README.md",
+    "skills/README-frontend.md",
+    "skills/README.md",
+    "testing/frontend/README.md",
+    "testing/README.md"
+  ],
+  "ready": [
+    "context/reference-patterns.md",
+    "quality/definition-of-ready.md"
+  ],
+  "real": [
+    "docs/ai/benchmark-methodology.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md"
+  ],
+  "reason": [
+    "docs/eslint/require-client-component-reason.md"
+  ],
+  "rebuild": [
+    "runbooks/docker.md"
+  ],
+  "recipient": [
+    "product/personas.md"
+  ],
+  "record": [
+    "incidents/templates/incident-record.md"
+  ],
+  "records": [
+    "incidents/active/README.md"
+  ],
+  "redactforlog": [
+    "structure/modules/api-privacy.md"
+  ],
+  "redaction": [
+    "contracts/integrations/gemini.md",
+    "domain/image-lifecycle.md",
+    "knowledge/summaries/privacy.md",
+    "operations/logging-catalog.md",
+    "runbooks/safe-diagnostics.md",
+    "structure/modules/api-privacy.md",
+    "support/evidence-collection.md",
+    "support/privacy-and-data-handling.md"
+  ],
+  "redeploy": [
+    "runbooks/rollback-template.md",
+    "runbooks/rollback.md"
+  ],
+  "reduced-motion": [
+    "product/accessibility-expectations.md"
+  ],
+  "refactor": [
+    "agents/backend-refactor-agent.md",
+    "docs/features/simple-readable-code-operating-system-and-codebase-refactor/00-intake.md",
+    "rules/30-refactor-discipline.md",
+    "skills/refactor-feature.md"
+  ],
+  "reference": [
+    "context/frontend/reference-patterns.md",
+    "context/reference-patterns.md",
+    "docs/sdlc/public-reference-points.md"
+  ],
+  "refinement": [
+    "docs/features/_template-frontend/04-technical-refinement.md",
+    "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/_template/06-technical-refinement.md",
+    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
+    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
+    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/engineering-os-migration/06-technical-refinement.md",
+    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
+    "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
+    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
+    "docs/features/temporary-shareable-results/06-technical-refinement.md",
+    "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md",
+    "docs/features/twinzy-hardening-v3/06-technical-refinement.md"
+  ],
+  "refund": [
+    "contracts/api/payments.md",
+    "contracts/integrations/paypal.md",
+    "domain/failure-semantics.md",
+    "domain/policies.md",
+    "operations/retry-budget.md",
+    "structure/flows/payment-flow.md",
+    "structure/modules/api-payments.md"
+  ],
+  "refunds": [
+    "quality/risk-register.md"
+  ],
+  "region-hint": [
+    "domain/policies.md"
+  ],
+  "register": [
+    "docs/exceptions/README.md",
+    "quality/exception-policy.md",
+    "quality/risk-register.md",
+    "quality/technical-debt-register.md",
+    "quality/waiver-register.md"
+  ],
+  "regression": [
+    "docs/ai/regression-evaluation.md",
+    "quality/test-review-standard.md"
+  ],
+  "regression-test": [
+    "runbooks/hotfix.md"
+  ],
+  "rejection": [
+    "docs/ai/safety-filters.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "release": [
+    "agents/backend-release-gatekeeper.md",
+    "agents/frontend-release-gatekeeper.md",
+    "docs/features/_template-frontend/11-release-readiness.md",
+    "docs/features/_template/25-release-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/25-release-report.md",
+    "docs/release-checklist.md",
+    "docs/sdlc/release-checklist.md",
+    "memory/release-checklist.md",
+    "quality/release-readiness.md",
+    "release-notes/2026-07-12-ai-knowledge-os.md",
+    "release-notes/README.md",
+    "release-notes/release-notes-template.md",
+    "release-notes/simple-readable-code-operating-system-implementation.md",
+    "release-notes/twinzy-hardening-v3.md",
+    "rules/24-release-gate.md",
+    "rules/frontend/19-release-gates.md",
+    "runbooks/deployment.md",
+    "runbooks/release-smoke-test-template.md",
+    "runbooks/release-smoke-test.md",
+    "runbooks/rollback-template.md",
+    "support/known-issues-template.md",
+    "support/release-support-checklist.md"
+  ],
+  "reliability": [
+    "agents/reliability-engineer.md",
+    "memory/reliability-patterns.md",
+    "rules/08-reliability-durability.md",
+    "skills/reliability-review.md"
+  ],
+  "replies": [
+    "support/communication-templates.md"
+  ],
+  "report": [
+    "docs/ai-safety-review-report.md",
+    "docs/features/_template/15-dev-validation-report.md",
+    "docs/features/_template/17-qa-report.md",
+    "docs/features/_template/19-pentest-report.md",
+    "docs/features/_template/20-uat-report.md",
+    "docs/features/_template/25-release-report.md",
+    "docs/features/_template/26-hypercare-report.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/ai-knowledge-os/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/17-qa-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/20-uat-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/25-release-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/26-hypercare-report.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+    "docs/features/twinzy-hardening-v3/00-audit-report.md",
+    "docs/features/twinzy-hardening-v3/15-dev-validation-report.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md",
+    "docs/file-upload-security-review-report.md",
+    "docs/final-validation-report.md",
+    "docs/performance-review-report.md",
+    "docs/security-review-report.md"
+  ],
+  "repositories": [
+    "rules/20-repositories-database.md"
+  ],
+  "repository": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
+    "skills/create-repository.md",
+    "structure/README.md",
+    "structure/repository-map.md"
+  ],
+  "request": [
+    "docs/features/_template/00-intake.md",
+    "docs/features/advanced-global-traits-v2/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/README.md",
+    "docs/features/simple-readable-code-operating-system-implementation/00-intake.md",
+    "docs/features/temporary-shareable-results/00-intake.md",
+    "docs/features/visual-similarity-pivot/00-intake.md"
+  ],
+  "request-id": [
+    "domain/ubiquitous-language.md",
+    "operations/observability-map.md",
+    "product/terminology.md",
+    "support/evidence-collection.md"
+  ],
+  "requested": [
+    "docs/features/simple-readable-code-operating-system-implementation/00-audit-crosswalk.md"
+  ],
+  "requestid": [
+    "contracts/api/payments.md",
+    "contracts/api/sse-events.md"
+  ],
+  "require": [
+    "docs/eslint/require-client-component-reason.md"
+  ],
+  "requirements": [
+    "docs/features/_template-frontend/02-product-requirements.md",
+    "docs/features/_template/03-product-requirements.md",
+    "docs/features/advanced-global-traits-v2/03-product-requirements.md",
+    "docs/features/ai-knowledge-os/03-product-requirements.md",
+    "docs/features/engineering-os-migration/03-product-requirements.md",
+    "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/simple-readable-code-operating-system-implementation/03-product-requirements.md",
+    "docs/features/temporary-shareable-results/03-product-requirements.md",
+    "docs/features/twinzy-hardening-v3/03-product-requirements.md"
+  ],
+  "requires": [
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md"
+  ],
+  "research": [
+    "docs/features/multi-provider-ai/02-provider-research.md"
+  ],
+  "resilience": [
+    "docs/ai/fallback-routing.md",
+    "docs/ai/retry-timeout-policy.md"
+  ],
+  "resolved": [
+    "incidents/README.md",
+    "incidents/resolved/README.md"
+  ],
+  "resolver": [
+    "knowledge/README.md",
+    "rules/33-fast-context-routing.md",
+    "skills/resolve-task-context.md"
+  ],
+  "response": [
+    "incidents/templates/incident-record.md",
+    "runbooks/incident-response-template.md"
+  ],
+  "response-invalid": [
+    "runbooks/ai-schema-failures.md"
+  ],
+  "rest": [
+    "contracts/integrations/paypal.md"
+  ],
+  "restart": [
+    "operations/availability-expectations.md",
+    "operations/graceful-shutdown.md",
+    "runbooks/memory-growth.md",
+    "support/known-issues.md",
+    "support/sharing-troubleshooting.md"
+  ],
+  "restricted": [
+    "docs/eslint/no-restricted-layer-imports.md"
+  ],
+  "result-aggregation": [
+    "structure/modules/api-result-aggregation.md"
+  ],
+  "result-count": [
+    "domain/invariants.md",
+    "domain/result-ranking.md",
+    "product/game-rules.md"
+  ],
+  "resultcount": [
+    "contracts/api/analyze.md"
+  ],
+  "results": [
+    "docs/features/paypal-donations-and-paid-results/00-intake.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md",
+    "docs/features/temporary-shareable-results/00-intake.md",
+    "docs/features/temporary-shareable-results/01-business-analysis.md",
+    "docs/features/temporary-shareable-results/02-business-development.md",
+    "docs/features/temporary-shareable-results/03-product-requirements.md",
+    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
+    "docs/features/temporary-shareable-results/05-delivery-plan.md",
+    "docs/features/temporary-shareable-results/06-technical-refinement.md",
+    "docs/features/temporary-shareable-results/07-technical-roadmap.md",
+    "docs/features/temporary-shareable-results/08-architecture-review.md",
+    "docs/features/temporary-shareable-results/09-impact-analysis.md",
+    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
+    "docs/features/temporary-shareable-results/11-test-strategy.md",
+    "docs/features/temporary-shareable-results/12-coverage-plan.md",
+    "docs/features/temporary-shareable-results/13-implementation-readiness.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/23-documentation-changelog.md",
+    "support/AI-result-expectations.md"
+  ],
+  "retention": [
+    "docs/privacy-and-data-retention.md",
+    "product/privacy-promises.md",
+    "support/privacy-and-data-handling.md"
+  ],
+  "retest": [
+    "testing/bug-triage-and-retest.md"
+  ],
+  "retrospective": [
+    "docs/features/_template-frontend/13-retrospective.md",
+    "docs/features/_template/27-retrospective.md",
+    "docs/features/simple-readable-code-operating-system-implementation/27-retrospective.md",
+    "runbooks/hotfix.md"
+  ],
+  "retry": [
+    "docs/ai/retry-timeout-policy.md",
+    "domain/failure-semantics.md",
+    "operations/retry-budget.md",
+    "support/provider-outage-messaging.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "reuse": [
+    "rules/29-reuse-before-creating.md"
+  ],
+  "revert": [
+    "runbooks/emergency-rollback.md",
+    "runbooks/rollback-template.md",
+    "runbooks/rollback.md"
+  ],
+  "reviewer": [
+    "agents/accessibility-reviewer.md",
+    "agents/backend-code-reviewer.md",
+    "agents/backend-performance-reviewer.md",
+    "agents/backend-security-reviewer.md",
+    "agents/database-reviewer.md",
+    "agents/eslint-boundary-reviewer.md",
+    "agents/frontend-security-reviewer.md",
+    "agents/i18n-rtl-reviewer.md",
+    "agents/next-app-router-reviewer.md",
+    "agents/observability-reviewer.md",
+    "agents/react-performance-reviewer.md"
+  ],
+  "revoke": [
+    "runbooks/secret-rotation.md"
+  ],
+  "risk": [
+    "docs/features/_template/24-risk-compliance-ops.md",
+    "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md",
+    "docs/sdlc/risk-baseline.md",
+    "quality/README.md",
+    "quality/risk-register.md",
+    "rules/36-delivery-lanes-and-traceability.md"
+  ],
+  "risks": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "roadmap": [
+    "docs/features/_template/07-technical-roadmap.md",
+    "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
+    "docs/features/engineering-os-migration/07-technical-roadmap.md",
+    "docs/features/simple-readable-code-operating-system-implementation/07-technical-roadmap.md",
+    "docs/features/temporary-shareable-results/07-technical-roadmap.md",
+    "docs/features/twinzy-hardening-v3/07-technical-roadmap.md"
+  ],
+  "role": [
+    "agents/backend-architect.md",
+    "agents/backend-performance-reviewer.md",
+    "agents/backend-refactor-agent.md",
+    "agents/backend-test-engineer.md",
+    "agents/database-reviewer.md",
+    "agents/reliability-engineer.md"
+  ],
+  "roles": [
+    "agents/README.md"
+  ],
+  "rollback": [
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/provider-change-checklist.md",
+    "knowledge/summaries/operations.md",
+    "operations/deployment-model.md",
+    "quality/release-readiness.md",
+    "runbooks/emergency-rollback.md",
+    "runbooks/README.md",
+    "runbooks/rollback-template.md",
+    "runbooks/rollback.md",
+    "support/release-support-checklist.md"
+  ],
+  "rollout": [
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/provider-change-checklist.md"
+  ],
+  "root-cause": [
+    "incidents/templates/postmortem.md"
+  ],
+  "rotation": [
+    "runbooks/secret-rotation.md",
+    "runbooks/security-incident.md"
+  ],
+  "route": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
+    "operations/retry-budget.md",
+    "skills/add-route.md"
+  ],
+  "route-hop": [
+    "domain/policies.md"
+  ],
+  "routed": [
+    "skills/add-api-service-method.md"
+  ],
+  "router": [
+    "agents/next-app-router-reviewer.md",
+    "context/codebase-navigation.md",
+    "context/task-router.md",
+    "docs/agent-task-router.md",
+    "rules/frontend/01-next-app-router-architecture.md",
+    "runbooks/provider-outage.md",
+    "structure/modules/api-ai.md"
+  ],
+  "routes": [
+    "contracts/api/README.md",
+    "knowledge/summaries/backend.md",
+    "rules/18-routes-controllers.md"
+  ],
+  "routing": [
+    "contracts/ai/README.md",
+    "docs/ai/fallback-routing.md",
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/model-routing.md",
+    "docs/ai/README.md",
+    "docs/ai/shadow-routing.md",
+    "docs/features/multi-provider-ai/00-intake.md",
+    "docs/features/multi-provider-ai/02-provider-research.md",
+    "docs/features/multi-provider-ai/08-architecture-review.md",
+    "docs/provider-routing.md",
+    "knowledge/README.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "rules/33-fast-context-routing.md",
+    "skills/resolve-task-context.md",
+    "support/troubleshooting-index.md"
+  ],
+  "rtl": [
+    "agents/i18n-rtl-reviewer.md",
+    "domain/language-lifecycle.md",
+    "knowledge/summaries/frontend.md",
+    "memory/frontend/i18n-rtl-decisions.md",
+    "product/localization-expectations.md",
+    "product/principles.md",
+    "rules/frontend/14-i18n-rtl.md",
+    "structure/modules/web-ui-preferences.md",
+    "support/localization-troubleshooting.md"
+  ],
+  "rubric": [
+    "domain/calculations.md"
+  ],
+  "rule": [
+    "rules/README.md"
+  ],
+  "runbooks": [
+    "knowledge/summaries/operations.md",
+    "runbooks/ai-provider-outage.md",
+    "runbooks/api-outage.md",
+    "runbooks/incident-response-template.md",
+    "runbooks/release-smoke-test.md",
+    "support/escalation-matrix.md",
+    "support/troubleshooting-index.md"
+  ],
+  "runtime": [
+    "structure/runtime-topology.md"
+  ],
+  "safely": [
+    "skills/refactor-feature.md",
+    "skills/secure-file-upload.md"
+  ],
+  "safety": [
+    "docs/ai-safety-review-report.md",
+    "docs/ai-safety.md",
+    "docs/ai/forbidden-wording.md",
+    "docs/ai/prompt-change-checklist.md",
+    "docs/ai/README.md",
+    "docs/ai/safety-filters.md",
+    "domain/README.md",
+    "domain/safety-boundaries.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "memory/ai-safety-decisions.md",
+    "product/constraints.md",
+    "product/principles.md",
+    "rules/14-ai-safety.md",
+    "skills/cleanup-without-weakening-safety.md",
+    "skills/injection-safety-review.md",
+    "structure/flows/share-flow.md",
+    "structure/modules/api-ai.md",
+    "structure/modules/shared.md",
+    "support/AI-result-expectations.md",
+    "support/escalation-matrix.md"
+  ],
+  "safety-filter": [
+    "domain/policies.md"
+  ],
+  "safety-flags": [
+    "domain/invariants.md"
+  ],
+  "sampling": [
+    "docs/ai/cost-policy.md",
+    "docs/ai/shadow-routing.md",
+    "operations/AI-cost-budget.md"
+  ],
+  "sandbox": [
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md",
+    "product/monetization-policy.md"
+  ],
+  "sanitization": [
+    "docs/ai/safety-filters.md"
+  ],
+  "sanitizer": [
+    "docs/ai/output-validation.md",
+    "docs/ai/prompt-injection-threat-model.md"
+  ],
+  "sarif": [
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "scalability": [
+    "rules/07-performance-scalability.md"
+  ],
+  "scaling": [
+    "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "operations/README.md",
+    "operations/scaling-model.md"
+  ],
+  "scanners": [
+    "runbooks/secret-rotation.md"
+  ],
+  "scanning": [
+    "docs/ai/forbidden-wording.md"
+  ],
+  "scenarios": [
+    "quality/test-review-standard.md"
+  ],
+  "schema": [
+    "contracts/ai/prompt-io.md",
+    "contracts/README.md",
+    "docs/ai/prompt-change-checklist.md",
+    "domain/trait-taxonomy.md",
+    "runbooks/ai-schema-failures.md",
+    "runbooks/config-change.md",
+    "skills/migration-plan.md"
+  ],
+  "schemas": [
+    "contracts/ai/README.md",
+    "contracts/frontend-backend/shared-schemas.md",
+    "docs/ai/schema-contracts.md",
+    "domain/entities.md",
+    "rules/frontend/08-utils-helpers-mappers.md",
+    "structure/modules/shared.md"
+  ],
+  "scope": [
+    "product/non-goals.md"
+  ],
+  "score": [
+    "product/game-rules.md",
+    "structure/modules/api-result-aggregation.md"
+  ],
+  "scores": [
+    "support/AI-result-expectations.md"
+  ],
+  "scoring": [
+    "domain/calculations.md"
+  ],
+  "screenshots": [
+    "support/evidence-collection.md"
+  ],
+  "sdlc": [
+    "CLAUDE.md",
+    "docs/sdlc/code-review-checklist.md",
+    "docs/sdlc/company-sdlc-policy.md",
+    "docs/sdlc/documentation-baseline.md",
+    "docs/sdlc/engineering-standards.md",
+    "docs/sdlc/public-reference-points.md",
+    "docs/sdlc/qa-baseline.md",
+    "docs/sdlc/README.md",
+    "docs/sdlc/release-checklist.md",
+    "docs/sdlc/risk-baseline.md",
+    "docs/sdlc/security-baseline.md",
+    "docs/sdlc/uat-baseline.md"
+  ],
+  "secret scanner": [
+    "knowledge/summaries/security.md"
+  ],
+  "secrets": [
+    "contracts/configuration/env-contract.md",
+    "knowledge/summaries/security.md",
+    "runbooks/environment-bootstrap.md",
+    "runbooks/safe-diagnostics.md",
+    "runbooks/secret-rotation.md",
+    "structure/configuration-map.md",
+    "structure/modules/api-privacy.md"
+  ],
+  "section": [
+    "docs/features/twinzy-hardening-v3/00-audit-report.md"
+  ],
+  "secure": [
+    "skills/secure-file-upload.md"
+  ],
+  "security": [
+    "agents/backend-security-reviewer.md",
+    "agents/frontend-security-reviewer.md",
+    "docs/ai/prompt-injection-threat-model.md",
+    "docs/features/_template-frontend/08-security-review.md",
+    "docs/features/_template/19-security-review.md",
+    "docs/features/simple-readable-code-operating-system-implementation/19-security-review.md",
+    "docs/features/twinzy-hardening-v3/19-security-review.md",
+    "docs/file-upload-security-review-report.md",
+    "docs/file-upload-security.md",
+    "docs/sdlc/security-baseline.md",
+    "docs/security-review-report.md",
+    "docs/security-threat-model.md",
+    "knowledge/summaries/security.md",
+    "memory/frontend/security-decisions.md",
+    "memory/security-decisions.md",
+    "rules/06-security.md",
+    "rules/15-file-upload-security.md",
+    "rules/frontend/11-security.md",
+    "runbooks/security-incident.md",
+    "SECURITY.md",
+    "skills/security-review-frontend.md",
+    "skills/security-review.md",
+    "test-cases/security/security-test-case-template.md"
+  ],
+  "security-scan": [
+    "quality/quality-model.md"
+  ],
+  "sensitive-inference": [
+    "domain/safety-boundaries.md"
+  ],
+  "server": [
+    "docs/eslint/no-server-only-import-in-client.md"
+  ],
+  "server-busy": [
+    "runbooks/provider-rate-limiting.md",
+    "support/provider-outage-messaging.md"
+  ],
+  "service": [
+    "skills/add-api-service-method.md",
+    "skills/create-service-frontend.md",
+    "skills/create-service-layer.md",
+    "skills/create-service.md"
+  ],
+  "services": [
+    "rules/04-frontend-services-gateways.md",
+    "rules/19-services-application-layer.md",
+    "rules/frontend/04-services-api-gateway.md"
+  ],
+  "sev-1": [
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/emergency-rollback.md",
+    "runbooks/privacy-incident.md",
+    "support/escalation-matrix.md"
+  ],
+  "severity": [
+    "incidents/README.md",
+    "incidents/templates/incident-record.md",
+    "support/escalation-matrix.md"
+  ],
+  "shadow": [
+    "docs/ai/cost-policy.md",
+    "docs/ai/model-change-checklist.md",
+    "docs/ai/shadow-routing.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "operations/AI-cost-budget.md"
+  ],
+  "shape": [
+    "docs/ai/output-validation.md"
+  ],
+  "share": [
+    "contracts/api/share-results.md",
+    "domain/sharing-lifecycle.md",
+    "domain/state-machines.md",
+    "domain/ubiquitous-language.md",
+    "product/privacy-promises.md",
+    "product/terminology.md",
+    "product/user-journeys.md",
+    "structure/flows/share-flow.md",
+    "structure/modules/api-share-results.md",
+    "structure/modules/web-game.md",
+    "support/error-code-catalog.md",
+    "support/FAQ.md",
+    "support/feature-catalog.md",
+    "support/known-issues.md",
+    "support/product-behavior-guide.md",
+    "support/sharing-troubleshooting.md"
+  ],
+  "share config": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "share links": [
+    "knowledge/summaries/product.md"
+  ],
+  "share ttl": [
+    "knowledge/summaries/privacy.md"
+  ],
+  "share-id": [
+    "domain/sharing-lifecycle.md"
+  ],
+  "share-links": [
+    "support/sharing-troubleshooting.md"
+  ],
+  "share-page": [
+    "structure/flows/share-flow.md"
+  ],
+  "share-record": [
+    "domain/entities.md"
+  ],
+  "share-results": [
+    "contracts/api/share-results.md",
+    "structure/flows/share-flow.md",
+    "structure/modules/api-share-results.md"
+  ],
+  "shareable": [
+    "docs/features/temporary-shareable-results/00-intake.md",
+    "docs/features/temporary-shareable-results/01-business-analysis.md",
+    "docs/features/temporary-shareable-results/02-business-development.md",
+    "docs/features/temporary-shareable-results/03-product-requirements.md",
+    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
+    "docs/features/temporary-shareable-results/05-delivery-plan.md",
+    "docs/features/temporary-shareable-results/06-technical-refinement.md",
+    "docs/features/temporary-shareable-results/07-technical-roadmap.md",
+    "docs/features/temporary-shareable-results/08-architecture-review.md",
+    "docs/features/temporary-shareable-results/09-impact-analysis.md",
+    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
+    "docs/features/temporary-shareable-results/11-test-strategy.md",
+    "docs/features/temporary-shareable-results/12-coverage-plan.md",
+    "docs/features/temporary-shareable-results/13-implementation-readiness.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/23-documentation-changelog.md"
+  ],
+  "shared": [
+    "contracts/frontend-backend/shared-schemas.md",
+    "contracts/README.md",
+    "structure/modules/shared.md",
+    "structure/repository-map.md"
+  ],
+  "shared package": [
+    "knowledge/summaries/architecture.md"
+  ],
+  "shareid": [
+    "contracts/api/share-results.md"
+  ],
+  "sharer": [
+    "product/personas.md"
+  ],
+  "short": [
+    "docs/exceptions/exception-template.md"
+  ],
+  "shutdown": [
+    "knowledge/summaries/operations.md",
+    "operations/graceful-shutdown.md",
+    "operations/README.md"
+  ],
+  "sign-off": [
+    "quality/definition-of-done.md"
+  ],
+  "signals": [
+    "operations/observability-map.md",
+    "runbooks/hypercare.md"
+  ],
+  "sigterm": [
+    "operations/graceful-shutdown.md"
+  ],
+  "similarity": [
+    "docs/features/visual-similarity-pivot/00-intake.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md"
+  ],
+  "simplicity": [
+    "memory/code-simplicity-decisions.md"
+  ],
+  "simplify": [
+    "skills/simplify-existing-code.md"
+  ],
+  "single": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md"
+  ],
+  "single process": [
+    "knowledge/summaries/current-risks.md",
+    "knowledge/summaries/operations.md"
+  ],
+  "single-instance": [
+    "operations/availability-expectations.md",
+    "quality/risk-register.md"
+  ],
+  "single-process": [
+    "operations/scaling-model.md",
+    "runbooks/event-loop-lag.md"
+  ],
+  "skip-link": [
+    "product/accessibility-expectations.md"
+  ],
+  "sla": [
+    "operations/availability-expectations.md"
+  ],
+  "sli": [
+    "operations/README.md",
+    "operations/SLIs.md"
+  ],
+  "slice": [
+    "docs/features/twinzy-hardening-v3/19-security-review.md",
+    "domain/result-ranking.md"
+  ],
+  "slo": [
+    "operations/README.md",
+    "operations/SLOs.md"
+  ],
+  "slow": [
+    "runbooks/latency.md"
+  ],
+  "smoke": [
+    "runbooks/release-smoke-test.md"
+  ],
+  "smoke-test": [
+    "operations/readiness-checklist.md",
+    "quality/release-readiness.md",
+    "runbooks/deployment.md",
+    "runbooks/release-smoke-test-template.md",
+    "runbooks/rollback.md",
+    "support/release-support-checklist.md"
+  ],
+  "spend": [
+    "docs/ai/cost-policy.md",
+    "operations/AI-cost-budget.md"
+  ],
+  "split": [
+    "skills/simplify-existing-code.md"
+  ],
+  "sse": [
+    "contracts/api/sse-events.md",
+    "contracts/README.md",
+    "docs/ai/pipeline.md",
+    "domain/state-machines.md",
+    "operations/SLIs.md",
+    "runbooks/streaming-disconnects.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-game.md",
+    "structure/modules/web-game.md",
+    "structure/runtime-topology.md"
+  ],
+  "sse client": [
+    "knowledge/summaries/frontend.md"
+  ],
+  "sse-error": [
+    "domain/failure-semantics.md"
+  ],
+  "stack": [
+    "context/frontend/stack-and-toolchain.md",
+    "context/stack-and-toolchain.md",
+    "memory/backend-stack.md",
+    "memory/frontend-stack.md"
+  ],
+  "stage": [
+    "support/user-visible-error-guide.md"
+  ],
+  "stages": [
+    "contracts/api/sse-events.md",
+    "domain/state-machines.md"
+  ],
+  "stale": [
+    "rules/35-generated-artifacts-and-freshness.md"
+  ],
+  "stale mirrors": [
+    "knowledge/summaries/current-risks.md"
+  ],
+  "stale-docs": [
+    "quality/technical-debt-register.md"
+  ],
+  "staleness": [
+    "knowledge/summaries/current-risks.md",
+    "quality/documentation-review-standard.md",
+    "support/known-issues.md"
+  ],
+  "standard": [
+    "quality/architecture-review-standard.md",
+    "quality/test-review-standard.md",
+    "testing/bug-triage-and-retest.md",
+    "testing/e2e-testing-standard.md",
+    "testing/frontend/accessibility-testing-standard.md",
+    "testing/frontend/e2e-testing-standard.md",
+    "testing/frontend/integration-testing-standard.md",
+    "testing/frontend/unit-testing-standard.md",
+    "testing/frontend/visual-testing-standard.md",
+    "testing/integration-testing-standard.md",
+    "testing/test-data-and-fixtures.md",
+    "testing/unit-testing-standard.md"
+  ],
+  "standards": [
+    "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
+    "docs/features/engineering-os-migration/10-engineering-standards-check.md",
+    "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
+    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
+    "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md",
+    "docs/mobile-pwa-standards.md",
+    "docs/sdlc/engineering-standards.md",
+    "quality/code-review-standard.md",
+    "quality/README.md",
+    "testing/frontend/README.md",
+    "testing/README.md"
+  ],
+  "standing": [
+    "memory/project-architecture.md"
+  ],
+  "state": [
+    "docs/features/multi-provider-ai/08-architecture-review.md"
+  ],
+  "state-loss": [
+    "operations/graceful-shutdown.md"
+  ],
+  "state-machine": [
+    "domain/README.md",
+    "domain/state-machines.md"
+  ],
+  "stateless": [
+    "operations/scaling-model.md",
+    "structure/runtime-topology.md"
+  ],
+  "status": [
+    "knowledge/summaries/product.md"
+  ],
+  "steps": [
+    "contracts/ai/README.md"
+  ],
+  "store": [
+    "skills/create-zustand-store.md"
+  ],
+  "storybook": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
+  ],
+  "strategy": [
+    "docs/features/_template-frontend/06-test-strategy.md",
+    "docs/features/_template/11-test-strategy.md",
+    "docs/features/advanced-global-traits-v2/11-test-strategy.md",
+    "docs/features/ai-knowledge-os/11-test-strategy.md",
+    "docs/features/engineering-os-migration/11-test-strategy.md",
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
+    "docs/features/temporary-shareable-results/11-test-strategy.md",
+    "docs/features/twinzy-hardening-v3/11-test-strategy.md",
+    "docs/testing-strategy.md",
+    "memory/frontend/testing-strategy.md",
+    "memory/testing-strategy.md",
+    "testing/frontend/testing-strategy.md",
+    "testing/testing-strategy.md"
+  ],
+  "stream": [
+    "contracts/api/sse-events.md",
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/multi-tab-stream-isolation/08-architecture-review.md",
+    "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/multi-tab-stream-isolation/README.md",
+    "operations/timeout-budget.md",
+    "structure/modules/api-game.md"
+  ],
+  "stream-status": [
+    "domain/state-machines.md"
+  ],
+  "streamid": [
+    "contracts/api/sse-events.md"
+  ],
+  "streaming": [
+    "docs/ai/latency-budget.md",
+    "docs/ai/pipeline.md",
+    "docs/ai/retry-timeout-policy.md",
+    "docs/ai/schema-contracts.md",
+    "knowledge/summaries/backend.md",
+    "product/user-journeys.md",
+    "runbooks/streaming-disconnects.md",
+    "structure/runtime-topology.md"
+  ],
+  "strict": [
+    "architecture/adrs/adr-001-strict-engineering-os.md",
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
+    "docs/features/engineering-os-migration/00-intake.md"
+  ],
+  "strictness": [
+    "rules/11-eslint-typescript.md"
+  ],
+  "structure": [
+    "structure/README.md"
+  ],
+  "style": [
+    "product/vision.md"
+  ],
+  "stylevibefitscore": [
+    "domain/calculations.md"
+  ],
+  "superseded": [
+    "rules/34-memory-lifecycle.md"
+  ],
+  "supersession": [
+    "knowledge/hot-memory.md"
+  ],
+  "supply-chain": [
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "support": [
+    "knowledge/summaries/support.md",
+    "support/AI-result-expectations.md",
+    "support/communication-templates.md",
+    "support/consent-troubleshooting.md",
+    "support/error-code-catalog.md",
+    "support/escalation-matrix.md",
+    "support/evidence-collection.md",
+    "support/FAQ.md",
+    "support/feature-catalog.md",
+    "support/known-issues-template.md",
+    "support/known-issues.md",
+    "support/localization-troubleshooting.md",
+    "support/privacy-and-data-handling.md",
+    "support/product-behavior-guide.md",
+    "support/provider-outage-messaging.md",
+    "support/README.md",
+    "support/release-support-checklist.md",
+    "support/sharing-troubleshooting.md",
+    "support/simple-readable-code-operating-system-implementation.md",
+    "support/support-readiness-template.md",
+    "support/troubleshooting-index.md",
+    "support/upload-troubleshooting.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "suppressions": [
+    "quality/exception-policy.md"
+  ],
+  "swap": [
+    "skills/add-ai-provider.md"
+  ],
+  "symptoms": [
+    "support/troubleshooting-index.md"
+  ],
+  "tab": [
+    "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/multi-tab-stream-isolation/08-architecture-review.md",
+    "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/multi-tab-stream-isolation/README.md"
+  ],
+  "tabid": [
+    "contracts/api/sse-events.md"
+  ],
+  "tanstack": [
+    "rules/frontend/05-tanstack-query.md"
+  ],
+  "tanstack query": [
+    "knowledge/summaries/frontend.md"
+  ],
+  "targets": [
+    "operations/SLOs.md"
+  ],
+  "task": [
+    "context/codebase-navigation.md",
+    "context/task-router.md",
+    "docs/agent-task-router.md",
+    "skills/README.md"
+  ],
+  "taxonomy": [
+    "docs/ai/prompt-change-checklist.md",
+    "domain/README.md",
+    "domain/trait-taxonomy.md",
+    "knowledge/summaries/domain.md",
+    "structure/modules/shared.md"
+  ],
+  "tcp": [
+    "contracts/integrations/clamav.md"
+  ],
+  "tdd": [
+    "knowledge/summaries/testing.md"
+  ],
+  "technical": [
+    "docs/features/_template-frontend/04-technical-refinement.md",
+    "docs/features/_template/06-technical-refinement.md",
+    "docs/features/_template/07-technical-roadmap.md",
+    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
+    "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
+    "docs/features/engineering-os-migration/06-technical-refinement.md",
+    "docs/features/engineering-os-migration/07-technical-roadmap.md",
+    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
+    "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
+    "docs/features/simple-readable-code-operating-system-implementation/07-technical-roadmap.md",
+    "docs/features/temporary-shareable-results/06-technical-refinement.md",
+    "docs/features/temporary-shareable-results/07-technical-roadmap.md",
+    "docs/features/twinzy-hardening-v3/06-technical-refinement.md",
+    "docs/features/twinzy-hardening-v3/07-technical-roadmap.md"
+  ],
+  "technical-debt": [
+    "quality/technical-debt-register.md"
+  ],
+  "templates": [
+    "contracts/ai/prompt-io.md",
+    "knowledge/templates/ai-readme.md",
+    "support/communication-templates.md"
+  ],
+  "temporary": [
+    "contracts/api/share-results.md",
+    "docs/features/temporary-shareable-results/00-intake.md",
+    "docs/features/temporary-shareable-results/01-business-analysis.md",
+    "docs/features/temporary-shareable-results/02-business-development.md",
+    "docs/features/temporary-shareable-results/03-product-requirements.md",
+    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
+    "docs/features/temporary-shareable-results/05-delivery-plan.md",
+    "docs/features/temporary-shareable-results/06-technical-refinement.md",
+    "docs/features/temporary-shareable-results/07-technical-roadmap.md",
+    "docs/features/temporary-shareable-results/08-architecture-review.md",
+    "docs/features/temporary-shareable-results/09-impact-analysis.md",
+    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
+    "docs/features/temporary-shareable-results/11-test-strategy.md",
+    "docs/features/temporary-shareable-results/12-coverage-plan.md",
+    "docs/features/temporary-shareable-results/13-implementation-readiness.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+    "docs/features/temporary-shareable-results/16-dev-bug-log.md",
+    "docs/features/temporary-shareable-results/23-documentation-changelog.md"
+  ],
+  "terminal": [
+    "contracts/api/sse-events.md"
+  ],
+  "terminology": [
+    "product/README.md",
+    "product/terminology.md"
+  ],
+  "test": [
+    "agents/backend-test-engineer.md",
+    "agents/frontend-test-engineer.md",
+    "docs/features/_template-frontend/06-test-strategy.md",
+    "docs/features/_template/11-test-strategy.md",
+    "docs/features/advanced-global-traits-v2/11-test-strategy.md",
+    "docs/features/ai-knowledge-os/11-test-strategy.md",
+    "docs/features/engineering-os-migration/11-test-strategy.md",
+    "docs/features/multi-provider-ai/11-test-strategy.md",
+    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
+    "docs/features/temporary-shareable-results/11-test-strategy.md",
+    "docs/features/twinzy-hardening-v3/11-test-strategy.md",
+    "runbooks/release-smoke-test.md",
+    "TEST_CASES.md",
+    "test-cases/business/business-test-case-template.md",
+    "test-cases/e2e/e2e-test-case-template.md",
+    "test-cases/integration/integration-test-case-template.md",
+    "test-cases/security/security-test-case-template.md",
+    "test-cases/unit/unit-test-case-template.md",
+    "testing/frontend/test-data-and-fixtures.md",
+    "testing/test-data-and-fixtures.md"
+  ],
+  "test-counts": [
+    "quality/quality-metrics.md"
+  ],
+  "test-review": [
+    "quality/test-review-standard.md"
+  ],
+  "tests": [
+    "docs/ai/regression-evaluation.md",
+    "quality/test-review-standard.md",
+    "skills/write-accessibility-tests.md",
+    "skills/write-e2e-tests-frontend.md",
+    "skills/write-e2e-tests.md",
+    "skills/write-integration-tests-frontend.md",
+    "skills/write-integration-tests.md",
+    "skills/write-unit-tests-frontend.md",
+    "skills/write-unit-tests.md",
+    "skills/write-visual-tests.md"
+  ],
+  "text": [
+    "docs/eslint/no-raw-i18n-text.md"
+  ],
+  "text-only": [
+    "contracts/integrations/openai-compat.md",
+    "docs/ai/shadow-routing.md",
+    "docs/ai/written-traits-only-boundary.md"
+  ],
+  "theme": [
+    "structure/modules/web-ui-preferences.md"
+  ],
+  "threat": [
+    "docs/features/_template/19-threat-model.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
+    "docs/features/simple-readable-code-operating-system-implementation/19-threat-model.md",
+    "docs/security-threat-model.md"
+  ],
+  "threat-model": [
+    "docs/ai/prompt-injection-threat-model.md"
+  ],
+  "thresholds": [
+    "quality/quality-metrics.md"
+  ],
+  "throttle": [
+    "contracts/api/README.md",
+    "docs/ai/concurrency-policy.md",
+    "knowledge/summaries/security.md",
+    "operations/performance-budgets.md",
+    "runbooks/provider-rate-limiting.md",
+    "structure/modules/api-game.md"
+  ],
+  "tiers": [
+    "rules/33-fast-context-routing.md"
+  ],
+  "timeline": [
+    "incidents/templates/incident-record.md"
+  ],
+  "timeout": [
+    "contracts/integrations/gemini.md",
+    "contracts/integrations/paypal.md",
+    "docs/ai/fallback-routing.md",
+    "docs/ai/latency-budget.md",
+    "docs/ai/retry-timeout-policy.md",
+    "domain/state-machines.md",
+    "operations/timeout-budget.md"
+  ],
+  "timeouts": [
+    "knowledge/summaries/ai-pipeline.md"
+  ],
+  "timers": [
+    "operations/graceful-shutdown.md"
+  ],
+  "timings": [
+    "runbooks/latency.md"
+  ],
+  "title": [
+    "architecture/adrs/adr-template.md",
+    "docs/exceptions/exception-template.md"
+  ],
+  "tone": [
+    "product/user-facing-copy-principles.md"
+  ],
+  "toolchain": [
+    "context/frontend/stack-and-toolchain.md",
+    "context/stack-and-toolchain.md",
+    "memory/backend-stack.md"
+  ],
+  "topology": [
+    "structure/README.md",
+    "structure/runtime-topology.md"
+  ],
+  "touch": [
+    "skills/secure-file-upload.md"
+  ],
+  "touch-targets": [
+    "product/accessibility-expectations.md"
+  ],
+  "traceability": [
+    "rules/36-delivery-lanes-and-traceability.md"
+  ],
+  "traces": [
+    "operations/observability-map.md"
+  ],
+  "trackers": [
+    "product/non-goals.md"
+  ],
+  "trait": [
+    "domain/ubiquitous-language.md",
+    "product/terminology.md"
+  ],
+  "traitcount": [
+    "domain/calculations.md"
+  ],
+  "traits": [
+    "contracts/ai/prompt-io.md",
+    "docs/ai/schema-contracts.md",
+    "docs/ai/system-overview.md",
+    "docs/ai/written-traits-only-boundary.md",
+    "docs/features/advanced-global-traits-v2/00-intake.md",
+    "docs/features/advanced-global-traits-v2/01-business-analysis.md",
+    "docs/features/advanced-global-traits-v2/02-business-development.md",
+    "docs/features/advanced-global-traits-v2/03-product-requirements.md",
+    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
+    "docs/features/advanced-global-traits-v2/05-delivery-plan.md",
+    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
+    "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
+    "docs/features/advanced-global-traits-v2/08-architecture-review.md",
+    "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
+    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
+    "docs/features/advanced-global-traits-v2/11-test-strategy.md",
+    "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
+    "docs/features/advanced-global-traits-v2/13-implementation-readiness.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
+    "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
+    "domain/trait-taxonomy.md",
+    "knowledge/summaries/domain.md"
+  ],
+  "transient": [
+    "domain/entities.md",
+    "domain/failure-semantics.md",
+    "support/user-visible-error-guide.md"
+  ],
+  "translate": [
+    "contracts/api/analyze.md",
+    "product/user-journeys.md",
+    "structure/modules/api-game.md"
+  ],
+  "translation": [
+    "contracts/ai/prompt-io.md",
+    "docs/ai/pipeline.md",
+    "docs/ai/prompt-catalog.md",
+    "docs/ai/schema-contracts.md",
+    "docs/ai/system-overview.md",
+    "domain/language-lifecycle.md",
+    "knowledge/summaries/domain.md",
+    "product/localization-expectations.md",
+    "structure/modules/api-ai.md",
+    "support/localization-troubleshooting.md"
+  ],
+  "triage": [
+    "support/troubleshooting-index.md",
+    "testing/bug-triage-and-retest.md"
+  ],
+  "trivy": [
+    "knowledge/summaries/security.md",
+    "quality/quality-metrics.md",
+    "quality/quality-model.md",
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "troubleshooting": [
+    "knowledge/summaries/support.md",
+    "support/troubleshooting-index.md"
+  ],
+  "truthful": [
+    "product/user-facing-copy-principles.md"
+  ],
+  "tsx": [
+    "rules/02-frontend-components-tsx.md"
+  ],
+  "ttl": [
+    "contracts/api/share-results.md",
+    "domain/invariants.md",
+    "domain/sharing-lifecycle.md",
+    "operations/timeout-budget.md",
+    "structure/flows/share-flow.md",
+    "structure/modules/api-share-results.md",
+    "support/sharing-troubleshooting.md"
+  ],
+  "twinzy-shared": [
+    "contracts/frontend-backend/shared-schemas.md"
+  ],
+  "typecheck": [
+    "quality/quality-model.md",
+    "skills/fix-eslint-typecheck-frontend.md",
+    "skills/fix-eslint-typecheck.md"
+  ],
+  "typed": [
+    "skills/create-error.md"
+  ],
+  "typed-port": [
+    "docs/ai/written-traits-only-boundary.md"
+  ],
+  "types": [
+    "rules/05-types-enums-constants.md",
+    "rules/frontend/04-services-api-gateway.md",
+    "rules/frontend/07-types-enums-constants.md"
+  ],
+  "typescript": [
+    "rules/11-eslint-typescript.md",
+    "rules/frontend/10-eslint-typescript.md"
+  ],
+  "uat": [
+    "docs/features/_template/20-uat-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/20-uat-report.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md",
+    "docs/sdlc/uat-baseline.md"
+  ],
+  "ui": [
+    "support/user-visible-error-guide.md"
+  ],
+  "ui-preferences": [
+    "structure/modules/web-ui-preferences.md"
+  ],
+  "uncertainty-notes": [
+    "domain/trait-taxonomy.md"
+  ],
+  "unit": [
+    "skills/write-unit-tests-frontend.md",
+    "skills/write-unit-tests.md",
+    "test-cases/unit/unit-test-case-template.md",
+    "testing/frontend/unit-testing-standard.md",
+    "testing/unit-testing-standard.md"
+  ],
+  "unsafe": [
+    "runbooks/ai-schema-failures.md"
+  ],
+  "update": [
+    "skills/prepare-agent-mirrors.md"
+  ],
+  "upgrade": [
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "upload": [
+    "contracts/api/analyze.md",
+    "contracts/integrations/clamav.md",
+    "docs/file-upload-security-review-report.md",
+    "docs/file-upload-security.md",
+    "domain/consent-model.md",
+    "operations/performance-budgets.md",
+    "rules/15-file-upload-security.md",
+    "runbooks/upload-failures.md",
+    "skills/cleanup-without-weakening-safety.md",
+    "skills/secure-file-upload.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-file-security.md",
+    "structure/modules/web-game.md",
+    "support/communication-templates.md",
+    "support/consent-troubleshooting.md",
+    "support/error-code-catalog.md",
+    "support/README.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "upload chain": [
+    "knowledge/summaries/security.md"
+  ],
+  "upload rejection": [
+    "knowledge/summaries/support.md"
+  ],
+  "uploads": [
+    "product/constraints.md"
+  ],
+  "uptime": [
+    "operations/health-checks.md",
+    "structure/modules/api-health.md"
+  ],
+  "usage": [
+    "docs/features/_template/README.md",
+    "skills/modularize-existing-library.md"
+  ],
+  "use": [
+    "rules/17-manager-layer.md",
+    "skills/create-manager-use-case.md",
+    "skills/create-use-case.md"
+  ],
+  "use-case": [
+    "structure/modules/api-game.md"
+  ],
+  "utils": [
+    "rules/frontend/08-utils-helpers-mappers.md"
+  ],
+  "uuid": [
+    "structure/modules/api-share-results.md"
+  ],
+  "ux": [
+    "support/product-behavior-guide.md"
+  ],
+  "validate": [
+    "quality/documentation-review-standard.md"
+  ],
+  "validation": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "contracts/configuration/env-contract.md",
+    "docs/ai/output-validation.md",
+    "docs/ai/prompt-injection-threat-model.md",
+    "docs/ai/README.md",
+    "docs/ai/schema-contracts.md",
+    "docs/features/_template/15-dev-validation-report.md",
+    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
+    "docs/features/ai-knowledge-os/15-dev-validation-report.md",
+    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
+    "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md",
+    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+    "docs/features/twinzy-hardening-v3/15-dev-validation-report.md",
+    "docs/final-validation-report.md",
+    "quality/definition-of-done.md",
+    "rules/21-dto-validation.md",
+    "rules/32-documentation-quality.md",
+    "runbooks/ai-schema-failures.md",
+    "runbooks/environment-bootstrap.md",
+    "skills/create-dto-validation.md",
+    "skills/final-validation-frontend.md",
+    "skills/final-validation.md",
+    "structure/configuration-map.md",
+    "structure/modules/api-file-security.md"
+  ],
+  "value": [
+    "skills/add-config-value.md"
+  ],
+  "variables": [
+    "docs/env-vars.md"
+  ],
+  "vars": [
+    "docs/env-vars.md"
+  ],
+  "vendor": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "memory/library-boundaries.md"
+  ],
+  "vendor wrappers": [
+    "knowledge/summaries/frontend.md"
+  ],
+  "vendor wrapping": [
+    "knowledge/summaries/architecture.md"
+  ],
+  "verdict": [
+    "domain/calculations.md",
+    "domain/ubiquitous-language.md",
+    "knowledge/summaries/domain.md",
+    "product/game-rules.md",
+    "product/terminology.md",
+    "structure/modules/api-result-aggregation.md"
+  ],
+  "verification": [
+    "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md",
+    "runbooks/accidental-image-exposure.md",
+    "runbooks/release-smoke-test-template.md"
+  ],
+  "version": [
+    "docs/ai/prompt-change-checklist.md",
+    "structure/modules/api-health.md"
+  ],
+  "versioning": [
+    "contracts/api/README.md",
+    "contracts/README.md"
+  ],
+  "vibe": [
+    "product/vision.md"
+  ],
+  "view": [
+    "skills/create-hook.md"
+  ],
+  "view-model": [
+    "structure/modules/web-game.md"
+  ],
+  "virtualized": [
+    "skills/add-virtualized-list.md"
+  ],
+  "virus-scan": [
+    "contracts/integrations/clamav.md",
+    "runbooks/upload-failures.md",
+    "support/upload-troubleshooting.md"
+  ],
+  "vision": [
+    "contracts/integrations/gemini.md",
+    "docs/ai/model-routing.md",
+    "docs/ai/provider-catalog.md",
+    "product/README.md",
+    "product/vision.md"
+  ],
+  "visual": [
+    "docs/features/visual-similarity-pivot/00-intake.md",
+    "docs/features/visual-similarity-pivot/20-uat-report.md",
+    "knowledge/summaries/testing.md",
+    "skills/write-visual-tests.md",
+    "testing/frontend/visual-testing-standard.md"
+  ],
+  "vitest": [
+    "knowledge/summaries/testing.md"
+  ],
+  "vocabulary": [
+    "context/glossary.md",
+    "product/terminology.md"
+  ],
+  "voluntary": [
+    "docs/features/paypal-donations-and-paid-results/19-threat-model.md"
+  ],
+  "vulnerability": [
+    "runbooks/dependency-vulnerability.md"
+  ],
+  "waiver": [
+    "quality/README.md",
+    "quality/waiver-register.md"
+  ],
+  "waivers": [
+    "quality/exception-policy.md"
+  ],
+  "warn": [
+    "operations/logging-catalog.md"
+  ],
+  "watchdog": [
+    "docs/ai/latency-budget.md",
+    "docs/ai/retry-timeout-policy.md",
+    "operations/timeout-budget.md",
+    "runbooks/streaming-disconnects.md"
+  ],
+  "way": [
+    "docs/simple-readable-code.md"
+  ],
+  "wcag": [
+    "product/accessibility-expectations.md"
+  ],
+  "weakening": [
+    "skills/cleanup-without-weakening-safety.md"
+  ],
+  "web": [
+    "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
+    "docs/features/_template-frontend/README.md",
+    "rules/frontend/README.md",
+    "skills/README-frontend.md",
+    "structure/modules/web-game.md",
+    "structure/modules/web-ui-preferences.md",
+    "structure/repository-map.md",
+    "testing/frontend/accessibility-testing-standard.md",
+    "testing/frontend/coverage-policy.md",
+    "testing/frontend/e2e-testing-standard.md",
+    "testing/frontend/integration-testing-standard.md",
+    "testing/frontend/quality-gates.md",
+    "testing/frontend/README.md",
+    "testing/frontend/test-data-and-fixtures.md",
+    "testing/frontend/testing-strategy.md",
+    "testing/frontend/unit-testing-standard.md",
+    "testing/frontend/visual-testing-standard.md"
+  ],
+  "webhooks": [
+    "quality/technical-debt-register.md",
+    "support/known-issues.md"
+  ],
+  "weights": [
+    "docs/ai/benchmark-methodology.md"
+  ],
+  "what": [
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md"
+  ],
+  "where": [
+    "context/codebase-navigation.md"
+  ],
+  "why": [
+    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md"
+  ],
+  "window": [
+    "runbooks/hypercare.md"
+  ],
+  "wipe": [
+    "docs/ai/image-lifecycle.md",
+    "domain/image-lifecycle.md",
+    "domain/ubiquitous-language.md",
+    "runbooks/accidental-image-exposure.md",
+    "structure/flows/analyze-flow.md",
+    "structure/modules/api-file-security.md"
+  ],
+  "without": [
+    "skills/cleanup-without-weakening-safety.md"
+  ],
+  "wording": [
+    "docs/ai/forbidden-wording.md",
+    "docs/ai/safety-filters.md",
+    "product/user-facing-copy-principles.md",
+    "runbooks/privacy-incident.md",
+    "support/communication-templates.md",
+    "support/README.md"
+  ],
+  "workaround": [
+    "support/known-issues-template.md"
+  ],
+  "workbench": [
+    "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
+  ],
+  "works": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
+  "workspace": [
+    "context/glossary.md"
+  ],
+  "workspaces": [
+    "runbooks/local-development.md",
+    "structure/repository-map.md"
+  ],
+  "wrapper": [
+    "skills/create-package-wrapper.md"
+  ],
+  "wrapping": [
+    "docs/library-wrapping.md",
+    "rules/10-library-modularization.md",
+    "rules/frontend/09-library-wrapping.md"
+  ],
+  "write": [
+    "skills/write-accessibility-tests.md",
+    "skills/write-e2e-tests-frontend.md",
+    "skills/write-e2e-tests.md",
+    "skills/write-integration-tests-frontend.md",
+    "skills/write-integration-tests.md",
+    "skills/write-simple-readable-code.md",
+    "skills/write-unit-tests-frontend.md",
+    "skills/write-unit-tests.md",
+    "skills/write-visual-tests.md"
+  ],
+  "written-traits-v5": [
+    "contracts/ai/prompt-io.md"
+  ],
+  "xxx": [
+    "architecture/adrs/adr-template.md"
+  ],
+  "yagni": [
+    "rules/29-reuse-before-creating.md"
+  ],
+  "zero-fill": [
+    "domain/image-lifecycle.md"
+  ],
+  "zod": [
+    "architecture/adrs/adr-002-zod-validation-vendor.md",
+    "contracts/frontend-backend/shared-schemas.md",
+    "contracts/README.md",
+    "docs/ai/output-validation.md",
+    "docs/ai/schema-contracts.md",
+    "domain/entities.md",
+    "rules/21-dto-validation.md",
+    "runbooks/ai-schema-failures.md",
+    "skills/create-dto-validation.md",
+    "structure/configuration-map.md",
+    "structure/modules/shared.md"
+  ],
+  "zod schema": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "zod validation": [
+    "knowledge/summaries/ai-pipeline.md"
+  ],
+  "zustand": [
+    "knowledge/summaries/frontend.md",
+    "rules/frontend/06-zustand.md",
+    "skills/create-zustand-store.md",
+    "structure/modules/web-ui-preferences.md"
+  ]
+}

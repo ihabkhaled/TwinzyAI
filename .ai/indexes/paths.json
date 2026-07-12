@@ -1,0 +1,7 @@
+{
+  "apps": "web:ui-preferences",
+  "apps/web": "web:tests",
+  "apps/web/src": "web:pkg-link",
+  "apps/web/src/packages": "web:pkg-icons",
+  "packages": "shared"
+}

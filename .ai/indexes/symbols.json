@@ -1,0 +1,3731 @@
+{
+  "AcceptedStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "accordionChevronVariants": [
+    "apps/web/src/packages/ui-primitives/accordion.variants.ts"
+  ],
+  "accordionContentVariants": [
+    "apps/web/src/packages/ui-primitives/accordion.variants.ts"
+  ],
+  "AccordionItem": [
+    "apps/web/src/packages/ui-primitives/accordion.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "AccordionItemProps": [
+    "apps/web/src/packages/ui-primitives/accordion.tsx"
+  ],
+  "accordionItemVariants": [
+    "apps/web/src/packages/ui-primitives/accordion.variants.ts"
+  ],
+  "accordionTriggerVariants": [
+    "apps/web/src/packages/ui-primitives/accordion.variants.ts"
+  ],
+  "AcquireOutcome": [
+    "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+  ],
+  "aggregateEntryMetrics": [
+    "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+  ],
+  "AI_IMAGE_STEPS": [
+    "apps/api/src/config/gemini-step.constants.ts"
+  ],
+  "AI_INVALID_RESPONSE_MESSAGE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "AI_PROVIDER_ADAPTER": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "AI_PROVIDER_VALUES": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "AI_RATE_LIMITED_MESSAGE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "AI_STEP_ROUTE_ENV_KEYS": [
+    "apps/api/src/config/gemini-step.constants.ts"
+  ],
+  "AI_STEP_SHADOW_ROUTE_ENV_KEYS": [
+    "apps/api/src/config/gemini-step.constants.ts"
+  ],
+  "AI_TIMEOUT_MESSAGE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "AI_TRANSLATE_REQUEST_TIMEOUT_MS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "AI_UNAVAILABLE_MESSAGE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "AI_UNSAFE_RESPONSE_MESSAGE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "AiCallOptions": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "AiContentValidator": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "AiImageInput": [
+    "apps/api/src/modules/ai/model/gemini.types.ts"
+  ],
+  "AiImageSource": [
+    "apps/api/src/modules/ai/model/gemini.types.ts"
+  ],
+  "AiIssueListener": [
+    "apps/api/src/modules/ai/lib/json-response.util.ts"
+  ],
+  "AiModule": [
+    "apps/api/src/modules/ai/ai.module.ts"
+  ],
+  "AiProvider": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "AiProviderAdapter": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "AiProviderValue": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "AiRouteEntry": [
+    "apps/api/src/config/ai-route.types.ts"
+  ],
+  "AiRouterService": [
+    "apps/api/src/modules/ai/adapters/ai-router.service.ts"
+  ],
+  "AiSafetyService": [
+    "apps/api/src/modules/ai/application/ai-safety.service.ts"
+  ],
+  "AiShadowService": [
+    "apps/api/src/modules/ai/adapters/ai-shadow.service.ts"
+  ],
+  "AiStreamChunkListener": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "AiStreamOptions": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "AiValidationResult": [
+    "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
+  ],
+  "Alert": [
+    "apps/web/src/packages/ui-primitives/alert.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "AlertProps": [
+    "apps/web/src/packages/ui-primitives/alert.tsx"
+  ],
+  "AlertVariantProps": [
+    "apps/web/src/packages/ui-primitives/alert.variants.ts"
+  ],
+  "alertVariants": [
+    "apps/web/src/packages/ui-primitives/alert.variants.ts"
+  ],
+  "ALL_FORBIDDEN_PHRASES": [
+    "apps/api/src/modules/ai/model/ai-safety.constants.ts"
+  ],
+  "ALL_FORBIDDEN_SHARE_PHRASES": [
+    "apps/api/src/modules/share-results/model/share-safety.constants.ts"
+  ],
+  "ALLOWED_IMAGE_EXTENSIONS": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts",
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "ALLOWED_IMAGE_MIME_TYPES": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts",
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "AllowedImageMimeType": [
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "ANALYSIS_CANCELLED_MESSAGE": [
+    "apps/api/src/modules/game/model/game.messages.ts"
+  ],
+  "ANALYSIS_TIMEOUT_MESSAGE": [
+    "apps/api/src/modules/game/model/game.messages.ts"
+  ],
+  "AnalysisSlot": [
+    "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+  ],
+  "AnalysisSlotRequest": [
+    "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+  ],
+  "ANALYZE_THROTTLE": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "AnalyzeGameMutation": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "AnalyzeGameStreamUseCase": [
+    "apps/api/src/modules/game/application/analyze-game-stream.use-case.ts"
+  ],
+  "AnalyzeGameUseCase": [
+    "apps/api/src/modules/game/application/analyze-game.use-case.ts"
+  ],
+  "analyzeImage": [
+    "apps/web/src/modules/game/services/game.service.ts"
+  ],
+  "analyzeImageRequest": [
+    "apps/web/src/modules/game/gateway/game.gateway.ts"
+  ],
+  "analyzeImageStream": [
+    "apps/web/src/modules/game/services/game.service.ts"
+  ],
+  "analyzeImageStreamRequest": [
+    "apps/web/src/modules/game/gateway/game-stream.gateway.ts"
+  ],
+  "AnalyzeRequestBodySchema": [
+    "apps/api/src/modules/game/api/dto/analyze-request.dto.ts"
+  ],
+  "AnalyzeRunControl": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "AnalyzeRunInput": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "AnalyzeRunPayment": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "AnalyzeStreamOptions": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "API_BASE_PATH": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "API_GLOBAL_PREFIX": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "API_ROUTES": [
+    "apps/web/src/shared/api/api-routes.constants.ts"
+  ],
+  "API_SERVICE_NAME": [
+    "apps/api/src/modules/health/model/health.constants.ts"
+  ],
+  "API_SERVICE_VERSION": [
+    "apps/api/src/modules/health/model/health.constants.ts"
+  ],
+  "API_VERSION": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "ApiErrorResponse": [
+    "packages/shared/src/types/api-error.schema.ts"
+  ],
+  "ApiErrorResponseSchema": [
+    "packages/shared/src/types/api-error.schema.ts"
+  ],
+  "ApiTags": [
+    "apps/api/src/core/openapi/openapi.vendor.ts"
+  ],
+  "APP_NAME": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "AppConfigModule": [
+    "apps/api/src/config/config.module.ts"
+  ],
+  "AppConfigService": [
+    "apps/api/src/config/app-config.service.ts"
+  ],
+  "AppError": [
+    "apps/api/src/core/errors/app-error.ts",
+    "apps/api/src/core/errors/index.ts",
+    "apps/web/src/shared/errors/app-error.ts"
+  ],
+  "AppErrorOptions": [
+    "apps/web/src/shared/errors/app-error.ts"
+  ],
+  "AppExceptionFilter": [
+    "apps/api/src/core/errors/app-exception.filter.ts"
+  ],
+  "AppHeader": [
+    "apps/web/src/shared/components/layout/app-header.component.tsx"
+  ],
+  "appHeaderBrandClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "appHeaderClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "appHeaderControlsClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "appHeaderInnerClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "AppHeaderProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "AppImage": [
+    "apps/web/src/packages/image/app-image.tsx",
+    "apps/web/src/packages/image/index.ts"
+  ],
+  "AppImageProps": [
+    "apps/web/src/packages/image/app-image.tsx"
+  ],
+  "AppIntlProvider": [
+    "apps/web/src/packages/i18n/app-intl-provider.tsx",
+    "apps/web/src/packages/i18n/index.ts"
+  ],
+  "AppLink": [
+    "apps/web/src/packages/link/app-link.tsx",
+    "apps/web/src/packages/link/index.ts"
+  ],
+  "appLogger": [
+    "apps/web/src/packages/logger/app-logger.ts",
+    "apps/web/src/packages/logger/index.ts"
+  ],
+  "AppLogger": [
+    "apps/api/src/core/logger/app-logger.service.ts",
+    "apps/api/src/core/logger/index.ts",
+    "apps/web/src/packages/logger/app-logger.ts"
+  ],
+  "AppLoggerPort": [
+    "apps/api/src/core/logger/logger.port.ts"
+  ],
+  "AppMessages": [
+    "apps/web/src/packages/i18n/intl-messages-provider.tsx"
+  ],
+  "AppModule": [
+    "apps/api/src/app.module.ts"
+  ],
+  "AppNavigation": [
+    "apps/web/src/packages/navigation/navigation-types.ts"
+  ],
+  "AppQueryClient": [
+    "apps/web/src/packages/query/index.ts",
+    "apps/web/src/packages/query/query-hooks.ts"
+  ],
+  "AppQueryClientProvider": [
+    "apps/web/src/packages/query/index.ts",
+    "apps/web/src/packages/query/query-hooks.ts"
+  ],
+  "AppQueryKey": [
+    "apps/web/src/packages/query/query-types.ts"
+  ],
+  "AppQueryProvider": [
+    "apps/web/src/packages/query/app-query-provider.tsx",
+    "apps/web/src/packages/query/index.ts"
+  ],
+  "AppTextDirection": [
+    "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "AppTheme": [
+    "apps/web/src/shared/enums/app-theme.enum.ts"
+  ],
+  "AppThemeValue": [
+    "apps/web/src/shared/enums/app-theme.enum.ts"
+  ],
+  "AppToaster": [
+    "apps/web/src/packages/toast/app-toaster.tsx",
+    "apps/web/src/packages/toast/index.ts"
+  ],
+  "assembleGameViewModel": [
+    "apps/web/src/modules/game/helpers/game-view-model.assembler.ts"
+  ],
+  "assertNever": [
+    "apps/web/src/shared/utils/assert-never.util.ts"
+  ],
+  "assertResponseLanguage": [
+    "apps/api/src/modules/ai/lib/response-language.guard.ts"
+  ],
+  "attachExternalAbort": [
+    "apps/api/src/modules/ai/lib/abort-bridge.util.ts"
+  ],
+  "BASE64_RUN_PATTERN": [
+    "apps/api/src/modules/privacy/model/privacy.constants.ts"
+  ],
+  "BENCHMARK_PERCENT_SCALE": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BENCHMARK_SCORE_PRECISION": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BENCHMARK_SCORE_WEIGHTS": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BENCHMARK_SPEED_CEILING_MS": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BenchmarkCliOptions": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BenchmarkReport": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BenchmarkSample": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "bindAppLogger": [
+    "apps/api/src/core/logger/bind-app-logger.ts"
+  ],
+  "BODY_LIMIT_BYTES": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "bodyClassName": [
+    "apps/web/src/app/layout.variants.ts"
+  ],
+  "bootstrap": [
+    "apps/api/src/bootstrap/bootstrap.ts"
+  ],
+  "BOOTSTRAP_LOG_CONTEXT": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "buildAiImageInput": [
+    "apps/api/src/modules/ai/lib/image-input.util.ts"
+  ],
+  "buildAnalyzeFormData": [
+    "apps/web/src/modules/game/gateway/game-form-data.builder.ts"
+  ],
+  "buildBrokenResponseText": [
+    "apps/api/src/benchmark/benchmark-fixtures.ts"
+  ],
+  "buildBusyStreamMessage": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "buildCameraViewModel": [
+    "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
+  ],
+  "buildContentSecurityPolicy": [
+    "apps/web/src/shared/security/content-security-policy.ts"
+  ],
+  "buildDuplicateStreamMessage": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "buildGameScreenLabels": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "buildGatewayPath": [
+    "apps/web/src/shared/api/api-routes.constants.ts"
+  ],
+  "buildIndexedTestId": [
+    "apps/web/src/shared/testing/test-id.helper.ts"
+  ],
+  "buildIntegrationError": [
+    "apps/api/src/core/errors/error-factory.ts",
+    "apps/api/src/core/errors/index.ts"
+  ],
+  "buildLandingLabels": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "buildMatchingEvidence": [
+    "apps/api/src/modules/ai/lib/matching-evidence.util.ts"
+  ],
+  "buildPageTitle": [
+    "apps/web/src/shared/helpers/page-title.helper.ts"
+  ],
+  "buildPaymentError": [
+    "apps/api/src/core/errors/error-factory.ts",
+    "apps/api/src/core/errors/index.ts"
+  ],
+  "buildPaymentViewModel": [
+    "apps/web/src/modules/game/helpers/payment-view-model.helper.ts"
+  ],
+  "buildPayPalDonateUrl": [
+    "apps/web/src/shared/helpers/donate-link.helper.ts"
+  ],
+  "buildPinoHttpOptions": [
+    "apps/api/src/core/logger/http-logging.options.ts"
+  ],
+  "buildPlatformLinks": [
+    "apps/web/src/modules/game/helpers/share-platform.helper.ts"
+  ],
+  "buildSchemaValidator": [
+    "apps/api/src/modules/ai/lib/json-response.util.ts"
+  ],
+  "buildShareModalViewModel": [
+    "apps/web/src/modules/game/helpers/share-view-model.helper.ts"
+  ],
+  "buildSharePagePath": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "buildShareResultQueryKey": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "buildShareText": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "buildShareUrl": [
+    "apps/api/src/modules/share-results/lib/share-result-url.util.ts"
+  ],
+  "buildShareViewModel": [
+    "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
+  ],
+  "buildStreamCorsHeaders": [
+    "apps/api/src/modules/game/lib/stream-cors.ts"
+  ],
+  "buildTooManyRequestsError": [
+    "apps/api/src/core/errors/error-factory.ts",
+    "apps/api/src/core/errors/index.ts"
+  ],
+  "buildTraitFieldLabelKey": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "buildTranslationViewModel": [
+    "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
+  ],
+  "buildUnsafeResponseText": [
+    "apps/api/src/benchmark/benchmark-fixtures.ts"
+  ],
+  "buildUploadViewModel": [
+    "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
+  ],
+  "buildValidResponseText": [
+    "apps/api/src/benchmark/benchmark-fixtures.ts"
+  ],
+  "BUSY_ACQUIRE_OUTCOME": [
+    "apps/api/src/core/streaming/concurrency-limiter.constants.ts"
+  ],
+  "Button": [
+    "apps/web/src/packages/ui-primitives/button.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "ButtonProps": [
+    "apps/web/src/packages/ui-primitives/button.tsx"
+  ],
+  "ButtonVariantProps": [
+    "apps/web/src/packages/ui-primitives/button.variants.ts"
+  ],
+  "buttonVariants": [
+    "apps/web/src/packages/ui-primitives/button.variants.ts"
+  ],
+  "CAMERA_CONSTRAINTS": [
+    "apps/web/src/packages/camera/camera.constants.ts"
+  ],
+  "CAMERA_ERROR_MESSAGE_KEY": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "cameraActionsClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "CameraCapture": [
+    "apps/web/src/modules/game/components/camera-capture.component.tsx"
+  ],
+  "CameraCaptureProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "CameraController": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "cameraErrorClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "cameraStageClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "cameraStartingClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "cameraTitleClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "cameraVideoClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "CameraViewModel": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "CANCEL_THROTTLE": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "CancelAnalysisRequest": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "CancelAnalysisRequestSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "CancelAnalysisResponse": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "CancelAnalysisResponseSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "CancelAnalysisUseCase": [
+    "apps/api/src/modules/game/application/cancel-analysis.use-case.ts"
+  ],
+  "Candidate": [
+    "packages/shared/src/schemas/candidates.schema.ts"
+  ],
+  "CandidateGenerationResponse": [
+    "packages/shared/src/schemas/candidates.schema.ts"
+  ],
+  "CandidateGenerationResponseSchema": [
+    "packages/shared/src/schemas/candidates.schema.ts"
+  ],
+  "CandidateGenerationService": [
+    "apps/api/src/modules/ai/application/candidate-generation.service.ts"
+  ],
+  "CandidateJudgeResponse": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "CandidateJudgeResponseSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "CandidateJudgeService": [
+    "apps/api/src/modules/ai/application/candidate-judge.service.ts"
+  ],
+  "CandidateSafetyCheckSchema": [
+    "packages/shared/src/schemas/candidates.schema.ts"
+  ],
+  "CandidateSchema": [
+    "packages/shared/src/schemas/candidates.schema.ts"
+  ],
+  "CandidatesStreamMessage": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "CandidatesStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "candidatesTitleClass": [
+    "apps/web/src/modules/game/containers/game-processing.variants.ts"
+  ],
+  "canUseWebShare": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "CAPTIONS_TRACK_KIND": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "CAPTURE_FILENAME": [
+    "apps/web/src/packages/camera/camera.constants.ts"
+  ],
+  "CAPTURE_MIME": [
+    "apps/web/src/packages/camera/camera.constants.ts"
+  ],
+  "CAPTURE_QUALITY": [
+    "apps/web/src/packages/camera/camera.constants.ts"
+  ],
+  "captureFrameToFile": [
+    "apps/web/src/packages/camera/capture-frame.ts",
+    "apps/web/src/packages/camera/index.ts"
+  ],
+  "Card": [
+    "apps/web/src/packages/ui-primitives/card.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "CardDescription": [
+    "apps/web/src/packages/ui-primitives/card.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "CardDescriptionProps": [
+    "apps/web/src/packages/ui-primitives/card.tsx"
+  ],
+  "CardDescriptionVariantProps": [
+    "apps/web/src/packages/ui-primitives/card.variants.ts"
+  ],
+  "cardDescriptionVariants": [
+    "apps/web/src/packages/ui-primitives/card.variants.ts"
+  ],
+  "CardProps": [
+    "apps/web/src/packages/ui-primitives/card.tsx"
+  ],
+  "CardTitle": [
+    "apps/web/src/packages/ui-primitives/card.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "CardTitleProps": [
+    "apps/web/src/packages/ui-primitives/card.tsx"
+  ],
+  "CardTitleVariantProps": [
+    "apps/web/src/packages/ui-primitives/card.variants.ts"
+  ],
+  "cardTitleVariants": [
+    "apps/web/src/packages/ui-primitives/card.variants.ts"
+  ],
+  "CardVariantProps": [
+    "apps/web/src/packages/ui-primitives/card.variants.ts"
+  ],
+  "cardVariants": [
+    "apps/web/src/packages/ui-primitives/card.variants.ts"
+  ],
+  "CHAT_COMPLETIONS_PATH": [
+    "apps/api/src/modules/ai/model/openai-compat.constants.ts"
+  ],
+  "Checkbox": [
+    "apps/web/src/packages/ui-primitives/checkbox.tsx",
+    "apps/web/src/packages/ui-primitives/index.ts"
+  ],
+  "CheckboxProps": [
+    "apps/web/src/packages/ui-primitives/checkbox.tsx"
+  ],
+  "CheckboxVariantProps": [
+    "apps/web/src/packages/ui-primitives/checkbox.variants.ts"
+  ],
+  "checkboxVariants": [
+    "apps/web/src/packages/ui-primitives/checkbox.variants.ts"
+  ],
+  "ChevronDownIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "chipClass": [
+    "apps/web/src/modules/game/containers/chips.variants.ts"
+  ],
+  "chipListClass": [
+    "apps/web/src/modules/game/containers/chips.variants.ts"
+  ],
+  "CLAMAV_CHUNK_SIZE_BYTES": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "CLAMAV_SIZE_PREFIX_LENGTH_BYTES": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "CLAMAV_TERMINAL_CHUNK_LENGTH_BYTES": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "CLAMAV_TIMEOUT_MS": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "ClamAvAdapter": [
+    "apps/api/src/modules/file-security/adapters/clamav.adapter.ts"
+  ],
+  "ClamAvScanResult": [
+    "apps/api/src/modules/file-security/model/clamav.types.ts"
+  ],
+  "classifyProviderError": [
+    "apps/api/src/modules/ai/lib/provider-error.util.ts"
+  ],
+  "CLIENT_ERROR_MIN_STATUS": [
+    "apps/api/src/core/http/http-status.constants.ts"
+  ],
+  "cn": [
+    "apps/web/src/packages/ui-primitives/cn.ts"
+  ],
+  "collectExtractionTextValues": [
+    "apps/api/src/modules/ai/lib/trait-text.util.ts"
+  ],
+  "collectStringValues": [
+    "apps/api/src/modules/share-results/lib/share-result-safety.util.ts"
+  ],
+  "collectTraitTextValues": [
+    "apps/api/src/modules/ai/lib/trait-text.util.ts"
+  ],
+  "composeErrorMessage": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "computeShareExpiry": [
+    "apps/api/src/modules/share-results/lib/share-result-expiry.util.ts"
+  ],
+  "ConcurrencyLimiter": [
+    "apps/api/src/core/streaming/concurrency-limiter.service.ts",
+    "apps/api/src/core/streaming/index.ts"
+  ],
+  "CONFIDENCE_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "CONFIDENCE_LEVEL_VALUES": [
+    "packages/shared/src/enums/confidence.enum.ts"
+  ],
+  "ConfidenceLevel": [
+    "packages/shared/src/enums/confidence.enum.ts"
+  ],
+  "ConfidenceLevelValue": [
+    "packages/shared/src/enums/confidence.enum.ts"
+  ],
+  "config": [
+    "apps/web/src/proxy.ts"
+  ],
+  "configureLifecycle": [
+    "apps/api/src/bootstrap/configure-lifecycle.ts"
+  ],
+  "configureSecurity": [
+    "apps/api/src/bootstrap/configure-security.ts"
+  ],
+  "configureSwagger": [
+    "apps/api/src/bootstrap/configure-swagger.ts"
+  ],
+  "configureValidation": [
+    "apps/api/src/bootstrap/configure-validation.ts"
+  ],
+  "CONSENT_FIELD_NAME": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "CONSENT_FIELD_VALUE": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "CONSENT_INPUT_ID": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "CONSENT_REQUIRED_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "containsEmbeddedImageData": [
+    "apps/api/src/modules/share-results/lib/share-result-safety.util.ts"
+  ],
+  "containsForbiddenShareWording": [
+    "apps/api/src/modules/share-results/lib/share-result-safety.util.ts"
+  ],
+  "containsForbiddenWording": [
+    "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts"
+  ],
+  "contentDefinitionListClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "contentDescriptionClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "contentLeadClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "contentListClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "ContentSecurityPolicyInput": [
+    "apps/web/src/shared/security/content-security-policy.ts"
+  ],
+  "contentTermClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "contentTitleClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "copyTextToClipboard": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "CoreModule": [
+    "apps/api/src/core/core.module.ts"
+  ],
+  "CorrelationIdSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "CORS_ALLOWED_METHODS": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "CORS_MAX_AGE_SECONDS": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "COUNTDOWN_PAD_WIDTH": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "COUNTDOWN_TICK_MS": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "CountdownState": [
+    "apps/web/src/modules/game/model/share.types.ts"
+  ],
+  "CountdownTimer": [
+    "apps/web/src/modules/game/components/countdown-timer.component.tsx"
+  ],
+  "countdownTimerClass": [
+    "apps/web/src/modules/game/components/countdown-timer.variants.ts"
+  ],
+  "CountdownTimerProps": [
+    "apps/web/src/modules/game/model/share-component.types.ts"
+  ],
+  "countPopulatedTraitFields": [
+    "packages/shared/src/utils/trait-count.util.ts"
+  ],
+  "CREATE_ORDER_THROTTLE": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "CREATE_SHARE_THROTTLE": [
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "createApp": [
+    "apps/api/src/bootstrap/create-app.ts"
+  ],
+  "createAppStore": [
+    "apps/web/src/packages/zustand/create-app-store.ts",
+    "apps/web/src/packages/zustand/index.ts"
+  ],
+  "createFastifyAdapter": [
+    "apps/api/src/bootstrap/fastify-adapter.ts"
+  ],
+  "createObjectUrl": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "createPaymentOrderRequest": [
+    "apps/web/src/modules/game/gateway/payment.gateway.ts"
+  ],
+  "CreatePaymentOrderRequest": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "CreatePaymentOrderRequestSchema": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "CreatePaymentOrderResponse": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "CreatePaymentOrderResponseSchema": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "createShareLink": [
+    "apps/web/src/modules/game/services/share.service.ts"
+  ],
+  "CreateShareMutation": [
+    "apps/web/src/modules/game/model/share.types.ts"
+  ],
+  "createShareResultRequest": [
+    "apps/web/src/modules/game/gateway/share.gateway.ts"
+  ],
+  "CreateShareResultRequest": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "CreateShareResultRequestSchema": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "CreateShareResultResponse": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "CreateShareResultResponseSchema": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "CreateShareResultUseCase": [
+    "apps/api/src/modules/share-results/application/create-share-result.use-case.ts"
+  ],
+  "createSseFrameParser": [
+    "apps/web/src/packages/axios/sse-parser.ts"
+  ],
+  "createTestApp": [
+    "apps/api/src/bootstrap/create-test-app.ts"
+  ],
+  "CreateTestAppOptions": [
+    "apps/api/src/bootstrap/create-test-app.types.ts"
+  ],
+  "createValidationException": [
+    "apps/api/src/core/validation/validation-exception.factory.ts"
+  ],
+  "createZodValidationPipe": [
+    "apps/api/src/core/validation/index.ts",
+    "apps/api/src/core/validation/zod-validation.pipe.ts"
+  ],
+  "DARK_COLOR_SCHEME_QUERY": [
+    "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "DEFAULT_AI_RESPONSE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_ANALYSIS_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_API_PORT": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_API_VERSION": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "DEFAULT_CLAMAV_HOSTS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_CLAMAV_PORT": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_CORS_ORIGIN": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_GEMINI_STREAM_IDLE_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_GEMINI_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_LANGUAGE_CODE": [
+    "packages/shared/src/constants/language.constants.ts"
+  ],
+  "DEFAULT_LOCALE": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "DEFAULT_MAX_ACTIVE_ANALYSES_PER_IP": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_MAX_ACTIVE_ANALYSES_PER_TAB": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_MAX_ANALYSIS_QUEUE_SIZE": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_MAX_GLOBAL_ACTIVE_ANALYSES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_MAX_IMAGE_SIZE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts",
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "DEFAULT_RATE_LIMIT_MAX": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_RATE_LIMIT_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_RESULT_COUNT": [
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "DEFAULT_SHARE_RESULT_MAX_ACTIVE_ITEMS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_SHARE_RESULT_MAX_PAYLOAD_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_SHARE_RESULT_TTL_SECONDS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_STREAM_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_TEST_IMAGE_SIZE_BYTES": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "DEFAULT_TIME_ZONE": [
+    "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "DELETE_SHARE_THROTTLE": [
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "DeleteShareResultUseCase": [
+    "apps/api/src/modules/share-results/application/delete-share-result.use-case.ts"
+  ],
+  "DEV_LOG_TRANSPORT": [
+    "apps/api/src/core/logger/logger.constants.ts"
+  ],
+  "DonateLink": [
+    "apps/web/src/modules/game/containers/donate-link.container.tsx"
+  ],
+  "donateLinkClass": [
+    "apps/web/src/modules/game/containers/donate-link.variants.ts"
+  ],
+  "DonateLinkProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "DonateNavLink": [
+    "apps/web/src/shared/components/layout/donate-nav-link.component.tsx"
+  ],
+  "DonateNavLinkProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "DUPLICATE_REQUEST_MESSAGE": [
+    "apps/api/src/modules/game/model/game.messages.ts"
+  ],
+  "EMBEDDED_IMAGE_PATTERNS": [
+    "apps/api/src/modules/share-results/model/share-safety.constants.ts"
+  ],
+  "EmptyState": [
+    "apps/web/src/shared/components/feedback/empty-state.component.tsx"
+  ],
+  "EmptyStateProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "EntryMetrics": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "ERROR_MESSAGE_KEY_BY_CODE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "ERROR_MESSAGE_KEYS": [
+    "apps/web/src/shared/errors/error-keys.constants.ts"
+  ],
+  "ErrorBody": [
+    "apps/api/src/core/errors/error.types.ts"
+  ],
+  "ErrorCode": [
+    "apps/api/src/core/errors/error-code.constants.ts",
+    "apps/api/src/core/errors/index.ts",
+    "packages/shared/src/constants/error-code.constants.ts"
+  ],
+  "ErrorCodeValue": [
+    "packages/shared/src/constants/error-code.constants.ts"
+  ],
+  "ErrorMessageKey": [
+    "apps/api/src/core/errors/error.types.ts",
+    "apps/web/src/shared/errors/error-keys.constants.ts"
+  ],
+  "ErrorState": [
+    "apps/web/src/shared/components/feedback/error-state.component.tsx"
+  ],
+  "ErrorStateProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "ErrorStreamMessage": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "ErrorStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "evaluateResponseText": [
+    "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+  ],
+  "EXPECTED_FILE_FIELD_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "ExternalLink": [
+    "apps/web/src/packages/link/app-link.tsx",
+    "apps/web/src/packages/link/index.ts"
+  ],
+  "extractFailedStage": [
+    "apps/web/src/modules/game/helpers/game-error.helper.ts"
+  ],
+  "extractJsonObject": [
+    "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts"
+  ],
+  "FALLBACK_ERROR_COPY": [
+    "apps/web/src/shared/constants/fallback-copy.constants.ts"
+  ],
+  "fetchSharedResult": [
+    "apps/web/src/modules/game/services/share.service.ts"
+  ],
+  "FILE_ERROR_MESSAGES": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "FILE_TOO_LARGE_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "FileSecurityModule": [
+    "apps/api/src/modules/file-security/file-security.module.ts",
+    "apps/api/src/modules/file-security/index.ts"
+  ],
+  "FileSecurityService": [
+    "apps/api/src/modules/file-security/application/file-security.service.ts",
+    "apps/api/src/modules/file-security/index.ts"
+  ],
+  "FileValidationResult": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "FileValidationService": [
+    "apps/api/src/modules/file-security/application/file-validation.service.ts"
+  ],
+  "FinalGameResult": [
+    "packages/shared/src/schemas/game-result.schema.ts"
+  ],
+  "FinalGameResultSchema": [
+    "apps/web/src/modules/game/schemas/game.schema.ts",
+    "packages/shared/src/schemas/game-result.schema.ts"
+  ],
+  "FinalResultItem": [
+    "packages/shared/src/schemas/game-result.schema.ts"
+  ],
+  "FinalResultItemSchema": [
+    "packages/shared/src/schemas/game-result.schema.ts"
+  ],
+  "FinalResultSafetyCheckSchema": [
+    "packages/shared/src/schemas/game-result.schema.ts"
+  ],
+  "findForbiddenPhrase": [
+    "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts"
+  ],
+  "flattenZodIssues": [
+    "apps/api/src/core/validation/zod-issue.mapper.ts"
+  ],
+  "FORBIDDEN_RESULT_PHRASES": [
+    "packages/shared/src/constants/safety.constants.ts"
+  ],
+  "FORBIDDEN_SENSITIVE_TOPICS": [
+    "packages/shared/src/constants/safety.constants.ts"
+  ],
+  "formatCountdown": [
+    "apps/web/src/modules/game/helpers/countdown.helper.ts"
+  ],
+  "GAME_ANALYZE_PATH": [
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "GAME_ANALYZE_STREAM_PATH": [
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "GAME_CANCEL_PATH": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "GAME_ERROR_KEY_BY_CODE": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "GAME_MUTATION_KEY": [
+    "apps/web/src/modules/game/queries/game-query-keys.ts"
+  ],
+  "GAME_PROMPT_VERSION": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "GAME_ROUTE_ANALYZE": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "GAME_ROUTE_ANALYZE_STREAM": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "GAME_ROUTE_CANCEL": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "GAME_ROUTE_ROOT": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "GAME_ROUTE_TRANSLATE_RESULT": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "GAME_STREAM_EVENT_VALUES": [
+    "packages/shared/src/enums/game-stream.enum.ts"
+  ],
+  "GAME_STREAM_STAGE_VALUES": [
+    "packages/shared/src/enums/game-stream.enum.ts"
+  ],
+  "GAME_TRANSLATE_RESULT_PATH": [
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "GameContainer": [
+    "apps/web/src/modules/game/containers/game.container.tsx",
+    "apps/web/src/modules/game/index.ts"
+  ],
+  "GameController": [
+    "apps/api/src/modules/game/api/game.controller.ts"
+  ],
+  "GameErrorMessageKey": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "GameIntro": [
+    "apps/web/src/modules/game/components/game-intro.component.tsx"
+  ],
+  "gameIntroListClass": [
+    "apps/web/src/modules/game/components/game-intro.variants.ts"
+  ],
+  "GameIntroProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "GameModule": [
+    "apps/api/src/modules/game/game.module.ts"
+  ],
+  "GamePhase": [
+    "apps/web/src/modules/game/model/game.enums.ts"
+  ],
+  "GamePhaseValue": [
+    "apps/web/src/modules/game/model/game.enums.ts"
+  ],
+  "GameProcessing": [
+    "apps/web/src/modules/game/containers/game-processing.container.tsx"
+  ],
+  "GameProcessingProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "GameResult": [
+    "apps/web/src/modules/game/containers/game-result.container.tsx"
+  ],
+  "GameResultProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "GameResultView": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "GameScreenLabels": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "GameSetup": [
+    "apps/web/src/modules/game/containers/game-setup.container.tsx"
+  ],
+  "GameSetupProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "GameStreamEmitter": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "GameStreamEvent": [
+    "packages/shared/src/enums/game-stream.enum.ts"
+  ],
+  "GameStreamEventValue": [
+    "packages/shared/src/enums/game-stream.enum.ts"
+  ],
+  "GameStreamHandlers": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "GameStreamMessage": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "GameStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "GameStreamPresenter": [
+    "apps/api/src/modules/game/api/game-stream.presenter.ts"
+  ],
+  "GameStreamRequest": [
+    "apps/api/src/modules/game/model/game-stream.types.ts"
+  ],
+  "GameStreamStage": [
+    "packages/shared/src/enums/game-stream.enum.ts"
+  ],
+  "GameStreamStageValue": [
+    "packages/shared/src/enums/game-stream.enum.ts"
+  ],
+  "gameTitleClass": [
+    "apps/web/src/modules/game/containers/game.container.variants.ts"
+  ],
+  "GameViewModel": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "GameViewModelInput": [
+    "apps/web/src/modules/game/helpers/game-view-model.assembler.ts"
+  ],
+  "GEMINI_RESPONSE_MIME_TYPE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "GEMINI_STEP_ENV_KEYS": [
+    "apps/api/src/config/gemini-step.constants.ts"
+  ],
+  "GEMINI_TEMPERATURE": [
+    "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "GeminiAdapter": [
+    "apps/api/src/modules/ai/adapters/gemini.adapter.ts"
+  ],
+  "GeminiStep": [
+    "apps/api/src/config/gemini-step.constants.ts"
+  ],
+  "GeminiStepValue": [
+    "apps/api/src/config/gemini-step.constants.ts"
+  ],
+  "generateMetadata": [
+    "apps/web/src/app/game/page.tsx",
+    "apps/web/src/app/help/page.tsx",
+    "apps/web/src/app/layout.tsx",
+    "apps/web/src/app/not-found.tsx",
+    "apps/web/src/app/privacy/page.tsx",
+    "apps/web/src/app/share/[shareId]/page.tsx",
+    "apps/web/src/app/terms/page.tsx"
+  ],
+  "generateShareId": [
+    "apps/api/src/modules/share-results/lib/share-id.util.ts"
+  ],
+  "GENERIC_ERROR_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "GENERIC_ERROR_MESSAGE_KEY": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "GENERIC_PROMPT_ERROR": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "getJson": [
+    "apps/web/src/packages/axios/http-client.ts",
+    "apps/web/src/packages/axios/index.ts"
+  ],
+  "getLocaleDirection": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "getRootAttribute": [
+    "apps/web/src/packages/browser/dom-attributes.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "getSafeDocument": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "getSafeWindow": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "getServerLocale": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/server-messages.ts"
+  ],
+  "getServerMessages": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/server-messages.ts"
+  ],
+  "getServerTranslations": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/server-messages.ts"
+  ],
+  "getShareResultRequest": [
+    "apps/web/src/modules/game/gateway/share.gateway.ts"
+  ],
+  "GetShareResultUseCase": [
+    "apps/api/src/modules/share-results/application/get-share-result.use-case.ts"
+  ],
+  "getTabId": [
+    "apps/web/src/modules/game/helpers/stream-identity.helper.ts"
+  ],
+  "GlobeIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "hasSameJsonShape": [
+    "apps/api/src/modules/ai/lib/json-shape.util.ts"
+  ],
+  "headerDonateLabelClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "headerDonateLinkClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "headerIconLinkClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "headerLocaleLabelClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "HEALTH_PATH": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "HealthController": [
+    "apps/api/src/modules/health/api/health.controller.ts"
+  ],
+  "HealthModule": [
+    "apps/api/src/modules/health/health.module.ts"
+  ],
+  "HealthResponse": [
+    "packages/shared/src/schemas/health.schema.ts"
+  ],
+  "HealthResponseSchema": [
+    "packages/shared/src/schemas/health.schema.ts"
+  ],
+  "HealthService": [
+    "apps/api/src/modules/health/application/health.service.ts"
+  ],
+  "HeartbeatStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "HeartIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "HomeIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "HomeLink": [
+    "apps/web/src/shared/components/layout/home-link.component.tsx"
+  ],
+  "HomeLinkProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "HTTP_STATUS_INTERNAL_SERVER_ERROR": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "HTTP_STATUS_NOT_FOUND": [
+    "apps/api/src/modules/payments/model/payment.constants.ts",
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "HTTP_STATUS_SERVICE_UNAVAILABLE": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "HTTP_STATUS_TOO_MANY_REQUESTS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "httpClient": [
+    "apps/web/src/packages/axios/http-client.ts",
+    "apps/web/src/packages/axios/index.ts"
+  ],
+  "HttpError": [
+    "apps/web/src/packages/axios/http-error.ts",
+    "apps/web/src/packages/axios/index.ts"
+  ],
+  "HttpErrorKind": [
+    "apps/web/src/packages/axios/http-types.ts"
+  ],
+  "HttpReplyLike": [
+    "apps/api/src/core/http/http-reply.types.ts"
+  ],
+  "HttpRequestConfig": [
+    "apps/web/src/packages/axios/http-types.ts"
+  ],
+  "IMAGE_MAGIC_BYTES": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "IMAGE_MIME": [
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "IMAGE_QUALITY_LEVELS": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "ImageDecodeValidationService": [
+    "apps/api/src/modules/file-security/application/image-decode-validation.service.ts"
+  ],
+  "ImageDimensions": [
+    "apps/api/src/modules/file-security/lib/image-dimensions.helpers.ts"
+  ],
+  "ImageQuality": [
+    "apps/web/src/modules/game/containers/image-quality.container.tsx"
+  ],
+  "ImageQualityProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "InfectedFileError": [
+    "apps/api/src/modules/file-security/model/file-security.errors.ts"
+  ],
+  "InMemoryShareResultCacheRepository": [
+    "apps/api/src/modules/share-results/infrastructure/in-memory-share-result-cache.repository.ts"
+  ],
+  "Input": [
+    "apps/web/src/packages/ui-primitives/index.ts",
+    "apps/web/src/packages/ui-primitives/input.tsx"
+  ],
+  "InputProps": [
+    "apps/web/src/packages/ui-primitives/input.tsx"
+  ],
+  "InputVariantProps": [
+    "apps/web/src/packages/ui-primitives/input.variants.ts"
+  ],
+  "inputVariants": [
+    "apps/web/src/packages/ui-primitives/input.variants.ts"
+  ],
+  "IntegrationError": [
+    "apps/api/src/core/errors/index.ts",
+    "apps/api/src/core/errors/integration.error.ts"
+  ],
+  "interFont": [
+    "apps/web/src/shared/fonts/app-fonts.ts"
+  ],
+  "IntlMessagesProvider": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/intl-messages-provider.tsx"
+  ],
+  "InvalidImageError": [
+    "apps/api/src/modules/file-security/model/file-security.errors.ts"
+  ],
+  "isAppError": [
+    "apps/web/src/shared/errors/app-error.ts"
+  ],
+  "isCameraSupported": [
+    "apps/web/src/packages/camera/camera-stream.ts"
+  ],
+  "isCancelledRunError": [
+    "apps/web/src/modules/game/helpers/game-error.helper.ts"
+  ],
+  "isConsentGiven": [
+    "apps/api/src/modules/game/lib/consent.ts"
+  ],
+  "isDefined": [
+    "apps/web/src/shared/utils/is-defined.util.ts"
+  ],
+  "isDevRuntime": [
+    "apps/web/src/packages/env/index.ts",
+    "apps/web/src/packages/env/public-env.ts"
+  ],
+  "isDisplayableResult": [
+    "apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts"
+  ],
+  "isHttpError": [
+    "apps/web/src/packages/axios/http-error.ts",
+    "apps/web/src/packages/axios/index.ts"
+  ],
+  "isMatchingStreamFrame": [
+    "apps/web/src/modules/game/helpers/stream-frame.helper.ts"
+  ],
+  "isModelRetryable": [
+    "apps/api/src/modules/ai/lib/provider-error.util.ts"
+  ],
+  "isPayPalConfigured": [
+    "apps/web/src/packages/paypal/index.ts",
+    "apps/web/src/packages/paypal/paypal-sdk.ts"
+  ],
+  "isRecord": [
+    "packages/shared/src/utils/guards.util.ts"
+  ],
+  "isSafeExternalUrl": [
+    "apps/web/src/shared/security/external-url.helper.ts"
+  ],
+  "isShareExpired": [
+    "apps/api/src/modules/share-results/lib/share-result-expiry.util.ts"
+  ],
+  "isSupportedLanguageCode": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts",
+    "packages/shared/src/constants/language.constants.ts"
+  ],
+  "isTerminalStreamStatus": [
+    "packages/shared/src/enums/stream-status.enum.ts"
+  ],
+  "isTransientGameError": [
+    "apps/web/src/modules/game/helpers/game-error.helper.ts"
+  ],
+  "isUnshareableText": [
+    "apps/api/src/modules/share-results/lib/share-result-safety.util.ts"
+  ],
+  "JPEG_HEIGHT_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_LENGTH_BIAS": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_LENGTH_MIN": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_LENGTH_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_MARKER_PREFIX": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_MIN_SOF_LENGTH": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_SOF_MARKERS": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_START_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JPEG_WIDTH_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "JSON_REPORT_INDENT": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "JSON_ROUTE_BODY_LIMITS": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "jsonRouteBodyLimitFor": [
+    "apps/api/src/bootstrap/json-route-body-limit.util.ts"
+  ],
+  "JudgeCandidatesInput": [
+    "apps/api/src/modules/ai/model/judge-input.types.ts"
+  ],
+  "JudgedResult": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "JudgedResultSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "JudgeSafetyCheckSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "Label": [
+    "apps/web/src/packages/ui-primitives/index.ts",
+    "apps/web/src/packages/ui-primitives/label.tsx"
+  ],
+  "LabelProps": [
+    "apps/web/src/packages/ui-primitives/label.tsx"
+  ],
+  "LabelVariantProps": [
+    "apps/web/src/packages/ui-primitives/label.variants.ts"
+  ],
+  "labelVariants": [
+    "apps/web/src/packages/ui-primitives/label.variants.ts"
+  ],
+  "landingBadgeClass": [
+    "apps/web/src/modules/game/components/landing-hero.variants.ts"
+  ],
+  "LandingContainer": [
+    "apps/web/src/modules/game/containers/landing.container.tsx",
+    "apps/web/src/modules/game/index.ts"
+  ],
+  "landingCtaClass": [
+    "apps/web/src/modules/game/components/landing-hero.variants.ts"
+  ],
+  "LandingHero": [
+    "apps/web/src/modules/game/components/landing-hero.component.tsx"
+  ],
+  "LandingHeroProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "LandingLabels": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "landingSectionClass": [
+    "apps/web/src/modules/game/components/landing-hero.variants.ts"
+  ],
+  "landingSubtitleClass": [
+    "apps/web/src/modules/game/components/landing-hero.variants.ts"
+  ],
+  "landingTitleClass": [
+    "apps/web/src/modules/game/components/landing-hero.variants.ts"
+  ],
+  "LANGUAGE_CODE_MAX_LENGTH": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "LANGUAGE_CODES": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts",
+    "packages/shared/src/constants/language.constants.ts"
+  ],
+  "LANGUAGE_FIELD_NAME": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "LanguageCodeSchema": [
+    "packages/shared/src/schemas/language.schema.ts"
+  ],
+  "LanguageCodeValue": [
+    "packages/shared/src/constants/language.constants.ts"
+  ],
+  "LISTEN_HOST": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "LoadingState": [
+    "apps/web/src/shared/components/feedback/loading-state.component.tsx"
+  ],
+  "LoadingStateProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "LOCALE_COOKIE_MAX_AGE_SECONDS": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "LOCALE_COOKIE_NAME": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "LOCALE_LABEL_KEYS": [
+    "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "LocaleSwitcher": [
+    "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx",
+    "apps/web/src/modules/ui-preferences/index.ts"
+  ],
+  "LocaleSwitcherController": [
+    "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+  ],
+  "LogContext": [
+    "apps/api/src/core/logger/logger.port.ts"
+  ],
+  "LOGGER_ALL_ROUTES_PATH": [
+    "apps/api/src/core/logger/logger.constants.ts"
+  ],
+  "LoggerModule": [
+    "apps/api/src/core/logger/index.ts",
+    "apps/api/src/core/logger/logger.module.ts"
+  ],
+  "LogLevelValue": [
+    "apps/api/src/config/env.schema.ts"
+  ],
+  "LogRedactionService": [
+    "apps/api/src/modules/privacy/application/log-redaction.service.ts"
+  ],
+  "MagicByteValidationService": [
+    "apps/api/src/modules/file-security/application/magic-byte-validation.service.ts"
+  ],
+  "makeQueryClient": [
+    "apps/web/src/packages/query/query-client.ts"
+  ],
+  "mapErrorToMessageKey": [
+    "apps/web/src/shared/errors/http-error-to-message-key.mapper.ts"
+  ],
+  "mapFinalResultToView": [
+    "apps/web/src/modules/game/mappers/game.mapper.ts"
+  ],
+  "matchesMediaQuery": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "MatchingEvidence": [
+    "apps/api/src/modules/ai/model/matching-evidence.types.ts"
+  ],
+  "MAX_ACTIVE_ANALYSES_PER_IP_LIMIT": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_ACTIVE_ANALYSES_PER_TAB_LIMIT": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_AI_RESPONSE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_AI_ROUTE_ENTRIES": [
+    "apps/api/src/config/ai-route.constants.ts"
+  ],
+  "MAX_ANALYSIS_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_ARCHETYPE_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_CANDIDATE_POOL": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MAX_CANDIDATE_SEARCH_HINTS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_CHOSEN_REASON_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_COMPACT_TRAIT_SUMMARY": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "MAX_DISCLAIMER_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_ERROR_CODE_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_ERROR_MESSAGE_KEY_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_ERROR_MESSAGE_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_FALLBACK_MESSAGE_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_GEMINI_STREAM_IDLE_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_GEMINI_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_GLOBAL_ACTIVE_ANALYSES_LIMIT": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_HIGH_SIGNAL_TOKENS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_HTTP_STATUS_CODE": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_IMAGE_DIMENSION_PX": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "MAX_IMAGE_QUALITY_CAPS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_IMAGE_QUALITY_IMPACT_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_IMAGE_SIZE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_JUDGE_NOTES_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_LOGGED_LENGTH": [
+    "apps/api/src/modules/privacy/model/privacy.constants.ts"
+  ],
+  "MAX_NAME_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_PORT_NUMBER": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_QUEUE_SIZE": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_RATE_LIMIT_MAX": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_RATE_LIMIT_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_REASON_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_REMOVED_REASON_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_RESULT_COUNT": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MAX_SCORE": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MAX_SEARCH_HINT_REASON_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_SHARE_RESULT_TTL_SECONDS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_STREAM_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_TRAIT_ARRAY_ITEMS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_TRAIT_EVIDENCE_WEIGHT": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_TRAIT_REFERENCE_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_TRAIT_TEXT_LENGTH": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "MAX_TRAIT_TOKEN_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_UNCERTAINTY_NOTES_PER_FIELD": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "MAX_VISUAL_ARCHETYPE_HINTS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_WEIGHTED_EVIDENCE_ITEMS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MILLISECONDS_PER_SECOND": [
+    "apps/api/src/modules/payments/model/payment.constants.ts",
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "MIME_TYPE_BY_EXTENSION": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts",
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "MIN_AI_RESPONSE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_ANALYSIS_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_CANDIDATE_POOL": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MIN_CONCURRENCY_LIMIT": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_DISPLAY_SCORE": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MIN_GEMINI_STREAM_IDLE_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_GEMINI_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_HTTP_STATUS_CODE": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MIN_IMAGE_DIMENSION_PX": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "MIN_IMAGE_SIZE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_PORT_NUMBER": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_QUEUE_SIZE": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_RATE_LIMIT_MAX": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_RATE_LIMIT_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_RESULT_COUNT": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MIN_SCORE": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_SHARE_RESULT_MAX_PAYLOAD_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_SHARE_RESULT_TTL_SECONDS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_STREAM_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MOCK_LATENCY_BASE_MS": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "MOCK_LATENCY_JITTER_RANGE_MS": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "MOCK_LATENCY_STEP_MS": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "modalBackdropClass": [
+    "apps/web/src/modules/game/containers/share-modal.variants.ts"
+  ],
+  "modalCardClass": [
+    "apps/web/src/modules/game/containers/share-modal.variants.ts"
+  ],
+  "modalDescriptionClass": [
+    "apps/web/src/modules/game/containers/share-modal.variants.ts"
+  ],
+  "modalHeaderClass": [
+    "apps/web/src/modules/game/containers/share-modal.variants.ts"
+  ],
+  "modalTitleClass": [
+    "apps/web/src/modules/game/containers/share-modal.variants.ts"
+  ],
+  "ModelCall": [
+    "apps/api/src/modules/ai/model/gemini.types.ts"
+  ],
+  "MoonIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "MULTIPART_FILE_TOO_LARGE_ERROR_CODE": [
+    "apps/api/src/core/http/multipart.constants.ts"
+  ],
+  "MULTIPART_FILES_LIMIT_ERROR_CODE": [
+    "apps/api/src/core/http/multipart.constants.ts"
+  ],
+  "MULTIPART_INVALID_CONTENT_TYPE_ERROR_CODE": [
+    "apps/api/src/core/http/multipart.constants.ts"
+  ],
+  "MULTIPART_PART_TYPE": [
+    "apps/api/src/core/http/multipart.constants.ts"
+  ],
+  "MultipartBody": [
+    "apps/api/src/core/http/multipart-body.decorator.ts"
+  ],
+  "MultipartCollectionState": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "MultipartFieldLike": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "MultipartFileLike": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "MultipartPartLike": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "MultipartRequestLike": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "newRequestId": [
+    "apps/web/src/modules/game/helpers/stream-identity.helper.ts"
+  ],
+  "NO_MATCH_FALLBACK_BY_LANGUAGE": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "NO_MATCH_FALLBACK_MESSAGE": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "NodeEnvironment": [
+    "apps/api/src/config/env.schema.ts"
+  ],
+  "normalizeLanguageCode": [
+    "packages/shared/src/constants/language.constants.ts"
+  ],
+  "normalizeToHttpError": [
+    "apps/web/src/packages/axios/http-error.ts"
+  ],
+  "NotFoundError": [
+    "apps/api/src/core/errors/index.ts",
+    "apps/api/src/core/errors/not-found.error.ts"
+  ],
+  "ONE_FILE_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "OPENAI_COMPAT_DEFAULT_BASE_URLS": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "OPENAI_COMPAT_PROVIDER_ENV_KEYS": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "OPENAI_COMPAT_PROVIDER_VALUES": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "OPENAI_COMPAT_TEMPERATURE": [
+    "apps/api/src/modules/ai/model/openai-compat.constants.ts"
+  ],
+  "OpenAiCompatAdapter": [
+    "apps/api/src/modules/ai/adapters/openai-compat.adapter.ts"
+  ],
+  "OpenAiCompatCredential": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "OpenAiCompatProviderValue": [
+    "apps/api/src/config/ai-provider.constants.ts"
+  ],
+  "OpenAiCompatRequestBody": [
+    "apps/api/src/modules/ai/model/openai-compat.types.ts"
+  ],
+  "OpenAiCompatResponseBody": [
+    "apps/api/src/modules/ai/model/openai-compat.types.ts"
+  ],
+  "OutboundStreamStamp": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "P50": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "P95": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "PageContainer": [
+    "apps/web/src/packages/ui-primitives/index.ts",
+    "apps/web/src/packages/ui-primitives/page-container.tsx"
+  ],
+  "PageContainerProps": [
+    "apps/web/src/packages/ui-primitives/page-container.tsx"
+  ],
+  "PageContainerVariantProps": [
+    "apps/web/src/packages/ui-primitives/page-container.variants.ts"
+  ],
+  "pageContainerVariants": [
+    "apps/web/src/packages/ui-primitives/page-container.variants.ts"
+  ],
+  "parseAiJsonResponse": [
+    "apps/api/src/modules/ai/lib/json-response.util.ts"
+  ],
+  "parseAiRouteList": [
+    "apps/api/src/config/ai-route.util.ts"
+  ],
+  "parseAiRouteToken": [
+    "apps/api/src/config/ai-route.util.ts"
+  ],
+  "ParsedEnv": [
+    "apps/api/src/config/env.schema.ts"
+  ],
+  "ParsedUploadedFile": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "parseMultipartUpload": [
+    "apps/api/src/core/http/multipart-upload.parser.ts"
+  ],
+  "parseSchema": [
+    "apps/web/src/packages/zod/index.ts",
+    "apps/web/src/packages/zod/parse-schema.ts"
+  ],
+  "passesSafetyScan": [
+    "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+  ],
+  "PayloadTooLargeError": [
+    "apps/api/src/core/errors/index.ts",
+    "apps/api/src/core/errors/payload-too-large.error.ts"
+  ],
+  "PAYMENT_ERROR_CODES": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "PAYMENT_ORDER_FIELD_NAME": [
+    "apps/api/src/modules/payments/model/payment.constants.ts",
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PAYMENT_ORDER_INVALID_MESSAGE": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMENT_PRICE_CURRENCY_PATTERN": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "PAYMENT_PRICE_VALUE_PATTERN": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "PAYMENT_REQUIRED_MESSAGE": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMENT_UNAVAILABLE_MESSAGE": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PaymentCaptureRecord": [
+    "apps/api/src/modules/payments/model/payment.types.ts"
+  ],
+  "paymentDescriptionClass": [
+    "apps/web/src/modules/game/containers/payment-step.variants.ts"
+  ],
+  "PaymentError": [
+    "apps/api/src/core/errors/index.ts",
+    "apps/api/src/core/errors/payment.error.ts"
+  ],
+  "PaymentFlowController": [
+    "apps/web/src/modules/game/model/payment-flow.types.ts"
+  ],
+  "PaymentFlowDeps": [
+    "apps/web/src/modules/game/model/payment-flow.types.ts"
+  ],
+  "PaymentGateService": [
+    "apps/api/src/modules/payments/application/payment-gate.service.ts",
+    "apps/api/src/modules/payments/index.ts"
+  ],
+  "PaymentHolder": [
+    "apps/api/src/modules/payments/model/payment.types.ts"
+  ],
+  "paymentLoaderClass": [
+    "apps/web/src/modules/game/containers/payment-step.variants.ts"
+  ],
+  "PaymentPrice": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "PAYMENTS_ORDERS_PATH": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "PAYMENTS_ROUTE_ORDERS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMENTS_ROUTE_ROOT": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PaymentsController": [
+    "apps/api/src/modules/payments/api/payments.controller.ts"
+  ],
+  "PaymentsModule": [
+    "apps/api/src/modules/payments/index.ts",
+    "apps/api/src/modules/payments/payments.module.ts"
+  ],
+  "PaymentStep": [
+    "apps/web/src/modules/game/containers/payment-step.container.tsx"
+  ],
+  "PaymentStepProps": [
+    "apps/web/src/modules/game/model/payment.types.ts"
+  ],
+  "paymentTitleClass": [
+    "apps/web/src/modules/game/containers/payment-step.variants.ts"
+  ],
+  "PaymentViewModel": [
+    "apps/web/src/modules/game/model/payment.types.ts"
+  ],
+  "PaymentViewModelInput": [
+    "apps/web/src/modules/game/helpers/payment-view-model.helper.ts"
+  ],
+  "PAYPAL_BASE_URL_BY_ENV": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "PAYPAL_CAPTURES_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_CLIENT_ID_PATTERN": [
+    "apps/web/src/packages/env/index.ts",
+    "apps/web/src/packages/env/public-env.ts"
+  ],
+  "PAYPAL_CSP_ORIGINS": [
+    "apps/web/src/packages/paypal/index.ts",
+    "apps/web/src/packages/paypal/paypal.constants.ts"
+  ],
+  "PAYPAL_ENV_VALUES": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "PAYPAL_ME_BASE_URL": [
+    "apps/web/src/shared/constants/donate.constants.ts"
+  ],
+  "PAYPAL_ME_USERNAME_PATTERN": [
+    "apps/web/src/packages/env/index.ts",
+    "apps/web/src/packages/env/public-env.ts"
+  ],
+  "PAYPAL_OAUTH_TOKEN_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_ORDER_ID_PATTERN": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_ORDERS_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_PAYMENT_FAILED_ISSUES": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_REQUEST_TIMEOUT_MS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_SDK_BASE_URL": [
+    "apps/web/src/packages/paypal/paypal.constants.ts"
+  ],
+  "PAYPAL_SDK_SCRIPT_ID": [
+    "apps/web/src/packages/paypal/paypal.constants.ts"
+  ],
+  "PAYPAL_STATUS_COMPLETED": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYPAL_TOKEN_EXPIRY_MARGIN_SECONDS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PaypalAdapter": [
+    "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+  ],
+  "PayPalButtonsConfig": [
+    "apps/web/src/packages/paypal/paypal-sdk.types.ts"
+  ],
+  "PayPalButtonsController": [
+    "apps/web/src/modules/game/model/payment.types.ts"
+  ],
+  "PayPalButtonsHandle": [
+    "apps/web/src/packages/paypal/paypal-sdk.types.ts"
+  ],
+  "PayPalButtonsStatus": [
+    "apps/web/src/modules/game/model/payment.types.ts"
+  ],
+  "PayPalButtonsStatusValue": [
+    "apps/web/src/modules/game/model/payment.types.ts"
+  ],
+  "PaypalCaptureOrderResponseSchema": [
+    "apps/api/src/modules/payments/model/paypal.schemas.ts"
+  ],
+  "PaypalCreateOrderResponseSchema": [
+    "apps/api/src/modules/payments/model/paypal.schemas.ts"
+  ],
+  "PaypalEnvValue": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "PaypalErrorResponse": [
+    "apps/api/src/modules/payments/model/paypal.schemas.ts"
+  ],
+  "PaypalErrorResponseSchema": [
+    "apps/api/src/modules/payments/model/paypal.schemas.ts"
+  ],
+  "PayPalOrderActions": [
+    "apps/web/src/packages/paypal/paypal-sdk.types.ts"
+  ],
+  "PaypalOrderIdSchema": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaypalTokenResponseSchema": [
+    "apps/api/src/modules/payments/model/paypal.schemas.ts"
+  ],
+  "PERCENTILE_SCALE": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "percentileMs": [
+    "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+  ],
+  "PHOTO_INPUT_ID": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "platformLinkClass": [
+    "apps/web/src/modules/game/containers/share-platform-links.variants.ts"
+  ],
+  "platformTitleClass": [
+    "apps/web/src/modules/game/containers/share-platform-links.variants.ts"
+  ],
+  "PNG_HEIGHT_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "PNG_IHDR_SIZE": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "PNG_IHDR_TYPE_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "PNG_WIDTH_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "POPULARITY_LEVEL_VALUES": [
+    "packages/shared/src/enums/popularity.enum.ts"
+  ],
+  "PopularityLevel": [
+    "packages/shared/src/enums/popularity.enum.ts"
+  ],
+  "PopularityLevelValue": [
+    "packages/shared/src/enums/popularity.enum.ts"
+  ],
+  "postJson": [
+    "apps/web/src/packages/axios/http-client.ts",
+    "apps/web/src/packages/axios/index.ts"
+  ],
+  "postMultipart": [
+    "apps/web/src/packages/axios/http-client.ts",
+    "apps/web/src/packages/axios/index.ts"
+  ],
+  "PREVIEW_IMAGE_SIZE": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "PrivacyModule": [
+    "apps/api/src/modules/privacy/privacy.module.ts"
+  ],
+  "PrivacyNotice": [
+    "apps/web/src/modules/game/components/privacy-notice.component.tsx",
+    "apps/web/src/modules/game/index.ts"
+  ],
+  "privacyNoticeClass": [
+    "apps/web/src/modules/game/components/privacy-notice.variants.ts"
+  ],
+  "PrivacyNoticeProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "ProcessingCard": [
+    "apps/web/src/modules/game/components/processing-card.component.tsx"
+  ],
+  "ProcessingCardProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "processingHintClass": [
+    "apps/web/src/modules/game/components/processing-card.variants.ts"
+  ],
+  "processingSkeletonsClass": [
+    "apps/web/src/modules/game/components/processing-card.variants.ts"
+  ],
+  "processingTitleClass": [
+    "apps/web/src/modules/game/components/processing-card.variants.ts"
+  ],
+  "PROMPT_FILES": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "PROMPT_JSON_INDENT": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "PromptKey": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "PromptKeyValue": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "PromptPlaceholder": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "PromptPlaceholderValue": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "PromptTemplateRepository": [
+    "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts"
+  ],
+  "ProviderErrorKind": [
+    "apps/api/src/modules/ai/lib/provider-error.util.ts",
+    "apps/api/src/modules/ai/model/provider-error.enums.ts"
+  ],
+  "ProviderErrorKindValue": [
+    "apps/api/src/modules/ai/model/provider-error.enums.ts"
+  ],
+  "ProviderRegistryService": [
+    "apps/api/src/modules/ai/adapters/provider-registry.service.ts"
+  ],
+  "Providers": [
+    "apps/web/src/app/providers.tsx"
+  ],
+  "proxy": [
+    "apps/web/src/proxy.ts"
+  ],
+  "PUBLIC_CATEGORY_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "PUBLIC_CATEGORY_VALUES": [
+    "packages/shared/src/enums/public-category.enum.ts"
+  ],
+  "PublicCategory": [
+    "packages/shared/src/enums/public-category.enum.ts"
+  ],
+  "PublicCategoryValue": [
+    "packages/shared/src/enums/public-category.enum.ts"
+  ],
+  "publicEnv": [
+    "apps/web/src/packages/env/index.ts",
+    "apps/web/src/packages/env/public-env.ts"
+  ],
+  "PublicEnv": [
+    "apps/web/src/packages/env/public-env.ts"
+  ],
+  "publicEnvSchema": [
+    "apps/web/src/packages/env/public-env.ts"
+  ],
+  "QueuedAnalysisWaiter": [
+    "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+  ],
+  "randomStreamId": [
+    "apps/api/src/modules/game/lib/stream-correlation.ts"
+  ],
+  "randomUuid": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "RATE_LIMIT_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "RateLimitModule": [
+    "apps/api/src/core/rate-limit/rate-limit.module.ts"
+  ],
+  "RawResponseLike": [
+    "apps/api/src/core/http/sse.types.ts"
+  ],
+  "READ_SHARE_THROTTLE": [
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "readImageDimensions": [
+    "apps/api/src/modules/file-security/lib/image-dimensions.helpers.ts"
+  ],
+  "readStorageJson": [
+    "apps/web/src/packages/storage/index.ts",
+    "apps/web/src/packages/storage/web-storage.ts"
+  ],
+  "readThemeAttribute": [
+    "apps/web/src/shared/helpers/read-theme-cookie.helper.ts"
+  ],
+  "RealBenchmarkDeps": [
+    "apps/api/src/benchmark/benchmark-real-runner.ts"
+  ],
+  "RealEntryRunInput": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "REDACT_CENSOR": [
+    "apps/api/src/core/logger/logger.constants.ts"
+  ],
+  "REDACT_PATHS": [
+    "apps/api/src/core/logger/logger.constants.ts"
+  ],
+  "REDACTED_PLACEHOLDER": [
+    "apps/api/src/modules/privacy/model/privacy.constants.ts"
+  ],
+  "redactForLog": [
+    "apps/api/src/modules/privacy/lib/log-redaction.helpers.ts"
+  ],
+  "REGION_HINT_BY_LANGUAGE": [
+    "apps/api/src/modules/ai/model/region-hint.constants.ts"
+  ],
+  "RemovedCandidate": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "RemovedCandidateSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "removeStorageItem": [
+    "apps/web/src/packages/storage/index.ts",
+    "apps/web/src/packages/storage/web-storage.ts"
+  ],
+  "renderPayPalButtons": [
+    "apps/web/src/packages/paypal/index.ts",
+    "apps/web/src/packages/paypal/paypal-sdk.ts"
+  ],
+  "requestCameraStream": [
+    "apps/web/src/packages/camera/camera-stream.ts",
+    "apps/web/src/packages/camera/index.ts"
+  ],
+  "REQUIRED_PLACEHOLDERS": [
+    "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "resolveCategoryLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveConfidenceLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveCorrelationId": [
+    "apps/api/src/modules/game/lib/stream-correlation.ts"
+  ],
+  "ResolvedColorScheme": [
+    "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+  ],
+  "resolveDonateUrl": [
+    "apps/web/src/shared/helpers/donate-link.helper.ts"
+  ],
+  "resolveInitialTheme": [
+    "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "resolvePaymentOrderId": [
+    "apps/api/src/modules/payments/lib/payment-order.util.ts"
+  ],
+  "resolvePaymentPriceLabel": [
+    "apps/web/src/modules/game/helpers/payment-price.helper.ts"
+  ],
+  "resolvePhase": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveRequestLanguage": [
+    "apps/api/src/modules/game/lib/request-language.ts"
+  ],
+  "resolveRequestResultCount": [
+    "apps/api/src/modules/game/lib/request-result-count.ts"
+  ],
+  "resolveResultCountTitle": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveSharePhase": [
+    "apps/web/src/modules/game/helpers/share-display.helper.ts"
+  ],
+  "resolveStageLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveStreamTermination": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "resolveThemeAttribute": [
+    "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "resolveTraitCategoryTitle": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveTraitCountLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveTraitFieldLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveUncertaintyLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "resolveVerdictLabel": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "RESULT_AGGREGATION_LOG_CONTEXT": [
+    "apps/api/src/modules/result-aggregation/model/result-aggregation.constants.ts"
+  ],
+  "RESULT_COUNT_FIELD_NAME": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "RESULT_COUNT_INPUT_ID": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "RESULT_COUNT_OPTIONS": [
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "RESULT_DISCLAIMER": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "RESULT_DISCLAIMER_BY_LANGUAGE": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
+  "ResultAggregationModule": [
+    "apps/api/src/modules/result-aggregation/index.ts",
+    "apps/api/src/modules/result-aggregation/result-aggregation.module.ts"
+  ],
+  "ResultAggregationService": [
+    "apps/api/src/modules/result-aggregation/application/result-aggregation.service.ts",
+    "apps/api/src/modules/result-aggregation/index.ts"
+  ],
+  "resultBadgesClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "resultBoldClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "ResultCard": [
+    "apps/web/src/modules/game/components/result-card.component.tsx"
+  ],
+  "ResultCardProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "resultConfidenceClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "ResultCount": [
+    "packages/shared/src/schemas/result-count.schema.ts"
+  ],
+  "resultCountHintClass": [
+    "apps/web/src/modules/game/components/result-count-select.variants.ts"
+  ],
+  "ResultCountSchema": [
+    "apps/web/src/modules/game/schemas/game.schema.ts",
+    "packages/shared/src/schemas/result-count.schema.ts"
+  ],
+  "ResultCountSelect": [
+    "apps/web/src/modules/game/components/result-count-select.component.tsx"
+  ],
+  "resultCountSelectClass": [
+    "apps/web/src/modules/game/components/result-count-select.variants.ts"
+  ],
+  "ResultCountSelectProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "ResultDisclaimer": [
+    "apps/web/src/modules/game/components/result-disclaimer.component.tsx"
+  ],
+  "resultDisclaimerClass": [
+    "apps/web/src/modules/game/components/result-disclaimer.variants.ts"
+  ],
+  "ResultDisclaimerProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "resultFallbackTitleClass": [
+    "apps/web/src/modules/game/components/result-list.variants.ts"
+  ],
+  "resultHeaderClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "ResultLabels": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "ResultList": [
+    "apps/web/src/modules/game/components/result-list.component.tsx"
+  ],
+  "ResultListProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "resultListStackClass": [
+    "apps/web/src/modules/game/components/result-list.variants.ts"
+  ],
+  "resultListTitleClass": [
+    "apps/web/src/modules/game/components/result-list.variants.ts"
+  ],
+  "resultMatchingClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "resultMetaClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "resultMismatchClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "resultRankClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "resultReasonClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "resultScoreClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "ResultSections": [
+    "apps/web/src/modules/game/containers/result-sections.container.tsx"
+  ],
+  "ResultSectionsProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "ResultStreamMessage": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "ResultStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "ResultSummary": [
+    "apps/web/src/modules/game/containers/result-summary.container.tsx"
+  ],
+  "ResultSummaryProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "resultTitleClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "ResultTranslationController": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "ResultTranslationService": [
+    "apps/api/src/modules/ai/application/result-translation.service.ts"
+  ],
+  "resultVerdictClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "ResultView": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "resultWeakClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
+  ],
+  "RetryButton": [
+    "apps/web/src/modules/game/components/retry-button.component.tsx"
+  ],
+  "RetryButtonProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "revokeObjectUrl": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "ROOT_FIELD_NAME": [
+    "apps/api/src/core/validation/validation.constants.ts"
+  ],
+  "ROUTE_HOPPABLE_ERROR_CODES": [
+    "apps/api/src/modules/ai/model/ai-router.constants.ts"
+  ],
+  "ROUTE_PATHS": [
+    "apps/web/src/shared/constants/route-paths.constants.ts"
+  ],
+  "RouteDispatch": [
+    "apps/api/src/modules/ai/model/ai-router.types.ts"
+  ],
+  "routeEntryKey": [
+    "apps/api/src/config/ai-route.types.ts"
+  ],
+  "runMockBenchmark": [
+    "apps/api/src/benchmark/benchmark-runner.ts"
+  ],
+  "runRealBenchmark": [
+    "apps/api/src/benchmark/benchmark-real-runner.ts"
+  ],
+  "RunRecoveryController": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "RunRecoveryDeps": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "SafeParseResult": [
+    "apps/web/src/packages/zod/parse-schema.ts"
+  ],
+  "safeParseSchema": [
+    "apps/web/src/packages/zod/index.ts",
+    "apps/web/src/packages/zod/parse-schema.ts"
+  ],
+  "sanitizeAiResponseText": [
+    "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts"
+  ],
+  "SchemaParseError": [
+    "apps/web/src/packages/zod/parse-schema.ts"
+  ],
+  "SchemaParseIssue": [
+    "apps/web/src/packages/zod/parse-schema.ts"
+  ],
+  "SECONDS_PER_MINUTE": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SECRET_KEY_PATTERN": [
+    "apps/api/src/modules/privacy/model/privacy.constants.ts"
+  ],
+  "selectDisplayableResults": [
+    "apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts"
+  ],
+  "selectTheme": [
+    "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts"
+  ],
+  "SERVER_BUSY_MESSAGE": [
+    "apps/api/src/modules/game/model/game.messages.ts"
+  ],
+  "SERVER_ERROR_MIN_STATUS": [
+    "apps/api/src/core/http/http-status.constants.ts"
+  ],
+  "setRootAttribute": [
+    "apps/web/src/packages/browser/dom-attributes.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "SHADOW_SAMPLE_RESOLUTION": [
+    "apps/api/src/modules/ai/model/ai-router.constants.ts"
+  ],
+  "SHARE_CACHE_CONTROL_HEADER": [
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "SHARE_CACHE_CONTROL_VALUE": [
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "SHARE_CACHE_SWEEP_INTERVAL_MS": [
+    "apps/api/src/modules/share-results/model/share-result.constants.ts"
+  ],
+  "SHARE_CAPACITY_MESSAGE": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_CAPACITY_MESSAGE_KEY": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_COPIED_MESSAGE_KEY": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "SHARE_CREATE_MUTATION_KEY": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SHARE_CREATE_TIMEOUT_MS": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SHARE_LOG_CONTEXT": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_MESSAGE_KEYS": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SHARE_MODAL_TITLE_ID": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SHARE_NOT_FOUND_MESSAGE": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_NOT_FOUND_MESSAGE_KEY": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_PAGE_PATH_PREFIX": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "SHARE_PAYLOAD_TOO_LARGE_MESSAGE": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_PAYLOAD_TOO_LARGE_MESSAGE_KEY": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_PLATFORM_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SHARE_PLATFORM_ORDER": [
+    "apps/web/src/modules/game/model/share.constants.ts"
+  ],
+  "SHARE_RESULT_CACHE": [
+    "apps/api/src/modules/share-results/model/share-result.port.ts"
+  ],
+  "SHARE_RESULT_DEFAULT_MAX_ACTIVE_ITEMS": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "SHARE_RESULT_DEFAULT_MAX_PAYLOAD_BYTES": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "SHARE_RESULT_DEFAULT_TTL_SECONDS": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "SHARE_RESULT_MAX_TTL_SECONDS": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "SHARE_RESULT_MIN_TTL_SECONDS": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "SHARE_RESULT_UNSAFE_MESSAGE": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_RESULT_UNSAFE_MESSAGE_KEY": [
+    "apps/api/src/modules/share-results/model/share-result.messages.ts"
+  ],
+  "SHARE_RESULTS_PATH": [
+    "packages/shared/src/constants/share-result.constants.ts"
+  ],
+  "ShareButton": [
+    "apps/web/src/modules/game/components/share-button.component.tsx"
+  ],
+  "ShareButtonProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "shareCapacityError": [
+    "apps/api/src/modules/share-results/lib/share-result-errors.ts"
+  ],
+  "ShareController": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "ShareCreateController": [
+    "apps/web/src/modules/game/model/share.types.ts"
+  ],
+  "ShareExpiryWindow": [
+    "apps/api/src/modules/share-results/model/share-result.types.ts"
+  ],
+  "shareFeedbackClass": [
+    "apps/web/src/modules/game/components/share-button.variants.ts"
+  ],
+  "ShareFeedbackInput": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "ShareId": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "ShareIdSchema": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "ShareLinkContent": [
+    "apps/web/src/modules/game/model/share-modal.types.ts"
+  ],
+  "ShareModal": [
+    "apps/web/src/modules/game/containers/share-modal.container.tsx"
+  ],
+  "ShareModalProps": [
+    "apps/web/src/modules/game/model/share-modal.types.ts"
+  ],
+  "ShareModalViewModel": [
+    "apps/web/src/modules/game/model/share-modal.types.ts"
+  ],
+  "shareNotFoundError": [
+    "apps/api/src/modules/share-results/lib/share-result-errors.ts"
+  ],
+  "SharePageContainer": [
+    "apps/web/src/modules/game/containers/share-page.container.tsx",
+    "apps/web/src/modules/game/index.ts"
+  ],
+  "SharePageController": [
+    "apps/web/src/modules/game/model/share.types.ts"
+  ],
+  "SharePagePhase": [
+    "apps/web/src/modules/game/model/share.enums.ts"
+  ],
+  "SharePagePhaseValue": [
+    "apps/web/src/modules/game/model/share.enums.ts"
+  ],
+  "SharePageProps": [
+    "apps/web/src/modules/game/model/share-component.types.ts"
+  ],
+  "sharePageTitleClass": [
+    "apps/web/src/modules/game/containers/share-page.variants.ts"
+  ],
+  "sharePayloadTooLargeError": [
+    "apps/api/src/modules/share-results/lib/share-result-errors.ts"
+  ],
+  "SharePlatform": [
+    "apps/web/src/modules/game/model/share.enums.ts"
+  ],
+  "SharePlatformLink": [
+    "apps/web/src/modules/game/model/share-modal.types.ts"
+  ],
+  "SharePlatformLinks": [
+    "apps/web/src/modules/game/containers/share-platform-links.container.tsx"
+  ],
+  "SharePlatformLinksProps": [
+    "apps/web/src/modules/game/model/share-component.types.ts"
+  ],
+  "SharePlatformValue": [
+    "apps/web/src/modules/game/model/share.enums.ts"
+  ],
+  "shareRemainingSeconds": [
+    "apps/api/src/modules/share-results/lib/share-result-expiry.util.ts"
+  ],
+  "ShareResultCachePort": [
+    "apps/api/src/modules/share-results/model/share-result.port.ts"
+  ],
+  "ShareResultCacheService": [
+    "apps/api/src/modules/share-results/application/share-result-cache.service.ts"
+  ],
+  "ShareResultResponse": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "ShareResultResponseSchema": [
+    "packages/shared/src/schemas/share-result.schema.ts"
+  ],
+  "ShareResultSafetyService": [
+    "apps/api/src/modules/share-results/application/share-result-safety.service.ts"
+  ],
+  "ShareResultsController": [
+    "apps/api/src/modules/share-results/api/share-results.controller.ts"
+  ],
+  "ShareResultsModule": [
+    "apps/api/src/modules/share-results/index.ts",
+    "apps/api/src/modules/share-results/share-results.module.ts"
+  ],
+  "shareResultUnsafeError": [
+    "apps/api/src/modules/share-results/lib/share-result-errors.ts"
+  ],
+  "shareStateCtaClass": [
+    "apps/web/src/modules/game/components/share-state-message.variants.ts"
+  ],
+  "ShareStateMessage": [
+    "apps/web/src/modules/game/components/share-state-message.component.tsx"
+  ],
+  "ShareStateMessageProps": [
+    "apps/web/src/modules/game/model/share-component.types.ts"
+  ],
+  "shareStateTitleClass": [
+    "apps/web/src/modules/game/components/share-state-message.variants.ts"
+  ],
+  "shareViaWebShare": [
+    "apps/web/src/packages/browser/browser-environment.ts",
+    "apps/web/src/packages/browser/index.ts"
+  ],
+  "ShareViewModel": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "showToast": [
+    "apps/web/src/packages/toast/show-toast.ts"
+  ],
+  "ShowToastOptions": [
+    "apps/web/src/packages/toast/show-toast.ts"
+  ],
+  "Skeleton": [
+    "apps/web/src/packages/ui-primitives/index.ts",
+    "apps/web/src/packages/ui-primitives/skeleton.tsx"
+  ],
+  "skeletonLineMediumClass": [
+    "apps/web/src/modules/game/components/processing-card.variants.ts"
+  ],
+  "skeletonLineWideClass": [
+    "apps/web/src/modules/game/components/processing-card.variants.ts"
+  ],
+  "skeletonLineWiderClass": [
+    "apps/web/src/modules/game/components/processing-card.variants.ts"
+  ],
+  "SkeletonProps": [
+    "apps/web/src/packages/ui-primitives/skeleton.tsx"
+  ],
+  "SkeletonVariantProps": [
+    "apps/web/src/packages/ui-primitives/skeleton.variants.ts"
+  ],
+  "skeletonVariants": [
+    "apps/web/src/packages/ui-primitives/skeleton.variants.ts"
+  ],
+  "SkipLink": [
+    "apps/web/src/shared/components/primitives/skip-link.component.tsx"
+  ],
+  "skipLinkClassName": [
+    "apps/web/src/shared/components/primitives/skip-link.variants.ts"
+  ],
+  "SkipLinkProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "SparklesIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "Spinner": [
+    "apps/web/src/packages/ui-primitives/index.ts",
+    "apps/web/src/packages/ui-primitives/spinner.tsx"
+  ],
+  "SpinnerProps": [
+    "apps/web/src/packages/ui-primitives/spinner.tsx"
+  ],
+  "SpinnerVariantProps": [
+    "apps/web/src/packages/ui-primitives/spinner.variants.ts"
+  ],
+  "spinnerVariants": [
+    "apps/web/src/packages/ui-primitives/spinner.variants.ts"
+  ],
+  "SseCapableReplyLike": [
+    "apps/api/src/core/http/sse.types.ts"
+  ],
+  "SseDataListener": [
+    "apps/web/src/packages/axios/stream-request.ts"
+  ],
+  "SseFrameParser": [
+    "apps/web/src/packages/axios/sse-parser.ts"
+  ],
+  "SseWriter": [
+    "apps/api/src/core/http/sse-writer.ts"
+  ],
+  "Stack": [
+    "apps/web/src/packages/ui-primitives/index.ts",
+    "apps/web/src/packages/ui-primitives/stack.tsx"
+  ],
+  "StackProps": [
+    "apps/web/src/packages/ui-primitives/stack.tsx"
+  ],
+  "StackVariantProps": [
+    "apps/web/src/packages/ui-primitives/stack.variants.ts"
+  ],
+  "stackVariants": [
+    "apps/web/src/packages/ui-primitives/stack.variants.ts"
+  ],
+  "STAGE_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "StageStreamMessage": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "StageStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "stampStreamFrame": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "statusForStreamEvent": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "StepBenchmarkResult": [
+    "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "stopCameraStream": [
+    "apps/web/src/packages/camera/camera-stream.ts",
+    "apps/web/src/packages/camera/index.ts"
+  ],
+  "STORAGE_KEYS": [
+    "apps/web/src/shared/constants/storage-keys.constants.ts"
+  ],
+  "StorageArea": [
+    "apps/web/src/packages/storage/web-storage.ts"
+  ],
+  "StoredShareRecord": [
+    "apps/api/src/modules/share-results/model/share-result.types.ts"
+  ],
+  "STREAM_HEARTBEAT_INTERVAL_MS": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "STREAM_ID_HEADERS": [
+    "packages/shared/src/constants/stream.constants.ts"
+  ],
+  "STREAM_STATUS_VALUES": [
+    "packages/shared/src/enums/stream-status.enum.ts"
+  ],
+  "StreamAbortReason": [
+    "apps/api/src/core/streaming/index.ts",
+    "apps/api/src/core/streaming/stream-abort.constants.ts"
+  ],
+  "StreamAnalysisContext": [
+    "apps/api/src/modules/game/model/game-stream.types.ts"
+  ],
+  "StreamCancelKey": [
+    "apps/api/src/core/streaming/stream-registry.types.ts"
+  ],
+  "StreamCorrelationIds": [
+    "apps/api/src/modules/game/model/game-stream.types.ts"
+  ],
+  "StreamEnvelope": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "StreamEnvelopeSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "streamEnvelopeShape": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "StreamIdHeaderKey": [
+    "packages/shared/src/constants/stream.constants.ts"
+  ],
+  "StreamIdHeaderName": [
+    "packages/shared/src/constants/stream.constants.ts"
+  ],
+  "StreamingModule": [
+    "apps/api/src/core/streaming/index.ts",
+    "apps/api/src/core/streaming/streaming.module.ts"
+  ],
+  "StreamMeta": [
+    "apps/api/src/core/http/stream-meta.decorator.ts"
+  ],
+  "StreamMetaRequestLike": [
+    "apps/api/src/core/http/stream-meta.types.ts"
+  ],
+  "streamMultipart": [
+    "apps/web/src/packages/axios/index.ts",
+    "apps/web/src/packages/axios/stream-request.ts"
+  ],
+  "StreamProgressController": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "StreamRegistration": [
+    "apps/api/src/core/streaming/stream-registry.types.ts"
+  ],
+  "StreamRegistry": [
+    "apps/api/src/core/streaming/index.ts",
+    "apps/api/src/core/streaming/stream-registry.service.ts"
+  ],
+  "StreamRequestMeta": [
+    "apps/api/src/core/http/stream-meta.types.ts"
+  ],
+  "StreamRequestOptions": [
+    "apps/web/src/packages/axios/stream-request.ts"
+  ],
+  "StreamStatus": [
+    "packages/shared/src/enums/stream-status.enum.ts"
+  ],
+  "StreamStatusValue": [
+    "packages/shared/src/enums/stream-status.enum.ts"
+  ],
+  "StreamTermination": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "StyleMatchInput": [
+    "apps/api/src/modules/game/model/game-stream.types.ts"
+  ],
+  "StyleMatchService": [
+    "apps/api/src/modules/game/application/style-match.service.ts"
+  ],
+  "summaryTitleClass": [
+    "apps/web/src/modules/game/containers/game-result.variants.ts"
+  ],
+  "SunIcon": [
+    "apps/web/src/packages/icons/index.ts"
+  ],
+  "SWAGGER_DESCRIPTION": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "SWAGGER_PATH": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "SWAGGER_TITLE": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "SWAGGER_VERSION": [
+    "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "TEMP_FILE_PREFIX": [
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "TemporaryFileCleanupService": [
+    "apps/api/src/modules/file-security/application/temporary-file-cleanup.service.ts",
+    "apps/api/src/modules/file-security/index.ts"
+  ],
+  "TERMINAL_STREAM_STATUS_VALUES": [
+    "packages/shared/src/enums/stream-status.enum.ts"
+  ],
+  "TEST_IDS": [
+    "apps/web/src/shared/constants/test-ids.constants.ts"
+  ],
+  "Testable": [
+    "apps/web/src/packages/ui-primitives/testable.ts"
+  ],
+  "THEME_COOKIE_MAX_AGE_SECONDS": [
+    "apps/web/src/shared/constants/theme-cookie.constants.ts"
+  ],
+  "THEME_COOKIE_NAME": [
+    "apps/web/src/shared/constants/theme-cookie.constants.ts"
+  ],
+  "THEME_PALETTE": [
+    "apps/web/src/shared/constants/theme-palette.constants.ts"
+  ],
+  "ThemeToggle": [
+    "apps/web/src/modules/ui-preferences/containers/theme-toggle.container.tsx",
+    "apps/web/src/modules/ui-preferences/index.ts"
+  ],
+  "ThemeToggleController": [
+    "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+  ],
+  "Throttle": [
+    "apps/api/src/core/rate-limit/rate-limit.vendor.ts"
+  ],
+  "toAppError": [
+    "apps/web/src/shared/errors/app-error.ts"
+  ],
+  "ToastType": [
+    "apps/web/src/packages/toast/show-toast.ts"
+  ],
+  "toErrorBody": [
+    "apps/api/src/core/errors/error-body.mapper.ts",
+    "apps/api/src/core/errors/index.ts"
+  ],
+  "toFallbackResult": [
+    "apps/api/src/modules/result-aggregation/lib/result-aggregation.mapper.ts"
+  ],
+  "toFinalGameResult": [
+    "apps/api/src/modules/result-aggregation/lib/result-aggregation.mapper.ts"
+  ],
+  "toFinalResultItem": [
+    "apps/api/src/modules/result-aggregation/lib/result-aggregation.mapper.ts"
+  ],
+  "toFriendlyErrorMessageKey": [
+    "apps/web/src/modules/game/helpers/game-error.helper.ts"
+  ],
+  "toJsonReport": [
+    "apps/api/src/benchmark/benchmark-report.ts"
+  ],
+  "toMarkdownReport": [
+    "apps/api/src/benchmark/benchmark-report.ts"
+  ],
+  "TOO_MANY_FILES_MESSAGE_MARKER": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "TooManyRequestsError": [
+    "apps/api/src/core/errors/index.ts",
+    "apps/api/src/core/errors/too-many-requests.error.ts"
+  ],
+  "toStreamErrorMessage": [
+    "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "TOTAL_TRAIT_FIELDS": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "TRAIT_CATEGORY_FIELDS": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "TRAIT_CATEGORY_KEYS": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "TRAIT_CATEGORY_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "TraitCategoryKey": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "TraitCategoryView": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "TraitDetails": [
+    "apps/web/src/modules/game/containers/trait-details.container.tsx"
+  ],
+  "TraitDetailsProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "traitDetailsTitleClass": [
+    "apps/web/src/modules/game/containers/trait-details.variants.ts"
+  ],
+  "TraitExtractionResponse": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "TraitExtractionResponseSchema": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "TraitExtractionService": [
+    "apps/api/src/modules/ai/application/trait-extraction.service.ts"
+  ],
+  "TraitFieldView": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "TraitItem": [
+    "apps/web/src/modules/game/components/trait-item.component.tsx"
+  ],
+  "traitItemClass": [
+    "apps/web/src/modules/game/components/trait-item.variants.ts"
+  ],
+  "traitItemLabelClass": [
+    "apps/web/src/modules/game/components/trait-item.variants.ts"
+  ],
+  "TraitItemProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "traitItemValueClass": [
+    "apps/web/src/modules/game/components/trait-item.variants.ts"
+  ],
+  "TraitReferenceSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "Traits": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "TraitSafetyCheckSchema": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "TraitsProgress": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "TraitsSchema": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "TraitsStreamMessage": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "TraitsStreamMessageSchema": [
+    "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "traitValueSchema": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "TRANSIENT_ERROR_CODES": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "TRANSLATE_MUTATION_KEY": [
+    "apps/web/src/modules/game/queries/game-query-keys.ts"
+  ],
+  "TRANSLATE_THROTTLE": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "TranslateMessage": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "translateOptionalKey": [
+    "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "translateResult": [
+    "apps/web/src/modules/game/services/game.service.ts"
+  ],
+  "TranslateResultInput": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "TranslateResultMutation": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "translateResultRequest": [
+    "apps/web/src/modules/game/gateway/game-translate.gateway.ts"
+  ],
+  "TranslateResultRequest": [
+    "packages/shared/src/schemas/translate-result.schema.ts"
+  ],
+  "TranslateResultRequestSchema": [
+    "packages/shared/src/schemas/translate-result.schema.ts"
+  ],
+  "TranslateResultResponse": [
+    "packages/shared/src/schemas/translate-result.schema.ts"
+  ],
+  "TranslateResultResponseSchema": [
+    "packages/shared/src/schemas/translate-result.schema.ts"
+  ],
+  "TranslateResultUseCase": [
+    "apps/api/src/modules/game/application/translate-result.use-case.ts"
+  ],
+  "TRANSLATION_FAILED_MESSAGE_KEY": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "translationBannerClass": [
+    "apps/web/src/modules/game/containers/game-result.variants.ts"
+  ],
+  "TranslationStatusProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "TranslationViewModel": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "TranslationViewModelInput": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "UI_PREFERENCE_DOM_ATTRIBUTES": [
+    "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "UiPreferencesEffects": [
+    "apps/web/src/modules/ui-preferences/containers/ui-preferences-effects.container.tsx",
+    "apps/web/src/modules/ui-preferences/index.ts"
+  ],
+  "UiPreferencesSnapshot": [
+    "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts"
+  ],
+  "uiPreferencesSnapshotSchema": [
+    "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts"
+  ],
+  "UiPreferencesState": [
+    "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+  ],
+  "UNCERTAINTY_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "UNCERTAINTY_NOTE_FIELDS": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "uncertaintyGroupTitleClass": [
+    "apps/web/src/modules/game/containers/image-quality.variants.ts"
+  ],
+  "UncertaintyGroupView": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "uncertaintyNoteClass": [
+    "apps/web/src/modules/game/containers/image-quality.variants.ts"
+  ],
+  "UncertaintyNoteField": [
+    "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "UncertaintyNotes": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "UncertaintyNotesSchema": [
+    "packages/shared/src/schemas/traits.schema.ts"
+  ],
+  "UNCLEAR_TRAIT_VALUE_MARKERS": [
+    "packages/shared/src/constants/trait.constants.ts"
+  ],
+  "UNEXPECTED_FIELD_MESSAGE_MARKER": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "UnsupportedImageTypeError": [
+    "apps/api/src/modules/file-security/model/file-security.errors.ts"
+  ],
+  "UPLOAD_CONSENT_FIELD_NAME": [
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "UPLOAD_CONSENT_GRANTED_VALUE": [
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "UPLOAD_FIELD_NAME": [
+    "apps/web/src/modules/game/model/game.constants.ts",
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "UPLOAD_HARD_CAP_BYTES": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "UPLOAD_INPUT_ACCEPT": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "UPLOAD_MAX_FILES": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "UPLOAD_TRANSPORT_HARD_CAP_BYTES": [
+    "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "UploadCard": [
+    "apps/web/src/modules/game/components/upload-card.component.tsx"
+  ],
+  "UploadCardProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "UploadCarrierRequestLike": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "UploadConsent": [
+    "apps/web/src/modules/game/components/upload-consent.component.tsx"
+  ],
+  "UploadConsentProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "UploadController": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "UploadedImage": [
+    "apps/api/src/core/http/uploaded-image.decorator.ts"
+  ],
+  "UploadedImageFile": [
+    "apps/api/src/modules/file-security/model/upload-file.types.ts"
+  ],
+  "UploadedImageInterceptor": [
+    "apps/api/src/core/http/uploaded-image.interceptor.ts"
+  ],
+  "UploadedImagePayload": [
+    "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "uploadErrorClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadGridClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadPreviewImageClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadPreviewWrapClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadSourceButtonClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadSourceHintClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadSourceTitleClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "uploadSrOnlyClass": [
+    "apps/web/src/modules/game/components/upload-card.variants.ts"
+  ],
+  "UploadViewModel": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "UploadViewModelInput": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "useAnalyzeGameMutation": [
+    "apps/web/src/modules/game/queries/game.mutations.ts"
+  ],
+  "useAnalyzeRunControl": [
+    "apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts"
+  ],
+  "useAppLocale": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/translation-hooks.ts"
+  ],
+  "useAppMutation": [
+    "apps/web/src/packages/query/index.ts",
+    "apps/web/src/packages/query/query-hooks.ts"
+  ],
+  "useAppNavigation": [
+    "apps/web/src/packages/navigation/index.ts",
+    "apps/web/src/packages/navigation/use-app-navigation.hook.ts"
+  ],
+  "useAppQuery": [
+    "apps/web/src/packages/query/index.ts",
+    "apps/web/src/packages/query/query-hooks.ts"
+  ],
+  "useAppTranslation": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/translation-hooks.ts"
+  ],
+  "useCameraCapture": [
+    "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts"
+  ],
+  "useCountdown": [
+    "apps/web/src/modules/game/hooks/useCountdown.hook.ts"
+  ],
+  "useCreateShareMutation": [
+    "apps/web/src/modules/game/queries/share.mutations.ts"
+  ],
+  "useEscapeKey": [
+    "apps/web/src/shared/hooks/useEscapeKey.hook.ts"
+  ],
+  "useGame": [
+    "apps/web/src/modules/game/hooks/useGame.hook.ts"
+  ],
+  "useImageUpload": [
+    "apps/web/src/modules/game/hooks/useImageUpload.hook.ts"
+  ],
+  "useLocaleSwitcher": [
+    "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts"
+  ],
+  "usePaymentFlow": [
+    "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts"
+  ],
+  "usePayPalButtons": [
+    "apps/web/src/modules/game/hooks/usePayPalButtons.hook.ts"
+  ],
+  "useResultCount": [
+    "apps/web/src/modules/game/hooks/useResultCount.hook.ts"
+  ],
+  "useResultTranslation": [
+    "apps/web/src/modules/game/hooks/useResultTranslation.hook.ts"
+  ],
+  "useRouteErrorLogger": [
+    "apps/web/src/shared/hooks/useRouteErrorLogger.hook.ts"
+  ],
+  "useRunRecovery": [
+    "apps/web/src/modules/game/hooks/useRunRecovery.hook.ts"
+  ],
+  "useShareCreate": [
+    "apps/web/src/modules/game/hooks/useShareCreate.hook.ts"
+  ],
+  "useSharePage": [
+    "apps/web/src/modules/game/hooks/useSharePage.hook.ts"
+  ],
+  "useShareResult": [
+    "apps/web/src/modules/game/hooks/useShareResult.hook.ts"
+  ],
+  "useShareResultQuery": [
+    "apps/web/src/modules/game/queries/share.queries.ts"
+  ],
+  "useStreamProgress": [
+    "apps/web/src/modules/game/hooks/useStreamProgress.hook.ts"
+  ],
+  "useThemeToggle": [
+    "apps/web/src/modules/ui-preferences/hooks/useThemeToggle.hook.ts"
+  ],
+  "useTranslateResultMutation": [
+    "apps/web/src/modules/game/queries/game.mutations.ts"
+  ],
+  "useUiPreferencesEffects": [
+    "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts"
+  ],
+  "useUiPreferencesStore": [
+    "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts"
+  ],
+  "validateEnv": [
+    "apps/api/src/config/env.schema.ts"
+  ],
+  "validateFileForUpload": [
+    "apps/web/src/modules/game/services/game.service.ts"
+  ],
+  "validateImageFile": [
+    "apps/web/src/modules/game/helpers/game-validation.helper.ts"
+  ],
+  "VALIDATION_CONFIGURED_MESSAGE": [
+    "apps/api/src/bootstrap/configure-validation.constants.ts"
+  ],
+  "VALIDATION_FAILED_MESSAGE": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "VALIDATION_FAILED_MESSAGE_KEY": [
+    "apps/api/src/core/errors/error.constants.ts"
+  ],
+  "VALIDATION_LOG_CONTEXT": [
+    "apps/api/src/core/validation/validation.constants.ts"
+  ],
+  "VALIDATION_LOG_MESSAGE": [
+    "apps/api/src/core/validation/validation.constants.ts"
+  ],
+  "ValidationError": [
+    "apps/api/src/core/errors/index.ts",
+    "apps/api/src/core/errors/validation.error.ts"
+  ],
+  "ValidationIssue": [
+    "apps/api/src/core/validation/validation.types.ts"
+  ],
+  "Verdict": [
+    "packages/shared/src/enums/verdict.enum.ts"
+  ],
+  "VERDICT_LABEL_KEYS": [
+    "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "VERDICT_VALUES": [
+    "packages/shared/src/enums/verdict.enum.ts"
+  ],
+  "VerdictValue": [
+    "packages/shared/src/enums/verdict.enum.ts"
+  ],
+  "viewport": [
+    "apps/web/src/app/layout.tsx"
+  ],
+  "VirusScanService": [
+    "apps/api/src/modules/file-security/application/virus-scan.service.ts"
+  ],
+  "VirusScanUnavailableError": [
+    "apps/api/src/modules/file-security/model/file-security.errors.ts"
+  ],
+  "WEBP_CHUNK_HEADER_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_CHUNK_HEADER_SIZE": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_FORMAT_MARKER": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "WEBP_MARKER_OFFSET": [
+    "apps/api/src/modules/file-security/model/file-security.constants.ts"
+  ],
+  "WEBP_MIN_BUFFER_LENGTH": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_PAYLOAD_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_DIMENSION_MASK": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_HEIGHT_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_SYNC_CODE_A": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_SYNC_CODE_B": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_SYNC_CODE_C": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_SYNC_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8_WIDTH_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8L_BITS_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8L_DIMENSION_BIAS": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8L_DIMENSION_MASK": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8L_FLAG_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8L_FLAG_VALUE": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8L_HEIGHT_SHIFT": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8X_DIMENSION_BIAS": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8X_DIMENSION_SIZE": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8X_HEIGHT_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WEBP_VP8X_WIDTH_OFFSET": [
+    "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "wipeUploadedImageBuffer": [
+    "apps/api/src/modules/file-security/index.ts",
+    "apps/api/src/modules/file-security/lib/upload-buffer-cleanup.util.ts"
+  ],
+  "writeCookie": [
+    "apps/web/src/packages/storage/cookie-storage.ts",
+    "apps/web/src/packages/storage/index.ts"
+  ],
+  "writeStorageJson": [
+    "apps/web/src/packages/storage/index.ts",
+    "apps/web/src/packages/storage/web-storage.ts"
+  ],
+  "z": [
+    "apps/web/src/packages/zod/index.ts"
+  ]
+}

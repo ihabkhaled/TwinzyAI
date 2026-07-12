@@ -1,0 +1,638 @@
+{
+  "contracts": [
+    {
+      "name": "AnalyzeRequestBodySchema",
+      "path": "apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
+      "usedBy": [
+        "apps/api/src/modules/game/lib/consent.ts",
+        "apps/api/src/modules/game/lib/request-language.ts",
+        "apps/api/src/modules/game/lib/request-result-count.ts"
+      ]
+    },
+    {
+      "name": "PaypalCaptureOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaypalCreateOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaypalErrorResponse",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaypalErrorResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaypalTokenResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "name": "FinalGameResultSchema",
+      "path": "apps/web/src/modules/game/schemas/game.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/game/gateway/game.gateway.ts",
+        "apps/web/src/modules/game/services/game.service.ts"
+      ]
+    },
+    {
+      "name": "ResultCountSchema",
+      "path": "apps/web/src/modules/game/schemas/game.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/game/gateway/game.gateway.ts",
+        "apps/web/src/modules/game/services/game.service.ts"
+      ]
+    },
+    {
+      "name": "UiPreferencesSnapshot",
+      "path": "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
+        "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
+        "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+      ]
+    },
+    {
+      "name": "uiPreferencesSnapshotSchema",
+      "path": "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
+        "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
+        "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+      ]
+    },
+    {
+      "name": "Candidate",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CandidateGenerationResponse",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CandidateGenerationResponseSchema",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CandidateSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CandidateSchema",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "FinalGameResult",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "name": "FinalGameResultSchema",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "name": "FinalResultItem",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "name": "FinalResultItemSchema",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "name": "FinalResultSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "name": "AcceptedStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CancelAnalysisRequest",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CancelAnalysisRequestSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CancelAnalysisResponse",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CancelAnalysisResponseSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CandidatesStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CandidatesStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "CorrelationIdSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "ErrorStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "ErrorStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "GameStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "GameStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "HeartbeatStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "ResultStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "ResultStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "StageStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "StageStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "StreamEnvelope",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "StreamEnvelopeSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "streamEnvelopeShape",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "TraitsStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "TraitsStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "name": "HealthResponse",
+      "path": "packages/shared/src/schemas/health.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "HealthResponseSchema",
+      "path": "packages/shared/src/schemas/health.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CandidateJudgeResponse",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CandidateJudgeResponseSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "JudgedResult",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "JudgedResultSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "JudgeSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "RemovedCandidate",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "RemovedCandidateSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TraitReferenceSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "LanguageCodeSchema",
+      "path": "packages/shared/src/schemas/language.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "name": "CreatePaymentOrderRequest",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreatePaymentOrderRequestSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreatePaymentOrderResponse",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreatePaymentOrderResponseSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PAYMENT_ORDER_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaypalOrderIdSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ResultCount",
+      "path": "packages/shared/src/schemas/result-count.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ResultCountSchema",
+      "path": "packages/shared/src/schemas/result-count.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreateShareResultRequest",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreateShareResultRequestSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreateShareResultResponse",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "CreateShareResultResponseSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ShareId",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ShareIdSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ShareResultResponse",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ShareResultResponseSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TraitExtractionResponse",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TraitExtractionResponseSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "Traits",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TraitSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TraitsSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "traitValueSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "UncertaintyNotes",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "UncertaintyNotesSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TranslateResultRequest",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TranslateResultRequestSchema",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TranslateResultResponse",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "TranslateResultResponseSchema",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    }
+  ]
+}

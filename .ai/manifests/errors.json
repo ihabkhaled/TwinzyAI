@@ -1,0 +1,479 @@
+{
+  "count": 79,
+  "errors": [
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "AppError",
+      "path": "apps/api/src/core/errors/app-error.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "AppExceptionFilter",
+      "path": "apps/api/src/core/errors/app-exception.filter.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "toErrorBody",
+      "path": "apps/api/src/core/errors/error-body.mapper.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "ErrorCode",
+      "path": "apps/api/src/core/errors/error-code.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "buildIntegrationError",
+      "path": "apps/api/src/core/errors/error-factory.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "buildPaymentError",
+      "path": "apps/api/src/core/errors/error-factory.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "buildTooManyRequestsError",
+      "path": "apps/api/src/core/errors/error-factory.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "CONSENT_REQUIRED_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "ERROR_MESSAGE_KEY_BY_CODE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "EXPECTED_FILE_FIELD_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "FILE_TOO_LARGE_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "GENERIC_ERROR_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "GENERIC_ERROR_MESSAGE_KEY",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "ONE_FILE_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "RATE_LIMIT_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "TOO_MANY_FILES_MESSAGE_MARKER",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "UNEXPECTED_FIELD_MESSAGE_MARKER",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "VALIDATION_FAILED_MESSAGE",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "VALIDATION_FAILED_MESSAGE_KEY",
+      "path": "apps/api/src/core/errors/error.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "ErrorBody",
+      "path": "apps/api/src/core/errors/error.types.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "ErrorMessageKey",
+      "path": "apps/api/src/core/errors/error.types.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "AppError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "buildIntegrationError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "buildPaymentError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "buildTooManyRequestsError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "ErrorCode",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "IntegrationError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "NotFoundError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "PayloadTooLargeError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "PaymentError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "toErrorBody",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "TooManyRequestsError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "api:core",
+      "name": "ValidationError",
+      "path": "apps/api/src/core/errors/index.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "IntegrationError",
+      "path": "apps/api/src/core/errors/integration.error.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "NotFoundError",
+      "path": "apps/api/src/core/errors/not-found.error.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "PayloadTooLargeError",
+      "path": "apps/api/src/core/errors/payload-too-large.error.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "PaymentError",
+      "path": "apps/api/src/core/errors/payment.error.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "TooManyRequestsError",
+      "path": "apps/api/src/core/errors/too-many-requests.error.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "ValidationError",
+      "path": "apps/api/src/core/errors/validation.error.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "CLIENT_ERROR_MIN_STATUS",
+      "path": "apps/api/src/core/http/http-status.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "SERVER_ERROR_MIN_STATUS",
+      "path": "apps/api/src/core/http/http-status.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "MULTIPART_FILE_TOO_LARGE_ERROR_CODE",
+      "path": "apps/api/src/core/http/multipart.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "MULTIPART_FILES_LIMIT_ERROR_CODE",
+      "path": "apps/api/src/core/http/multipart.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "MULTIPART_INVALID_CONTENT_TYPE_ERROR_CODE",
+      "path": "apps/api/src/core/http/multipart.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:ai",
+      "name": "ROUTE_HOPPABLE_ERROR_CODES",
+      "path": "apps/api/src/modules/ai/model/ai-router.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:ai",
+      "name": "GENERIC_PROMPT_ERROR",
+      "path": "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:file-security",
+      "name": "FILE_ERROR_MESSAGES",
+      "path": "apps/api/src/modules/file-security/model/file-security.constants.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:file-security",
+      "name": "InfectedFileError",
+      "path": "apps/api/src/modules/file-security/model/file-security.errors.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:file-security",
+      "name": "InvalidImageError",
+      "path": "apps/api/src/modules/file-security/model/file-security.errors.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:file-security",
+      "name": "UnsupportedImageTypeError",
+      "path": "apps/api/src/modules/file-security/model/file-security.errors.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:file-security",
+      "name": "VirusScanUnavailableError",
+      "path": "apps/api/src/modules/file-security/model/file-security.errors.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:file-security",
+      "name": "WEBP_VP8_SYNC_CODE_A",
+      "path": "apps/api/src/modules/file-security/model/image-format.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:file-security",
+      "name": "WEBP_VP8_SYNC_CODE_B",
+      "path": "apps/api/src/modules/file-security/model/image-format.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:file-security",
+      "name": "WEBP_VP8_SYNC_CODE_C",
+      "path": "apps/api/src/modules/file-security/model/image-format.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "api:game",
+      "name": "LANGUAGE_CODE_MAX_LENGTH",
+      "path": "apps/api/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:game",
+      "name": "CAMERA_ERROR_MESSAGE_KEY",
+      "path": "apps/web/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:game",
+      "name": "GAME_ERROR_KEY_BY_CODE",
+      "path": "apps/web/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:game",
+      "name": "PAYMENT_ERROR_CODES",
+      "path": "apps/web/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:game",
+      "name": "TRANSIENT_ERROR_CODES",
+      "path": "apps/web/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "web:pkg-axios",
+      "name": "HttpError",
+      "path": "apps/web/src/packages/axios/http-error.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:pkg-i18n",
+      "name": "LANGUAGE_CODES",
+      "path": "apps/web/src/packages/i18n/index.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:pkg-i18n",
+      "name": "LANGUAGE_CODES",
+      "path": "apps/web/src/packages/i18n/locale.constants.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "web:pkg-zod",
+      "name": "SchemaParseError",
+      "path": "apps/web/src/packages/zod/parse-schema.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:shared",
+      "name": "FALLBACK_ERROR_COPY",
+      "path": "apps/web/src/shared/constants/fallback-copy.constants.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "web:shared",
+      "name": "AppError",
+      "path": "apps/web/src/shared/errors/app-error.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "web:shared",
+      "name": "AppErrorOptions",
+      "path": "apps/web/src/shared/errors/app-error.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "web:shared",
+      "name": "isAppError",
+      "path": "apps/web/src/shared/errors/app-error.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "web:shared",
+      "name": "toAppError",
+      "path": "apps/web/src/shared/errors/app-error.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "web:shared",
+      "name": "ERROR_MESSAGE_KEYS",
+      "path": "apps/web/src/shared/errors/error-keys.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "web:shared",
+      "name": "ErrorMessageKey",
+      "path": "apps/web/src/shared/errors/error-keys.constants.ts"
+    },
+    {
+      "kind": "error-file-export",
+      "module": "web:shared",
+      "name": "mapErrorToMessageKey",
+      "path": "apps/web/src/shared/errors/http-error-to-message-key.mapper.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "DEFAULT_LANGUAGE_CODE",
+      "path": "packages/shared/src/constants/language.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "LANGUAGE_CODES",
+      "path": "packages/shared/src/constants/language.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "HTTP_STATUS_INTERNAL_SERVER_ERROR",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "MAX_ERROR_CODE_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "MAX_ERROR_MESSAGE_KEY_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "MAX_ERROR_MESSAGE_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "MAX_HTTP_STATUS_CODE",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "error-catalog",
+      "module": "shared",
+      "name": "MIN_HTTP_STATUS_CODE",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    }
+  ]
+}

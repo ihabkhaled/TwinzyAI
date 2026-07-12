@@ -1,0 +1,801 @@
+{
+  "contracts": [
+    {
+      "kind": "dto",
+      "module": "api:game",
+      "name": "AnalyzeRequestBodySchema",
+      "path": "apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
+      "usedBy": [
+        "apps/api/src/modules/game/lib/consent.ts",
+        "apps/api/src/modules/game/lib/request-language.ts",
+        "apps/api/src/modules/game/lib/request-result-count.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaypalCaptureOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaypalCreateOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "api:payments",
+      "name": "PaypalErrorResponse",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaypalErrorResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaypalTokenResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "web:game",
+      "name": "FinalGameResultSchema",
+      "path": "apps/web/src/modules/game/schemas/game.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/game/gateway/game.gateway.ts",
+        "apps/web/src/modules/game/services/game.service.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "web:game",
+      "name": "ResultCountSchema",
+      "path": "apps/web/src/modules/game/schemas/game.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/game/gateway/game.gateway.ts",
+        "apps/web/src/modules/game/services/game.service.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "web:ui-preferences",
+      "name": "UiPreferencesSnapshot",
+      "path": "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
+        "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
+        "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "web:ui-preferences",
+      "name": "uiPreferencesSnapshotSchema",
+      "path": "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
+      "usedBy": [
+        "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
+        "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
+        "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "Candidate",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CandidateGenerationResponse",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CandidateGenerationResponseSchema",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CandidateSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CandidateSchema",
+      "path": "packages/shared/src/schemas/candidates.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "FinalGameResult",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "FinalGameResultSchema",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "FinalResultItem",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "FinalResultItemSchema",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "FinalResultSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/game-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-stream.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "AcceptedStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CancelAnalysisRequest",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CancelAnalysisRequestSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CancelAnalysisResponse",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CancelAnalysisResponseSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CandidatesStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CandidatesStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CorrelationIdSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ErrorStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ErrorStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "GameStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "GameStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "HeartbeatStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ResultStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ResultStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "StageStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "StageStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "StreamEnvelope",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "StreamEnvelopeSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "streamEnvelopeShape",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "TraitsStreamMessage",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TraitsStreamMessageSchema",
+      "path": "packages/shared/src/schemas/game-stream.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/payment.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "HealthResponse",
+      "path": "packages/shared/src/schemas/health.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "HealthResponseSchema",
+      "path": "packages/shared/src/schemas/health.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CandidateJudgeResponse",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CandidateJudgeResponseSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "JudgedResult",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "JudgedResultSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "JudgeSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "RemovedCandidate",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "RemovedCandidateSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TraitReferenceSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "LanguageCodeSchema",
+      "path": "packages/shared/src/schemas/language.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/share-result.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts",
+        "packages/shared/src/schemas/translate-result.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CreatePaymentOrderRequest",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CreatePaymentOrderRequestSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CreatePaymentOrderResponse",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CreatePaymentOrderResponseSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PAYMENT_ORDER_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PaypalOrderIdSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ResultCount",
+      "path": "packages/shared/src/schemas/result-count.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ResultCountSchema",
+      "path": "packages/shared/src/schemas/result-count.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CreateShareResultRequest",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CreateShareResultRequestSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "CreateShareResultResponse",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CreateShareResultResponseSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ShareId",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ShareIdSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ShareResultResponse",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ShareResultResponseSchema",
+      "path": "packages/shared/src/schemas/share-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "TraitExtractionResponse",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TraitExtractionResponseSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "Traits",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TraitSafetyCheckSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TraitsSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "traitValueSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "UncertaintyNotes",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "UncertaintyNotesSchema",
+      "path": "packages/shared/src/schemas/traits.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "TranslateResultRequest",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TranslateResultRequestSchema",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "TranslateResultResponse",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "TranslateResultResponseSchema",
+      "path": "packages/shared/src/schemas/translate-result.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    }
+  ],
+  "count": 81
+}
