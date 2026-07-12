@@ -1,3 +1,19 @@
+---
+id: runbook-release-smoke-test-template
+title: Release Smoke Test Template
+type: runbook
+authority: canonical
+status: current
+owner: repository owner
+summary: Template for defining release-specific smoke tests on top of the standing baseline in runbooks/release-smoke-test.md.
+keywords: [runbook, smoke-test, template, release, verification, health, envelope]
+contextTier: 2
+relatedCode: []
+relatedTests: []
+relatedDocs: [runbooks/release-smoke-test.md, runbooks/deployment.md]
+readWhen: Defining the extra smoke checks a specific release needs beyond the standing baseline.
+---
+
 # Release Smoke Test Template
 
 ## Scope

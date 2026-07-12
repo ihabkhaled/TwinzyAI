@@ -1,0 +1,52 @@
+# structure/entrypoint-catalog.yaml — canonical entrypoints (authored; type: structure).
+# Every path verified against the source cited. Companion prose: structure/runtime-topology.md.
+entrypoints:
+  api-process:
+    file: apps/api/src/main.ts
+    role: Backend process entry - imports reflect-metadata, runs bootstrap(), writes fatal bootstrap errors to stderr and sets exitCode 1.
+    chain:
+      - apps/api/src/bootstrap/bootstrap.ts # orchestrator: createApp -> security -> validation -> lifecycle -> optional swagger -> listen(apiPort, '0.0.0.0')
+      - apps/api/src/bootstrap/create-app.ts # NestFactory.create on the Fastify adapter, bufferLogs, bindAppLogger
+      - apps/api/src/bootstrap/fastify-adapter.ts # bodyLimit = upload cap + 1 MiB, TRUST_PROXY (the one pre-DI process.env read), UUID request ids
+      - apps/api/src/bootstrap/configure-security.ts # helmet, cookie, bounded multipart (1 file), per-route JSON body caps, closed-by-default CORS
+      - apps/api/src/bootstrap/configure-validation.ts # zod-only per-route pipes; no global pipe
+      - apps/api/src/bootstrap/configure-lifecycle.ts # global /api prefix + URI versioning v1 + shutdown hooks
+      - apps/api/src/bootstrap/configure-swagger.ts # /docs, guarded by config.swaggerEnabled
+
+  api-root-module:
+    file: apps/api/src/app.module.ts
+    role: Root Nest module; deliberate import order - AppConfigModule -> LoggerModule -> CoreModule -> HealthModule, PrivacyModule, GameModule, PaymentsModule, ShareResultsModule (ai/file-security/result-aggregation arrive transitively via GameModule).
+
+  api-test-harness:
+    file: apps/api/src/bootstrap/create-test-app.ts
+    role: Integration-test entry - boots a compiled TestingModule on the real Fastify adapter with production security/validation/lifecycle wiring (optional swagger).
+
+  api-benchmark:
+    file: apps/api/src/benchmark/benchmark.main.ts
+    role: ai:benchmark CLI - flags --mode=mock|real --samples --photo --out; mock is deterministic/CI-safe; real boots NestFactory.createApplicationContext(AppModule) for live billed provider calls; writes report.md + report.json per run.
+    npmScript: ai:benchmark # root package.json: builds apps/api then runs dist/benchmark/benchmark.main.js
+
+  web-app-router:
+    file: apps/web/src/app/layout.tsx
+    role: Next.js App Router root layout (async server component) - locale/theme-aware <html>, AppIntlProvider + Providers, AppHeader, metadata (PWA manifest + icon). Routes live at apps/web/src/app/**/page.tsx (/, /game, /share/[shareId], /help, /privacy, /terms); no route.ts handlers.
+
+  web-request-proxy:
+    file: apps/web/src/proxy.ts
+    role: Next request proxy - mints a per-request nonce and sets the Content-Security-Policy built by apps/web/src/shared/security/content-security-policy.ts on request and response headers; PayPal origins appended only when NEXT_PUBLIC_PAYPAL_CLIENT_ID is configured.
+
+  web-client-providers:
+    file: apps/web/src/app/providers.tsx
+    role: Client boundary hosting AppQueryProvider (TanStack Query cache) and UiPreferencesEffects.
+
+  shared-package:
+    file: packages/shared/src/index.ts
+    role: '@twinzy/shared public surface - star-exports constants/enums/schemas/types/utils; published entrypoint dist/index.js per packages/shared/package.json exports.'
+
+npmEntrypoints:
+  # The frequently used process-level scripts; the full catalog is structure/command-catalog.yaml.
+  dev: Builds @twinzy/shared then runs dev:api and dev:web concurrently (root package.json).
+  dev:api: npm run dev --workspace apps/api
+  dev:web: npm run dev --workspace apps/web
+  start: Runs both built apps concurrently.
+  docker:up: docker compose up -d --build (services in docker-compose.yml)
+  ai:benchmark: Builds apps/api and runs the compiled benchmark CLI.

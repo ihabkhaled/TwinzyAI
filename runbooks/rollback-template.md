@@ -1,4 +1,22 @@
+---
+id: runbook-rollback-template
+title: Rollback Runbook Template
+type: runbook
+authority: canonical
+status: current
+owner: repository owner
+summary: Template for documenting a release-specific rollback procedure; the canonical rollback mechanics live in runbooks/rollback.md.
+keywords: [runbook, rollback, template, release, revert, redeploy]
+contextTier: 2
+relatedCode: [docker-compose.yml]
+relatedTests: []
+relatedDocs: [runbooks/rollback.md, runbooks/release-smoke-test.md]
+readWhen: Instantiating the rollback plan for a specific release.
+---
+
 # Rollback Runbook Template
+
+Instantiate this per release. The canonical mechanics (git revert, env-lever table, verification) are owned by [`rollback.md`](./rollback.md) — record here only what is specific to this release.
 
 ## Trigger
 

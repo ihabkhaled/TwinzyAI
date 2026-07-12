@@ -1,4 +1,22 @@
+---
+id: support-known-issues-template
+title: Known Issues Template
+type: support
+authority: canonical
+status: current
+owner: repository owner
+summary: Template for documenting one known issue during a release or hypercare window; durable items live in the live register.
+keywords: [support, known-issues, template, release, hypercare, workaround, escalation]
+contextTier: 2
+relatedCode: []
+relatedTests: []
+relatedDocs: [support/known-issues.md, support/escalation-matrix.md]
+readWhen: Filing a new known issue for a release/hypercare window.
+---
+
 # Known Issues Template
+
+Instantiate one file per issue during a release/hypercare window; issues that outlive the window move into the live register, [known-issues.md](./known-issues.md).
 
 ## Issue
 

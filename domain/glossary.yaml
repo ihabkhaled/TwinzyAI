@@ -1,0 +1,135 @@
+# domain/glossary.yaml — machine-readable twin of domain/ubiquitous-language.md.
+# One fact, one owner: definitions here mirror that doc; the cited code path is
+# the authoritative source for each term's behavior.
+version: 1
+source: domain/ubiquitous-language.md
+terms:
+  - term: trait
+    definition: >-
+      One field of the 221-field visible, non-identifying taxonomy, represented
+      as localized free text; unclear values stay honest markers.
+    ownedBy: packages/shared/src/constants/trait-category.constants.ts
+    see: domain/trait-taxonomy.md
+  - term: extraction
+    definition: >-
+      Pipeline step 1 and the only image-facing step; photo plus Prompt 1
+      produce Zod-validated written traits, then the photo is wiped.
+    ownedBy: apps/api/src/modules/ai/application/trait-extraction.service.ts
+    see: domain/image-lifecycle.md
+  - term: matching evidence
+    definition: >-
+      The distilled text payload (traits plus aggregates) given to the
+      generation and judge prompts; never the image.
+    ownedBy: apps/api/src/modules/ai/lib/matching-evidence.util.ts
+    see: domain/entities.md
+  - term: candidate
+    definition: >-
+      A playful public style/vibe match proposed in step 2 from written traits
+      only; the pool is bounded 1-25.
+    ownedBy: packages/shared/src/schemas/candidates.schema.ts
+    see: domain/entities.md
+  - term: judge
+    definition: >-
+      Step 3; a strict text-only referee that verifies candidate claims against
+      the evidence, re-scores conservatively, and removes weak or unsafe entries.
+    ownedBy: apps/api/src/modules/ai/application/candidate-judge.service.ts
+    see: domain/calculations.md
+  - term: verdict
+    definition: >-
+      The judged strength of one match; strong, medium, or weak, derived from
+      the final score (80+, 70-79, below 70).
+    ownedBy: packages/shared/src/enums/verdict.enum.ts
+    see: domain/calculations.md
+  - term: aggregation
+    definition: >-
+      The final server-side shaping step; keeps only displayable judged
+      results, re-ranks, caps to the requested count, enforces the server
+      disclaimer, and drops removedCandidates.
+    ownedBy: apps/api/src/modules/result-aggregation/application/result-aggregation.service.ts
+    see: domain/result-ranking.md
+  - term: fallback result
+    definition: >-
+      The safe, disclaimer-carrying response returned when no candidate
+      survives; its text is a server constant, never model output.
+    ownedBy: packages/shared/src/constants/app.constants.ts
+    see: domain/invariants.md
+  - term: disclaimer
+    definition: >-
+      The mandatory style/vibe-not-identity text on every result; always the
+      server-owned localized constant.
+    ownedBy: packages/shared/src/constants/app.constants.ts
+    see: domain/invariants.md
+  - term: prompt version
+    definition: >-
+      written-traits-v5; the contract version every AI response must echo as a
+      Zod literal.
+    ownedBy: packages/shared/src/constants/app.constants.ts
+    see: domain/invariants.md
+  - term: safety check
+    definition: >-
+      The literal-false self-report booleans every AI response must carry; any
+      true value fails schema validation.
+    ownedBy: packages/shared/src/schemas/judge.schema.ts
+    see: domain/safety-boundaries.md
+  - term: request id
+    definition: >-
+      The client-minted UUID identifying one analyze run; stamped on every SSE
+      frame, bound to the PayPal order custom_id, required for cancel.
+    ownedBy: packages/shared/src/schemas/game-stream.schema.ts
+    see: domain/state-machines.md
+  - term: stage
+    definition: >-
+      A pipeline milestone reported over SSE; validating, scanning,
+      extracting-traits, generating-candidates, judging, aggregating.
+    ownedBy: packages/shared/src/enums/game-stream.enum.ts
+    see: domain/state-machines.md
+  - term: stream status
+    definition: >-
+      The per-frame lifecycle value; queued and active are non-terminal,
+      completed, failed, cancelled, and rejected are terminal.
+    ownedBy: packages/shared/src/enums/stream-status.enum.ts
+    see: domain/state-machines.md
+  - term: paywall gate
+    definition: >-
+      The env-gated payment check between file security and extraction; off by
+      default (blank PayPal credentials, game free), on requires a verified
+      PayPal Orders v2 capture before the AI runs. LIVE mode not approved.
+    ownedBy: apps/api/src/modules/payments/application/payment-gate.service.ts
+    see: docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+  - term: capture-at-consumption
+    definition: >-
+      The paywall design; the order is captured only when the analysis actually
+      starts, PayPal itself is the ledger, no order store exists.
+    ownedBy: apps/api/src/modules/payments/adapters/paypal.adapter.ts
+    see: domain/state-machines.md
+  - term: refund-on-failure
+    definition: >-
+      Any failure after capture (AI error, timeout, cancel, disconnect)
+      best-effort refunds the undelivered run.
+    ownedBy: apps/api/src/modules/payments/application/payment-gate.service.ts
+    see: domain/failure-semantics.md
+  - term: wipe
+    definition: >-
+      Zero-filling the uploaded image buffer in a finally block on every path;
+      success, failure, and abort.
+    ownedBy: apps/api/src/modules/file-security/lib/upload-buffer-cleanup.util.ts
+    see: domain/image-lifecycle.md
+  - term: share
+    definition: >-
+      A temporary, image-free copy of one final result in an in-memory TTL
+      cache under an unguessable UUID; expired and missing ids return the same
+      404.
+    ownedBy: apps/api/src/modules/share-results/application/create-share-result.use-case.ts
+    see: domain/sharing-lifecycle.md
+  - term: consent flag
+    definition: >-
+      The multipart field that must be the literal string "true" (or boolean
+      true from JSON) before any file or AI work runs.
+    ownedBy: apps/api/src/modules/game/lib/consent.ts
+    see: domain/consent-model.md
+  - term: region hint
+    definition: >-
+      A coverage-only prompt hint derived from the chosen UI language; it must
+      never constrain who may appear.
+    ownedBy: apps/api/src/modules/ai/model/region-hint.constants.ts
+    see: domain/policies.md

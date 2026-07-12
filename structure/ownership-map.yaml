@@ -1,0 +1,252 @@
+# structure/ownership-map.yaml — module ownership + delivery-lane map.
+# Consumed by the knowledge compiler (scripts/knowledge/build.mjs). Shape contract:
+# top-level "modules:", one subkey per compiler module id, each with
+# responsibility / owner / lane / docs. Lanes are defined in knowledge/delivery-lanes.yaml.
+modules:
+  'api:ai':
+    responsibility: AI provider pipeline (extraction/generation/judge/translation) behind the AI_PROVIDER_ADAPTER port with safety filtering and prompt templates.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/api-ai.md
+      - docs/ai-safety.md
+      - docs/provider-routing.md
+      - rules/14-ai-safety.md
+  'api:file-security':
+    responsibility: Upload verification chain (consent, size, MIME, magic bytes, decode, optional ClamAV fail-closed) plus in-memory buffer zero-fill.
+    owner: repository owner
+    lane: critical
+    docs:
+      - structure/modules/api-file-security.md
+      - docs/file-upload-security.md
+      - rules/15-file-upload-security.md
+  'api:game':
+    responsibility: Analyze-game transport and orchestration - /api/v1/game analyze, SSE stream, cancel, translate-result.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/api-game.md
+      - structure/flows/analyze-flow.md
+      - docs/backend-architecture.md
+  'api:health':
+    responsibility: Liveness endpoint GET /api/v1/health.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/api-health.md
+  'api:payments':
+    responsibility: Env-gated PayPal Orders v2 paid-analysis gate - server-priced orders, capture-at-consumption, best-effort refunds, no persistence.
+    owner: repository owner
+    lane: critical
+    docs:
+      - structure/modules/api-payments.md
+      - structure/flows/payment-flow.md
+      - docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+  'api:privacy':
+    responsibility: Log redaction (base64 runs, secrets) and the no-persistence guarantee.
+    owner: repository owner
+    lane: critical
+    docs:
+      - structure/modules/api-privacy.md
+      - docs/privacy-and-data-retention.md
+  'api:result-aggregation':
+    responsibility: Pure final-response shaping - displayability filter, re-rank, server-owned disclaimer and fallback.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/api-result-aggregation.md
+  'api:share-results':
+    responsibility: Temporary shareable results over an in-memory TTL cache port - no DB, no images, safety re-scan on create.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/api-share-results.md
+      - structure/flows/share-flow.md
+  'api:core':
+    responsibility: Cross-cutting backend platform - typed errors + global exception filter, pino logger, zod validation pipes, throttling, openapi shim, multipart/SSE http helpers, streaming admission + cancel registry.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/layer-map.md
+      - docs/backend-architecture.md
+      - rules/26-error-handling-and-exceptions.md
+      - rules/22-observability-logging.md
+  'api:config':
+    responsibility: Typed zod-validated fail-fast env configuration - env.schema.ts single source, AppConfigService the only injectable surface.
+    owner: repository owner
+    lane: critical
+    docs:
+      - structure/configuration-map.md
+      - docs/env-vars.md
+      - rules/25-configuration-and-environment.md
+  'api:bootstrap':
+    responsibility: Fastify app assembly - security (helmet, multipart caps, CORS closed by default), validation wiring, versioned lifecycle, optional swagger, test harness.
+    owner: repository owner
+    lane: critical
+    docs:
+      - structure/entrypoint-catalog.yaml
+      - structure/runtime-topology.md
+      - docs/backend-architecture.md
+  'api:benchmark':
+    responsibility: ai:benchmark CLI - deterministic mock mode and live real mode scoring providers with production schemas + safety guard.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/ai-benchmarking.md
+  'api:tests':
+    responsibility: Integration suites booting production wiring via createTestApp with FakeAiAdapter and ClamAV stubs, plus shared fixtures.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/testing-strategy.md
+      - rules/09-testing-coverage.md
+  'web:game':
+    responsibility: Core game feature module - setup, payment step, SSE progress, results, translation, share.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/web-game.md
+      - structure/flows/analyze-flow.md
+      - docs/frontend-architecture.md
+  'web:ui-preferences':
+    responsibility: Theme + locale preferences (cookies, html attributes, the only zustand store).
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/web-ui-preferences.md
+      - docs/frontend-architecture.md
+  'web:app':
+    responsibility: Next.js App Router routes, root layout, providers, error boundaries; no route handlers.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/repository-map.md
+      - docs/frontend-architecture.md
+  'web:shared':
+    responsibility: Cross-module app code - shared components, constants, errors, helpers, hooks, CSP builder, test-id registry.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/layer-map.md
+      - docs/frontend-architecture.md
+  'web:e2e':
+    responsibility: Playwright suites (functional/a11y/visual/mobile) against a mocked backend with the paywall pinned off.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/testing-strategy.md
+  'web:pkg-axios':
+    responsibility: Single axios owner - HttpError normalization, zod-validated requests, and the app's only streaming fetch + SSE parser.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+      - structure/layer-map.md
+  'web:pkg-browser':
+    responsibility: SSR-safe browser-globals facade (window/document, matchMedia, uuid, object URLs, clipboard, Web Share).
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-camera':
+    responsibility: Camera wrapper - stream lifecycle and frame capture to File.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-env':
+    responsibility: Zod-validated publicEnv - the only sanctioned client process.env reader (apiBaseUrl, paypal ids, display-only price).
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/configuration-map.md
+      - docs/env-vars.md
+  'web:pkg-i18n':
+    responsibility: next-intl facade - cookie-based locale, en + ar (RTL) catalogs, server/client translation helpers.
+    owner: repository owner
+    lane: standard
+    docs:
+      - rules/12-i18n.md
+      - docs/library-wrapping.md
+  'web:pkg-icons':
+    responsibility: lucide-react facade with an explicit *Icon allowlist.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-image':
+    responsibility: AppImage - next/image wrapper making alt text mandatory.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-link':
+    responsibility: AppLink (typed internal routes) + ExternalLink (outbound-safe) - the only next/link import site.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-logger':
+    responsibility: Leveled app logger; debug/info muted in production appEnv.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-navigation':
+    responsibility: useAppNavigation - typed wrapper over next/navigation.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-paypal':
+    responsibility: Single PayPal JS Buttons SDK wrapper - lazy one-time script injection, StrictMode-safe render, CSP origin list.
+    owner: repository owner
+    lane: critical
+    docs:
+      - structure/flows/payment-flow.md
+      - docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+      - docs/library-wrapping.md
+  'web:pkg-query':
+    responsibility: TanStack Query facade - client factory, provider, useAppQuery/useAppMutation.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-storage':
+    responsibility: Cookie + schema-validated web-storage wrappers, SSR-safe.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-toast':
+    responsibility: sonner facade - ToastType, showToast, AppToaster.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-ui-primitives':
+    responsibility: Design-system primitives (Button, Card, Input, Alert, Spinner, ...) with CVA variants and cn().
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/frontend-architecture.md
+      - docs/library-wrapping.md
+  'web:pkg-zod':
+    responsibility: zod facade - parseSchema with SchemaParseError, re-exported z.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  'web:pkg-zustand':
+    responsibility: The app's only zustand owner (createAppStore); client global state only.
+    owner: repository owner
+    lane: standard
+    docs:
+      - docs/library-wrapping.md
+  shared:
+    responsibility: Cross-side contracts package - constants, frozen ErrorCode catalog, safety wordlists, trait taxonomy, as-const enums, all shared Zod schemas, utils.
+    owner: repository owner
+    lane: standard
+    docs:
+      - structure/modules/shared.md
+      - docs/ai-safety.md

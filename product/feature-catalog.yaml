@@ -1,0 +1,156 @@
+# product/feature-catalog.yaml — canonical machine-readable catalog of user-facing features.
+# Owner: repository owner. Authority: canonical. contextTier: 2.
+# Status values:
+#   live      — shipped and active for every user
+#   env-gated — shipped, inert unless the named env vars are set (default: off)
+#   planned   — recorded intent only, not shipped
+# Every evidence path is repo-relative and resolves at time of writing (2026-07-12).
+version: 1
+statusValues:
+  - live
+  - env-gated
+  - planned
+features:
+  - id: analyze
+    name: Photo analysis (non-streaming)
+    status: live
+    summary: >-
+      One consented photo in, written visible traits + 1-10 ranked style/vibe
+      matches out; image wiped in finally, disclaimer server-enforced.
+    code:
+      - apps/api/src/modules/game/application/analyze-game.use-case.ts
+      - apps/web/src/modules/game/gateway/game.gateway.ts
+    tests:
+      - apps/web/e2e/game-flow.spec.ts
+    docs:
+      - product/game-rules.md
+      - docs/architecture.md
+
+  - id: analyze-streaming
+    name: Streaming analysis (SSE progress)
+    status: live
+    summary: >-
+      SSE-streamed analyze with live stage/traits/candidates frames, per-tab and
+      per-request correlation ids, and multi-tab isolation.
+    code:
+      - apps/api/src/modules/game/application/analyze-game-stream.use-case.ts
+      - apps/web/src/modules/game/gateway/game-stream.gateway.ts
+      - apps/web/src/packages/axios/stream-request.ts
+    tests:
+      - apps/web/e2e/game-streaming.spec.ts
+    docs:
+      - docs/features/multi-tab-stream-isolation/00-intake.md
+
+  - id: cancel-run
+    name: Cancel a running analysis
+    status: live
+    summary: >-
+      Per-run AbortController closes the SSE socket; the backend stops the
+      pipeline; cancel is distinct from error and allows same-photo retry.
+    code:
+      - apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts
+    tests:
+      - apps/web/e2e/game-cancel.spec.ts
+    docs:
+      - product/user-journeys.md
+
+  - id: translate-result
+    name: Text-only result translation on locale switch
+    status: live
+    summary: >-
+      Switching locale re-translates the existing result via a text-only
+      endpoint; the photo is never re-sent.
+    code:
+      - apps/web/src/modules/game/gateway/game-translate.gateway.ts
+      - apps/api/src/modules/ai/prompts/translate-result-prompt.md
+    tests:
+      - apps/web/e2e/game-translate.spec.ts
+    docs:
+      - docs/privacy-and-data-retention.md
+
+  - id: share-links
+    name: Temporary shareable results
+    status: live
+    summary: >-
+      Unguessable UUID share links backed by an in-memory TTL cache (default
+      600s, max 3600s); public /share/[shareId] page with countdown; identical
+      safe 404 for missing or expired links.
+    code:
+      - packages/shared/src/constants/share-result.constants.ts
+      - apps/web/src/modules/game/containers/share-page.container.tsx
+    tests:
+      - apps/web/e2e/share-flow.spec.ts
+    docs:
+      - docs/features/temporary-shareable-results/00-intake.md
+
+  - id: donation-link
+    name: Voluntary PayPal.me donation link
+    status: env-gated
+    enabledBy:
+      - NEXT_PUBLIC_PAYPAL_ME_USERNAME
+    summary: >-
+      Outbound, clearly-voluntary paypal.me link in the nav and result page;
+      strictly validated handle; hidden when the env var is unset; never gates
+      anything.
+    code:
+      - apps/web/src/shared/helpers/donate-link.helper.ts
+      - apps/web/src/shared/constants/donate.constants.ts
+    tests:
+      - apps/web/e2e/donations.spec.ts
+    docs:
+      - product/monetization-policy.md
+      - docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+
+  - id: paywall
+    name: Paid analysis (PayPal Orders v2, capture-at-consumption)
+    status: env-gated
+    liveApproved: false
+    enabledBy:
+      - PAYPAL_CLIENT_ID
+      - PAYPAL_CLIENT_SECRET
+      - NEXT_PUBLIC_PAYPAL_CLIENT_ID
+    summary: >-
+      Server-priced order, buyer approval via PayPal Buttons, verified capture
+      at consumption bound to the request id, auto-refund on failure, no local
+      persistence. SANDBOX-GO only; LIVE mode is NOT approved (4 open
+      conditions recorded in the go/no-go). Blank credentials (default) keep
+      the game fully free.
+    code:
+      - apps/api/src/modules/payments/application/payment-gate.service.ts
+      - apps/api/src/modules/payments/adapters/paypal.adapter.ts
+      - apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts
+    tests:
+      - apps/web/e2e/paywall.spec.ts
+    docs:
+      - product/monetization-policy.md
+      - docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+      - docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md
+
+  - id: pwa-install
+    name: Installable PWA
+    status: live
+    summary: >-
+      Web manifest (standalone, portrait) + SVG icon; installability asserted
+      in unit and e2e suites; mobile-first from 320px.
+    code:
+      - apps/web/public/manifest.webmanifest
+      - apps/web/src/app/layout.tsx
+    tests:
+      - apps/web/src/tests/pwa.test.ts
+      - apps/web/e2e/pwa-a11y.spec.ts
+    docs:
+      - docs/mobile-pwa-standards.md
+
+  - id: ui-preferences
+    name: Theme and locale preferences
+    status: live
+    summary: >-
+      Light/dark theme toggle and en/ar locale switcher; cookie + storage
+      persistence; data-theme and dir mirrored onto <html>; RTL for Arabic.
+    code:
+      - apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts
+      - apps/web/src/modules/ui-preferences/index.ts
+    tests:
+      - apps/web/e2e/mobile-theme.spec.ts
+    docs:
+      - product/localization-expectations.md

@@ -1,0 +1,177 @@
+# Machine-readable inventory of every contract surface in the monorepo.
+# One entry per surface: the doc that describes it, the file that OWNS the
+# shape (executable truth), and the known consumers. Paths are repo-relative.
+# See contracts/README.md for the compatibility policy.
+version: 1
+surfaces:
+  - id: game-analyze
+    kind: http-endpoint
+    method: POST
+    path: /api/v1/game/analyze
+    doc: contracts/api/analyze.md
+    owner: apps/api/src/modules/game/api/game.controller.ts
+    requestSchemas:
+      - apps/api/src/modules/game/api/dto/analyze-request.dto.ts
+    responseSchemas:
+      - packages/shared/src/schemas/game-result.schema.ts
+    consumers:
+      - apps/web/src/modules/game/gateway/game.gateway.ts
+      - apps/api/src/tests/game-analyze.integration.test.ts
+
+  - id: game-analyze-stream
+    kind: http-endpoint-sse
+    method: POST
+    path: /api/v1/game/analyze/stream
+    doc: contracts/api/sse-events.md
+    owner: apps/api/src/modules/game/api/game-stream.presenter.ts
+    requestSchemas:
+      - apps/api/src/modules/game/api/dto/analyze-request.dto.ts
+    responseSchemas:
+      - packages/shared/src/schemas/game-stream.schema.ts
+    consumers:
+      - apps/web/src/modules/game/gateway/game-stream.gateway.ts
+      - apps/api/src/tests/game-analyze-stream.integration.test.ts
+
+  - id: game-cancel
+    kind: http-endpoint
+    method: POST
+    path: /api/v1/game/cancel
+    doc: contracts/api/analyze.md
+    owner: apps/api/src/modules/game/api/game.controller.ts
+    requestSchemas:
+      - packages/shared/src/schemas/game-stream.schema.ts
+    responseSchemas:
+      - packages/shared/src/schemas/game-stream.schema.ts
+    # The current web client cancels by aborting the stream request (server
+    # classifies it as a disconnect); no web gateway calls this endpoint today.
+    consumers:
+      - apps/api/src/tests/game-cancel-body-limit.integration.test.ts
+      - apps/api/src/tests/game-stream-isolation.integration.test.ts
+
+  - id: game-translate-result
+    kind: http-endpoint
+    method: POST
+    path: /api/v1/game/translate-result
+    doc: contracts/api/analyze.md
+    owner: apps/api/src/modules/game/api/game.controller.ts
+    requestSchemas:
+      - packages/shared/src/schemas/translate-result.schema.ts
+    responseSchemas:
+      - packages/shared/src/schemas/game-result.schema.ts
+    consumers:
+      - apps/web/src/modules/game/gateway/game-translate.gateway.ts
+      - apps/api/src/tests/game-translate-result.integration.test.ts
+
+  - id: payments-orders
+    kind: http-endpoint
+    method: POST
+    path: /api/v1/payments/orders
+    doc: contracts/api/payments.md
+    owner: apps/api/src/modules/payments/api/payments.controller.ts
+    requestSchemas:
+      - packages/shared/src/schemas/payment.schema.ts
+    responseSchemas:
+      - packages/shared/src/schemas/payment.schema.ts
+    consumers:
+      - apps/web/src/modules/game/gateway/payment.gateway.ts
+      - apps/api/src/tests/game-analyze-paywall.integration.test.ts
+
+  - id: share-results
+    kind: http-endpoint-group
+    methods: [POST, GET, DELETE]
+    path: /api/v1/share-results
+    doc: contracts/api/share-results.md
+    owner: apps/api/src/modules/share-results/api/share-results.controller.ts
+    requestSchemas:
+      - packages/shared/src/schemas/share-result.schema.ts
+    responseSchemas:
+      - packages/shared/src/schemas/share-result.schema.ts
+    consumers:
+      - apps/web/src/modules/game/gateway/share.gateway.ts
+      - apps/api/src/tests/share-results.integration.test.ts
+
+  - id: health
+    kind: http-endpoint
+    method: GET
+    path: /api/v1/health
+    doc: contracts/api/README.md
+    owner: apps/api/src/modules/health/api/health.controller.ts
+    responseSchemas:
+      - packages/shared/src/schemas/health.schema.ts
+    consumers:
+      - apps/api/src/tests/health.integration.test.ts
+
+  - id: error-envelope
+    kind: response-envelope
+    doc: contracts/api/error-envelope.md
+    owner: packages/shared/src/types/api-error.schema.ts
+    producers:
+      - apps/api/src/core/errors/error-body.mapper.ts
+    consumers:
+      - apps/web/src/modules/game/helpers/game-error.helper.ts
+
+  - id: ai-provider-port
+    kind: internal-port
+    doc: contracts/ai/README.md
+    owner: apps/api/src/modules/ai/model/ai-provider-adapter.types.ts
+    implementations:
+      - apps/api/src/modules/ai/adapters/ai-router.service.ts
+      - apps/api/src/modules/ai/adapters/gemini.adapter.ts
+      - apps/api/src/modules/ai/adapters/openai-compat.adapter.ts
+      - apps/api/src/tests/fixtures/fake-ai-adapter.ts
+    consumers:
+      - apps/api/src/modules/ai/application/trait-extraction.service.ts
+      - apps/api/src/modules/ai/application/candidate-generation.service.ts
+      - apps/api/src/modules/ai/application/candidate-judge.service.ts
+      - apps/api/src/modules/ai/application/result-translation.service.ts
+
+  - id: ai-prompt-io
+    kind: prompt-contract
+    doc: contracts/ai/prompt-io.md
+    owner: apps/api/src/modules/ai/model/prompt-version.constants.ts
+    templates:
+      - apps/api/src/modules/ai/prompts/use-1st-prompt.md
+      - apps/api/src/modules/ai/prompts/use-2nd-prompt.md
+      - apps/api/src/modules/ai/prompts/use-3rd-prompt.md
+      - apps/api/src/modules/ai/prompts/translate-result-prompt.md
+    responseSchemas:
+      - packages/shared/src/schemas/traits.schema.ts
+      - packages/shared/src/schemas/candidates.schema.ts
+      - packages/shared/src/schemas/judge.schema.ts
+      - packages/shared/src/schemas/game-result.schema.ts
+
+  - id: shared-schemas
+    kind: schema-package
+    doc: contracts/frontend-backend/shared-schemas.md
+    owner: packages/shared/src/index.ts
+    consumers:
+      - apps/api
+      - apps/web
+
+  - id: env-contract
+    kind: configuration
+    doc: contracts/configuration/env-contract.md
+    owner: apps/api/src/config/env.schema.ts
+    detailDoc: docs/env-vars.md
+
+  - id: paypal-rest
+    kind: third-party-integration
+    doc: contracts/integrations/paypal.md
+    owner: apps/api/src/modules/payments/adapters/paypal.adapter.ts
+    responseSchemas:
+      - apps/api/src/modules/payments/model/paypal.schemas.ts
+
+  - id: clamav-instream
+    kind: third-party-integration
+    doc: contracts/integrations/clamav.md
+    owner: apps/api/src/modules/file-security/adapters/clamav.adapter.ts
+
+  - id: gemini-sdk
+    kind: third-party-integration
+    doc: contracts/integrations/gemini.md
+    owner: apps/api/src/modules/ai/adapters/gemini.adapter.ts
+
+  - id: openai-compat-http
+    kind: third-party-integration
+    doc: contracts/integrations/openai-compat.md
+    owner: apps/api/src/modules/ai/adapters/openai-compat.adapter.ts

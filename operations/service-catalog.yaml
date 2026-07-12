@@ -1,0 +1,86 @@
+# operations/service-catalog.yaml — deployable units of the Twinzy stack.
+# Wiring source of truth: docker-compose.yml, Dockerfile.api, Dockerfile.web.
+# Update this file in the same delivery stream as any change to those files.
+services:
+  - name: api
+    kind: backend
+    description: NestJS 11 + Fastify HTTP/SSE API (stateless, no database).
+    build:
+      dockerfile: Dockerfile.api
+      image: twinzy-api:local
+      baseImage: node:22-alpine
+      user: node # non-root (Dockerfile.api runner stage)
+    entrypoint: node apps/api/dist/main.js
+    ports:
+      - container: 4000
+        published: ${API_PORT:-4000}
+    healthcheck:
+      command: wget -qO- http://127.0.0.1:4000/api/v1/health
+      interval: 30s
+      timeout: 5s
+      startPeriod: 15s
+      retries: 3
+      definedIn: Dockerfile.api
+    resources: # docker-compose.yml
+      memLimit: 1g
+      cpus: 1.0
+    hardening: # docker-compose.yml
+      readOnly: true
+      tmpfs: [/tmp]
+      securityOpt: [no-new-privileges:true]
+      capDrop: [ALL]
+      volumes: none # "No volumes on purpose: uploads must never persist."
+    restartPolicy: unless-stopped
+    configSource: apps/api/src/config/env.schema.ts # fail-fast zod validation
+    runbooks:
+      - runbooks/api-outage.md
+      - runbooks/ai-provider-outage.md
+
+  - name: web
+    kind: frontend
+    description: Next.js App Router PWA served from the standalone build output.
+    build:
+      dockerfile: Dockerfile.web
+      image: twinzy-web:local
+      baseImage: node:22-alpine
+      user: node
+      buildArgs:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:4000}
+    entrypoint: node apps/web/server.js
+    ports:
+      - container: 3000
+        published: ${WEB_PORT:-3000}
+    healthcheck:
+      command: wget -qO- http://127.0.0.1:3000/
+      interval: 30s
+      timeout: 5s
+      startPeriod: 15s
+      retries: 3
+      definedIn: Dockerfile.web
+    resources:
+      memLimit: 512m
+      cpus: 0.5
+    hardening:
+      readOnly: true
+      tmpfs: [/tmp]
+      securityOpt: [no-new-privileges:true]
+      capDrop: [ALL]
+    restartPolicy: unless-stopped
+    dependsOn: [api]
+
+  - name: clamav
+    kind: sidecar
+    description: >-
+      Optional virus scanner (clamd). Started only with the "clamav" compose
+      profile; reached over the internal network via the ClamAV adapter
+      (apps/api/src/modules/file-security/adapters/clamav.adapter.ts) when
+      ENABLE_CLAMAV=true. Scanner errors fail closed.
+    image: clamav/clamav:stable
+    profiles: [clamav]
+    ports:
+      - container: 3310
+        published: none # expose-only; not published outside the compose network
+    healthcheck: none # no healthcheck defined in docker-compose.yml
+    hardening:
+      securityOpt: [no-new-privileges:true]
+    restartPolicy: unless-stopped

@@ -1,0 +1,94 @@
+# structure/command-catalog.yaml — the important root npm scripts (authored; type: structure).
+# Source of truth for the commands themselves: root package.json#scripts. This catalog
+# explains intent; if it disagrees with package.json, package.json wins — update this file.
+commands:
+  dev:
+    run: npm run dev
+    does: Build @twinzy/shared, then run api (port 4000) and web (port 3000) dev servers concurrently.
+  build:
+    run: npm run build
+    does: Build shared, then apps/api, then apps/web (order matters - shared first).
+  build:shared:
+    run: npm run build:shared
+    does: Compile packages/shared to dist/; prerequisite of nearly every other script (stale dist is a known pitfall).
+
+  lint:
+    run: npm run lint
+    does: Build shared, then eslint over the whole repo with --max-warnings 0 (architecture plugins included).
+  typecheck:
+    run: npm run typecheck
+    does: Build shared, then tsc --noEmit on the root project plus every workspace typecheck.
+  format:
+    run: npm run format
+    does: prettier --write across the repo (format:check is the CI/read-only variant).
+
+  test:
+    run: npm run test
+    does: Build shared, then run all vitest projects (api-unit, api-integration, web-unit, shared-unit, lint-rules).
+  test:unit:
+    run: npm run test:unit
+    does: Only the unit projects - api-unit, web-unit, shared-unit, lint-rules.
+  test:integration:
+    run: npm run test:integration
+    does: Only api-integration (apps/api/src/tests/*.integration.test.ts booting production wiring).
+  test:coverage:
+    run: npm run test:coverage
+    does: Full vitest run with coverage - the coverage gate used by validate.
+  test:e2e:
+    run: npm run test:e2e
+    does: Playwright suites in apps/web/e2e (mocked backend; paywall pinned off in the config).
+  test:security:
+    run: npm run test:security
+    does: api unit + integration scoped to modules/file-security, modules/privacy, and common.
+  test:ai:
+    run: npm run test:ai
+    does: api unit + integration scoped to modules/ai, modules/game, modules/result-aggregation.
+  test:a11y:
+    run: npm run test:a11y
+    does: Playwright a11y project (axe) in apps/web.
+  test:visual:
+    run: npm run test:visual
+    does: Playwright visual-snapshot project in apps/web.
+
+  validate:
+    run: npm run validate
+    does: The full local gate - format:check, lint, typecheck, test:coverage, build, quality:dead-code (knip), quality:circular (madge).
+  quality:dead-code:
+    run: npm run quality:dead-code
+    does: knip - unused files/exports/dependencies.
+  quality:circular:
+    run: npm run quality:circular
+    does: madge --circular over apps/web/src and apps/api/src.
+
+  security:scan:
+    run: npm run security:scan
+    does: trivy fs (vuln, secret, misconfig incl. dev deps), fails on HIGH/CRITICAL.
+  security:scan:secrets:
+    run: npm run security:scan:secrets
+    does: node scripts/scan-secrets.mjs - repo secret scan.
+  audit:
+    run: npm run audit
+    does: npm audit --audit-level=low.
+
+  docker:up:
+    run: npm run docker:up
+    does: docker compose up -d --build (api + web; clamav via the clamav profile). See structure/runtime-topology.md.
+  docker:down:
+    run: npm run docker:down
+    does: docker compose down.
+  docker:logs:
+    run: npm run docker:logs
+    does: docker compose logs -f.
+
+  ai:benchmark:
+    run: npm run ai:benchmark
+    does: Build apps/api and run the benchmark CLI (mock default; --mode=real makes live billed provider calls). Doc - docs/ai-benchmarking.md.
+  load-test:
+    run: npm run load-test
+    does: node scripts/load-test.mjs.
+  calibrate:
+    run: npm run calibrate
+    does: Build shared then node scripts/calibrate.mjs.
+
+  # Knowledge-OS commands are documented in knowledge/README.md
+  # (knowledge:build, knowledge:context, knowledge:validate, knowledge:benchmark, knowledge:report).

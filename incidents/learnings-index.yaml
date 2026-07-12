@@ -1,0 +1,18 @@
+# incidents/learnings-index.yaml — machine-readable index of incident learnings.
+# Append one entry when an incident record moves to incidents/resolved/
+# (process: incidents/README.md). Keep entries public-repo safe.
+#
+# Entry schema:
+#   - id: INC-YYYY-NNN            # matches the incident record's Incident ID
+#     date: YYYY-MM-DD            # resolution date
+#     title: <short title>
+#     severity: SEV-1|SEV-2|SEV-3
+#     record: incidents/resolved/<file>.md
+#     postmortem: incidents/resolved/<file>.md | null
+#     rootCause: <one line>
+#     learnings:
+#       - <one-line durable lesson>
+#     policyChanges:              # canonical docs updated because of this incident
+#       - <repo-relative path> | []
+learnings: []
+# No incidents have been recorded yet — this list is intentionally empty.

@@ -1,0 +1,405 @@
+# structure/module-catalog.yaml — canonical module catalog (authored; type: structure).
+# One entry per module. Evidence: module files cited in each entry; detailed pages in
+# structure/modules/*.md. Owner: repository owner. Lanes live in structure/ownership-map.yaml.
+modules:
+  'api:ai':
+    path: apps/api/src/modules/ai
+    responsibility: >-
+      AI provider pipeline: trait extraction (the only image-capable step), candidate
+      generation, judge, and translation behind the AI_PROVIDER_ADAPTER port served by
+      AiRouterService; GeminiAdapter is the sole @google/genai importer and
+      OpenAiCompatAdapter serves openai/deepseek/qwen/kimi/glm; AiSafetyService filters
+      forbidden wording; PromptTemplateRepository loads prompts/*.md.
+    layerAnatomy: [adapters, application, infrastructure, lib, model, prompts, tests]
+    publicSurface:
+      # apps/api/src/modules/ai/index.ts
+      - AiModule
+      - AiSafetyService
+      - CandidateGenerationService
+      - CandidateJudgeService
+      - ResultTranslationService
+      - TraitExtractionService
+      - PromptTemplateRepository
+      - buildAiImageInput
+      - buildMatchingEvidence
+      - model/ai-provider-adapter.types (AI_PROVIDER_ADAPTER port + call types)
+      - model/gemini.types, model/judge-input.types, model/matching-evidence.types
+    dependsOn: ['api:privacy', 'api:core', 'api:config', shared]
+    consumers: ['api:game', 'api:benchmark']
+    tests: apps/api/src/modules/ai/tests
+    risks:
+      - Only trait extraction may carry the image — enforced by AI_IMAGE_STEPS
+        (apps/api/src/config/gemini-step.constants.ts) and the router's vision-capable filter.
+      - Every response is zod-validated and safety-filtered; weakening either violates
+        product constraints (rules/14-ai-safety.md).
+      - GEMINI_MODEL and all caps are env-only; never hardcode a model name.
+    commonChanges:
+      - Add or reroute a provider/model via AI_ROUTE_<STEP> env and provider-registry.service.ts.
+      - Prompt edits in apps/api/src/modules/ai/prompts/*.md (placeholder-validated).
+      - Tune shadow sampling (AI_SHADOW_* env keys).
+    forbiddenDependencies:
+      - Importing @google/genai anywhere except adapters/gemini.adapter.ts.
+      - Passing image input to generation/judge/translation (image-less signatures by construction).
+      - Reading process.env directly (AppConfigService only).
+
+  'api:file-security':
+    path: apps/api/src/modules/file-security
+    responsibility: >-
+      Backend upload-verification chain (rules/15-file-upload-security.md): consent →
+      presence → size → MIME/extension allowlist + consistency → magic bytes → structural
+      decode with dimension bounds → optional ClamAV INSTREAM scan failing closed; plus
+      TemporaryFileCleanupService zero-filling the in-memory upload buffer.
+    layerAnatomy: [adapters, application, lib, model, tests]
+    publicSurface:
+      # apps/api/src/modules/file-security/index.ts
+      - FileSecurityService
+      - TemporaryFileCleanupService
+      - FileSecurityModule
+      - wipeUploadedImageBuffer
+      - UploadedImageFile (type)
+    dependsOn: ['api:core', 'api:config', shared]
+    consumers: ['api:game']
+    tests: apps/api/src/modules/file-security/tests
+    risks:
+      - Validation order is a documented contract; reordering weakens the chain.
+      - Virus scan must fail CLOSED when ENABLE_CLAMAV is true (virus-scan.service.ts).
+      - Buffers must never touch disk; wipe is called from use-case finally blocks.
+    commonChanges:
+      - Adjust MAX_IMAGE_SIZE_BYTES bounds or add an image format (magic bytes + decode helpers).
+      - ClamAV host/port topology changes (CLAMAV_HOSTS, CLAMAV_PORT).
+    forbiddenDependencies:
+      - Writing uploads to disk or any persistence.
+      - Skipping the consent check before file processing.
+
+  'api:game':
+    path: apps/api/src/modules/game
+    responsibility: >-
+      The analyze-game feature and only multi-endpoint transport: POST /api/v1/game/
+      {analyze, analyze/stream (SSE), cancel, translate-result}; use-cases orchestrate
+      consent + file security → payment capture → image-only extraction → buffer wipe →
+      text-only StyleMatchService (generation/judge/aggregation); GameStreamPresenter
+      owns the SSE lifecycle.
+    layerAnatomy: [api, api/dto, application, lib, model, tests]
+    publicSurface:
+      # apps/api/src/modules/game/index.ts
+      - GameModule
+    dependsOn:
+      - 'api:ai'
+      - 'api:file-security'
+      - 'api:payments'
+      - 'api:result-aggregation'
+      - 'api:privacy'
+      - 'api:core' # streaming, http, rate-limit, validation, openapi, errors
+      - 'api:config'
+      - shared
+    consumers: [] # registered by app.module.ts only
+    tests: apps/api/src/modules/game/tests (+ apps/api/src/tests/game-*.integration.test.ts)
+    risks:
+      - Payment capture happens after cheap local checks and before the AI call;
+        refundOnFailure must run on any error after capture (analyze-game.use-case.ts).
+      - SSE frames must stay stamped with tabId/requestId/streamId; cancel requires all
+        three to match (core StreamRegistry).
+      - The upload buffer must be wiped on every path, including stream rejection paths.
+    commonChanges:
+      - New SSE event/stage (change shared enums + game-stream.presenter.ts + web gateway).
+      - Throttle or route changes in model/game.constants.ts (single-sourced for bootstrap body caps).
+    forbiddenDependencies:
+      - Business logic in the controller (thin, one delegation per method).
+      - Passing the image (or any derivative) beyond TraitExtractionService.
+
+  'api:health':
+    path: apps/api/src/modules/health
+    responsibility: >-
+      Liveness endpoint GET /api/v1/health returning {status:'ok', service, version,
+      uptimeSeconds} per the shared HealthResponse schema.
+    layerAnatomy: [api, application, model, tests]
+    publicSurface:
+      # apps/api/src/modules/health/index.ts
+      - HealthModule
+    dependsOn: ['api:core', shared] # openapi decorator only
+    consumers: []
+    tests: apps/api/src/modules/health/tests (+ apps/api/src/tests/health.integration.test.ts)
+    risks:
+      - Version constants (model/health.constants.ts) drift from releases if forgotten.
+    commonChanges:
+      - Bump API_SERVICE_VERSION; extend the health payload via the shared schema first.
+    forbiddenDependencies:
+      - Any dependency on feature modules or external services.
+
+  'api:payments':
+    path: apps/api/src/modules/payments
+    responsibility: >-
+      Config-gated paid-analysis gate over PayPal Orders v2: POST /api/v1/payments/orders
+      creates a server-priced order bound to a requestId; PaymentGateService captures at
+      consumption inside analyze runs and best-effort refunds undelivered runs;
+      PaypalAdapter is the only PayPal REST client. Paywall ON iff both
+      PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET are set; blank (default) = fully free.
+    layerAnatomy: [adapters, api, application, lib, model, tests]
+    publicSurface:
+      # apps/api/src/modules/payments/index.ts
+      - PaymentGateService
+      - PaymentHolder (type)
+      - PaymentsModule
+    dependsOn: ['api:core', 'api:config', shared]
+    consumers: ['api:game']
+    tests: apps/api/src/modules/payments/tests (+ apps/api/src/tests/game-analyze-paywall.integration.test.ts)
+    risks:
+      - Money flow — critical lane; LIVE mode is NOT approved (open conditions recorded in
+        docs/features/paypal-donations-and-paid-results/22-go-no-go.md).
+      - Capture verification must stay field-by-field (status COMPLETED, exact
+        amount/currency, custom_id binding) in paypal.adapter.ts verifyCapture.
+      - No persistence — PaymentCaptureRecord is in-memory only; refund failures log for
+        manual PayPal-dashboard reconciliation.
+    commonChanges:
+      - Price/currency via PAYMENT_PRICE_VALUE / PAYMENT_PRICE_CURRENCY env.
+      - Sandbox/live base URL via PAYPAL_ENV (apps/api/src/config/payment.constants.ts).
+    forbiddenDependencies:
+      - Talking to PayPal REST anywhere except adapters/paypal.adapter.ts.
+      - Trusting a client-sent price (schemas deliberately omit price).
+
+  'api:privacy':
+    path: apps/api/src/modules/privacy
+    responsibility: >-
+      Log redaction and the no-persistence guarantee: LogRedactionService wrapping the pure
+      redactForLog helper (caps values at 500 chars; replaces base64 runs — the signature of
+      leaked image bytes — and key/token/authorization secrets with [REDACTED]).
+    layerAnatomy: [application, lib, model, tests]
+    publicSurface:
+      # apps/api/src/modules/privacy/index.ts
+      - LogRedactionService
+      - redactForLog
+      - PrivacyModule
+    dependsOn: ['api:core', shared]
+    consumers: ['api:ai', 'api:game']
+    tests: apps/api/src/modules/privacy/tests
+    risks:
+      - Weakening redaction patterns can leak image bytes or secrets into logs.
+    commonChanges:
+      - New secret-key patterns in model/privacy.constants.ts.
+    forbiddenDependencies:
+      - Any repository/persistence (the module doc states there is deliberately none in this API).
+
+  'api:result-aggregation':
+    path: apps/api/src/modules/result-aggregation
+    responsibility: >-
+      Pure final-response shaping: keep only displayable judged results (shouldDisplay,
+      non-weak verdict, MIN_DISPLAY_SCORE, safety evidence), re-rank and cap to
+      resultCount, enforce the server-side localized disclaimer and fallback message,
+      drop the judge's removedCandidates from the public payload.
+    layerAnatomy: [application, lib, model, tests]
+    publicSurface:
+      # apps/api/src/modules/result-aggregation/index.ts
+      - ResultAggregationService
+      - ResultAggregationModule
+    dependsOn: ['api:core', shared]
+    consumers: ['api:game']
+    tests: apps/api/src/modules/result-aggregation/tests
+    risks:
+      - The model's own disclaimer must never be trusted; the server-owned localized copy
+        from @twinzy/shared always overwrites it (lib/result-aggregation.mapper.ts).
+    commonChanges:
+      - Display-threshold changes go through shared constants (MIN_DISPLAY_SCORE in
+        packages/shared/src/constants/trait.constants.ts), not local values.
+    forbiddenDependencies:
+      - Env reads, controllers, external calls — this module is pure.
+
+  'api:share-results':
+    path: apps/api/src/modules/share-results
+    responsibility: >-
+      Temporary shareable results with no DB and no images: POST/GET/DELETE
+      /api/v1/share-results[/:shareId] over the SHARE_RESULT_CACHE port bound to an
+      in-memory TTL cache; create re-validates the untrusted payload (byte budget,
+      forbidden wording, embedded-image detection, server-owned disclaimer), mints
+      CSPRNG UUID ids, and capacity-caps active records.
+    layerAnatomy: [api, application, infrastructure, lib, model, tests]
+    publicSurface:
+      # apps/api/src/modules/share-results/index.ts
+      - ShareResultsModule
+    dependsOn: ['api:core', 'api:config', shared]
+    consumers: [] # standalone; registered by app.module.ts
+    tests: apps/api/src/modules/share-results/tests (+ apps/api/src/tests/share-results.integration.test.ts)
+    risks:
+      - Missing and expired ids must return the identical 404 (no existence oracle).
+      - In-memory driver is single-instance; records vanish on restart (Redis/Valkey is
+        the documented production extension of the same port).
+    commonChanges:
+      - TTL/payload/capacity via SHARE_RESULT_* env keys.
+      - A second cache driver implements ShareResultCachePort (model/share-result.port.ts).
+    forbiddenDependencies:
+      - Storing images or any image derivative (EMBEDDED_IMAGE_PATTERNS reject them).
+      - Bypassing the safety re-scan on create.
+
+  'web:game':
+    path: apps/web/src/modules/game
+    responsibility: >-
+      The core game feature: landing, upload/camera/consent setup, env-gated PayPal
+      payment step, SSE-streamed analyze with live progress, result view, text-only
+      locale re-translation, temporary share links and the public share page.
+    layerAnatomy:
+      [
+        components,
+        containers,
+        hooks,
+        services,
+        gateway,
+        model,
+        helpers,
+        mappers,
+        queries,
+        schemas,
+        test,
+      ]
+    publicSurface:
+      # apps/web/src/modules/game/index.ts — deep imports forbidden
+      - PrivacyNotice
+      - GameContainer
+      - LandingContainer
+      - SharePageContainer
+    dependsOn: ['web:shared', 'web:packages', shared]
+    consumers: ['web:app']
+    tests: apps/web/src/modules/game/test (+ apps/web/e2e)
+    risks:
+      - The uploaded image is an in-memory File + object URL only; never written to any
+        browser storage (useImageUpload.hook.ts).
+      - SSE frames are filtered by tab id + request id; breaking correlation breaks
+        multi-tab isolation.
+      - Payment UI must render free flow when isPayPalConfigured() is false.
+    commonChanges:
+      - New result/UI states in containers + i18n catalogs (en + ar, RTL).
+      - Error-code → copy mapping in model/game.constants.ts (GAME_ERROR_KEY_BY_CODE).
+    forbiddenDependencies:
+      - Direct vendor imports (axios/next-intl/PayPal SDK/etc. only via apps/web/src/packages).
+      - Business logic in *.component.tsx (pure composition; hooks/services own logic).
+
+  'web:ui-preferences':
+    path: apps/web/src/modules/ui-preferences
+    responsibility: >-
+      Theme + locale preferences: LocaleSwitcher/ThemeToggle/UiPreferencesEffects
+      containers, hooks writing NEXT_LOCALE and twinzy.theme cookies and mirroring
+      data-theme/dir onto <html>, and the app's only zustand store (theme).
+    layerAnatomy: [containers, hooks, store, model, schemas, types, test]
+    publicSurface:
+      # apps/web/src/modules/ui-preferences/index.ts
+      - LocaleSwitcher
+      - ThemeToggle
+      - UiPreferencesEffects
+    dependsOn: ['web:shared', 'web:packages', shared]
+    consumers: ['web:app']
+    tests: apps/web/src/modules/ui-preferences/test
+    risks:
+      - The store must stay pure (state only); all side effects live in the effects hook.
+    commonChanges:
+      - New locales require catalog + RTL-set changes in apps/web/src/packages/i18n and
+        LANGUAGE_CODES in packages/shared/src/constants/language.constants.ts.
+    forbiddenDependencies:
+      - Raw zustand imports (only via apps/web/src/packages/zustand/create-app-store.ts).
+
+  'web:app':
+    path: apps/web/src/app
+    responsibility: >-
+      App Router: routes / /game /share/[shareId] /help /privacy /terms; root layout
+      (locale + theme-aware html, AppHeader, providers); error/global-error/not-found/
+      loading boundaries; no route.ts handlers — all HTTP goes to the NestJS API via gateways.
+    layerAnatomy: [pages, layout, providers, error-boundaries, styles, variants]
+    publicSurface:
+      - Next.js file-system routes (no index.ts barrel)
+    dependsOn: ['web:game', 'web:ui-preferences', 'web:shared', 'web:packages']
+    consumers: [] # framework entry
+    tests: apps/web/e2e (route-level coverage; unit tests live in the modules)
+    risks:
+      - global-error.tsx must keep hardcoded English fallback copy (i18n unavailable after
+        a root crash).
+    commonChanges:
+      - New route = new page.tsx + metadata via getServerTranslations + e2e coverage.
+    forbiddenDependencies:
+      - Deep imports into module internals (module index barrels only).
+      - Server-side data handlers (route.ts) without a recorded architecture decision.
+
+  'web:shared':
+    path: apps/web/src/shared
+    responsibility: >-
+      Cross-module app code: feedback/layout/primitive components, constants (routes,
+      test ids, storage keys, donate base URL, theme), AppError + i18n error-key catalog,
+      fonts, helpers (donate-link, theme-cookie), hooks, CSP builder + external-url guard,
+      test-id helper, small utils.
+    layerAnatomy:
+      [api, components, constants, enums, errors, fonts, helpers, hooks, security, testing, utils]
+    publicSurface:
+      - Folder-scoped exports (no single barrel); CSP builder at shared/security/content-security-policy.ts
+    dependsOn: ['web:packages', shared]
+    consumers: ['web:app', 'web:game', 'web:ui-preferences']
+    tests: co-located *.test.ts(x) under apps/web/src/shared
+    risks:
+      - The CSP builder appends PayPal origins and "font-src data:" ONLY when
+        NEXT_PUBLIC_PAYPAL_CLIENT_ID is configured — the free game's policy is never loosened.
+      - external-url.helper.ts allows only https:/mailto: outbound anchors.
+    commonChanges:
+      - New test ids in constants/test-ids.constants.ts (canonical registry).
+    forbiddenDependencies:
+      - Feature-module imports (shared must not depend on modules/).
+
+  'web:packages':
+    path: apps/web/src/packages
+    responsibility: >-
+      Vendor wrappers — each directory is the single sanctioned owner of one library or
+      browser concern; raw imports elsewhere are lint errors.
+    vendors:
+      [
+        axios,
+        browser,
+        camera,
+        env,
+        i18n,
+        icons,
+        image,
+        link,
+        logger,
+        navigation,
+        paypal,
+        query,
+        storage,
+        toast,
+        ui-primitives,
+        zod,
+        zustand,
+      ]
+    layerAnatomy: [one wrapper folder per vendor, each with its own tests]
+    publicSurface:
+      - Per-package entry files (e.g. axios/http-client.ts + stream-request.ts,
+        env/public-env.ts, paypal/paypal-sdk.ts, query/make-query-client + AppQueryProvider)
+    dependsOn: [shared]
+    consumers: ['web:app', 'web:game', 'web:ui-preferences', 'web:shared']
+    tests: co-located tests per package (e.g. apps/web/src/packages/axios/*.test.ts)
+    risks:
+      - packages/axios/stream-request.ts is the ONE place allowed to open a streaming fetch.
+      - packages/env/public-env.ts is the only sanctioned client process.env reader.
+      - packages/paypal is critical-lane (money-adjacent SDK surface).
+    commonChanges:
+      - New vendor = new wrapper folder + boundary rule in eslint/frontend/package-boundaries.config.mjs.
+    forbiddenDependencies:
+      - Importing feature modules or app routes (packages are the bottom of the frontend stack).
+
+  shared:
+    path: packages/shared
+    responsibility: >-
+      Cross-side contracts package (@twinzy/shared): API route constants, the frozen
+      24-code ErrorCode catalog, safety wordlists, the 16-category/221-field trait
+      taxonomy, as-const enums, all cross-side Zod schemas (traits/candidates/judge/
+      game-result/game-stream/translate/share/payment/health), and utils.
+    layerAnatomy: [constants, enums, schemas, types, utils, tests]
+    publicSurface:
+      # packages/shared/src/index.ts — star-exports ./constants ./enums ./schemas ./types ./utils
+      - Everything is reachable via the root barrel; published entrypoint dist/index.js
+    dependsOn: [] # sole runtime dependency is zod
+    consumers: ['api:*', 'web:*']
+    tests: packages/shared/tests
+    risks:
+      - ErrorCode values are add-only — never rename/remove (public API contract).
+      - GAME_PROMPT_VERSION is a z.literal in four schemas; bumping it invalidates every
+        prompt/schema pairing at once.
+      - dist/ can go stale relative to src/ — always npm run build:shared before consuming.
+    commonChanges:
+      - New shared bound/enum/schema field — update schema + both consumers + fixtures in
+        packages/shared/tests/fixtures/advanced-fixtures.ts.
+    forbiddenDependencies:
+      - Any dependency besides zod; no app-side imports (contracts flow one way).
