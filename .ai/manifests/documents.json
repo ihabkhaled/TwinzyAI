@@ -1340,7 +1340,7 @@
       "sourceMentions": [],
       "summary": "Accepted — implementation deferred until profiling proves it is needed.",
       "title": "ADR-003 — Horizontal Scaling Plan for Twinzy API",
-      "tokens": 964,
+      "tokens": 948,
       "type": "adr"
     },
     {
@@ -9255,7 +9255,7 @@
       "sourceMentions": [],
       "summary": "> Copy everything below the line into a capable AI coding agent inside any repository.",
       "title": "The Generic Knowledge-OS Prompt (portable — works on any repository)",
-      "tokens": 6426,
+      "tokens": 6333,
       "type": "doc"
     },
     {
@@ -13145,7 +13145,7 @@
       ],
       "summary": "**Request ID:** twinzy-hardening-v3",
       "title": "TwinzyAI Hardening v3 — 32-Section Audit & Prioritized Implementation Plan",
-      "tokens": 9630,
+      "tokens": 9469,
       "type": "doc"
     },
     {
@@ -13174,7 +13174,7 @@
       "sourceMentions": [],
       "summary": "- **Request ID:** twinzy-hardening-v3",
       "title": "00-intake.md — TwinzyAI Hardening v3",
-      "tokens": 379,
+      "tokens": 374,
       "type": "doc"
     },
     {
@@ -13211,7 +13211,7 @@
       "sourceMentions": [],
       "summary": "TwinzyAI’s current pipeline is safe but the result quality is not precise enough. The score can feel forced, the result count is locked at 5, the prompts do not extract the full set of visible style/vibe signals, and the test/lint/securi...",
       "title": "01-business-analysis.md — TwinzyAI Hardening v3",
-      "tokens": 787,
+      "tokens": 774,
       "type": "doc"
     },
     {
@@ -13246,7 +13246,7 @@
       "sourceMentions": [],
       "summary": "This hardening protects the product’s credibility. A free, privacy-safe AI game that produces precise, playful, evidence-based results is more shareable and more defensible. The result-count feature improves user control and session enga...",
       "title": "02-business-development.md — TwinzyAI Hardening v3",
-      "tokens": 395,
+      "tokens": 388,
       "type": "doc"
     },
     {
@@ -13285,7 +13285,7 @@
       "sourceMentions": [],
       "summary": "1. **Result-count control**",
       "title": "03-product-requirements.md — TwinzyAI Hardening v3",
-      "tokens": 1177,
+      "tokens": 1155,
       "type": "doc"
     },
     {
@@ -13322,7 +13322,7 @@
       "sourceMentions": [],
       "summary": "- Engineering (full-stack, backend, frontend)",
       "title": "04-cross-functional-refinement.md — TwinzyAI Hardening v3",
-      "tokens": 875,
+      "tokens": 858,
       "type": "doc"
     },
     {
@@ -13359,7 +13359,7 @@
       ],
       "summary": "- Define `ResultCountSchema`, `MIN_RESULT_COUNT`, `MAX_RESULT_COUNT`, `DEFAULT_RESULT_COUNT`.",
       "title": "05-delivery-plan.md — TwinzyAI Hardening v3",
-      "tokens": 983,
+      "tokens": 964,
       "type": "doc"
     },
     {
@@ -13395,7 +13395,7 @@
       "sourceMentions": [],
       "summary": "The monorepo uses npm workspaces with a shared package (`@twinzy/shared`) that must be built before `apps/web` and `apps/api` can consume it. The backend is NestJS 11 on Fastify with typed Zod validation, the frontend is Next.js App Rout...",
       "title": "06-technical-refinement.md — TwinzyAI Hardening v3",
-      "tokens": 781,
+      "tokens": 768,
       "type": "doc"
     },
     {
@@ -13431,7 +13431,7 @@
       "sourceMentions": [],
       "summary": "1. **M0 — Hygiene:** Clean lockfile, remove stale node_modules content, verify `.env` is gitignored.",
       "title": "07-technical-roadmap.md — TwinzyAI Hardening v3",
-      "tokens": 686,
+      "tokens": 673,
       "type": "doc"
     },
     {
@@ -13465,7 +13465,7 @@
       "sourceMentions": [],
       "summary": "- Backend: `api → application → domain → infrastructure/adapters` with cross-cutting `src/core` and `src/config`.",
       "title": "08-architecture-review.md — TwinzyAI Hardening v3",
-      "tokens": 615,
+      "tokens": 604,
       "type": "doc"
     },
     {
@@ -13503,7 +13503,7 @@
       "sourceMentions": [],
       "summary": "- `apps/api` — analyze, analyze-stream, cancel, translate-result endpoints; prompts; AI services; result aggregation; file security.",
       "title": "09-impact-analysis.md — TwinzyAI Hardening v3",
-      "tokens": 656,
+      "tokens": 642,
       "type": "doc"
     },
     {
@@ -13538,7 +13538,7 @@
       "sourceMentions": [],
       "summary": "| Standard | Status | Notes |",
       "title": "10-engineering-standards-check.md — TwinzyAI Hardening v3",
-      "tokens": 628,
+      "tokens": 618,
       "type": "doc"
     },
     {
@@ -13574,7 +13574,7 @@
       "sourceMentions": [],
       "summary": "| Requirement | Test layers | Evidence location |",
       "title": "11-test-strategy.md — TwinzyAI Hardening v3",
-      "tokens": 1000,
+      "tokens": 985,
       "type": "doc"
     },
     {
@@ -13612,7 +13612,7 @@
       ],
       "summary": "- `packages/shared/src/constants/**/*.ts`",
       "title": "12-coverage-plan.md — TwinzyAI Hardening v3",
-      "tokens": 716,
+      "tokens": 700,
       "type": "doc"
     },
     {
@@ -13653,7 +13653,7 @@
       "sourceMentions": [],
       "summary": "Per `CLAUDE.md`, the following must be true before phase 14 starts:",
       "title": "13-implementation-readiness.md — TwinzyAI Hardening v3",
-      "tokens": 1009,
+      "tokens": 986,
       "type": "doc"
     },
     {
@@ -13690,7 +13690,7 @@
       "sourceMentions": [],
       "summary": "All local quality gates were executed after the implementation phase. The codebase was updated for the result-count feature, prompt v3, shared contract tightening, and supporting documentation/runbooks.",
       "title": "15-dev-validation-report.md — TwinzyAI Hardening v3",
-      "tokens": 718,
+      "tokens": 706,
       "type": "doc"
     },
     {
@@ -13762,7 +13762,7 @@
       ],
       "summary": "| Document | Why it changed |",
       "title": "23-documentation-changelog.md — TwinzyAI Hardening v3",
-      "tokens": 495,
+      "tokens": 489,
       "type": "doc"
     },
     {
@@ -21426,7 +21426,7 @@
       "sourceMentions": [],
       "summary": "A **free**, mobile-first, privacy-safe AI game. Upload a photo, get playful public style/vibe",
       "title": "Twinzy",
-      "tokens": 1526,
+      "tokens": 1495,
       "type": "doc"
     },
     {
@@ -21631,7 +21631,7 @@
       ],
       "summary": "This release improves result quality, user control, and production readiness while keeping the game free, privacy-safe, and free of face recognition, identity matching, or biometric comparison.",
       "title": "Release Notes — Twinzy Hardening v3",
-      "tokens": 749,
+      "tokens": 734,
       "type": "release-note"
     },
     {
@@ -25747,7 +25747,7 @@
       ],
       "summary": "Rotating exposed or aging secrets — Gemini API key, PayPal REST credentials, and OpenAI-compatible provider keys — with verification and scanner sweep.",
       "title": "Runbook — Secret Rotation (Gemini, PayPal, Provider Keys)",
-      "tokens": 1398,
+      "tokens": 1374,
       "type": "runbook"
     },
     {
@@ -25952,7 +25952,7 @@
       "sourceMentions": [],
       "summary": "Report suspected vulnerabilities privately to the maintainers. Do not open public issues with",
       "title": "SECURITY.md",
-      "tokens": 494,
+      "tokens": 485,
       "type": "doc"
     },
     {
@@ -30817,7 +30817,7 @@
       "sourceMentions": [],
       "summary": "Living checklist of behaviors under test. Every case maps to at least one automated test.",
       "title": "TEST_CASES.md — Behavioral Test Matrix",
-      "tokens": 2825,
+      "tokens": 2784,
       "type": "doc"
     },
     {
@@ -31268,7 +31268,7 @@
       ],
       "summary": "Coverage is measured by Vitest's v8 provider and enforced as build-breaking thresholds in",
       "title": "Frontend Coverage Policy (`apps/web`)",
-      "tokens": 1109,
+      "tokens": 1089,
       "type": "testing"
     },
     {
@@ -31723,7 +31723,7 @@
       "sourceMentions": [],
       "summary": "> The complete set of automated gates that block delivery, the exact scripts behind them, and how Husky and CI enforce them. Implements the canon: [/context/stack-and-toolchain.md](../context/stack-and-toolchain.md), [/rules/00-non-negot...",
       "title": "Quality Gates",
-      "tokens": 3035,
+      "tokens": 2991,
       "type": "testing"
     },
     {
@@ -32001,7 +32001,7 @@
       ],
       "summary": "> The house standard for unit tests in this workspace: **Vitest 4 + `@nestjs/testing`**, one unit in isolation, mocked at every layer boundary, AAA structure, deterministic, branch-complete. Implements the testing canon in [/rules/09-tes...",
       "title": "Unit Testing Standard",
-      "tokens": 4866,
+      "tokens": 4786,
       "type": "testing"
     }
   ]
