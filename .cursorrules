@@ -20,8 +20,10 @@ Compact non-negotiables:
   SDK/fetch/axios/storage imports in business code (eslint package-boundaries enforced).
 - No process.env outside config/bootstrap. Logging via AppLogger (pino) only; never console.*.
 - Errors are typed AppError with messageKey errors.<feature>.<key>; never leak stacks/provider errors.
-- The game is FREE — no payment capture, no paid gating, ever. Sole exception: the
-  voluntary env-driven PayPal.me donate LINK (app never processes money).
+- The game is FREE by default — monetization only via the recorded owner-gated programs: the
+  voluntary env-driven PayPal.me donate LINK, and the env-gated PayPal Orders v2 paywall
+  (2026-07-12 supersession, docs/features/paypal-donations-and-paid-results/22-go-no-go.md;
+  blank credentials = fully free, a default never inverted; LIVE not approved).
 - No face recognition / identity matching / biometrics / image storage; image goes only to the
   trait-extraction prompt; GEMINI_MODEL from .env; AI outputs Zod-validated + safety-filtered.
 - Tests first; coverage on touched modules 95/90/95/95 (stmts/branches/funcs/lines).

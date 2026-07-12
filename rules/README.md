@@ -33,6 +33,12 @@
 | 28 | [28-simple-readable-code.md](./28-simple-readable-code.md) | The Simple Code Ladder; boring > clever; token-burning code banned; review lens |
 | 29 | [29-reuse-before-creating.md](./29-reuse-before-creating.md) | YAGNI + search-then-extend for ALL code; extract-on-second-use; delete dead code |
 | 30 | [30-refactor-discipline.md](./30-refactor-discipline.md) | Ownership-driven refactors; never-weaken list; agent-mirror alignment |
+| 31 | [31-knowledge-management.md](./31-knowledge-management.md) | Three knowledge planes; one fact one owner; authority precedence; rebuild-in-commit |
+| 32 | [32-documentation-quality.md](./32-documentation-quality.md) | Frontmatter, evidence-cited docs, resolvable links, tier honesty, no duplicates |
+| 33 | [33-fast-context-routing.md](./33-fast-context-routing.md) | Resolver-first protocol; hard context budgets; golden benchmark as a gate |
+| 34 | [34-memory-lifecycle.md](./34-memory-lifecycle.md) | Dated/evidenced memories; hot-memory working set; promotion and supersession |
+| 35 | [35-generated-artifacts-and-freshness.md](./35-generated-artifacts-and-freshness.md) | .ai/ never hand-edited; declared inputs; deterministic; hash-triggered staleness |
+| 36 | [36-delivery-lanes-and-traceability.md](./36-delivery-lanes-and-traceability.md) | Fast/standard/critical lanes scale weight never existence; recorded-scope traceability |
 
 ## Frontend
 

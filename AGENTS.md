@@ -13,17 +13,24 @@ Precedence when files differ: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` 
 Before writing code: need it → reuse existing owner → native/platform → existing wrapper/dependency → small helper → direct readable code → new abstraction only when justified. Be lazy about code volume, never about reading, validation, security, privacy, AI safety, file upload safety, tests, docs, observability, accessibility, i18n, or architecture. No inline reusable declarations in layer files; reuse before creating; no clever code. Never bypass hooks or gates. See [rules/28-simple-readable-code.md](rules/28-simple-readable-code.md) and [context/declaration-ownership-map.md](context/declaration-ownership-map.md).
 
 
-## Mandatory first actions
+## Mandatory first actions (fast-task protocol)
 
 Before changing anything:
 
-1. Read root `CLAUDE.md` end to end.
-2. Read the request artifacts under `docs/features/<feature-slug>/` if they exist for your task.
-3. Read the permanent baselines under `docs/sdlc/`.
-4. Read the code **and the tests** you are going to touch, before editing them.
-5. Read `memory/known-pitfalls.md` (plus any other `memory/` decisions relevant to your task).
+1. Read [`.ai/BOOTSTRAP.md`](.ai/BOOTSTRAP.md) — the compiled ~1,500-token bootstrap carrying
+   every universal invariant, the authority order, and the open critical items.
+2. Resolve your task: `npm run knowledge:context -- --task="<exact request>"` (add
+   `--files=...` or `--diff=origin/main...HEAD` when known), then read
+   `.ai/local/current-context.md` — it names the delivery lane, context pack, exact docs,
+   source, tests, reviewers, and validation commands.
+3. Read the exact code **and the tests** the resolver names, before editing them (in parallel).
+4. Read the request artifacts under `docs/features/<feature-slug>/` if they exist for your task.
+5. Load canonical detail (`CLAUDE.md` sections, `rules/`, `docs/sdlc/`,
+   `memory/known-pitfalls.md`) as the pack directs — routed, not wholesale.
 
-No one may modify code they have not read.
+No one may modify code they have not read. Everything under `.ai/` is generated
+(`npm run knowledge:build`) — never edit it by hand; fix the authored source in `knowledge/`
+or the canonical folders instead.
 
 ## Canonical operating rules
 
@@ -50,11 +57,14 @@ matching, or serious facial similarity analysis.
 
 The app NEVER stores: uploaded images, face embeddings, biometric templates, or raw image bytes.
 
-There is NO payment capture and NO paid gating. The game is free forever — never add
-payment processing, subscription, or result-gating logic. Sole owner-approved exception
-(2026-07-10, docs/features/paypal-donations-and-paid-results/): a voluntary outbound
-PayPal.me donation LINK (env-driven, validated, hidden when unset); the app never
-processes, verifies, or records money.
+The game is free BY DEFAULT, and monetization exists only inside the recorded owner-gated
+programs (docs/features/paypal-donations-and-paid-results/): the voluntary outbound PayPal.me
+donation LINK (2026-07-10; env-driven, validated, hidden when unset, never gates anything) and
+the env-gated PayPal Orders v2 paywall (2026-07-12 supersession in `22-go-no-go.md` —
+capture-at-consumption, server-authoritative price, no persistence; blank
+`PAYPAL_CLIENT_ID`/`PAYPAL_CLIENT_SECRET` = fully free, a default that may never be inverted;
+**LIVE mode is not approved** until the four recorded conditions pass). No subscriptions, no
+accounts, no other monetization, and no paywall scope change outside that program's gates.
 
 ## Stack
 
@@ -112,8 +122,15 @@ file — definitions live in `types/`/`enums/`/`constants/`/`model/` (backend
 Knowledge folders:
 
 ```
+.ai/                   GENERATED acceleration plane: BOOTSTRAP, HOT_MEMORY, QUICK_ROUTER,
+                       manifests/indexes/packs/graphs (rebuild: npm run knowledge:build)
+knowledge/             authored knowledge-OS definitions: routing map, delivery lanes, risk
+                       classification, budgets, packs, bootstrap/hot-memory sources, golden sets
+structure/ product/ domain/ contracts/   canonical area docs (modules, product truth, domain
+                       invariants, API/AI/integration contracts)
+operations/ incidents/ quality/          ops model, incident process, quality standards
 rules/                 engineering rule bodies (start: rules/00-non-negotiable-rules.md)
-skills/                step-by-step task playbooks
+skills/                step-by-step task playbooks (start: skills/resolve-task-context.md)
 context/               architecture map, stack/toolchain, task router, reference patterns
 memory/                durable decisions + memory/known-pitfalls.md
 agents/                specialist review roles (architecture, security, tests, release, ...)

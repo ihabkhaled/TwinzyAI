@@ -69,7 +69,7 @@
 
 ## Twinzy product constraints (42–47)
 
-42. **The game is free.** Never add payment, billing, subscription, or monetization logic — not even scaffolding.
+42. **The game is free by default; monetization exists only inside the recorded owner-gated programs.** Two recorded owner decisions in `docs/features/paypal-donations-and-paid-results/`: the voluntary outbound PayPal.me donate LINK (2026-07-10; env-driven, hidden when unset, never gates anything) and the env-gated PayPal Orders v2 paywall (2026-07-12 supersession in `22-go-no-go.md`; capture-at-consumption, server-authoritative price, no persistence; blank credentials = fully free, and that free default may never be inverted; **LIVE is not approved** until the four recorded conditions pass). No subscriptions, no accounts, no other monetization — and no paywall scope change outside that program's gates.
 43. **No face recognition, no identity matching, no biometric comparison, no exact-lookalike claims.** Ever.
 44. **No image persistence.** Multer memory storage only; the buffer is zero-filled in `finally` on every path; image data is never logged, never returned, never written anywhere. (rules/15)
 45. **Only the trait-extraction prompt sees the image.** Candidate and judge prompts are text-only — no image, URL, hash, crop, or embedding. (rules/14)

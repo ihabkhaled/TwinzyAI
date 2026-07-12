@@ -16,7 +16,7 @@ alwaysApply: true
   No raw fetch/axios outside the HTTP wrapper. No raw browser storage outside the storage wrapper.
 - No `process.env` outside config/bootstrap. Logging via `AppLogger` (pino) only — never `console.*`.
 - Errors are typed `AppError` with messageKey `errors.<feature>.<key>`; never leak stacks/provider errors.
-- The game is FREE — no payment capture, no paid gating, ever (sole exception: the voluntary env-driven PayPal.me donate LINK; the app never processes money). No biometrics/identity matching/image storage.
+- The game is FREE by default — monetization only via the recorded owner-gated programs: the voluntary env-driven PayPal.me donate LINK plus the env-gated PayPal Orders v2 paywall (2026-07-12 supersession, docs/features/paypal-donations-and-paid-results/22-go-no-go.md; blank credentials = fully free, a default never inverted; LIVE not approved). No biometrics/identity matching/image storage.
 - All user-facing strings via i18n. Tests first. Never weaken rules to pass.
 - Gates green before done: lint (0/0) · typecheck · test:unit · test:coverage · build · security:scan.
 - Conventional commits via Husky hooks; never `--no-verify`.
