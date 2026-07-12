@@ -1,0 +1,49 @@
+# Knowledge-OS manifest — system identity, planes, and build entrypoints.
+# Authored; consumed by scripts/knowledge and by humans orienting themselves.
+system:
+  name: twinzy-knowledge-os
+  version: 1
+  description: >-
+    Incrementally compiled engineering knowledge operating system: canonical
+    docs are authored under the repository root; the compiler generates the
+    .ai/ acceleration plane; agents route through it instead of reading the
+    repository wholesale.
+
+planes:
+  canonical:
+    description: Human-maintained source of truth (never generated).
+    roots:
+      - CLAUDE.md
+      - rules
+      - skills
+      - context
+      - memory
+      - agents
+      - testing
+      - support
+      - runbooks
+      - architecture
+      - structure
+      - product
+      - domain
+      - contracts
+      - operations
+      - incidents
+      - quality
+      - knowledge
+      - docs
+  compiled:
+    description: Generated acceleration plane (never hand-edited).
+    roots:
+      - .ai
+  execution:
+    description: Fast-task protocol followed by agents at runtime.
+    entrypoint: .ai/BOOTSTRAP.md
+    resolver: npm run knowledge:context
+
+build:
+  full: npm run knowledge:build
+  incremental: npm run knowledge:build:incremental
+  validate: npm run knowledge:validate
+  benchmark: npm run knowledge:benchmark
+  compiler: scripts/knowledge/build.mjs

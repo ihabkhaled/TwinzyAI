@@ -1,0 +1,156 @@
+# Golden knowledge questions — the knowledge regression suite. Each records
+# the verified answer, its canonical source, and the code evidence. Run after
+# significant knowledge changes: an agent (or reviewer) answers each question
+# using ONLY the listed context budget and compares against expectedAnswer.
+# knowledge:validate checks that every referenced source still exists.
+questions:
+  - id: q-image-lifecycle
+    area: privacy
+    question: What happens to the uploaded photo after trait extraction, including on failure or abort?
+    expectedAnswer: >-
+      The image lives only in request memory (multer memory storage); both
+      analyze use-cases zero-fill the buffer in a finally block on success,
+      failure, and abort, and only TraitExtractionService ever receives it —
+      no downstream step, log, or response contains the image.
+    canonicalSource: domain/image-lifecycle.md
+    codeEvidence:
+      - apps/api/src/modules/game/application/analyze-game.use-case.ts
+      - apps/api/src/modules/file-security/lib/upload-buffer-cleanup.util.ts
+    maxContextTokens: 3000
+
+  - id: q-paywall-status
+    area: product
+    question: Is Twinzy free, and under what recorded conditions may results be gated on payment?
+    expectedAnswer: >-
+      Free by default: with blank PayPal credentials the payment gate no-ops.
+      A recorded owner decision (2026-07-12, 22-go-no-go.md) approved an
+      env-gated PayPal Orders v2 paywall for sandbox; LIVE is not approved
+      until four recorded conditions pass (HTTPS origin, business account +
+      sandbox sign-off, en+ar copy revision, recorded live smoke test).
+    canonicalSource: product/monetization-policy.md
+    codeEvidence:
+      - apps/api/src/modules/payments/application/payment-gate.service.ts
+      - docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+    maxContextTokens: 3000
+
+  - id: q-ai-steps
+    area: ai
+    question: Which AI pipeline steps exist and which may receive the photo?
+    expectedAnswer: >-
+      Four steps — trait extraction, candidate generation, candidate judging,
+      result translation. Only trait extraction may receive the photo; the
+      router dispatches photo-carrying calls only to vision-capable providers
+      and every other step is text-only by construction.
+    canonicalSource: docs/ai/pipeline.md
+    codeEvidence:
+      - apps/api/src/modules/ai/application/trait-extraction.service.ts
+      - apps/api/src/modules/ai/adapters/ai-router.service.ts
+    maxContextTokens: 3000
+
+  - id: q-model-config
+    area: configuration
+    question: Where do AI model names come from and what happens when none are configured?
+    expectedAnswer: >-
+      Env only — GEMINI_MODEL, per-step GEMINI_MODEL_*, fallback chains, and
+      AI_ROUTE_* provider:model chains via the zod-validated config; an empty
+      chain throws AiProviderUnavailable (fail-closed), never a hardcoded id.
+    canonicalSource: docs/env-vars.md
+    codeEvidence:
+      - apps/api/src/config/env.schema.ts
+      - apps/api/src/modules/ai/adapters/gemini.adapter.ts
+    maxContextTokens: 2500
+
+  - id: q-upload-chain
+    area: security
+    question: What is the exact upload validation order and the ClamAV failure behavior?
+    expectedAnswer: >-
+      Consent → presence/single-file → size → MIME + extension allowlists with
+      consistency → magic bytes → structural decode → optional ClamAV, which
+      fails CLOSED (rejects the upload) on any scanner error whenever enabled.
+    canonicalSource: rules/15-file-upload-security.md
+    codeEvidence:
+      - apps/api/src/modules/file-security/application/file-security.service.ts
+      - apps/api/src/modules/file-security/application/virus-scan.service.ts
+    maxContextTokens: 2500
+
+  - id: q-safety-layers
+    area: ai
+    question: Which layers prevent identity assertions or sensitive inference in results?
+    expectedAnswer: >-
+      Four — shared forbidden en+ar phrase/topic lists
+      (safety.constants.ts), the forbidden-wording guard scan, AiSafetyService
+      (reject trait responses whole, drop unsafe candidates/results), and the
+      judge schema's z.literal(false) safety flags; the server also imposes
+      its own disclaimer.
+    canonicalSource: domain/safety-boundaries.md
+    codeEvidence:
+      - packages/shared/src/constants/safety.constants.ts
+      - packages/shared/src/schemas/judge.schema.ts
+    maxContextTokens: 3000
+
+  - id: q-architecture-layers
+    area: architecture
+    question: What are the backend layers and who enforces them?
+    expectedAnswer: >-
+      Controller (thin, one delegation) → Application (use-cases orchestrate,
+      services ≤20 lines/method) → Domain (pure) → Infrastructure →
+      Adapters (vendors wrapped), with core/config/bootstrap cross-cutting;
+      enforced mechanically by the custom architecture ESLint plugin.
+    canonicalSource: context/architecture-map.md
+    codeEvidence:
+      - eslint/architecture.config.mjs
+    maxContextTokens: 2500
+
+  - id: q-frontend-anatomy
+    area: frontend
+    question: Where may vendor libraries be imported in apps/web and where does state live?
+    expectedAnswer: >-
+      Only inside apps/web/src/packages/<vendor> wrappers (axios, paypal,
+      i18n, zod, zustand, query, etc.); TSX is composition-only and state and
+      effects live in hooks; HTTP goes through the module gateway.
+    canonicalSource: rules/frontend/09-library-wrapping.md
+    codeEvidence:
+      - eslint/frontend/package-boundaries.config.mjs
+    maxContextTokens: 2500
+
+  - id: q-coverage-gate
+    area: testing
+    question: What is the touched-module coverage requirement and which commands gate a change?
+    expectedAnswer: >-
+      95% lines, branches, functions, and statements on touched modules;
+      gates are npm run lint (0 warnings), typecheck, test:coverage, build —
+      run via hooks and CI; hooks may never be bypassed.
+    canonicalSource: testing/testing-strategy.md
+    codeEvidence:
+      - vitest.config.mts
+      - .husky/pre-push
+    maxContextTokens: 2500
+
+  - id: q-error-copy
+    area: support
+    question: Where do user-facing AI failure messages live and how are they localized?
+    expectedAnswer: >-
+      User-facing AI error copy constants live in the AI module's model layer
+      (gemini.constants.ts: unavailable, rate-limited, timeout, invalid,
+      unsafe) and surface through the web i18n catalogs (en+ar) — every
+      user-visible string routes through i18n.
+    canonicalSource: support/error-code-catalog.md
+    codeEvidence:
+      - apps/api/src/modules/ai/model/gemini.constants.ts
+      - apps/web/src/packages/i18n/messages/en.json
+    maxContextTokens: 2500
+
+  - id: q-knowledge-os
+    area: knowledge
+    question: How does an agent get task context fast, and what may never be edited by hand?
+    expectedAnswer: >-
+      Load .ai/BOOTSTRAP.md, then run npm run knowledge:context -- --task="..."
+      and read .ai/local/current-context.md plus the exact source and tests it
+      lists. Everything under .ai/ is generated by npm run knowledge:build and
+      must never be edited by hand — authored truth lives in knowledge/ and
+      the canonical directories.
+    canonicalSource: knowledge/README.md
+    codeEvidence:
+      - scripts/knowledge/build.mjs
+      - scripts/knowledge/resolve-context.mjs
+    maxContextTokens: 2000

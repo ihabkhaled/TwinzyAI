@@ -1,0 +1,30 @@
+# Allowed relationship types and evidence labels in generated graphs
+# (.ai/graphs/). The compiler may only emit these; validate-generated-files
+# treats unknown types as errors.
+types:
+  imports:
+    description: module A imports from module B (cross-module edge)
+    producedBy: scan-dependencies
+  covers:
+    description: test file exercises a source file (resolved import edge)
+    producedBy: scan-tests
+  describes:
+    description: document explains a source file
+    producedBy: scan-documents (frontmatter relatedCode or body mention)
+  uses-contract:
+    description: source file consumes a shared schema/DTO export
+    producedBy: scan-schemas
+
+labels:
+  explicit:
+    description: declared by a human in frontmatter or an authored map
+    trust: authoritative
+  generated:
+    description: mechanically derived from code facts (imports, decorators)
+    trust: reliable inventory; re-derived every build
+  inferred:
+    description: heuristic (e.g. path mentioned in a doc body)
+    trust: routing hint only — verify before acting on it
+  unverified:
+    description: asserted somewhere but not yet confirmed by scan or human
+    trust: must be confirmed before use in planning

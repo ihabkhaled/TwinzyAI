@@ -1,0 +1,154 @@
+# Golden benchmark tasks — knowledge:benchmark runs each through the resolver
+# and asserts: expected task type, expected lane, and that every mustInclude
+# path appears somewhere in the resolved context (pack, docs, source, tests).
+# Latency percentiles and token sizes are measured across the whole suite.
+tasks:
+  - id: backend-endpoint
+    task: add a new endpoint to the share results controller that lists nothing but returns 204
+    expect:
+      taskType: backend-feature
+      lane: standard
+      mustInclude: [rules/18-routes-controllers.md]
+
+  - id: frontend-component
+    task: split the processing card component into smaller sub-components under the game module
+    files: [apps/web/src/modules/game/components/processing-card.component.tsx]
+    expect:
+      taskType: frontend-feature
+      lane: standard
+      mustInclude: [rules/frontend/02-components-and-containers.md]
+
+  - id: bug-fix
+    task: fix the typo in the retry toast message
+    expect:
+      taskType: routine-fix
+      lane: fast
+      mustInclude: [context/architecture-map.md]
+
+  - id: refactor
+    task: decompose the large aggregation mapper into smaller named helpers without changing behavior
+    expect:
+      taskType: refactor
+      lane: standard
+      mustInclude: [rules/30-refactor-discipline.md]
+
+  - id: config-addition
+    task: add a new env config value for the share link TTL with schema validation
+    expect:
+      taskType: configuration-change
+      lane: standard
+      mustInclude: [skills/add-config-value.md, docs/env-vars.md]
+
+  - id: error-addition
+    task: add a new typed error code for oversized uploads and map it end to end
+    files: [apps/api/src/modules/file-security/application/file-validation.service.ts]
+    expect:
+      taskType: upload-security-change
+      lane: critical
+      mustInclude: [rules/15-file-upload-security.md]
+
+  - id: prompt-change
+    task: reword the judge prompt template to tighten the verdict instructions
+    expect:
+      taskType: ai-prompt-change
+      lane: critical
+      mustInclude: [docs/ai-safety.md]
+
+  - id: provider-change
+    task: add a new openai compatible provider to the ai fallback routing chain
+    expect:
+      taskType: ai-provider-change
+      lane: critical
+      mustInclude: [docs/provider-routing.md, skills/add-ai-provider.md]
+
+  - id: upload-security
+    task: tighten the magic bytes check for webp uploads in file security
+    expect:
+      taskType: upload-security-change
+      lane: critical
+      mustInclude: [rules/15-file-upload-security.md, skills/secure-file-upload.md]
+
+  - id: privacy-change
+    task: review the image lifecycle wipe to guarantee redaction on the abort path
+    expect:
+      taskType: privacy-change
+      lane: critical
+      mustInclude: [docs/privacy-and-data-retention.md]
+
+  - id: payments-guard
+    task: verify the paypal capture verification fields before enabling the paywall
+    expect:
+      taskType: payments-change
+      lane: critical
+      mustInclude: [docs/features/paypal-donations-and-paid-results/22-go-no-go.md]
+
+  - id: sse-change
+    task: add a heartbeat event to the sse stream so proxies keep the analyze stream open
+    files: [apps/api/src/modules/game/application/analyze-game-stream.use-case.ts]
+    expect:
+      taskType: reliability-change
+      lane: standard
+      mustInclude: [rules/08-reliability-durability.md]
+
+  - id: localization
+    task: add the missing arabic translation for the share expiry i18n message key
+    expect:
+      taskType: localization-change
+      lane: standard
+      mustInclude: [skills/add-i18n-message-key.md]
+
+  - id: test-addition
+    task: add integration tests covering the cancel analysis flow
+    expect:
+      taskType: testing-change
+      lane: fast
+      mustInclude: [testing/testing-strategy.md]
+
+  - id: performance-issue
+    task: profile and reduce the latency of candidate generation under load
+    expect:
+      taskType: performance-change
+      lane: standard
+      mustInclude: [rules/07-performance-scalability.md]
+
+  - id: production-incident
+    task: users report an outage where every analyze request fails investigate the incident
+    expect:
+      taskType: incident
+      lane: critical
+      mustInclude: [memory/known-pitfalls.md]
+
+  - id: release-prep
+    task: prepare the release checklist and smoke tests for the next deploy
+    expect:
+      taskType: release
+      lane: critical
+      mustInclude: [docs/release-checklist.md]
+
+  - id: rollback-run
+    task: rollback the latest deploy because the health check is flapping
+    expect:
+      taskType: rollback
+      lane: critical
+      mustInclude: [runbooks/rollback-template.md]
+
+  - id: dependency-upgrade
+    task: upgrade the zod package across workspaces and verify the wrappers
+    expect:
+      taskType: dependency-change
+      lane: standard
+      mustInclude: [docs/package-decisions.md]
+
+  - id: a11y-audit
+    task: run an accessibility audit on the consent checkbox and fix focus order
+    expect:
+      taskType: accessibility-change
+      lane: critical
+      mustInclude: [skills/accessibility-review.md]
+
+  - id: knowledge-edit
+    task: add a new task type to the knowledge routing map with its context pack
+    expect:
+      taskType: knowledge-change
+      lane: standard
+      mustInclude: [knowledge/README.md]

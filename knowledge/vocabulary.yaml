@@ -1,0 +1,60 @@
+# Canonical vocabulary for the task classifier. `synonyms` map informal task
+# wording onto the canonical term that routing-map keywords use. Matching is
+# case-insensitive whole-word.
+terms:
+  paywall:
+    synonyms: [payment, paypal, checkout, paid analysis, price, capture, order, refund, 402]
+  upload:
+    synonyms: [image upload, file upload, multipart, photo, magic bytes, clamav, mime]
+  consent:
+    synonyms: [checkbox, agreement, privacy consent, opt-in]
+  extraction:
+    synonyms: [trait extraction, visible traits, first step, image analysis]
+  candidates:
+    synonyms: [candidate generation, matching, style match, recall, second step]
+  judge:
+    synonyms: [judging, scoring, verdict, third step, rerank]
+  translation:
+    synonyms: [translate result, arabic, language switch, localization of result]
+  sse:
+    synonyms: [stream, streaming, server-sent events, event stream, progress events]
+  provider:
+    synonyms: [gemini, openai, deepseek, qwen, kimi, glm, model routing, fallback, shadow]
+  prompt:
+    synonyms: [prompt template, placeholder, system prompt, instruction file]
+  safety:
+    synonyms: [forbidden wording, sensitive inference, identity claim, safety filter, guardrail]
+  privacy:
+    synonyms: [image lifecycle, wipe, redaction, retention, data handling, pii]
+  config:
+    synonyms: [env, environment variable, dotenv, setting, flag, toggle]
+  contract:
+    synonyms: [schema, dto, zod, api shape, request shape, response shape, endpoint contract]
+  frontend:
+    synonyms: [component, container, hook, page, tsx, react, next, ui, styling, css]
+  backend:
+    synonyms: [controller, use case, service, adapter, repository, nest, fastify, api]
+  test:
+    synonyms: [unit test, integration test, e2e, playwright, vitest, coverage, spec]
+  a11y:
+    synonyms: [accessibility, aria, screen reader, keyboard, focus]
+  i18n:
+    synonyms: [localization, translation catalog, message key, rtl, arabic copy]
+  performance:
+    synonyms: [latency, slow, memory leak, throughput, bundle size, lighthouse]
+  reliability:
+    synonyms: [timeout, retry, cancellation, abort, rate limit, overload, backpressure]
+  release:
+    synonyms: [deploy, deployment, ship, go-live, docker, smoke test]
+  rollback:
+    synonyms: [revert, undo release, hotfix rollback]
+  incident:
+    synonyms: [outage, production bug, sev, postmortem, on-call]
+  dependency:
+    synonyms: [package, npm, upgrade, library, vendor, cve, audit]
+  share:
+    synonyms: [share results, share link, shareid, temporary share]
+  donation:
+    synonyms: [donate, paypal.me, tip]
+  knowledge:
+    synonyms: [docs system, bootstrap, context pack, resolver, manifest, knowledge os, .ai]

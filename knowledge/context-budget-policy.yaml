@@ -1,0 +1,45 @@
+# Token budgets and performance targets for the compiled plane and the
+# resolver. Budgets are HARD for generated artifacts (the build fails when a
+# compiled file exceeds its budget) and targets for resolver output.
+# Token counts use the compiler's ~4 chars/token estimate (lib/tokens.mjs).
+artifacts:
+  bootstrap:
+    file: .ai/BOOTSTRAP.md
+    maxTokens: 1500
+  hotMemory:
+    file: .ai/HOT_MEMORY.md
+    maxTokens: 1500
+  quickRouter:
+    file: .ai/QUICK_ROUTER.md
+    maxTokens: 1200
+  currentState:
+    file: .ai/CURRENT_STATE.md
+    maxTokens: 1200
+  summary:
+    filePattern: .ai/summaries/*.md
+    maxTokens: 2500
+  pack:
+    filePattern: .ai/packs/*.md
+    maxTokens: 6000
+    criticalLaneMaxTokens: 15000
+
+contextTiers:
+  0: universal bootstrap (always loaded)
+  1: common summary (loaded for most tasks)
+  2: task-specific canonical detail (loaded when routed)
+  3: deep investigation (loaded on demand only)
+  4: historical/reference (never loaded in normal routing)
+
+resolver:
+  routineTaskInitialTokensMax: 8000
+  routineTaskInitialDocumentsMax: 15
+  p50TargetMs: 300
+  p95TargetMs: 1000
+
+planning:
+  routine:
+    initialContextTokens: [3000, 8000]
+    note: exact source files and tests identified before any broad documentation
+  critical:
+    initialContextTokens: [6000, 15000]
+    note: expand progressively; routing stays targeted even for critical work

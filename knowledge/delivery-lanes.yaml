@@ -1,0 +1,59 @@
+# Risk-based delivery lanes. Every lifecycle concern from CLAUDE.md exists in
+# every lane; what scales is artifact WEIGHT, never phase existence.
+# Lane selection is deterministic: risk-classification.yaml maps paths and
+# keywords to a lane; the highest-risk match wins. When in doubt, escalate one
+# lane — never de-escalate silently.
+lanes:
+  fast:
+    description: >-
+      Tiny, localized, contract-preserving changes: small bug fixes, isolated
+      refactors, copy/typo fixes, isolated tests, docs corrections, safe
+      dependency patches, internal cleanup.
+    artifacts:
+      - one compact task record (docs/features/<slug>/task-record.md or the
+        PR description for trivial fixes) covering intake, current behavior,
+        target behavior, impact, risk, plan, tests, validation, docs delta,
+        rollback
+    gates:
+      - all repository quality gates green (lint, typecheck, tests, coverage, build)
+      - regression test for any bug fix
+      - knowledge build clean if canonical docs or .ai inputs changed
+    forbidden:
+      - any change matching a critical pattern in risk-classification.yaml
+      - contract, schema, or public API changes
+      - weakening validation, safety filters, tests, or lint
+
+  standard:
+    description: >-
+      Normal features and module changes: API additions, frontend flows,
+      configuration additions, AI pipeline changes that preserve established
+      safety boundaries, moderate refactors.
+    artifacts:
+      - docs/features/<slug>/ with compact phase artifacts (00-intake,
+        03-product-requirements, 08-architecture-review, 09-impact-analysis,
+        11-test-strategy, 13-implementation-readiness, 15-dev-validation-report
+        at minimum; merge trivially-empty phases into neighbors with an
+        explicit "Not applicable — <why>" note)
+    gates:
+      - everything in fast
+      - architecture fit documented; impacted-area checklist reviewed
+      - touched-module coverage >= 95%
+      - documentation delta from the impact engine applied
+
+  critical:
+    description: >-
+      Privacy boundary, image handling, consent copy, auth, payments/paywall,
+      upload security, public contract breaking changes, data persistence,
+      infrastructure topology, production incidents, AI-safety policy, and
+      model/prompt changes with meaningful safety impact.
+    artifacts:
+      - full CLAUDE.md phase artifact set (00–13 before implementation;
+        15–27 through release), including 19-threat-model and security review
+    gates:
+      - everything in standard
+      - specialist reviewer sign-offs per routing-map.yaml
+      - rollback design validated, observability confirmed
+      - explicit owner approval recorded for any product-constraint impact
+
+defaultLane: standard
+escalationRule: highest matched lane wins; ambiguity escalates one lane

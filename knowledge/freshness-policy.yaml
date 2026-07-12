@@ -1,0 +1,77 @@
+# Hash-triggered freshness. When any file matching `whenChanged` (substring
+# prefix match) has a different hash than the last build snapshot
+# (.ai/hashes/*.json), the listed documents/artifacts become review-required
+# and appear in .ai/generated/stale-items.json. Calendar age is never a
+# trigger.
+triggers:
+  - id: prompts-changed
+    whenChanged: apps/api/src/modules/ai/prompts/
+    review:
+      - docs/ai/prompt-catalog.md
+      - knowledge/summaries/ai-pipeline.md
+      - contracts/ai/README.md
+  - id: safety-constants-changed
+    whenChanged: packages/shared/src/constants/safety.constants.ts
+    review:
+      - docs/ai-safety.md
+      - knowledge/summaries/ai-pipeline.md
+      - domain/safety-boundaries.md
+  - id: env-schema-changed
+    whenChanged: apps/api/src/config/env.schema.ts
+    review:
+      - docs/env-vars.md
+      - knowledge/summaries/configuration.md
+      - .env.example
+  - id: env-example-changed
+    whenChanged: .env.example
+    review:
+      - docs/env-vars.md
+      - knowledge/summaries/configuration.md
+  - id: controllers-changed
+    whenChanged: .controller.ts
+    review:
+      - contracts/api/README.md
+      - knowledge/summaries/backend.md
+  - id: shared-schemas-changed
+    whenChanged: packages/shared/src/schemas/
+    review:
+      - contracts/README.md
+      - knowledge/summaries/backend.md
+      - knowledge/summaries/frontend.md
+  - id: payments-changed
+    whenChanged: apps/api/src/modules/payments/
+    review:
+      - docs/features/paypal-donations-and-paid-results/22-go-no-go.md
+      - knowledge/hot-memory.md
+      - product/monetization-policy.md
+  - id: file-security-changed
+    whenChanged: apps/api/src/modules/file-security/
+    review:
+      - docs/file-upload-security.md
+      - rules/15-file-upload-security.md
+      - knowledge/summaries/security.md
+  - id: privacy-module-changed
+    whenChanged: apps/api/src/modules/privacy/
+    review:
+      - docs/privacy-and-data-retention.md
+      - knowledge/summaries/privacy.md
+      - domain/image-lifecycle.md
+  - id: bootstrap-inputs-changed
+    whenChanged: knowledge/bootstrap.md
+    review:
+      - .ai/BOOTSTRAP.md
+  - id: hot-memory-inputs-changed
+    whenChanged: knowledge/hot-memory.md
+    review:
+      - .ai/HOT_MEMORY.md
+  - id: eslint-rules-changed
+    whenChanged: eslint/
+    review:
+      - docs/eslint-architecture.md
+      - rules/00-non-negotiable-rules.md
+      - knowledge/summaries/architecture.md
+  - id: architecture-map-changed
+    whenChanged: context/architecture-map.md
+    review:
+      - knowledge/summaries/architecture.md
+      - knowledge/bootstrap.md

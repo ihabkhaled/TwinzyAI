@@ -1,0 +1,376 @@
+# Task-type routing — the heart of the fast-task protocol. The classifier
+# scores task text against `keywords` (plus vocabulary.yaml synonyms) and
+# touched files against `pathHints`; the winning task type supplies the pack,
+# mandatory docs, rules, skills, reviewers, and validation commands for the
+# initial context. Doc paths are validated by knowledge:validate.
+taskTypes:
+  routine-fix:
+    title: Small localized bug fix or cleanup
+    lane: fast
+    pack: fast-routine-fix
+    keywords: [fix, bug, typo, small, cleanup, dead code, rename]
+    pathHints: []
+    mustRead: [context/architecture-map.md]
+    rules: [rules/00-non-negotiable-rules.md, rules/28-simple-readable-code.md]
+    skills: [skills/investigate-production-bug.md, skills/write-unit-tests.md]
+    reviewers: [agents/backend-code-reviewer.md]
+    validation: [npm run lint, npm run typecheck, npm run test:unit]
+
+  backend-feature:
+    title: New or changed NestJS behavior in apps/api
+    lane: standard
+    pack: backend-feature
+    keywords: [backend, controller, use case, service, adapter, endpoint, nest, api]
+    pathHints: [apps/api/src/]
+    mustRead: [context/architecture-map.md, context/reference-patterns.md]
+    rules:
+      [
+        rules/00-non-negotiable-rules.md,
+        rules/16-backend-architecture.md,
+        rules/18-routes-controllers.md,
+        rules/19-services-application-layer.md,
+      ]
+    skills: [skills/create-feature.md, skills/create-controller.md, skills/create-use-case.md]
+    reviewers: [agents/backend-architect.md, agents/backend-test-engineer.md]
+    validation: [npm run lint, npm run typecheck, npm run test:coverage, npm run build]
+
+  frontend-feature:
+    title: New or changed Next.js behavior in apps/web
+    lane: standard
+    pack: frontend-feature
+    keywords: [frontend, component, container, hook, page, tsx, react, ui, styling]
+    pathHints: [apps/web/src/]
+    mustRead: [rules/frontend/00-non-negotiable-rules.md, context/codebase-navigation.md]
+    rules:
+      [
+        rules/frontend/01-next-app-router-architecture.md,
+        rules/frontend/02-components-and-containers.md,
+        rules/frontend/03-hooks.md,
+        rules/02-frontend-components-tsx.md,
+      ]
+    skills: [skills/create-component.md, skills/create-container.md, skills/create-hook.md]
+    reviewers: [agents/frontend-architect.md, agents/frontend-test-engineer.md]
+    validation: [npm run lint, npm run typecheck, npm run test:unit, npm run test:e2e]
+
+  full-stack-feature:
+    title: Feature spanning api + web + shared contracts
+    lane: standard
+    pack: full-stack-feature
+    keywords: [full stack, end to end feature, both sides, api and ui]
+    pathHints: [packages/shared/src/]
+    mustRead: [context/architecture-map.md, context/declaration-ownership-map.md]
+    rules:
+      [
+        rules/00-non-negotiable-rules.md,
+        rules/05-types-enums-constants.md,
+        rules/21-dto-validation.md,
+      ]
+    skills:
+      [skills/create-feature.md, skills/create-dto-validation.md, skills/add-api-service-method.md]
+    reviewers: [agents/backend-architect.md, agents/frontend-architect.md]
+    validation: [npm run validate]
+
+  refactor:
+    title: Structure-preserving refactor
+    lane: standard
+    pack: refactor
+    keywords: [refactor, decompose, extract, move, restructure, simplify]
+    pathHints: []
+    mustRead: [rules/30-refactor-discipline.md, rules/29-reuse-before-creating.md]
+    rules: [rules/28-simple-readable-code.md, rules/00-non-negotiable-rules.md]
+    skills:
+      [skills/refactor-feature.md, skills/decompose-large-file.md, skills/simplify-existing-code.md]
+    reviewers: [agents/backend-refactor-agent.md]
+    validation: [npm run lint, npm run typecheck, npm run test:coverage, npm run quality:dead-code]
+
+  production-bug:
+    title: Investigating/fixing a production defect
+    lane: standard
+    pack: production-bug
+    keywords: [production, investigate, defect, regression, broken, error in prod]
+    pathHints: []
+    mustRead: [memory/known-pitfalls.md, docs/architecture.md]
+    rules: [rules/22-observability-logging.md, rules/26-error-handling-and-exceptions.md]
+    skills: [skills/investigate-production-bug.md]
+    reviewers: [agents/reliability-engineer.md, agents/observability-reviewer.md]
+    validation: [npm run test:integration, npm run test:e2e:ci]
+
+  architecture-change:
+    title: Layer boundaries, module topology, cross-cutting structure
+    lane: critical
+    pack: architecture-change
+    keywords: [architecture, boundary, layer, module topology, adr, restructure repo]
+    pathHints: [eslint/, context/architecture-map.md]
+    mustRead: [context/architecture-map.md, docs/eslint-architecture.md, rules/01-architecture.md]
+    rules:
+      [
+        rules/00-non-negotiable-rules.md,
+        rules/16-backend-architecture.md,
+        rules/10-library-modularization.md,
+      ]
+    skills: [skills/create-module.md, skills/add-library.md]
+    reviewers: [agents/backend-architect.md, agents/eslint-boundary-reviewer.md]
+    validation: [npm run validate]
+
+  ai-pipeline-change:
+    title: Trait extraction / candidates / judge / translation behavior
+    lane: critical
+    pack: ai-pipeline-change
+    keywords: [pipeline, extraction, candidates, judge, translation, ai step, gemini call]
+    pathHints: [apps/api/src/modules/ai/, apps/api/src/modules/result-aggregation/]
+    mustRead: [context/ai-context.md, docs/ai-safety.md, docs/provider-routing.md]
+    rules: [rules/14-ai-safety.md, rules/00-non-negotiable-rules.md]
+    skills: [skills/add-ai-provider.md, skills/write-integration-tests.md]
+    reviewers: [agents/backend-security-reviewer.md, agents/backend-test-engineer.md]
+    validation: [npm run test:ai, npm run lint, npm run typecheck]
+
+  ai-provider-change:
+    title: Provider adapters, routing chains, fallback/shadow
+    lane: critical
+    pack: ai-provider-change
+    keywords: [provider, gemini, openai, deepseek, qwen, kimi, glm, fallback, shadow, model routing]
+    pathHints: [apps/api/src/modules/ai/adapters/]
+    mustRead: [docs/provider-routing.md, docs/ai-benchmarking.md, context/ai-context.md]
+    rules:
+      [
+        rules/14-ai-safety.md,
+        rules/10-library-modularization.md,
+        rules/25-configuration-and-environment.md,
+      ]
+    skills: [skills/add-ai-provider.md]
+    reviewers: [agents/backend-architect.md, agents/reliability-engineer.md]
+    validation: [npm run test:ai, npm run ai:benchmark]
+
+  ai-prompt-change:
+    title: Prompt template wording/placeholders
+    lane: critical
+    pack: ai-prompt-change
+    keywords: [prompt, template, placeholder, wording, instruction file]
+    pathHints: [apps/api/src/modules/ai/prompts/]
+    mustRead: [docs/ai-safety.md, context/ai-context.md]
+    rules: [rules/14-ai-safety.md]
+    skills: [skills/write-integration-tests.md]
+    reviewers: [agents/backend-security-reviewer.md]
+    validation: [npm run test:ai, npm run ai:benchmark]
+
+  upload-security-change:
+    title: File upload validation chain
+    lane: critical
+    pack: upload-security-change
+    keywords: [upload, file security, magic bytes, clamav, mime, image validation, multipart]
+    pathHints: [apps/api/src/modules/file-security/]
+    mustRead: [rules/15-file-upload-security.md, docs/file-upload-security.md]
+    rules: [rules/06-security.md, rules/15-file-upload-security.md]
+    skills: [skills/secure-file-upload.md, skills/security-review.md]
+    reviewers: [agents/backend-security-reviewer.md]
+    validation: [npm run test:file-security, npm run test:security]
+
+  privacy-change:
+    title: Image lifecycle, consent, redaction, data handling
+    lane: critical
+    pack: privacy-change
+    keywords: [privacy, consent, image lifecycle, wipe, redaction, retention, pii, logging leak]
+    pathHints: [apps/api/src/modules/privacy/, apps/api/src/modules/game/lib/]
+    mustRead: [docs/privacy-and-data-retention.md, docs/ai-safety.md]
+    rules: [rules/14-ai-safety.md, rules/06-security.md, rules/22-observability-logging.md]
+    skills: [skills/security-review.md, skills/cleanup-without-weakening-safety.md]
+    reviewers: [agents/backend-security-reviewer.md]
+    validation: [npm run test:security, npm run test:coverage]
+
+  payments-change:
+    title: Paywall / PayPal / donation surfaces (owner-gated program)
+    lane: critical
+    pack: payments-change
+    keywords: [payment, paywall, paypal, price, capture, order, refund, donation, checkout]
+    pathHints: [apps/api/src/modules/payments/, apps/web/src/packages/paypal/]
+    mustRead:
+      [
+        docs/features/paypal-donations-and-paid-results/22-go-no-go.md,
+        docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md,
+      ]
+    rules:
+      [
+        rules/00-non-negotiable-rules.md,
+        rules/06-security.md,
+        rules/25-configuration-and-environment.md,
+      ]
+    skills: [skills/security-review.md, skills/add-config-value.md]
+    reviewers: [agents/backend-security-reviewer.md, agents/frontend-security-reviewer.md]
+    validation: [npm run test:coverage, npm run test:e2e:ci, npm run security:scan:secrets]
+
+  api-contract-change:
+    title: Endpoint shapes, shared schemas, DTOs, SSE events
+    lane: critical
+    pack: api-contract-change
+    keywords: [contract, schema, dto, zod, breaking, endpoint shape, sse event, response shape]
+    pathHints: [packages/shared/src/schemas/, apps/api/src/modules/game/api/dto/]
+    mustRead: [context/declaration-ownership-map.md, rules/21-dto-validation.md]
+    rules: [rules/21-dto-validation.md, rules/05-types-enums-constants.md]
+    skills: [skills/create-dto-validation.md, skills/add-api-service-method.md]
+    reviewers: [agents/backend-architect.md, agents/frontend-architect.md]
+    validation: [npm run validate]
+
+  configuration-change:
+    title: Env vars, config schema, toggles
+    lane: standard
+    pack: configuration-change
+    keywords: [config, env, environment variable, flag, toggle, setting, dotenv]
+    pathHints: [apps/api/src/config/, apps/web/src/packages/env/, .env.example]
+    mustRead: [docs/env-vars.md, rules/25-configuration-and-environment.md]
+    rules: [rules/25-configuration-and-environment.md]
+    skills: [skills/add-config-value.md]
+    reviewers: [agents/backend-release-gatekeeper.md]
+    validation: [npm run lint, npm run typecheck, npm run test:unit, npm run security:scan:secrets]
+
+  performance-change:
+    title: Latency, memory, throughput, bundle size
+    lane: standard
+    pack: performance-change
+    keywords:
+      [performance, latency, slow, memory, throughput, bundle, lighthouse, optimize, profile, load]
+    pathHints: []
+    mustRead: [rules/07-performance-scalability.md, docs/performance-review-report.md]
+    rules: [rules/07-performance-scalability.md, rules/frontend/12-performance.md]
+    skills: [skills/performance-review.md, skills/performance-review-frontend.md]
+    reviewers: [agents/backend-performance-reviewer.md, agents/react-performance-reviewer.md]
+    validation: [npm run test:coverage, npm run load-test]
+
+  reliability-change:
+    title: Timeouts, retries, cancellation, rate limits, overload
+    lane: standard
+    pack: reliability-change
+    keywords:
+      [
+        timeout,
+        retry,
+        cancel,
+        abort,
+        rate limit,
+        overload,
+        backpressure,
+        resilience,
+        sse,
+        stream,
+        heartbeat,
+      ]
+    pathHints: [apps/api/src/core/rate-limit/]
+    mustRead: [rules/08-reliability-durability.md, rules/27-async-events-and-jobs.md]
+    rules: [rules/08-reliability-durability.md, rules/26-error-handling-and-exceptions.md]
+    skills: [skills/reliability-review.md]
+    reviewers: [agents/reliability-engineer.md]
+    validation: [npm run test:integration, npm run load-test]
+
+  accessibility-change:
+    title: A11y behavior and audits
+    lane: standard
+    pack: accessibility-change
+    keywords: [accessibility, a11y, aria, keyboard, focus, screen reader, contrast]
+    pathHints: []
+    mustRead: [rules/13-accessibility.md, rules/frontend/13-accessibility.md]
+    rules: [rules/13-accessibility.md]
+    skills: [skills/accessibility-review.md, skills/write-accessibility-tests.md]
+    reviewers: [agents/accessibility-reviewer.md]
+    validation: [npm run test:a11y, npm run test:e2e]
+
+  localization-change:
+    title: i18n catalogs, RTL, language behavior
+    lane: standard
+    pack: localization-change
+    keywords: [i18n, localization, message key, arabic, rtl, translation catalog, copy]
+    pathHints: [apps/web/src/packages/i18n/]
+    mustRead: [rules/12-i18n.md, rules/frontend/14-i18n-rtl.md]
+    rules: [rules/12-i18n.md]
+    skills: [skills/add-i18n-message-key.md]
+    reviewers: [agents/i18n-rtl-reviewer.md]
+    validation: [npm run lint, npm run test:unit, npm run test:e2e]
+
+  dependency-change:
+    title: Package upgrades/additions/removals
+    lane: standard
+    pack: dependency-change
+    keywords: [dependency, package, npm, upgrade, cve, audit, library, vendor]
+    pathHints: [package.json, package-lock.json]
+    mustRead: [docs/package-decisions.md, docs/library-wrapping.md]
+    rules: [rules/10-library-modularization.md, rules/frontend/09-library-wrapping.md]
+    skills:
+      [
+        skills/add-library.md,
+        skills/create-package-wrapper.md,
+        skills/modularize-existing-library.md,
+      ]
+    reviewers: [agents/backend-release-gatekeeper.md]
+    validation: [npm run audit, npm run validate]
+
+  testing-change:
+    title: Adding/repairing tests, fixtures, harnesses
+    lane: fast
+    pack: testing-change
+    keywords: [test, coverage, fixture, mock, flaky, vitest, playwright, spec]
+    pathHints: [apps/api/src/tests/, apps/web/e2e/, testing/]
+    mustRead: [testing/testing-strategy.md, rules/09-testing-coverage.md]
+    rules: [rules/09-testing-coverage.md, rules/frontend/15-testing-and-coverage.md]
+    skills:
+      [skills/write-unit-tests.md, skills/write-integration-tests.md, skills/write-e2e-tests.md]
+    reviewers: [agents/backend-test-engineer.md, agents/frontend-test-engineer.md]
+    validation: [npm run test:coverage]
+
+  support-change:
+    title: Support docs, troubleshooting, FAQs, known issues
+    lane: fast
+    pack: support-change
+    keywords: [support, faq, troubleshooting, known issue, help copy]
+    pathHints: [support/]
+    mustRead: [support/README.md]
+    rules: [rules/23-review-checklist.md]
+    skills: []
+    reviewers: []
+    validation: [npm run knowledge:validate]
+
+  release:
+    title: Preparing/executing a release
+    lane: critical
+    pack: release
+    keywords: [release, deploy, ship, go live, docker, smoke test, production rollout]
+    pathHints: [docker-compose.yml, Dockerfile.api, Dockerfile.web, .github/workflows/]
+    mustRead: [docs/release-checklist.md, rules/24-release-gate.md, docs/sdlc/release-checklist.md]
+    rules: [rules/24-release-gate.md, rules/frontend/19-release-gates.md]
+    skills: [skills/final-validation.md, skills/final-validation-frontend.md]
+    reviewers: [agents/backend-release-gatekeeper.md, agents/frontend-release-gatekeeper.md]
+    validation: [npm run validate, npm run security:scan, npm run test:e2e:ci]
+
+  rollback:
+    title: Rolling back a release or change
+    lane: critical
+    pack: rollback
+    keywords: [rollback, revert, undo release, restore previous]
+    pathHints: []
+    mustRead: [runbooks/rollback-template.md, docs/release-checklist.md]
+    rules: [rules/24-release-gate.md]
+    skills: [skills/migration-plan.md]
+    reviewers: [agents/backend-release-gatekeeper.md]
+    validation: [npm run validate]
+
+  incident:
+    title: Live incident response
+    lane: critical
+    pack: incident
+    keywords: [incident, outage, sev, down, on call, emergency, postmortem]
+    pathHints: [incidents/]
+    mustRead: [runbooks/README.md, memory/known-pitfalls.md]
+    rules: [rules/22-observability-logging.md, rules/24-release-gate.md]
+    skills: [skills/investigate-production-bug.md]
+    reviewers: [agents/reliability-engineer.md]
+    validation: [npm run test:integration]
+
+  knowledge-change:
+    title: Knowledge OS — docs, routing, packs, compiler
+    lane: standard
+    pack: knowledge-change
+    keywords:
+      [knowledge, bootstrap, pack, resolver, manifest, docs system, context routing, claude.md]
+    pathHints: [knowledge/, scripts/knowledge/, .ai/, context/, memory/]
+    mustRead: [knowledge/README.md, rules/31-knowledge-management.md]
+    rules: [rules/31-knowledge-management.md]
+    skills: [skills/resolve-task-context.md, skills/prepare-agent-mirrors.md]
+    reviewers: []
+    validation: [npm run knowledge:build, npm run knowledge:validate, npm run knowledge:benchmark]

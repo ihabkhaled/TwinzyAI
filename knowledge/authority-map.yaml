@@ -1,0 +1,60 @@
+# Precedence when sources disagree. Lower number wins. A generated file can
+# never outrank its authored source; a summary can never outrank the detail
+# it summarizes. Contradictions between canonical sources are recorded in
+# contradiction-checks.yaml (registry section) until resolved — never merged
+# silently.
+precedence:
+  - level: 0
+    name: governance
+    sources: [CLAUDE.md]
+    note: Lifecycle/governance policy; wins over all engineering guidance.
+  - level: 1
+    name: engineering-canon
+    sources: [context/architecture-map.md, rules/00-non-negotiable-rules.md]
+    note: The two engineering canon files; win over any other engineering doc.
+  - level: 2
+    name: rules
+    sources: [rules/]
+    note: Permanent engineering obligations per layer/concern.
+  - level: 3
+    name: decisions
+    sources: [architecture/adrs/, memory/, docs/package-decisions.md]
+    note: Standing decisions and learned pitfalls, dated and scoped.
+  - level: 4
+    name: canonical-detail
+    sources:
+      [
+        structure/,
+        product/,
+        domain/,
+        contracts/,
+        testing/,
+        operations/,
+        support/,
+        runbooks/,
+        quality/,
+        incidents/,
+        skills/,
+        agents/,
+        knowledge/,
+      ]
+    note: Owned detail per area; one fact, one owner.
+  - level: 5
+    name: summaries-and-context
+    sources: [context/, .ai/summaries/, .ai/BOOTSTRAP.md, .ai/HOT_MEMORY.md]
+    note: Compiled/authored digests; route to canonical detail, never redefine it.
+  - level: 6
+    name: generated-facts
+    sources: [.ai/manifests/, .ai/indexes/, .ai/graphs/]
+    note: Mechanical scans of reality; trusted for inventory, not for policy.
+  - level: 7
+    name: feature-work
+    sources: [docs/features/]
+    note: Temporary per-request artifacts; superseded once promoted to canon.
+
+tieBreakers:
+  - When two rules overlap, the stricter one applies.
+  - Code + tests are evidence of current behavior, not of approved policy;
+    behavior/policy gaps are contradictions to record and resolve.
+  - If a summary disagrees with its canonical source, the summary is stale —
+    rebuild or fix the source; never patch the summary alone.

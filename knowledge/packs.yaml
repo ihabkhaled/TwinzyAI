@@ -1,0 +1,285 @@
+# Context-pack definitions. build-packs.mjs compiles each entry into
+# .ai/packs/<id>.md by combining this authored content with the routing-map
+# entry for `taskType` (docs, rules, skills, reviewers, validation) and the
+# generated manifests (code entrypoints from pathHints, tests from the
+# source-test graph). Keep invariants area-specific; universal invariants live
+# in the bootstrap and are not repeated here.
+packs:
+  - id: fast-routine-fix
+    taskType: routine-fix
+    invariants:
+      - Smallest safe change; no drive-by refactors in the same commit.
+      - A bug fix ships with a regression test in the same change.
+      - No new files when an existing owner file can absorb the change (rules/29).
+    notes: >-
+      Read the owner file and its test before editing. If the fix touches any
+      critical path from knowledge/risk-classification.yaml, STOP and re-route
+      as the matching critical task type.
+
+  - id: backend-feature
+    taskType: backend-feature
+    invariants:
+      - One delegation per controller handler; orchestration lives in a use case.
+      - Services stay focused (≤ ~20 lines/method); concurrency only in use cases/lib.
+      - No inline DTOs/types/constants — model/, api/dto/, or packages/shared own them.
+      - New env reads go through config (env.schema.ts + app-config.service.ts), never process.env.
+    notes: >-
+      Copy the closest existing module shape (see structure/modules/) instead of
+      inventing one. Register new modules in app.module.ts and expose a minimal
+      index.ts public surface. Integration tests live beside the module in tests/.
+
+  - id: frontend-feature
+    taskType: frontend-feature
+    invariants:
+      - TSX is pure composition; state/effects in hooks; HTTP only via the gateway.
+      - Component/container files cap at 130 lines / 60 per function — split early.
+      - Every user-facing string goes through i18n (en AND ar in the same change).
+      - Vendor imports only via apps/web/src/packages/<vendor> wrappers.
+    notes: >-
+      Follow the module anatomy (components/containers/hooks/services/gateway/model).
+      Reuse shared/components design-system pieces before creating new ones.
+
+  - id: full-stack-feature
+    taskType: full-stack-feature
+    invariants:
+      - The shared zod schema in packages/shared is the single contract; both sides derive from it.
+      - Backend validates at the transport edge; the frontend never trusts its own validation alone.
+      - Ship api + web + shared + tests + docs in one reviewable stream.
+    notes: >-
+      Sequence: shared schema → api (dto + controller + use case) → web gateway →
+      hook → UI → e2e. Rebuild shared (npm run build:shared) before lint/typecheck.
+
+  - id: refactor
+    taskType: refactor
+    invariants:
+      - Behavior-preserving; tests stay green without modification (or state why).
+      - Never weaken validation, safety filters, error handling, or types to simplify.
+      - Extraction targets the existing owner file; no parallel duplicates.
+    notes: >-
+      Run npm run quality:dead-code and quality:circular after moving code.
+      Large decompositions follow skills/decompose-large-file.md slice order.
+
+  - id: production-bug
+    taskType: production-bug
+    invariants:
+      - Reproduce before fixing; the root cause, not the symptom, gets the fix.
+      - The exact failure mode becomes a permanent regression test.
+      - Check memory/known-pitfalls.md first — many failures are recorded traps.
+    notes: >-
+      Evidence order: user-visible error → error code → owning module (impact
+      graph) → logs (redaction-aware) → recent commits touching the owner.
+
+  - id: architecture-change
+    taskType: architecture-change
+    invariants:
+      - Layer boundaries are ESLint-enforced; changes need the plugin updated in the same stream.
+      - An ADR records any boundary/topology decision (architecture/adrs/).
+      - context/architecture-map.md and knowledge/summaries/architecture.md update together.
+    notes: >-
+      The architecture plugin lives in eslint/architecture-plugin (backend) and
+      eslint/frontend-architecture-plugin (web). Never relax a rule to make a
+      migration pass — migrate the code.
+
+  - id: ai-pipeline-change
+    taskType: ai-pipeline-change
+    invariants:
+      - Only TraitExtractionService may receive the image; every other step is text-only by construction.
+      - Every step output is zod-parsed then safety-filtered before use.
+      - The server, never the model, sets disclaimers and canonical fields.
+      - Prompt/schema/safety changes ride the critical lane with test:ai green.
+    notes: >-
+      The pipeline: extraction → candidate generation → judge → aggregation →
+      (translation). Read docs/ai/pipeline.md and the step service before editing.
+      Language guard and shape checks are load-bearing — never bypass on "trusted" paths.
+
+  - id: ai-provider-change
+    taskType: ai-provider-change
+    invariants:
+      - New vendors get an adapter implementing AiProviderAdapter; no SDK imports outside adapters.
+      - Photo-carrying calls dispatch only to vision-capable entries (fail-closed).
+      - Provider errors are classified (rate-limited/unavailable/fatal) and redacted before logging.
+      - Routing chains are env-only (AI_ROUTE_*); boot validates explicit routes.
+    notes: >-
+      Follow skills/add-ai-provider.md. OpenAI-compatible vendors reuse
+      OpenAiCompatAdapter via registry config instead of new adapters when the
+      wire format matches. Run npm run ai:benchmark before and after.
+
+  - id: ai-prompt-change
+    taskType: ai-prompt-change
+    invariants:
+      - Prompts live in apps/api/src/modules/ai/prompts/ with validated REQUIRED_PLACEHOLDERS.
+      - Placeholder replacement is split/join (no regex) and asserts nothing unreplaced.
+      - Wording must never solicit identity, biometrics, or sensitive attributes.
+      - Output schema + safety filter changes accompany any output-shape change.
+    notes: >-
+      Test with npm run test:ai plus a benchmark run; judge safety flags
+      (z.literal(false)) must stay impossible to satisfy with unsafe content.
+
+  - id: upload-security-change
+    taskType: upload-security-change
+    invariants:
+      - 'Chain order is fixed: consent → presence → size → MIME/extension+consistency → magic bytes → decode → ClamAV.'
+      - ClamAV fails CLOSED whenever enabled — any scanner error rejects the upload.
+      - Multer memory storage only; buffers are zero-filled, never written to disk.
+      - Caps come from env (MAX_IMAGE_SIZE_BYTES etc.), never hardcoded.
+    notes: >-
+      Every change here needs npm run test:file-security and the security
+      reviewer. Never reorder the chain for performance; consent stays first.
+
+  - id: privacy-change
+    taskType: privacy-change
+    invariants:
+      - The image never leaves request memory, is wiped in finally, and is never logged.
+      - Log redaction (privacy module) wraps every provider error before logging.
+      - No new persistence of user data without an owner-approved recorded decision.
+      - Consent copy must stay accurate to the pipeline in BOTH languages.
+    notes: >-
+      domain/image-lifecycle.md is the canonical lifecycle statement. Any change
+      to what is collected, kept, or logged updates docs/privacy-and-data-retention.md
+      and the consent copy review in the same stream.
+
+  - id: payments-change
+    taskType: payments-change
+    invariants:
+      - Paywall is env-gated; blank credentials = free game. Never invert the default.
+      - Price is server-authoritative (PAYMENT_PRICE_VALUE); the client never sends an amount.
+      - Capture verifies status, amount, currency, and custom_id === requestId; failures refund.
+      - No persistence, no webhooks without updating the recorded program (22-go-no-go.md).
+      - LIVE mode stays forbidden until the four recorded conditions pass.
+    notes: >-
+      This is an owner-gated program. Read 22-go-no-go.md and
+      19-threat-model-paywall.md before any change; keep the .env.example price
+      mirror (PAYMENT_PRICE_VALUE ↔ NEXT_PUBLIC_PAYMENT_PRICE_VALUE) intact.
+
+  - id: api-contract-change
+    taskType: api-contract-change
+    invariants:
+      - packages/shared schemas are the single source; api DTOs and web types derive from them.
+      - Breaking changes are first-class events — version or stage them, never slip them.
+      - Transport validation is server-side; clients are never trusted to enforce bounds.
+    notes: >-
+      Update contracts/ docs and both-side consumers in one stream. SSE event
+      shape changes count as contract changes (contracts/api/sse-events.md).
+
+  - id: configuration-change
+    taskType: configuration-change
+    invariants:
+      - 'Every new key: env.schema.ts (zod, fail-fast) → app-config.service.ts getter → .env.example with comment → docs/env-vars.md.'
+      - Web-visible values use NEXT_PUBLIC_* via packages/env — never leak server secrets.
+      - No process.env reads outside the config layer.
+    notes: >-
+      Follow skills/add-config-value.md. Mirror pairs (like the payment price)
+      must stay consistent; knowledge:contradictions checks the price mirror.
+
+  - id: performance-change
+    taskType: performance-change
+    invariants:
+      - Measure before and after; no speculative optimization.
+      - Never trade away validation, safety, or clarity for micro-gains.
+      - Frontend perf respects component-size caps — split, don't inline.
+    notes: >-
+      Backend levers: timeouts, byte caps, concurrency env knobs. Frontend:
+      React/Next patterns per rules/frontend/12-performance.md. Use npm run
+      load-test for API paths.
+
+  - id: reliability-change
+    taskType: reliability-change
+    invariants:
+      - Every remote call has a timeout; every retry has a limit and backoff.
+      - Cancellation propagates (AbortSignal bridging) end to end.
+      - Failures map to typed error codes with safe user copy.
+    notes: >-
+      Rate limiting lives in core/rate-limit; AI hop/retry policy in the router
+      and adapters. Test overload and abort paths, not just happy paths.
+
+  - id: accessibility-change
+    taskType: accessibility-change
+    invariants:
+      - Keyboard and focus behavior are mandatory for interactive flows.
+      - a11y assertions live in e2e/component tests (npm run test:a11y).
+      - RTL (Arabic) layouts must stay correct alongside a11y changes.
+    notes: >-
+      Strict jsx-a11y is part of the lint gate; do not work around it with
+      role/aria misuse — fix the semantics.
+
+  - id: localization-change
+    taskType: localization-change
+    invariants:
+      - Every string ships in en AND ar together; no hardcoded copy in TSX.
+      - Message keys are named constants; RTL correctness is part of done.
+      - AI result language is enforced by the response-language guard, not trust.
+    notes: >-
+      Catalogs live in apps/web/src/packages/i18n/messages/. Payment/consent
+      copy is owner-sensitive — see product/user-facing-copy-principles.md.
+
+  - id: dependency-change
+    taskType: dependency-change
+    invariants:
+      - Every meaningful library is wrapped (packages/<vendor> on web, adapters on api).
+      - New/upgraded deps pass npm run audit and the trivy scan; decisions recorded in docs/package-decisions.md.
+      - Lockfile changes ride with the dependency change, never separately.
+    notes: >-
+      Prefer extending an existing wrapper over adding a vendor. Overrides in
+      the root package.json are deliberate — read the comments before touching.
+
+  - id: testing-change
+    taskType: testing-change
+    invariants:
+      - Tests are deterministic — control time/randomness; no arbitrary sleeps.
+      - Mock at boundaries (adapters/gateways), never the logic under test.
+      - Touched-module coverage stays ≥95% lines/branches/functions/statements.
+    notes: >-
+      Vitest projects: api-unit, api-integration, web-unit, shared-unit,
+      lint-rules; Playwright for e2e. Fixtures live in module tests/ dirs and
+      apps/api/src/tests.
+
+  - id: support-change
+    taskType: support-change
+    invariants:
+      - Support docs state what the code does today, with error codes and i18n keys cited.
+      - Known issues carry an owner and a status, never open-ended.
+    notes: >-
+      support/error-code-catalog.md maps user-visible errors; keep it in sync
+      with shared error constants when codes change.
+
+  - id: release
+    taskType: release
+    invariants:
+      - No release without green validate, security scans, e2e, and the release checklist.
+      - Rollback stays feasible; smoke tests run immediately after deploy.
+      - Docker images scanned (security:scan:images) before promotion.
+    notes: >-
+      Follow docs/release-checklist.md + rules/24. The paywall env block
+      deserves explicit review at every release: blank credentials unless the
+      owner has recorded LIVE approval.
+
+  - id: rollback
+    taskType: rollback
+    invariants:
+      - Roll back first, diagnose second when user impact is active.
+      - The API is stateless — rollback is image/config revert; no data migrations to unwind.
+      - Record what was rolled back, why, and the follow-up owner.
+    notes: >-
+      Use runbooks/rollback.md; verify /health and a smoke analyze run after.
+
+  - id: incident
+    taskType: incident
+    invariants:
+      - Blameless; timeline recorded as it happens in incidents/active/.
+      - User-data safety first — never widen logging to debug a privacy path.
+      - Every incident ends with a postmortem and a learnings entry.
+    notes: >-
+      Triage order: /health → provider status (outage runbook) → recent
+      release (rollback runbook) → known pitfalls.
+
+  - id: knowledge-change
+    taskType: knowledge-change
+    invariants:
+      - .ai/ is generated only; authored truth lives in knowledge/ and the canonical dirs.
+      - Every knowledge edit rebuilds .ai/ in the same commit (knowledge:build) and passes knowledge:validate.
+      - Budgets are hard — bootstrap/hot-memory ≤1,500 tokens, summaries ≤2,500, packs ≤6,000.
+      - One fact, one owner; contradictions get registry entries, never silent merges.
+    notes: >-
+      The compiler lives in scripts/knowledge/ (plain ESM, repo lint rules
+      apply). New task types need routing-map + pack + vocabulary + golden task
+      entries together.
