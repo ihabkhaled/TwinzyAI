@@ -8368,7 +8368,7 @@
           "name": "PaymentStep"
         }
       ],
-      "hash": "5ad94dee5e4c88faa0d5ecaca9dc830a3ca9823224e8930cd4f4a43d9376fa7f",
+      "hash": "04286eba0b63369b98210e5d9262445cb3861b72351809582ea0a62a19b3fd4c",
       "imports": [
         "../hooks/usePayPalButtons.hook",
         "../model/payment.types",
@@ -8379,12 +8379,16 @@
       ],
       "isTest": false,
       "layer": "containers",
-      "loc": 62,
+      "loc": 67,
       "module": "web:game",
       "path": "apps/web/src/modules/game/containers/payment-step.container.tsx"
     },
     {
       "exports": [
+        {
+          "kind": "const",
+          "name": "paymentButtonsClass"
+        },
         {
           "kind": "const",
           "name": "paymentDescriptionClass"
@@ -8398,11 +8402,11 @@
           "name": "paymentTitleClass"
         }
       ],
-      "hash": "684387091c0811971ddce7e55aa34dffee4a3f8fb9c5e4eb1bcfc98b2ebf3c52",
+      "hash": "05b47f59c62624fb3204bfbc4d6ec48777fad0d60297e5c79a2d67a26de83cd1",
       "imports": [],
       "isTest": false,
       "layer": "containers",
-      "loc": 8,
+      "loc": 18,
       "module": "web:game",
       "path": "apps/web/src/modules/game/containers/payment-step.variants.ts"
     },

@@ -11,6 +11,7 @@ import type { PaymentStepProps } from '../model/payment.types';
 import { PayPalButtonsStatus } from '../model/payment.types';
 
 import {
+  paymentButtonsClass,
   paymentDescriptionClass,
   paymentLoaderClass,
   paymentTitleClass,
@@ -50,8 +51,12 @@ export const PaymentStep = ({
             <span className={paymentDescriptionClass}>{loadingLabel}</span>
           </div>
         ) : null}
-        {/* Always mounted so the SDK has a stable node to render into. */}
-        <div ref={containerRef} data-testid={TEST_IDS.paypalButtons} />
+        {/* Always mounted (white surface) so the SDK has a stable, readable node. */}
+        <div
+          ref={containerRef}
+          className={paymentButtonsClass}
+          data-testid={TEST_IDS.paypalButtons}
+        />
         <Button variant="ghost" onClick={payment.onCancel} testId={TEST_IDS.cancelPayment}>
           {cancelLabel}
         </Button>

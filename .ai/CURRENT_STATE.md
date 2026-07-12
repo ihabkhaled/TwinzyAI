@@ -11,9 +11,9 @@
 | API endpoints | 9 |
 | Web routes | 7 |
 | Test files | 169 |
-| Canonical documents | 687 |
+| Canonical documents | 688 |
 | Open contradiction-registry entries | 3 |
-| Stale items at last analysis | 6 |
+| Stale items at last analysis | 0 |
 | Broken links at last analysis | 9 |
 
 ## Active feature folders (docs/features/)

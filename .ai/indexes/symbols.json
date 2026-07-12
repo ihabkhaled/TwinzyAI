@@ -2185,6 +2185,9 @@
   "PAYMENT_UNAVAILABLE_MESSAGE": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
+  "paymentButtonsClass": [
+    "apps/web/src/modules/game/containers/payment-step.variants.ts"
+  ],
   "PaymentCaptureRecord": [
     "apps/api/src/modules/payments/model/payment.types.ts"
   ],

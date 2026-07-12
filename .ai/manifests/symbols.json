@@ -1,5 +1,5 @@
 {
-  "count": 1370,
+  "count": 1371,
   "symbols": [
     {
       "kind": "const",
@@ -5516,6 +5516,13 @@
       "module": "api:payments",
       "name": "PAYMENT_UNAVAILABLE_MESSAGE",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "containers",
+      "module": "web:game",
+      "name": "paymentButtonsClass",
+      "path": "apps/web/src/modules/game/containers/payment-step.variants.ts"
     },
     {
       "kind": "interface",

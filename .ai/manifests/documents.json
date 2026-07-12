@@ -1,5 +1,5 @@
 {
-  "count": 687,
+  "count": 688,
   "documents": [
     {
       "authority": "canonical",
@@ -9224,6 +9224,38 @@
       "summary": "Everything updated in this delivery stream, and why.",
       "title": "23 — Documentation Changelog: AI Knowledge Operating System",
       "tokens": 801,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "48b8f2cd0dbf21d4bc19d698921e1888e63c29856bc38823904865f47c24e100",
+      "headings": [
+        "The Generic Knowledge-OS Prompt (portable — works on any repository)"
+      ],
+      "id": "docs-features-ai-knowledge-os-generic-knowledge-os-prompt",
+      "keywords": [
+        "any",
+        "docs",
+        "features",
+        "generic",
+        "knowledge",
+        "portable",
+        "prompt",
+        "repository",
+        "works"
+      ],
+      "links": [],
+      "path": "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "> Copy everything below the line into a capable AI coding agent inside any repository.",
+      "title": "The Generic Knowledge-OS Prompt (portable — works on any repository)",
+      "tokens": 6426,
       "type": "doc"
     },
     {

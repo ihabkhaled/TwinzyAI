@@ -504,6 +504,7 @@
       "docs/features/ai-knowledge-os/13-implementation-readiness.md",
       "docs/features/ai-knowledge-os/15-dev-validation-report.md",
       "docs/features/ai-knowledge-os/23-documentation-changelog.md",
+      "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
       "docs/features/engineering-os-migration/00-intake.md",
       "docs/features/engineering-os-migration/01-business-analysis.md",
       "docs/features/engineering-os-migration/02-business-development.md",
@@ -999,7 +1000,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "127c3c7e20ff18b5d883a20f4dd216782d3c7ea6385e471100c7f65b45611e24"
+    "inputsHash": "44ea16eb49f20392bcb0dc4fbd44a7b0d4f9af39a6876f90693e3c339a45159a"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
@@ -1704,7 +1705,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "fdb769e9bb49322284c23f76f5c9af12cbe5f77637b9960df9b979ed9bc84117"
+    "inputsHash": "abc728948374a5ad04147cd66142540dc788b6973c5e1f0173b901a609ee87c3"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2380,7 +2381,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "16c3555f60bd4a8d282a4252cb5f164aae3bdecab3cde8e3a593442303aec160"
+    "inputsHash": "71a02d8f046b0e94d698e309645fe65588e0edffffdccbbb5638c244c3b993e7"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -3061,7 +3062,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "16c3555f60bd4a8d282a4252cb5f164aae3bdecab3cde8e3a593442303aec160"
+    "inputsHash": "71a02d8f046b0e94d698e309645fe65588e0edffffdccbbb5638c244c3b993e7"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3726,7 +3727,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "16c3555f60bd4a8d282a4252cb5f164aae3bdecab3cde8e3a593442303aec160"
+    "inputsHash": "71a02d8f046b0e94d698e309645fe65588e0edffffdccbbb5638c244c3b993e7"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

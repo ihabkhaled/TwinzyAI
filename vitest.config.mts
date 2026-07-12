@@ -33,11 +33,16 @@ export default defineConfig({
           environment: 'node',
           include: ['src/**/*.test.ts'],
           exclude: [NODE_MODULES_GLOB, 'src/**/*.integration.test.ts'],
-          // Pin the paid-analysis paywall OFF so tests are deterministic
-          // regardless of a developer's local .env credentials. dotenv never
-          // overrides an already-set process.env key, so these empty values
-          // win; the paywall suite opts back in with vi.stubEnv.
-          env: { PAYPAL_CLIENT_ID: '', PAYPAL_CLIENT_SECRET: '' },
+          // Pin the paid-analysis paywall AND the parallel-pipeline flag OFF so
+          // tests are deterministic regardless of a developer's local .env.
+          // dotenv never overrides an already-set process.env key, so these
+          // values win; the paywall suite opts back in with vi.stubEnv, and
+          // parallel-mode behavior is covered by candidate-recall.service.test.ts.
+          env: {
+            PAYPAL_CLIENT_ID: '',
+            PAYPAL_CLIENT_SECRET: '',
+            AI_PARALLEL_PIPELINE_ENABLED: 'false',
+          },
         },
       },
       {
@@ -49,7 +54,11 @@ export default defineConfig({
           environment: 'node',
           include: ['src/**/*.integration.test.ts'],
           exclude: [NODE_MODULES_GLOB],
-          env: { PAYPAL_CLIENT_ID: '', PAYPAL_CLIENT_SECRET: '' },
+          env: {
+            PAYPAL_CLIENT_ID: '',
+            PAYPAL_CLIENT_SECRET: '',
+            AI_PARALLEL_PIPELINE_ENABLED: 'false',
+          },
         },
       },
       {

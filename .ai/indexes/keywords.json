@@ -239,6 +239,9 @@
   "anthropic": [
     "ANTHROPIC.md"
   ],
+  "any": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
   "api": [
     "architecture/adrs/adr-003-horizontal-scaling-plan.md",
     "contracts/api/README.md",
@@ -1922,6 +1925,9 @@
     "docs/ai/system-overview.md",
     "docs/features/parallel-ai-pipeline/README.md"
   ],
+  "generic": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
   "glm": [
     "contracts/integrations/openai-compat.md",
     "docs/ai/provider-catalog.md",
@@ -2341,6 +2347,7 @@
     "docs/features/ai-knowledge-os/13-implementation-readiness.md",
     "docs/features/ai-knowledge-os/15-dev-validation-report.md",
     "docs/features/ai-knowledge-os/23-documentation-changelog.md",
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
     "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
     "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
     "knowledge/README.md",
@@ -3222,6 +3229,9 @@
     "contracts/ai/README.md",
     "structure/modules/api-share-results.md"
   ],
+  "portable": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+  ],
   "ports": [
     "operations/deployment-model.md",
     "structure/runtime-topology.md"
@@ -3335,6 +3345,7 @@
   "prompt": [
     "contracts/ai/prompt-io.md",
     "docs/ai/prompt-change-checklist.md",
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
     "runbooks/ai-schema-failures.md"
   ],
   "prompt-drift": [
@@ -3684,6 +3695,7 @@
     "rules/20-repositories-database.md"
   ],
   "repository": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
     "skills/create-repository.md",
     "structure/README.md",
     "structure/repository-map.md"
@@ -5140,6 +5152,9 @@
   ],
   "workbench": [
     "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
+  ],
+  "works": [
+    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
   ],
   "workspace": [
     "context/glossary.md"
