@@ -18,4 +18,9 @@ Key decisions:
   would add a heavy native dependency — revisit if requirements grow.
 - unplugin-swc + @swc/core: required for Vitest to emit Nest decorator metadata.
 - supertest for HTTP integration tests; concurrently for the dev script.
+- yaml (eemeli, zero-dependency) as a root devDependency for the knowledge compiler
+  (scripts/knowledge): parses authored knowledge/*.yaml definitions and document frontmatter.
+  Wrapped in scripts/knowledge/lib/yaml-io.mjs per the library-wrapping rule; dev-only, never
+  shipped in an app bundle. A hand-rolled YAML-subset parser was rejected as a silent-breakage
+  risk for human-edited files.
 Rejected plugins: none beyond the documented ESLint holds above.

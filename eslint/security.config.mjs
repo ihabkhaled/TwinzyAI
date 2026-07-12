@@ -65,4 +65,29 @@ export default [
       "security/detect-non-literal-fs-filename": "off",
     },
   },
+  {
+    // The knowledge compiler's whole contract is walking the repository and
+    // compiling authored knowledge/*.yaml definitions: dynamic repo-relative
+    // paths and authored regex patterns are its inputs by design, and it is a
+    // local/CI dev tool never reachable from HTTP or untrusted request data.
+    // detect-unsafe-regex stays covered by the more precise regexp plugin
+    // (error level). Documented in docs/eslint-architecture.md.
+    files: ["scripts/knowledge/**/*.mjs"],
+    rules: {
+      "security/detect-non-literal-fs-filename": "off",
+      "security/detect-non-literal-regexp": "off",
+      "security/detect-unsafe-regex": "off",
+      "security/detect-possible-timing-attacks": "off",
+    },
+  },
+  {
+    // The knowledge resolver shells out to exactly one fixed command
+    // (`git diff --name-only <range>`) via execFileSync with a hardcoded
+    // argument vector; the range comes from the operator's own CLI flag and
+    // never from HTTP or user payloads. Documented in docs/eslint-architecture.md.
+    files: ["scripts/knowledge/lib/git.mjs"],
+    rules: {
+      "security/detect-child-process": "off",
+    },
+  },
 ];

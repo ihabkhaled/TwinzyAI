@@ -7,3 +7,5 @@ test-results
 package-lock.json
 *.md
 apps/web/next-env.d.ts
+# Knowledge OS generated plane — byte-stable compiler output, not prettier's
+.ai

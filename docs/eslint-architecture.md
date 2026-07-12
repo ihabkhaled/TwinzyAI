@@ -78,6 +78,10 @@ rules agree.
 - security/detect-non-literal-regexp OFF for architecture-plugin/shared/policy-utils.mjs only —
   the policy engine compiles regexes from the static pattern lists in
   package-boundaries.config.mjs, no user input.
+- security/detect-child-process OFF for scripts/knowledge/lib/git.mjs only — the knowledge
+  resolver runs exactly one fixed command (`git diff --name-only <range>`) via execFileSync
+  with a hardcoded argument vector; the range comes from the operator own CLI flag and the
+  script is never reachable from HTTP or untrusted request data.
 - unicorn/prevent-abbreviations OFF — wholesale renames (props/env/params) harm readability.
 - unicorn/no-null OFF — React/DOM APIs use null. unicorn/prefer-top-level-await OFF — CJS api.
 - import-x/no-unresolved not enabled — TypeScript owns module resolution.

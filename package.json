@@ -74,7 +74,23 @@
     "calibrate": "npm run build:shared && node scripts/calibrate.mjs",
     "test:a11y": "npm run test:a11y --workspace apps/web -- --pass-with-no-tests",
     "test:visual": "npm run test:visual --workspace apps/web -- --pass-with-no-tests",
-    "quality:frontend": "npm run lint && npm run typecheck && npm run test:e2e"
+    "quality:frontend": "npm run lint && npm run typecheck && npm run test:e2e",
+    "knowledge:build": "node scripts/knowledge/build.mjs",
+    "knowledge:build:incremental": "node scripts/knowledge/build-incremental.mjs",
+    "knowledge:context": "node scripts/knowledge/resolve-context.mjs",
+    "knowledge:classify": "node scripts/knowledge/classify-task.mjs",
+    "knowledge:validate": "node scripts/knowledge/validate-frontmatter.mjs && node scripts/knowledge/validate-links.mjs && node scripts/knowledge/validate-source-references.mjs && node scripts/knowledge/validate-generated-files.mjs && node scripts/knowledge/validate-context-packs.mjs && node scripts/knowledge/find-contradictions.mjs",
+    "knowledge:links": "node scripts/knowledge/validate-links.mjs",
+    "knowledge:stale": "node scripts/knowledge/find-stale-items.mjs",
+    "knowledge:contradictions": "node scripts/knowledge/find-contradictions.mjs",
+    "knowledge:duplicates": "node scripts/knowledge/find-duplicates.mjs",
+    "knowledge:orphans": "node scripts/knowledge/find-orphans.mjs",
+    "knowledge:graphs": "node scripts/knowledge/build-graphs.mjs",
+    "knowledge:packs": "node scripts/knowledge/build-packs.mjs",
+    "knowledge:benchmark": "node scripts/knowledge/benchmark-context.mjs",
+    "knowledge:report": "node scripts/knowledge/report.mjs",
+    "knowledge:refresh": "node scripts/knowledge/build.mjs && node scripts/knowledge/report.mjs",
+    "knowledge:tokens": "node scripts/knowledge/estimate-tokens.mjs"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.1",
@@ -111,7 +127,8 @@
     "tsc7": "npm:typescript@^7.0.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.62.1",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "yaml": "^2.8.1"
   },
   "dependencies": {
     "fastify": "^5.10.0"

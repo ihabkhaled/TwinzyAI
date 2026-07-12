@@ -40,3 +40,8 @@ tmp/
 # AI benchmark outputs (results/reports stay out of git — scripts and docs only)
 benchmark-results/
 docs/features/multi-provider-ai/benchmarks/
+
+# Knowledge OS: per-task resolver output is local-only; the rest of .ai/ is
+# committed generated artifacts (rebuilt by npm run knowledge:build)
+.ai/local/*
+!.ai/local/.gitkeep

@@ -26,7 +26,7 @@
   },
   "workspaces": {
     ".": {
-      "project": ["eslint/**/*.mjs", "*.{ts,mjs,cjs}"]
+      "project": ["eslint/**/*.mjs", "scripts/**/*.mjs", "*.{ts,mjs,cjs}"]
     },
     "apps/api": {
       "entry": [
