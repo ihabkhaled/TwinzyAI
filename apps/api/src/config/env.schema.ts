@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
 import {
+  DEFAULT_AI_CALLS_PER_ANALYSIS,
+  DEFAULT_AI_GENERATION_CONCURRENCY,
+  DEFAULT_AI_GENERATION_LANES,
+  DEFAULT_AI_JUDGE_CONCURRENCY,
+  DEFAULT_AI_PARALLEL_QUEUE_TIMEOUT_MS,
   DEFAULT_AI_RESPONSE_BYTES,
   DEFAULT_ANALYSIS_TIMEOUT_MS,
   DEFAULT_API_PORT,
@@ -23,7 +28,11 @@ import {
   DEFAULT_STREAM_TTL_MS,
   MAX_ACTIVE_ANALYSES_PER_IP_LIMIT,
   MAX_ACTIVE_ANALYSES_PER_TAB_LIMIT,
+  MAX_AI_CALLS_PER_ANALYSIS,
+  MAX_AI_GENERATION_LANES,
+  MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS,
   MAX_AI_RESPONSE_BYTES,
+  MAX_AI_STEP_CONCURRENCY,
   MAX_ANALYSIS_TIMEOUT_MS,
   MAX_GEMINI_STREAM_IDLE_TIMEOUT_MS,
   MAX_GEMINI_TIMEOUT_MS,
@@ -37,7 +46,11 @@ import {
   MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES,
   MAX_SHARE_RESULT_TTL_SECONDS,
   MAX_STREAM_TTL_MS,
+  MIN_AI_CALLS_PER_ANALYSIS,
+  MIN_AI_GENERATION_LANES,
+  MIN_AI_PARALLEL_QUEUE_TIMEOUT_MS,
   MIN_AI_RESPONSE_BYTES,
+  MIN_AI_STEP_CONCURRENCY,
   MIN_ANALYSIS_TIMEOUT_MS,
   MIN_CONCURRENCY_LIMIT,
   MIN_GEMINI_STREAM_IDLE_TIMEOUT_MS,
@@ -203,6 +216,48 @@ const EnvSchema = z
       .min(MIN_AI_RESPONSE_BYTES)
       .max(MAX_AI_RESPONSE_BYTES)
       .default(DEFAULT_AI_RESPONSE_BYTES),
+    // PARALLEL AI PIPELINE (Release A — async candidate-generation lanes).
+    // OFF by default: when false the pipeline runs the unchanged single
+    // generation call. When true, candidate recall fans out into
+    // AI_GENERATION_LANES text-only lanes (each a different recall focus),
+    // bounded globally by AI_GENERATION_CONCURRENCY concurrent generation
+    // calls, never exceeding AI_MAX_CALLS_PER_ANALYSIS provider calls per
+    // analysis. A lane that cannot get a concurrency permit within
+    // AI_PARALLEL_QUEUE_TIMEOUT_MS is dropped, not blocked. Extraction still
+    // runs once (image-only) and judging still runs once; parallelism never
+    // widens the image boundary. AI_JUDGE_CONCURRENCY provisions the judge
+    // gate for the Release B judge tournament.
+    AI_PARALLEL_PIPELINE_ENABLED: booleanFromString,
+    AI_GENERATION_LANES: z.coerce
+      .number()
+      .int()
+      .min(MIN_AI_GENERATION_LANES)
+      .max(MAX_AI_GENERATION_LANES)
+      .default(DEFAULT_AI_GENERATION_LANES),
+    AI_GENERATION_CONCURRENCY: z.coerce
+      .number()
+      .int()
+      .min(MIN_AI_STEP_CONCURRENCY)
+      .max(MAX_AI_STEP_CONCURRENCY)
+      .default(DEFAULT_AI_GENERATION_CONCURRENCY),
+    AI_JUDGE_CONCURRENCY: z.coerce
+      .number()
+      .int()
+      .min(MIN_AI_STEP_CONCURRENCY)
+      .max(MAX_AI_STEP_CONCURRENCY)
+      .default(DEFAULT_AI_JUDGE_CONCURRENCY),
+    AI_MAX_CALLS_PER_ANALYSIS: z.coerce
+      .number()
+      .int()
+      .min(MIN_AI_CALLS_PER_ANALYSIS)
+      .max(MAX_AI_CALLS_PER_ANALYSIS)
+      .default(DEFAULT_AI_CALLS_PER_ANALYSIS),
+    AI_PARALLEL_QUEUE_TIMEOUT_MS: z.coerce
+      .number()
+      .int()
+      .min(MIN_AI_PARALLEL_QUEUE_TIMEOUT_MS)
+      .max(MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS)
+      .default(DEFAULT_AI_PARALLEL_QUEUE_TIMEOUT_MS),
     MAX_IMAGE_SIZE_BYTES: z.coerce
       .number()
       .int()

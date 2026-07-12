@@ -150,3 +150,31 @@ describe('AppConfigService provider enablement + shadow routing', () => {
     expect(config.shadowRouteFor(GeminiStep.Extraction)).toBeUndefined();
   });
 });
+
+/** Typed stand-in: serves already-coerced values (as @nestjs/config would). */
+const buildTypedService = (values: Partial<ParsedEnv>): AppConfigService => {
+  const configService = {
+    get: (key: keyof ParsedEnv): unknown => values[key],
+  } as unknown as ConfigService<ParsedEnv, true>;
+  return new AppConfigService(configService);
+};
+
+describe('AppConfigService parallel AI pipeline getters', () => {
+  it('reads each parallel-pipeline setting from its env key', () => {
+    const config = buildTypedService({
+      AI_PARALLEL_PIPELINE_ENABLED: true,
+      AI_GENERATION_LANES: 3,
+      AI_GENERATION_CONCURRENCY: 4,
+      AI_JUDGE_CONCURRENCY: 2,
+      AI_MAX_CALLS_PER_ANALYSIS: 7,
+      AI_PARALLEL_QUEUE_TIMEOUT_MS: 15_000,
+    });
+
+    expect(config.aiParallelPipelineEnabled).toBe(true);
+    expect(config.aiGenerationLanes).toBe(3);
+    expect(config.aiGenerationConcurrency).toBe(4);
+    expect(config.aiJudgeConcurrency).toBe(2);
+    expect(config.aiMaxCallsPerAnalysis).toBe(7);
+    expect(config.aiParallelQueueTimeoutMs).toBe(15_000);
+  });
+});

@@ -15,7 +15,7 @@ Task type: `backend-feature` · Lane: **standard** · Load after `.ai/BOOTSTRAP.
 
 ## Must-read docs
 
-- context/architecture-map.md — > This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ... (~5586 tokens)
+- context/architecture-map.md — > This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ... (~5717 tokens)
 - context/reference-patterns.md — > The canonical, copy-ready code for every layer and cross-cutting concern in `apps/api` (plus the shared-contract pattern both apps use). One tight, strict-TypeScript snippet per concern; each obeys the layer/import/lint rules. This imp... (~5277 tokens)
 
 ## Rules

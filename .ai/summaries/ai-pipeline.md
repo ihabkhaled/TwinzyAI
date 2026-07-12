@@ -16,6 +16,10 @@ Four env-routable steps — extraction, generation, judge, translation (`GeminiS
 - Route precedence (`app-config.service.ts`): `AI_ROUTE_<STEP>` (comma `provider:model` list, bare token = `gemini:<model>`, ≤10 entries, parse errors throw at boot) **replaces** per-step `GEMINI_MODEL_<STEP>`+fallbacks, which **replaces** the global `GEMINI_MODEL`+`GEMINI_FALLBACK_MODELS` chain. Rollback is env-only. Doc: `docs/provider-routing.md` (verified accurate).
 - Shadow mode: sampled, metrics-only, **text steps only** (no extraction shadow key exists); `AI_SHADOW_ENABLED/SAMPLE_RATE/TIMEOUT_MS` + `AI_SHADOW_ROUTE_{GENERATION,JUDGE,TRANSLATION}`; one log line, failures swallowed, output never reaches users (`adapters/ai-shadow.service.ts`).
 
+## Parallel candidate recall (Release A, flag-gated — `AI_PARALLEL_PIPELINE_ENABLED`, default off)
+
+`application/candidate-recall.service.ts` owns the single-vs-parallel strategy: flag off ⇒ one unchanged generation call; flag on ⇒ fan out into `AI_GENERATION_LANES` (2) text-only lanes, each with a distinct recall focus (strongest/diverse/wildcard) appended in code (`lib/candidate-lane-plan.util.ts`) to the unchanged base prompt. Lanes run under `application/ai-step-concurrency.gate.ts` — a process-global per-step `core/concurrency/semaphore.ts` sized by `AI_GENERATION_CONCURRENCY` (2) — clamped to `AI_MAX_CALLS_PER_ANALYSIS` (5 = extraction+lanes+judge). `Promise.allSettled`: a failed/permit-timed-out (`AI_PARALLEL_QUEUE_TIMEOUT_MS`, 30 s) lane is dropped, survivors merge/dedupe deterministically (`lib/candidate-merge.util.ts`, score-desc then name-asc), empty ⇒ same server fallback. Extraction and judge still run exactly once — the image boundary is untouched. `AI_JUDGE_CONCURRENCY` provisions the future Release-B judge tournament. Owner: `docs/ai/concurrency-policy.md` + `architecture/adrs/adr-004-parallel-ai-pipeline.md`. `StyleMatchService` now depends only on `CandidateRecallService` for recall.
+
 ## Prompts (`apps/api/src/modules/ai/prompts/`, loaded by `infrastructure/prompt-template.repository.ts`)
 
 `use-1st-prompt.md` (extraction, `[LANGUAGE_CODE]`), `use-2nd-prompt.md` (generation, `[TRAITS_JSON] [LANGUAGE_CODE] [RESULT_COUNT] [REGION_HINT]`), `use-3rd-prompt.md` (judge — owns score calibration), `translate-result-prompt.md`. The repository validates required placeholders, replaces via split/join (no regex injection), and rejects any prompt still containing a known placeholder. Registry: `model/prompt-version.constants.ts`. Contract version `written-traits-v5` is a `z.literal` in every response schema; lock-step drift test at `modules/ai/tests/ai-pipeline.test.ts`.
@@ -32,7 +36,8 @@ Four env-routable steps — extraction, generation, judge, translation (`GeminiS
 ## Env knobs (all in `apps/api/src/config/env.schema.ts`; defaults in `env-bounds.constants.ts`)
 
 - Timeouts/size: `GEMINI_TIMEOUT_MS` (30 s default; reused by the compat adapter), `GEMINI_STREAM_IDLE_TIMEOUT_MS` (60 s inter-chunk), `AI_MAX_RESPONSE_BYTES` (500 k, aborts mid-stream on overflow), `ANALYSIS_TIMEOUT_MS` watchdog (120 s), `STREAM_TTL_MS` (180 s, ≥ watchdog).
-- Concurrency: `MAX_GLOBAL_ACTIVE_ANALYSES` 50 / `MAX_ACTIVE_ANALYSES_PER_IP` 3 / `MAX_ACTIVE_ANALYSES_PER_TAB` 1 / `MAX_ANALYSIS_QUEUE_SIZE` 100.
+- Concurrency (admission): `MAX_GLOBAL_ACTIVE_ANALYSES` 50 / `MAX_ACTIVE_ANALYSES_PER_IP` 3 / `MAX_ACTIVE_ANALYSES_PER_TAB` 1 / `MAX_ANALYSIS_QUEUE_SIZE` 100.
+- Parallel recall (Release A, off by default): `AI_PARALLEL_PIPELINE_ENABLED`, `AI_GENERATION_LANES` 2, `AI_GENERATION_CONCURRENCY` 2, `AI_JUDGE_CONCURRENCY` 1, `AI_MAX_CALLS_PER_ANALYSIS` 5, `AI_PARALLEL_QUEUE_TIMEOUT_MS` 30 s.
 - Selection: `GEMINI_API_KEY`, `GEMINI_MODEL[_<STEP>]`, `GEMINI_FALLBACK_MODELS[_<STEP>]`, `AI_ROUTE_<STEP>`, `{OPENAI|DEEPSEEK|QWEN|KIMI|GLM}_{API_KEY,BASE_URL}`. Never hardcoded — an empty chain throws `AiProviderUnavailable` rather than defaulting.
 
 ## Cancellation and benchmark

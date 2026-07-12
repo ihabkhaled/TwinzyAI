@@ -61,6 +61,7 @@ Business code injects `AppConfigService` and reads typed getters — never the r
 - **`GEMINI_MODEL`** comes from `.env` via config — hardcoding a model name anywhere (source, tests, prompts, docs-as-code) is a review blocker.
 - **`ENABLE_CLAMAV`** + environment drive the fail-closed policy ([15-file-upload-security.md](./15-file-upload-security.md)).
 - **`ENABLE_OPENAPI_DOCS`** flag-gates swagger (`core/openapi`); off by default outside local.
+- **`AI_PARALLEL_*` knobs** — the six parallel-pipeline vars (`AI_PARALLEL_PIPELINE_ENABLED`, `AI_GENERATION_LANES`, `AI_GENERATION_CONCURRENCY`, `AI_JUDGE_CONCURRENCY`, `AI_MAX_CALLS_PER_ANALYSIS`, `AI_PARALLEL_QUEUE_TIMEOUT_MS`) follow the same validated-config pattern (zod schema + `env-bounds.constants.ts` bounds + typed `AppConfigService` getters); flag `false` by default ([/docs/ai/concurrency-policy.md](../docs/ai/concurrency-policy.md)).
 - Frontend receives **`NEXT_PUBLIC_*` only**, read through `lib/config` — no server value ever reaches the bundle.
 
 ## Secrets

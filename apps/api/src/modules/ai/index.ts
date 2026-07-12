@@ -2,6 +2,7 @@ export * from './ai.module';
 export * from './application/ai-safety.service';
 export * from './application/candidate-generation.service';
 export * from './application/candidate-judge.service';
+export * from './application/candidate-recall.service';
 export * from './application/result-translation.service';
 export * from './application/trait-extraction.service';
 export * from './infrastructure/prompt-template.repository';

@@ -80,7 +80,7 @@
     ],
     "summary": "> Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r...",
     "title": "07 — Performance & Scalability",
-    "tokens": 1332
+    "tokens": 1487
   },
   "rules/08-reliability-durability.md": {
     "keywords": [
@@ -90,7 +90,7 @@
     ],
     "summary": "> The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl...",
     "title": "08 — Reliability & Durability",
-    "tokens": 1383
+    "tokens": 1510
   },
   "rules/09-testing-coverage.md": {
     "keywords": [
@@ -271,7 +271,7 @@
     ],
     "summary": "> All configuration is typed, zod-validated at startup, and read through `@nestjs/config` behind **`AppConfigService` — the only injectable config surface**. `process.env` never appears outside `config/` and `bootstrap/` (ESLint-enforced...",
     "title": "25 — Configuration & Environment",
-    "tokens": 1399
+    "tokens": 1512
   },
   "rules/26-error-handling-and-exceptions.md": {
     "keywords": [

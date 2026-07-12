@@ -1,7 +1,8 @@
 {
   "2026": [
     "docs/features/multi-provider-ai/02-provider-research.md",
-    "release-notes/2026-07-12-ai-knowledge-os.md"
+    "release-notes/2026-07-12-ai-knowledge-os.md",
+    "release-notes/2026-07-12-parallel-ai-pipeline.md"
   ],
   "<5-12 lowercase routing keywords>": [
     "knowledge/templates/canonical-doc.md"
@@ -20,6 +21,9 @@
   ],
   "003": [
     "architecture/adrs/adr-003-horizontal-scaling-plan.md"
+  ],
+  "004": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md"
   ],
   "4xx": [
     "contracts/api/error-envelope.md"
@@ -101,6 +105,7 @@
     "architecture/adrs/adr-001-strict-engineering-os.md",
     "architecture/adrs/adr-002-zod-validation-vendor.md",
     "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
     "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
     "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
     "architecture/adrs/adr-template.md",
@@ -114,6 +119,7 @@
     "architecture/adrs/adr-001-strict-engineering-os.md",
     "architecture/adrs/adr-002-zod-validation-vendor.md",
     "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
     "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
     "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
     "architecture/adrs/adr-template.md",
@@ -209,6 +215,7 @@
     "docs/features/engineering-os-migration/09-impact-analysis.md",
     "docs/features/multi-provider-ai/09-impact-analysis.md",
     "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
     "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
     "docs/features/simple-readable-code-operating-system-implementation/01-business-analysis.md",
     "docs/features/simple-readable-code-operating-system-implementation/09-impact-analysis.md",
@@ -231,9 +238,6 @@
   ],
   "anthropic": [
     "ANTHROPIC.md"
-  ],
-  "any": [
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
   ],
   "api": [
     "architecture/adrs/adr-003-horizontal-scaling-plan.md",
@@ -317,6 +321,8 @@
     "rules/36-delivery-lanes-and-traceability.md"
   ],
   "async": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
+    "docs/features/parallel-ai-pipeline/README.md",
     "rules/27-async-events-and-jobs.md"
   ],
   "audience": [
@@ -518,6 +524,7 @@
     "docs/features/_template/16-dev-bug-log.md",
     "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
     "docs/features/temporary-shareable-results/16-dev-bug-log.md",
     "skills/investigate-production-bug.md",
@@ -561,6 +568,9 @@
     "docs/features/visual-similarity-pivot/20-uat-report.md",
     "domain/calculations.md"
   ],
+  "call-budget": [
+    "docs/ai/concurrency-policy.md"
+  ],
   "called": [
     "skills/create-manager-use-case.md"
   ],
@@ -580,6 +590,8 @@
     "support/user-visible-error-guide.md"
   ],
   "candidate": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
+    "docs/features/parallel-ai-pipeline/README.md",
     "domain/entities.md",
     "domain/ubiquitous-language.md",
     "product/terminology.md"
@@ -665,6 +677,7 @@
     "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
     "docs/features/ai-knowledge-os/23-documentation-changelog.md",
     "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
     "docs/features/simple-readable-code-operating-system-implementation/23-documentation-changelog.md",
     "docs/features/temporary-shareable-results/23-documentation-changelog.md",
     "docs/features/twinzy-hardening-v3/23-documentation-changelog.md"
@@ -725,6 +738,7 @@
     "docs/features/_template/00-intake.md",
     "docs/features/advanced-global-traits-v2/00-intake.md",
     "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/parallel-ai-pipeline/00-intake.md",
     "docs/features/temporary-shareable-results/00-intake.md",
     "docs/features/visual-similarity-pivot/00-intake.md"
   ],
@@ -830,6 +844,12 @@
     "docs/ai/concurrency-policy.md",
     "operations/scaling-model.md",
     "runbooks/provider-rate-limiting.md"
+  ],
+  "concurrency lanes": [
+    "knowledge/summaries/configuration.md"
+  ],
+  "concurrency-gate": [
+    "knowledge/summaries/ai-pipeline.md"
   ],
   "config": [
     "docs/eslint/no-process-env-outside-config.md",
@@ -985,6 +1005,7 @@
     "docs/features/engineering-os-migration/12-coverage-plan.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
     "docs/features/temporary-shareable-results/12-coverage-plan.md",
     "docs/features/twinzy-hardening-v3/12-coverage-plan.md",
@@ -1216,6 +1237,8 @@
     "docs/features/ai-knowledge-os/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
+    "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
     "docs/features/temporary-shareable-results/15-dev-validation-report.md",
@@ -1228,6 +1251,8 @@
     "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
+    "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
     "docs/features/temporary-shareable-results/15-dev-validation-report.md"
@@ -1289,6 +1314,7 @@
     "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
     "docs/features/ai-knowledge-os/23-documentation-changelog.md",
     "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
     "docs/features/simple-readable-code-operating-system-implementation/23-documentation-changelog.md",
     "docs/features/temporary-shareable-results/23-documentation-changelog.md",
     "docs/features/twinzy-hardening-v3/23-documentation-changelog.md",
@@ -1677,6 +1703,10 @@
     "structure/modules/api-result-aggregation.md",
     "support/AI-result-expectations.md"
   ],
+  "fan-out": [
+    "docs/ai/concurrency-policy.md",
+    "knowledge/summaries/ai-pipeline.md"
+  ],
   "faq": [
     "support/FAQ.md"
   ],
@@ -1700,6 +1730,7 @@
     "docs/features/_template-frontend/README.md",
     "docs/features/_template/README.md",
     "docs/features/multi-tab-stream-isolation/README.md",
+    "docs/features/parallel-ai-pipeline/README.md",
     "skills/create-feature.md",
     "skills/create-module-frontend.md",
     "skills/refactor-feature.md"
@@ -1829,6 +1860,7 @@
     "support/product-behavior-guide.md"
   ],
   "gate": [
+    "docs/ai/concurrency-policy.md",
     "quality/definition-of-ready.md",
     "quality/release-readiness.md",
     "rules/24-release-gate.md",
@@ -1885,11 +1917,10 @@
     "rules/35-generated-artifacts-and-freshness.md"
   ],
   "generation": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
     "docs/ai/prompt-catalog.md",
-    "docs/ai/system-overview.md"
-  ],
-  "generic": [
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
+    "docs/ai/system-overview.md",
+    "docs/features/parallel-ai-pipeline/README.md"
   ],
   "glm": [
     "contracts/integrations/openai-compat.md",
@@ -2130,6 +2161,7 @@
     "docs/features/engineering-os-migration/09-impact-analysis.md",
     "docs/features/multi-provider-ai/09-impact-analysis.md",
     "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
     "docs/features/simple-readable-code-operating-system-implementation/09-impact-analysis.md",
     "docs/features/temporary-shareable-results/02-business-development.md",
     "docs/features/temporary-shareable-results/09-impact-analysis.md",
@@ -2206,6 +2238,7 @@
     "docs/features/engineering-os-migration/00-intake.md",
     "docs/features/multi-provider-ai/00-intake.md",
     "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/parallel-ai-pipeline/00-intake.md",
     "docs/features/paypal-donations-and-paid-results/00-intake.md",
     "docs/features/simple-readable-code-operating-system-and-codebase-refactor/00-intake.md",
     "docs/features/simple-readable-code-operating-system-implementation/00-intake.md",
@@ -2308,8 +2341,8 @@
     "docs/features/ai-knowledge-os/13-implementation-readiness.md",
     "docs/features/ai-knowledge-os/15-dev-validation-report.md",
     "docs/features/ai-knowledge-os/23-documentation-changelog.md",
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
     "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+    "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
     "knowledge/README.md",
     "knowledge/templates/ai-readme.md",
     "quality/documentation-review-standard.md",
@@ -2336,6 +2369,10 @@
     "runbooks/event-loop-lag.md"
   ],
   "lanes": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
+    "docs/ai/concurrency-policy.md",
+    "docs/features/parallel-ai-pipeline/README.md",
+    "knowledge/summaries/ai-pipeline.md",
     "rules/36-delivery-lanes-and-traceability.md"
   ],
   "language": [
@@ -2473,6 +2510,7 @@
     "docs/features/_template/18-defect-cycle-log.md",
     "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
+    "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/16-dev-bug-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/18-defect-cycle-log.md",
     "docs/features/temporary-shareable-results/16-dev-bug-log.md"
@@ -2796,6 +2834,7 @@
   ],
   "notes": [
     "release-notes/2026-07-12-ai-knowledge-os.md",
+    "release-notes/2026-07-12-parallel-ai-pipeline.md",
     "release-notes/README.md",
     "release-notes/release-notes-template.md",
     "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -2934,6 +2973,28 @@
     "docs/features/paypal-donations-and-paid-results/22-go-no-go.md",
     "docs/features/paypal-donations-and-paid-results/25-sandbox-verification.md"
   ],
+  "parallel": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
+    "docs/ai/concurrency-policy.md",
+    "docs/features/parallel-ai-pipeline/00-intake.md",
+    "docs/features/parallel-ai-pipeline/03-product-requirements.md",
+    "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+    "docs/features/parallel-ai-pipeline/08-architecture-review.md",
+    "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+    "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+    "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
+    "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
+    "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
+    "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
+    "docs/features/parallel-ai-pipeline/19-security-review.md",
+    "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+    "docs/features/parallel-ai-pipeline/README.md",
+    "knowledge/summaries/ai-pipeline.md",
+    "release-notes/2026-07-12-parallel-ai-pipeline.md"
+  ],
+  "parallel pipeline": [
+    "knowledge/summaries/configuration.md"
+  ],
   "parsing": [
     "docs/ai/output-validation.md"
   ],
@@ -3060,11 +3121,26 @@
     "operations/observability-map.md"
   ],
   "pipeline": [
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
     "docs/ai/pipeline.md",
     "docs/ai/README.md",
     "docs/ai/system-overview.md",
+    "docs/features/parallel-ai-pipeline/00-intake.md",
+    "docs/features/parallel-ai-pipeline/03-product-requirements.md",
+    "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+    "docs/features/parallel-ai-pipeline/08-architecture-review.md",
+    "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+    "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+    "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
+    "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
+    "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
+    "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
+    "docs/features/parallel-ai-pipeline/19-security-review.md",
+    "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+    "docs/features/parallel-ai-pipeline/README.md",
     "knowledge/summaries/ai-pipeline.md",
     "knowledge/summaries/domain.md",
+    "release-notes/2026-07-12-parallel-ai-pipeline.md",
     "structure/flows/analyze-flow.md"
   ],
   "pitfalls": [
@@ -3094,6 +3170,7 @@
     "docs/features/engineering-os-migration/12-coverage-plan.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/05-delivery-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
     "docs/features/temporary-shareable-results/05-delivery-plan.md",
@@ -3145,9 +3222,6 @@
     "contracts/ai/README.md",
     "structure/modules/api-share-results.md"
   ],
-  "portable": [
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
-  ],
   "ports": [
     "operations/deployment-model.md",
     "structure/runtime-topology.md"
@@ -3197,6 +3271,7 @@
   "privacy": [
     "docs/ai/image-lifecycle.md",
     "docs/ai/written-traits-only-boundary.md",
+    "docs/features/parallel-ai-pipeline/19-security-review.md",
     "docs/privacy-and-data-retention.md",
     "domain/consent-model.md",
     "domain/image-lifecycle.md",
@@ -3238,6 +3313,7 @@
     "docs/features/ai-knowledge-os/03-product-requirements.md",
     "docs/features/engineering-os-migration/03-product-requirements.md",
     "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/parallel-ai-pipeline/03-product-requirements.md",
     "docs/features/simple-readable-code-operating-system-implementation/03-product-requirements.md",
     "docs/features/temporary-shareable-results/03-product-requirements.md",
     "docs/features/twinzy-hardening-v3/03-product-requirements.md",
@@ -3259,7 +3335,6 @@
   "prompt": [
     "contracts/ai/prompt-io.md",
     "docs/ai/prompt-change-checklist.md",
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
     "runbooks/ai-schema-failures.md"
   ],
   "prompt-drift": [
@@ -3396,6 +3471,7 @@
     "docs/features/ai-knowledge-os/13-implementation-readiness.md",
     "docs/features/engineering-os-migration/13-implementation-readiness.md",
     "docs/features/multi-provider-ai/13-implementation-readiness.md",
+    "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
     "docs/features/simple-readable-code-operating-system-implementation/13-implementation-readiness.md",
     "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md",
     "docs/features/temporary-shareable-results/13-implementation-readiness.md",
@@ -3420,6 +3496,7 @@
     "docs/features/_template-frontend/README.md",
     "docs/features/_template/README.md",
     "docs/features/multi-tab-stream-isolation/README.md",
+    "docs/features/parallel-ai-pipeline/README.md",
     "docs/features/README.md",
     "docs/README.md",
     "docs/sdlc/README.md",
@@ -3498,6 +3575,7 @@
     "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
     "docs/features/engineering-os-migration/06-technical-refinement.md",
     "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
     "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
@@ -3542,14 +3620,17 @@
   "release": [
     "agents/backend-release-gatekeeper.md",
     "agents/frontend-release-gatekeeper.md",
+    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
     "docs/features/_template-frontend/11-release-readiness.md",
     "docs/features/_template/25-release-report.md",
+    "docs/features/parallel-ai-pipeline/README.md",
     "docs/features/simple-readable-code-operating-system-implementation/25-release-report.md",
     "docs/release-checklist.md",
     "docs/sdlc/release-checklist.md",
     "memory/release-checklist.md",
     "quality/release-readiness.md",
     "release-notes/2026-07-12-ai-knowledge-os.md",
+    "release-notes/2026-07-12-parallel-ai-pipeline.md",
     "release-notes/README.md",
     "release-notes/release-notes-template.md",
     "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -3583,6 +3664,7 @@
     "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
     "docs/features/ai-knowledge-os/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
+    "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/17-qa-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md",
@@ -3602,7 +3684,6 @@
     "rules/20-repositories-database.md"
   ],
   "repository": [
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
     "skills/create-repository.md",
     "structure/README.md",
     "structure/repository-map.md"
@@ -3611,6 +3692,7 @@
     "docs/features/_template/00-intake.md",
     "docs/features/advanced-global-traits-v2/00-intake.md",
     "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/parallel-ai-pipeline/00-intake.md",
     "docs/features/README.md",
     "docs/features/simple-readable-code-operating-system-implementation/00-intake.md",
     "docs/features/temporary-shareable-results/00-intake.md",
@@ -3639,6 +3721,7 @@
     "docs/features/ai-knowledge-os/03-product-requirements.md",
     "docs/features/engineering-os-migration/03-product-requirements.md",
     "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/parallel-ai-pipeline/03-product-requirements.md",
     "docs/features/simple-readable-code-operating-system-implementation/03-product-requirements.md",
     "docs/features/temporary-shareable-results/03-product-requirements.md",
     "docs/features/twinzy-hardening-v3/03-product-requirements.md"
@@ -4027,6 +4110,7 @@
     "docs/ai/prompt-injection-threat-model.md",
     "docs/features/_template-frontend/08-security-review.md",
     "docs/features/_template/19-security-review.md",
+    "docs/features/parallel-ai-pipeline/19-security-review.md",
     "docs/features/simple-readable-code-operating-system-implementation/19-security-review.md",
     "docs/features/twinzy-hardening-v3/19-security-review.md",
     "docs/file-upload-security-review-report.md",
@@ -4048,6 +4132,9 @@
   ],
   "security-scan": [
     "quality/quality-model.md"
+  ],
+  "semaphore": [
+    "docs/ai/concurrency-policy.md"
   ],
   "sensitive-inference": [
     "domain/safety-boundaries.md"
@@ -4361,6 +4448,7 @@
     "docs/features/engineering-os-migration/11-test-strategy.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/parallel-ai-pipeline/11-test-strategy.md",
     "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
     "docs/features/temporary-shareable-results/11-test-strategy.md",
     "docs/features/twinzy-hardening-v3/11-test-strategy.md",
@@ -4513,6 +4601,7 @@
     "docs/features/engineering-os-migration/06-technical-refinement.md",
     "docs/features/engineering-os-migration/07-technical-roadmap.md",
     "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
     "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/07-technical-roadmap.md",
@@ -4566,6 +4655,7 @@
     "docs/features/engineering-os-migration/11-test-strategy.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/parallel-ai-pipeline/11-test-strategy.md",
     "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
     "docs/features/temporary-shareable-results/11-test-strategy.md",
     "docs/features/twinzy-hardening-v3/11-test-strategy.md",
@@ -4878,33 +4968,6 @@
   "validate": [
     "quality/documentation-review-standard.md"
   ],
-  "validation": [
-    "architecture/adrs/adr-002-zod-validation-vendor.md",
-    "contracts/configuration/env-contract.md",
-    "docs/ai/output-validation.md",
-    "docs/ai/prompt-injection-threat-model.md",
-    "docs/ai/README.md",
-    "docs/ai/schema-contracts.md",
-    "docs/features/_template/15-dev-validation-report.md",
-    "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
-    "docs/features/ai-knowledge-os/15-dev-validation-report.md",
-    "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
-    "docs/features/simple-readable-code-operating-system-implementation/15-dev-validation-report.md",
-    "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md",
-    "docs/features/temporary-shareable-results/15-dev-validation-report.md",
-    "docs/features/twinzy-hardening-v3/15-dev-validation-report.md",
-    "docs/final-validation-report.md",
-    "quality/definition-of-done.md",
-    "rules/21-dto-validation.md",
-    "rules/32-documentation-quality.md",
-    "runbooks/ai-schema-failures.md",
-    "runbooks/environment-bootstrap.md",
-    "skills/create-dto-validation.md",
-    "skills/final-validation-frontend.md",
-    "skills/final-validation.md",
-    "structure/configuration-map.md",
-    "structure/modules/api-file-security.md"
-  ],
   "value": [
     "skills/add-config-value.md"
   ],
@@ -5077,9 +5140,6 @@
   ],
   "workbench": [
     "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md"
-  ],
-  "works": [
-    "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md"
   ],
   "workspace": [
     "context/glossary.md"

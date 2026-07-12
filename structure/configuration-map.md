@@ -29,6 +29,7 @@ validates, and exposes configuration, and what must move together.
 | Module wiring | `apps/api/src/config/config.module.ts` | `@Global()`, env-file order `apps/api/.env` then repo-root `.env` (process.env wins), `cache: true`, `validate: validateEnv` |
 | The only injectable surface | `apps/api/src/config/app-config.service.ts` | Typed getters incl. `isPaywallEnabled` (ON iff BOTH `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` non-empty), `swaggerEnabled` (default `!isProduction`), per-step AI route/model-chain resolution, `paymentPrice` |
 | AI step/provider constants | `apps/api/src/config/gemini-step.constants.ts`, `ai-provider.constants.ts`, `ai-route.util.ts` | `AI_IMAGE_STEPS = [Extraction]` (the fail-closed image-step policy), provider env-key maps, `AI_ROUTE_*` parsing that throws at startup on bad tokens |
+| AI parallel-pipeline knobs (flag-gated, OFF) | `apps/api/src/config/env.schema.ts` (+ `env-bounds.constants.ts`), `app-config.service.ts` getters | The six `AI_PARALLEL_PIPELINE_ENABLED` / `AI_GENERATION_LANES` / `AI_GENERATION_CONCURRENCY` / `AI_JUDGE_CONCURRENCY` / `AI_MAX_CALLS_PER_ANALYSIS` / `AI_PARALLEL_QUEUE_TIMEOUT_MS` knobs; default OFF, consumed by `AiStepConcurrencyGate` / `CandidateRecallService` — detail in [docs/ai/concurrency-policy.md](../docs/ai/concurrency-policy.md) |
 | Payment constants | `apps/api/src/config/payment.constants.ts` | `PAYPAL_ENV_VALUES`, sandbox/live base URLs |
 
 Rules: `process.env` is read only in `src/config` (schema) and the one pre-DI exception

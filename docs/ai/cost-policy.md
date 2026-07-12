@@ -23,9 +23,9 @@ There is no billing meter in the app; **cost is bounded structurally** by env-dr
 
 ## What one user run can cost
 
-A full analyze run makes **3 AI calls** (extraction, generation, judge — aggregation is not an
-AI call); a language switch adds 1 translation call ([pipeline.md](pipeline.md)). Each call is
-bounded by:
+A full analyze run makes **3 AI calls** by default (extraction, generation, judge — aggregation is
+not an AI call; more when parallel recall is enabled, see below); a language switch adds 1
+translation call ([pipeline.md](pipeline.md)). Each call is bounded by:
 
 - time: `GEMINI_TIMEOUT_MS` total + `GEMINI_STREAM_IDLE_TIMEOUT_MS` idle
   ([retry-timeout-policy.md](retry-timeout-policy.md));
@@ -42,7 +42,7 @@ Admission caps (defaults 50 global / 3 per IP / 1 per tab, queue 100) plus per-r
 provider calls, so abandoned runs stop spending
 ([retry-timeout-policy.md](retry-timeout-policy.md) §Abort bridging).
 
-## Shadow spend (the only optional multiplier)
+## Shadow spend (an optional multiplier)
 
 Shadow runs add at most one extra text call per sampled primary, bounded by:
 
@@ -54,6 +54,17 @@ Shadow runs add at most one extra text call per sampled primary, bounded by:
 
 Extraction is never shadowed (no image duplication, no vision-call spend) —
 [shadow-routing.md](shadow-routing.md).
+
+## Parallel recall spend (flag-gated, OFF by default)
+
+`AI_PARALLEL_PIPELINE_ENABLED=true` (default `false`) fans the generation step out into
+`AI_GENERATION_LANES` (default 2) provider calls instead of one, multiplying generation spend to
+buy latency/recall. It is hard-bounded two ways: lane count is clamped so
+`extraction + lanes + judge ≤ AI_MAX_CALLS_PER_ANALYSIS` (default 5), and a process-global
+`AI_GENERATION_CONCURRENCY` gate caps concurrent generation calls across all analyses. Cost is an
+explicit acceptance criterion before the flag is enabled in any environment — see
+[concurrency-policy.md](concurrency-policy.md) and
+[ADR-004](../../architecture/adrs/adr-004-parallel-ai-pipeline.md).
 
 ## Benchmark spend
 

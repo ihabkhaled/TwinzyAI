@@ -7,8 +7,10 @@ import { AiShadowService } from './adapters/ai-shadow.service';
 import { GeminiAdapter } from './adapters/gemini.adapter';
 import { ProviderRegistryService } from './adapters/provider-registry.service';
 import { AiSafetyService } from './application/ai-safety.service';
+import { AiStepConcurrencyGate } from './application/ai-step-concurrency.gate';
 import { CandidateGenerationService } from './application/candidate-generation.service';
 import { CandidateJudgeService } from './application/candidate-judge.service';
+import { CandidateRecallService } from './application/candidate-recall.service';
 import { ResultTranslationService } from './application/result-translation.service';
 import { TraitExtractionService } from './application/trait-extraction.service';
 import { PromptTemplateRepository } from './infrastructure/prompt-template.repository';
@@ -31,14 +33,17 @@ import { AI_PROVIDER_ADAPTER } from './model/ai-provider-adapter.types';
     { provide: AI_PROVIDER_ADAPTER, useClass: AiRouterService },
     PromptTemplateRepository,
     AiSafetyService,
+    AiStepConcurrencyGate,
     TraitExtractionService,
     CandidateGenerationService,
+    CandidateRecallService,
     CandidateJudgeService,
     ResultTranslationService,
   ],
   exports: [
     TraitExtractionService,
     CandidateGenerationService,
+    CandidateRecallService,
     CandidateJudgeService,
     ResultTranslationService,
   ],

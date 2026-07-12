@@ -49,6 +49,7 @@ Use `allSettled` when one failure must not abort the rest — and handle every s
 - Explicit timeout (`GEMINI_TIMEOUT_MS`) on every provider call, enforced inside the adapter via `AbortController` ([08-reliability-durability.md](./08-reliability-durability.md)).
 - No server-side auto-retry of the analyze pipeline (a whole-pipeline retry doubles cost and latency); retries, if ever added, are per-call, capped, transient-only, and adapter-owned.
 - The three prompt stages run in their designed order; independent sub-calls within a stage may parallelize in the use case, bounded.
+- **AI provider fan-out must be globally bounded and budgeted.** A parallel step (e.g. the flag-gated candidate-recall lanes) runs under a process-global per-step concurrency gate and a per-analysis call budget — never an unbounded `Promise.all`. Prefer bounded async concurrency over `worker_threads` for network-bound provider calls (workers add isolate/client duplication without cutting network latency). See [/memory/performance-decisions.md](../memory/performance-decisions.md), [/docs/ai/concurrency-policy.md](../docs/ai/concurrency-policy.md), [ADR-004](../architecture/adrs/adr-004-parallel-ai-pipeline.md).
 
 ## 4. Stateless scaling
 

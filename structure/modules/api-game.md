@@ -38,7 +38,7 @@ the bootstrap per-route body caps — `apps/api/src/bootstrap/bootstrap.constant
 | --- | --- |
 | `application/analyze-game.use-case.ts` | Consent + file-security → payment capture (before the AI call) → image-only extraction → buffer wipe in `finally` → text-only match; `refundOnFailure` after capture |
 | `application/analyze-game-stream.use-case.ts` | Streaming counterpart; SSE milestones; abort-aware between steps; threads `StreamAnalysisContext` incl. the mutable `PaymentHolder` |
-| `application/style-match.service.ts` | Text-only phase: generation → fallback → judge → aggregation with progress callbacks |
+| `application/style-match.service.ts` | Text-only phase: candidate **recall** (`CandidateRecallService` — one generation call, or parallel lanes when `AI_PARALLEL_PIPELINE_ENABLED` is on) → fallback → judge → aggregation with progress callbacks |
 | `application/cancel-analysis.use-case.ts` | Delegates to core `StreamRegistry.cancel` (streamId+tabId+requestId must all match) |
 | `api/game-stream.presenter.ts` | SSE lifecycle: reply hijack, allowlisted CORS, `ConcurrencyLimiter` admission, duplicate-requestId rejection, frame stamping, 10 s heartbeats, watchdog at `ANALYSIS_TIMEOUT_MS`, buffer wipe on every rejection path |
 | `lib/game-stream.ts` | Frame stamping, busy/duplicate messages, `resolveStreamTermination` (disconnect silent / cancel / timeout / mapped error) |

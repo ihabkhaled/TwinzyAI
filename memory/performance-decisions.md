@@ -43,3 +43,17 @@ design — do not add them without a workload that actually needs them:
 
 If a genuinely CPU-bound step or a cross-instance coordination need appears later, revisit — but
 measure first with `load-test`, and keep the interactive request path lean.
+
+## Parallel candidate-recall (ADR-004, flag-gated OFF)
+
+Candidate recall can fan the text-only generation step out into `AI_GENERATION_LANES` parallel
+lanes (`AI_PARALLEL_PIPELINE_ENABLED`, default OFF). The chosen mechanism is **bounded async
+concurrency**, not `worker_threads`: the lanes are network-bound Gemini calls, so worker isolates
+would add duplication without cutting latency (the same reasoning that rejected worker offload
+above). A process-global per-step `Semaphore` gate (`AI_GENERATION_CONCURRENCY`) plus a
+per-analysis call budget (`AI_MAX_CALLS_PER_ANALYSIS`) bound the fan-out; parallelism trades
+provider **cost** for latency, both acceptance criteria before enabling. This does **not** relax
+the "three AI calls are sequential" rule above — the cross-*step* dependency chain (extraction →
+generation → judge) stays sequential; only the generation step itself widens into lanes. Owners:
+[ADR-004](../architecture/adrs/adr-004-parallel-ai-pipeline.md),
+[concurrency-policy.md](../docs/ai/concurrency-policy.md).

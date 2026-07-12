@@ -3,12 +3,32 @@
     {
       "kind": "artifact",
       "reason": "inputs changed since last build",
-      "target": ".ai/generated/broken-links.json"
+      "target": ".ai/generated/duplicate-topics.json"
     },
     {
-      "kind": "artifact",
-      "reason": "inputs changed since last build",
-      "target": ".ai/generated/unresolved-references.json"
+      "kind": "review",
+      "reason": "trigger env-schema-changed: 1 watched file(s) changed",
+      "target": ".env.example"
+    },
+    {
+      "kind": "review",
+      "reason": "trigger env-schema-changed: 1 watched file(s) changed",
+      "target": "docs/env-vars.md"
+    },
+    {
+      "kind": "review",
+      "reason": "trigger architecture-map-changed: 1 watched file(s) changed",
+      "target": "knowledge/bootstrap.md"
+    },
+    {
+      "kind": "review",
+      "reason": "trigger architecture-map-changed: 1 watched file(s) changed",
+      "target": "knowledge/summaries/architecture.md"
+    },
+    {
+      "kind": "review",
+      "reason": "trigger env-schema-changed: 1 watched file(s) changed",
+      "target": "knowledge/summaries/configuration.md"
     }
   ]
 }

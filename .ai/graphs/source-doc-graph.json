@@ -596,6 +596,16 @@
       "source": "apps/api/src/config/app-config.service.ts"
     },
     {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/app-config.service.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/app-config.service.ts"
+    },
+    {
       "doc": "domain/policies.md",
       "label": "inferred",
       "source": "apps/api/src/config/app-config.service.ts"
@@ -751,6 +761,21 @@
       "source": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
       "doc": "operations/scaling-model.md",
       "label": "inferred",
       "source": "apps/api/src/config/env-bounds.constants.ts"
@@ -867,6 +892,21 @@
     },
     {
       "doc": "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env.schema.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env.schema.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env.schema.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
       "label": "inferred",
       "source": "apps/api/src/config/env.schema.ts"
     },
@@ -1234,6 +1274,46 @@
       "doc": "structure/modules/api-payments.md",
       "label": "inferred",
       "source": "apps/api/src/config/payment.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/concurrency.types.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/index.ts"
+    },
+    {
+      "doc": "docs/ai/concurrency-policy.md",
+      "label": "explicit",
+      "source": "apps/api/src/core/concurrency/semaphore.ts"
+    },
+    {
+      "doc": "docs/ai/concurrency-policy.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/semaphore.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/semaphore.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/semaphore.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/concurrency/tests/semaphore.test.ts"
     },
     {
       "doc": "contracts/api/error-envelope.md",
@@ -2306,6 +2386,11 @@
       "source": "apps/api/src/modules/ai/ai.module.ts"
     },
     {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/ai.module.ts"
+    },
+    {
       "doc": "docs/ai/safety-filters.md",
       "label": "explicit",
       "source": "apps/api/src/modules/ai/application/ai-safety.service.ts"
@@ -2381,6 +2466,41 @@
       "source": "apps/api/src/modules/ai/application/ai-safety.service.ts"
     },
     {
+      "doc": "docs/ai/concurrency-policy.md",
+      "label": "explicit",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "doc": "docs/ai/concurrency-policy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "doc": "knowledge/summaries/ai-pipeline.md",
+      "label": "explicit",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "doc": "operations/scaling-model.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "doc": "operations/timeout-budget.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
       "doc": "agents/backend-code-reviewer.md",
       "label": "inferred",
       "source": "apps/api/src/modules/ai/application/candidate-generation.service.ts"
@@ -2397,6 +2517,11 @@
     },
     {
       "doc": "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/candidate-generation.service.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
       "label": "inferred",
       "source": "apps/api/src/modules/ai/application/candidate-generation.service.ts"
     },
@@ -2429,6 +2554,36 @@
       "doc": "domain/ubiquitous-language.md",
       "label": "inferred",
       "source": "apps/api/src/modules/ai/application/candidate-judge.service.ts"
+    },
+    {
+      "doc": "docs/ai/concurrency-policy.md",
+      "label": "explicit",
+      "source": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
+      "doc": "docs/ai/concurrency-policy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
+      "doc": "knowledge/summaries/ai-pipeline.md",
+      "label": "explicit",
+      "source": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
+      "doc": "operations/logging-catalog.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
     },
     {
       "doc": "contracts/api/analyze.md",
@@ -2624,6 +2779,21 @@
       "doc": "docs/ai/prompt-injection-threat-model.md",
       "label": "explicit",
       "source": "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
+    },
+    {
+      "doc": "domain/result-ranking.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
     },
     {
       "doc": "docs/ai/forbidden-wording.md",
@@ -2901,6 +3071,36 @@
       "source": "apps/api/src/modules/ai/model/ai-safety.constants.ts"
     },
     {
+      "doc": "docs/ai/prompt-catalog.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/model/candidate-lane.types.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/model/candidate-recall.types.ts"
+    },
+    {
       "doc": "contracts/integrations/gemini.md",
       "label": "explicit",
       "source": "apps/api/src/modules/ai/model/gemini.constants.ts"
@@ -3099,6 +3299,26 @@
       "doc": "knowledge/summaries/domain.md",
       "label": "inferred",
       "source": "apps/api/src/modules/ai/tests/ai-pipeline.test.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
     },
     {
       "doc": "docs/ai/forbidden-wording.md",
@@ -3781,6 +4001,16 @@
       "source": "apps/api/src/modules/game/application/analyze-game.use-case.ts"
     },
     {
+      "doc": "docs/features/parallel-ai-pipeline/08-architecture-review.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/game/application/analyze-game.use-case.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/19-security-review.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/game/application/analyze-game.use-case.ts"
+    },
+    {
       "doc": "domain/image-lifecycle.md",
       "label": "inferred",
       "source": "apps/api/src/modules/game/application/analyze-game.use-case.ts"
@@ -3852,6 +4082,11 @@
     },
     {
       "doc": "docs/ai/written-traits-only-boundary.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/game/application/style-match.service.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
       "label": "inferred",
       "source": "apps/api/src/modules/game/application/style-match.service.ts"
     },
@@ -4169,6 +4404,11 @@
       "doc": "testing/e2e-testing-standard.md",
       "label": "inferred",
       "source": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "source": "apps/api/src/modules/game/tests/style-match.service.test.ts"
     },
     {
       "doc": "structure/modules/api-health.md",
@@ -5222,6 +5462,16 @@
     },
     {
       "doc": "contracts/integrations/clamav.md",
+      "label": "inferred",
+      "source": "apps/api/src/tests/fixtures/stubs.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
+      "label": "inferred",
+      "source": "apps/api/src/tests/fixtures/stubs.ts"
+    },
+    {
+      "doc": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
       "label": "inferred",
       "source": "apps/api/src/tests/fixtures/stubs.ts"
     },

@@ -6,8 +6,8 @@ authority: canonical
 status: current
 owner: repository owner
 generated: false
-summary: Routing digest of configuration — the single zod env schema, the key groups (AI, payments, upload, share, streaming, web public), fail-fast validation, and the .env.example mirror discipline.
-keywords: [configuration, env vars, zod schema, fail-fast, appconfigservice, paypal env, gemini env, env.example, public env, share config]
+summary: Routing digest of configuration — the single zod env schema, the key groups (AI, parallel pipeline, payments, upload, share, streaming, web public), fail-fast validation, and the .env.example mirror discipline.
+keywords: [configuration, env vars, zod schema, fail-fast, appconfigservice, paypal env, gemini env, env.example, public env, share config, parallel pipeline, concurrency lanes]
 contextTier: 1
 relatedCode: [apps/api/src/config/env.schema.ts, apps/api/src/config/app-config.service.ts, apps/web/src/packages/env/public-env.ts, .env.example]
 relatedTests: [apps/api/src/config/env.schema.test.ts, apps/api/src/config/app-config.service.test.ts]
@@ -34,6 +34,8 @@ readWhen: You are adding, changing, or consuming any environment variable or con
 **Upload / scan**: `MAX_IMAGE_SIZE_BYTES` (shared 5 MiB default, capped by the 10 MiB transport ceiling), `ENABLE_CLAMAV` (false), `CLAMAV_HOSTS` ('127.0.0.1,clamav' — ordered, first reachable cached), `CLAMAV_PORT` (3310).
 
 **Streaming / concurrency**: `MAX_GLOBAL_ACTIVE_ANALYSES` (50), `MAX_ACTIVE_ANALYSES_PER_IP` (3), `MAX_ACTIVE_ANALYSES_PER_TAB` (1), `MAX_ANALYSIS_QUEUE_SIZE` (100), `ANALYSIS_TIMEOUT_MS` (120000), `STREAM_TTL_MS` (180000, must be ≥ watchdog).
+
+**Parallel AI pipeline** (Release A, off by default; details: `docs/ai/concurrency-policy.md` + `architecture/adrs/adr-004-parallel-ai-pipeline.md`): `AI_PARALLEL_PIPELINE_ENABLED` (false), `AI_GENERATION_LANES` (2, 1–6), `AI_GENERATION_CONCURRENCY` (2, 1–16, global per-step gate), `AI_JUDGE_CONCURRENCY` (1, 1–16, provisions Release B), `AI_MAX_CALLS_PER_ANALYSIS` (5, 3–20, extraction+lanes+judge), `AI_PARALLEL_QUEUE_TIMEOUT_MS` (30000, 1000–120000, lane permit wait).
 
 **Share**: `SHARE_RESULT_TTL_SECONDS` (600, bounds 60–3600 from shared), `SHARE_RESULT_MAX_PAYLOAD_BYTES` (50000), `SHARE_RESULT_MAX_ACTIVE_ITEMS` (1000), `SHARE_RESULT_PUBLIC_BASE_URL` (z.url(), server config only — never user input).
 

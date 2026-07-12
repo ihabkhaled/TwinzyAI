@@ -14,7 +14,7 @@ Task type: `full-stack-feature` · Lane: **standard** · Load after `.ai/BOOTSTR
 
 ## Must-read docs
 
-- context/architecture-map.md — > This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ... (~5586 tokens)
+- context/architecture-map.md — > This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ... (~5717 tokens)
 - context/declaration-ownership-map.md — The one answer sheet for "where does X live?". Search-then-extend ([rules/29](../rules/29-reuse-before-creating.md)): if the owner exists, extend it; never create a parallel owner. Enforced mechanically by `architecture/no-inline-domain-... (~838 tokens)
 
 ## Rules

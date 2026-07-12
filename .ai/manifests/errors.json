@@ -1,6 +1,24 @@
 {
-  "count": 79,
+  "count": 82,
   "errors": [
+    {
+      "kind": "error-catalog",
+      "module": "api:core",
+      "name": "CONCURRENCY_TIMEOUT_ERROR_NAME",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "ConcurrencyAbortError",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
+    {
+      "kind": "error-class",
+      "module": "api:core",
+      "name": "ConcurrencyTimeoutError",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
     {
       "kind": "error-class",
       "module": "api:core",

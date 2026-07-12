@@ -56,6 +56,14 @@ const CONFIG_DEFAULTS = {
   geminiTimeoutMs: 5000,
   geminiStreamIdleTimeoutMs: 60_000,
   aiMaxResponseBytes: 500_000,
+  // Parallel AI pipeline (Release A) — OFF by default so existing suites run
+  // the unchanged single-generation path. Parallel-mode tests override these.
+  aiParallelPipelineEnabled: false,
+  aiGenerationLanes: 2,
+  aiGenerationConcurrency: 2,
+  aiJudgeConcurrency: 1,
+  aiMaxCallsPerAnalysis: 5,
+  aiParallelQueueTimeoutMs: 30_000,
   maxImageSizeBytes: 5_242_880,
   enableClamAv: false,
   clamAvHosts: ['localhost'] as readonly string[],

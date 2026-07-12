@@ -28,6 +28,7 @@ centralized in
 | Per provider call, total | `GEMINI_TIMEOUT_MS` | 30 000 (1 000–120 000) | AbortController on the whole call; reused by the OpenAI-compat adapter |
 | Per stream, idle | `GEMINI_STREAM_IDLE_TIMEOUT_MS` | 60 000 (1 000–300 000) | Inter-chunk timer reset on every chunk — a model that keeps producing tokens is never cut off; silence for this long aborts (`env.schema.ts` comment: the pipeline "listens and waits") |
 | Per shadow call | `AI_SHADOW_TIMEOUT_MS` | 30 000 (1 000–120 000) | `AbortSignal.timeout` on metrics-only shadow runs |
+| Parallel lane permit wait | `AI_PARALLEL_QUEUE_TIMEOUT_MS` | 30 000 (1 000–120 000) | When the parallel pipeline is on, a recall lane that cannot get a concurrency permit within this window is **dropped** (not blocked); survivors still merge (`candidate-recall.service.ts`, [concurrency-policy.md](concurrency-policy.md)) |
 | Whole pipeline watchdog | `ANALYSIS_TIMEOUT_MS` | 120 000 (1 000–600 000) | Presenter watchdog; also the max queue wait; expiry ⇒ `AI_TIMEOUT` frame, status Failed |
 | Orphan sweep | `STREAM_TTL_MS` | 180 000 (must be ≥ `ANALYSIS_TIMEOUT_MS`, superRefine) | `StreamRegistry.sweep` aborts forgotten streams |
 

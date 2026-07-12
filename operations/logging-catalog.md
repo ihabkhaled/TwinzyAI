@@ -32,6 +32,7 @@ Level comes from `LOG_LEVEL` (fatal…trace, default `info`,
 | Stream registry | `warn`: `Reaped N stale stream(s) past TTL` ([apps/api/src/core/streaming/stream-registry.service.ts](../apps/api/src/core/streaming/stream-registry.service.ts)) |
 | AI adapters | Provider error text passed through `redactForLog` before logging ([apps/api/src/modules/ai/adapters/gemini.adapter.ts](../apps/api/src/modules/ai/adapters/gemini.adapter.ts)); debug prompt logging gated off in production (`isProduction`) |
 | AI shadow runs | Failures swallowed to a single `warn` line — never affect the user path ([apps/api/src/modules/ai/adapters/ai-shadow.service.ts](../apps/api/src/modules/ai/adapters/ai-shadow.service.ts)) |
+| Parallel candidate recall (flag on) | `info`: `Parallel recall: N lane(s), M succeeded, K merged candidate(s)`; `warn` on lane clamp (`Generation lanes clamped …`) or a failed lane (`Generation lane <id> failed: <ErrorType>` — error TYPE only, never provider detail or image data) ([apps/api/src/modules/ai/application/candidate-recall.service.ts](../apps/api/src/modules/ai/application/candidate-recall.service.ts)) |
 | Payments | PII-free PayPal diagnostics only (name/issue/debug_id/description); refund failure logs `REFUND FAILED … reconcile in the PayPal dashboard` ([apps/api/src/modules/payments/adapters/paypal.adapter.ts](../apps/api/src/modules/payments/adapters/paypal.adapter.ts)) |
 
 ## Redaction (mechanical, two layers)

@@ -1,5 +1,5 @@
 {
-  "count": 163,
+  "count": 169,
   "tests": [
     {
       "kind": "unit",
@@ -47,6 +47,14 @@
       "path": "apps/api/src/config/env.schema.test.ts",
       "targets": [
         "apps/api/src/config/env.schema.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:core",
+      "path": "apps/api/src/core/concurrency/tests/semaphore.test.ts",
+      "targets": [
+        "apps/api/src/core/concurrency/index.ts"
       ]
     },
     {
@@ -209,6 +217,48 @@
         "apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
         "apps/api/src/modules/ai/adapters/provider-registry.service.ts",
         "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
+        "apps/api/src/tests/fixtures/stubs.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "targets": [
+        "apps/api/src/config/gemini-step.constants.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "apps/api/src/tests/fixtures/stubs.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "targets": [
+        "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+        "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "targets": [
+        "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "targets": [
+        "apps/api/src/config/app-config.service.ts",
+        "apps/api/src/modules/ai/application/ai-safety.service.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "apps/api/src/modules/ai/application/candidate-generation.service.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+        "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
         "apps/api/src/tests/fixtures/stubs.ts"
       ]
     },
@@ -450,6 +500,18 @@
       "path": "apps/api/src/modules/game/tests/stream-cors.test.ts",
       "targets": [
         "apps/api/src/modules/game/lib/stream-cors.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:game",
+      "path": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "targets": [
+        "apps/api/src/modules/ai/index.ts",
+        "apps/api/src/modules/game/application/style-match.service.ts",
+        "apps/api/src/modules/result-aggregation/index.ts",
+        "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+        "apps/api/src/tests/fixtures/stubs.ts"
       ]
     },
     {

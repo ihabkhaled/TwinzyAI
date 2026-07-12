@@ -28,6 +28,7 @@ Rule: the recorded owner decision wins; canonical files must be updated first, m
 
 - Extraction is **hardcoded Gemini-only** (fail-closed vision routing) — a Gemini outage stops the whole pipeline regardless of configured fallback providers; text steps can hop providers, extraction cannot (`apps/api/src/modules/ai/adapters/provider-registry.service.ts`). Runbook: `runbooks/ai-provider-outage.md`.
 - All admission/cancel/share state is single-process in-memory; restart drops active streams and share links; horizontal scaling deliberately deferred (ADR-003).
+- The parallel candidate-recall gate (`AI_PARALLEL_PIPELINE_ENABLED`, off by default) is likewise single-process/in-memory: `AI_GENERATION_CONCURRENCY` bounds generation calls **per instance**, so a multi-instance deployment needs a shared limiter for fleet-wide bounding (future Release D / ADR-004). Enabling it also trades provider **cost** for latency — treat both as acceptance criteria (`docs/ai/concurrency-policy.md`).
 - No webhooks for payment reconciliation (see §1); refund failures are logged for manual PayPal-dashboard reconciliation (`payment-gate.service.ts`).
 
 ## 5. Stale docs and code comments (verified drift; code is correct unless noted)

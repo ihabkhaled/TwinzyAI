@@ -44,6 +44,17 @@ Configuration truth is [apps/api/src/config/env.schema.ts](../apps/api/src/confi
 | `POST /payments/orders` | 10/min | `CREATE_ORDER_THROTTLE`, [apps/api/src/modules/payments/model/payment.constants.ts](../apps/api/src/modules/payments/model/payment.constants.ts) |
 | Share create / read / delete | 20 / 120 / 20 per min | [apps/api/src/modules/share-results/model/share-result.constants.ts](../apps/api/src/modules/share-results/model/share-result.constants.ts) |
 
+## Parallel-recall lever (flag-gated, OFF by default)
+
+`AI_PARALLEL_PIPELINE_ENABLED=true` trades AI provider **cost** for **latency**: the text-only
+generation step fans out into `AI_GENERATION_LANES` parallel lanes, bounded by a process-global
+per-step concurrency gate (`AI_GENERATION_CONCURRENCY`) and a per-analysis call budget
+(`AI_MAX_CALLS_PER_ANALYSIS`); a lane that cannot get a permit within
+`AI_PARALLEL_QUEUE_TIMEOUT_MS` (30 000 ms) is dropped, never blocking the run. Both latency and
+cost are acceptance criteria before enabling — detail in
+[docs/ai/concurrency-policy.md](../docs/ai/concurrency-policy.md) and
+[AI-cost-budget.md](AI-cost-budget.md).
+
 ## Runtime resource budgets
 
 Compose limits: api 1 GiB / 1.0 CPU, web 512 MiB / 0.5 CPU

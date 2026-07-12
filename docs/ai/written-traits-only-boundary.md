@@ -53,6 +53,11 @@ only written visible-trait text. This page cites every mechanism that enforces i
    field (strictObject contracts — [schema-contracts.md](schema-contracts.md)).
 8. **No image in shadow runs.** Shadow routing has no extraction key and triggers only after
    text calls — [shadow-routing.md](shadow-routing.md).
+9. **Parallel recall stays text-only.** When `AI_PARALLEL_PIPELINE_ENABLED=true`, the extra
+   candidate-recall lanes are all text-only generation calls (`generateFromText`, no image
+   parameter) fanned out by `CandidateRecallService` after extraction has returned and the buffer
+   is wiped; parallelism adds provider calls but never a new image path — extraction remains the
+   single image caller ([concurrency-policy.md](concurrency-policy.md)).
 
 ## What downstream steps DO receive
 

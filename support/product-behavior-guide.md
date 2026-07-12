@@ -57,6 +57,8 @@ Streaming progress over SSE with live stage labels (`game.stage.*`, mapped in `S
 
 Also shown: live traits ("Traits we're reading", `game.liveTraitsTitle`), rough candidates (`game.liveCandidatesTitle`), the hint "This usually takes a few seconds. Please keep this tab open." (`game.processingHint`), and a Cancel button (`game.cancelProcessing`). Cancelling is **not** an error — the UI silently returns to setup (`isCancelledRunError`, `apps/web/src/modules/game/helpers/game-error.helper.ts`).
 
+> Internal note (no player-visible effect): an optional parallel candidate-recall mode (`AI_PARALLEL_PIPELINE_ENABLED`, OFF by default) may run behind the scenes — the stages, live traits/candidates, results, and disclaimer are all identical whether it is on or off ([concurrency-policy.md](../docs/ai/concurrency-policy.md)).
+
 ## 5. Success (phase `Success`)
 
 Ranked matches with style/vibe fit scores, verdict bands ("Strong/Medium/Light vibe fit", `result.verdict.*`), trait accordion, image-quality/uncertainty sections, and the server-enforced disclaimer: "This is a playful style/vibe result based on written visible traits only. It is not face recognition, identity matching, or biometric comparison." (`result.disclaimer`; enforced server-side by `apps/api/src/modules/result-aggregation`). No confident match shows "No confident match this time" (`result.fallbackTitle`). Expectations detail: [AI-result-expectations.md](./AI-result-expectations.md).

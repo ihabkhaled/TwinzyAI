@@ -47,6 +47,12 @@ language switch: 4. Translation (text-only) — existing result JSON → same-sh
 - **Translation** re-imposes every canonical field (names, ranks, scores, verdicts, enums,
   `promptVersion`) from the original and rejects shape drift
   (`apps/api/src/modules/ai/application/result-translation.service.ts`).
+- **Parallel recall (flag-gated, OFF by default).** When `AI_PARALLEL_PIPELINE_ENABLED=true`, the
+  Generation step fans out into `AI_GENERATION_LANES` text-only focus lanes bounded by a
+  process-global per-step gate and a per-analysis call budget, merged deterministically; the
+  flag-off path is one unchanged generation call and the SSE contract and image boundary are
+  identical either way — [concurrency-policy.md](concurrency-policy.md),
+  [ADR-004](../../architecture/adrs/adr-004-parallel-ai-pipeline.md).
 
 ## Cross-cutting guarantees (each owned elsewhere)
 

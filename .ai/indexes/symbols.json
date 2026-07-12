@@ -99,6 +99,9 @@
   "AiShadowService": [
     "apps/api/src/modules/ai/adapters/ai-shadow.service.ts"
   ],
+  "AiStepConcurrencyGate": [
+    "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+  ],
   "AiStreamChunkListener": [
     "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts"
   ],
@@ -386,6 +389,9 @@
   "buildCameraViewModel": [
     "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
   ],
+  "buildCandidateGenerationLanes": [
+    "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
+  ],
   "buildContentSecurityPolicy": [
     "apps/web/src/shared/security/content-security-policy.ts"
   ],
@@ -407,6 +413,9 @@
   ],
   "buildLandingLabels": [
     "apps/web/src/modules/game/helpers/game-display.helper.ts"
+  ],
+  "buildLaneFocusSection": [
+    "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
   ],
   "buildMatchingEvidence": [
     "apps/api/src/modules/ai/lib/matching-evidence.util.ts"
@@ -546,6 +555,18 @@
   "Candidate": [
     "packages/shared/src/schemas/candidates.schema.ts"
   ],
+  "CANDIDATE_GENERATION_LANE_ORDER": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "CandidateGenerationFocus": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "CandidateGenerationFocusValue": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "CandidateGenerationLane": [
+    "apps/api/src/modules/ai/model/candidate-lane.types.ts"
+  ],
   "CandidateGenerationResponse": [
     "packages/shared/src/schemas/candidates.schema.ts"
   ],
@@ -564,6 +585,12 @@
   "CandidateJudgeService": [
     "apps/api/src/modules/ai/application/candidate-judge.service.ts"
   ],
+  "CandidateRecallInput": [
+    "apps/api/src/modules/ai/model/candidate-recall.types.ts"
+  ],
+  "CandidateRecallService": [
+    "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+  ],
   "CandidateSafetyCheckSchema": [
     "packages/shared/src/schemas/candidates.schema.ts"
   ],
@@ -578,6 +605,9 @@
   ],
   "candidatesTitleClass": [
     "apps/web/src/modules/game/containers/game-processing.variants.ts"
+  ],
+  "canonicalCandidateName": [
+    "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
   ],
   "canUseWebShare": [
     "apps/web/src/packages/browser/browser-environment.ts",
@@ -705,9 +735,18 @@
   "computeShareExpiry": [
     "apps/api/src/modules/share-results/lib/share-result-expiry.util.ts"
   ],
+  "CONCURRENCY_TIMEOUT_ERROR_NAME": [
+    "apps/api/src/core/concurrency/concurrency.errors.ts"
+  ],
+  "ConcurrencyAbortError": [
+    "apps/api/src/core/concurrency/concurrency.errors.ts"
+  ],
   "ConcurrencyLimiter": [
     "apps/api/src/core/streaming/concurrency-limiter.service.ts",
     "apps/api/src/core/streaming/index.ts"
+  ],
+  "ConcurrencyTimeoutError": [
+    "apps/api/src/core/concurrency/concurrency.errors.ts"
   ],
   "CONFIDENCE_LABEL_KEYS": [
     "apps/web/src/modules/game/model/game.constants.ts"
@@ -892,6 +931,21 @@
   ],
   "DARK_COLOR_SCHEME_QUERY": [
     "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "DEFAULT_AI_CALLS_PER_ANALYSIS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_GENERATION_CONCURRENCY": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_GENERATION_LANES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_JUDGE_CONCURRENCY": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_PARALLEL_QUEUE_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
   ],
   "DEFAULT_AI_RESPONSE_BYTES": [
     "apps/api/src/config/env-bounds.constants.ts"
@@ -1619,6 +1673,15 @@
   "landingTitleClass": [
     "apps/web/src/modules/game/components/landing-hero.variants.ts"
   ],
+  "LANE_FOCUS_DIRECTIVE": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "LANE_FOCUS_SAFETY_REMINDER": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "LANE_FOCUS_SECTION_HEADING": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
   "LANGUAGE_CODE_MAX_LENGTH": [
     "apps/api/src/modules/game/model/game.constants.ts"
   ],
@@ -1704,11 +1767,23 @@
   "MAX_ACTIVE_ANALYSES_PER_TAB_LIMIT": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "MAX_AI_CALLS_PER_ANALYSIS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_AI_GENERATION_LANES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
   "MAX_AI_RESPONSE_BYTES": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MAX_AI_ROUTE_ENTRIES": [
     "apps/api/src/config/ai-route.constants.ts"
+  ],
+  "MAX_AI_STEP_CONCURRENCY": [
+    "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MAX_ANALYSIS_TIMEOUT_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
@@ -1842,6 +1917,9 @@
   "MAX_WEIGHTED_EVIDENCE_ITEMS": [
     "packages/shared/src/constants/response-bounds.constants.ts"
   ],
+  "mergeCandidatePools": [
+    "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
+  ],
   "MILLISECONDS_PER_SECOND": [
     "apps/api/src/modules/payments/model/payment.constants.ts",
     "apps/api/src/modules/share-results/model/share-result.constants.ts"
@@ -1850,7 +1928,19 @@
     "apps/api/src/modules/file-security/model/file-security.constants.ts",
     "packages/shared/src/constants/upload.constants.ts"
   ],
+  "MIN_AI_CALLS_PER_ANALYSIS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_AI_GENERATION_LANES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_AI_PARALLEL_QUEUE_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
   "MIN_AI_RESPONSE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_AI_STEP_CONCURRENCY": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MIN_ANALYSIS_TIMEOUT_MS": [
@@ -2456,6 +2546,9 @@
   "REQUIRED_PLACEHOLDERS": [
     "apps/api/src/modules/ai/model/prompt-version.constants.ts"
   ],
+  "RESERVED_NON_GENERATION_CALLS": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
   "resolveCategoryLabel": [
     "apps/web/src/modules/game/helpers/game-display.helper.ts"
   ],
@@ -2728,6 +2821,18 @@
   ],
   "selectTheme": [
     "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts"
+  ],
+  "Semaphore": [
+    "apps/api/src/core/concurrency/semaphore.ts"
+  ],
+  "SemaphoreAcquireOptions": [
+    "apps/api/src/core/concurrency/concurrency.types.ts"
+  ],
+  "SemaphoreRelease": [
+    "apps/api/src/core/concurrency/concurrency.types.ts"
+  ],
+  "SemaphoreWaiter": [
+    "apps/api/src/core/concurrency/concurrency.types.ts"
   ],
   "SERVER_BUSY_MESSAGE": [
     "apps/api/src/modules/game/model/game.messages.ts"

@@ -14,12 +14,12 @@ Task type: `reliability-change` · Lane: **standard** · Load after `.ai/BOOTSTR
 
 ## Must-read docs
 
-- rules/08-reliability-durability.md — > The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl... (~1383 tokens)
+- rules/08-reliability-durability.md — > The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl... (~1510 tokens)
 - rules/27-async-events-and-jobs.md — > **Twinzy has no message broker, no queues, no domain-event bus, and no background jobs — by standing decision.** The product is a synchronous request/response pipeline: upload → analyze → result. This file governs the async work that *... (~1405 tokens)
 
 ## Rules
 
-- rules/08-reliability-durability.md — > The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl... (~1383 tokens)
+- rules/08-reliability-durability.md — > The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl... (~1510 tokens)
 - rules/26-error-handling-and-exceptions.md — > Every failure is a **typed `AppError`** carrying a `messageKey`, raised in the layer that detects it and translated **once** at the edge by the global exception filter into the sanitized envelope. Full detail is logged server-side; cli... (~1656 tokens)
 
 ## Skills

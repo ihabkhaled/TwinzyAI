@@ -14,7 +14,7 @@ Task type: `architecture-change` · Lane: **critical** · Load after `.ai/BOOTST
 
 ## Must-read docs
 
-- context/architecture-map.md — > This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ... (~5586 tokens)
+- context/architecture-map.md — > This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ... (~5717 tokens)
 - docs/eslint-architecture.md — Flat config split by concern under /eslint, composed in eslint/index.mjs (prettier last), root (~1925 tokens)
 - rules/01-architecture.md — > The monorepo layout, the one-way layering rule, and the module boundary rule that everything else builds on. This file implements [`/context/architecture-map.md`](../context/architecture-map.md) and rules 16–23 of [00-non-negotiable-ru... (~1348 tokens)
 

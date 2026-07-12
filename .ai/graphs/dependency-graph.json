@@ -1,12 +1,12 @@
 {
   "edges": [
     {
-      "count": 17,
+      "count": 21,
       "from": "api:ai",
       "to": "api:config"
     },
     {
-      "count": 20,
+      "count": 22,
       "from": "api:ai",
       "to": "api:core"
     },
@@ -16,7 +16,7 @@
       "to": "api:privacy"
     },
     {
-      "count": 15,
+      "count": 18,
       "from": "api:ai",
       "to": "shared"
     },

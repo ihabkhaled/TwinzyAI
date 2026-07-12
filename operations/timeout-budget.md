@@ -28,6 +28,7 @@ Rules); this table is the complete recorded set.
 | Per-call total deadline | `GEMINI_TIMEOUT_MS` (1 s–120 s) | 30 000 ms | Whole-call abort for a provider call |
 | Streaming idle deadline | `GEMINI_STREAM_IDLE_TIMEOUT_MS` (1 s–300 s) | 60 000 ms | Inter-chunk idle abort, not a total deadline |
 | Shadow-run deadline | `AI_SHADOW_TIMEOUT_MS` (1 s–120 s) | 30 000 ms | `AbortSignal.timeout` around the metrics-only shadow call ([apps/api/src/modules/ai/adapters/ai-shadow.service.ts](../apps/api/src/modules/ai/adapters/ai-shadow.service.ts)) |
+| Lane permit wait (parallel recall, flag-gated) | `AI_PARALLEL_QUEUE_TIMEOUT_MS` (1 s–120 s) | 30 000 ms | Max wait for a generation-concurrency permit before a parallel lane is dropped ([apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts](../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts); [docs/ai/concurrency-policy.md](../docs/ai/concurrency-policy.md)) |
 
 ## Analysis lifecycle
 

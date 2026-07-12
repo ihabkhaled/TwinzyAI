@@ -16,7 +16,7 @@ Task type: `ai-prompt-change` · Lane: **critical** · Load after `.ai/BOOTSTRAP
 ## Must-read docs
 
 - docs/ai-safety.md — See rules/14-ai-safety.md for the normative rules. Implementation summary: (~644 tokens)
-- context/ai-context.md — Pipeline (backend only; the frontend never calls an AI provider): (~252 tokens)
+- context/ai-context.md — Pipeline (backend only; the frontend never calls an AI provider): (~400 tokens)
 
 ## Rules
 

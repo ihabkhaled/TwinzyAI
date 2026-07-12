@@ -6,14 +6,14 @@
 
 | Fact | Value |
 | --- | --- |
-| Source files scanned | 643 |
+| Source files scanned | 660 |
 | Source modules | 39 |
 | API endpoints | 9 |
 | Web routes | 7 |
-| Test files | 163 |
-| Canonical documents | 673 |
+| Test files | 169 |
+| Canonical documents | 687 |
 | Open contradiction-registry entries | 3 |
-| Stale items at last analysis | 2 |
+| Stale items at last analysis | 6 |
 | Broken links at last analysis | 9 |
 
 ## Active feature folders (docs/features/)
@@ -23,6 +23,7 @@
 - engineering-os-migration
 - multi-provider-ai
 - multi-tab-stream-isolation
+- parallel-ai-pipeline
 - paypal-donations-and-paid-results
 - simple-readable-code-operating-system-and-codebase-refactor
 - simple-readable-code-operating-system-implementation

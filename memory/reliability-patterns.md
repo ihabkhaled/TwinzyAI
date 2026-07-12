@@ -43,3 +43,19 @@ resilience patterns are intentionally **not** used here:
   the provider, add jittered exponential backoff there and reconsider a breaker — but keep the
   interactive request path on immediate fallback. Terminal non-retryable failures still surface
   as the typed `IntegrationError` envelope so the UI shows a friendly, stage-aware message.
+
+## Bounded parallel recall (ADR-004, flag-gated OFF)
+
+The flag-gated parallel candidate-recall fan-out follows the same fail-safe doctrine:
+
+- **Per-step `Semaphore` gate** (`core/concurrency/semaphore.ts` via `AiStepConcurrencyGate`) bounds
+  concurrent provider calls across all analyses — never an unbounded `Promise.all`.
+- **`Promise.allSettled` fan-out**: one failed or permit-timed-out lane is dropped, never failing
+  the analysis; an empty merge falls back exactly as the single-call path.
+- **Abort propagation**: the analysis `AbortSignal` threads into every lane and its gate wait; a
+  queued lane whose signal aborts never starts.
+- **Deterministic merge** by canonical name (keep higher score, order score-desc then name-asc) so
+  results are stable regardless of lane finish order.
+
+Owners: [ADR-004](../architecture/adrs/adr-004-parallel-ai-pipeline.md),
+[concurrency-policy.md](../docs/ai/concurrency-policy.md).

@@ -5,13 +5,13 @@ type: doc
 authority: canonical
 status: current
 owner: repository owner
-summary: Request-level concurrency caps, the bounded FIFO queue, overload behavior, and the rate limits that bound how much AI work one process accepts.
-keywords: [ai, concurrency, limits, queue, overload, rate-limit, throttle, admission]
+summary: Request-level concurrency caps, the bounded FIFO queue, overload behavior, the rate limits that bound how much AI work one process accepts, and the flag-gated parallel candidate-recall fan-out with its global per-step gate and per-analysis call budget.
+keywords: [ai, concurrency, limits, queue, overload, rate-limit, throttle, admission, parallel, fan-out, lanes, semaphore, gate, call-budget]
 contextTier: 2
-relatedCode: [apps/api/src/core/streaming/concurrency-limiter.service.ts, apps/api/src/config/env-bounds.constants.ts, apps/api/src/modules/game/model/game.constants.ts, apps/api/src/core/rate-limit/rate-limit.vendor.ts]
-relatedTests: [apps/api/src/tests/game-stream-isolation.integration.test.ts]
-relatedDocs: [docs/ai/cost-policy.md, docs/ai/retry-timeout-policy.md, docs/env-vars.md]
-readWhen: You are tuning concurrency/queue caps, changing throttles, or debugging SERVER_BUSY rejections.
+relatedCode: [apps/api/src/core/streaming/concurrency-limiter.service.ts, apps/api/src/config/env-bounds.constants.ts, apps/api/src/modules/game/model/game.constants.ts, apps/api/src/core/rate-limit/rate-limit.vendor.ts, apps/api/src/core/concurrency/semaphore.ts, apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts, apps/api/src/modules/ai/application/candidate-recall.service.ts]
+relatedTests: [apps/api/src/tests/game-stream-isolation.integration.test.ts, apps/api/src/modules/ai/tests/candidate-recall.service.test.ts, apps/api/src/core/concurrency/tests/semaphore.test.ts]
+relatedDocs: [docs/ai/cost-policy.md, docs/ai/retry-timeout-policy.md, docs/env-vars.md, architecture/adrs/adr-004-parallel-ai-pipeline.md]
+readWhen: You are tuning concurrency/queue caps, changing throttles, tuning the parallel candidate-recall fan-out, or debugging SERVER_BUSY rejections.
 ---
 
 # AI Concurrency Policy
@@ -57,3 +57,38 @@ by `StreamRegistry.isRequestActive` before admission
   capacity.
 
 These caps are also the primary cost lever — see [cost-policy.md](cost-policy.md).
+
+## Parallel candidate-recall fan-out (Release A, flag-gated)
+
+A second, **inner** concurrency layer applies only when `AI_PARALLEL_PIPELINE_ENABLED=true`
+(default `false`; see [ADR-004](../../architecture/adrs/adr-004-parallel-ai-pipeline.md)). It bounds
+the fan-out of the text-only candidate-recall step — it does **not** replace the admission caps
+above, which still gate whole analyses.
+
+[`CandidateRecallService`](../../apps/api/src/modules/ai/application/candidate-recall.service.ts)
+owns the single-vs-parallel strategy: flag off ⇒ one unchanged generation call; flag on ⇒ fan out
+into `AI_GENERATION_LANES` text-only lanes (each a distinct recall focus). Two bounds keep this
+safe under load:
+
+| Bound | Env var (default, range) | Enforced by |
+| --- | --- | --- |
+| Global concurrent generation calls across ALL analyses | `AI_GENERATION_CONCURRENCY` (2, 1–16) | [`AiStepConcurrencyGate`](../../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts) — a process-global [`Semaphore`](../../apps/api/src/core/concurrency/semaphore.ts) per pipeline step |
+| Lanes per analysis | `AI_GENERATION_LANES` (2, 1–6) | `CandidateRecallService` lane plan |
+| Total provider calls per analysis (extraction + lanes + judge) | `AI_MAX_CALLS_PER_ANALYSIS` (5, 3–20) | lane count clamped to `budget − 2`, with a warning log (never a silent cap) |
+| Max wait for a concurrency permit before a lane is dropped | `AI_PARALLEL_QUEUE_TIMEOUT_MS` (30 000, 1000–120 000) | the `Semaphore` acquire timeout |
+| Global concurrent judge calls (provisioned for the Release B tournament) | `AI_JUDGE_CONCURRENCY` (1, 1–16) | the gate's judge `Semaphore` |
+
+Behavior guarantees:
+
+- The gate is a NestJS singleton, so its per-step permit pool bounds concurrency across **all**
+  simultaneous analyses — a burst of parallel analyses can never multiply generation calls without
+  limit.
+- Fan-out uses `Promise.allSettled`: a lane that fails or times out waiting for a permit is
+  dropped, never fails the analysis. An empty merge falls back exactly as the single-call path does.
+- The analysis `AbortSignal` threads into every lane and its gate wait; a queued lane whose signal
+  aborts never starts.
+- Extraction (image) and judging still run **exactly once** — parallelism never widens the
+  [image boundary](written-traits-only-boundary.md).
+
+The parallel path is the primary latency lever and a cost multiplier — see
+[cost-policy.md](cost-policy.md) and [latency-budget.md](latency-budget.md).

@@ -1,5 +1,5 @@
 {
-  "count": 643,
+  "count": 660,
   "files": [
     {
       "exports": [
@@ -694,7 +694,7 @@
     },
     {
       "exports": [],
-      "hash": "674b0a5645650d34bdd1732c842de1f350c65bcf86d3dd79b4016845169c0fb5",
+      "hash": "9ded046df2cf20658baa065ceeb356b714745d217ec1221fbd038f89310ae717",
       "imports": [
         "./ai-route.constants",
         "./app-config.service",
@@ -705,7 +705,7 @@
       ],
       "isTest": true,
       "layer": "config",
-      "loc": 153,
+      "loc": 181,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.test.ts"
     },
@@ -716,7 +716,7 @@
           "name": "AppConfigService"
         }
       ],
-      "hash": "f8fdc157d3af4e9ffd980500434cf28eb77aef0c37241ffabf8c1ef430075e47",
+      "hash": "aeaed25e8785ad68a7f92d255c2a2e284afc99f1d736cf2545917b5b2089905b",
       "imports": [
         "./ai-provider.constants",
         "./ai-route.types",
@@ -729,7 +729,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 295,
+      "loc": 328,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.ts"
     },
@@ -756,6 +756,26 @@
     },
     {
       "exports": [
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_CALLS_PER_ANALYSIS"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_GENERATION_CONCURRENCY"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_GENERATION_LANES"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_JUDGE_CONCURRENCY"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_PARALLEL_QUEUE_TIMEOUT_MS"
+        },
         {
           "kind": "const",
           "name": "DEFAULT_AI_RESPONSE_BYTES"
@@ -846,7 +866,23 @@
         },
         {
           "kind": "const",
+          "name": "MAX_AI_CALLS_PER_ANALYSIS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_AI_GENERATION_LANES"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS"
+        },
+        {
+          "kind": "const",
           "name": "MAX_AI_RESPONSE_BYTES"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_AI_STEP_CONCURRENCY"
         },
         {
           "kind": "const",
@@ -902,7 +938,23 @@
         },
         {
           "kind": "const",
+          "name": "MIN_AI_CALLS_PER_ANALYSIS"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_AI_GENERATION_LANES"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_AI_PARALLEL_QUEUE_TIMEOUT_MS"
+        },
+        {
+          "kind": "const",
           "name": "MIN_AI_RESPONSE_BYTES"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_AI_STEP_CONCURRENCY"
         },
         {
           "kind": "const",
@@ -965,19 +1017,19 @@
           "name": "PAYMENT_PRICE_VALUE_PATTERN"
         }
       ],
-      "hash": "9558823a72f5022d641c4402fd73499f6098ee9de3d68054e9387f90362fe91c",
+      "hash": "18baeed2a82b7d9315f47ceb48844834cbee3ef3933f76f7f986ae23d0a144d7",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 94,
+      "loc": 119,
       "module": "api:config",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
       "exports": [],
-      "hash": "ad4217d3ba77d635f3b8e603831d92f5ddefd6427f84c1988784aab2acfe6c00",
+      "hash": "8b2f29f3143887e29133adefcf2abd442b051c9724bc70f22df6a9ac84389a70",
       "imports": [
         "./env.schema",
         "@twinzy/shared",
@@ -985,7 +1037,7 @@
       ],
       "isTest": true,
       "layer": "config",
-      "loc": 32,
+      "loc": 62,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.test.ts"
     },
@@ -1008,7 +1060,7 @@
           "name": "validateEnv"
         }
       ],
-      "hash": "6720e7850122e81308adefbce6bbb1209ce130cd1c28967ba855cc406960af3a",
+      "hash": "2c698012591cd85255dc5330ecf6d16f4d7f69b17897ac36027ab542a135fd2c",
       "imports": [
         "./env-bounds.constants",
         "./payment.constants",
@@ -1016,7 +1068,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 327,
+      "loc": 382,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.ts"
     },
@@ -1098,6 +1150,97 @@
       "loc": 28,
       "module": "api:config",
       "path": "apps/api/src/config/payment.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "CONCURRENCY_TIMEOUT_ERROR_NAME"
+        },
+        {
+          "kind": "class",
+          "name": "ConcurrencyAbortError"
+        },
+        {
+          "kind": "class",
+          "name": "ConcurrencyTimeoutError"
+        }
+      ],
+      "hash": "51f4584096db002c69caf18a4e95a40e0faf75f82a2e8619b34acb72a3d00245",
+      "imports": [],
+      "isTest": false,
+      "layer": "core",
+      "loc": 27,
+      "module": "api:core",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "SemaphoreAcquireOptions"
+        },
+        {
+          "kind": "type",
+          "name": "SemaphoreRelease"
+        },
+        {
+          "kind": "interface",
+          "name": "SemaphoreWaiter"
+        }
+      ],
+      "hash": "7da4516230b22922bb36c7935fc2c846ddb4caef2aad24fc4eba2643564d507f",
+      "imports": [],
+      "isTest": false,
+      "layer": "core",
+      "loc": 21,
+      "module": "api:core",
+      "path": "apps/api/src/core/concurrency/concurrency.types.ts"
+    },
+    {
+      "exports": [],
+      "hash": "941bd5a3f4c0a371736d18107bf55302ef19e63fd2eee7ee1392ebe0dccc48e1",
+      "imports": [
+        "./concurrency.errors",
+        "./concurrency.types",
+        "./semaphore"
+      ],
+      "isTest": false,
+      "layer": "core",
+      "loc": 4,
+      "module": "api:core",
+      "path": "apps/api/src/core/concurrency/index.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "Semaphore"
+        }
+      ],
+      "hash": "2c94fb3f306de57e215574cc4e9b8e97ff948892ea045ada999e22b3f55030a8",
+      "imports": [
+        "./concurrency.errors",
+        "./concurrency.types"
+      ],
+      "isTest": false,
+      "layer": "core",
+      "loc": 130,
+      "module": "api:core",
+      "path": "apps/api/src/core/concurrency/semaphore.ts"
+    },
+    {
+      "exports": [],
+      "hash": "afcf9b343ead3acda8100fa444c6e7df7ee96d1ac0703a6ebf5c6a13e61c0003",
+      "imports": [
+        "..",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "core",
+      "loc": 122,
+      "module": "api:core",
+      "path": "apps/api/src/core/concurrency/tests/semaphore.test.ts"
     },
     {
       "exports": [
@@ -2590,7 +2733,7 @@
           "name": "AiModule"
         }
       ],
-      "hash": "0034650a4e68659af466a70c464062ac2bea3faf8d2bce803cc1bb5c50f05bcf",
+      "hash": "87d78aabac1ceb9c38563a6a9c2676e063a1326242bc7e1d6fbed2658d9caa0c",
       "imports": [
         "../privacy",
         "./adapters/ai-router.service",
@@ -2598,8 +2741,10 @@
         "./adapters/gemini.adapter",
         "./adapters/provider-registry.service",
         "./application/ai-safety.service",
+        "./application/ai-step-concurrency.gate",
         "./application/candidate-generation.service",
         "./application/candidate-judge.service",
+        "./application/candidate-recall.service",
         "./application/result-translation.service",
         "./application/trait-extraction.service",
         "./infrastructure/prompt-template.repository",
@@ -2608,7 +2753,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 47,
+      "loc": 52,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/ai.module.ts"
     },
@@ -2638,18 +2783,40 @@
       "exports": [
         {
           "kind": "class",
+          "name": "AiStepConcurrencyGate"
+        }
+      ],
+      "hash": "875b97322d09fee16dae41ddee89e892acea036c5eca36cfe372002fd8d3b4c7",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../../config/gemini-step.constants",
+        "../../../core/concurrency",
+        "@nestjs/common"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 58,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
           "name": "CandidateGenerationService"
         }
       ],
-      "hash": "ccf3adbfc12397fbc8bd645f64b00cbbce9c3c7d3161a32de88903072027d7a1",
+      "hash": "dfe070f9d7ee61ee0c5686f7832429853a27a9514dc68b75b8d274cc1be41504",
       "imports": [
         "../../../config/gemini-step.constants",
         "../../../core/logger/app-logger.service",
         "../infrastructure/prompt-template.repository",
+        "../lib/candidate-lane-plan.util",
         "../lib/json-response.util",
         "../lib/matching-evidence.util",
         "../lib/response-language.guard",
         "../model/ai-provider-adapter.types",
+        "../model/candidate-lane.types",
         "../model/prompt-version.constants",
         "../model/region-hint.constants",
         "./ai-safety.service",
@@ -2658,7 +2825,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 87,
+      "loc": 103,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/candidate-generation.service.ts"
     },
@@ -2689,6 +2856,34 @@
       "loc": 75,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/candidate-judge.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "CandidateRecallService"
+        }
+      ],
+      "hash": "4abe20f7cc1cba87325333c32e48413a79a7c48e4f9c26b2a4440f1a2cf29675",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../../config/gemini-step.constants",
+        "../../../core/logger/app-logger.service",
+        "../lib/candidate-lane-plan.util",
+        "../lib/candidate-merge.util",
+        "../model/candidate-lane.constants",
+        "../model/candidate-lane.types",
+        "../model/candidate-recall.types",
+        "./ai-step-concurrency.gate",
+        "./candidate-generation.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 117,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
     },
     {
       "exports": [
@@ -2749,12 +2944,13 @@
     },
     {
       "exports": [],
-      "hash": "5c030f38a4015ddee04804603e98c96b3bef731e8c324d37c01f03ccc7ac8217",
+      "hash": "98fecd3b66e7022eb812e4878c76e3ffd033d002cd7cbc38399be917f412493e",
       "imports": [
         "./ai.module",
         "./application/ai-safety.service",
         "./application/candidate-generation.service",
         "./application/candidate-judge.service",
+        "./application/candidate-recall.service",
         "./application/result-translation.service",
         "./application/trait-extraction.service",
         "./infrastructure/prompt-template.repository",
@@ -2767,7 +2963,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 14,
+      "loc": 15,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/index.ts"
     },
@@ -2827,6 +3023,49 @@
       "loc": 30,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildCandidateGenerationLanes"
+        },
+        {
+          "kind": "const",
+          "name": "buildLaneFocusSection"
+        }
+      ],
+      "hash": "d86d8ab5a85aa85c6b52cb0d0aa1ffe29847b10262a911fae0b5b10ae3037371",
+      "imports": [
+        "../model/candidate-lane.constants",
+        "../model/candidate-lane.types"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 32,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "canonicalCandidateName"
+        },
+        {
+          "kind": "const",
+          "name": "mergeCandidatePools"
+        }
+      ],
+      "hash": "36eefd8cb3046b2066692f863b3b9b2bc14f59ab7c9b786dc22ff2d2ef051419",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 54,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
     },
     {
       "exports": [
@@ -3092,6 +3331,79 @@
       "loc": 11,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/ai-safety.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "CANDIDATE_GENERATION_LANE_ORDER"
+        },
+        {
+          "kind": "const",
+          "name": "CandidateGenerationFocus"
+        },
+        {
+          "kind": "type",
+          "name": "CandidateGenerationFocusValue"
+        },
+        {
+          "kind": "const",
+          "name": "LANE_FOCUS_DIRECTIVE"
+        },
+        {
+          "kind": "const",
+          "name": "LANE_FOCUS_SAFETY_REMINDER"
+        },
+        {
+          "kind": "const",
+          "name": "LANE_FOCUS_SECTION_HEADING"
+        },
+        {
+          "kind": "const",
+          "name": "RESERVED_NON_GENERATION_CALLS"
+        }
+      ],
+      "hash": "800dd716e72fff4fa5b87a7e282520382835fedd7778da2ff69cab19c548fd44",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 58,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "CandidateGenerationLane"
+        }
+      ],
+      "hash": "84655634fbe4ec06b8ba73872d6be4d1e3cc7e2d84a6273712003ab041cf5954",
+      "imports": [
+        "./candidate-lane.constants"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 14,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "CandidateRecallInput"
+        }
+      ],
+      "hash": "852de6b69ece666aecc81e9d000e6766ca928ec93c0bed624f86be562e5fa8c6",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 14,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/candidate-recall.types.ts"
     },
     {
       "exports": [
@@ -3388,6 +3700,70 @@
       "loc": 95,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "edb8271b128725e31df87c31b01b1ed091bfe69f6b896da91e8a7124dde774c8",
+      "imports": [
+        "../../../config/gemini-step.constants",
+        "../../../tests/fixtures/stubs",
+        "../application/ai-step-concurrency.gate",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 88,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "5c32b445c4a40fb24de44891459aab3afa1986ff5972e1cfcd8acb8ee888fc7c",
+      "imports": [
+        "../lib/candidate-lane-plan.util",
+        "../model/candidate-lane.constants",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 50,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "2d323f5e33becd3f301c39eccf318b79c83393eab10e6da79ad323d5a5b1e797",
+      "imports": [
+        "../lib/candidate-merge.util",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 50,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "2d9fac8bd49d1fca2b91a05bc7e639c5e508e61a5c2906755160812c719d6eb9",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../../../tests/fixtures/stubs",
+        "../application/ai-safety.service",
+        "../application/ai-step-concurrency.gate",
+        "../application/candidate-generation.service",
+        "../application/candidate-recall.service",
+        "../infrastructure/prompt-template.repository",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 141,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
     },
     {
       "exports": [],
@@ -4296,7 +4672,7 @@
           "name": "StyleMatchService"
         }
       ],
-      "hash": "f69fc37cfb0fcc22b8e484e4da6e3439c62a48345ae88cb9a5ce5e23029f88b8",
+      "hash": "e0214e2c7085c2216999eb7e346b4f5892a7198882da7d1ee5695fb82eb26ca9",
       "imports": [
         "../../../core/logger",
         "../../ai",
@@ -4307,7 +4683,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 78,
+      "loc": 83,
       "module": "api:game",
       "path": "apps/api/src/modules/game/application/style-match.service.ts"
     },
@@ -4771,6 +5147,24 @@
       "loc": 23,
       "module": "api:game",
       "path": "apps/api/src/modules/game/tests/stream-cors.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "38555b21357b4d1aafd67cd928694937db6c761c05f904de9fade827625dd5f4",
+      "imports": [
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../../../tests/fixtures/stubs",
+        "../../ai",
+        "../../result-aggregation",
+        "../application/style-match.service",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 73,
+      "module": "api:game",
+      "path": "apps/api/src/modules/game/tests/style-match.service.test.ts"
     },
     {
       "exports": [
@@ -6131,7 +6525,7 @@
           "name": "buildConfigStub"
         }
       ],
-      "hash": "92a3699626e3cd18f21933d99d6981ff1942e0f4a84748aed48a781830d38789",
+      "hash": "54022747ef0a4421ed17daae60ba93225b2267168c8aa082951898771839c0c2",
       "imports": [
         "../../config/ai-provider.constants",
         "../../config/ai-route.types",
@@ -6143,7 +6537,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 111,
+      "loc": 119,
       "module": "api:tests",
       "path": "apps/api/src/tests/fixtures/stubs.ts"
     },

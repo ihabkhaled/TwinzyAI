@@ -8,7 +8,7 @@ npm-workspace monorepo: `apps/api` (NestJS 11 on Fastify 5), `apps/web` (Next.js
 
 ## Backend (`apps/api/src`) — one-way layers
 
-`Controller (api/) → Application (use-cases + ≤20-line services) → Domain → Persistence (infrastructure/) → Integration (adapters/)`, plus cross-cutting `core/` (logger, errors+filter, validation, rate-limit, openapi, http, streaming), `config/` (typed zod fail-fast), `bootstrap/` (Fastify assembly — the only home of platform vendor imports).
+`Controller (api/) → Application (use-cases + ≤20-line services) → Domain → Persistence (infrastructure/) → Integration (adapters/)`, plus cross-cutting `core/` (logger, errors+filter, validation, rate-limit, openapi, http, streaming, concurrency — a reusable abortable `Semaphore` primitive), `config/` (typed zod fail-fast), `bootstrap/` (Fastify assembly — the only home of platform vendor imports).
 
 **8 modules** (`apps/api/src/modules/`, map: `knowledge/summaries/backend.md`): `ai`, `file-security`, `game`, `health`, `payments`, `privacy`, `result-aggregation`, `share-results`. Import graph: `game → {core/streaming, ai, file-security, payments, result-aggregation, privacy}`; `ai → privacy`; everything else standalone (`apps/api/src/app.module.ts` registers Health, Privacy, Game, Payments, ShareResults; the rest arrive transitively).
 
@@ -38,6 +38,6 @@ Star-exported barrels: `constants/` (10 files: app/error-code/language/safety/sh
 
 - Declaration ownership answer sheet: `context/declaration-ownership-map.md`.
 - Task → files/rule/skill router: `context/codebase-navigation.md` (frontend paths there are stale; trust `context/frontend/architecture-map.md` for apps/web).
-- ADRs: `architecture/adrs/` — ADR-001 engineering OS, ADR-002 Zod-only validation, ADR-003 scaling deferred, ADR-FE-0001 strict Next architecture, ADR-FE-0002 workbench over Storybook.
+- ADRs: `architecture/adrs/` — ADR-001 engineering OS, ADR-002 Zod-only validation, ADR-003 scaling deferred, ADR-004 parallel AI pipeline (Release A, flag-gated), ADR-FE-0001 strict Next architecture, ADR-FE-0002 workbench over Storybook.
 - Reference code shapes: `context/reference-patterns.md` (backend), `context/frontend/reference-patterns.md`.
 - Standing decisions + pitfalls: `memory/architecture-decisions.md`, `memory/known-pitfalls.md`.

@@ -30,6 +30,13 @@ before handing it to the judge
 (`apps/api/src/modules/ai/application/candidate-generation.service.ts`). Unsafe candidates
 were already dropped item-wise by the safety filter.
 
+> **Parallel recall (flag-gated, OFF by default).** When `AI_PARALLEL_PIPELINE_ENABLED=true`, the
+> generation step runs as multiple lanes; their pools are merged/deduped by canonical name (keeping
+> the higher `styleVibeFitScore`) and ordered deterministically — score descending, then canonical
+> name ascending — so identical lane outputs aggregate identically regardless of finish order
+> (`apps/api/src/modules/ai/lib/candidate-merge.util.ts`). The merged pool then enters the passes
+> below unchanged ([concurrency-policy.md](../docs/ai/concurrency-policy.md)).
+
 ### 2. The judge assigns ranks — but they are normalized, not trusted
 
 Prompt 3 requires "Rank 1..N strongest to weakest; `rank` values must be sequential starting

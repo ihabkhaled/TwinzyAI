@@ -192,6 +192,39 @@ export class AppConfigService {
     return this.configService.get('AI_MAX_RESPONSE_BYTES', { infer: true });
   }
 
+  /**
+   * Master switch for the parallel candidate-generation pipeline (Release A).
+   * OFF by default: the pipeline runs the single unchanged generation call.
+   */
+  public get aiParallelPipelineEnabled(): boolean {
+    return this.configService.get('AI_PARALLEL_PIPELINE_ENABLED', { infer: true });
+  }
+
+  /** Number of text-only candidate-recall lanes to fan out (parallel mode). */
+  public get aiGenerationLanes(): number {
+    return this.configService.get('AI_GENERATION_LANES', { infer: true });
+  }
+
+  /** Global ceiling on concurrent candidate-generation provider calls. */
+  public get aiGenerationConcurrency(): number {
+    return this.configService.get('AI_GENERATION_CONCURRENCY', { infer: true });
+  }
+
+  /** Global ceiling on concurrent judge provider calls (Release B tournament). */
+  public get aiJudgeConcurrency(): number {
+    return this.configService.get('AI_JUDGE_CONCURRENCY', { infer: true });
+  }
+
+  /** Hard cap on total provider calls per analysis (extraction + lanes + judge). */
+  public get aiMaxCallsPerAnalysis(): number {
+    return this.configService.get('AI_MAX_CALLS_PER_ANALYSIS', { infer: true });
+  }
+
+  /** How long a lane may wait for a concurrency permit before it is dropped. */
+  public get aiParallelQueueTimeoutMs(): number {
+    return this.configService.get('AI_PARALLEL_QUEUE_TIMEOUT_MS', { infer: true });
+  }
+
   public get maxImageSizeBytes(): number {
     return this.configService.get('MAX_IMAGE_SIZE_BYTES', { infer: true });
   }

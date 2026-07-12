@@ -47,6 +47,7 @@ differ (defaults per `apps/api/src/config/env.schema.ts`):
 | Optional providers | `{OPENAI\|DEEPSEEK\|QWEN\|KIMI\|GLM}_API_KEY`/`_BASE_URL` | Key absence = provider disabled ([AI routing](../ai/README.md)). |
 | Optional hardening | `ENABLE_CLAMAV`, `CLAMAV_HOSTS/PORT`, `TRUST_PROXY` | Scanning off / proxy trust off by default ([ClamAV contract](../integrations/clamav.md)). |
 | Tunable caps | timeouts, byte caps, concurrency, rate limits, share TTL/caps | Safe defaults with schema-enforced bounds. |
+| Parallel AI pipeline (flag-gated) | `AI_PARALLEL_PIPELINE_ENABLED` (default `false`), `AI_GENERATION_LANES` (2), `AI_GENERATION_CONCURRENCY` (2), `AI_JUDGE_CONCURRENCY` (1), `AI_MAX_CALLS_PER_ANALYSIS` (5), `AI_PARALLEL_QUEUE_TIMEOUT_MS` (30 000) | Flag `false` (default) = one unchanged generation call = current behavior; all schema-bounded, per-variable detail in [docs/env-vars.md](../../docs/env-vars.md) / [concurrency-policy.md](../../docs/ai/concurrency-policy.md). |
 
 ## NEXT_PUBLIC_* rules
 

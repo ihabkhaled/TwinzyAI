@@ -1,5 +1,5 @@
 {
-  "count": 673,
+  "count": 687,
   "documents": [
     {
       "authority": "canonical",
@@ -1348,6 +1348,50 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
+      "hash": "40cfd1465068f03559f309e85d06d0327eb8b55ff895c00f2ef1ce75ecec127d",
+      "headings": [
+        "ADR-004 — Parallel AI Pipeline (Release A: async candidate-generation lanes)",
+        "Status",
+        "Context",
+        "Decision",
+        "Consequences",
+        "Alternatives considered"
+      ],
+      "id": "architecture-adrs-adr-004-parallel-ai-pipeline",
+      "keywords": [
+        "004",
+        "adr",
+        "adrs",
+        "architecture",
+        "async",
+        "candidate",
+        "generation",
+        "lanes",
+        "parallel",
+        "pipeline",
+        "release"
+      ],
+      "links": [
+        "../../docs/ai/concurrency-policy.md",
+        "../../docs/ai/cost-policy.md",
+        "../../docs/ai/written-traits-only-boundary.md",
+        "./adr-003-horizontal-scaling-plan.md"
+      ],
+      "path": "architecture/adrs/adr-004-parallel-ai-pipeline.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Accepted — Release A implemented behind a flag (OFF by default). Releases B–D deferred.",
+      "title": "ADR-004 — Parallel AI Pipeline (Release A: async candidate-generation lanes)",
+      "tokens": 1432,
+      "type": "adr"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
       "hash": "8cf0456c5a50b3bb3e58a979c6e8123a344396d20069322989caaa3d3ac25bf8",
       "headings": [
         "ADR FE-0001: Strict Next.js frontend architecture (apps/web)",
@@ -1484,7 +1528,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "c2d420662f472e88d14c1b44b9aaa47c72d260544727bd83469fac07deb3d1d9",
+      "hash": "ae6fc77ff90648e3b9e8ce39fc5d9ae55bd0193047684b5a635d5ac04aaa883b",
       "headings": [
         "ADRs",
         "Index"
@@ -1498,6 +1542,8 @@
       "links": [
         "./adr-001-strict-engineering-os.md",
         "./adr-002-zod-validation-vendor.md",
+        "./adr-003-horizontal-scaling-plan.md",
+        "./adr-004-parallel-ai-pipeline.md",
         "./adr-fe-0001-strict-next-architecture.md",
         "./adr-fe-0002-component-workbench-over-storybook.md",
         "./adr-template.md"
@@ -1509,7 +1555,7 @@
       "sourceMentions": [],
       "summary": "Store architectural decision records here. Create a new ADR whenever a change introduces or alters an architectural decision that future engineers will need to understand. Start from [`adr-template.md`](./adr-template.md); number sequent...",
       "title": "ADRs",
-      "tokens": 274,
+      "tokens": 342,
       "type": "adr"
     },
     {
@@ -1638,7 +1684,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "eeae7735add24cec24cdb1521d4f15e7603089675123df2c117a16a516f125da",
+      "hash": "212ab5a30f1d1e723e6d25329d4e04bf4eb56adc1d81143dcccc39c52c7e46ac",
       "headings": [
         "AI Context"
       ],
@@ -1646,7 +1692,9 @@
       "keywords": [
         "context"
       ],
-      "links": [],
+      "links": [
+        "../docs/ai/concurrency-policy.md"
+      ],
       "path": "context/ai-context.md",
       "relatedCode": [],
       "relatedDocs": [],
@@ -1654,7 +1702,7 @@
       "sourceMentions": [],
       "summary": "Pipeline (backend only; the frontend never calls an AI provider):",
       "title": "AI Context",
-      "tokens": 252,
+      "tokens": 400,
       "type": "summary"
     },
     {
@@ -1662,7 +1710,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "fc9e405d2e69dbc6ebc61a4cdf16849531778f0c6ded57fb827aad01f948ac0e",
+      "hash": "4142069004b7a2c70bdb27a9ff85f32117d44b7d92ed6c366aa4e611c34edfd1",
       "headings": [
         "Architecture Map — The Canonical Twinzy Backend Architecture",
         "1. The layers (and the one-way dependency rule)",
@@ -1685,6 +1733,8 @@
       ],
       "links": [
         "../agents/README.md",
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../docs/ai/concurrency-policy.md",
         "../eslint/architecture-plugin/rules/controller-no-logic.mjs",
         "../eslint/architecture.config.mjs",
         "../rules/00-non-negotiable-rules.md",
@@ -1719,7 +1769,7 @@
       ],
       "summary": "> This is the **single source of truth** for how `apps/api` is structured. Every rule in [`/rules`](../rules/README.md), every skill in [`/skills`](../skills/README.md), every reviewer in [`/agents`](../agents/README.md), and the custom ...",
       "title": "Architecture Map — The Canonical Twinzy Backend Architecture",
-      "tokens": 5586,
+      "tokens": 5717,
       "type": "summary"
     },
     {
@@ -2994,7 +3044,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "84cd71a7105e5aa9c0503eb3e7855aa6ee33e07fc17af63b6fc2be0b6a5a3622",
+      "hash": "c8b65812483447aff7a9873355e0436039b5c04a6cc3db30cd8a256589721488",
       "headings": [
         "Environment Configuration Contract",
         "Where the contract is defined",
@@ -3016,6 +3066,7 @@
       ],
       "links": [
         "../../CLAUDE.md",
+        "../../docs/ai/concurrency-policy.md",
         "../../docs/env-vars.md",
         "../ai/README.md",
         "../api/payments.md",
@@ -3045,7 +3096,7 @@
       ],
       "summary": "Pointer to the env-var contract — where it is defined, required vs optional groups, NEXT_PUBLIC_* exposure rules, and fail-fast validation; per-variable detail is owned by docs/env-vars.md.",
       "title": "Environment Configuration Contract",
-      "tokens": 1080,
+      "tokens": 1200,
       "type": "contract"
     },
     {
@@ -3772,12 +3823,13 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "fef84edf5be8843271e9c9bca4661d2851bc15aa233c9628a784818abffee70b",
+      "hash": "21d1532456574a41d36255c6f428a53d4bfc99194265dd387ee57b5cd7c0b39d",
       "headings": [
         "AI Concurrency Policy",
         "Analysis concurrency caps (the AI-work gate)",
         "HTTP rate limits",
-        "Overload behavior"
+        "Overload behavior",
+        "Parallel candidate-recall fan-out (Release A, flag-gated)"
       ],
       "id": "ai-concurrency-policy",
       "keywords": [
@@ -3788,38 +3840,59 @@
         "overload",
         "rate-limit",
         "throttle",
-        "admission"
+        "admission",
+        "parallel",
+        "fan-out",
+        "lanes",
+        "semaphore",
+        "gate",
+        "call-budget"
       ],
       "links": [
         "../../apps/api/src/config/env-bounds.constants.ts",
+        "../../apps/api/src/core/concurrency/semaphore.ts",
         "../../apps/api/src/core/streaming/concurrency-limiter.service.ts",
+        "../../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "../../apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "cost-policy.md",
-        "retry-timeout-policy.md"
+        "latency-budget.md",
+        "retry-timeout-policy.md",
+        "written-traits-only-boundary.md"
       ],
       "path": "docs/ai/concurrency-policy.md",
       "relatedCode": [
         "apps/api/src/core/streaming/concurrency-limiter.service.ts",
         "apps/api/src/config/env-bounds.constants.ts",
         "apps/api/src/modules/game/model/game.constants.ts",
-        "apps/api/src/core/rate-limit/rate-limit.vendor.ts"
+        "apps/api/src/core/rate-limit/rate-limit.vendor.ts",
+        "apps/api/src/core/concurrency/semaphore.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts"
       ],
       "relatedDocs": [
         "docs/ai/cost-policy.md",
         "docs/ai/retry-timeout-policy.md",
-        "docs/env-vars.md"
+        "docs/env-vars.md",
+        "architecture/adrs/adr-004-parallel-ai-pipeline.md"
       ],
       "relatedTests": [
-        "apps/api/src/tests/game-stream-isolation.integration.test.ts"
+        "apps/api/src/tests/game-stream-isolation.integration.test.ts",
+        "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+        "apps/api/src/core/concurrency/tests/semaphore.test.ts"
       ],
       "sourceMentions": [
         "apps/api/src/config/env-bounds.constants.ts",
+        "apps/api/src/core/concurrency/semaphore.ts",
         "apps/api/src/core/streaming/concurrency-limiter.service.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts",
         "apps/api/src/modules/game/api/game-stream.presenter.ts",
         "apps/api/src/modules/game/model/game.constants.ts"
       ],
-      "summary": "Request-level concurrency caps, the bounded FIFO queue, overload behavior, and the rate limits that bound how much AI work one process accepts.",
+      "summary": "Request-level concurrency caps, the bounded FIFO queue, overload behavior, the rate limits that bound how much AI work one process accepts, and the flag-gated parallel candidate-recall fan-out with its global per-step gate and per-analysis call budget.",
       "title": "AI Concurrency Policy",
-      "tokens": 776,
+      "tokens": 1536,
       "type": "doc"
     },
     {
@@ -3827,12 +3900,13 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "fca2c2c669b07497bd89891ea2b87a50de135a8d08ddaee5926acead01b7c958",
+      "hash": "55e2d7c1ef88d53feb4073d720ff307f73d5d25f29189d18ed8ef1446863c8e4",
       "headings": [
         "AI Cost Policy",
         "What one user run can cost",
         "How many runs can happen at once",
-        "Shadow spend (the only optional multiplier)",
+        "Shadow spend (an optional multiplier)",
+        "Parallel recall spend (flag-gated, OFF by default)",
         "Benchmark spend",
         "Levers, cheapest first"
       ],
@@ -3850,6 +3924,7 @@
       ],
       "links": [
         "../../apps/api/src/config/env.schema.ts",
+        "../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "../ai-benchmarking.md",
         "concurrency-policy.md",
         "fallback-routing.md",
@@ -3879,7 +3954,7 @@
       ],
       "summary": "The env caps that bound AI spend — concurrency, throttles, timeouts, response byte caps, route-chain length, and the shadow sampling rate.",
       "title": "AI Cost Policy",
-      "tokens": 877,
+      "tokens": 1067,
       "type": "doc"
     },
     {
@@ -4229,7 +4304,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "61af69896ab91c3e70a543f9d0190611e37575a6ec3fd46d56be0592e69b21a9",
+      "hash": "806cc84786fe302e125fb1c2db119a69e9884ad4edc899fc60a653467f825de7",
       "headings": [
         "AI Latency Budget",
         "The ceilings (env defaults)",
@@ -4250,6 +4325,7 @@
       "links": [
         "../../apps/api/src/config/env-bounds.constants.ts",
         "../ai-benchmarking.md",
+        "concurrency-policy.md",
         "cost-policy.md",
         "model-change-checklist.md",
         "pipeline.md",
@@ -4275,7 +4351,7 @@
       ],
       "summary": "The timeout envelope as the de-facto latency ceilings — per call, per stream, per pipeline — with the env defaults that define them.",
       "title": "AI Latency Budget",
-      "tokens": 837,
+      "tokens": 985,
       "type": "doc"
     },
     {
@@ -4469,7 +4545,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "4e84680f4c7ccc3a0a3250d8b57f05a8e2bba1d4c87d29905ffbf28c42143b59",
+      "hash": "55f1e81918f4d2ea6d33f922b630b3a227384db1a3154367a3d160e2e10bfaec",
       "headings": [
         "AI Pipeline — Step by Step",
         "0. Admission and pre-AI gates (streaming path)",
@@ -4496,8 +4572,10 @@
         "../../apps/api/src/modules/ai/application/trait-extraction.service.ts",
         "../../apps/api/src/modules/game/application/analyze-game-stream.use-case.ts",
         "../../apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts",
+        "../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "../features/paypal-donations-and-paid-results/22-go-no-go.md",
         "../file-upload-security.md",
+        "concurrency-policy.md",
         "retry-timeout-policy.md",
         "written-traits-only-boundary.md"
       ],
@@ -4536,7 +4614,7 @@
       ],
       "summary": "What enters and leaves each AI pipeline step, which service owns it, and exactly where the image dies.",
       "title": "AI Pipeline — Step by Step",
-      "tokens": 1597,
+      "tokens": 1733,
       "type": "doc"
     },
     {
@@ -4544,7 +4622,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "b682d0b1a393fcaa13e4b7d2d1180126b884f8e70967054db80f1f16b18c6408",
+      "hash": "2d5402ffce131aadf42f956390fa12fe5ca69533ff6738da8b51a99315d78fd3",
       "headings": [
         "AI Prompt Catalog",
         "The four prompts",
@@ -4566,6 +4644,7 @@
         "../../apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
         "../../apps/api/src/modules/ai/model/prompt-version.constants.ts",
         "../ai-safety.md",
+        "concurrency-policy.md",
         "prompt-change-checklist.md",
         "safety-filters.md"
       ],
@@ -4586,6 +4665,7 @@
       ],
       "sourceMentions": [
         "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+        "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
         "apps/api/src/modules/ai/model/prompt-version.constants.ts",
         "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
         "packages/shared/src/constants/app.constants.ts",
@@ -4593,7 +4673,7 @@
       ],
       "summary": "The four prompt files, their PromptKey, required placeholders, output schema, and shared safety constraints.",
       "title": "AI Prompt Catalog",
-      "tokens": 1169,
+      "tokens": 1306,
       "type": "doc"
     },
     {
@@ -4969,7 +5049,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "51fcda483cc72f18c7b3d955534ebfb306693d674b1aefec110214d793426f0a",
+      "hash": "12089eb22c9ebc1addf258557a86b4b796cf1f2dab2887a706d9628bc7f8454c",
       "headings": [
         "AI Retry and Timeout Policy",
         "Timeout layers (innermost first)",
@@ -4993,6 +5073,7 @@
         "../../apps/api/src/config/env-bounds.constants.ts",
         "../../apps/api/src/modules/ai/lib/abort-bridge.util.ts",
         "../env-vars.md",
+        "concurrency-policy.md",
         "fallback-routing.md",
         "incident-response.md",
         "latency-budget.md",
@@ -5023,7 +5104,7 @@
       ],
       "summary": "Per-call total and idle timeouts, the pipeline watchdog, model-chain retries, and how external aborts bridge into provider calls.",
       "title": "AI Retry and Timeout Policy",
-      "tokens": 910,
+      "tokens": 992,
       "type": "doc"
     },
     {
@@ -5227,7 +5308,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "bf32db4e8e5cc7a596f2e585e365a598ba6b0037d53c43dfd16ffaf9a901a528",
+      "hash": "c21ae6caf0c94801e0b85dc55673b8a26e13070ebcacd4fc267c97e84240ff7b",
       "headings": [
         "AI System Overview",
         "Cross-cutting guarantees (each owned elsewhere)"
@@ -5247,8 +5328,10 @@
       "links": [
         "../../apps/api/src/config/gemini-step.constants.ts",
         "../../apps/api/src/modules/game/application/style-match.service.ts",
+        "../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "../ai-safety.md",
         "../provider-routing.md",
+        "concurrency-policy.md",
         "cost-policy.md",
         "image-lifecycle.md",
         "model-routing.md",
@@ -5282,7 +5365,7 @@
       ],
       "summary": "One-page view of the four-step AI pipeline — photo to written traits to candidates to judged results, plus text-only translation.",
       "title": "AI System Overview",
-      "tokens": 948,
+      "tokens": 1077,
       "type": "doc"
     },
     {
@@ -5290,7 +5373,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "beeba45881483c6213eb78a033961ac032ee911085126544b6d852ec7189c82f",
+      "hash": "1f649ac12e057a4e476d95d865106f5f6ee97b5802f86b91bbd19f8d5511cc03",
       "headings": [
         "The Written-Traits-Only Boundary",
         "Enforcement mechanisms (defense in depth)",
@@ -5314,6 +5397,7 @@
         "../../apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
         "../../apps/api/src/modules/game/application/style-match.service.ts",
         "../privacy-and-data-retention.md",
+        "concurrency-policy.md",
         "image-lifecycle.md",
         "model-routing.md",
         "schema-contracts.md",
@@ -5345,7 +5429,7 @@
       ],
       "summary": "Only trait extraction ever sees the photo; every downstream AI step, share, and display is text-only — enforced by types, config, registry, and wipes.",
       "title": "The Written-Traits-Only Boundary",
-      "tokens": 1166,
+      "tokens": 1278,
       "type": "doc"
     },
     {
@@ -5436,7 +5520,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "b28ae2e323403f5c0b4a5dbaf1eef0e07c9d4d19c9f2d23e5cf7d437338cbeb7",
+      "hash": "e216f984247b631d3bb4cd4eeac4f6d1af3a8ee51f1cdcf9b7c9c9f865a0ad2d",
       "headings": [
         "Environment Variables"
       ],
@@ -5456,7 +5540,7 @@
       "sourceMentions": [],
       "summary": "| Var | Side | Default | Notes |",
       "title": "Environment Variables",
-      "tokens": 683,
+      "tokens": 862,
       "type": "doc"
     },
     {
@@ -9147,38 +9231,6 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "48b8f2cd0dbf21d4bc19d698921e1888e63c29856bc38823904865f47c24e100",
-      "headings": [
-        "The Generic Knowledge-OS Prompt (portable — works on any repository)"
-      ],
-      "id": "docs-features-ai-knowledge-os-generic-knowledge-os-prompt",
-      "keywords": [
-        "any",
-        "docs",
-        "features",
-        "generic",
-        "knowledge",
-        "portable",
-        "prompt",
-        "repository",
-        "works"
-      ],
-      "links": [],
-      "path": "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
-      "relatedCode": [],
-      "relatedDocs": [],
-      "relatedTests": [],
-      "sourceMentions": [],
-      "summary": "> Copy everything below the line into a capable AI coding agent inside any repository.",
-      "title": "The Generic Knowledge-OS Prompt (portable — works on any repository)",
-      "tokens": 6333,
-      "type": "doc"
-    },
-    {
-      "authority": "canonical",
-      "contextTier": 3,
-      "generated": false,
-      "hasFrontmatter": false,
       "hash": "433f4a67a3e8208d87931f6f31518c995969ff5a019be7706b1bb00ae28653b1",
       "headings": [
         "00 — Intake: Strict Engineering-OS Migration"
@@ -10189,6 +10241,632 @@
       "summary": "Request `TWZ-2026-STREAM-ISO`. Makes the streaming analyze pipeline",
       "title": "Feature: Multi-tab stream isolation, overload protection & cancellation",
       "tokens": 484,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "ae7c193e0e1ab85932e096b3cb419728cb9e46956b425dad1550b1ce537b9909",
+      "headings": [
+        "00 - Request Intake and Classification",
+        "Request Record",
+        "Affected Domains",
+        "Criticality and Delivery Track",
+        "Initial Scope Summary",
+        "Exit Checklist"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-00-intake",
+      "keywords": [
+        "classification",
+        "docs",
+        "features",
+        "intake",
+        "parallel",
+        "pipeline",
+        "request"
+      ],
+      "links": [
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "06-technical-refinement.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/00-intake.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Field | Value |",
+      "title": "00 - Request Intake and Classification",
+      "tokens": 1141,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "f865642659155969a9d49af0091ef52f66fb6db1a2e1593a102aa4202fc18310",
+      "headings": [
+        "03 - Product Requirements",
+        "Epic",
+        "User stories & acceptance criteria",
+        "Out of scope / non-goals",
+        "UX / states",
+        "Analytics / localization / permissions",
+        "Product definition of done"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-03-product-requirements",
+      "keywords": [
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "product",
+        "requirements"
+      ],
+      "links": [
+        "11-test-strategy.md",
+        "15-dev-validation-report.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/03-product-requirements.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Improve candidate diversity/recall and latency of the analyze pipeline by letting candidate",
+      "title": "03 - Product Requirements",
+      "tokens": 1115,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "c4fcc7df0d793d024205d8928f9365e688937f9bda27d918347b0dd7284876a3",
+      "headings": [
+        "06 - Technical Refinement",
+        "Chosen approach",
+        "New environment variables",
+        "Key decisions & trade-offs",
+        "Open technical questions"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-06-technical-refinement",
+      "keywords": [
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "refinement",
+        "technical"
+      ],
+      "links": [
+        "../../../apps/api/src/config/app-config.service.ts",
+        "../../../apps/api/src/config/env-bounds.constants.ts",
+        "../../../apps/api/src/config/env.schema.ts",
+        "../../../apps/api/src/core/concurrency/concurrency.errors.ts",
+        "../../../apps/api/src/core/concurrency/concurrency.types.ts",
+        "../../../apps/api/src/core/concurrency/index.ts",
+        "../../../apps/api/src/core/concurrency/semaphore.ts",
+        "../../../apps/api/src/modules/ai/ai.module.ts",
+        "../../../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "../../../apps/api/src/modules/ai/application/candidate-generation.service.ts",
+        "../../../apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "../../../apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+        "../../../apps/api/src/modules/ai/lib/candidate-merge.util.ts",
+        "../../../apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+        "../../../apps/api/src/modules/ai/model/candidate-lane.types.ts",
+        "../../../apps/api/src/modules/ai/model/candidate-recall.types.ts",
+        "../../../apps/api/src/modules/game/application/style-match.service.ts",
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "09-impact-analysis.md",
+        "19-security-review.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/config/app-config.service.ts",
+        "apps/api/src/config/env-bounds.constants.ts",
+        "apps/api/src/config/env.schema.ts",
+        "apps/api/src/core/concurrency/concurrency.errors.ts",
+        "apps/api/src/core/concurrency/concurrency.types.ts",
+        "apps/api/src/core/concurrency/index.ts",
+        "apps/api/src/core/concurrency/semaphore.ts",
+        "apps/api/src/modules/ai/ai.module.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "apps/api/src/modules/ai/application/candidate-generation.service.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+        "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
+        "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+        "apps/api/src/modules/ai/model/candidate-lane.types.ts",
+        "apps/api/src/modules/ai/model/candidate-recall.types.ts",
+        "apps/api/src/modules/game/application/style-match.service.ts"
+      ],
+      "summary": "Additive, layered, gate-green in a single slice. Flow when `AI_PARALLEL_PIPELINE_ENABLED=true`:",
+      "title": "06 - Technical Refinement",
+      "tokens": 1669,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "4c5e428d2f851ee57499f48d1066300e38c33a453a6410d396d8257c85d70a4d",
+      "headings": [
+        "08 - Architecture Review",
+        "Fit with the layered engineering OS",
+        "Contract / data-flow changes",
+        "ADR-worthy decisions",
+        "Architecture risks"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-08-architecture-review",
+      "keywords": [
+        "architecture",
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "review"
+      ],
+      "links": [
+        "../../../apps/api/src/modules/game/application/analyze-game.use-case.ts",
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../../../context/architecture-map.md",
+        "06-technical-refinement.md",
+        "09-impact-analysis.md",
+        "19-security-review.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/08-architecture-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/modules/game/application/analyze-game.use-case.ts"
+      ],
+      "summary": "The change respects the one-way dependency rule (Controller → Application → Domain → Persistence →",
+      "title": "08 - Architecture Review",
+      "tokens": 1091,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "b13740467ee5c2bcc7a05af17804f721bcd62357ca7c5a92902ed55c20fe5b77",
+      "headings": [
+        "09 - Impact Analysis",
+        "Affected systems",
+        "Migration / compatibility",
+        "Team / ops impact",
+        "Known limitation (explicit)",
+        "Compliance / privacy"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-09-impact-analysis",
+      "keywords": [
+        "analysis",
+        "docs",
+        "features",
+        "impact",
+        "parallel",
+        "pipeline"
+      ],
+      "links": [
+        "../../../.env.example",
+        "../../../apps/api/src/config/env-bounds.constants.ts",
+        "../../../apps/api/src/config/env.schema.ts",
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../../ai/concurrency-policy.md",
+        "../../ai/cost-policy.md",
+        "../../ai/written-traits-only-boundary.md",
+        "08-architecture-review.md",
+        "19-security-review.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/config/env-bounds.constants.ts",
+        "apps/api/src/config/env.schema.ts"
+      ],
+      "summary": "| System | Impact | Backward compatible? |",
+      "title": "09 - Impact Analysis",
+      "tokens": 1020,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "c25c1c647a7a54b0208e66be86c3c69a7b4348a7201c6a80bacbb155cbffb5e2",
+      "headings": [
+        "11 - Test Strategy",
+        "Approach",
+        "Requirement → test mapping",
+        "Negative / edge cases covered",
+        "Determinism",
+        "Test files",
+        "Evidence"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-11-test-strategy",
+      "keywords": [
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "strategy",
+        "test"
+      ],
+      "links": [
+        "../../../apps/api/src/core/concurrency/tests/semaphore.test.ts",
+        "../../../apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+        "../../../apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+        "../../../apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+        "../../../apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+        "../../../apps/api/src/modules/game/tests/style-match.service.test.ts",
+        "12-coverage-plan.md",
+        "15-dev-validation-report.md",
+        "16-dev-bug-log.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/core/concurrency/tests/semaphore.test.ts",
+        "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+        "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+        "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+        "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+        "apps/api/src/modules/game/tests/style-match.service.test.ts"
+      ],
+      "summary": "All new behavior is exercised by **deterministic fake-adapter unit tests** — the repo's standard",
+      "title": "11 - Test Strategy",
+      "tokens": 1109,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "31483cf74b0ea55d333df7b3af748494192cf379107bd075f07853e832a4eb32",
+      "headings": [
+        "12 - Coverage Plan",
+        "Touched modules & how they are gated",
+        "Thresholds",
+        "Critical scenario coverage (not just line count)",
+        "Waivers"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-12-coverage-plan",
+      "keywords": [
+        "coverage",
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "plan"
+      ],
+      "links": [
+        "../../../apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+        "../../../testing/coverage-policy.md",
+        "../../../vitest.config.mts",
+        "15-dev-validation-report.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+      ],
+      "summary": "The coverage `include` globs already capture the logic-bearing new files:",
+      "title": "12 - Coverage Plan",
+      "tokens": 493,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "8af7ad64a6454e76c12920717c9626a31385ac27d6eebb22cfa7d8fdd0f15075",
+      "headings": [
+        "13 - Implementation Readiness",
+        "Pre-implementation gate (all satisfied before phase 14)",
+        "Branch / slice strategy",
+        "Flags & config",
+        "Migration / rollback",
+        "Observability plan",
+        "Review & release readiness",
+        "Open readiness gaps"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-13-implementation-readiness",
+      "keywords": [
+        "docs",
+        "features",
+        "implementation",
+        "parallel",
+        "pipeline",
+        "readiness"
+      ],
+      "links": [
+        "../../../.env.example",
+        "../../../apps/api/src/tests/fixtures/stubs.ts",
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../../../CLAUDE.md",
+        "../../../rules/00-non-negotiable-rules.md",
+        "../../../rules/07-performance-scalability.md",
+        "../../../rules/08-reliability-durability.md",
+        "../../../rules/25-configuration-and-environment.md",
+        "08-architecture-review.md",
+        "09-impact-analysis.md",
+        "19-security-review.md",
+        "README.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/tests/fixtures/stubs.ts"
+      ],
+      "summary": "- [x] Root [`CLAUDE.md`](../../../CLAUDE.md) reviewed; product invariants re-checked at intake",
+      "title": "13 - Implementation Readiness",
+      "tokens": 761,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "2e41fd47d75e5e2c476046e5ed7ca7da45c09f85165ee89def31769cbeb6334a",
+      "headings": [
+        "15 - Developer Validation Report",
+        "Summary",
+        "Gate evidence",
+        "Functional coverage of the new behavior",
+        "Operational checks",
+        "Adversarial verification"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-15-dev-validation-report",
+      "keywords": [
+        "dev",
+        "developer",
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "report",
+        "validation"
+      ],
+      "links": [
+        "16-dev-bug-log.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "All quality gates pass on the delivered change (single gate-green slice on `main`). Validated on the",
+      "title": "15 - Developer Validation Report",
+      "tokens": 796,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "1ec51e43033d7c807ef1d2246567ad18c8a751a9c1ed6139407e7c60f8dd6d80",
+      "headings": [
+        "16 - Developer Bug Log",
+        "Internal defect loop",
+        "Stability decision"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-16-dev-bug-log",
+      "keywords": [
+        "bug",
+        "dev",
+        "developer",
+        "docs",
+        "features",
+        "log",
+        "parallel",
+        "pipeline"
+      ],
+      "links": [],
+      "path": "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "No functional defects were found in the delivered behavior. Three implementation-time adjustments",
+      "title": "16 - Developer Bug Log",
+      "tokens": 697,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "6bc511e1d0a2db2cfd93cec9e4dfd41052637dbf5de09814ae135c07e723194d",
+      "headings": [
+        "19 - Security & Privacy Review",
+        "Scope",
+        "Privacy / image-boundary review (Twinzy non-negotiable)",
+        "Abuse / resource review",
+        "Secrets / logging",
+        "Reversibility",
+        "Residual risk",
+        "Decision"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-19-security-review",
+      "keywords": [
+        "docs",
+        "features",
+        "parallel",
+        "pipeline",
+        "privacy",
+        "review",
+        "security"
+      ],
+      "links": [
+        "../../../apps/api/src/modules/game/application/analyze-game.use-case.ts",
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../../ai/concurrency-policy.md",
+        "../../ai/cost-policy.md",
+        "../../ai/written-traits-only-boundary.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/19-security-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/modules/game/application/analyze-game.use-case.ts"
+      ],
+      "summary": "The change adds bounded, flag-gated parallelism to the **text-only** candidate-recall step. It adds",
+      "title": "19 - Security & Privacy Review",
+      "tokens": 907,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "bf86151fbbd523a06c06dadd67ce56f745f6d0506f9ffa4a16d0c9e67ef6877c",
+      "headings": [
+        "23 - Documentation & Knowledge Changelog",
+        "Documents created",
+        "Documents / code-docs updated in the same delivery stream",
+        "Configuration reference (for ops docs)",
+        "Canonical + knowledge docs threaded (same delivery stream)",
+        "Governance (`CLAUDE.md`) determination",
+        "Not changed (intentionally)",
+        "Remaining documentation gaps"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-23-documentation-changelog",
+      "keywords": [
+        "changelog",
+        "docs",
+        "documentation",
+        "features",
+        "knowledge",
+        "parallel",
+        "pipeline"
+      ],
+      "links": [
+        "../../../.env.example",
+        "../../../apps/api/src/config/app-config.service.ts",
+        "../../../apps/api/src/config/env-bounds.constants.ts",
+        "../../../apps/api/src/config/env.schema.ts",
+        "../../../apps/api/src/core/concurrency/semaphore.ts",
+        "../../../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "../../../apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "../../../apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+        "../../../apps/api/src/tests/fixtures/stubs.ts",
+        "../../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../../../architecture/adrs/README.md",
+        "../../../context/architecture-map.md",
+        "../../../contracts/configuration/env-contract.md",
+        "../../../memory/performance-decisions.md",
+        "../../../operations/AI-cost-budget.md",
+        "../../../README.md",
+        "../../../release-notes/2026-07-12-parallel-ai-pipeline.md",
+        "../../../rules/07-performance-scalability.md",
+        "../../../structure/configuration-map.md",
+        "../../../structure/flows/analyze-flow.md",
+        "../../../support/product-behavior-guide.md",
+        "../../../vitest.config.mts",
+        "../../ai/concurrency-policy.md",
+        "../../env-vars.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/src/config/app-config.service.ts",
+        "apps/api/src/config/env-bounds.constants.ts",
+        "apps/api/src/config/env.schema.ts",
+        "apps/api/src/core/concurrency/semaphore.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+        "apps/api/src/tests/fixtures/stubs.ts"
+      ],
+      "summary": "| Document | Why |",
+      "title": "23 - Documentation & Knowledge Changelog",
+      "tokens": 1552,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "d7f738e7ae5925d5d5c70669b8c7432ed352ae019444036c35d36f3941de414b",
+      "headings": [
+        "Feature: Parallel AI pipeline — Release A (async candidate-generation lanes)",
+        "Phase trail",
+        "Design authority",
+        "Implementation (single gate-green slice on `main`)"
+      ],
+      "id": "docs-features-parallel-ai-pipeline-readme",
+      "keywords": [
+        "async",
+        "candidate",
+        "docs",
+        "feature",
+        "features",
+        "generation",
+        "lanes",
+        "parallel",
+        "pipeline",
+        "readme",
+        "release"
+      ],
+      "links": [
+        "../../../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../../ai/concurrency-policy.md",
+        "../../ai/cost-policy.md",
+        "../../ai/written-traits-only-boundary.md",
+        "../../sdlc/README.md",
+        "00-intake.md",
+        "03-product-requirements.md",
+        "06-technical-refinement.md",
+        "08-architecture-review.md",
+        "09-impact-analysis.md",
+        "11-test-strategy.md",
+        "12-coverage-plan.md",
+        "13-implementation-readiness.md",
+        "15-dev-validation-report.md",
+        "16-dev-bug-log.md",
+        "19-security-review.md",
+        "23-documentation-changelog.md"
+      ],
+      "path": "docs/features/parallel-ai-pipeline/README.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Request `TWZ-2026-PARALLEL-AI`. Lets the candidate-recall step of the analyze pipeline fan out from",
+      "title": "Feature: Parallel AI pipeline — Release A (async candidate-generation lanes)",
+      "tokens": 856,
       "type": "doc"
     },
     {
@@ -14397,7 +15075,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "0018fdbafa3fcff27a3538f1273708ddc5a04cfcf3a038c3ab6ea1240a5a7bfa",
+      "hash": "e68596ab3cd362266018266c2e1654c94cff641d23774a5e0e9200fab90a4c83",
       "headings": [
         "Failure Semantics — Typed Codes per Stage, User Copy, Refunds",
         "The catalog",
@@ -14419,6 +15097,7 @@
         "message-key"
       ],
       "links": [
+        "../docs/ai/concurrency-policy.md",
         "policies.md",
         "sharing-lifecycle.md",
         "state-machines.md"
@@ -14460,7 +15139,7 @@
       ],
       "summary": "The typed error-code catalog mapped to pipeline stages, the safe envelope the user sees on HTTP and SSE, frontend friendly-copy mapping, and refund semantics for paid runs.",
       "title": "Failure Semantics — Typed Codes per Stage, User Copy, Refunds",
-      "tokens": 1616,
+      "tokens": 1699,
       "type": "domain"
     },
     {
@@ -14828,7 +15507,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "34200a3b80ec43e611b3501f5c3d8c6032015f83183a4bceac4b3593dceee011",
+      "hash": "f75a52bcee7f23cf19b1ca193a1d8c1e9d79976375d63f45c7359b9fd244ac45",
       "headings": [
         "Result Ranking — How Final Results Are Ordered and Capped",
         "The four ordering passes",
@@ -14850,6 +15529,7 @@
         "aggregation"
       ],
       "links": [
+        "../docs/ai/concurrency-policy.md",
         "calculations.md",
         "language-lifecycle.md"
       ],
@@ -14871,6 +15551,7 @@
       "sourceMentions": [
         "apps/api/src/modules/ai/application/candidate-generation.service.ts",
         "apps/api/src/modules/ai/application/result-translation.service.ts",
+        "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
         "apps/api/src/modules/ai/prompts/use-3rd-prompt.md",
         "apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts",
         "apps/api/src/modules/result-aggregation/lib/result-aggregation.mapper.ts",
@@ -14881,7 +15562,7 @@
       ],
       "summary": "The end-to-end ordering pipeline — generation sort, judge ranks, the server display gate, descending re-sort, resultCount cap, and 1-based re-ranking in the mapper.",
       "title": "Result Ranking — How Final Results Are Ordered and Capped",
-      "tokens": 1080,
+      "tokens": 1222,
       "type": "domain"
     },
     {
@@ -15676,11 +16357,12 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "82ac27c0581a4bf21979e88febeece65ed85c44d301ff568a3942c5fb23a920c",
+      "hash": "ad001770b3478f519e17ef44bbedb3396e4cd563b085160f1ca85b52252fa169",
       "headings": [
         "AI Pipeline Summary — Steps, Providers, Routing, Safety, Prompts, Env Knobs",
         "Steps and the image boundary",
         "Providers and routing",
+        "Parallel candidate recall (Release A, flag-gated — `AI_PARALLEL_PIPELINE_ENABLED`, default off)",
         "Prompts (`apps/api/src/modules/ai/prompts/`, loaded by `infrastructure/prompt-template.repository.ts`)",
         "Safety chain (layered; owner: `docs/ai-safety.md` + `rules/14-ai-safety.md`)",
         "Env knobs (all in `apps/api/src/config/env.schema.ts`; defaults in `env-bounds.constants.ts`)",
@@ -15698,7 +16380,11 @@
         "safety",
         "zod validation",
         "timeouts",
-        "benchmark"
+        "benchmark",
+        "parallel",
+        "lanes",
+        "fan-out",
+        "concurrency-gate"
       ],
       "links": [],
       "path": "knowledge/summaries/ai-pipeline.md",
@@ -15706,17 +16392,22 @@
         "apps/api/src/modules/ai/adapters/ai-router.service.ts",
         "apps/api/src/modules/ai/adapters/gemini.adapter.ts",
         "apps/api/src/modules/ai/application/ai-safety.service.ts",
-        "apps/api/src/config/gemini-step.constants.ts"
+        "apps/api/src/config/gemini-step.constants.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
       ],
       "relatedDocs": [
         "docs/provider-routing.md",
         "docs/ai-safety.md",
         "docs/ai-benchmarking.md",
-        "rules/14-ai-safety.md"
+        "rules/14-ai-safety.md",
+        "docs/ai/concurrency-policy.md",
+        "architecture/adrs/adr-004-parallel-ai-pipeline.md"
       ],
       "relatedTests": [
         "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
-        "apps/api/src/modules/ai/tests/ai-router.service.test.ts"
+        "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
+        "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
       ],
       "sourceMentions": [
         "apps/api/src/config/ai-provider.constants.ts",
@@ -15726,7 +16417,7 @@
       ],
       "summary": "Routing digest of the AI pipeline — the four env-routable steps, provider adapters and routing precedence, the layered safety chain, prompt files, and every cost/latency env knob.",
       "title": "AI Pipeline Summary — Steps, Providers, Routing, Safety, Prompts, Env Knobs",
-      "tokens": 1628,
+      "tokens": 2073,
       "type": "summary"
     },
     {
@@ -15734,7 +16425,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "f9bb7fcc9a9b1d917d5815199a4d0d2dc8e937beea0dc66352bbe53c5b17d50a",
+      "hash": "2f9dc48cd37289b4422d1ed34f5c7c969784f5ad76c3857ec18b10d6404e4939",
       "headings": [
         "Architecture Summary — Both Sides, Enforcement, Where Things Live",
         "Backend (`apps/api/src`) — one-way layers",
@@ -15784,7 +16475,7 @@
       ],
       "summary": "Routing digest of monorepo anatomy — backend and frontend layer chains, module lists, mechanical enforcement, and the canonical ownership maps.",
       "title": "Architecture Summary — Both Sides, Enforcement, Where Things Live",
-      "tokens": 1411,
+      "tokens": 1439,
       "type": "summary"
     },
     {
@@ -15845,7 +16536,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "152970a078aafc27d67363abc53934699bd01c7cb585332d81ace448a4dbe661",
+      "hash": "96d0cc2fd43e04912e67367a3181473fcedc50b7a00ad3edede0969518790b76",
       "headings": [
         "Configuration Summary — Env Schema, Key Groups, Fail-Fast, Mirror Rule",
         "Approach",
@@ -15863,7 +16554,9 @@
         "gemini env",
         "env.example",
         "public env",
-        "share config"
+        "share config",
+        "parallel pipeline",
+        "concurrency lanes"
       ],
       "links": [],
       "path": "knowledge/summaries/configuration.md",
@@ -15887,9 +16580,9 @@
         "apps/api/src/config/env.schema.ts",
         "apps/web/src/packages/env/public-env.ts"
       ],
-      "summary": "Routing digest of configuration — the single zod env schema, the key groups (AI, payments, upload, share, streaming, web public), fail-fast validation, and the .env.example mirror discipline.",
+      "summary": "Routing digest of configuration — the single zod env schema, the key groups (AI, parallel pipeline, payments, upload, share, streaming, web public), fail-fast validation, and the .env.example mirror discipline.",
       "title": "Configuration Summary — Env Schema, Key Groups, Fail-Fast, Mirror Rule",
-      "tokens": 1330,
+      "tokens": 1463,
       "type": "summary"
     },
     {
@@ -15897,7 +16590,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "afc81d169df2e5f7476e2ceb0948c4906d6504dcd4340c2739f8325308912c25",
+      "hash": "33b3e9966da678200ad8c1d38f11656d8adda471533b713eafbd948d7133c086",
       "headings": [
         "Current Risks Summary — Open Conditions, Debt, Staleness, Exposure",
         "1. Paywall LIVE conditions — OPEN (highest-visibility gate)",
@@ -15941,7 +16634,7 @@
       ],
       "summary": "Routing digest of open risk — paywall LIVE conditions, SDLC artifact debt, the stale-mirror/copy cleanup backlog, provider-outage exposure, and every recorded doc/code drift.",
       "title": "Current Risks Summary — Open Conditions, Debt, Staleness, Exposure",
-      "tokens": 1617,
+      "tokens": 1724,
       "type": "summary"
     },
     {
@@ -16592,7 +17285,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "ab3b37188b9d661a9f99847bf220552f1ebc283bcd8a371ed469073458ae18ac",
+      "hash": "643e8f73460424e7bb3e8ec2b47aea2bc111c7bad52c80f4cf10582639e37670",
       "headings": [
         "Architecture Decisions",
         "Extraction-only image boundary (2026-07-10)",
@@ -16602,6 +17295,7 @@
         "Error model: envelope stays compatible, messageKey is ADDITIVE",
         "Workspace & config",
         "Horizontal scaling plan (ADR-003)",
+        "Parallel AI pipeline (ADR-004)",
         "Ephemeral shareable results (TWZ-SHARE-001, 2026-07-08)"
       ],
       "id": "memory-architecture-decisions",
@@ -16614,7 +17308,9 @@
         "../architecture/adrs/adr-001-strict-engineering-os.md",
         "../architecture/adrs/adr-002-zod-validation-vendor.md",
         "../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "../docs/ai-benchmarking.md",
+        "../docs/ai/concurrency-policy.md",
         "../docs/features/engineering-os-migration/00-intake.md",
         "../docs/features/multi-provider-ai/00-intake.md",
         "../docs/features/simple-readable-code-operating-system-implementation/00-intake.md",
@@ -16632,7 +17328,7 @@
       ],
       "summary": "Standing shape lives in [project-architecture.md](./project-architecture.md); this file records",
       "title": "Architecture Decisions",
-      "tokens": 1921,
+      "tokens": 2105,
       "type": "memory"
     },
     {
@@ -17352,10 +18048,11 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "51474e8ee768ced912784b4c77a606e44d40abf5e2d2f3b85af20c8dc4e70338",
+      "hash": "c7fc08a9c26850487402d6a386ceac36bad7a69532a494574a401507b788ddbd",
       "headings": [
         "Performance Decisions",
-        "Scalability model + what we deliberately do NOT add"
+        "Scalability model + what we deliberately do NOT add",
+        "Parallel candidate-recall (ADR-004, flag-gated OFF)"
       ],
       "id": "memory-performance-decisions",
       "keywords": [
@@ -17364,6 +18061,8 @@
         "performance"
       ],
       "links": [
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../docs/ai/concurrency-policy.md",
         "../rules/07-performance-scalability.md",
         "./backend-stack.md",
         "./database-decisions.md",
@@ -17379,7 +18078,7 @@
       ],
       "summary": "Rule: [/rules/07-performance-scalability.md](../rules/07-performance-scalability.md).",
       "title": "Performance Decisions",
-      "tokens": 780,
+      "tokens": 1039,
       "type": "memory"
     },
     {
@@ -17547,10 +18246,11 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "13aecd3e36110130fd6f34c3a90cd4adc196dcea571bc13b2a4dcef819a4f112",
+      "hash": "42a8c9da3f430a883b45e8d33e532dd10c9407e5969f8c053ecb93a25ca9df57",
       "headings": [
         "Reliability Patterns",
-        "Provider resilience doctrine: immediate model-fallback, not retry-with-backoff"
+        "Provider resilience doctrine: immediate model-fallback, not retry-with-backoff",
+        "Bounded parallel recall (ADR-004, flag-gated OFF)"
       ],
       "id": "memory-reliability-patterns",
       "keywords": [
@@ -17559,6 +18259,8 @@
         "reliability"
       ],
       "links": [
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../docs/ai/concurrency-policy.md",
         "../rules/08-reliability-durability.md",
         "./architecture-decisions.md",
         "./backend-stack.md",
@@ -17573,7 +18275,7 @@
       "sourceMentions": [],
       "summary": "Rule: [/rules/08-reliability-durability.md](../rules/08-reliability-durability.md).",
       "title": "Reliability Patterns",
-      "tokens": 815,
+      "tokens": 1047,
       "type": "memory"
     },
     {
@@ -17770,7 +18472,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "1a6ce772bf7eb7d7f1cac0556ca88503ed4cea7b853e41f675f69fab6f71f7ad",
+      "hash": "c887406d0966da6d635f93a9826c6e881c3d85f60f39b0476550884773503faa",
       "headings": [
         "AI Cost Budget",
         "Call-volume ceilings (per API instance)",
@@ -17799,6 +18501,8 @@
         "../apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
         "../apps/api/src/tests/game-analyze.integration.test.ts",
         "../docs/ai-benchmarking.md",
+        "../docs/ai/concurrency-policy.md",
+        "../docs/ai/cost-policy.md",
         "../docs/env-vars.md",
         "performance-budgets.md",
         "retry-budget.md",
@@ -17830,7 +18534,7 @@
       ],
       "summary": "The env-driven caps that bound AI provider spend — concurrency and rate ceilings, per-call deadlines, response-size caps, shadow sampling, and the opt-in billed benchmark.",
       "title": "AI Cost Budget",
-      "tokens": 1011,
+      "tokens": 1147,
       "type": "operations"
     },
     {
@@ -18090,7 +18794,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "d227a48750c0b56992483317f3cde817ee989a04cbf90380ad9b5b6a784955a3",
+      "hash": "efdcc1cbee577ddd4fe5b6eb340fa72fb03c2f6a4564f77ebe60693df47e5b5b",
       "headings": [
         "Logging Catalog",
         "What is logged, per source",
@@ -18123,6 +18827,7 @@
         "../apps/api/src/main.ts",
         "../apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
         "../apps/api/src/modules/ai/adapters/gemini.adapter.ts",
+        "../apps/api/src/modules/ai/application/candidate-recall.service.ts",
         "../apps/api/src/modules/file-security/application/temporary-file-cleanup.service.ts",
         "../apps/api/src/modules/payments/adapters/paypal.adapter.ts",
         "../apps/api/src/modules/privacy/lib/log-redaction.helpers.ts",
@@ -18158,13 +18863,14 @@
         "apps/api/src/main.ts",
         "apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
         "apps/api/src/modules/ai/adapters/gemini.adapter.ts",
+        "apps/api/src/modules/ai/application/candidate-recall.service.ts",
         "apps/api/src/modules/file-security/application/temporary-file-cleanup.service.ts",
         "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
         "apps/api/src/modules/privacy/lib/log-redaction.helpers.ts"
       ],
       "summary": "What each layer logs, at what level, and the mechanical redaction that keeps images, submitted values, and secrets out of the logs.",
       "title": "Logging Catalog",
-      "tokens": 1161,
+      "tokens": 1266,
       "type": "operations"
     },
     {
@@ -18241,11 +18947,12 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "305ad8b8cdd9a43328a1290b429ab1e26175e264db6e306478a3f7d8a532428f",
+      "hash": "ef1e70f69dc8afcdbc657ea6500a8eddd9fb991ca14aaafffed820b69141bd0c",
       "headings": [
         "Performance Budgets",
         "Payload budgets",
         "Rate budgets",
+        "Parallel-recall lever (flag-gated, OFF by default)",
         "Runtime resource budgets",
         "Frontend performance"
       ],
@@ -18270,8 +18977,10 @@
         "../apps/api/src/modules/payments/model/payment.constants.ts",
         "../apps/api/src/modules/share-results/model/share-result.constants.ts",
         "../docker-compose.yml",
+        "../docs/ai/concurrency-policy.md",
         "../docs/performance-review-report.md",
         "../rules/07-performance-scalability.md",
+        "AI-cost-budget.md",
         "scaling-model.md",
         "timeout-budget.md"
       ],
@@ -18303,7 +19012,7 @@
       ],
       "summary": "The payload-size, response-size, rate-limit, and admission budgets that bound every request, all env-driven from env.schema.ts or single-sourced constants.",
       "title": "Performance Budgets",
-      "tokens": 1069,
+      "tokens": 1236,
       "type": "operations"
     },
     {
@@ -18526,7 +19235,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "c2a8c6ecbe73f9bb304653d628c017742ccb0065c485c90e80280461eb800c7b",
+      "hash": "27a5037c5702a78f952d1f5d71b9f40b9e47d7776b5bf356497b020944fa312f",
       "headings": [
         "Scaling Model",
         "Stateless by design",
@@ -18551,10 +19260,12 @@
         "../apps/api/src/core/rate-limit/rate-limit.module.ts",
         "../apps/api/src/core/streaming/concurrency-limiter.service.ts",
         "../apps/api/src/core/streaming/stream-registry.service.ts",
+        "../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
         "../apps/api/src/modules/privacy/privacy.module.ts",
         "../apps/api/src/modules/share-results/infrastructure/in-memory-share-result-cache.repository.ts",
         "../apps/api/src/modules/share-results/model/share-result.port.ts",
         "../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "../docker-compose.yml",
         "../docs/privacy-and-data-retention.md",
         "performance-budgets.md"
@@ -18581,13 +19292,14 @@
         "apps/api/src/core/rate-limit/rate-limit.module.ts",
         "apps/api/src/core/streaming/concurrency-limiter.service.ts",
         "apps/api/src/core/streaming/stream-registry.service.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
         "apps/api/src/modules/privacy/privacy.module.ts",
         "apps/api/src/modules/share-results/infrastructure/in-memory-share-result-cache.repository.ts",
         "apps/api/src/modules/share-results/model/share-result.port.ts"
       ],
       "summary": "The API is a stateless single-process service whose concurrency is bounded by env-driven admission caps; horizontal scaling is deliberately deferred per ADR-003.",
       "title": "Scaling Model",
-      "tokens": 1140,
+      "tokens": 1258,
       "type": "operations"
     },
     {
@@ -18717,7 +19429,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "e60ec126f15466e5885c0225860c9e275490b12ace1f0cf12d15f6c0329494df",
+      "hash": "eb7bc1193cd1fee5f115896c88a4b3a8e2b9cd17448e99ae669676b4486200bd",
       "headings": [
         "Timeout Budget",
         "AI provider calls",
@@ -18742,13 +19454,15 @@
         "../apps/api/src/core/streaming/concurrency-limiter.service.ts",
         "../apps/api/src/core/streaming/stream-registry.service.ts",
         "../apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
+        "../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
         "../apps/api/src/modules/file-security/application/virus-scan.service.ts",
         "../apps/api/src/modules/file-security/model/file-security.constants.ts",
         "../apps/api/src/modules/game/lib/game-stream.ts",
         "../apps/api/src/modules/game/model/game.constants.ts",
         "../apps/api/src/modules/payments/model/payment.constants.ts",
         "../Dockerfile.api",
-        "../Dockerfile.web"
+        "../Dockerfile.web",
+        "../docs/ai/concurrency-policy.md"
       ],
       "path": "operations/timeout-budget.md",
       "relatedCode": [
@@ -18770,6 +19484,7 @@
         "apps/api/src/core/streaming/concurrency-limiter.service.ts",
         "apps/api/src/core/streaming/stream-registry.service.ts",
         "apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
+        "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
         "apps/api/src/modules/file-security/application/virus-scan.service.ts",
         "apps/api/src/modules/file-security/model/file-security.constants.ts",
         "apps/api/src/modules/game/lib/game-stream.ts",
@@ -18778,7 +19493,7 @@
       ],
       "summary": "Every timeout in the request path — AI calls, the analysis watchdog, stream TTL, PayPal, ClamAV — with its env var or constant and default.",
       "title": "Timeout Budget",
-      "tokens": 1010,
+      "tokens": 1108,
       "type": "operations"
     },
     {
@@ -20642,7 +21357,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "e5e53167e147080a4305cb1532e82e9fb179ab3b8aa3221438c70a399e883e29",
+      "hash": "c294472302c903605b5d0606501cd59c14e3f89e5be5c132ee3b494fd7257906",
       "headings": [
         "Twinzy",
         "How it works",
@@ -20662,8 +21377,10 @@
       ],
       "links": [
         "AGENTS.md",
+        "architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "CLAUDE.md",
         "context/declaration-ownership-map.md",
+        "docs/ai/concurrency-policy.md",
         "docs/architecture.md",
         "docs/env-vars.md",
         "rules/28-simple-readable-code.md",
@@ -20677,7 +21394,7 @@
       "sourceMentions": [],
       "summary": "A **free**, mobile-first, privacy-safe AI game. Upload a photo, get playful public style/vibe",
       "title": "Twinzy",
-      "tokens": 1447,
+      "tokens": 1526,
       "type": "doc"
     },
     {
@@ -20710,6 +21427,45 @@
       "summary": "**Audience:** operators, contributors, and AI coding agents. **Player-visible changes:** none",
       "title": "Release Notes — AI Knowledge Operating System (2026-07-12)",
       "tokens": 547,
+      "type": "release-note"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 4,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "e1d56244a85b11405dc73e6b8fc9163d30e68a8ea7c6947584ecbb3a3955c28d",
+      "headings": [
+        "Release Notes — Parallel AI Pipeline, Release A (2026-07-12)",
+        "What shipped",
+        "Operator notes",
+        "Known limitations / follow-ups"
+      ],
+      "id": "release-notes-2026-07-12-parallel-ai-pipeline",
+      "keywords": [
+        "2026",
+        "notes",
+        "parallel",
+        "pipeline",
+        "release"
+      ],
+      "links": [
+        "../architecture/adrs/adr-003-horizontal-scaling-plan.md",
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../docs/ai/concurrency-policy.md",
+        "../docs/ai/cost-policy.md",
+        "../docs/ai/written-traits-only-boundary.md",
+        "../docs/env-vars.md",
+        "../docs/features/parallel-ai-pipeline/README.md"
+      ],
+      "path": "release-notes/2026-07-12-parallel-ai-pipeline.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "**Audience:** operators, contributors, and AI coding agents. **Player-visible changes:** none by",
+      "title": "Release Notes — Parallel AI Pipeline, Release A (2026-07-12)",
+      "tokens": 759,
       "type": "release-note"
     },
     {
@@ -21138,7 +21894,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "d609df32f03706b44c38789b2123046cb60ae92fbdbffab31cdef54ded37f9e3",
+      "hash": "ee26ca5a799c0843125054a2dcedb310cd1132946b5dae367ba08b2fed63aff5",
       "headings": [
         "07 — Performance & Scalability",
         "0. Non-negotiables",
@@ -21157,6 +21913,8 @@
         "scalability"
       ],
       "links": [
+        "../architecture/adrs/adr-004-parallel-ai-pipeline.md",
+        "../docs/ai/concurrency-policy.md",
         "../docs/package-decisions.md",
         "../memory/performance-decisions.md",
         "./00-non-negotiable-rules.md",
@@ -21174,7 +21932,7 @@
       "sourceMentions": [],
       "summary": "> Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r...",
       "title": "07 — Performance & Scalability",
-      "tokens": 1332,
+      "tokens": 1487,
       "type": "rule"
     },
     {
@@ -21182,7 +21940,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "447cd38013412b4a72fd22e731e0a393f10c19cfdd2273c3cbf53a47b200ed52",
+      "hash": "c623872ad7506a14dac44e39addd4081d8e2d4bd3a68a3efd0aa345792a3ed94",
       "headings": [
         "08 — Reliability & Durability",
         "1. Timeouts with `AbortController` — every remote call",
@@ -21201,6 +21959,7 @@
         "rules"
       ],
       "links": [
+        "../docs/ai/concurrency-policy.md",
         "../memory/reliability-patterns.md",
         "./00-non-negotiable-rules.md",
         "./07-performance-scalability.md",
@@ -21216,7 +21975,7 @@
       "sourceMentions": [],
       "summary": "> The operational playbook for not hanging requests, not leaking buffers, and not crashing the process. Every remote call is bounded and cancellable; every side effect is fail-safe; every workflow reaches a terminal state; shutdown is cl...",
       "title": "08 — Reliability & Durability",
-      "tokens": 1383,
+      "tokens": 1510,
       "type": "rule"
     },
     {
@@ -21897,7 +22656,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "4324b74f856aefbcfc76fbb71a411cf582f1d810cffde3c7cd24d1cda6abe315",
+      "hash": "4f5f50297da6f58306f39e3ab8bc5054cba2163aa029ce530fedd3b4d9a55ad5",
       "headings": [
         "25 — Configuration & Environment",
         "The one boundary that matters",
@@ -21915,6 +22674,7 @@
         "rules"
       ],
       "links": [
+        "../docs/ai/concurrency-policy.md",
         "../memory/security-decisions.md",
         "./00-non-negotiable-rules.md",
         "./05-types-enums-constants.md",
@@ -21931,7 +22691,7 @@
       "sourceMentions": [],
       "summary": "> All configuration is typed, zod-validated at startup, and read through `@nestjs/config` behind **`AppConfigService` — the only injectable config surface**. `process.env` never appears outside `config/` and `bootstrap/` (ESLint-enforced...",
       "title": "25 — Configuration & Environment",
-      "tokens": 1399,
+      "tokens": 1512,
       "type": "rule"
     },
     {
@@ -27609,7 +28369,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "3873dde57e74bcc0c90c352f966f0c72b8e94b1e7fcb6c93d6cd1f46c503dc03",
+      "hash": "bee42a8aeb0f054cbf6cc070f2f50ecc775b4214ed9b24b6f2749aa06ee843b2",
       "headings": [
         "Configuration Map — Where Config Lives on Each Side",
         "Backend (`apps/api`)",
@@ -27631,6 +28391,7 @@
       ],
       "links": [
         "../CLAUDE.md",
+        "../docs/ai/concurrency-policy.md",
         "../docs/env-vars.md",
         "../rules/25-configuration-and-environment.md",
         "layer-map.md",
@@ -27674,7 +28435,7 @@
       ],
       "summary": "Where configuration is defined, validated, and consumed — the backend env schema and AppConfigService, the web publicEnv reader, and the files that must move together when config changes.",
       "title": "Configuration Map — Where Config Lives on Each Side",
-      "tokens": 1267,
+      "tokens": 1391,
       "type": "structure"
     },
     {
@@ -27682,7 +28443,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "8c7c7dff8e6ce680b2c51cfc34480bbd7940482203ea1ab69478f5dbe1093218",
+      "hash": "1321ad84cad2351c4a7a64d2f485634eb7092facb234a521ded78507554da262",
       "headings": [
         "Analyze Flow — Upload to Result, End to End",
         "Client side (web)",
@@ -27704,6 +28465,7 @@
         "pipeline"
       ],
       "links": [
+        "../../docs/ai/concurrency-policy.md",
         "payment-flow.md"
       ],
       "path": "structure/flows/analyze-flow.md",
@@ -27746,7 +28508,7 @@
       ],
       "summary": "The full analyze pipeline — upload, consent, file security, optional payment gate, image-only trait extraction, buffer wipe, text-only candidates/judge/aggregation, and SSE or JSON response.",
       "title": "Analyze Flow — Upload to Result, End to End",
-      "tokens": 1714,
+      "tokens": 1846,
       "type": "structure"
     },
     {
@@ -27884,7 +28646,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "112fa2000625f6c1de7fd5af366c7e484836701e726960e2f8581d481092b85e",
+      "hash": "9cd2045551d34eeb8cba48f4d648ff94bc4e772993096ca2a7b302fb1332a33c",
       "headings": [
         "Layer Map — Backend and Frontend Layer Models and Their Enforcement",
         "Backend (`apps/api/src`) — one-way layered dependencies",
@@ -27956,7 +28718,7 @@
       ],
       "summary": "The one-way layered backend (Controller→Application→Domain→Infrastructure→Adapters) and frontend (Component→Hook→Service→Gateway) models with pointers to the ESLint configs that mechanically enforce them.",
       "title": "Layer Map — Backend and Frontend Layer Models and Their Enforcement",
-      "tokens": 1593,
+      "tokens": 1596,
       "type": "structure"
     },
     {
@@ -27964,7 +28726,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "223c57f3a0dfe7d9d52b5d9d861b5c4ae02bdbca4e4cd4eb03a2ca73484a4157",
+      "hash": "5f40d5a1c88a3f833912f66c0146c8b1b0919b368a2d3c58171639e3da40cb7d",
       "headings": [
         "Module — `apps/api/src/modules/ai`",
         "Public surface (`index.ts`)",
@@ -27987,9 +28749,11 @@
         "prompts"
       ],
       "links": [
+        "../../architecture/adrs/adr-004-parallel-ai-pipeline.md",
         "../../CLAUDE.md",
         "../../docs/ai-benchmarking.md",
         "../../docs/ai-safety.md",
+        "../../docs/ai/concurrency-policy.md",
         "../../docs/env-vars.md",
         "../../docs/provider-routing.md",
         "../../rules/14-ai-safety.md",
@@ -28004,7 +28768,8 @@
         "docs/ai-safety.md",
         "docs/provider-routing.md",
         "rules/14-ai-safety.md",
-        "structure/flows/analyze-flow.md"
+        "structure/flows/analyze-flow.md",
+        "docs/ai/concurrency-policy.md"
       ],
       "relatedTests": [
         "apps/api/src/modules/ai/tests",
@@ -28015,7 +28780,7 @@
       ],
       "summary": "The AI provider pipeline module — four step services behind the AI_PROVIDER_ADAPTER port, provider routing with fallbacks and shadow runs, safety filtering, and file-based prompt templates.",
       "title": "Module — api ai (AI Provider Pipeline)",
-      "tokens": 1224,
+      "tokens": 1487,
       "type": "structure"
     },
     {
@@ -28078,7 +28843,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "52142d23ef0c4e4e3a7c2751566468224069ad5f0e9a6003fda15ad7e36ca701",
+      "hash": "d50c0d804fe4e6e19f0472aa705f7416433ffb0a6291747144d163ed30ec762f",
       "headings": [
         "Module — `apps/api/src/modules/game`",
         "Endpoints (`api/game.controller.ts`, prefix `/api/v1/game`)",
@@ -28126,7 +28891,7 @@
       ],
       "summary": "The analyze-game feature module — the four /api/v1/game endpoints, the two analyze use-cases, the text-only style-match orchestration, and the SSE presenter with admission, correlation, heartbeats, and cancel.",
       "title": "Module — api game (Analyze Feature and SSE Transport)",
-      "tokens": 1196,
+      "tokens": 1226,
       "type": "structure"
     },
     {
@@ -29454,7 +30219,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "8d9b6a1d460862a3c2a69c8f788f4402a8b22450fb5085bc656b90bf1caf2a86",
+      "hash": "b4955720778d23878843423581a02aeca315bdc5c99f229c15d97a84061bb1c7",
       "headings": [
         "Product Behavior Guide — What Players Experience Per Flow",
         "1. Landing (`/`)",
@@ -29479,6 +30244,7 @@
         "ux"
       ],
       "links": [
+        "../docs/ai/concurrency-policy.md",
         "./AI-result-expectations.md",
         "./consent-troubleshooting.md",
         "./feature-catalog.md",
@@ -29521,7 +30287,7 @@
       ],
       "summary": "Support-facing walkthrough of every player-visible flow, including all loading, progress, error, and empty states with their i18n copy keys.",
       "title": "Product Behavior Guide — What Players Experience Per Flow",
-      "tokens": 1868,
+      "tokens": 1950,
       "type": "support"
     },
     {

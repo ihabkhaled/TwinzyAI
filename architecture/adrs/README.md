@@ -8,6 +8,8 @@ Store architectural decision records here. Create a new ADR whenever a change in
 | --- | --- | --- |
 | [ADR-001](./adr-001-strict-engineering-os.md) | Adopt the Strict Layered Engineering OS for the Backend | Accepted |
 | [ADR-002](./adr-002-zod-validation-vendor.md) | Zod as the Single Validation Vendor (Including the HTTP Boundary) | Accepted |
+| [ADR-003](./adr-003-horizontal-scaling-plan.md) | Horizontal Scaling Plan for Twinzy API | Accepted (deferred) |
+| [ADR-004](./adr-004-parallel-ai-pipeline.md) | Parallel AI Pipeline (Release A: async candidate-generation lanes) | Accepted (flag-gated, off by default) |
 
 ### Frontend ADRs (`apps/web`)
 

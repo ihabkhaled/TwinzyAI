@@ -12,6 +12,12 @@
 | GEMINI_TIMEOUT_MS | api | 30000 | per-call timeout |
 | GEMINI_STREAM_IDLE_TIMEOUT_MS | api | 60000 | maximum inter-chunk idle time |
 | AI_MAX_RESPONSE_BYTES | api | 500000 | maximum raw response accepted from any AI provider |
+| AI_PARALLEL_PIPELINE_ENABLED | api | false | Release A parallel candidate-recall fan-out; off = single unchanged generation call |
+| AI_GENERATION_LANES | api | 2 | recall lanes to fan out (1–6); 2 = strongest + diverse |
+| AI_GENERATION_CONCURRENCY | api | 2 | global cap on concurrent generation calls across all analyses (1–16) |
+| AI_JUDGE_CONCURRENCY | api | 1 | global cap on concurrent judge calls (1–16); provisions the Release B tournament gate |
+| AI_MAX_CALLS_PER_ANALYSIS | api | 5 | hard cap on provider calls/analysis (3–20): extraction + lanes + judge; lanes clamped to fit |
+| AI_PARALLEL_QUEUE_TIMEOUT_MS | api | 30000 | max wait for a concurrency permit before a lane is dropped (1000–120000) |
 | MAX_IMAGE_SIZE_BYTES | api | 5242880 | 5 MB upload cap |
 | ENABLE_CLAMAV | api | false | true = scan; prod fails closed on scanner errors |
 | CLAMAV_HOSTS / CLAMAV_PORT | api | 127.0.0.1,clamav / 3310 | ordered host fallback list |

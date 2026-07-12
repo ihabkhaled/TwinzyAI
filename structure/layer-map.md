@@ -29,7 +29,7 @@ Controller (modules/*/api/*.controller.ts — thin, one delegation per method)
     → Domain (modules/*/domain/ — pure policies; optional per module)
       → Persistence (modules/*/infrastructure/*.repository.ts — e.g. share-results cache driver)
         → Integration (modules/*/adapters/*.adapter.ts — every external library wrapped)
-Cross-cutting: src/core (errors, logger, validation, rate-limit, openapi, http, streaming)
+Cross-cutting: src/core (errors, logger, validation, rate-limit, openapi, http, streaming, concurrency)
              · src/config (typed, zod-validated, fail-fast) · src/bootstrap (Fastify assembly)
              · packages/shared (cross-side contracts)
 ```

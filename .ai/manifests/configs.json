@@ -1,11 +1,59 @@
 {
   "configs": [
     {
+      "description": "Global ceiling on concurrent generation provider calls across ALL analyses (1..16). Bounds fan-out so many simultaneous analyses cannot burst the quota.",
+      "example": "2",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_GENERATION_CONCURRENCY",
+      "readBy": []
+    },
+    {
+      "description": "Number of recall lanes to fan out (1..6). Two = strongest + diverse.",
+      "example": "2",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_GENERATION_LANES",
+      "readBy": []
+    },
+    {
+      "description": "Global ceiling on concurrent judge calls (1..16). Provisions the gate for the Release B judge tournament; the single Release-A judge call is unaffected.",
+      "example": "1",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_JUDGE_CONCURRENCY",
+      "readBy": []
+    },
+    {
+      "description": "Hard cap on total provider calls per analysis (3..20): extraction + lanes + judge. Lanes are clamped so this budget can never be exceeded.",
+      "example": "5",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_MAX_CALLS_PER_ANALYSIS",
+      "readBy": []
+    },
+    {
       "description": "Maximum raw provider response accepted before parsing (all providers).",
       "example": "500000",
       "inEnvExample": true,
       "isPublic": false,
       "name": "AI_MAX_RESPONSE_BYTES",
+      "readBy": []
+    },
+    {
+      "description": "--- Parallel AI pipeline (Release A — async candidate-generation lanes) --- OFF by default: the pipeline runs the single unchanged generation call. When true, candidate recall fans out into AI_GENERATION_LANES text-only lanes (each a different recall focus: strongest, diverse, wildcard), merged and deduped deterministically. Extraction (image) and judging still run exactly once, so parallelism never widens the image boundary. See docs/ai/concurrency-policy.md.",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_PARALLEL_PIPELINE_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "How long a lane may wait for a concurrency permit before it is dropped (not blocked), in ms (1000..120000). A dropped lane never fails the analysis.",
+      "example": "30000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_PARALLEL_QUEUE_TIMEOUT_MS",
       "readBy": []
     },
     {
@@ -561,6 +609,6 @@
       "readBy": []
     }
   ],
-  "count": 68,
+  "count": 74,
   "undocumented": []
 }

@@ -54,6 +54,7 @@
   ],
   "apps/api/src/config/app-config.service.ts": [
     "apps/api/src/config/app-config.service.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
     "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
     "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
     "apps/api/src/tests/fixtures/stubs.ts"
@@ -68,6 +69,7 @@
   "apps/api/src/config/gemini-step.constants.ts": [
     "apps/api/src/benchmark/tests/benchmark.test.ts",
     "apps/api/src/config/app-config.service.test.ts",
+    "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
     "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
     "apps/api/src/tests/fixtures/stubs.ts"
   ],
@@ -75,6 +77,9 @@
     "apps/api/src/modules/share-results/tests/share-result-services.test.ts",
     "apps/api/src/modules/share-results/tests/share-result-use-cases.test.ts",
     "apps/api/src/tests/share-results.integration.test.ts"
+  ],
+  "apps/api/src/core/concurrency/index.ts": [
+    "apps/api/src/core/concurrency/tests/semaphore.test.ts"
   ],
   "apps/api/src/core/errors/app-exception.filter.ts": [
     "apps/api/src/core/errors/tests/app-exception.filter.test.ts"
@@ -189,13 +194,22 @@
   ],
   "apps/api/src/modules/ai/application/ai-safety.service.ts": [
     "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
-    "apps/api/src/modules/ai/tests/ai-safety.service.test.ts"
+    "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
+  ],
+  "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts": [
+    "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
   ],
   "apps/api/src/modules/ai/application/candidate-generation.service.ts": [
-    "apps/api/src/modules/ai/tests/ai-pipeline.test.ts"
+    "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
   ],
   "apps/api/src/modules/ai/application/candidate-judge.service.ts": [
     "apps/api/src/modules/ai/tests/ai-pipeline.test.ts"
+  ],
+  "apps/api/src/modules/ai/application/candidate-recall.service.ts": [
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
   ],
   "apps/api/src/modules/ai/application/result-translation.service.ts": [
     "apps/api/src/modules/ai/tests/ai-pipeline.test.ts"
@@ -205,6 +219,7 @@
   ],
   "apps/api/src/modules/ai/index.ts": [
     "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
+    "apps/api/src/modules/game/tests/style-match.service.test.ts",
     "apps/api/src/tests/game-analyze-paywall.integration.test.ts",
     "apps/api/src/tests/game-analyze-stream.integration.test.ts",
     "apps/api/src/tests/game-analyze.integration.test.ts",
@@ -216,10 +231,17 @@
   ],
   "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts": [
     "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
     "apps/api/src/modules/ai/tests/prompt-template.repository.test.ts"
   ],
   "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts": [
     "apps/api/src/modules/ai/tests/ai-response-sanitizer.test.ts"
+  ],
+  "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts": [
+    "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts"
+  ],
+  "apps/api/src/modules/ai/lib/candidate-merge.util.ts": [
+    "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts"
   ],
   "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts": [
     "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts"
@@ -243,6 +265,9 @@
     "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
     "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
     "apps/api/src/tests/fixtures/fake-ai-adapter.ts"
+  ],
+  "apps/api/src/modules/ai/model/candidate-lane.constants.ts": [
+    "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts"
   ],
   "apps/api/src/modules/ai/model/gemini.types.ts": [
     "apps/api/src/modules/ai/tests/openai-compat.adapter.test.ts",
@@ -313,7 +338,8 @@
     "apps/api/src/modules/game/tests/cancel-analysis.use-case.test.ts"
   ],
   "apps/api/src/modules/game/application/style-match.service.ts": [
-    "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts"
+    "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
+    "apps/api/src/modules/game/tests/style-match.service.test.ts"
   ],
   "apps/api/src/modules/game/lib/consent.ts": [
     "apps/api/src/modules/game/tests/consent.test.ts"
@@ -379,7 +405,8 @@
     "apps/api/src/modules/result-aggregation/tests/result-aggregation.service.test.ts"
   ],
   "apps/api/src/modules/result-aggregation/index.ts": [
-    "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts"
+    "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
+    "apps/api/src/modules/game/tests/style-match.service.test.ts"
   ],
   "apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts": [
     "apps/api/src/modules/result-aggregation/tests/result-aggregation.helpers.test.ts"
@@ -432,9 +459,11 @@
   ],
   "apps/api/src/tests/fixtures/fake-ai-adapter.ts": [
     "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
     "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
     "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
     "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
+    "apps/api/src/modules/game/tests/style-match.service.test.ts",
     "apps/api/src/modules/result-aggregation/tests/result-aggregation.helpers.test.ts",
     "apps/api/src/modules/result-aggregation/tests/result-aggregation.mapper.test.ts",
     "apps/api/src/modules/result-aggregation/tests/result-aggregation.service.test.ts",
@@ -473,6 +502,8 @@
     "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
     "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
     "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+    "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+    "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
     "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
     "apps/api/src/modules/ai/tests/openai-compat.adapter.test.ts",
     "apps/api/src/modules/ai/tests/prompt-template.repository.test.ts",
@@ -482,6 +513,7 @@
     "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
     "apps/api/src/modules/game/tests/cancel-analysis.use-case.test.ts",
     "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
+    "apps/api/src/modules/game/tests/style-match.service.test.ts",
     "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
     "apps/api/src/modules/payments/tests/paypal.adapter.test.ts",
     "apps/api/src/modules/result-aggregation/tests/result-aggregation.service.test.ts",

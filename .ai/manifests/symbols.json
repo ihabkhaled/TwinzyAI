@@ -1,5 +1,5 @@
 {
-  "count": 1335,
+  "count": 1370,
   "symbols": [
     {
       "kind": "const",
@@ -238,6 +238,13 @@
       "module": "api:ai",
       "name": "AiShadowService",
       "path": "apps/api/src/modules/ai/adapters/ai-shadow.service.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "AiStepConcurrencyGate",
+      "path": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts"
     },
     {
       "kind": "type",
@@ -990,6 +997,13 @@
     },
     {
       "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "buildCandidateGenerationLanes",
+      "path": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
+    },
+    {
+      "kind": "const",
       "layer": "shared",
       "module": "web:shared",
       "name": "buildContentSecurityPolicy",
@@ -1043,6 +1057,13 @@
       "module": "web:game",
       "name": "buildLandingLabels",
       "path": "apps/web/src/modules/game/helpers/game-display.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "buildLaneFocusSection",
+      "path": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
     },
     {
       "kind": "const",
@@ -1381,6 +1402,34 @@
       "path": "packages/shared/src/schemas/candidates.schema.ts"
     },
     {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CANDIDATE_GENERATION_LANE_ORDER",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CandidateGenerationFocus",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CandidateGenerationFocusValue",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CandidateGenerationLane",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.types.ts"
+    },
+    {
       "kind": "type",
       "layer": "schemas",
       "module": "shared",
@@ -1423,6 +1472,20 @@
       "path": "apps/api/src/modules/ai/application/candidate-judge.service.ts"
     },
     {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CandidateRecallInput",
+      "path": "apps/api/src/modules/ai/model/candidate-recall.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "CandidateRecallService",
+      "path": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
       "kind": "const",
       "layer": "schemas",
       "module": "shared",
@@ -1456,6 +1519,13 @@
       "module": "web:game",
       "name": "candidatesTitleClass",
       "path": "apps/web/src/modules/game/containers/game-processing.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "canonicalCandidateName",
+      "path": "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
     },
     {
       "kind": "function",
@@ -1780,6 +1850,20 @@
       "path": "apps/api/src/modules/share-results/lib/share-result-expiry.util.ts"
     },
     {
+      "kind": "const",
+      "layer": "core",
+      "module": "api:core",
+      "name": "CONCURRENCY_TIMEOUT_ERROR_NAME",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "core",
+      "module": "api:core",
+      "name": "ConcurrencyAbortError",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
+    },
+    {
       "kind": "class",
       "layer": "core",
       "module": "api:core",
@@ -1792,6 +1876,13 @@
       "module": "api:core",
       "name": "ConcurrencyLimiter",
       "path": "apps/api/src/core/streaming/index.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "core",
+      "module": "api:core",
+      "name": "ConcurrencyTimeoutError",
+      "path": "apps/api/src/core/concurrency/concurrency.errors.ts"
     },
     {
       "kind": "const",
@@ -2240,6 +2331,41 @@
       "module": "web:ui-preferences",
       "name": "DARK_COLOR_SCHEME_QUERY",
       "path": "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_CALLS_PER_ANALYSIS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_GENERATION_CONCURRENCY",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_GENERATION_LANES",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_JUDGE_CONCURRENCY",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_PARALLEL_QUEUE_TIMEOUT_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -4134,6 +4260,27 @@
     {
       "kind": "const",
       "layer": "model",
+      "module": "api:ai",
+      "name": "LANE_FOCUS_DIRECTIVE",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "LANE_FOCUS_SAFETY_REMINDER",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "LANE_FOCUS_SECTION_HEADING",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
       "module": "api:game",
       "name": "LANGUAGE_CODE_MAX_LENGTH",
       "path": "apps/api/src/modules/game/model/game.constants.ts"
@@ -4366,6 +4513,27 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "MAX_AI_CALLS_PER_ANALYSIS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_AI_GENERATION_LANES",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "MAX_AI_RESPONSE_BYTES",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -4375,6 +4543,13 @@
       "module": "api:config",
       "name": "MAX_AI_ROUTE_ENTRIES",
       "path": "apps/api/src/config/ai-route.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_AI_STEP_CONCURRENCY",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -4686,6 +4861,13 @@
     },
     {
       "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "mergeCandidatePools",
+      "path": "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "api:payments",
       "name": "MILLISECONDS_PER_SECOND",
@@ -4716,7 +4898,35 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "MIN_AI_CALLS_PER_ANALYSIS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MIN_AI_GENERATION_LANES",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MIN_AI_PARALLEL_QUEUE_TIMEOUT_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "MIN_AI_RESPONSE_BYTES",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MIN_AI_STEP_CONCURRENCY",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
@@ -6226,6 +6436,13 @@
     },
     {
       "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "RESERVED_NON_GENERATION_CALLS",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "helpers",
       "module": "web:game",
       "name": "resolveCategoryLabel",
@@ -6888,6 +7105,34 @@
       "module": "web:ui-preferences",
       "name": "selectTheme",
       "path": "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "core",
+      "module": "api:core",
+      "name": "Semaphore",
+      "path": "apps/api/src/core/concurrency/semaphore.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "core",
+      "module": "api:core",
+      "name": "SemaphoreAcquireOptions",
+      "path": "apps/api/src/core/concurrency/concurrency.types.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "core",
+      "module": "api:core",
+      "name": "SemaphoreRelease",
+      "path": "apps/api/src/core/concurrency/concurrency.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "core",
+      "module": "api:core",
+      "name": "SemaphoreWaiter",
+      "path": "apps/api/src/core/concurrency/concurrency.types.ts"
     },
     {
       "kind": "const",

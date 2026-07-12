@@ -1,5 +1,5 @@
 {
-  "count": 2393,
+  "count": 2463,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -458,6 +458,12 @@
       "type": "covers"
     },
     {
+      "from": "apps/api/src/core/concurrency/tests/semaphore.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/core/concurrency/index.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/api/src/core/errors/tests/app-exception.filter.test.ts",
       "label": "generated",
       "to": "apps/api/src/core/errors/app-exception.filter.ts",
@@ -801,6 +807,90 @@
     },
     {
       "from": "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/gemini-step.constants.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/app-config.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/candidate-generation.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "label": "generated",
       "to": "apps/api/src/tests/fixtures/stubs.ts",
       "type": "covers"
@@ -1295,6 +1385,36 @@
       "from": "apps/api/src/modules/game/tests/stream-cors.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/game/lib/stream-cors.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/game/application/style-match.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/result-aggregation/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
       "type": "covers"
     },
     {
@@ -4660,6 +4780,18 @@
     {
       "from": "docs/ai/concurrency-policy.md",
       "label": "explicit",
+      "to": "apps/api/src/core/concurrency/semaphore.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/concurrency-policy.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/semaphore.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/concurrency-policy.md",
+      "label": "explicit",
       "to": "apps/api/src/core/rate-limit/rate-limit.vendor.ts",
       "type": "describes"
     },
@@ -4673,6 +4805,30 @@
       "from": "docs/ai/concurrency-policy.md",
       "label": "inferred",
       "to": "apps/api/src/core/streaming/concurrency-limiter.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/concurrency-policy.md",
+      "label": "explicit",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/concurrency-policy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/concurrency-policy.md",
+      "label": "explicit",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/concurrency-policy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
       "type": "describes"
     },
     {
@@ -5183,6 +5339,12 @@
       "from": "docs/ai/prompt-catalog.md",
       "label": "inferred",
       "to": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/ai/prompt-catalog.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
       "type": "describes"
     },
     {
@@ -6125,6 +6287,228 @@
       "from": "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
       "label": "inferred",
       "to": "packages/shared/src/enums/stream-status.enum.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/app-config.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env-bounds.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env.schema.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/concurrency.errors.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/concurrency.types.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/index.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/semaphore.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/ai.module.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/candidate-generation.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/model/candidate-lane.types.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/model/candidate-recall.types.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/game/application/style-match.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/08-architecture-review.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/game/application/analyze-game.use-case.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env-bounds.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env.schema.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/tests/semaphore.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/game/tests/style-match.service.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
+      "label": "inferred",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/19-security-review.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/game/application/analyze-game.use-case.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/app-config.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env-bounds.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env.schema.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/concurrency/semaphore.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "label": "inferred",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
       "type": "describes"
     },
     {
@@ -7341,6 +7725,12 @@
     },
     {
       "from": "domain/result-ranking.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
+      "type": "describes"
+    },
+    {
+      "from": "domain/result-ranking.md",
       "label": "explicit",
       "to": "apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts",
       "type": "describes"
@@ -7841,6 +8231,18 @@
       "from": "knowledge/summaries/ai-pipeline.md",
       "label": "explicit",
       "to": "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "knowledge/summaries/ai-pipeline.md",
+      "label": "explicit",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "describes"
+    },
+    {
+      "from": "knowledge/summaries/ai-pipeline.md",
+      "label": "explicit",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
       "type": "describes"
     },
     {
@@ -8728,6 +9130,12 @@
     {
       "from": "operations/logging-catalog.md",
       "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/candidate-recall.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "operations/logging-catalog.md",
+      "label": "inferred",
       "to": "apps/api/src/modules/file-security/application/temporary-file-cleanup.service.ts",
       "type": "describes"
     },
@@ -9100,6 +9508,12 @@
     {
       "from": "operations/scaling-model.md",
       "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
+      "type": "describes"
+    },
+    {
+      "from": "operations/scaling-model.md",
+      "label": "inferred",
       "to": "apps/api/src/modules/privacy/privacy.module.ts",
       "type": "describes"
     },
@@ -9239,6 +9653,12 @@
       "from": "operations/timeout-budget.md",
       "label": "inferred",
       "to": "apps/api/src/modules/ai/adapters/ai-shadow.service.ts",
+      "type": "describes"
+    },
+    {
+      "from": "operations/timeout-budget.md",
+      "label": "inferred",
+      "to": "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
       "type": "describes"
     },
     {

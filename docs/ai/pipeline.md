@@ -59,6 +59,12 @@ paywall is configured (`analyze-game-stream.use-case.ts:110`; off by default —
 - **Out**: `CandidateGenerationResponseSchema`-valid pool of 1..25 public-figure candidates,
   ranked by `styleVibeFitScore` desc; unsafe candidates dropped item-wise
   (`AiSafetyService.filterCandidates`). Empty pool ⇒ fallback result.
+- **Recall strategy** (`application/candidate-recall.service.ts`): flag off (default) ⇒ this one
+  call, unchanged. Flag on (`AI_PARALLEL_PIPELINE_ENABLED`) ⇒ fans out into `AI_GENERATION_LANES`
+  text-only lanes (distinct recall focus each), bounded by a process-global per-step gate and the
+  per-analysis call budget, then merged/deduped deterministically. Both paths are text-only and end
+  in the same judge step — see [concurrency-policy.md](concurrency-policy.md) and
+  [ADR-004](../../architecture/adrs/adr-004-parallel-ai-pipeline.md).
 
 ## 3. Judge — text-only
 

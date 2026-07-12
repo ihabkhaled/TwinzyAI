@@ -10,7 +10,7 @@ keywords: [ai, gemini, provider, router, extraction, candidates, judge, translat
 contextTier: 2
 relatedCode: [apps/api/src/modules/ai, apps/api/src/config/gemini-step.constants.ts]
 relatedTests: [apps/api/src/modules/ai/tests, apps/api/src/tests/game-analyze.integration.test.ts]
-relatedDocs: [docs/ai-safety.md, docs/provider-routing.md, rules/14-ai-safety.md, structure/flows/analyze-flow.md]
+relatedDocs: [docs/ai-safety.md, docs/provider-routing.md, rules/14-ai-safety.md, structure/flows/analyze-flow.md, docs/ai/concurrency-policy.md]
 readWhen: You are changing AI steps, providers, models, prompts, or safety filtering.
 ---
 
@@ -35,6 +35,8 @@ The module exports only the four step services to DI consumers (`ai.module.ts`).
 | --- | --- |
 | `application/trait-extraction.service.ts` | The only step allowed to send the image; zod + language + safety validation |
 | `application/candidate-generation.service.ts` | Text-only recall; region hint by language; unsafe candidates dropped |
+| `application/candidate-recall.service.ts` | Single-vs-parallel recall strategy behind `AI_PARALLEL_PIPELINE_ENABLED`; fans text-only generation into focus lanes and merges deterministically (Release A, OFF by default) |
+| `application/ai-step-concurrency.gate.ts` | Process-global per-step `Semaphore` gate (`core/concurrency/semaphore.ts`) bounding parallel generation/judge calls across all analyses |
 | `application/candidate-judge.service.ts` | Text-only strict judge; unsafe judged results filtered |
 | `application/result-translation.service.ts` | Text-only; re-imposes canonical fields server-side; shape drift rejected |
 | `application/ai-safety.service.ts` | Forbidden-wording scanning over `ALL_FORBIDDEN_PHRASES` (shared lists) |
@@ -44,6 +46,8 @@ The module exports only the four step services to DI consumers (`ai.module.ts`).
 | `adapters/openai-compat.adapter.ts` | One fetch-based adapter for openai/deepseek/qwen/kimi/glm; image methods reject |
 | `adapters/ai-shadow.service.ts` | Sampled, metrics-only, fire-and-forget shadow runs (text-only steps) |
 | `infrastructure/prompt-template.repository.ts` | Loads `prompts/*.md` with required-placeholder validation |
+| `lib/candidate-lane-plan.util.ts`, `lib/candidate-merge.util.ts` | Lane plan (count + per-lane recall focus) and deterministic pool merge/dedupe by canonical name |
+| `model/candidate-lane.constants.ts` | Versioned lane focus-directive constants appended (in code) to the base generation prompt |
 | `prompts/` | `use-1st/2nd/3rd-prompt.md`, `translate-result-prompt.md` |
 
 ## Invariants
@@ -59,6 +63,10 @@ The module exports only the four step services to DI consumers (`ai.module.ts`).
   [docs/provider-routing.md](../../docs/provider-routing.md).
 - Provider error text is redacted via the privacy module's `redactForLog` before logging.
 - Shadow output never touches user results.
+- Parallel candidate recall is a flag-gated inner concurrency layer (OFF by default) owned by
+  [docs/ai/concurrency-policy.md](../../docs/ai/concurrency-policy.md) and
+  [ADR-004](../../architecture/adrs/adr-004-parallel-ai-pipeline.md); it never widens the image
+  boundary — extraction stays the only image call.
 
 ## Tests
 

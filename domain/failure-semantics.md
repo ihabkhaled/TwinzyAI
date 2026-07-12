@@ -84,3 +84,7 @@ or removed** — they are the public contract the frontend maps to friendly copy
   ([sharing-lifecycle.md](sharing-lifecycle.md)) — do not "improve" the 404 with detail.
 - Cancel mismatches are silent no-ops, not errors
   ([policies.md](policies.md#cancellation-match-policy)).
+- A failed or timed-out parallel candidate-recall **lane** is dropped (`Promise.allSettled`) and
+  never fails the analysis; if every lane fails, the empty merge falls back exactly as the
+  single-call path (server-owned no-match fallback). Flag-gated, OFF by default
+  ([concurrency-policy.md](../docs/ai/concurrency-policy.md)).

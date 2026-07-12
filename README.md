@@ -13,7 +13,7 @@ no biometric comparison, and your photo is never stored. Fully localized in Engl
    fields across 16 categories, targeting **100+ traits** when image quality allows
    (`use-1st-prompt`).
 4. The image buffer is destroyed immediately after.
-5. Gemini receives the **written traits only** and suggests a candidate pool larger than the requested count from a **global public-figure pool** (`use-2nd-prompt`).
+5. Gemini receives the **written traits only** and suggests a candidate pool larger than the requested count from a **global public-figure pool** (`use-2nd-prompt`). Optionally (flag `AI_PARALLEL_PIPELINE_ENABLED`, off by default) this recall step fans out into bounded parallel text-only lanes and merges them — see [ADR-004](architecture/adrs/adr-004-parallel-ai-pipeline.md) and [concurrency-policy.md](docs/ai/concurrency-policy.md); the written-traits-only boundary is unchanged.
 6. A judge pass re-scores and filters (`use-3rd-prompt`) — up to the user-selected number of safe final results (1–10, default 10).
 7. The frontend shows traits, results, and a permanent disclaimer — all dynamic output is
    localized (en/ar).

@@ -15,7 +15,7 @@ Task type: `ai-pipeline-change` · Lane: **critical** · Load after `.ai/BOOTSTR
 
 ## Must-read docs
 
-- context/ai-context.md — Pipeline (backend only; the frontend never calls an AI provider): (~252 tokens)
+- context/ai-context.md — Pipeline (backend only; the frontend never calls an AI provider): (~400 tokens)
 - docs/ai-safety.md — See rules/14-ai-safety.md for the normative rules. Implementation summary: (~644 tokens)
 - docs/provider-routing.md — TwinzyAI routes each AI pipeline step (trait **extraction**, candidate **generation**, **judge**, result **translation**) through a provider-agnostic router, so every step can run on the provider/model that fits its difficulty — with cro... (~1253 tokens)
 

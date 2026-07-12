@@ -59,6 +59,13 @@ prompt template).
 - **Prompt 4 (translation)**: existing result JSON → same-structure translation; names, numbers,
   and enums must not change; forbidden wording applies in any language.
 
+When `AI_PARALLEL_PIPELINE_ENABLED=true`, the generation prompt gains an appended text-only
+"## Lane focus (recall variation)" section per lane — a recall-bias directive (strongest / diverse
+/ wildcard) that reaffirms every base-prompt safety and trait-support rule. The base prompt **file
+is unchanged**; the focus directives are versioned constants in
+`apps/api/src/modules/ai/model/candidate-lane.constants.ts`, so the flag-off path is byte-identical
+and no `GAME_PROMPT_VERSION` bump is needed ([concurrency-policy.md](concurrency-policy.md)).
+
 ## Shared safety constraints
 
 Every prompt carries a forbidden-wording section and an all-false `safetyCheck` self-report; the

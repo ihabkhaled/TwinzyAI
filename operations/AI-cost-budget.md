@@ -36,6 +36,12 @@ models are never hardcoded (product constraint, CLAUDE.md).
   ([apps/api/src/config/env.schema.ts](../apps/api/src/config/env.schema.ts)).
 - Fallback chains multiply worst-case calls per step but are bounded: chain length plus at most
   10 route entries per step ([retry-budget.md](retry-budget.md)).
+- **Parallel recall (flag-gated, OFF by default).** With `AI_PARALLEL_PIPELINE_ENABLED=true` the
+  generation step fans out into `AI_GENERATION_LANES` (default 2) provider calls instead of one,
+  multiplying generation spend; total calls per analysis are hard-capped by
+  `AI_MAX_CALLS_PER_ANALYSIS` (default 5 = extraction + lanes + judge) and the process-global
+  generation gate, and cost is an acceptance criterion before enabling
+  ([concurrency-policy.md](../docs/ai/concurrency-policy.md), [cost-policy.md](../docs/ai/cost-policy.md)).
 
 ## Shadow sampling (extra spend, off by default)
 

@@ -59,6 +59,8 @@ try {
 
 No floating promises (`no-floating-promises` is `error`): detach deliberately with an owned catch, or await.
 
+Parallel provider fan-out (e.g. the flag-gated candidate-recall lanes) uses **`Promise.allSettled`** so one failed or timed-out lane never fails the request; it propagates the request `AbortSignal` into every lane and its gate wait, and merges surviving pools **deterministically** (canonical name, higher score, stable order) so output does not depend on finish order ([07-performance-scalability.md](./07-performance-scalability.md), [/docs/ai/concurrency-policy.md](../docs/ai/concurrency-policy.md)).
+
 ## 4. Terminal states — no endless loading
 
 Every async workflow reaches **success, failure, or timeout** — and the client can observe which. A swallowed error with no terminal outcome leaves the user spinning forever ([27-async-events-and-jobs.md](./27-async-events-and-jobs.md)). The frontend mirrors this: every request path renders success, error, or timeout UI — never an indefinite spinner.

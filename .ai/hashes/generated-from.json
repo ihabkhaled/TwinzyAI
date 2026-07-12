@@ -230,7 +230,7 @@
       "support/upload-troubleshooting.md",
       "support/user-visible-error-guide.md"
     ],
-    "inputsHash": "3d2230374df9d905ae7c5245279ded3c6d1d4735cad1b1fd3c602902ba06e1d9"
+    "inputsHash": "3e3fe234e9ec23a2085c73f003193251da521e8c45b722e31fa2e89ca820897a"
   },
   ".ai/generated/orphans.json": {
     "inputs": [
@@ -276,7 +276,7 @@
       "apps/api/src/bootstrap/fastify-adapter.ts",
       "apps/web/src/packages/env/public-env.ts"
     ],
-    "inputsHash": "93aa369d5451b6d2df1d42f82178ba0f59464d820dac95bfe62f912849cc0f08"
+    "inputsHash": "e3f830fc5cf7ff3425b3f31d3c676e05aa2b2b9bfb7ddd5af9f53d3bec569e80"
   },
   ".ai/manifests/contracts.json": {
     "inputs": [
@@ -336,6 +336,7 @@
       "architecture/adrs/adr-001-strict-engineering-os.md",
       "architecture/adrs/adr-002-zod-validation-vendor.md",
       "architecture/adrs/adr-003-horizontal-scaling-plan.md",
+      "architecture/adrs/adr-004-parallel-ai-pipeline.md",
       "architecture/adrs/adr-fe-0001-strict-next-architecture.md",
       "architecture/adrs/adr-fe-0002-component-workbench-over-storybook.md",
       "architecture/adrs/adr-template.md",
@@ -503,7 +504,6 @@
       "docs/features/ai-knowledge-os/13-implementation-readiness.md",
       "docs/features/ai-knowledge-os/15-dev-validation-report.md",
       "docs/features/ai-knowledge-os/23-documentation-changelog.md",
-      "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
       "docs/features/engineering-os-migration/00-intake.md",
       "docs/features/engineering-os-migration/01-business-analysis.md",
       "docs/features/engineering-os-migration/02-business-development.md",
@@ -534,6 +534,19 @@
       "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
       "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
       "docs/features/multi-tab-stream-isolation/README.md",
+      "docs/features/parallel-ai-pipeline/00-intake.md",
+      "docs/features/parallel-ai-pipeline/03-product-requirements.md",
+      "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
+      "docs/features/parallel-ai-pipeline/08-architecture-review.md",
+      "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
+      "docs/features/parallel-ai-pipeline/11-test-strategy.md",
+      "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
+      "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
+      "docs/features/parallel-ai-pipeline/15-dev-validation-report.md",
+      "docs/features/parallel-ai-pipeline/16-dev-bug-log.md",
+      "docs/features/parallel-ai-pipeline/19-security-review.md",
+      "docs/features/parallel-ai-pipeline/23-documentation-changelog.md",
+      "docs/features/parallel-ai-pipeline/README.md",
       "docs/features/paypal-donations-and-paid-results/00-intake.md",
       "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
       "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
@@ -757,6 +770,7 @@
       "QWEN.md",
       "README.md",
       "release-notes/2026-07-12-ai-knowledge-os.md",
+      "release-notes/2026-07-12-parallel-ai-pipeline.md",
       "release-notes/README.md",
       "release-notes/release-notes-template.md",
       "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -985,10 +999,11 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "3c6ce997d1c706042122fa7ccbea11887a21f6f518b2680a9685a9f2b8b1b294"
+    "inputsHash": "127c3c7e20ff18b5d883a20f4dd216782d3c7ea6385e471100c7f65b45611e24"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
+      "apps/api/src/core/concurrency/concurrency.errors.ts",
       "apps/api/src/core/errors/app-error.ts",
       "apps/api/src/core/errors/app-exception.filter.ts",
       "apps/api/src/core/errors/error-body.mapper.ts",
@@ -1023,7 +1038,7 @@
       "packages/shared/src/constants/language.constants.ts",
       "packages/shared/src/constants/response-bounds.constants.ts"
     ],
-    "inputsHash": "e7ad7a2df0fc891f93c467092af73c87d1f784e8d2b368a2a07dc5d6cec8f2ae"
+    "inputsHash": "59df48d8dd7c922ebf13405dd696805a432cd836ed8089390a365217696fd912"
   },
   ".ai/manifests/ownership.json": {
     "inputs": [
@@ -1063,6 +1078,11 @@
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
       "apps/api/src/config/payment.constants.ts",
+      "apps/api/src/core/concurrency/concurrency.errors.ts",
+      "apps/api/src/core/concurrency/concurrency.types.ts",
+      "apps/api/src/core/concurrency/index.ts",
+      "apps/api/src/core/concurrency/semaphore.ts",
+      "apps/api/src/core/concurrency/tests/semaphore.test.ts",
       "apps/api/src/core/core.module.ts",
       "apps/api/src/core/errors/app-error.ts",
       "apps/api/src/core/errors/app-exception.filter.ts",
@@ -1134,14 +1154,18 @@
       "apps/api/src/modules/ai/adapters/provider-registry.service.ts",
       "apps/api/src/modules/ai/ai.module.ts",
       "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
       "apps/api/src/modules/ai/application/candidate-generation.service.ts",
       "apps/api/src/modules/ai/application/candidate-judge.service.ts",
+      "apps/api/src/modules/ai/application/candidate-recall.service.ts",
       "apps/api/src/modules/ai/application/result-translation.service.ts",
       "apps/api/src/modules/ai/application/trait-extraction.service.ts",
       "apps/api/src/modules/ai/index.ts",
       "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
       "apps/api/src/modules/ai/lib/abort-bridge.util.ts",
       "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts",
+      "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+      "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
       "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts",
       "apps/api/src/modules/ai/lib/image-input.util.ts",
       "apps/api/src/modules/ai/lib/json-response.util.ts",
@@ -1154,6 +1178,9 @@
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
       "apps/api/src/modules/ai/model/ai-router.types.ts",
       "apps/api/src/modules/ai/model/ai-safety.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.types.ts",
+      "apps/api/src/modules/ai/model/candidate-recall.types.ts",
       "apps/api/src/modules/ai/model/gemini.constants.ts",
       "apps/api/src/modules/ai/model/gemini.types.ts",
       "apps/api/src/modules/ai/model/judge-input.types.ts",
@@ -1168,6 +1195,10 @@
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
       "apps/api/src/modules/ai/tests/json-response.util.test.ts",
@@ -1226,6 +1257,7 @@
       "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
       "apps/api/src/modules/game/tests/request-language.test.ts",
       "apps/api/src/modules/game/tests/stream-cors.test.ts",
+      "apps/api/src/modules/game/tests/style-match.service.test.ts",
       "apps/api/src/modules/health/api/health.controller.ts",
       "apps/api/src/modules/health/application/health.service.ts",
       "apps/api/src/modules/health/health.module.ts",
@@ -1672,7 +1704,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "300f0ef9331b80abc8de8495dccbca8398d0135705d087eb655360471098a87f"
+    "inputsHash": "fdb769e9bb49322284c23f76f5c9af12cbe5f77637b9960df9b979ed9bc84117"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -1723,6 +1755,11 @@
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
       "apps/api/src/config/payment.constants.ts",
+      "apps/api/src/core/concurrency/concurrency.errors.ts",
+      "apps/api/src/core/concurrency/concurrency.types.ts",
+      "apps/api/src/core/concurrency/index.ts",
+      "apps/api/src/core/concurrency/semaphore.ts",
+      "apps/api/src/core/concurrency/tests/semaphore.test.ts",
       "apps/api/src/core/core.module.ts",
       "apps/api/src/core/errors/app-error.ts",
       "apps/api/src/core/errors/app-exception.filter.ts",
@@ -1794,14 +1831,18 @@
       "apps/api/src/modules/ai/adapters/provider-registry.service.ts",
       "apps/api/src/modules/ai/ai.module.ts",
       "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
       "apps/api/src/modules/ai/application/candidate-generation.service.ts",
       "apps/api/src/modules/ai/application/candidate-judge.service.ts",
+      "apps/api/src/modules/ai/application/candidate-recall.service.ts",
       "apps/api/src/modules/ai/application/result-translation.service.ts",
       "apps/api/src/modules/ai/application/trait-extraction.service.ts",
       "apps/api/src/modules/ai/index.ts",
       "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
       "apps/api/src/modules/ai/lib/abort-bridge.util.ts",
       "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts",
+      "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+      "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
       "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts",
       "apps/api/src/modules/ai/lib/image-input.util.ts",
       "apps/api/src/modules/ai/lib/json-response.util.ts",
@@ -1814,6 +1855,9 @@
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
       "apps/api/src/modules/ai/model/ai-router.types.ts",
       "apps/api/src/modules/ai/model/ai-safety.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.types.ts",
+      "apps/api/src/modules/ai/model/candidate-recall.types.ts",
       "apps/api/src/modules/ai/model/gemini.constants.ts",
       "apps/api/src/modules/ai/model/gemini.types.ts",
       "apps/api/src/modules/ai/model/judge-input.types.ts",
@@ -1828,6 +1872,10 @@
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
       "apps/api/src/modules/ai/tests/json-response.util.test.ts",
@@ -1886,6 +1934,7 @@
       "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
       "apps/api/src/modules/game/tests/request-language.test.ts",
       "apps/api/src/modules/game/tests/stream-cors.test.ts",
+      "apps/api/src/modules/game/tests/style-match.service.test.ts",
       "apps/api/src/modules/health/api/health.controller.ts",
       "apps/api/src/modules/health/application/health.service.ts",
       "apps/api/src/modules/health/health.module.ts",
@@ -2331,7 +2380,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "9d112af2cf5d9748621b42bee1fadf65abb83c9b42d0bd0fc54e4f728c78a9a9"
+    "inputsHash": "16c3555f60bd4a8d282a4252cb5f164aae3bdecab3cde8e3a593442303aec160"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2387,6 +2436,11 @@
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
       "apps/api/src/config/payment.constants.ts",
+      "apps/api/src/core/concurrency/concurrency.errors.ts",
+      "apps/api/src/core/concurrency/concurrency.types.ts",
+      "apps/api/src/core/concurrency/index.ts",
+      "apps/api/src/core/concurrency/semaphore.ts",
+      "apps/api/src/core/concurrency/tests/semaphore.test.ts",
       "apps/api/src/core/core.module.ts",
       "apps/api/src/core/errors/app-error.ts",
       "apps/api/src/core/errors/app-exception.filter.ts",
@@ -2458,14 +2512,18 @@
       "apps/api/src/modules/ai/adapters/provider-registry.service.ts",
       "apps/api/src/modules/ai/ai.module.ts",
       "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
       "apps/api/src/modules/ai/application/candidate-generation.service.ts",
       "apps/api/src/modules/ai/application/candidate-judge.service.ts",
+      "apps/api/src/modules/ai/application/candidate-recall.service.ts",
       "apps/api/src/modules/ai/application/result-translation.service.ts",
       "apps/api/src/modules/ai/application/trait-extraction.service.ts",
       "apps/api/src/modules/ai/index.ts",
       "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
       "apps/api/src/modules/ai/lib/abort-bridge.util.ts",
       "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts",
+      "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+      "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
       "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts",
       "apps/api/src/modules/ai/lib/image-input.util.ts",
       "apps/api/src/modules/ai/lib/json-response.util.ts",
@@ -2478,6 +2536,9 @@
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
       "apps/api/src/modules/ai/model/ai-router.types.ts",
       "apps/api/src/modules/ai/model/ai-safety.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.types.ts",
+      "apps/api/src/modules/ai/model/candidate-recall.types.ts",
       "apps/api/src/modules/ai/model/gemini.constants.ts",
       "apps/api/src/modules/ai/model/gemini.types.ts",
       "apps/api/src/modules/ai/model/judge-input.types.ts",
@@ -2492,6 +2553,10 @@
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
       "apps/api/src/modules/ai/tests/json-response.util.test.ts",
@@ -2550,6 +2615,7 @@
       "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
       "apps/api/src/modules/game/tests/request-language.test.ts",
       "apps/api/src/modules/game/tests/stream-cors.test.ts",
+      "apps/api/src/modules/game/tests/style-match.service.test.ts",
       "apps/api/src/modules/health/api/health.controller.ts",
       "apps/api/src/modules/health/application/health.service.ts",
       "apps/api/src/modules/health/health.module.ts",
@@ -2995,7 +3061,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "9d112af2cf5d9748621b42bee1fadf65abb83c9b42d0bd0fc54e4f728c78a9a9"
+    "inputsHash": "16c3555f60bd4a8d282a4252cb5f164aae3bdecab3cde8e3a593442303aec160"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3035,6 +3101,11 @@
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
       "apps/api/src/config/payment.constants.ts",
+      "apps/api/src/core/concurrency/concurrency.errors.ts",
+      "apps/api/src/core/concurrency/concurrency.types.ts",
+      "apps/api/src/core/concurrency/index.ts",
+      "apps/api/src/core/concurrency/semaphore.ts",
+      "apps/api/src/core/concurrency/tests/semaphore.test.ts",
       "apps/api/src/core/core.module.ts",
       "apps/api/src/core/errors/app-error.ts",
       "apps/api/src/core/errors/app-exception.filter.ts",
@@ -3106,14 +3177,18 @@
       "apps/api/src/modules/ai/adapters/provider-registry.service.ts",
       "apps/api/src/modules/ai/ai.module.ts",
       "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts",
       "apps/api/src/modules/ai/application/candidate-generation.service.ts",
       "apps/api/src/modules/ai/application/candidate-judge.service.ts",
+      "apps/api/src/modules/ai/application/candidate-recall.service.ts",
       "apps/api/src/modules/ai/application/result-translation.service.ts",
       "apps/api/src/modules/ai/application/trait-extraction.service.ts",
       "apps/api/src/modules/ai/index.ts",
       "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
       "apps/api/src/modules/ai/lib/abort-bridge.util.ts",
       "apps/api/src/modules/ai/lib/ai-response-sanitizer.ts",
+      "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
+      "apps/api/src/modules/ai/lib/candidate-merge.util.ts",
       "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts",
       "apps/api/src/modules/ai/lib/image-input.util.ts",
       "apps/api/src/modules/ai/lib/json-response.util.ts",
@@ -3126,6 +3201,9 @@
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
       "apps/api/src/modules/ai/model/ai-router.types.ts",
       "apps/api/src/modules/ai/model/ai-safety.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.constants.ts",
+      "apps/api/src/modules/ai/model/candidate-lane.types.ts",
+      "apps/api/src/modules/ai/model/candidate-recall.types.ts",
       "apps/api/src/modules/ai/model/gemini.constants.ts",
       "apps/api/src/modules/ai/model/gemini.types.ts",
       "apps/api/src/modules/ai/model/judge-input.types.ts",
@@ -3140,6 +3218,10 @@
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
       "apps/api/src/modules/ai/tests/json-response.util.test.ts",
@@ -3198,6 +3280,7 @@
       "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
       "apps/api/src/modules/game/tests/request-language.test.ts",
       "apps/api/src/modules/game/tests/stream-cors.test.ts",
+      "apps/api/src/modules/game/tests/style-match.service.test.ts",
       "apps/api/src/modules/health/api/health.controller.ts",
       "apps/api/src/modules/health/application/health.service.ts",
       "apps/api/src/modules/health/health.module.ts",
@@ -3643,7 +3726,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "9d112af2cf5d9748621b42bee1fadf65abb83c9b42d0bd0fc54e4f728c78a9a9"
+    "inputsHash": "16c3555f60bd4a8d282a4252cb5f164aae3bdecab3cde8e3a593442303aec160"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [
@@ -3865,14 +3948,14 @@
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/ai-pipeline.md"
     ],
-    "inputsHash": "42a1629088698db5ba903440ffe58724db26b2b867f8d388c7864acb81cab808"
+    "inputsHash": "e68e71298e8a1a8461efed0aadb61047ad01eaaf15bfa0ab213117e9c0a0fa73"
   },
   ".ai/summaries/architecture.md": {
     "inputs": [
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/architecture.md"
     ],
-    "inputsHash": "04cb74a6ce108de445cd7c1406b82bb10bc76a875f8af277fd752e266f36c727"
+    "inputsHash": "a512d7b15ed6615fbf351b93c2746fece4f3c1e0302003a4976db728ec9185de"
   },
   ".ai/summaries/backend.md": {
     "inputs": [
@@ -3886,14 +3969,14 @@
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/configuration.md"
     ],
-    "inputsHash": "a5abe0cfe2b637dcf864b18da0e60693ec2a0f52268462a96b0413cfc788873c"
+    "inputsHash": "3b7aebf96c3c08e559c45b1a3d93e793bc3f2fec428cb5e80558c85147ee10db"
   },
   ".ai/summaries/current-risks.md": {
     "inputs": [
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/current-risks.md"
     ],
-    "inputsHash": "89f48711bda7616e7f455709b1098809cef7136bca66889097e8bff557ee462a"
+    "inputsHash": "3e6f35e9adb01ddf169b412d7d67100c88a1210669479f5913f70c9e484af062"
   },
   ".ai/summaries/domain.md": {
     "inputs": [

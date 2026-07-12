@@ -69,6 +69,12 @@ constants (`packages/shared/src/constants/app.constants.ts`).
     `CandidateGenerationService` (region hint by language; unsafe candidates dropped) →
     empty-pool fallback → `CandidateJudgeService` (strict judge, `z.literal(false)` safety
     flags) — all with no image slot by construction.
+    - **Parallel recall (flag-gated, OFF by default).** When `AI_PARALLEL_PIPELINE_ENABLED=true`,
+      recall runs through `CandidateRecallService`, which fans the text-only generation step out
+      into `AI_GENERATION_LANES` focus lanes bounded by a process-global per-step gate and a
+      per-analysis call budget, then merges/dedupes deterministically; the flag-off path is one
+      unchanged generation call and the image path is untouched either way
+      ([concurrency-policy.md](../../docs/ai/concurrency-policy.md)).
 11. **Aggregation** — `ResultAggregationService.aggregate`
     (`apps/api/src/modules/result-aggregation/application/result-aggregation.service.ts`):
     displayability filter (non-weak verdict, `MIN_DISPLAY_SCORE`, safety evidence), re-rank,

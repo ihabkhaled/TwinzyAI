@@ -6,7 +6,7 @@
       "docs/provider-routing.md",
       "rules/14-ai-safety.md"
     ],
-    "fileCount": 50,
+    "fileCount": 61,
     "lane": "standard",
     "layers": [
       "adapters",
@@ -67,7 +67,7 @@
       "rules/26-error-handling-and-exceptions.md",
       "rules/22-observability-logging.md"
     ],
-    "fileCount": 63,
+    "fileCount": 68,
     "lane": "standard",
     "layers": [
       "core"
@@ -100,7 +100,7 @@
       "structure/flows/analyze-flow.md",
       "docs/backend-architecture.md"
     ],
-    "fileCount": 27,
+    "fileCount": 28,
     "lane": "standard",
     "layers": [
       "api",

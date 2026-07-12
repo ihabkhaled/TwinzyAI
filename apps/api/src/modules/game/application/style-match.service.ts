@@ -9,7 +9,7 @@ import type {
 import { GameStreamStage } from '@twinzy/shared';
 
 import { AppLogger } from '../../../core/logger';
-import { CandidateGenerationService, CandidateJudgeService } from '../../ai';
+import { CandidateJudgeService, CandidateRecallService } from '../../ai';
 import { ResultAggregationService } from '../../result-aggregation';
 import type { StyleMatchInput } from '../model/game-stream.types';
 
@@ -24,7 +24,7 @@ const LOG_CONTEXT = 'StyleMatch';
 @Injectable()
 export class StyleMatchService {
   public constructor(
-    private readonly candidateGeneration: CandidateGenerationService,
+    private readonly candidateRecall: CandidateRecallService,
     private readonly candidateJudge: CandidateJudgeService,
     private readonly resultAggregation: ResultAggregationService,
     private readonly logger: AppLogger,
@@ -46,14 +46,19 @@ export class StyleMatchService {
     return this.resultAggregation.aggregate(extraction, judged, languageCode, resultCount);
   }
 
+  /**
+   * Recall the candidate pool. The recall service owns the single-vs-parallel
+   * strategy behind the flag; either way it reports the same public
+   * `generating-candidates` stage, so the SSE contract is identical.
+   */
   private generateCandidates(input: StyleMatchInput): Promise<Candidate[]> {
     this.reportStage(input.progress, GameStreamStage.GeneratingCandidates);
-    return this.candidateGeneration.generateCandidates(
-      input.extraction,
-      input.languageCode,
-      input.resultCount,
-      input.signal,
-    );
+    return this.candidateRecall.recall({
+      extraction: input.extraction,
+      languageCode: input.languageCode,
+      resultCount: input.resultCount,
+      signal: input.signal,
+    });
   }
 
   private judgeCandidates(

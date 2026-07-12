@@ -34,6 +34,11 @@ state is in-memory and instance-local:
   "Single-process/in-memory: it governs one API instance (documented limitation for horizontal scaling)".
 - **Share links** — in-memory TTL cache; "records gone on restart"
   ([apps/api/src/modules/share-results/infrastructure/in-memory-share-result-cache.repository.ts](../apps/api/src/modules/share-results/infrastructure/in-memory-share-result-cache.repository.ts)).
+- **Parallel-recall gate** — `AiStepConcurrencyGate`
+  ([apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts](../apps/api/src/modules/ai/application/ai-step-concurrency.gate.ts)),
+  a process-global `Semaphore` that bounds fan-out generation/judge calls **per instance** only
+  (flag-gated, OFF by default). Fleet-wide provider-concurrency bounding is future work
+  ([ADR-004](../architecture/adrs/adr-004-parallel-ai-pipeline.md) known limitation → ADR-003).
 
 ## What bounds concurrency
 

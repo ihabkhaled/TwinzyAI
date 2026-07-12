@@ -83,6 +83,31 @@ export const MAX_SHARE_RESULT_MAX_PAYLOAD_BYTES = 500_000;
 export const MIN_SHARE_RESULT_MAX_ACTIVE_ITEMS = 1;
 export const MAX_SHARE_RESULT_MAX_ACTIVE_ITEMS = 100_000;
 
+// --- Parallel AI pipeline (Release A: async candidate-generation lanes) ---
+// Flag-gated and OFF by default. These bound the fan-out so parallelism can
+// never turn into an unbounded burst of provider calls: a fixed lane count, a
+// global per-step concurrency ceiling, a hard per-analysis call budget, and a
+// queue-wait watchdog for a lane that cannot get a concurrency permit in time.
+export const MIN_AI_GENERATION_LANES = 1;
+export const MAX_AI_GENERATION_LANES = 6;
+export const DEFAULT_AI_GENERATION_LANES = 2;
+
+export const MIN_AI_STEP_CONCURRENCY = 1;
+export const MAX_AI_STEP_CONCURRENCY = 16;
+export const DEFAULT_AI_GENERATION_CONCURRENCY = 2;
+export const DEFAULT_AI_JUDGE_CONCURRENCY = 1;
+
+// Total provider calls one analysis may make (extraction + generation lanes +
+// judge). The floor of 3 is the minimum viable pipeline: 1 extraction, 1
+// generation lane, 1 judge.
+export const MIN_AI_CALLS_PER_ANALYSIS = 3;
+export const MAX_AI_CALLS_PER_ANALYSIS = 20;
+export const DEFAULT_AI_CALLS_PER_ANALYSIS = 5;
+
+export const MIN_AI_PARALLEL_QUEUE_TIMEOUT_MS = 1000;
+export const MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS = 120_000;
+export const DEFAULT_AI_PARALLEL_QUEUE_TIMEOUT_MS = 30_000;
+
 // --- Paid analysis (PayPal Orders v2; enabled only when credentials exist) ---
 /** Money as PayPal expects it: dot-decimal with exactly two places. */
 export const PAYMENT_PRICE_VALUE_PATTERN = /^\d{1,6}\.\d{2}$/;

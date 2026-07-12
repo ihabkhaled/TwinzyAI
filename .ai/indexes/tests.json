@@ -6,6 +6,10 @@
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
+      "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
       "apps/api/src/modules/ai/tests/json-response.util.test.ts",
@@ -28,6 +32,7 @@
       "apps/api/src/config/env.schema.test.ts"
     ],
     "api:core": [
+      "apps/api/src/core/concurrency/tests/semaphore.test.ts",
       "apps/api/src/core/errors/tests/app-exception.filter.test.ts",
       "apps/api/src/core/errors/tests/error-body.mapper.test.ts",
       "apps/api/src/core/http/tests/multipart-upload.parser.test.ts",
@@ -55,7 +60,8 @@
       "apps/api/src/modules/game/tests/game-stream-lib.test.ts",
       "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
       "apps/api/src/modules/game/tests/request-language.test.ts",
-      "apps/api/src/modules/game/tests/stream-cors.test.ts"
+      "apps/api/src/modules/game/tests/stream-cors.test.ts",
+      "apps/api/src/modules/game/tests/style-match.service.test.ts"
     ],
     "api:health": [
       "apps/api/src/modules/health/tests/health.service.test.ts"

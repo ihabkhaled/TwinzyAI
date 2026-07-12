@@ -14,12 +14,12 @@ Task type: `performance-change` · Lane: **standard** · Load after `.ai/BOOTSTR
 
 ## Must-read docs
 
-- rules/07-performance-scalability.md — > Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r... (~1332 tokens)
+- rules/07-performance-scalability.md — > Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r... (~1487 tokens)
 - docs/performance-review-report.md — Date: 2026-07-05 · Scope: full stack · Method: skills/performance-review.md (~347 tokens)
 
 ## Rules
 
-- rules/07-performance-scalability.md — > Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r... (~1332 tokens)
+- rules/07-performance-scalability.md — > Performance is a design constraint, not a later optimization: every external call bounded, every list capped, every instance stateless so the app scales horizontally without rewrites. Implements rules 19, 31, 37 of [00-non-negotiable-r... (~1487 tokens)
 - rules/frontend/12-performance.md — Performance is an architectural property here, not an optimization pass. The rules below keep the (~982 tokens)
 
 ## Skills

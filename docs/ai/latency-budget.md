@@ -30,12 +30,19 @@ mechanics owned by [retry-timeout-policy.md](retry-timeout-policy.md)).
 | Whole analyze pipeline (incl. queue wait) | `ANALYSIS_TIMEOUT_MS` = 120 s default (hard max 600 s) | `env-bounds.constants.ts:60-62`; watchdog in `game-stream.presenter.ts` |
 | Stream lifetime hard stop | `STREAM_TTL_MS` = 180 s default, ≥ `ANALYSIS_TIMEOUT_MS` by schema | `env-bounds.constants.ts:64-66` |
 | Shadow call (never user-visible) | `AI_SHADOW_TIMEOUT_MS` = 30 s default | `env.schema.ts` |
+| Lane permit wait (parallel recall, flag-gated) | `AI_PARALLEL_QUEUE_TIMEOUT_MS` = 30 s default | `env.schema.ts`; [concurrency-policy.md](concurrency-policy.md) |
 
 Worst-case arithmetic: a pipeline of 3 sequential AI calls with fallback hops is still cut off by
 the 120 s watchdog — the user always gets a terminal frame (`AI_TIMEOUT`) rather than an endless
 spinner ([pipeline.md](pipeline.md) §Streaming). Note `.env.example` raises `GEMINI_TIMEOUT_MS`
 to the 120 s max for live operation, so in that configuration the watchdog is the binding
 constraint.
+
+When `AI_PARALLEL_PIPELINE_ENABLED=true`, running the generation step as parallel lanes is the
+primary latency **lever** (overlapping recall calls that would otherwise be one call); a lane that
+cannot get a concurrency permit within `AI_PARALLEL_QUEUE_TIMEOUT_MS` is dropped rather than
+extending the run. It trades provider cost for latency — [cost-policy.md](cost-policy.md),
+[concurrency-policy.md](concurrency-policy.md).
 
 ## Perceived latency
 

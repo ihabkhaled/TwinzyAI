@@ -29,3 +29,33 @@ describe('validateEnv boolean configuration', () => {
     );
   });
 });
+
+describe('validateEnv parallel AI pipeline', () => {
+  it('defaults the parallel pipeline off with conservative lane settings', () => {
+    const env = validateEnv({});
+    expect(env.AI_PARALLEL_PIPELINE_ENABLED).toBe(false);
+    expect(env.AI_GENERATION_LANES).toBe(2);
+    expect(env.AI_GENERATION_CONCURRENCY).toBe(2);
+    expect(env.AI_JUDGE_CONCURRENCY).toBe(1);
+    expect(env.AI_MAX_CALLS_PER_ANALYSIS).toBe(5);
+    expect(env.AI_PARALLEL_QUEUE_TIMEOUT_MS).toBe(30_000);
+  });
+
+  it('enables and coerces the parallel pipeline settings from strings', () => {
+    const env = validateEnv({ AI_PARALLEL_PIPELINE_ENABLED: 'true', AI_GENERATION_LANES: '4' });
+    expect(env.AI_PARALLEL_PIPELINE_ENABLED).toBe(true);
+    expect(env.AI_GENERATION_LANES).toBe(4);
+  });
+
+  it('rejects a lane count above the ceiling', () => {
+    expect(() => validateEnv({ AI_GENERATION_LANES: '7' })).toThrow(
+      /Invalid environment configuration/u,
+    );
+  });
+
+  it('rejects a per-analysis call budget below the minimum viable pipeline', () => {
+    expect(() => validateEnv({ AI_MAX_CALLS_PER_ANALYSIS: '2' })).toThrow(
+      /Invalid environment configuration/u,
+    );
+  });
+});

@@ -89,6 +89,17 @@ the individual decisions and their reasons.
   rate-limit store before containers can be scaled. See
   [adr-003-horizontal-scaling-plan.md](../architecture/adrs/adr-003-horizontal-scaling-plan.md).
 
+## Parallel AI pipeline (ADR-004)
+
+- Release A of a phased plan adds **flag-gated** (`AI_PARALLEL_PIPELINE_ENABLED`, default OFF)
+  bounded-async parallel candidate recall: the text-only generation step fans out into focus lanes
+  under a process-global per-step gate + per-analysis call budget, merged deterministically. Judge
+  and extraction stay single calls; no worker threads (deferred to Release C). Rollback is env-only.
+  See [adr-004-parallel-ai-pipeline.md](../architecture/adrs/adr-004-parallel-ai-pipeline.md) and
+  [concurrency-policy.md](../docs/ai/concurrency-policy.md). (Note: the earlier phase-13 plan for a
+  share-cache-port ADR under this same number was never written — this ADR-004 is the parallel
+  pipeline.)
+
 ## Ephemeral shareable results (TWZ-SHARE-001, 2026-07-08)
 
 - Sharing a finished result is ephemeral and database-free: the record lives behind
