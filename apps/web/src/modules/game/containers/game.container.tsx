@@ -120,6 +120,7 @@ export const GameContainer = (): ReactElement => {
         <PaymentStep
           title={labels.paymentTitle}
           description={labels.paymentDescription}
+          loadingLabel={labels.paymentLoading}
           cancelLabel={labels.paymentCancel}
           errorMessage={vm.paymentErrorMessage}
           payment={vm.payment}

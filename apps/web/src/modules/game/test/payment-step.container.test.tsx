@@ -54,6 +54,7 @@ const buildPayment = (overrides: Partial<PaymentViewModel> = {}): PaymentViewMod
 const labels = {
   title: 'Your $0.50 analysis',
   description: 'Pay to reveal results.',
+  loadingLabel: 'Loading secure payment options…',
   cancelLabel: 'Cancel and go back',
 };
 
@@ -66,6 +67,19 @@ describe('PaymentStep', () => {
     await waitFor(() => {
       expect(screen.getByTestId('fake-paypal-pay')).toBeInTheDocument();
     });
+  });
+
+  it('shows a loader until the buttons render, then hides it', async () => {
+    render(<PaymentStep {...labels} errorMessage={undefined} payment={buildPayment()} />);
+
+    // The loader is visible on first paint, before the async SDK render resolves.
+    expect(screen.getByTestId('payment-loader')).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByTestId('fake-paypal-pay')).toBeInTheDocument();
+    });
+    // Once the buttons are ready the loader is gone.
+    expect(screen.queryByTestId('payment-loader')).not.toBeInTheDocument();
   });
 
   it('renders exactly ONE button under StrictMode (no double-render flash)', async () => {

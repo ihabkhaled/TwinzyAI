@@ -157,6 +157,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   privacyNotice: translate('home.privacyNotice'),
   paymentTitle: translate('game.paymentTitle'),
   paymentDescription: translate('game.paymentDescription'),
+  paymentLoading: translate('game.paymentLoading'),
   paymentCancel: translate('game.paymentCancel'),
   upload: {
     label: translate('upload.label'),

@@ -33,6 +33,7 @@
     "paymentTitle": "One small step: your $0.50 analysis",
     "paymentDescription": "This analysis costs $0.50. Pay securely with PayPal to reveal your results — you are charged only when the analysis runs, and refunded automatically if it fails.",
     "paymentCancel": "Cancel and go back",
+    "paymentLoading": "Loading secure payment options…",
     "title": "Your vibe check",
     "analyzeButton": "Analyze my vibe",
     "processingText": "Reading visible traits and preparing your vibe result...",

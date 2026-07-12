@@ -358,6 +358,7 @@ export interface GameScreenLabels {
   privacyNotice: string;
   paymentTitle: string;
   paymentDescription: string;
+  paymentLoading: string;
   paymentCancel: string;
   upload: UploadLabels;
   resultCount: ResultCountLabels;
