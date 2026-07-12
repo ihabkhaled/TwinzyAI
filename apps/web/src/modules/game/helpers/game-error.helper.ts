@@ -9,6 +9,7 @@ import { mapErrorToMessageKey } from '@/shared/errors/http-error-to-message-key.
 import {
   GAME_ERROR_KEY_BY_CODE,
   type GameErrorMessageKey,
+  PAYMENT_ERROR_CODES,
   TRANSIENT_ERROR_CODES,
 } from '../model/game.constants';
 
@@ -27,10 +28,16 @@ const extractBackendErrorCode = (error: unknown): string | undefined => {
 /**
  * The pipeline stage the backend reported as failing (from the terminal SSE
  * error frame), so the UI can say "finding matches failed" instead of a
- * generic error. Undefined when the failure carried no stage.
+ * generic error. Undefined when the failure carried no stage, or when the
+ * failure is a PAYMENT error — payment happens between stages, so stamping it
+ * with the last-emitted stage ("scanning") would misattribute the failure.
  */
 export const extractFailedStage = (error: unknown): GameStreamStageValue | undefined => {
   if (!isHttpError(error)) {
+    return undefined;
+  }
+  const code = extractBackendErrorCode(error);
+  if (code !== undefined && PAYMENT_ERROR_CODES.includes(code)) {
     return undefined;
   }
   const body = error.responseBody;

@@ -99,7 +99,6 @@ export const useGame = (): GameViewModel => {
       ? composeErrorMessage(translate, toFriendlyErrorMessageKey(error), extractFailedStage(error))
       : undefined,
     payment,
-    paymentPriceLabel: translate('game.paymentTitle'),
     onPaymentError: payment.onError,
     paymentErrorMessage:
       payment.errorKey === undefined

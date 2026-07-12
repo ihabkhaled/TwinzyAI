@@ -138,6 +138,17 @@ export const GAME_ERROR_KEY_BY_CODE: Record<string, GameErrorMessageKey> = {
   [ErrorCode.PaymentProviderUnavailable]: GAME_ERROR_MESSAGE_KEYS.payment,
 };
 
+/**
+ * Payment failures are not pipeline-stage failures — the capture happens
+ * between the scanning and extraction stages, so the terminal frame's `stage`
+ * (the last one emitted) must NOT be prefixed onto a payment error's copy.
+ */
+export const PAYMENT_ERROR_CODES: readonly string[] = [
+  ErrorCode.PaymentRequired,
+  ErrorCode.PaymentOrderInvalid,
+  ErrorCode.PaymentProviderUnavailable,
+];
+
 /** i18n key shown when translation fails and the old language is kept. */
 export const TRANSLATION_FAILED_MESSAGE_KEY = 'errors.translationFailed';
 

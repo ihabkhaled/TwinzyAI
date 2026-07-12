@@ -39,9 +39,30 @@ export { PAYMENT_ORDER_FIELD_NAME } from '@twinzy/shared';
 /** Order/capture statuses the gate accepts as "money actually moved". */
 export const PAYPAL_STATUS_COMPLETED = 'COMPLETED';
 
-/** PayPal issue codes the adapter maps to typed errors. */
-export const PAYPAL_ISSUE_ORDER_NOT_APPROVED = 'ORDER_NOT_APPROVED';
-export const PAYPAL_ISSUE_ORDER_ALREADY_CAPTURED = 'ORDER_ALREADY_CAPTURED';
+/** PayPal issue codes, referenced by the payment-failed set below. */
+const PAYPAL_ISSUE_ORDER_NOT_APPROVED = 'ORDER_NOT_APPROVED';
+const PAYPAL_ISSUE_ORDER_ALREADY_CAPTURED = 'ORDER_ALREADY_CAPTURED';
+
+/**
+ * Capture issues where NO money moved and the failure is on the payment side,
+ * not our infrastructure — a declined/blocked instrument shows as a temporary
+ * bank hold that is released (the "withdrawn then refunded" a payer sees), and
+ * a compliance block simply cannot complete. These map to a 402 "not charged,
+ * try again", never a 502 "provider unavailable" (which implies a transient
+ * outage). COMPLIANCE_VIOLATION is usually an account/self-payment restriction
+ * the payer must resolve with PayPal — see docs/features/…/06-technical-refinement.
+ */
+export const PAYPAL_PAYMENT_FAILED_ISSUES: readonly string[] = [
+  PAYPAL_ISSUE_ORDER_NOT_APPROVED,
+  PAYPAL_ISSUE_ORDER_ALREADY_CAPTURED,
+  'INSTRUMENT_DECLINED',
+  'PAYER_ACTION_REQUIRED',
+  'TRANSACTION_REFUSED',
+  'PAYER_CANNOT_PAY',
+  'ORDER_NOT_CAPTURED',
+  'ORDER_EXPIRED',
+  'COMPLIANCE_VIOLATION',
+];
 
 /** Operator-facing error copy (safe: never echoes provider payloads). */
 export const PAYMENT_REQUIRED_MESSAGE = 'This analysis requires payment before it can run.';

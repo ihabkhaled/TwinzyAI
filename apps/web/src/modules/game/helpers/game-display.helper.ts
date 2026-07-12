@@ -24,6 +24,8 @@ import type {
   TranslateMessage,
 } from '../model/game.types';
 
+import { resolvePaymentPriceLabel } from './payment-price.helper';
+
 /** Map the mutation status flags to the single phase the container renders. */
 export const resolvePhase = (
   isPending: boolean,
@@ -155,8 +157,8 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   cancelProcessing: translate('game.cancelProcessing'),
   retryTranslation: translate('game.retryTranslation'),
   privacyNotice: translate('home.privacyNotice'),
-  paymentTitle: translate('game.paymentTitle'),
-  paymentDescription: translate('game.paymentDescription'),
+  paymentTitle: translate('game.paymentTitle', { price: resolvePaymentPriceLabel() }),
+  paymentDescription: translate('game.paymentDescription', { price: resolvePaymentPriceLabel() }),
   paymentLoading: translate('game.paymentLoading'),
   paymentCancel: translate('game.paymentCancel'),
   upload: {

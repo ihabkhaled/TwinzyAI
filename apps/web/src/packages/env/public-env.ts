@@ -35,6 +35,17 @@ export const publicEnvSchema = z.object({
     emptyToUndefined,
     z.string().regex(PAYPAL_CLIENT_ID_PATTERN).optional(),
   ),
+  // Display-only price shown on the payment step. MUST mirror the server's
+  // PAYMENT_PRICE_VALUE/CURRENCY (the server price is authoritative and every
+  // capture is verified against it); these only format the copy the buyer reads.
+  paymentPriceValue: z
+    .string()
+    .regex(/^\d{1,6}\.\d{2}$/)
+    .default('0.50'),
+  paymentPriceCurrency: z
+    .string()
+    .regex(/^[A-Z]{3}$/)
+    .default('USD'),
 });
 
 export type PublicEnv = z.output<typeof publicEnvSchema>;
@@ -46,6 +57,8 @@ export const publicEnv: PublicEnv = parseSchema(
     apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     paypalMeUsername: process.env.NEXT_PUBLIC_PAYPAL_ME_USERNAME,
     paypalClientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+    paymentPriceValue: process.env.NEXT_PUBLIC_PAYMENT_PRICE_VALUE,
+    paymentPriceCurrency: process.env.NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY,
   },
   'public environment',
 );

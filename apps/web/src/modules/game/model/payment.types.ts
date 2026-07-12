@@ -20,7 +20,6 @@ export interface PayPalButtonsController {
 export interface PaymentViewModel {
   isPaywallEnabled: boolean;
   isPaying: boolean;
-  priceLabel: string;
   createOrder: () => Promise<string>;
   onApprove: (orderId: string) => void;
   onCancel: () => void;

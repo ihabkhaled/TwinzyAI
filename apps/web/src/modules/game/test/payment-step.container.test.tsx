@@ -43,7 +43,6 @@ vi.mock('@/packages/paypal', () => ({
 const buildPayment = (overrides: Partial<PaymentViewModel> = {}): PaymentViewModel => ({
   isPaywallEnabled: true,
   isPaying: true,
-  priceLabel: '$0.50',
   createOrder: vi.fn(() => Promise.resolve('ORDER-1')),
   onApprove: vi.fn(),
   onCancel: vi.fn(),

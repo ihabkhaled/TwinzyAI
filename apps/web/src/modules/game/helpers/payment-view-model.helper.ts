@@ -4,7 +4,6 @@ import type { PaymentFlowController } from '../model/payment-flow.types';
 /** Inputs the payment view model is assembled from (all prepared upstream). */
 export interface PaymentViewModelInput {
   flow: PaymentFlowController;
-  priceLabel: string;
   onError: (error: unknown) => void;
 }
 
@@ -15,12 +14,10 @@ export interface PaymentViewModelInput {
  */
 export const buildPaymentViewModel = ({
   flow,
-  priceLabel,
   onError,
 }: PaymentViewModelInput): PaymentViewModel => ({
   isPaywallEnabled: flow.isPaywallEnabled,
   isPaying: flow.isPaying,
-  priceLabel,
   createOrder: flow.createOrder,
   onApprove: flow.onApprove,
   onCancel: flow.cancelPayment,

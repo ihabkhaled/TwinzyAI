@@ -82,6 +82,17 @@ describe('extractFailedStage', () => {
     expect(extractFailedStage(bogus)).toBeUndefined();
     expect(extractFailedStage(new Error('boom'))).toBeUndefined();
   });
+
+  it('suppresses the stage for a PAYMENT error (it is not a pipeline-stage failure)', () => {
+    // The backend stamps the last-emitted stage (scanning) onto the terminal
+    // frame; a payment capture fails between stages, so it must not be labelled.
+    const paymentErrorAtScanning = new HttpError('http', 'declined', null, {
+      errorCode: 'PAYMENT_ORDER_INVALID',
+      message: 'declined',
+      stage: 'scanning',
+    });
+    expect(extractFailedStage(paymentErrorAtScanning)).toBeUndefined();
+  });
 });
 
 describe('isTransientGameError', () => {

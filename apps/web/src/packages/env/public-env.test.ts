@@ -9,13 +9,29 @@ describe('publicEnvSchema', () => {
     expect(publicEnvSchema.parse({})).toStrictEqual({
       appEnv: 'local',
       apiBaseUrl: 'http://localhost:4000',
+      paymentPriceValue: '0.50',
+      paymentPriceCurrency: 'USD',
     });
   });
 
   it('accepts valid overrides', () => {
     expect(
       publicEnvSchema.parse({ appEnv: 'production', apiBaseUrl: 'https://api.twinzy.test' }),
-    ).toStrictEqual({ appEnv: 'production', apiBaseUrl: 'https://api.twinzy.test' });
+    ).toStrictEqual({
+      appEnv: 'production',
+      apiBaseUrl: 'https://api.twinzy.test',
+      paymentPriceValue: '0.50',
+      paymentPriceCurrency: 'USD',
+    });
+  });
+
+  it('reads the display price + currency from the env', () => {
+    const parsed = publicEnvSchema.parse({
+      paymentPriceValue: '2.50',
+      paymentPriceCurrency: 'EUR',
+    });
+    expect(parsed.paymentPriceValue).toBe('2.50');
+    expect(parsed.paymentPriceCurrency).toBe('EUR');
   });
 
   it('rejects an app env outside the allowed set', () => {

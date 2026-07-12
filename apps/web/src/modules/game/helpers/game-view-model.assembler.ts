@@ -33,7 +33,6 @@ export interface GameViewModelInput {
   onAnalyze: () => void;
   errorMessage: string | undefined;
   payment: PaymentFlowController;
-  paymentPriceLabel: string;
   onPaymentError: (error: unknown) => void;
   paymentErrorMessage: string | undefined;
   resultView: GameResultView | undefined;
@@ -69,7 +68,6 @@ export const assembleGameViewModel = (input: GameViewModelInput): GameViewModel 
   errorMessage: input.errorMessage,
   payment: buildPaymentViewModel({
     flow: input.payment,
-    priceLabel: input.paymentPriceLabel,
     onError: input.onPaymentError,
   }),
   paymentErrorMessage: input.paymentErrorMessage,

@@ -15,10 +15,9 @@ import {
   PAYMENT_ORDER_INVALID_MESSAGE,
   PAYMENT_UNAVAILABLE_MESSAGE,
   PAYPAL_CAPTURES_PATH,
-  PAYPAL_ISSUE_ORDER_ALREADY_CAPTURED,
-  PAYPAL_ISSUE_ORDER_NOT_APPROVED,
   PAYPAL_OAUTH_TOKEN_PATH,
   PAYPAL_ORDERS_PATH,
+  PAYPAL_PAYMENT_FAILED_ISSUES,
   PAYPAL_REQUEST_TIMEOUT_MS,
   PAYPAL_STATUS_COMPLETED,
   PAYPAL_TOKEN_EXPIRY_MARGIN_SECONDS,
@@ -27,11 +26,33 @@ import type { PaymentCaptureRecord } from '../model/payment.types';
 import {
   PaypalCaptureOrderResponseSchema,
   PaypalCreateOrderResponseSchema,
+  type PaypalErrorResponse,
   PaypalErrorResponseSchema,
   PaypalTokenResponseSchema,
 } from '../model/paypal.schemas';
 
 const LOG_CONTEXT = 'PayPal';
+
+/**
+ * Compact, PII-free diagnostics line from a PayPal error body: the error name,
+ * the first issue code + description, and the debug_id to quote to PayPal
+ * support. Everything here is machine metadata, never payer data.
+ */
+const buildPaypalDiagnostics = (body: PaypalErrorResponse | undefined): string => {
+  if (body === undefined) {
+    return '(unparsed error body)';
+  }
+  const detail = body.details?.[0];
+  const parts = [
+    `name=${body.name ?? 'n/a'}`,
+    `issue=${detail?.issue ?? 'n/a'}`,
+    `debug_id=${body.debug_id ?? 'n/a'}`,
+  ];
+  if (detail?.description !== undefined) {
+    parts.push(`description=${detail.description}`);
+  }
+  return `(${parts.join(', ')})`;
+};
 
 /**
  * The ONLY file that talks to PayPal's REST API (Orders v2 + Refunds).
@@ -210,19 +231,18 @@ export class PaypalAdapter {
   /** Map PayPal's machine-readable issue codes onto the typed gate errors. */
   private async mapPaypalFailure(response: Response, operation: string): Promise<Error> {
     const parsed = PaypalErrorResponseSchema.safeParse(await this.readJson(response));
-    const issue = parsed.success ? parsed.data.details?.[0]?.issue : undefined;
-    if (
-      issue === PAYPAL_ISSUE_ORDER_NOT_APPROVED ||
-      issue === PAYPAL_ISSUE_ORDER_ALREADY_CAPTURED
-    ) {
-      this.logger.warn(`PayPal ${operation} rejected: ${issue}`);
+    const body: PaypalErrorResponse | undefined = parsed.success ? parsed.data : undefined;
+    const issue = body?.details?.[0]?.issue;
+    // Full machine-readable diagnostics (no payer PII): issue code, description,
+    // PayPal's error name, and the debug_id to quote to PayPal support.
+    this.logger.error(
+      `PayPal ${operation} failed with HTTP ${response.status} ${buildPaypalDiagnostics(body)}`,
+    );
+    const isPaymentFailure = issue !== undefined && PAYPAL_PAYMENT_FAILED_ISSUES.includes(issue);
+    if (isPaymentFailure || response.status === HTTP_STATUS_NOT_FOUND) {
+      // No money moved; the buyer can simply try again with the same or another method.
       return buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
     }
-    if (response.status === HTTP_STATUS_NOT_FOUND) {
-      this.logger.warn(`PayPal ${operation} rejected: order not found`);
-      return buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
-    }
-    this.logger.error(`PayPal ${operation} failed with HTTP ${response.status}`);
     return this.unavailable(`${operation} failed at the payment provider`);
   }
 
