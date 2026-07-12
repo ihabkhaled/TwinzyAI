@@ -21,6 +21,10 @@ describe('buildContentSecurityPolicy without the paywall (free game)', () => {
     expect(directive(csp, 'frame-src')).toBe(`frame-src 'self'`);
   });
 
+  it('keeps a minimal font-src (no data:) for the free game', () => {
+    expect(directive(buildContentSecurityPolicy(baseInput), 'font-src')).toBe(`font-src 'self'`);
+  });
+
   it('keeps a strict, eval-free script-src in a built environment', () => {
     const csp = buildContentSecurityPolicy(baseInput);
 
@@ -49,6 +53,12 @@ describe('buildContentSecurityPolicy with the paywall configured', () => {
 
   it('allows the button logo images from paypalobjects (the broken-image fix)', () => {
     expect(directive(csp, 'img-src')).toContain('https://www.paypalobjects.com');
+  });
+
+  it('allows the inline data: button fonts the SDK injects', () => {
+    const fontSrc = directive(csp, 'font-src');
+    expect(fontSrc).toContain('data:');
+    expect(fontSrc).toContain('https://www.paypalobjects.com');
   });
 
   it('allows the checkout iframe and REST calls to paypal.com', () => {

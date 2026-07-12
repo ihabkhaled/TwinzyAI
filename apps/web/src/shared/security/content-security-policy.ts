@@ -29,6 +29,10 @@ export const buildContentSecurityPolicy = ({
   paypalClientId,
 }: ContentSecurityPolicyInput): string => {
   const paypal = paypalClientId === undefined ? '' : ` ${PAYPAL_CSP_ORIGINS.join(' ')}`;
+  // The Buttons SDK serves its button fonts as inline data: URIs, so font-src
+  // needs `data:` in addition to the PayPal hosts — only when the paywall is on,
+  // so the free game's font-src stays a minimal `'self'`.
+  const fontSrc = paypal === '' ? `font-src 'self'` : `font-src 'self' data:${paypal}`;
   // The PayPal SDK loads its own further scripts, so it needs host-based
   // allowance here (nonce/strict-dynamic alone cannot authorize them).
   const scriptSrc = isDevRuntime
@@ -40,7 +44,7 @@ export const buildContentSecurityPolicy = ({
     scriptSrc,
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' blob: data:${paypal}`,
-    `font-src 'self'${paypal}`,
+    fontSrc,
     `connect-src 'self' ${apiBaseUrl}${paypal}`,
     `frame-src 'self'${paypal}`,
     `object-src 'none'`,

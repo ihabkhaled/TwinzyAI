@@ -6,6 +6,7 @@ import type { ReactElement } from 'react';
 import { useAppTranslation } from '@/packages/i18n';
 import { GlobeIcon } from '@/packages/icons';
 import { Button } from '@/packages/ui-primitives';
+import { headerLocaleLabelClass } from '@/shared/components/layout/app-header.variants';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import { useLocaleSwitcher } from '../hooks/useLocaleSwitcher.hook';
@@ -25,7 +26,7 @@ export const LocaleSwitcher = (): ReactElement => {
       testId={TEST_IDS.localeSwitch}
     >
       <GlobeIcon aria-hidden size={18} />
-      {t(LOCALE_LABEL_KEYS[nextLocale])}
+      <span className={headerLocaleLabelClass}>{t(LOCALE_LABEL_KEYS[nextLocale])}</span>
     </Button>
   );
 };

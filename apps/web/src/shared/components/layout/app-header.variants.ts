@@ -2,8 +2,11 @@
 export const appHeaderClass =
   'sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur';
 
+// Gap + horizontal padding tighten on phones so the four controls (home,
+// donate, language, theme) clear a 320px header with margin across platforms;
+// roomier from sm up.
 export const appHeaderInnerClass =
-  'mx-auto flex w-full max-w-xl items-center justify-between gap-4 px-4 py-3';
+  'mx-auto flex w-full max-w-xl items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-4';
 
 export const appHeaderBrandClass =
   'inline-flex items-center gap-2 text-base font-semibold text-foreground';
@@ -20,3 +23,11 @@ export const headerDonateLinkClass = `${headerIconLinkClass} gap-1.5`;
 
 /** Donate label is icon-only on phones to protect the 320px header layout. */
 export const headerDonateLabelClass = 'hidden sm:inline';
+
+/**
+ * The locale endonym ("العربية"/"English") is the only header control with
+ * variable, font-dependent width — hidden on phones so every control is a
+ * fixed-width icon and the 320px header cannot overflow across platforms
+ * (the globe icon + aria-label still convey the action).
+ */
+export const headerLocaleLabelClass = 'hidden sm:inline';
