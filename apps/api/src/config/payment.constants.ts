@@ -4,13 +4,14 @@
  * enable it, PAYPAL_ENV picks the endpoint, and the price is server-owned.
  */
 
-export const PaypalEnv = {
+const PaypalEnv = {
   Sandbox: 'sandbox',
   Live: 'live',
 } as const;
 
 export type PaypalEnvValue = (typeof PaypalEnv)[keyof typeof PaypalEnv];
 
+/** The env-schema's source of truth for the `PAYPAL_ENV` enum. */
 export const PAYPAL_ENV_VALUES = [PaypalEnv.Sandbox, PaypalEnv.Live] as const;
 
 /** REST API origin per PayPal environment (never configurable per-request). */

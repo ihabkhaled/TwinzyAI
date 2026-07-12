@@ -36,7 +36,7 @@ const getPayPal = (): PayPalNamespace | undefined =>
 export const isPayPalConfigured = (): boolean => publicEnv.paypalClientId !== undefined;
 
 /** Load the PayPal SDK script once; resolves when `window.paypal` is ready. */
-export const loadPayPalSdk = async (): Promise<void> => {
+const loadPayPalSdk = async (): Promise<void> => {
   if (getPayPal() !== undefined) {
     return;
   }

@@ -166,7 +166,12 @@ export class PaypalAdapter {
       body: 'grant_type=client_credentials',
     });
     if (!response.ok) {
-      this.logger.error(`PayPal OAuth failed with HTTP ${response.status}`);
+      this.logger.error(
+        `PayPal OAuth failed with HTTP ${response.status} against the ${this.config.paypalEnv} endpoint. ` +
+          `A 401 almost always means PAYPAL_CLIENT_ID/SECRET do not match PAYPAL_ENV — ` +
+          `sandbox credentials are rejected by the live endpoint and vice versa. ` +
+          `Verify the credentials belong to a ${this.config.paypalEnv} PayPal REST app.`,
+      );
       throw this.unavailable('authentication with the payment provider failed');
     }
     const parsed = PaypalTokenResponseSchema.safeParse(await this.readJson(response));

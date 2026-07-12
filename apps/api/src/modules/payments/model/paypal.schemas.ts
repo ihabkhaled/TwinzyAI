@@ -42,8 +42,6 @@ export const PaypalCaptureOrderResponseSchema = z.looseObject({
   purchase_units: z.array(purchaseUnitSchema).min(1),
 });
 
-export type PaypalCaptureOrderResponse = z.output<typeof PaypalCaptureOrderResponseSchema>;
-
 const paypalErrorDetailSchema = z.looseObject({ issue: z.string().optional() });
 
 /** PayPal error bodies carry machine-readable `issue` codes under details. */

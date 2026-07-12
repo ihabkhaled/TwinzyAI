@@ -54,6 +54,7 @@ import {
   PAYMENT_PRICE_CURRENCY_PATTERN,
   PAYMENT_PRICE_VALUE_PATTERN,
 } from './env-bounds.constants';
+import { PAYPAL_ENV_VALUES } from './payment.constants';
 
 const NODE_ENVIRONMENTS = ['development', 'test', 'production'] as const;
 
@@ -116,7 +117,7 @@ const EnvSchema = z
      */
     PAYPAL_CLIENT_ID: z.string().default(''),
     PAYPAL_CLIENT_SECRET: z.string().default(''),
-    PAYPAL_ENV: z.enum(['sandbox', 'live']).default('sandbox'),
+    PAYPAL_ENV: z.enum(PAYPAL_ENV_VALUES).default('sandbox'),
     /** Server-authoritative price per analysis (never trusted from clients). */
     PAYMENT_PRICE_VALUE: z.string().regex(PAYMENT_PRICE_VALUE_PATTERN).default('0.50'),
     PAYMENT_PRICE_CURRENCY: z.string().regex(PAYMENT_PRICE_CURRENCY_PATTERN).default('USD'),

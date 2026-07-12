@@ -4,5 +4,5 @@
  */
 
 export { PAYPAL_CSP_ORIGINS } from './paypal.constants';
-export { isPayPalConfigured, loadPayPalSdk, renderPayPalButtons } from './paypal-sdk';
+export { isPayPalConfigured, renderPayPalButtons } from './paypal-sdk';
 export type { PayPalButtonsConfig, PayPalButtonsHandle } from './paypal-sdk.types';
