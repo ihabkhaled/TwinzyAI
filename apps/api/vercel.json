@@ -3,5 +3,8 @@
   "framework": "nestjs",
   "installCommand": "cd ../.. && npm install --include=dev && sh apps/api/scripts/patch-fastify-cookie-cjs.sh",
   "buildCommand": null,
-  "outputDirectory": null
+  "outputDirectory": null,
+  "env": {
+    "SHARE_RESULT_PUBLIC_BASE_URL": "https://twinzy-ai-web.vercel.app"
+  }
 }
