@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nestjs",
-  "installCommand": "npm install --include=dev --prefix ../.. && npm install --no-save --prefix ../.. --workspace apps/api @fastify/cookie@11.1.0",
+  "installCommand": "npm install --include=dev --prefix ../.. && cd ../.. && npm install --no-save --workspace @twinzy/api @fastify/cookie@11.1.0",
   "buildCommand": null,
   "outputDirectory": null
 }
