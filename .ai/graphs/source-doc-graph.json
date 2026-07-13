@@ -306,6 +306,16 @@
       "source": "apps/api/src/bootstrap/bootstrap.ts"
     },
     {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "source": "apps/api/src/bootstrap/bootstrap.ts"
+    },
+    {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "source": "apps/api/src/bootstrap/bootstrap.ts"
+    },
+    {
       "doc": "structure/runtime-topology.md",
       "label": "explicit",
       "source": "apps/api/src/bootstrap/bootstrap.ts"
@@ -367,6 +377,11 @@
     },
     {
       "doc": "operations/readiness-checklist.md",
+      "label": "inferred",
+      "source": "apps/api/src/bootstrap/configure-security.ts"
+    },
+    {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
       "label": "inferred",
       "source": "apps/api/src/bootstrap/configure-security.ts"
     },
@@ -1071,6 +1086,11 @@
       "source": "apps/api/src/config/env.schema.ts"
     },
     {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "source": "apps/api/src/config/env.schema.ts"
+    },
+    {
       "doc": "runbooks/environment-bootstrap.md",
       "label": "explicit",
       "source": "apps/api/src/config/env.schema.ts"
@@ -1587,6 +1607,11 @@
     },
     {
       "doc": "docs/features/twinzy-hardening-v3/12-coverage-plan.md",
+      "label": "inferred",
+      "source": "apps/api/src/core/http/sse-writer.ts"
+    },
+    {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
       "label": "inferred",
       "source": "apps/api/src/core/http/sse-writer.ts"
     },
@@ -6506,6 +6531,16 @@
       "source": "apps/web/src/packages/env/public-env.ts"
     },
     {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "source": "apps/web/src/packages/env/public-env.ts"
+    },
+    {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "source": "apps/web/src/packages/env/public-env.ts"
+    },
+    {
       "doc": "runbooks/environment-bootstrap.md",
       "label": "explicit",
       "source": "apps/web/src/packages/env/public-env.ts"
@@ -7517,6 +7552,11 @@
     },
     {
       "doc": "runbooks/dependency-vulnerability.md",
+      "label": "explicit",
+      "source": "package.json"
+    },
+    {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
       "label": "explicit",
       "source": "package.json"
     },
@@ -9034,6 +9074,11 @@
       "doc": "domain/trait-taxonomy.md",
       "label": "inferred",
       "source": "packages/shared/src/utils/trait-count.util.ts"
+    },
+    {
+      "doc": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "source": "railway.json"
     },
     {
       "doc": "docs/ai/evaluation-framework.md",

@@ -11,7 +11,7 @@
 | API endpoints | 9 |
 | Web routes | 7 |
 | Test files | 169 |
-| Canonical documents | 688 |
+| Canonical documents | 689 |
 | Open contradiction-registry entries | 3 |
 | Stale items at last analysis | 0 |
 | Broken links at last analysis | 9 |

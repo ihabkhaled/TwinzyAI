@@ -281,7 +281,7 @@
       "workspace": "twinzy"
     },
     {
-      "command": "husky",
+      "command": "husky || true",
       "name": "prepare",
       "workspace": "twinzy"
     },

@@ -1,5 +1,5 @@
 {
-  "count": 2463,
+  "count": 2472,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -12071,6 +12071,60 @@
       "from": "runbooks/dependency-vulnerability.md",
       "label": "explicit",
       "to": "package.json",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "to": "apps/api/src/bootstrap/bootstrap.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "to": "apps/api/src/bootstrap/bootstrap.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "to": "apps/api/src/bootstrap/configure-security.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "to": "apps/api/src/config/env.schema.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "to": "apps/api/src/core/http/sse-writer.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "to": "apps/web/src/packages/env/public-env.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "inferred",
+      "to": "apps/web/src/packages/env/public-env.ts",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "to": "package.json",
+      "type": "describes"
+    },
+    {
+      "from": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "label": "explicit",
+      "to": "railway.json",
       "type": "describes"
     },
     {

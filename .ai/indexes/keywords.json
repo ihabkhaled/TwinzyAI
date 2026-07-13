@@ -991,6 +991,7 @@
   "cors": [
     "knowledge/summaries/security.md",
     "operations/readiness-checklist.md",
+    "runbooks/deploy-vercel-web-and-railway-api.md",
     "runbooks/streaming-disconnects.md"
   ],
   "cost": [
@@ -1214,6 +1215,7 @@
   "deployment": [
     "operations/deployment-model.md",
     "operations/README.md",
+    "runbooks/deploy-vercel-web-and-railway-api.md",
     "runbooks/deployment.md",
     "runbooks/README.md"
   ],
@@ -2028,6 +2030,7 @@
   "healthcheck": [
     "operations/deployment-model.md",
     "operations/health-checks.md",
+    "runbooks/deploy-vercel-web-and-railway-api.md",
     "runbooks/docker.md"
   ],
   "heap": [
@@ -2090,7 +2093,8 @@
     "runbooks/deployment.md"
   ],
   "husky": [
-    "quality/quality-model.md"
+    "quality/quality-model.md",
+    "runbooks/deploy-vercel-web-and-railway-api.md"
   ],
   "hypercare": [
     "docs/features/_template-frontend/12-hypercare.md",
@@ -2733,6 +2737,7 @@
   ],
   "monorepo": [
     "knowledge/summaries/architecture.md",
+    "runbooks/deploy-vercel-web-and-railway-api.md",
     "structure/README.md",
     "structure/repository-map.md"
   ],
@@ -2798,6 +2803,9 @@
   "nextjs": [
     "knowledge/summaries/architecture.md",
     "knowledge/summaries/frontend.md"
+  ],
+  "nixpacks": [
+    "runbooks/deploy-vercel-web-and-railway-api.md"
   ],
   "no persistence": [
     "knowledge/summaries/privacy.md"
@@ -3447,6 +3455,9 @@
     "contracts/integrations/openai-compat.md",
     "docs/ai/provider-catalog.md",
     "QWEN.md"
+  ],
+  "railway": [
+    "runbooks/deploy-vercel-web-and-railway-api.md"
   ],
   "ranking": [
     "domain/README.md",
@@ -4356,6 +4367,7 @@
     "docs/ai/pipeline.md",
     "domain/state-machines.md",
     "operations/SLIs.md",
+    "runbooks/deploy-vercel-web-and-railway-api.md",
     "runbooks/streaming-disconnects.md",
     "structure/flows/analyze-flow.md",
     "structure/modules/api-game.md",
@@ -4998,6 +5010,9 @@
   ],
   "vendor wrapping": [
     "knowledge/summaries/architecture.md"
+  ],
+  "vercel": [
+    "runbooks/deploy-vercel-web-and-railway-api.md"
   ],
   "verdict": [
     "domain/calculations.md",

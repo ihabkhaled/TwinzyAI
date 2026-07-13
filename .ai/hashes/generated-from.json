@@ -167,6 +167,7 @@
       "runbooks/ai-schema-failures.md",
       "runbooks/config-change.md",
       "runbooks/dependency-vulnerability.md",
+      "runbooks/deploy-vercel-web-and-railway-api.md",
       "runbooks/deployment.md",
       "runbooks/docker.md",
       "runbooks/emergency-rollback.md",
@@ -230,7 +231,7 @@
       "support/upload-troubleshooting.md",
       "support/user-visible-error-guide.md"
     ],
-    "inputsHash": "3e3fe234e9ec23a2085c73f003193251da521e8c45b722e31fa2e89ca820897a"
+    "inputsHash": "a34f5f4e081e1e6658e3238ffeefaf3877ed6965fd6f9caf0d82ca9454af1a22"
   },
   ".ai/generated/orphans.json": {
     "inputs": [
@@ -268,7 +269,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "5492f214bacf98b454b1c840fbe9752fa311e0b25c097e08b2caa73455ce7118"
+    "inputsHash": "e8b7a008110d31f69213863f6ea533d3dfba9419fb8d4bf93055721aaed43a43"
   },
   ".ai/manifests/configs.json": {
     "inputs": [
@@ -307,7 +308,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "5492f214bacf98b454b1c840fbe9752fa311e0b25c097e08b2caa73455ce7118"
+    "inputsHash": "e8b7a008110d31f69213863f6ea533d3dfba9419fb8d4bf93055721aaed43a43"
   },
   ".ai/manifests/documents.json": {
     "inputs": [
@@ -842,6 +843,7 @@
       "runbooks/api-outage.md",
       "runbooks/config-change.md",
       "runbooks/dependency-vulnerability.md",
+      "runbooks/deploy-vercel-web-and-railway-api.md",
       "runbooks/deployment.md",
       "runbooks/docker.md",
       "runbooks/emergency-rollback.md",
@@ -1000,7 +1002,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "44ea16eb49f20392bcb0dc4fbd44a7b0d4f9af39a6876f90693e3c339a45159a"
+    "inputsHash": "f3e543c9390c8fc6d9b06fb68feb4f44afe6065235ec9615ae2e1a67b59e080d"
   },
   ".ai/manifests/errors.json": {
     "inputs": [

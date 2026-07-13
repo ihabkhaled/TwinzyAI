@@ -1,5 +1,5 @@
 {
-  "count": 688,
+  "count": 689,
   "documents": [
     {
       "authority": "canonical",
@@ -24660,6 +24660,69 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
+      "hash": "34e129f44683564c2d03b8cb8fe90c156d8b4a32e34b28324131ed7b3b1c2391",
+      "headings": [
+        "Runbook — Split Deploy (Vercel web + Railway API)",
+        "Why two services",
+        "Prerequisite — the `prepare`/husky install fix",
+        "Frontend — Vercel",
+        "Backend — Railway",
+        "Smoke test (after both are live)",
+        "Rollback"
+      ],
+      "id": "runbook-deploy-vercel-web-railway-api",
+      "keywords": [
+        "runbook",
+        "deployment",
+        "vercel",
+        "railway",
+        "monorepo",
+        "husky",
+        "cors",
+        "nixpacks",
+        "sse",
+        "healthcheck"
+      ],
+      "links": [
+        "../.nvmrc",
+        "../apps/api/src/bootstrap/bootstrap.ts",
+        "../apps/api/src/bootstrap/configure-security.ts",
+        "../apps/api/src/config/env.schema.ts",
+        "../apps/api/src/core/http/sse-writer.ts",
+        "../apps/web/src/packages/env/public-env.ts",
+        "../railway.json"
+      ],
+      "path": "runbooks/deploy-vercel-web-and-railway-api.md",
+      "relatedCode": [
+        "railway.json",
+        "package.json",
+        "apps/api/src/bootstrap/bootstrap.ts",
+        "apps/web/src/packages/env/public-env.ts"
+      ],
+      "relatedDocs": [
+        "runbooks/deployment.md",
+        "runbooks/environment-bootstrap.md",
+        "runbooks/rollback.md"
+      ],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/api/dist/main.js",
+        "apps/api/src/bootstrap/bootstrap.ts",
+        "apps/api/src/bootstrap/configure-security.ts",
+        "apps/api/src/config/env.schema.ts",
+        "apps/api/src/core/http/sse-writer.ts",
+        "apps/web/src/packages/env/public-env.ts"
+      ],
+      "summary": "Deploy the two Twinzy services as separate hosts — the Next.js frontend on Vercel (root apps/web) and the long-running NestJS API on Railway (repo root, railway.json) — wired by NEXT_PUBLIC_API_BASE_URL and CORS_ALLOWED_ORIGINS.",
+      "title": "Runbook — Split Deploy (Vercel web + Railway API)",
+      "tokens": 1593,
+      "type": "runbook"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 2,
+      "generated": false,
+      "hasFrontmatter": true,
       "hash": "d6398d22f3569739cbcc10776a3c45d40b46d0a1f1c28d5fcd9644f182dd81b2",
       "headings": [
         "Runbook — Deployment",
@@ -25394,7 +25457,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "b60127ac4871f67e85cbfe200c3858a09eee80698eaf849110de8ddecdc9458f",
+      "hash": "36ebdb5b8c7d7e3f833dc4044344b5b90cc5fafa22e70185e8a4c90793cb6c0b",
       "headings": [
         "Runbooks — Twinzy",
         "Development & environment",
@@ -25423,6 +25486,7 @@
         "./api-outage.md",
         "./config-change.md",
         "./dependency-vulnerability.md",
+        "./deploy-vercel-web-and-railway-api.md",
         "./deployment.md",
         "./docker.md",
         "./emergency-rollback.md",
@@ -25459,7 +25523,7 @@
       "sourceMentions": [],
       "summary": "Index of all operational runbooks for the Twinzy stack — development, deployment, incidents, providers, performance, and safety procedures.",
       "title": "Runbooks — Twinzy",
-      "tokens": 1136,
+      "tokens": 1173,
       "type": "runbook"
     },
     {

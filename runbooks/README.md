@@ -35,6 +35,7 @@ Ground truth for operations: structured pino JSON logs with request-id correlati
 | Runbook | When to use |
 | --- | --- |
 | [`deployment.md`](./deployment.md) | Deploy the stack (gated) |
+| [`deploy-vercel-web-and-railway-api.md`](./deploy-vercel-web-and-railway-api.md) | Split deploy: Next.js web on Vercel + NestJS API on Railway |
 | [`release-smoke-test.md`](./release-smoke-test.md) | Post-deploy verification of every release |
 | [`rollback.md`](./rollback.md) | Undo a release; env-lever feature disablement |
 | [`emergency-rollback.md`](./emergency-rollback.md) | Active SEV-1 impact, minutes matter |
