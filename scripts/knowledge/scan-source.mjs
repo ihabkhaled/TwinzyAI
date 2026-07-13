@@ -22,6 +22,13 @@ const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.mts', '.cts'];
 /** apps/web/e2e sits outside src but is part of the scanned surface (Playwright specs). */
 const EXTRA_ROOTS = ['apps/web/e2e'];
 
+/**
+ * Deployment-only wrappers intentionally duplicate a canonical application
+ * entrypoint and should not change the architecture inventory or generated
+ * knowledge graph.
+ */
+const EXCLUDED_SOURCE_PATHS = new Set(['apps/api/src/server.ts']);
+
 const buildEntry = (path) => {
   const text = readText(path);
   return {
@@ -43,7 +50,7 @@ export const scanSource = () => {
   }
   const files = paths
     .toSorted((a, b) => a.localeCompare(b))
-    .filter((path) => !path.endsWith('.d.ts'))
+    .filter((path) => !path.endsWith('.d.ts') && !EXCLUDED_SOURCE_PATHS.has(path))
     .map((path) => buildEntry(path));
   return { count: files.length, files };
 };
