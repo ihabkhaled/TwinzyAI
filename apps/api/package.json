@@ -5,7 +5,7 @@
   "description": "Twinzy backend API (NestJS).",
   "scripts": {
     "dev": "nest start --watch",
-    "build": "nest build",
+    "build": "npm --prefix ../.. run build:shared && nest build",
     "start": "node dist/main.js",
     "typecheck": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json"
   },

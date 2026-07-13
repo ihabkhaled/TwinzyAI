@@ -1,7 +1,7 @@
 {
   "commands": [
     {
-      "command": "nest build",
+      "command": "npm --prefix ../.. run build:shared && nest build",
       "name": "build",
       "workspace": "@twinzy/api"
     },
@@ -31,12 +31,12 @@
       "workspace": "@twinzy/shared"
     },
     {
-      "command": "next build --turbopack",
+      "command": "npm --prefix ../.. run build:shared && next build --turbopack",
       "name": "build",
       "workspace": "@twinzy/web"
     },
     {
-      "command": "next build",
+      "command": "npm --prefix ../.. run build:shared && next build",
       "name": "build:turbo",
       "workspace": "@twinzy/web"
     },
@@ -281,7 +281,7 @@
       "workspace": "twinzy"
     },
     {
-      "command": "husky || true",
+      "command": "node .husky/install.mjs",
       "name": "prepare",
       "workspace": "twinzy"
     },
