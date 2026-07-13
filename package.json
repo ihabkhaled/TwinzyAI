@@ -53,7 +53,7 @@
     "test:pwa": "npm run build:shared && vitest run --project web-unit -- pwa",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
