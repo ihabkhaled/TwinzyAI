@@ -16,6 +16,7 @@
     "@fastify/multipart": "^10.1.0",
     "@fastify/static": "^9.3.0",
     "@google/genai": "^2.10.0",
+    "@nestjs/cli": "^11.0.23",
     "@nestjs/common": "^11.1.28",
     "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.1.28",
@@ -32,7 +33,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@nestjs/cli": "^11.0.23",
     "@nestjs/testing": "^11.1.28",
     "@swc/core": "^1.15.43",
     "@types/node": "^26.1.1",

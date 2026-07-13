@@ -262,7 +262,8 @@
   "workspaces": [
     {
       "dependencies": {
-        "fastify": "^5.10.0"
+        "fastify": "^5.10.0",
+        "tsc7": "npm:typescript@^7.0.2"
       },
       "devDependencies": {
         "@commitlint/cli": "^21.2.1",
@@ -296,7 +297,6 @@
         "madge": "^8.0.0",
         "npm-check-updates": "^22.2.9",
         "prettier": "^3.9.5",
-        "tsc7": "npm:typescript@^7.0.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.62.1",
         "vitest": "^4.1.10",
@@ -333,6 +333,7 @@
         "@fastify/multipart": "^10.1.0",
         "@fastify/static": "^9.3.0",
         "@google/genai": "^2.10.0",
+        "@nestjs/cli": "^11.0.23",
         "@nestjs/common": "^11.1.28",
         "@nestjs/config": "^4.0.4",
         "@nestjs/core": "^11.1.28",
@@ -349,7 +350,6 @@
         "zod": "^4.4.3"
       },
       "devDependencies": {
-        "@nestjs/cli": "^11.0.23",
         "@nestjs/testing": "^11.1.28",
         "@swc/core": "^1.15.43",
         "@types/node": "^26.1.1",
