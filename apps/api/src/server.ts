@@ -1,7 +1,20 @@
+import { NestFactory } from '@nestjs/core';
+
+import { bootstrap } from './bootstrap/bootstrap';
+
+import 'reflect-metadata';
+
 /**
- * Vercel detects `src/server.ts` as a Node.js server entrypoint and captures
- * the existing Nest/Fastify `listen()` call as a Vercel Function. Keep the
- * canonical bootstrap in `main.ts` so local, Railway, and Vercel deployments
- * all start the API through the same code path.
+ * Vercel statically detects NestJS only when the entrypoint imports
+ * `@nestjs/core` directly. The actual application startup remains delegated to
+ * the canonical bootstrap used by local and Railway deployments.
  */
-import './main';
+if (typeof NestFactory.create !== 'function') {
+  throw new TypeError('NestJS application factory is unavailable');
+}
+
+bootstrap().catch((error: unknown) => {
+  const message = error instanceof Error ? (error.stack ?? error.message) : String(error);
+  process.stderr.write(`Fatal bootstrap error: ${message}\n`);
+  process.exitCode = 1;
+});
