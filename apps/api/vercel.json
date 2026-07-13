@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nestjs",
   "installCommand": "cd ../.. && npm install --include=dev && sh apps/api/scripts/patch-fastify-cookie-cjs.sh",
-  "buildCommand": null,
+  "buildCommand": "sh scripts/verify-vercel-build.sh",
   "outputDirectory": null
 }
