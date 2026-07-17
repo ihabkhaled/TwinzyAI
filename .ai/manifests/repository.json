@@ -1,5 +1,5 @@
 {
-  "count": 660,
+  "count": 663,
   "files": [
     {
       "exports": [
@@ -7401,17 +7401,18 @@
           "name": "CameraCapture"
         }
       ],
-      "hash": "4537259e3fb81a64be4b17a99225d9325c0c5e5f399b0965ddea88d434cad817",
+      "hash": "4f672245135d1b9849ffd0a92b9859f9f6caf87642218a98136ca86700bf4385",
       "imports": [
         "../model/game-component.types",
         "../model/game.constants",
         "./camera-capture.variants",
+        "./camera-controls.component",
         "@/packages/ui-primitives",
         "react"
       ],
       "isTest": false,
       "layer": "components",
-      "loc": 68,
+      "loc": 81,
       "module": "web:game",
       "path": "apps/web/src/modules/game/components/camera-capture.component.tsx"
     },
@@ -7420,6 +7421,10 @@
         {
           "kind": "const",
           "name": "cameraActionsClass"
+        },
+        {
+          "kind": "const",
+          "name": "cameraControlsClass"
         },
         {
           "kind": "const",
@@ -7440,15 +7445,44 @@
         {
           "kind": "const",
           "name": "cameraVideoClass"
+        },
+        {
+          "kind": "const",
+          "name": "cameraVideoMirroredClass"
+        },
+        {
+          "kind": "const",
+          "name": "resolveCameraVideoClass"
         }
       ],
-      "hash": "3bd47bc729688f442a04ca97ce0e1944cafae00b5bae1513a2265286b6dae74e",
+      "hash": "116b0c70c93a8b93c8e8217d9fba13e315737f11684d69bdfae3c1d49cddfc9f",
       "imports": [],
       "isTest": false,
       "layer": "components",
-      "loc": 13,
+      "loc": 23,
       "module": "web:game",
       "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "CameraControls"
+        }
+      ],
+      "hash": "349d27d05c079dc1bb521777aa339e1d9f4ffdaf5ce43e742f2ade72b2dc59f7",
+      "imports": [
+        "../model/game-component.types",
+        "./camera-capture.variants",
+        "@/packages/ui-primitives",
+        "@/shared/constants/test-ids.constants",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "components",
+      "loc": 39,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/camera-controls.component.tsx"
     },
     {
       "exports": [
@@ -8229,7 +8263,7 @@
           "name": "GameSetup"
         }
       ],
-      "hash": "558a064bcd18104aadb1f3fc2d49f56a72493aeb54b18575e979dd7fc2984d7e",
+      "hash": "70da4278a53f13bd6810794456dfa6da109e55ce645471c7927421ef9a50c7a2",
       "imports": [
         "../components/camera-capture.component",
         "../components/privacy-notice.component",
@@ -8245,7 +8279,7 @@
       ],
       "isTest": false,
       "layer": "containers",
-      "loc": 95,
+      "loc": 100,
       "module": "web:game",
       "path": "apps/web/src/modules/game/containers/game-setup.container.tsx"
     },
@@ -8847,7 +8881,7 @@
           "name": "translateOptionalKey"
         }
       ],
-      "hash": "0c9d7c30bc8f553470b2800520e166af5fc63cea940e2d67ababbcf3c2636d3c",
+      "hash": "4fcf78f68814f55d9a33546d702fac4f8d54dd2b1267595c592b46fc6e52b323",
       "imports": [
         "../model/game.constants",
         "../model/game.enums",
@@ -8857,7 +8891,7 @@
       ],
       "isTest": false,
       "layer": "helpers",
-      "loc": 213,
+      "loc": 215,
       "module": "web:game",
       "path": "apps/web/src/modules/game/helpers/game-display.helper.ts"
     },
@@ -8960,14 +8994,14 @@
           "name": "buildUploadViewModel"
         }
       ],
-      "hash": "96cdc802a7d7bb950a0e9e2c906cb7e20ec14771d2d8440e4fbfd76606da703e",
+      "hash": "15810555e1dadd1aa30ee7c4bbd24824af499266cc1e71951886a248be40b870",
       "imports": [
         "../model/game.types",
         "./game-display.helper"
       ],
       "isTest": false,
       "layer": "helpers",
-      "loc": 60,
+      "loc": 63,
       "module": "web:game",
       "path": "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
     },
@@ -9134,18 +9168,38 @@
           "name": "useCameraCapture"
         }
       ],
-      "hash": "45da0beab1514dcbe2144fab1bd158a3ee99ad09b887d35a37cbff000a475334",
+      "hash": "0e8eb734ab12b89f41710fa9cc59327a0222e1b11e28178e86e5f3c9c1c711dc",
       "imports": [
         "../model/game.constants",
+        "../model/game.types",
+        "./useCameraSettings.hook",
+        "@/packages/camera",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "hooks",
+      "loc": 99,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "useCameraSettings"
+        }
+      ],
+      "hash": "b9b8718b7ad66d2a9f947a7d8cd3fc6f5b339c1bcfaf5eb9549b6bbabda2f88e",
+      "imports": [
         "../model/game.types",
         "@/packages/camera",
         "react"
       ],
       "isTest": false,
       "layer": "hooks",
-      "loc": 97,
+      "loc": 32,
       "module": "web:game",
-      "path": "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts"
+      "path": "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts"
     },
     {
       "exports": [
@@ -9460,7 +9514,37 @@
       "exports": [
         {
           "kind": "interface",
+          "name": "CameraController"
+        },
+        {
+          "kind": "interface",
+          "name": "CameraSettings"
+        },
+        {
+          "kind": "interface",
+          "name": "CameraViewModel"
+        }
+      ],
+      "hash": "3f7f3249d20c520da589bb48d7274256e98c1a945c0e241cfef8b79bc814968c",
+      "imports": [
+        "@/packages/camera",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 47,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/model/camera.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
           "name": "CameraCaptureProps"
+        },
+        {
+          "kind": "interface",
+          "name": "CameraControlsProps"
         },
         {
           "kind": "interface",
@@ -9551,14 +9635,14 @@
           "name": "UploadConsentProps"
         }
       ],
-      "hash": "ef422632d244dbe3f4fb3cd9d6b5d48cf66af7afa6bba4e355dcfd6c6f45645e",
+      "hash": "f0208435a527e708c3c7863ac3ce21fd82a80fd72af1bc5373a585751baa78d9",
       "imports": [
         "./game.types",
         "react"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 219,
+      "loc": 233,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/game-component.types.ts"
     },
@@ -9757,14 +9841,6 @@
           "name": "AnalyzeStreamOptions"
         },
         {
-          "kind": "interface",
-          "name": "CameraController"
-        },
-        {
-          "kind": "interface",
-          "name": "CameraViewModel"
-        },
-        {
           "kind": "type",
           "name": "FileValidationResult"
         },
@@ -9873,18 +9949,18 @@
           "name": "UploadViewModelInput"
         }
       ],
-      "hash": "36ebb30954cdb06dc8e0b493fbfefd2f1fa7d51d8cd0b8fed26a3db8b77b4e7d",
+      "hash": "f4678cc23ce4ff8adec480ab05ae8c43720f6b2d288ba832068d374166f98b83",
       "imports": [
+        "./camera.types",
         "./game.enums",
         "./payment.types",
         "./share-modal.types",
         "@/shared/errors/error-keys.constants",
-        "@twinzy/shared",
-        "react"
+        "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 420,
+      "loc": 398,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/game.types.ts"
     },
@@ -10281,7 +10357,7 @@
     },
     {
       "exports": [],
-      "hash": "2b99b7feed9db1107276861954e37c9e8aba510281441b8834a78f057a599921",
+      "hash": "d9b6c2aff6a58154429bb80fa0e4ffa03c5e88e7c0ddb2bfccb25c968d30d828",
       "imports": [
         "../components/camera-capture.component",
         "@testing-library/react",
@@ -10290,7 +10366,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 60,
+      "loc": 91,
       "module": "web:game",
       "path": "apps/web/src/modules/game/test/camera-capture.component.test.tsx"
     },
@@ -10478,7 +10554,7 @@
     },
     {
       "exports": [],
-      "hash": "6d88c85893640cac0b8b59262c7a991690892f8e6378050c68636757605d32f5",
+      "hash": "1397708e680efdf5974849afff1763f1fac6fbf651408e1bf4294b42f6835a6c",
       "imports": [
         "../helpers/game-view-model.helper",
         "./game-fixtures",
@@ -10488,7 +10564,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 63,
+      "loc": 67,
       "module": "web:game",
       "path": "apps/web/src/modules/game/test/game-view-model.helper.test.ts"
     },
@@ -10715,7 +10791,7 @@
     },
     {
       "exports": [],
-      "hash": "9c7c9791122158d929e924582f095043087975586c9a72a65831d9c5f8c19b86",
+      "hash": "9a3ce3537f484476082b8fd419fd98b0b74b2d769efc9e09313305d2a17787c8",
       "imports": [
         "../hooks/useCameraCapture.hook",
         "@/packages/camera",
@@ -10724,7 +10800,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 114,
+      "loc": 162,
       "module": "web:game",
       "path": "apps/web/src/modules/game/test/use-camera-capture.hook.test.ts"
     },
@@ -11561,7 +11637,7 @@
     },
     {
       "exports": [],
-      "hash": "eb502f32601c162d12507a39e4457a1c6ac003b2d5011766dc14c810348ce5f4",
+      "hash": "5854d3ed6663ff62a51e8e74a13f99904253a016dacd56427f2388c9ec5149ea",
       "imports": [
         "./camera-stream",
         "./camera.constants",
@@ -11569,7 +11645,7 @@
       ],
       "isTest": true,
       "layer": "packages",
-      "loc": 66,
+      "loc": 77,
       "module": "web:pkg-camera",
       "path": "apps/web/src/packages/camera/camera-stream.test.ts"
     },
@@ -11588,13 +11664,13 @@
           "name": "stopCameraStream"
         }
       ],
-      "hash": "1a7860f9e2de49aa2f53baf59cfc12ebd8852eed51853c2f807b9e164ea5511d",
+      "hash": "d3dfe72e78cfc8008301ac5dbfe643b39cb1825cf0383fdb4fc9caa5c64ac60f",
       "imports": [
         "./camera.constants"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 39,
+      "loc": 40,
       "module": "web:pkg-camera",
       "path": "apps/web/src/packages/camera/camera-stream.ts"
     },
@@ -11602,7 +11678,15 @@
       "exports": [
         {
           "kind": "const",
-          "name": "CAMERA_CONSTRAINTS"
+          "name": "buildCameraConstraints"
+        },
+        {
+          "kind": "const",
+          "name": "CAMERA_FACING_MODES"
+        },
+        {
+          "kind": "type",
+          "name": "CameraFacingMode"
         },
         {
           "kind": "const",
@@ -11615,19 +11699,23 @@
         {
           "kind": "const",
           "name": "CAPTURE_QUALITY"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_CAMERA_FACING_MODE"
         }
       ],
-      "hash": "5a48b89601959ba8e10600a03dd8f68ac53b96ca04df799de8e0b1c05e0217c0",
+      "hash": "962bc380e30fa98d453ff57aa8172dc951583d0cff11e11c3a6ee323aace67ac",
       "imports": [],
       "isTest": false,
       "layer": "packages",
-      "loc": 20,
+      "loc": 35,
       "module": "web:pkg-camera",
       "path": "apps/web/src/packages/camera/camera.constants.ts"
     },
     {
       "exports": [],
-      "hash": "a818792736517d72e1868a4f3887f61cb8441d3c0e022ae80dd6ba6840e5ecb3",
+      "hash": "21b6a923b00a6e8a318a7524dc608638dd986a0ac7e855e4dd69c7ace8b558d5",
       "imports": [
         "./camera.constants",
         "./capture-frame",
@@ -11635,7 +11723,7 @@
       ],
       "isTest": true,
       "layer": "packages",
-      "loc": 61,
+      "loc": 86,
       "module": "web:pkg-camera",
       "path": "apps/web/src/packages/camera/capture-frame.test.ts"
     },
@@ -11646,13 +11734,13 @@
           "name": "captureFrameToFile"
         }
       ],
-      "hash": "61b1e57a3dee3ef57e63edb45ae220e388640e02bc723e9d81197bf5e61b43d3",
+      "hash": "13dbb8b3a3e5f37c6ba9999f6983bf477469bfb34144833a068fa4cb95b86a31",
       "imports": [
         "./camera.constants"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 41,
+      "loc": 49,
       "module": "web:pkg-camera",
       "path": "apps/web/src/packages/camera/capture-frame.ts"
     },
@@ -11660,7 +11748,15 @@
       "exports": [
         {
           "kind": "re-export",
+          "name": "CAMERA_FACING_MODES"
+        },
+        {
+          "kind": "re-export",
           "name": "captureFrameToFile"
+        },
+        {
+          "kind": "re-export",
+          "name": "DEFAULT_CAMERA_FACING_MODE"
         },
         {
           "kind": "re-export",
@@ -11671,14 +11767,15 @@
           "name": "stopCameraStream"
         }
       ],
-      "hash": "13134646f71f0ee6433cb831b7f82a40213247f14d3642df3aea9d57377581a5",
+      "hash": "f764e8e8e1758e8f85cd64f185b677751c8e4c3143363a6059515ee21123feea",
       "imports": [
         "./camera-stream",
+        "./camera.constants",
         "./capture-frame"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 3,
+      "loc": 5,
       "module": "web:pkg-camera",
       "path": "apps/web/src/packages/camera/index.ts"
     },
@@ -13879,11 +13976,11 @@
           "name": "TEST_IDS"
         }
       ],
-      "hash": "d757d11a3ca47e1ec7d5fa1e8781683175659be3d30bee156982fd38a665e89f",
+      "hash": "5e495f85c7a7dc22e89905a0c61307b65d25acd61a7db938cb7dcfc9ce550b7d",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 57,
+      "loc": 59,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/test-ids.constants.ts"
     },

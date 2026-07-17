@@ -6,7 +6,7 @@
 
 | Fact | Value |
 | --- | --- |
-| Source files scanned | 660 |
+| Source files scanned | 663 |
 | Source modules | 39 |
 | API endpoints | 9 |
 | Web routes | 7 |

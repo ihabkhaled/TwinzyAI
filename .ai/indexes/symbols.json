@@ -386,6 +386,9 @@
   "buildBusyStreamMessage": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
+  "buildCameraConstraints": [
+    "apps/web/src/packages/camera/camera.constants.ts"
+  ],
   "buildCameraViewModel": [
     "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
   ],
@@ -498,11 +501,12 @@
   "buttonVariants": [
     "apps/web/src/packages/ui-primitives/button.variants.ts"
   ],
-  "CAMERA_CONSTRAINTS": [
-    "apps/web/src/packages/camera/camera.constants.ts"
-  ],
   "CAMERA_ERROR_MESSAGE_KEY": [
     "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "CAMERA_FACING_MODES": [
+    "apps/web/src/packages/camera/camera.constants.ts",
+    "apps/web/src/packages/camera/index.ts"
   ],
   "cameraActionsClass": [
     "apps/web/src/modules/game/components/camera-capture.variants.ts"
@@ -514,10 +518,25 @@
     "apps/web/src/modules/game/model/game-component.types.ts"
   ],
   "CameraController": [
-    "apps/web/src/modules/game/model/game.types.ts"
+    "apps/web/src/modules/game/model/camera.types.ts"
+  ],
+  "CameraControls": [
+    "apps/web/src/modules/game/components/camera-controls.component.tsx"
+  ],
+  "cameraControlsClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "CameraControlsProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
   ],
   "cameraErrorClass": [
     "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
+  "CameraFacingMode": [
+    "apps/web/src/packages/camera/camera.constants.ts"
+  ],
+  "CameraSettings": [
+    "apps/web/src/modules/game/model/camera.types.ts"
   ],
   "cameraStageClass": [
     "apps/web/src/modules/game/components/camera-capture.variants.ts"
@@ -531,8 +550,11 @@
   "cameraVideoClass": [
     "apps/web/src/modules/game/components/camera-capture.variants.ts"
   ],
+  "cameraVideoMirroredClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
   "CameraViewModel": [
-    "apps/web/src/modules/game/model/game.types.ts"
+    "apps/web/src/modules/game/model/camera.types.ts"
   ],
   "CANCEL_THROTTLE": [
     "apps/api/src/modules/game/model/game.constants.ts"
@@ -958,6 +980,10 @@
   ],
   "DEFAULT_API_VERSION": [
     "apps/api/src/bootstrap/bootstrap.constants.ts"
+  ],
+  "DEFAULT_CAMERA_FACING_MODE": [
+    "apps/web/src/packages/camera/camera.constants.ts",
+    "apps/web/src/packages/camera/index.ts"
   ],
   "DEFAULT_CLAMAV_HOSTS": [
     "apps/api/src/config/env-bounds.constants.ts"
@@ -2552,6 +2578,9 @@
   "RESERVED_NON_GENERATION_CALLS": [
     "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
   ],
+  "resolveCameraVideoClass": [
+    "apps/web/src/modules/game/components/camera-capture.variants.ts"
+  ],
   "resolveCategoryLabel": [
     "apps/web/src/modules/game/helpers/game-display.helper.ts"
   ],
@@ -3636,6 +3665,9 @@
   ],
   "useCameraCapture": [
     "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts"
+  ],
+  "useCameraSettings": [
+    "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts"
   ],
   "useCountdown": [
     "apps/web/src/modules/game/hooks/useCountdown.hook.ts"

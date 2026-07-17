@@ -10,6 +10,8 @@ vi.mock('@/packages/camera', () => ({
   stopCameraStream: vi.fn(),
   captureFrameToFile: vi.fn(),
   isCameraSupported: vi.fn(() => true),
+  CAMERA_FACING_MODES: { Front: 'user', Back: 'environment' },
+  DEFAULT_CAMERA_FACING_MODE: 'environment',
 }));
 
 const requestMock = vi.mocked(cameraPackage.requestCameraStream);
@@ -29,9 +31,10 @@ describe('useCameraCapture', () => {
     vi.clearAllMocks();
   });
 
-  it('opens the camera and requests a stream', async () => {
+  it('opens the camera and requests the rear stream by default', async () => {
     const { result } = renderHook(() => useCameraCapture(vi.fn()));
     expect(result.current.isOpen).toBe(false);
+    expect(result.current.isMirrored).toBe(false);
 
     act(() => {
       result.current.open();
@@ -39,7 +42,52 @@ describe('useCameraCapture', () => {
 
     expect(result.current.isOpen).toBe(true);
     await waitFor(() => {
-      expect(requestMock).toHaveBeenCalledTimes(1);
+      expect(requestMock).toHaveBeenCalledWith('environment');
+    });
+  });
+
+  it('switches to the front camera and re-acquires the stream', async () => {
+    const { result } = renderHook(() => useCameraCapture(vi.fn()));
+    act(() => {
+      result.current.open();
+    });
+    await waitFor(() => {
+      expect(requestMock).toHaveBeenCalledWith('environment');
+    });
+
+    act(() => {
+      result.current.switchCamera();
+    });
+
+    await waitFor(() => {
+      expect(requestMock).toHaveBeenCalledWith('user');
+    });
+    expect(stopMock).toHaveBeenCalled();
+  });
+
+  it('toggles the mirror flag and captures a mirrored frame', async () => {
+    const file = new File(['x'], 'camera-photo.jpg', { type: 'image/jpeg' });
+    captureMock.mockResolvedValue(file);
+    const { result } = renderHook(() => useCameraCapture(vi.fn()));
+    act(() => {
+      result.current.open();
+    });
+    await waitFor(() => {
+      expect(requestMock).toHaveBeenCalled();
+    });
+
+    act(() => {
+      result.current.toggleMirror();
+    });
+    expect(result.current.isMirrored).toBe(true);
+
+    act(() => {
+      result.current.videoRef.current = document.createElement('video');
+      result.current.capture();
+    });
+
+    await waitFor(() => {
+      expect(captureMock).toHaveBeenCalledWith(expect.anything(), true);
     });
   });
 

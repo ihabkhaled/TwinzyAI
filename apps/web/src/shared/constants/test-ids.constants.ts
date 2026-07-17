@@ -9,6 +9,8 @@ export const TEST_IDS = {
   uploadCard: 'upload-card',
   uploadInput: 'upload-input',
   cameraCard: 'camera-card',
+  cameraSwitch: 'camera-switch',
+  cameraMirror: 'camera-mirror',
   consentCheckbox: 'consent-checkbox',
   analyzeButton: 'analyze-button',
   resultCountSelect: 'result-count-select',

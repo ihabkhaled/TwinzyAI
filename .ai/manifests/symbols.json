@@ -1,5 +1,5 @@
 {
-  "count": 1371,
+  "count": 1383,
   "symbols": [
     {
       "kind": "const",
@@ -990,6 +990,13 @@
     },
     {
       "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-camera",
+      "name": "buildCameraConstraints",
+      "path": "apps/web/src/packages/camera/camera.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "helpers",
       "module": "web:game",
       "name": "buildCameraViewModel",
@@ -1270,17 +1277,24 @@
     },
     {
       "kind": "const",
-      "layer": "packages",
-      "module": "web:pkg-camera",
-      "name": "CAMERA_CONSTRAINTS",
-      "path": "apps/web/src/packages/camera/camera.constants.ts"
-    },
-    {
-      "kind": "const",
       "layer": "model",
       "module": "web:game",
       "name": "CAMERA_ERROR_MESSAGE_KEY",
       "path": "apps/web/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-camera",
+      "name": "CAMERA_FACING_MODES",
+      "path": "apps/web/src/packages/camera/camera.constants.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-camera",
+      "name": "CAMERA_FACING_MODES",
+      "path": "apps/web/src/packages/camera/index.ts"
     },
     {
       "kind": "const",
@@ -1308,7 +1322,28 @@
       "layer": "model",
       "module": "web:game",
       "name": "CameraController",
-      "path": "apps/web/src/modules/game/model/game.types.ts"
+      "path": "apps/web/src/modules/game/model/camera.types.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "components",
+      "module": "web:game",
+      "name": "CameraControls",
+      "path": "apps/web/src/modules/game/components/camera-controls.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "cameraControlsClass",
+      "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "CameraControlsProps",
+      "path": "apps/web/src/modules/game/model/game-component.types.ts"
     },
     {
       "kind": "const",
@@ -1316,6 +1351,20 @@
       "module": "web:game",
       "name": "cameraErrorClass",
       "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "packages",
+      "module": "web:pkg-camera",
+      "name": "CameraFacingMode",
+      "path": "apps/web/src/packages/camera/camera.constants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "CameraSettings",
+      "path": "apps/web/src/modules/game/model/camera.types.ts"
     },
     {
       "kind": "const",
@@ -1346,11 +1395,18 @@
       "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
     },
     {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "cameraVideoMirroredClass",
+      "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
+    },
+    {
       "kind": "interface",
       "layer": "model",
       "module": "web:game",
       "name": "CameraViewModel",
-      "path": "apps/web/src/modules/game/model/game.types.ts"
+      "path": "apps/web/src/modules/game/model/camera.types.ts"
     },
     {
       "kind": "const",
@@ -2394,6 +2450,20 @@
       "module": "api:bootstrap",
       "name": "DEFAULT_API_VERSION",
       "path": "apps/api/src/bootstrap/bootstrap.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-camera",
+      "name": "DEFAULT_CAMERA_FACING_MODE",
+      "path": "apps/web/src/packages/camera/camera.constants.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-camera",
+      "name": "DEFAULT_CAMERA_FACING_MODE",
+      "path": "apps/web/src/packages/camera/index.ts"
     },
     {
       "kind": "const",
@@ -6450,6 +6520,13 @@
     },
     {
       "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "resolveCameraVideoClass",
+      "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "helpers",
       "module": "web:game",
       "name": "resolveCategoryLabel",
@@ -9114,6 +9191,13 @@
       "module": "web:game",
       "name": "useCameraCapture",
       "path": "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "hooks",
+      "module": "web:game",
+      "name": "useCameraSettings",
+      "path": "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts"
     },
     {
       "kind": "const",

@@ -11,8 +11,9 @@ import {
   cameraStageClass,
   cameraStartingClass,
   cameraTitleClass,
-  cameraVideoClass,
+  resolveCameraVideoClass,
 } from './camera-capture.variants';
+import { CameraControls } from './camera-controls.component';
 
 /**
  * Live camera preview with Capture/Cancel actions. Pure composition: the video
@@ -26,11 +27,16 @@ export function CameraCapture({
   startingLabel,
   captureButton,
   cancelButton,
+  switchButton,
+  mirrorButton,
   isStarting,
+  isMirrored,
   errorMessage,
   videoRef,
   onCapture,
   onCancel,
+  onSwitchCamera,
+  onToggleMirror,
   testId,
 }: Readonly<CameraCaptureProps>): ReactElement {
   return (
@@ -43,7 +49,7 @@ export function CameraCapture({
           playsInline
           muted
           aria-label={previewLabel}
-          className={cameraVideoClass}
+          className={resolveCameraVideoClass(isMirrored)}
         >
           <track kind={CAPTIONS_TRACK_KIND} />
         </video>
@@ -54,6 +60,13 @@ export function CameraCapture({
           {errorMessage}
         </Alert>
       )}
+      <CameraControls
+        switchButton={switchButton}
+        mirrorButton={mirrorButton}
+        isMirrored={isMirrored}
+        onSwitchCamera={onSwitchCamera}
+        onToggleMirror={onToggleMirror}
+      />
       <div className={cameraActionsClass}>
         <Button onClick={onCapture} disabled={isStarting}>
           {captureButton}

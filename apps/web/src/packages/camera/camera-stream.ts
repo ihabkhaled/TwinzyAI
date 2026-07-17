@@ -1,4 +1,5 @@
-import { CAMERA_CONSTRAINTS } from './camera.constants';
+import type { CameraFacingMode } from './camera.constants';
+import { buildCameraConstraints } from './camera.constants';
 
 /**
  * Thin wrapper around the browser camera stream APIs (getUserMedia), kept in
@@ -19,12 +20,12 @@ export const isCameraSupported = (): boolean => {
   return typeof mediaDevices?.getUserMedia === 'function';
 };
 
-/** Opens the rear camera; rejects when the browser cannot stream. */
-export const requestCameraStream = async (): Promise<MediaStream> => {
+/** Opens the requested camera (front/back); rejects when the browser cannot stream. */
+export const requestCameraStream = async (facingMode: CameraFacingMode): Promise<MediaStream> => {
   if (!isCameraSupported()) {
     throw new Error('CAMERA_UNSUPPORTED');
   }
-  return globalThis.navigator.mediaDevices.getUserMedia(CAMERA_CONSTRAINTS);
+  return globalThis.navigator.mediaDevices.getUserMedia(buildCameraConstraints(facingMode));
 };
 
 /** Stops every track so the camera light turns off and the device is released. */

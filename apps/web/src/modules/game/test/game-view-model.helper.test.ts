@@ -29,15 +29,19 @@ describe('game view-model helpers', () => {
         isOpen: true,
         isStarting: false,
         errorKey: ERROR_MESSAGE_KEYS.generic,
+        isMirrored: false,
         videoRef: createRef<HTMLVideoElement>(),
         open: vi.fn(),
         cancel: vi.fn(),
         capture: vi.fn(),
+        switchCamera: vi.fn(),
+        toggleMirror: vi.fn(),
       },
       fakeTranslate,
     );
     expect(camera.errorMessage).toBe(ERROR_MESSAGE_KEYS.generic);
     expect(camera.isOpen).toBe(true);
+    expect(camera.isMirrored).toBe(false);
   });
 
   it('maps optional share and translation feedback', () => {

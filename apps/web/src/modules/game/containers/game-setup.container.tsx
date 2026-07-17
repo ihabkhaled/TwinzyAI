@@ -20,11 +20,16 @@ const renderCamera = (vm: GameViewModel, labels: GameScreenLabels): ReactElement
     startingLabel={labels.camera.starting}
     captureButton={labels.camera.captureButton}
     cancelButton={labels.camera.cancelButton}
+    switchButton={labels.camera.switchButton}
+    mirrorButton={labels.camera.mirrorButton}
     isStarting={vm.camera.isStarting}
+    isMirrored={vm.camera.isMirrored}
     errorMessage={vm.camera.errorMessage}
     videoRef={vm.camera.videoRef}
     onCapture={vm.camera.onCapture}
     onCancel={vm.camera.onCancel}
+    onSwitchCamera={vm.camera.onSwitchCamera}
+    onToggleMirror={vm.camera.onToggleMirror}
     testId={TEST_IDS.cameraCard}
   />
 );

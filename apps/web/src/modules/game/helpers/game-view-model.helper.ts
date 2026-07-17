@@ -33,10 +33,13 @@ export const buildCameraViewModel = (
   isOpen: camera.isOpen,
   isStarting: camera.isStarting,
   errorMessage: translateOptionalKey(translate, camera.errorKey),
+  isMirrored: camera.isMirrored,
   videoRef: camera.videoRef,
   onOpen: camera.open,
   onCancel: camera.cancel,
   onCapture: camera.capture,
+  onSwitchCamera: camera.switchCamera,
+  onToggleMirror: camera.toggleMirror,
 });
 
 /** Build the share sub-view with translated feedback copy. */

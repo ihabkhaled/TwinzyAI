@@ -55,6 +55,8 @@
     "cameraStarting": "Starting the camera…",
     "cameraCaptureButton": "Capture photo",
     "cameraCancelButton": "Cancel",
+    "cameraSwitchButton": "Switch camera",
+    "cameraMirrorButton": "Mirror",
     "cameraError": "We could not open your camera. Check permissions or upload a photo instead.",
     "traitCount": "Traits read: {count}",
     "compactSummaryTitle": "Strongest signals",

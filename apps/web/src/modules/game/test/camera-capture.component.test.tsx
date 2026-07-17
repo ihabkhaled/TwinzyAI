@@ -10,9 +10,14 @@ const baseProps = {
   startingLabel: 'Starting the camera…',
   captureButton: 'Capture photo',
   cancelButton: 'Cancel',
+  switchButton: 'Switch camera',
+  mirrorButton: 'Mirror',
   isStarting: false,
+  isMirrored: false,
   errorMessage: undefined,
   videoRef: createRef<HTMLVideoElement | null>(),
+  onSwitchCamera: vi.fn(),
+  onToggleMirror: vi.fn(),
   testId: 'camera-card',
 };
 
@@ -55,5 +60,31 @@ describe('CameraCapture', () => {
     );
 
     expect(screen.getByText('We could not open your camera.')).toBeInTheDocument();
+  });
+
+  it('invokes the switch and mirror handlers on click', () => {
+    const onSwitchCamera = vi.fn();
+    const onToggleMirror = vi.fn();
+    render(
+      <CameraCapture
+        {...baseProps}
+        onCapture={vi.fn()}
+        onCancel={vi.fn()}
+        onSwitchCamera={onSwitchCamera}
+        onToggleMirror={onToggleMirror}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Switch camera' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Mirror' }));
+
+    expect(onSwitchCamera).toHaveBeenCalledTimes(1);
+    expect(onToggleMirror).toHaveBeenCalledTimes(1);
+  });
+
+  it('marks the mirror control pressed when the preview is mirrored', () => {
+    render(<CameraCapture {...baseProps} isMirrored onCapture={vi.fn()} onCancel={vi.fn()} />);
+
+    expect(screen.getByRole('button', { name: 'Mirror', pressed: true })).toBeInTheDocument();
   });
 });

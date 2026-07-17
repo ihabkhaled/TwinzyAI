@@ -1362,6 +1362,7 @@
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
+      "apps/web/src/modules/game/components/camera-controls.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.variants.ts",
       "apps/web/src/modules/game/components/game-intro.component.tsx",
@@ -1436,6 +1437,7 @@
       "apps/web/src/modules/game/helpers/stream-identity.helper.ts",
       "apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts",
       "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts",
+      "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts",
       "apps/web/src/modules/game/hooks/useCountdown.hook.ts",
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
@@ -1450,6 +1452,7 @@
       "apps/web/src/modules/game/hooks/useStreamProgress.hook.ts",
       "apps/web/src/modules/game/index.ts",
       "apps/web/src/modules/game/mappers/game.mapper.ts",
+      "apps/web/src/modules/game/model/camera.types.ts",
       "apps/web/src/modules/game/model/game-component.types.ts",
       "apps/web/src/modules/game/model/game.constants.ts",
       "apps/web/src/modules/game/model/game.enums.ts",
@@ -1707,7 +1710,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "abc728948374a5ad04147cd66142540dc788b6973c5e1f0173b901a609ee87c3"
+    "inputsHash": "f0ecc77c63227ecc5651b2a6526558f30bb9daa72448e3da445519ef6fb1e0b8"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2039,6 +2042,7 @@
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
+      "apps/web/src/modules/game/components/camera-controls.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.variants.ts",
       "apps/web/src/modules/game/components/game-intro.component.tsx",
@@ -2113,6 +2117,7 @@
       "apps/web/src/modules/game/helpers/stream-identity.helper.ts",
       "apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts",
       "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts",
+      "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts",
       "apps/web/src/modules/game/hooks/useCountdown.hook.ts",
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
@@ -2127,6 +2132,7 @@
       "apps/web/src/modules/game/hooks/useStreamProgress.hook.ts",
       "apps/web/src/modules/game/index.ts",
       "apps/web/src/modules/game/mappers/game.mapper.ts",
+      "apps/web/src/modules/game/model/camera.types.ts",
       "apps/web/src/modules/game/model/game-component.types.ts",
       "apps/web/src/modules/game/model/game.constants.ts",
       "apps/web/src/modules/game/model/game.enums.ts",
@@ -2383,7 +2389,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "71a02d8f046b0e94d698e309645fe65588e0edffffdccbbb5638c244c3b993e7"
+    "inputsHash": "51c8b72ad11b5b2413ce232c8a8ddb60442c24d6171d8df944bfbe876fa8b05e"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2720,6 +2726,7 @@
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
+      "apps/web/src/modules/game/components/camera-controls.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.variants.ts",
       "apps/web/src/modules/game/components/game-intro.component.tsx",
@@ -2794,6 +2801,7 @@
       "apps/web/src/modules/game/helpers/stream-identity.helper.ts",
       "apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts",
       "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts",
+      "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts",
       "apps/web/src/modules/game/hooks/useCountdown.hook.ts",
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
@@ -2808,6 +2816,7 @@
       "apps/web/src/modules/game/hooks/useStreamProgress.hook.ts",
       "apps/web/src/modules/game/index.ts",
       "apps/web/src/modules/game/mappers/game.mapper.ts",
+      "apps/web/src/modules/game/model/camera.types.ts",
       "apps/web/src/modules/game/model/game-component.types.ts",
       "apps/web/src/modules/game/model/game.constants.ts",
       "apps/web/src/modules/game/model/game.enums.ts",
@@ -3064,7 +3073,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "71a02d8f046b0e94d698e309645fe65588e0edffffdccbbb5638c244c3b993e7"
+    "inputsHash": "51c8b72ad11b5b2413ce232c8a8ddb60442c24d6171d8df944bfbe876fa8b05e"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3385,6 +3394,7 @@
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
+      "apps/web/src/modules/game/components/camera-controls.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.component.tsx",
       "apps/web/src/modules/game/components/countdown-timer.variants.ts",
       "apps/web/src/modules/game/components/game-intro.component.tsx",
@@ -3459,6 +3469,7 @@
       "apps/web/src/modules/game/helpers/stream-identity.helper.ts",
       "apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts",
       "apps/web/src/modules/game/hooks/useCameraCapture.hook.ts",
+      "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts",
       "apps/web/src/modules/game/hooks/useCountdown.hook.ts",
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
@@ -3473,6 +3484,7 @@
       "apps/web/src/modules/game/hooks/useStreamProgress.hook.ts",
       "apps/web/src/modules/game/index.ts",
       "apps/web/src/modules/game/mappers/game.mapper.ts",
+      "apps/web/src/modules/game/model/camera.types.ts",
       "apps/web/src/modules/game/model/game-component.types.ts",
       "apps/web/src/modules/game/model/game.constants.ts",
       "apps/web/src/modules/game/model/game.enums.ts",
@@ -3729,7 +3741,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "71a02d8f046b0e94d698e309645fe65588e0edffffdccbbb5638c244c3b993e7"
+    "inputsHash": "51c8b72ad11b5b2413ce232c8a8ddb60442c24d6171d8df944bfbe876fa8b05e"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

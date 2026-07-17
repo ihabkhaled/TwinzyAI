@@ -176,6 +176,8 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
     starting: translate('game.cameraStarting'),
     captureButton: translate('game.cameraCaptureButton'),
     cancelButton: translate('game.cameraCancelButton'),
+    switchButton: translate('game.cameraSwitchButton'),
+    mirrorButton: translate('game.cameraMirrorButton'),
   },
   result: {
     title: translate('result.title'),

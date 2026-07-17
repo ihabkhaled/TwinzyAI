@@ -8,6 +8,8 @@ import { captureFrameToFile, requestCameraStream, stopCameraStream } from '@/pac
 import { CAMERA_ERROR_MESSAGE_KEY } from '../model/game.constants';
 import type { CameraController } from '../model/game.types';
 
+import { useCameraSettings } from './useCameraSettings.hook';
+
 /**
  * Owns the live camera lifecycle: requests the stream when opened, binds it to
  * the video element, captures a frame to a File, and ALWAYS stops every track
@@ -19,6 +21,7 @@ export const useCameraCapture = (onCapture: (file: File) => void): CameraControl
   const [isOpen, setIsOpen] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
   const [errorKey, setErrorKey] = useState<string | undefined>();
+  const { facingMode, ...cameraSettings } = useCameraSettings();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | undefined>(undefined);
 
@@ -34,13 +37,12 @@ export const useCameraCapture = (onCapture: (file: File) => void): CameraControl
     if (!isOpen) {
       return;
     }
-
     let cancelled = false;
     const start = async (): Promise<void> => {
       setIsStarting(true);
       setErrorKey(undefined);
       try {
-        const stream = await requestCameraStream();
+        const stream = await requestCameraStream(facingMode);
         if (cancelled) {
           stopCameraStream(stream);
           return;
@@ -59,13 +61,13 @@ export const useCameraCapture = (onCapture: (file: File) => void): CameraControl
         }
       }
     };
-
     void start();
+    // facingMode in the deps re-acquires the stream on switch; cleanup stops the old one.
     return (): void => {
       cancelled = true;
       stop();
     };
-  }, [isOpen, stop]);
+  }, [isOpen, stop, facingMode]);
 
   const open = useCallback((): void => {
     setIsOpen(true);
@@ -82,7 +84,7 @@ export const useCameraCapture = (onCapture: (file: File) => void): CameraControl
     }
     const run = async (): Promise<void> => {
       try {
-        const file = await captureFrameToFile(video);
+        const file = await captureFrameToFile(video, cameraSettings.isMirrored);
         onCapture(file);
         setIsOpen(false);
       } catch {
@@ -90,7 +92,7 @@ export const useCameraCapture = (onCapture: (file: File) => void): CameraControl
       }
     };
     void run();
-  }, [onCapture]);
+  }, [onCapture, cameraSettings.isMirrored]);
 
-  return { isOpen, isStarting, errorKey, videoRef, open, cancel, capture };
+  return { isOpen, isStarting, errorKey, videoRef, open, cancel, capture, ...cameraSettings };
 };

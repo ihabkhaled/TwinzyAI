@@ -6,8 +6,12 @@ import { CAPTURE_FILENAME, CAPTURE_MIME, CAPTURE_QUALITY } from './camera.consta
  * the exact same client validation and backend security chain. Lives in the
  * camera package because it is the only other place allowed to touch the raw
  * canvas/document APIs.
+ *
+ * `isMirrored` flips the frame horizontally so the saved photo matches a
+ * mirrored preview (WYSIWYG). `drawImage` ignores the CSS transform on the
+ * <video>, so the flip is applied to the canvas here instead.
  */
-export const captureFrameToFile = (video: HTMLVideoElement): Promise<File> =>
+export const captureFrameToFile = (video: HTMLVideoElement, isMirrored: boolean): Promise<File> =>
   new Promise<File>((resolve, reject): void => {
     const width = video.videoWidth;
     const height = video.videoHeight;
@@ -25,6 +29,10 @@ export const captureFrameToFile = (video: HTMLVideoElement): Promise<File> =>
       return;
     }
 
+    if (isMirrored) {
+      context.translate(width, 0);
+      context.scale(-1, 1);
+    }
     context.drawImage(video, 0, 0, width, height);
     canvas.toBlob(
       (blob): void => {

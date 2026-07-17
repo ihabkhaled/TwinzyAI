@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { CAMERA_CONSTRAINTS } from './camera.constants';
+import { buildCameraConstraints, CAMERA_FACING_MODES } from './camera.constants';
 import { isCameraSupported, requestCameraStream, stopCameraStream } from './camera-stream';
 
 const setMediaDevices = (value: unknown): void => {
@@ -30,7 +30,9 @@ describe('isCameraSupported', () => {
 describe('requestCameraStream', () => {
   it('rejects when the browser cannot stream', async () => {
     setMediaDevices(undefined);
-    await expect(requestCameraStream()).rejects.toThrow('CAMERA_UNSUPPORTED');
+    await expect(requestCameraStream(CAMERA_FACING_MODES.Back)).rejects.toThrow(
+      'CAMERA_UNSUPPORTED',
+    );
   });
 
   it('opens the rear camera with audio disabled', async () => {
@@ -38,8 +40,17 @@ describe('requestCameraStream', () => {
     const getUserMedia = vi.fn().mockResolvedValue(stream);
     setMediaDevices({ getUserMedia });
 
-    await expect(requestCameraStream()).resolves.toBe(stream);
-    expect(getUserMedia).toHaveBeenCalledWith(CAMERA_CONSTRAINTS);
+    await expect(requestCameraStream(CAMERA_FACING_MODES.Back)).resolves.toBe(stream);
+    expect(getUserMedia).toHaveBeenCalledWith(buildCameraConstraints(CAMERA_FACING_MODES.Back));
+  });
+
+  it('opens the front camera when the front facing mode is requested', async () => {
+    const stream = {} as MediaStream;
+    const getUserMedia = vi.fn().mockResolvedValue(stream);
+    setMediaDevices({ getUserMedia });
+
+    await expect(requestCameraStream(CAMERA_FACING_MODES.Front)).resolves.toBe(stream);
+    expect(getUserMedia).toHaveBeenCalledWith(buildCameraConstraints(CAMERA_FACING_MODES.Front));
   });
 });
 

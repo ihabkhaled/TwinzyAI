@@ -1,5 +1,3 @@
-import type { RefObject } from 'react';
-
 import type {
   FinalGameResult,
   GameStreamStageValue,
@@ -9,6 +7,7 @@ import type {
 
 import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
+import type { CameraViewModel } from './camera.types';
 import type { GamePhaseValue } from './game.enums';
 import type { PaymentViewModel } from './payment.types';
 import type { ShareModalViewModel } from './share-modal.types';
@@ -207,31 +206,8 @@ export interface ResultTranslationController {
   retry: () => void;
 }
 
-/**
- * The live-camera controller surface the capture hook exposes. Holds the raw
- * error KEY (not translated copy) so the hook stays React-i18n-free, mirroring
- * {@link UploadController}; the orchestrator translates it at the boundary.
- */
-export interface CameraController {
-  isOpen: boolean;
-  isStarting: boolean;
-  errorKey: string | undefined;
-  videoRef: RefObject<HTMLVideoElement | null>;
-  open: () => void;
-  cancel: () => void;
-  capture: () => void;
-}
-
-/** The live-camera sub-view the container renders (error already translated). */
-export interface CameraViewModel {
-  isOpen: boolean;
-  isStarting: boolean;
-  errorMessage: string | undefined;
-  videoRef: RefObject<HTMLVideoElement | null>;
-  onOpen: () => void;
-  onCancel: () => void;
-  onCapture: () => void;
-}
+/** Live-camera controller, settings, and sub-view shapes (see camera.types). */
+export type { CameraController, CameraSettings, CameraViewModel } from './camera.types';
 
 /** Internal upload-hook surface: preview state plus the raw failure key. */
 export interface UploadController {
@@ -312,6 +288,8 @@ interface CameraLabels {
   starting: string;
   captureButton: string;
   cancelButton: string;
+  switchButton: string;
+  mirrorButton: string;
 }
 
 /** Translated copy for the results view (dynamic values come from the DTO). */

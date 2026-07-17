@@ -68,6 +68,15 @@ export interface ResultCountSelectProps {
   testId?: string;
 }
 
+/** Props for the camera controls row (switch front/back + mirror toggle). */
+export interface CameraControlsProps {
+  switchButton: string;
+  mirrorButton: string;
+  isMirrored: boolean;
+  onSwitchCamera: () => void;
+  onToggleMirror: () => void;
+}
+
 /** Props for the live-camera capture card (pure: ref + handlers in, JSX out). */
 export interface CameraCaptureProps {
   title: string;
@@ -75,11 +84,16 @@ export interface CameraCaptureProps {
   startingLabel: string;
   captureButton: string;
   cancelButton: string;
+  switchButton: string;
+  mirrorButton: string;
   isStarting: boolean;
+  isMirrored: boolean;
   errorMessage: string | undefined;
   videoRef: RefObject<HTMLVideoElement | null>;
   onCapture: () => void;
   onCancel: () => void;
+  onSwitchCamera: () => void;
+  onToggleMirror: () => void;
   testId?: string;
 }
 
