@@ -26,10 +26,19 @@ export const PaymobTransactionSchema = z.object({
   pending: z.boolean(),
   is_refunded: z.boolean(),
   is_voided: z.boolean(),
+  error_occured: z.boolean().nullish(),
   amount_cents: z.coerce.number(),
   currency: z.string(),
   order: z.object({
     id: z.number(),
     merchant_order_id: z.string().nullish(),
   }),
+  // Decline diagnostics only. z.object() STRIPS every other key, so card data
+  // (masked pan, holder, source_data) never enters our parsed object at all.
+  data: z
+    .object({
+      message: z.string().nullish(),
+      txn_response_code: z.string().nullish(),
+    })
+    .nullish(),
 });

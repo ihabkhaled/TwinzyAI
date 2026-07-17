@@ -123,9 +123,31 @@ export class PaymobAdapter {
       tx.order.merchant_order_id === requestId &&
       tx.amount_cents > 0;
     if (!isVerified) {
-      throw this.captureRejected('status/currency/binding mismatch');
+      throw this.captureRejected(this.txnDiagnostics(tx, requestId));
     }
     return { gateway: PaymentGateway.Paymob, transactionId: tx.id, amountCents: tx.amount_cents };
+  }
+
+  /**
+   * A PII-free one-line reason for a rejected transaction: the status flags plus
+   * Paymob's machine decline code + generic message (e.g. AUTHENTICATION_NOT_SUPPORTED).
+   * No card data — the schema already strips masked pan / holder / source_data.
+   */
+  private txnDiagnostics(
+    tx: ReturnType<typeof PaymobTransactionSchema.parse>,
+    requestId: string,
+  ): string {
+    return [
+      `success=${tx.success}`,
+      `pending=${tx.pending}`,
+      `refunded=${tx.is_refunded}`,
+      `voided=${tx.is_voided}`,
+      `error=${tx.error_occured ?? false}`,
+      `currency=${tx.currency}`,
+      `bound=${tx.order.merchant_order_id === requestId}`,
+      `code=${tx.data?.txn_response_code ?? 'n/a'}`,
+      `message=${tx.data?.message ?? 'n/a'}`,
+    ].join(', ');
   }
 
   private buildIntentionBody(requestId: string, amountCents: number, currency: string): string {
