@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
+import { PaymentGateway } from '@twinzy/shared';
+
 import { AppConfigService } from '../../../config/app-config.service';
 import { PAYPAL_BASE_URL_BY_ENV } from '../../../config/payment.constants';
 import {
@@ -149,7 +151,7 @@ export class PaypalAdapter {
     if (!isVerified) {
       throw this.captureRejected('status/amount/binding mismatch');
     }
-    return { orderId, captureId: capture.id };
+    return { gateway: PaymentGateway.Paypal, orderId, captureId: capture.id };
   }
 
   private captureRejected(reason: string): Error {

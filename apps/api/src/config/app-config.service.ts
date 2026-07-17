@@ -18,7 +18,12 @@ import {
   GEMINI_STEP_ENV_KEYS,
   type GeminiStepValue,
 } from './gemini-step.constants';
-import type { PaymentPrice, PaypalEnvValue } from './payment.constants';
+import type {
+  ExchangeRateConfig,
+  PaymentPrice,
+  PaymobConfig,
+  PaypalEnvValue,
+} from './payment.constants';
 
 /**
  * The only injectable configuration surface. Wraps the config vendor behind
@@ -292,9 +297,41 @@ export class AppConfigService {
     return this.configService.get('SHARE_RESULT_PUBLIC_BASE_URL', { infer: true });
   }
 
-  /** Paid-analysis gate: ON iff BOTH PayPal credentials are configured. */
+  /** Paid-analysis gate: ON iff at least one payment provider is configured. */
   public get isPaywallEnabled(): boolean {
+    return this.isPaypalEnabled || this.isPaymobEnabled;
+  }
+
+  /** PayPal path (wallet + card): ON iff BOTH PayPal credentials are configured. */
+  public get isPaypalEnabled(): boolean {
     return this.paypalClientId.length > 0 && this.paypalClientSecret.length > 0;
+  }
+
+  /** Paymob path (EGP card): ON iff secret + public key + card integration id exist. */
+  public get isPaymobEnabled(): boolean {
+    const p = this.paymob;
+    return p.secretKey.length > 0 && p.publicKey.length > 0 && p.cardIntegrationId.length > 0;
+  }
+
+  /** Paymob credentials + charge currency (all from validated config). */
+  public get paymob(): PaymobConfig {
+    return {
+      secretKey: this.configService.get('PAYMOB_SECRET_KEY', { infer: true }),
+      publicKey: this.configService.get('PAYMOB_PUBLIC_KEY', { infer: true }),
+      apiKey: this.configService.get('PAYMOB_API_KEY', { infer: true }),
+      hmacSecret: this.configService.get('PAYMOB_HMAC_SECRET', { infer: true }),
+      cardIntegrationId: this.configService.get('PAYMOB_CARD_INTEGRATION_ID', { infer: true }),
+      currency: this.configService.get('PAYMOB_CURRENCY', { infer: true }),
+    };
+  }
+
+  /** USD→charge-currency exchange-rate service configuration. */
+  public get exchangeRate(): ExchangeRateConfig {
+    return {
+      apiBaseUrl: this.configService.get('EXCHANGE_RATE_API_BASE_URL', { infer: true }),
+      cacheTtlMs: this.configService.get('EXCHANGE_RATE_CACHE_TTL_MS', { infer: true }),
+      usdToEgpFallback: this.configService.get('USD_TO_EGP_FALLBACK_RATE', { infer: true }),
+    };
   }
 
   public get paypalClientId(): string {

@@ -75,10 +75,25 @@ const CONFIG_DEFAULTS = {
   analysisTimeoutMs: 120_000,
   // Paid-analysis gate (off by default so every existing suite stays free).
   isPaywallEnabled: false,
+  isPaypalEnabled: false,
+  isPaymobEnabled: false,
   paypalClientId: '',
   paypalClientSecret: '',
   paypalEnv: 'sandbox' as const,
   paymentPrice: { value: '0.50', currencyCode: 'USD' },
+  paymob: {
+    secretKey: '',
+    publicKey: '',
+    apiKey: '',
+    hmacSecret: '',
+    cardIntegrationId: '',
+    currency: 'EGP',
+  },
+  exchangeRate: {
+    apiBaseUrl: 'https://rates.test/v6/latest',
+    cacheTtlMs: 3_600_000,
+    usdToEgpFallback: 50,
+  },
   streamTtlMs: 180_000,
   // Per-step chain overrides for geminiModelChainFor; a step absent here
   // falls back to geminiModelChain, mirroring the real service's semantics.

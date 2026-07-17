@@ -25,3 +25,26 @@ export interface PaymentPrice {
   readonly value: string;
   readonly currencyCode: string;
 }
+
+/**
+ * Paymob Accept REST origin. Sandbox vs live is decided by the KEY prefix
+ * (`egy_..._test_` = sandbox), not by the host — so there is a single origin.
+ */
+export const PAYMOB_API_BASE_URL = 'https://accept.paymob.com';
+
+/** Paymob credentials + charge currency, all sourced from validated config. */
+export interface PaymobConfig {
+  readonly secretKey: string;
+  readonly publicKey: string;
+  readonly apiKey: string;
+  readonly hmacSecret: string;
+  readonly cardIntegrationId: string;
+  readonly currency: string;
+}
+
+/** USD→charge-currency exchange-rate service configuration. */
+export interface ExchangeRateConfig {
+  readonly apiBaseUrl: string;
+  readonly cacheTtlMs: number;
+  readonly usdToEgpFallback: number;
+}

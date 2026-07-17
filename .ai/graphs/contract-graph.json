@@ -10,6 +10,34 @@
       ]
     },
     {
+      "name": "ExchangeRateResponseSchema",
+      "path": "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaymobAuthTokenResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaymobIntentionApiResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+      ]
+    },
+    {
+      "name": "PaymobTransactionSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+      ]
+    },
+    {
       "name": "PaypalCaptureOrderResponseSchema",
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "usedBy": [
@@ -459,7 +487,63 @@
       ]
     },
     {
+      "name": "PAYMENT_GATEWAY_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
       "name": "PAYMENT_ORDER_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymentGateway",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymentGatewaySchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymentGatewayValue",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymobIntentionRequest",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymobIntentionRequestSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymobIntentionResponse",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PaymobIntentionResponseSchema",
       "path": "packages/shared/src/schemas/payment.schema.ts",
       "usedBy": [
         "packages/shared/src/schemas/index.ts"

@@ -7,5 +7,6 @@
   "POST /game/cancel": "apps/api/src/modules/game/api/game.controller.ts",
   "POST /game/translate-result": "apps/api/src/modules/game/api/game.controller.ts",
   "POST /payments/orders": "apps/api/src/modules/payments/api/payments.controller.ts",
+  "POST /payments/paymob/intention": "apps/api/src/modules/payments/api/payments.controller.ts",
   "POST /share-results": "apps/api/src/modules/share-results/api/share-results.controller.ts"
 }

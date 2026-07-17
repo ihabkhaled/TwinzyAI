@@ -277,11 +277,13 @@
       "apps/api/src/bootstrap/fastify-adapter.ts",
       "apps/web/src/packages/env/public-env.ts"
     ],
-    "inputsHash": "e3f830fc5cf7ff3425b3f31d3c676e05aa2b2b9bfb7ddd5af9f53d3bec569e80"
+    "inputsHash": "8b428bf66fb60d1b8bc8f0de4f7a58642f7a7b21308c80344b018e64bb026943"
   },
   ".ai/manifests/contracts.json": {
     "inputs": [
       "apps/api/src/modules/game/api/dto/analyze-request.dto.ts",
+      "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
+      "apps/api/src/modules/payments/model/paymob.schemas.ts",
       "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "apps/web/src/modules/game/schemas/game.schema.ts",
       "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
@@ -297,7 +299,7 @@
       "packages/shared/src/schemas/traits.schema.ts",
       "packages/shared/src/schemas/translate-result.schema.ts"
     ],
-    "inputsHash": "725f785d9a6a9e5ea9ee15cf23415280672c501e466ef6d94da589008f2b8d4a"
+    "inputsHash": "d5c46b3c517fd91ea2ff90805476e0742c17129ffcd522522989801ee147e5d2"
   },
   ".ai/manifests/dependencies.json": {
     "inputs": [
@@ -1080,6 +1082,7 @@
       "apps/api/src/config/env.schema.ts",
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
+      "apps/api/src/config/payment-env.schema.ts",
       "apps/api/src/config/payment.constants.ts",
       "apps/api/src/core/concurrency/concurrency.errors.ts",
       "apps/api/src/core/concurrency/concurrency.types.ts",
@@ -1267,13 +1270,17 @@
       "apps/api/src/modules/health/index.ts",
       "apps/api/src/modules/health/model/health.constants.ts",
       "apps/api/src/modules/health/tests/health.service.test.ts",
+      "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts",
+      "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
       "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
       "apps/api/src/modules/payments/api/payments.controller.ts",
       "apps/api/src/modules/payments/application/payment-gate.service.ts",
       "apps/api/src/modules/payments/index.ts",
       "apps/api/src/modules/payments/lib/payment-order.util.ts",
+      "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
       "apps/api/src/modules/payments/model/payment.constants.ts",
       "apps/api/src/modules/payments/model/payment.types.ts",
+      "apps/api/src/modules/payments/model/paymob.schemas.ts",
       "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "apps/api/src/modules/payments/payments.module.ts",
       "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
@@ -1710,7 +1717,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "f0ecc77c63227ecc5651b2a6526558f30bb9daa72448e3da445519ef6fb1e0b8"
+    "inputsHash": "a92035ff9fb214d3ac615b9fafd8434cf6baaa073af9556828ce27d40fa5f6b1"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -1760,6 +1767,7 @@
       "apps/api/src/config/env.schema.ts",
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
+      "apps/api/src/config/payment-env.schema.ts",
       "apps/api/src/config/payment.constants.ts",
       "apps/api/src/core/concurrency/concurrency.errors.ts",
       "apps/api/src/core/concurrency/concurrency.types.ts",
@@ -1947,13 +1955,17 @@
       "apps/api/src/modules/health/index.ts",
       "apps/api/src/modules/health/model/health.constants.ts",
       "apps/api/src/modules/health/tests/health.service.test.ts",
+      "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts",
+      "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
       "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
       "apps/api/src/modules/payments/api/payments.controller.ts",
       "apps/api/src/modules/payments/application/payment-gate.service.ts",
       "apps/api/src/modules/payments/index.ts",
       "apps/api/src/modules/payments/lib/payment-order.util.ts",
+      "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
       "apps/api/src/modules/payments/model/payment.constants.ts",
       "apps/api/src/modules/payments/model/payment.types.ts",
+      "apps/api/src/modules/payments/model/paymob.schemas.ts",
       "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "apps/api/src/modules/payments/payments.module.ts",
       "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
@@ -2389,7 +2401,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "51c8b72ad11b5b2413ce232c8a8ddb60442c24d6171d8df944bfbe876fa8b05e"
+    "inputsHash": "e822ac84fe9aa7e02ae8247e2f6c22c79f1edb2ecb4ec086b5fceb9bbfe57d25"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2405,7 +2417,7 @@
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "ea661998aa8b0c739ecfd232f9de9d06aaa9a6c8e1b382fb30b95b9bf708951f"
+    "inputsHash": "2bb845763024b49e7746fbdd4fea143d7ba4c9a3ab64db6882685c68c3636d5e"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -2444,6 +2456,7 @@
       "apps/api/src/config/env.schema.ts",
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
+      "apps/api/src/config/payment-env.schema.ts",
       "apps/api/src/config/payment.constants.ts",
       "apps/api/src/core/concurrency/concurrency.errors.ts",
       "apps/api/src/core/concurrency/concurrency.types.ts",
@@ -2631,13 +2644,17 @@
       "apps/api/src/modules/health/index.ts",
       "apps/api/src/modules/health/model/health.constants.ts",
       "apps/api/src/modules/health/tests/health.service.test.ts",
+      "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts",
+      "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
       "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
       "apps/api/src/modules/payments/api/payments.controller.ts",
       "apps/api/src/modules/payments/application/payment-gate.service.ts",
       "apps/api/src/modules/payments/index.ts",
       "apps/api/src/modules/payments/lib/payment-order.util.ts",
+      "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
       "apps/api/src/modules/payments/model/payment.constants.ts",
       "apps/api/src/modules/payments/model/payment.types.ts",
+      "apps/api/src/modules/payments/model/paymob.schemas.ts",
       "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "apps/api/src/modules/payments/payments.module.ts",
       "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
@@ -3073,7 +3090,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "51c8b72ad11b5b2413ce232c8a8ddb60442c24d6171d8df944bfbe876fa8b05e"
+    "inputsHash": "e822ac84fe9aa7e02ae8247e2f6c22c79f1edb2ecb4ec086b5fceb9bbfe57d25"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3112,6 +3129,7 @@
       "apps/api/src/config/env.schema.ts",
       "apps/api/src/config/gemini-step.constants.ts",
       "apps/api/src/config/index.ts",
+      "apps/api/src/config/payment-env.schema.ts",
       "apps/api/src/config/payment.constants.ts",
       "apps/api/src/core/concurrency/concurrency.errors.ts",
       "apps/api/src/core/concurrency/concurrency.types.ts",
@@ -3299,13 +3317,17 @@
       "apps/api/src/modules/health/index.ts",
       "apps/api/src/modules/health/model/health.constants.ts",
       "apps/api/src/modules/health/tests/health.service.test.ts",
+      "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts",
+      "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
       "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
       "apps/api/src/modules/payments/api/payments.controller.ts",
       "apps/api/src/modules/payments/application/payment-gate.service.ts",
       "apps/api/src/modules/payments/index.ts",
       "apps/api/src/modules/payments/lib/payment-order.util.ts",
+      "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
       "apps/api/src/modules/payments/model/payment.constants.ts",
       "apps/api/src/modules/payments/model/payment.types.ts",
+      "apps/api/src/modules/payments/model/paymob.schemas.ts",
       "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "apps/api/src/modules/payments/payments.module.ts",
       "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
@@ -3741,7 +3763,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "51c8b72ad11b5b2413ce232c8a8ddb60442c24d6171d8df944bfbe876fa8b05e"
+    "inputsHash": "e822ac84fe9aa7e02ae8247e2f6c22c79f1edb2ecb4ec086b5fceb9bbfe57d25"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

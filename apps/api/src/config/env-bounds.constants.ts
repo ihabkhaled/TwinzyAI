@@ -115,4 +115,27 @@ export const PAYMENT_PRICE_VALUE_PATTERN = /^\d{1,6}\.\d{2}$/;
 /** ISO-4217 alpha currency code. */
 export const PAYMENT_PRICE_CURRENCY_PATTERN = /^[A-Z]{3}$/;
 
+// --- Paymob (card, EGP; enabled only when its credentials exist) ---
+/** Paymob integration id: a numeric id copied from the merchant dashboard. */
+export const PAYMOB_INTEGRATION_ID_PATTERN = /^\d{1,12}$/;
+
+/** The currency Paymob charges in (Egypt account => EGP). */
+export const DEFAULT_PAYMOB_CURRENCY = 'EGP';
+
+// --- USD -> charge-currency exchange rate (used to price the Paymob EGP charge
+// from the canonical USD PAYMENT_PRICE_VALUE) ---
+/** Free, keyless USD-base rates endpoint; the currency code is appended (…/USD). */
+export const DEFAULT_EXCHANGE_RATE_API_BASE_URL = 'https://open.er-api.com/v6/latest';
+
+/** Cache a fetched rate this long so create-intention and verify-at-consumption agree. */
+export const MIN_EXCHANGE_RATE_CACHE_TTL_MS = 60_000;
+export const MAX_EXCHANGE_RATE_CACHE_TTL_MS = 86_400_000;
+export const DEFAULT_EXCHANGE_RATE_CACHE_TTL_MS = 3_600_000;
+
+/** One outbound rate call is bounded so a rate outage cannot hang a payment. */
+export const EXCHANGE_RATE_REQUEST_TIMEOUT_MS = 8000;
+
+/** Fallback USD->charge-currency rate used only when the rate API is unreachable. */
+export const DEFAULT_USD_TO_EGP_FALLBACK = 50;
+
 export const DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL = 'http://localhost:3000';

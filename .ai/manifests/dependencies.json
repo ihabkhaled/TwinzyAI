@@ -151,17 +151,17 @@
       "to": "shared"
     },
     {
-      "count": 3,
+      "count": 7,
       "from": "api:payments",
       "to": "api:config"
     },
     {
-      "count": 6,
+      "count": 10,
       "from": "api:payments",
       "to": "api:core"
     },
     {
-      "count": 4,
+      "count": 6,
       "from": "api:payments",
       "to": "shared"
     },

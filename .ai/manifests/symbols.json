@@ -1,5 +1,5 @@
 {
-  "count": 1383,
+  "count": 1421,
   "symbols": [
     {
       "kind": "const",
@@ -1388,20 +1388,6 @@
       "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
     },
     {
-      "kind": "const",
-      "layer": "components",
-      "module": "web:game",
-      "name": "cameraVideoClass",
-      "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
-    },
-    {
-      "kind": "const",
-      "layer": "components",
-      "module": "web:game",
-      "name": "cameraVideoMirroredClass",
-      "path": "apps/web/src/modules/game/components/camera-capture.variants.ts"
-    },
-    {
       "kind": "interface",
       "layer": "model",
       "module": "web:game",
@@ -2490,6 +2476,20 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "DEFAULT_EXCHANGE_RATE_API_BASE_URL",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_EXCHANGE_RATE_CACHE_TTL_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "DEFAULT_GEMINI_STREAM_IDLE_TIMEOUT_MS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -2574,6 +2574,13 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "DEFAULT_PAYMOB_CURRENCY",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "DEFAULT_RATE_LIMIT_MAX",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -2646,6 +2653,13 @@
       "module": "web:pkg-i18n",
       "name": "DEFAULT_TIME_ZONE",
       "path": "apps/web/src/packages/i18n/locale.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_USD_TO_EGP_FALLBACK",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -2835,6 +2849,41 @@
       "module": "api:benchmark",
       "name": "evaluateResponseText",
       "path": "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "EXCHANGE_RATE_REQUEST_TIMEOUT_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "EXCHANGE_RATE_SUCCESS_RESULT",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "adapters",
+      "module": "api:payments",
+      "name": "ExchangeRateAdapter",
+      "path": "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "config",
+      "module": "api:config",
+      "name": "ExchangeRateConfig",
+      "path": "apps/api/src/config/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "ExchangeRateResponseSchema",
+      "path": "apps/api/src/modules/payments/model/exchange-rate.schemas.ts"
     },
     {
       "kind": "const",
@@ -4693,6 +4742,13 @@
     },
     {
       "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_EXCHANGE_RATE_CACHE_TTL_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "constants",
       "module": "shared",
       "name": "MAX_FALLBACK_MESSAGE_LENGTH",
@@ -5031,6 +5087,13 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "MIN_EXCHANGE_RATE_CACHE_TTL_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "MIN_GEMINI_STREAM_IDLE_TIMEOUT_MS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -5131,6 +5194,13 @@
       "module": "api:config",
       "name": "MIN_STREAM_TTL_MS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "MINOR_UNITS_PER_MAJOR",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
     {
       "kind": "const",
@@ -5539,6 +5609,13 @@
       "path": "apps/web/src/modules/game/model/game.constants.ts"
     },
     {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PAYMENT_GATEWAY_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "model",
       "module": "api:payments",
@@ -5595,7 +5672,7 @@
       "path": "apps/web/src/modules/game/containers/payment-step.variants.ts"
     },
     {
-      "kind": "interface",
+      "kind": "type",
       "layer": "model",
       "module": "api:payments",
       "name": "PaymentCaptureRecord",
@@ -5651,6 +5728,27 @@
       "path": "apps/api/src/modules/payments/index.ts"
     },
     {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymentGateway",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymentGatewaySchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymentGatewayValue",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
       "kind": "interface",
       "layer": "model",
       "module": "api:payments",
@@ -5683,6 +5781,13 @@
       "layer": "model",
       "module": "api:payments",
       "name": "PAYMENTS_ROUTE_ORDERS",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMENTS_ROUTE_PAYMOB_INTENTION",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
     {
@@ -5747,6 +5852,160 @@
       "module": "web:game",
       "name": "PaymentViewModelInput",
       "path": "apps/web/src/modules/game/helpers/payment-view-model.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "PAYMOB_API_BASE_URL",
+      "path": "apps/api/src/config/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_AUTH_TOKEN_PATH",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_AUTH_TOKEN_TTL_MS",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_BILLING_PLACEHOLDER",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "PAYMOB_INTEGRATION_ID_PATTERN",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_INTENTION_PATH",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_ITEM_NAME",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_REFUND_PATH",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_REQUEST_TIMEOUT_MS",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_TRANSACTION_INQUIRY_PATH",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "adapters",
+      "module": "api:payments",
+      "name": "PaymobAdapter",
+      "path": "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaymobAuthTokenResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaymobCaptureRecord",
+      "path": "apps/api/src/modules/payments/model/payment.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "config",
+      "module": "api:config",
+      "name": "PaymobConfig",
+      "path": "apps/api/src/config/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "paymobEnvShape",
+      "path": "apps/api/src/config/payment-env.schema.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaymobIntention",
+      "path": "apps/api/src/modules/payments/model/payment.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaymobIntentionApiResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymobIntentionRequest",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymobIntentionRequestSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymobIntentionResponse",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PaymobIntentionResponseSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaymobTransactionSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts"
     },
     {
       "kind": "const",
@@ -6566,6 +6825,13 @@
       "module": "web:ui-preferences",
       "name": "resolveInitialTheme",
       "path": "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:payments",
+      "name": "resolvePaymentGateway",
+      "path": "apps/api/src/modules/payments/lib/payment-order.util.ts"
     },
     {
       "kind": "const",

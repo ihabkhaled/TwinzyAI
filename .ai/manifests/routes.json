@@ -37,6 +37,12 @@
       "path": "/payments/orders"
     },
     {
+      "file": "apps/api/src/modules/payments/api/payments.controller.ts",
+      "handler": "createPaymobIntention",
+      "method": "POST",
+      "path": "/payments/paymob/intention"
+    },
+    {
       "file": "apps/api/src/modules/share-results/api/share-results.controller.ts",
       "handler": "create",
       "method": "POST",
@@ -55,7 +61,7 @@
       "path": "/share-results/:shareId"
     }
   ],
-  "apiCount": 9,
+  "apiCount": 10,
   "web": [
     {
       "file": "apps/web/src/app/layout.tsx",

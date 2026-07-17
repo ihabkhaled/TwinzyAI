@@ -372,6 +372,9 @@
   "apps/api/src/modules/health/model/health.constants.ts": [
     "apps/api/src/modules/health/tests/health.service.test.ts"
   ],
+  "apps/api/src/modules/payments/adapters/paymob.adapter.ts": [
+    "apps/api/src/modules/payments/tests/payment-gate.service.test.ts"
+  ],
   "apps/api/src/modules/payments/adapters/paypal.adapter.ts": [
     "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
     "apps/api/src/modules/payments/tests/paypal.adapter.test.ts",

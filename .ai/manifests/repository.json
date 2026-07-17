@@ -1,5 +1,5 @@
 {
-  "count": 663,
+  "count": 668,
   "files": [
     {
       "exports": [
@@ -716,7 +716,7 @@
           "name": "AppConfigService"
         }
       ],
-      "hash": "aeaed25e8785ad68a7f92d255c2a2e284afc99f1d736cf2545917b5b2089905b",
+      "hash": "3e598eea13eb0c3fcae06c1d73fb8888369099f695d1709377252c427a7959cf",
       "imports": [
         "./ai-provider.constants",
         "./ai-route.types",
@@ -729,7 +729,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 328,
+      "loc": 365,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.ts"
     },
@@ -802,6 +802,14 @@
         },
         {
           "kind": "const",
+          "name": "DEFAULT_EXCHANGE_RATE_API_BASE_URL"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_EXCHANGE_RATE_CACHE_TTL_MS"
+        },
+        {
+          "kind": "const",
           "name": "DEFAULT_GEMINI_STREAM_IDLE_TIMEOUT_MS"
         },
         {
@@ -830,6 +838,10 @@
         },
         {
           "kind": "const",
+          "name": "DEFAULT_PAYMOB_CURRENCY"
+        },
+        {
+          "kind": "const",
           "name": "DEFAULT_RATE_LIMIT_MAX"
         },
         {
@@ -855,6 +867,14 @@
         {
           "kind": "const",
           "name": "DEFAULT_STREAM_TTL_MS"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_USD_TO_EGP_FALLBACK"
+        },
+        {
+          "kind": "const",
+          "name": "EXCHANGE_RATE_REQUEST_TIMEOUT_MS"
         },
         {
           "kind": "const",
@@ -887,6 +907,10 @@
         {
           "kind": "const",
           "name": "MAX_ANALYSIS_TIMEOUT_MS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_EXCHANGE_RATE_CACHE_TTL_MS"
         },
         {
           "kind": "const",
@@ -966,6 +990,10 @@
         },
         {
           "kind": "const",
+          "name": "MIN_EXCHANGE_RATE_CACHE_TTL_MS"
+        },
+        {
+          "kind": "const",
           "name": "MIN_GEMINI_STREAM_IDLE_TIMEOUT_MS"
         },
         {
@@ -1015,15 +1043,19 @@
         {
           "kind": "const",
           "name": "PAYMENT_PRICE_VALUE_PATTERN"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_INTEGRATION_ID_PATTERN"
         }
       ],
-      "hash": "18baeed2a82b7d9315f47ceb48844834cbee3ef3933f76f7f986ae23d0a144d7",
+      "hash": "5993a40b2703b2e3d35e0e7dc1ff58236409cb74918864feb30359e55dc530f1",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 119,
+      "loc": 142,
       "module": "api:config",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -1060,15 +1092,16 @@
           "name": "validateEnv"
         }
       ],
-      "hash": "2c698012591cd85255dc5330ecf6d16f4d7f69b17897ac36027ab542a135fd2c",
+      "hash": "00501b58aeaf06b1efac75fe7d0409a0155d37408e3664e2ab5a5060c3119996",
       "imports": [
         "./env-bounds.constants",
+        "./payment-env.schema",
         "./payment.constants",
         "zod"
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 382,
+      "loc": 385,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.ts"
     },
@@ -1127,8 +1160,38 @@
     {
       "exports": [
         {
+          "kind": "const",
+          "name": "paymobEnvShape"
+        }
+      ],
+      "hash": "93d28cf43fcd003f3f78170f3c2e1ccb6fc15f121542cbd56e6074ba8eb316f1",
+      "imports": [
+        "./env-bounds.constants",
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "config",
+      "loc": 44,
+      "module": "api:config",
+      "path": "apps/api/src/config/payment-env.schema.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "ExchangeRateConfig"
+        },
+        {
           "kind": "interface",
           "name": "PaymentPrice"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_API_BASE_URL"
+        },
+        {
+          "kind": "interface",
+          "name": "PaymobConfig"
         },
         {
           "kind": "const",
@@ -1143,11 +1206,11 @@
           "name": "PaypalEnvValue"
         }
       ],
-      "hash": "b118af9ce8f4ed0c12fa75baba76712c4c577dfb0354abb216135b78a71881c7",
+      "hash": "a9d7e0667361c0497171ad854481e4763b86b6e0c1ba511f518871d8addea52f",
       "imports": [],
       "isTest": false,
       "layer": "config",
-      "loc": 28,
+      "loc": 51,
       "module": "api:config",
       "path": "apps/api/src/config/payment.constants.ts"
     },
@@ -5274,10 +5337,59 @@
       "exports": [
         {
           "kind": "class",
+          "name": "ExchangeRateAdapter"
+        }
+      ],
+      "hash": "bd75c9dff12c6511f4e4192997efdfc4684866336e1e8210725ebc99c70dab47",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../../config/env-bounds.constants",
+        "../../../core/errors",
+        "../../../core/logger",
+        "../model/exchange-rate.schemas",
+        "../model/payment.constants",
+        "@nestjs/common"
+      ],
+      "isTest": false,
+      "layer": "adapters",
+      "loc": 105,
+      "module": "api:payments",
+      "path": "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PaymobAdapter"
+        }
+      ],
+      "hash": "5338e95b6ed03fee13790313c0197f18edda5d82b591f71103e81ae65c17daa5",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../../config/payment.constants",
+        "../../../core/errors",
+        "../../../core/logger",
+        "../model/payment.constants",
+        "../model/payment.types",
+        "../model/paymob.schemas",
+        "./exchange-rate.adapter",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "adapters",
+      "loc": 228,
+      "module": "api:payments",
+      "path": "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
           "name": "PaypalAdapter"
         }
       ],
-      "hash": "b99334b21c7199e118c758fcbc1df90b11569241ba9ab1455f0d910fa7362e27",
+      "hash": "a61c27b87bbe50c4648346e5cbc55d5ac255723d82ac2f2527856cd6d1af8028",
       "imports": [
         "../../../config/app-config.service",
         "../../../config/payment.constants",
@@ -5286,11 +5398,12 @@
         "../model/payment.constants",
         "../model/payment.types",
         "../model/paypal.schemas",
-        "@nestjs/common"
+        "@nestjs/common",
+        "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "adapters",
-      "loc": 264,
+      "loc": 266,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
     },
@@ -5301,7 +5414,7 @@
           "name": "PaymentsController"
         }
       ],
-      "hash": "aec5536f2924b9f98d53a3c05552c7e7e55b50cfbb7d0e0d2c33720de54ac1e9",
+      "hash": "722943397ca5c4a63fbfce515ab88a8f93434119060de3e605a5c72011ac9d08",
       "imports": [
         "../../../core/rate-limit",
         "../../../core/validation",
@@ -5312,7 +5425,7 @@
       ],
       "isTest": false,
       "layer": "api",
-      "loc": 32,
+      "loc": 47,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/api/payments.controller.ts"
     },
@@ -5323,11 +5436,12 @@
           "name": "PaymentGateService"
         }
       ],
-      "hash": "3b3215c79905a335eeb4af5f39aac8e1e3dfe9ede9f8c4ba5e5a7ede1e376339",
+      "hash": "bdd018d75c62b321214a728b3116cb3f97262e9a6e9f68510a6121615ed07c3a",
       "imports": [
         "../../../config/app-config.service",
         "../../../core/errors",
         "../../../core/logger",
+        "../adapters/paymob.adapter",
         "../adapters/paypal.adapter",
         "../lib/payment-order.util",
         "../model/payment.constants",
@@ -5337,7 +5451,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 98,
+      "loc": 147,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/application/payment-gate.service.ts"
     },
@@ -5368,19 +5482,40 @@
       "exports": [
         {
           "kind": "const",
+          "name": "resolvePaymentGateway"
+        },
+        {
+          "kind": "const",
           "name": "resolvePaymentOrderId"
         }
       ],
-      "hash": "eabd1359eff9bf2dbc0a0dc01dc234d0e5ce9e23770472617142ce18bb5d7d74",
+      "hash": "73f2d236df67fe9ea20b48931456c95544d8fe394f459c4a4be55e72c42cde9c",
       "imports": [
         "../model/payment.constants",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 21,
+      "loc": 39,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/lib/payment-order.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ExchangeRateResponseSchema"
+        }
+      ],
+      "hash": "d09366919157846a0dd82abce06757fcfe50b8ce5967bfdc1b2121b8be92552a",
+      "imports": [
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 12,
+      "module": "api:payments",
+      "path": "apps/api/src/modules/payments/model/exchange-rate.schemas.ts"
     },
     {
       "exports": [
@@ -5390,11 +5525,19 @@
         },
         {
           "kind": "const",
+          "name": "EXCHANGE_RATE_SUCCESS_RESULT"
+        },
+        {
+          "kind": "const",
           "name": "HTTP_STATUS_NOT_FOUND"
         },
         {
           "kind": "const",
           "name": "MILLISECONDS_PER_SECOND"
+        },
+        {
+          "kind": "const",
+          "name": "MINOR_UNITS_PER_MAJOR"
         },
         {
           "kind": "re-export",
@@ -5418,7 +5561,43 @@
         },
         {
           "kind": "const",
+          "name": "PAYMENTS_ROUTE_PAYMOB_INTENTION"
+        },
+        {
+          "kind": "const",
           "name": "PAYMENTS_ROUTE_ROOT"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_AUTH_TOKEN_PATH"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_AUTH_TOKEN_TTL_MS"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_BILLING_PLACEHOLDER"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_INTENTION_PATH"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_ITEM_NAME"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_REFUND_PATH"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_REQUEST_TIMEOUT_MS"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_TRANSACTION_INQUIRY_PATH"
         },
         {
           "kind": "const",
@@ -5453,34 +5632,67 @@
           "name": "PAYPAL_TOKEN_EXPIRY_MARGIN_SECONDS"
         }
       ],
-      "hash": "847ee68aa9b246cb8edd4719d4ff9f8603c9ae87b58113094f03886a80f57b85",
+      "hash": "361be53a5cf2091fbd5e94e4fa8321309409ea2462ae82631a76216a36c6dedf",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 73,
+      "loc": 117,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
     {
       "exports": [
         {
-          "kind": "interface",
+          "kind": "type",
           "name": "PaymentCaptureRecord"
         },
         {
           "kind": "interface",
           "name": "PaymentHolder"
+        },
+        {
+          "kind": "interface",
+          "name": "PaymobCaptureRecord"
+        },
+        {
+          "kind": "interface",
+          "name": "PaymobIntention"
         }
       ],
-      "hash": "b84dee6219604011b6a6419acfeb36dfe37cf157130ae2fc76e5d0edc81bbc4a",
+      "hash": "df554c8f86d90bcfea7ca3f095fa43cce9c545430ac280cc6bf488068814c8a8",
       "imports": [],
       "isTest": false,
       "layer": "model",
-      "loc": 19,
+      "loc": 35,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/payment.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "PaymobAuthTokenResponseSchema"
+        },
+        {
+          "kind": "const",
+          "name": "PaymobIntentionApiResponseSchema"
+        },
+        {
+          "kind": "const",
+          "name": "PaymobTransactionSchema"
+        }
+      ],
+      "hash": "411fbe9a9a04a6cf77d81b08af04c759dfb712fe845e17c72e9c80b22d400743",
+      "imports": [
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 36,
+      "module": "api:payments",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts"
     },
     {
       "exports": [
@@ -5522,8 +5734,10 @@
           "name": "PaymentsModule"
         }
       ],
-      "hash": "90860608b53248810177ebdf9485e7f6e864e6b80aa9df97bf7481c272adf505",
+      "hash": "d1407d500321f8f6d215dc9c4b8f0cc81217bf51a8034d04ab5b56161303218f",
       "imports": [
+        "./adapters/exchange-rate.adapter",
+        "./adapters/paymob.adapter",
         "./adapters/paypal.adapter",
         "./api/payments.controller",
         "./application/payment-gate.service",
@@ -5531,31 +5745,33 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 18,
+      "loc": 21,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/payments.module.ts"
     },
     {
       "exports": [],
-      "hash": "61e9d6b59b6138d479cbf26857c813a028ca37a164781d424e3b83eb3120d9c2",
+      "hash": "8d77f5d973b06e834e8f20ca8f1a5c67e959777dec456fc8249d6bcf9c8b7f89",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/stubs",
+        "../adapters/paymob.adapter",
         "../adapters/paypal.adapter",
         "../application/payment-gate.service",
         "../lib/payment-order.util",
         "../model/payment.types",
+        "@twinzy/shared",
         "vitest"
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 135,
+      "loc": 275,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/tests/payment-gate.service.test.ts"
     },
     {
       "exports": [],
-      "hash": "4f8dbc0b67c78a973bc47be49d481f6c3342fb33987b01e779274d4c9c435ace",
+      "hash": "3427e8aad2dda0510aabe276e83c7b76038449c4cdea0ab61daee31951efe8c8",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/stubs",
@@ -6525,7 +6741,7 @@
           "name": "buildConfigStub"
         }
       ],
-      "hash": "54022747ef0a4421ed17daae60ba93225b2267168c8aa082951898771839c0c2",
+      "hash": "97cb030acde0fa7d47bfc99e9006c85e675b076c9ed59a5860d2f656f2595b90",
       "imports": [
         "../../config/ai-provider.constants",
         "../../config/ai-route.types",
@@ -6537,7 +6753,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 119,
+      "loc": 134,
       "module": "api:tests",
       "path": "apps/api/src/tests/fixtures/stubs.ts"
     },
@@ -7444,18 +7660,10 @@
         },
         {
           "kind": "const",
-          "name": "cameraVideoClass"
-        },
-        {
-          "kind": "const",
-          "name": "cameraVideoMirroredClass"
-        },
-        {
-          "kind": "const",
           "name": "resolveCameraVideoClass"
         }
       ],
-      "hash": "116b0c70c93a8b93c8e8217d9fba13e315737f11684d69bdfae3c1d49cddfc9f",
+      "hash": "2e71e109a5cf8d3a12c6805a5c451364bdbc2f7e4b1b4fb500e0131099627d4a",
       "imports": [],
       "isTest": false,
       "layer": "components",
@@ -15528,21 +15736,53 @@
         },
         {
           "kind": "const",
+          "name": "PAYMENT_GATEWAY_FIELD_NAME"
+        },
+        {
+          "kind": "const",
           "name": "PAYMENT_ORDER_FIELD_NAME"
+        },
+        {
+          "kind": "const",
+          "name": "PaymentGateway"
+        },
+        {
+          "kind": "const",
+          "name": "PaymentGatewaySchema"
+        },
+        {
+          "kind": "type",
+          "name": "PaymentGatewayValue"
+        },
+        {
+          "kind": "type",
+          "name": "PaymobIntentionRequest"
+        },
+        {
+          "kind": "const",
+          "name": "PaymobIntentionRequestSchema"
+        },
+        {
+          "kind": "type",
+          "name": "PaymobIntentionResponse"
+        },
+        {
+          "kind": "const",
+          "name": "PaymobIntentionResponseSchema"
         },
         {
           "kind": "const",
           "name": "PaypalOrderIdSchema"
         }
       ],
-      "hash": "61952fdd1da08f04c44daf0aefe0e1b7f936bf9be74d8bb1843e41ee78bc7499",
+      "hash": "ff403f310ff4a005b2e9b6a1c12ec610439011a995d077406a846686b1c138f9",
       "imports": [
         "./game-stream.schema",
         "zod"
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 28,
+      "loc": 67,
       "module": "shared",
       "path": "packages/shared/src/schemas/payment.schema.ts"
     },

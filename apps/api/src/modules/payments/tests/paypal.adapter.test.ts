@@ -104,7 +104,7 @@ describe('PaypalAdapter.captureOrder', () => {
 
     const record = await buildAdapter().captureOrder('ORDER123', 'req-1');
 
-    expect(record).toStrictEqual({ orderId: 'ORDER123', captureId: 'CAP123' });
+    expect(record).toStrictEqual({ gateway: 'paypal', orderId: 'ORDER123', captureId: 'CAP123' });
   });
 
   it('sends an idempotency key so a retried capture cannot double-charge', async () => {

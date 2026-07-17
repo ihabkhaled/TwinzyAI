@@ -209,6 +209,22 @@
       "readBy": []
     },
     {
+      "description": "USD -> PAYMOB_CURRENCY conversion. Rates come from this USD-base endpoint (keyless default); the fetched rate is cached and a fallback keeps payments working through a rate-API outage.",
+      "example": "https://open.er-api.com/v6/latest",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "EXCHANGE_RATE_API_BASE_URL",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "3600000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "EXCHANGE_RATE_CACHE_TTL_MS",
+      "readBy": []
+    },
+    {
       "description": "--- Gemini (backend only — NEVER expose to the frontend) ---",
       "example": "",
       "inEnvExample": true,
@@ -433,6 +449,14 @@
       ]
     },
     {
+      "description": "Public Paymob key for the browser Pixel checkout (safe to expose). Leave blank to hide the Paymob option in the UI.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_PAYMOB_PUBLIC_KEY",
+      "readBy": []
+    },
+    {
       "description": "Public PayPal client id for the browser Buttons SDK (safe to expose; enables the frontend payment step). Leave blank to keep the free UI.",
       "example": "",
       "inEnvExample": true,
@@ -492,6 +516,54 @@
       "inEnvExample": true,
       "isPublic": false,
       "name": "PAYMENT_PRICE_VALUE",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMOB_API_KEY",
+      "readBy": []
+    },
+    {
+      "description": "Numeric card integration id from Paymob → Payment Integrations.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMOB_CARD_INTEGRATION_ID",
+      "readBy": []
+    },
+    {
+      "description": "Charge currency (Egypt account => EGP). ISO-4217 alpha.",
+      "example": "EGP",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMOB_CURRENCY",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMOB_HMAC_SECRET",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMOB_PUBLIC_KEY",
+      "readBy": []
+    },
+    {
+      "description": "--- Paymob card gateway (EGP) — OPTIONAL, alongside PayPal --- All THREE (SECRET + PUBLIC + CARD_INTEGRATION_ID) present => the Paymob card option turns ON; any blank => it is off and the game stays free of it. SANDBOX ONLY: use the egy_..._test_ keys from developer.paymob.com — LIVE keys are not approved. The charge is the canonical USD PAYMENT_PRICE_VALUE converted to EGP at intention time (see the exchange-rate settings below); secrets stay backend-only.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PAYMOB_SECRET_KEY",
       "readBy": []
     },
     {
@@ -602,6 +674,14 @@
     },
     {
       "description": "",
+      "example": "50",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "USD_TO_EGP_FALLBACK_RATE",
+      "readBy": []
+    },
+    {
+      "description": "",
       "example": "3000",
       "inEnvExample": true,
       "isPublic": false,
@@ -609,6 +689,6 @@
       "readBy": []
     }
   ],
-  "count": 74,
+  "count": 84,
   "undocumented": []
 }

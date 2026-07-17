@@ -68,6 +68,7 @@ import {
   PAYMENT_PRICE_VALUE_PATTERN,
 } from './env-bounds.constants';
 import { PAYPAL_ENV_VALUES } from './payment.constants';
+import { paymobEnvShape } from './payment-env.schema';
 
 const NODE_ENVIRONMENTS = ['development', 'test', 'production'] as const;
 
@@ -134,6 +135,8 @@ const EnvSchema = z
     /** Server-authoritative price per analysis (never trusted from clients). */
     PAYMENT_PRICE_VALUE: z.string().regex(PAYMENT_PRICE_VALUE_PATTERN).default('0.50'),
     PAYMENT_PRICE_CURRENCY: z.string().regex(PAYMENT_PRICE_CURRENCY_PATTERN).default('USD'),
+    // Paymob card gateway (EGP) + USD→EGP exchange-rate vars (see payment-env.schema).
+    ...paymobEnvShape,
     GEMINI_MODEL: z.string().default(''),
     // Comma-separated ordered fallback model ids. If the primary GEMINI_MODEL is
     // rate-limited (429), overloaded, or unavailable, the adapter retries the

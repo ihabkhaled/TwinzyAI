@@ -60,7 +60,7 @@
         "docs/env-vars.md",
         "rules/25-configuration-and-environment.md"
       ],
-      "fileCount": 14,
+      "fileCount": 15,
       "lane": "critical",
       "layers": [
         "config"
@@ -153,7 +153,7 @@
         "structure/flows/payment-flow.md",
         "docs/features/paypal-donations-and-paid-results/22-go-no-go.md"
       ],
-      "fileCount": 11,
+      "fileCount": 15,
       "lane": "critical",
       "layers": [
         "adapters",

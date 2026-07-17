@@ -14,6 +14,42 @@
     {
       "kind": "zod-schema",
       "module": "api:payments",
+      "name": "ExchangeRateResponseSchema",
+      "path": "apps/api/src/modules/payments/model/exchange-rate.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaymobAuthTokenResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaymobIntentionApiResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
+      "name": "PaymobTransactionSchema",
+      "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
       "name": "PaypalCaptureOrderResponseSchema",
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "usedBy": [
@@ -575,7 +611,79 @@
     {
       "kind": "schema-file-export",
       "module": "shared",
+      "name": "PAYMENT_GATEWAY_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
       "name": "PAYMENT_ORDER_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PaymentGateway",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PaymentGatewaySchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PaymentGatewayValue",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PaymobIntentionRequest",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PaymobIntentionRequestSchema",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PaymobIntentionResponse",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PaymobIntentionResponseSchema",
       "path": "packages/shared/src/schemas/payment.schema.ts",
       "usedBy": [
         "packages/shared/src/schemas/index.ts"
@@ -797,5 +905,5 @@
       ]
     }
   ],
-  "count": 81
+  "count": 93
 }

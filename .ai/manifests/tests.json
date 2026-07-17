@@ -529,6 +529,7 @@
       "path": "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
       "targets": [
         "apps/api/src/core/errors/index.ts",
+        "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
         "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
         "apps/api/src/modules/payments/application/payment-gate.service.ts",
         "apps/api/src/modules/payments/lib/payment-order.util.ts",

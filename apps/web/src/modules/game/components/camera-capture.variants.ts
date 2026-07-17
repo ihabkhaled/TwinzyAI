@@ -3,10 +3,10 @@ export const cameraTitleClass = 'mb-2 text-base font-semibold text-foreground';
 
 export const cameraStageClass = 'overflow-hidden rounded-xl bg-black';
 
-export const cameraVideoClass = 'mx-auto max-h-72 w-full object-contain';
+const cameraVideoClass = 'mx-auto max-h-72 w-full object-contain';
 
 /** Horizontal flip for the preview when the mirror toggle is on. */
-export const cameraVideoMirroredClass = '-scale-x-100';
+const cameraVideoMirroredClass = '-scale-x-100';
 
 /** Preview class with the mirror flip appended when mirrored (keeps JSX logic-free). */
 export const resolveCameraVideoClass = (isMirrored: boolean): string =>

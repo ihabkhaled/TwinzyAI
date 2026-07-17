@@ -547,12 +547,6 @@
   "cameraTitleClass": [
     "apps/web/src/modules/game/components/camera-capture.variants.ts"
   ],
-  "cameraVideoClass": [
-    "apps/web/src/modules/game/components/camera-capture.variants.ts"
-  ],
-  "cameraVideoMirroredClass": [
-    "apps/web/src/modules/game/components/camera-capture.variants.ts"
-  ],
   "CameraViewModel": [
     "apps/web/src/modules/game/model/camera.types.ts"
   ],
@@ -994,6 +988,12 @@
   "DEFAULT_CORS_ORIGIN": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "DEFAULT_EXCHANGE_RATE_API_BASE_URL": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_EXCHANGE_RATE_CACHE_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
   "DEFAULT_GEMINI_STREAM_IDLE_TIMEOUT_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -1023,6 +1023,9 @@
     "apps/api/src/config/env-bounds.constants.ts",
     "apps/web/src/modules/game/model/game.constants.ts",
     "packages/shared/src/constants/upload.constants.ts"
+  ],
+  "DEFAULT_PAYMOB_CURRENCY": [
+    "apps/api/src/config/env-bounds.constants.ts"
   ],
   "DEFAULT_RATE_LIMIT_MAX": [
     "apps/api/src/config/env-bounds.constants.ts"
@@ -1054,6 +1057,9 @@
   ],
   "DEFAULT_TIME_ZONE": [
     "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "DEFAULT_USD_TO_EGP_FALLBACK": [
+    "apps/api/src/config/env-bounds.constants.ts"
   ],
   "DELETE_SHARE_THROTTLE": [
     "apps/api/src/modules/share-results/model/share-result.constants.ts"
@@ -1129,6 +1135,21 @@
   ],
   "evaluateResponseText": [
     "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+  ],
+  "EXCHANGE_RATE_REQUEST_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "EXCHANGE_RATE_SUCCESS_RESULT": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "ExchangeRateAdapter": [
+    "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts"
+  ],
+  "ExchangeRateConfig": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "ExchangeRateResponseSchema": [
+    "apps/api/src/modules/payments/model/exchange-rate.schemas.ts"
   ],
   "EXPECTED_FILE_FIELD_MESSAGE": [
     "apps/api/src/core/errors/error.constants.ts"
@@ -1841,6 +1862,9 @@
   "MAX_ERROR_MESSAGE_LENGTH": [
     "packages/shared/src/constants/response-bounds.constants.ts"
   ],
+  "MAX_EXCHANGE_RATE_CACHE_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
   "MAX_FALLBACK_MESSAGE_LENGTH": [
     "packages/shared/src/constants/response-bounds.constants.ts"
   ],
@@ -1981,6 +2005,9 @@
   "MIN_DISPLAY_SCORE": [
     "packages/shared/src/constants/trait.constants.ts"
   ],
+  "MIN_EXCHANGE_RATE_CACHE_TTL_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
   "MIN_GEMINI_STREAM_IDLE_TIMEOUT_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -2025,6 +2052,9 @@
   ],
   "MIN_STREAM_TTL_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MINOR_UNITS_PER_MAJOR": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
   "MOCK_LATENCY_BASE_MS": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
@@ -2192,6 +2222,9 @@
   "PAYMENT_ERROR_CODES": [
     "apps/web/src/modules/game/model/game.constants.ts"
   ],
+  "PAYMENT_GATEWAY_FIELD_NAME": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
   "PAYMENT_ORDER_FIELD_NAME": [
     "apps/api/src/modules/payments/model/payment.constants.ts",
     "packages/shared/src/schemas/payment.schema.ts"
@@ -2234,6 +2267,15 @@
     "apps/api/src/modules/payments/application/payment-gate.service.ts",
     "apps/api/src/modules/payments/index.ts"
   ],
+  "PaymentGateway": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymentGatewaySchema": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymentGatewayValue": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
   "PaymentHolder": [
     "apps/api/src/modules/payments/model/payment.types.ts"
   ],
@@ -2247,6 +2289,9 @@
     "packages/shared/src/constants/app.constants.ts"
   ],
   "PAYMENTS_ROUTE_ORDERS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMENTS_ROUTE_PAYMOB_INTENTION": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
   "PAYMENTS_ROUTE_ROOT": [
@@ -2273,6 +2318,72 @@
   ],
   "PaymentViewModelInput": [
     "apps/web/src/modules/game/helpers/payment-view-model.helper.ts"
+  ],
+  "PAYMOB_API_BASE_URL": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "PAYMOB_AUTH_TOKEN_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_AUTH_TOKEN_TTL_MS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_BILLING_PLACEHOLDER": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_INTEGRATION_ID_PATTERN": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "PAYMOB_INTENTION_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_ITEM_NAME": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_REFUND_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_REQUEST_TIMEOUT_MS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_TRANSACTION_INQUIRY_PATH": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PaymobAdapter": [
+    "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
+  ],
+  "PaymobAuthTokenResponseSchema": [
+    "apps/api/src/modules/payments/model/paymob.schemas.ts"
+  ],
+  "PaymobCaptureRecord": [
+    "apps/api/src/modules/payments/model/payment.types.ts"
+  ],
+  "PaymobConfig": [
+    "apps/api/src/config/payment.constants.ts"
+  ],
+  "paymobEnvShape": [
+    "apps/api/src/config/payment-env.schema.ts"
+  ],
+  "PaymobIntention": [
+    "apps/api/src/modules/payments/model/payment.types.ts"
+  ],
+  "PaymobIntentionApiResponseSchema": [
+    "apps/api/src/modules/payments/model/paymob.schemas.ts"
+  ],
+  "PaymobIntentionRequest": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymobIntentionRequestSchema": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymobIntentionResponse": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymobIntentionResponseSchema": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymobTransactionSchema": [
+    "apps/api/src/modules/payments/model/paymob.schemas.ts"
   ],
   "PAYPAL_BASE_URL_BY_ENV": [
     "apps/api/src/config/payment.constants.ts"
@@ -2598,6 +2709,9 @@
   ],
   "resolveInitialTheme": [
     "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
+  ],
+  "resolvePaymentGateway": [
+    "apps/api/src/modules/payments/lib/payment-order.util.ts"
   ],
   "resolvePaymentOrderId": [
     "apps/api/src/modules/payments/lib/payment-order.util.ts"

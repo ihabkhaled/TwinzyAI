@@ -6,9 +6,9 @@
 
 | Fact | Value |
 | --- | --- |
-| Source files scanned | 663 |
+| Source files scanned | 668 |
 | Source modules | 39 |
-| API endpoints | 9 |
+| API endpoints | 10 |
 | Web routes | 7 |
 | Test files | 169 |
 | Canonical documents | 689 |

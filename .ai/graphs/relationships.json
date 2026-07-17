@@ -1,5 +1,5 @@
 {
-  "count": 2472,
+  "count": 2485,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -1430,6 +1430,30 @@
       "type": "covers"
     },
     {
+      "from": "apps/api/src/modules/payments/adapters/exchange-rate.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/model/exchange-rate.schemas.ts#ExchangeRateResponseSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/model/paymob.schemas.ts#PaymobAuthTokenResponseSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/model/paymob.schemas.ts#PaymobIntentionApiResponseSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/model/paymob.schemas.ts#PaymobTransactionSchema",
+      "type": "uses-contract"
+    },
+    {
       "from": "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
       "label": "generated",
       "to": "apps/api/src/modules/payments/model/paypal.schemas.ts#PaypalCaptureOrderResponseSchema",
@@ -1463,6 +1487,12 @@
       "from": "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
       "label": "generated",
       "to": "apps/api/src/core/errors/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
       "type": "covers"
     },
     {
@@ -10126,7 +10156,55 @@
     {
       "from": "packages/shared/src/schemas/index.ts",
       "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PAYMENT_GATEWAY_FIELD_NAME",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
       "to": "packages/shared/src/schemas/payment.schema.ts#PAYMENT_ORDER_FIELD_NAME",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymentGateway",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymentGatewaySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymentGatewayValue",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymobIntentionRequest",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymobIntentionRequestSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymobIntentionResponse",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/payment.schema.ts#PaymobIntentionResponseSchema",
       "type": "uses-contract"
     },
     {

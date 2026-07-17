@@ -1,11 +1,27 @@
 /**
- * Proof that money moved for exactly one analysis run: the captured PayPal
- * order + capture ids. Held only for the lifetime of the request (used to
- * refund if the pipeline fails after capture); never persisted.
+ * Proof that money moved for exactly one analysis run, tagged by gateway so the
+ * refund-on-failure path calls the right provider. Held only for the lifetime of
+ * the request; never persisted.
  */
-export interface PaymentCaptureRecord {
+interface PaypalCaptureRecord {
+  readonly gateway: 'paypal';
   readonly orderId: string;
   readonly captureId: string;
+}
+
+export interface PaymobCaptureRecord {
+  readonly gateway: 'paymob';
+  readonly transactionId: number;
+  readonly amountCents: number;
+}
+
+export type PaymentCaptureRecord = PaypalCaptureRecord | PaymobCaptureRecord;
+
+/** What a freshly-created Paymob intention hands back to the client for Pixel checkout. */
+export interface PaymobIntention {
+  readonly clientSecret: string;
+  readonly amountCents: number;
+  readonly currency: string;
 }
 
 /**

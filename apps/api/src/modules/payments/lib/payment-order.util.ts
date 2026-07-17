@@ -1,4 +1,10 @@
-import { isRecord } from '@twinzy/shared';
+import type { PaymentGatewayValue } from '@twinzy/shared';
+import {
+  isRecord,
+  PAYMENT_GATEWAY_FIELD_NAME,
+  PaymentGateway,
+  PaymentGatewaySchema,
+} from '@twinzy/shared';
 
 import { PAYMENT_ORDER_FIELD_NAME, PAYPAL_ORDER_ID_PATTERN } from '../model/payment.constants';
 
@@ -17,4 +23,16 @@ export const resolvePaymentOrderId = (body: unknown): string | null | undefined 
     return undefined;
   }
   return typeof raw === 'string' && PAYPAL_ORDER_ID_PATTERN.test(raw) ? raw : null;
+};
+
+/**
+ * Read which gateway the client paid through off the analyze body. Absent or
+ * malformed ⇒ PayPal (back-compat with the single-gateway contract).
+ */
+export const resolvePaymentGateway = (body: unknown): PaymentGatewayValue => {
+  if (!isRecord(body)) {
+    return PaymentGateway.Paypal;
+  }
+  const parsed = PaymentGatewaySchema.safeParse(body[PAYMENT_GATEWAY_FIELD_NAME]);
+  return parsed.success ? parsed.data : PaymentGateway.Paypal;
 };
