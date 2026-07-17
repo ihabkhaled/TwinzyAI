@@ -57,6 +57,8 @@ export type PaymobIntentionRequest = z.infer<typeof PaymobIntentionRequestSchema
 export const PaymobIntentionResponseSchema = z.strictObject({
   clientSecret: z.string().min(1),
   publicKey: z.string().min(1),
+  /** The Paymob order id; the client returns it on analyze so the server verifies it. */
+  orderId: z.number().int().positive(),
   amountCents: z.number().int().positive(),
   currency: z.string().regex(/^[A-Z]{3}$/),
   usdBaseValue: z.string().regex(/^\d{1,6}\.\d{2}$/),
@@ -64,3 +66,12 @@ export const PaymobIntentionResponseSchema = z.strictObject({
 });
 
 export type PaymobIntentionResponse = z.infer<typeof PaymobIntentionResponseSchema>;
+
+/**
+ * Multipart fields on the analyze request naming the paid Paymob order (verified
+ * server-side) and its transaction id (relayed from the checkout redirect, used
+ * only to refund an undelivered run). Both are numeric; the server re-validates.
+ */
+export const PAYMOB_ORDER_FIELD_NAME = 'paymobOrderId';
+export const PAYMOB_TRANSACTION_FIELD_NAME = 'paymobTransactionId';
+export const PAYMOB_ID_PATTERN = /^\d{1,15}$/;

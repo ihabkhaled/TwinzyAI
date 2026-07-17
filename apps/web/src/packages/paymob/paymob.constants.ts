@@ -12,3 +12,9 @@ export const PAYMOB_POPUP_FEATURES = 'popup=yes,width=480,height=760';
 
 /** How often (ms) to poll whether the checkout popup has closed. */
 export const PAYMOB_POPUP_POLL_MS = 500;
+
+/** postMessage type the /paymob/return page sends to the opener on completion. */
+export const PAYMOB_RETURN_MESSAGE_TYPE = 'paymob-return';
+
+/** Paymob numeric ids as they arrive on the redirect query (server re-validates). */
+export const PAYMOB_ID_QUERY_PATTERN = /^\d{1,15}$/;

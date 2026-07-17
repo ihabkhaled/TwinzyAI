@@ -1,5 +1,5 @@
 {
-  "count": 169,
+  "count": 170,
   "tests": [
     {
       "kind": "unit",
@@ -1013,6 +1013,15 @@
       "path": "apps/web/src/modules/game/test/game-fixtures.ts",
       "targets": [
         "apps/web/src/modules/game/model/game.constants.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
+      "targets": [
+        "apps/web/src/modules/game/gateway/game-form-data.builder.ts",
+        "apps/web/src/modules/game/test/game-fixtures.ts"
       ]
     },
     {

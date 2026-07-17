@@ -34,6 +34,10 @@ export const useAnalyzeGameMutation = (
         resultCount: input.resultCount,
         ...(input.paymentGateway !== undefined && { paymentGateway: input.paymentGateway }),
         ...(input.paypalOrderId !== undefined && { paypalOrderId: input.paypalOrderId }),
+        ...(input.paymobOrderId !== undefined && { paymobOrderId: input.paymobOrderId }),
+        ...(input.paymobTransactionId !== undefined && {
+          paymobTransactionId: input.paymobTransactionId,
+        }),
       }),
   });
 

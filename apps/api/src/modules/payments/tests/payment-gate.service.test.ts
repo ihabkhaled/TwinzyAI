@@ -7,7 +7,12 @@ import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stu
 import type { PaymobAdapter } from '../adapters/paymob.adapter';
 import type { PaypalAdapter } from '../adapters/paypal.adapter';
 import { PaymentGateService } from '../application/payment-gate.service';
-import { resolvePaymentGateway, resolvePaymentOrderId } from '../lib/payment-order.util';
+import {
+  resolvePaymentGateway,
+  resolvePaymentOrderId,
+  resolvePaymobOrderId,
+  resolvePaymobTransactionId,
+} from '../lib/payment-order.util';
 import type { PaymentCaptureRecord, PaymobCaptureRecord } from '../model/payment.types';
 
 const CAPTURE: PaymentCaptureRecord = {
@@ -18,6 +23,7 @@ const CAPTURE: PaymentCaptureRecord = {
 
 const PAYMOB_CAPTURE: PaymobCaptureRecord = {
   gateway: PaymentGateway.Paymob,
+  orderId: 568_000,
   transactionId: 987,
   amountCents: 4900,
 };
@@ -48,7 +54,12 @@ const buildPaymobFake = (): {
   const verifyPayment = vi.fn(() => Promise.resolve(PAYMOB_CAPTURE));
   const refund = vi.fn(() => Promise.resolve());
   const createIntention = vi.fn(() =>
-    Promise.resolve({ clientSecret: 'cs_123', amountCents: 4900, currency: 'EGP' }),
+    Promise.resolve({
+      clientSecret: 'cs_123',
+      orderId: 568_000,
+      amountCents: 4900,
+      currency: 'EGP',
+    }),
   );
   return {
     adapter: { verifyPayment, refund, createIntention } as unknown as PaymobAdapter,
@@ -168,23 +179,52 @@ describe('PaymentGateService with the paywall ON', () => {
 });
 
 describe('PaymentGateService with Paymob ON', () => {
-  it('verifies a Paymob run against the request id, never PayPal', async () => {
+  it('verifies the Paymob order bound to the request id, never PayPal', async () => {
     const { gate, paypal, paymob } = buildGate(false, true);
 
-    const record = await gate.captureForAnalysis({ paymentGateway: 'paymob' }, 'req-1');
+    const record = await gate.captureForAnalysis(
+      { paymentGateway: 'paymob', paymobOrderId: '568000', paymobTransactionId: '987' },
+      'req-1',
+    );
 
     expect(record).toStrictEqual(PAYMOB_CAPTURE);
-    expect(paymob.verifyPayment).toHaveBeenCalledWith('req-1');
+    expect(paymob.verifyPayment).toHaveBeenCalledWith('req-1', 568_000, 987);
     expect(paypal.captureOrder).not.toHaveBeenCalled();
   });
 
   it('cannot verify Paymob without a request id (402 PAYMENT_REQUIRED)', async () => {
     const { gate, paymob } = buildGate(false, true);
 
-    await expect(gate.captureForAnalysis({ paymentGateway: 'paymob' })).rejects.toMatchObject({
-      errorCode: ErrorCode.PaymentRequired,
-    });
+    await expect(
+      gate.captureForAnalysis({ paymentGateway: 'paymob', paymobOrderId: '568000' }),
+    ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentRequired });
     expect(paymob.verifyPayment).not.toHaveBeenCalled();
+  });
+
+  it('requires a Paymob order id: absent → 402 PAYMENT_REQUIRED', async () => {
+    const { gate, paymob } = buildGate(false, true);
+
+    await expect(
+      gate.captureForAnalysis({ paymentGateway: 'paymob' }, 'req-1'),
+    ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentRequired });
+    expect(paymob.verifyPayment).not.toHaveBeenCalled();
+  });
+
+  it('rejects a malformed Paymob order id BEFORE the provider', async () => {
+    const { gate, paymob } = buildGate(false, true);
+
+    await expect(
+      gate.captureForAnalysis({ paymentGateway: 'paymob', paymobOrderId: 'not-a-number' }, 'req-1'),
+    ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentOrderInvalid });
+    expect(paymob.verifyPayment).not.toHaveBeenCalled();
+  });
+
+  it('verifies with an undefined transaction id when the redirect did not relay one', async () => {
+    const { gate, paymob } = buildGate(false, true);
+
+    await gate.captureForAnalysis({ paymentGateway: 'paymob', paymobOrderId: '568000' }, 'req-1');
+
+    expect(paymob.verifyPayment).toHaveBeenCalledWith('req-1', 568_000, undefined);
   });
 
   it('refunds an undelivered Paymob run on Paymob, not PayPal', async () => {
@@ -205,6 +245,7 @@ describe('PaymentGateService with Paymob ON', () => {
     expect(response).toMatchObject({
       clientSecret: 'cs_123',
       publicKey: 'egy_pk_test_x',
+      orderId: 568_000,
       amountCents: 4900,
       currency: 'EGP',
       usdBaseValue: '0.50',
@@ -270,5 +311,20 @@ describe('resolvePaymentGateway', () => {
 
   it('falls back to PayPal for an unknown gateway value', () => {
     expect(resolvePaymentGateway({ paymentGateway: 'bitcoin' })).toBe(PaymentGateway.Paypal);
+  });
+});
+
+describe('resolvePaymob ids', () => {
+  it('order id: undefined absent, null malformed, number when valid', () => {
+    expect(resolvePaymobOrderId({})).toBeUndefined();
+    expect(resolvePaymobOrderId('nope')).toBeUndefined();
+    expect(resolvePaymobOrderId({ paymobOrderId: 'x' })).toBeNull();
+    expect(resolvePaymobOrderId({ paymobOrderId: '568000' })).toBe(568_000);
+  });
+
+  it('transaction id: undefined unless a valid numeric string is present', () => {
+    expect(resolvePaymobTransactionId({})).toBeUndefined();
+    expect(resolvePaymobTransactionId({ paymobTransactionId: 'x' })).toBeUndefined();
+    expect(resolvePaymobTransactionId({ paymobTransactionId: '987' })).toBe(987);
   });
 });

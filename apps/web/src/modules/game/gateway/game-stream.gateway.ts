@@ -32,13 +32,7 @@ export const analyzeImageStreamRequest = async (
 
   await streamMultipart(
     GAME_ANALYZE_STREAM_PATH,
-    buildAnalyzeFormData(
-      file,
-      languageCode,
-      options.resultCount,
-      options.paymentGateway,
-      options.paypalOrderId,
-    ),
+    buildAnalyzeFormData(file, languageCode, options.resultCount, options),
     (data) => {
       const parsed = GameStreamMessageSchema.safeParse(parseJson(data));
       if (!parsed.success) {

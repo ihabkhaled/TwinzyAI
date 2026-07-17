@@ -5,4 +5,5 @@
 export { PrivacyNotice } from './components/privacy-notice.component';
 export { GameContainer } from './containers/game.container';
 export { LandingContainer } from './containers/landing.container';
+export { PaymobReturnContainer } from './containers/paymob-return.container';
 export { SharePageContainer } from './containers/share-page.container';

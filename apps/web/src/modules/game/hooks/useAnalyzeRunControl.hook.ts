@@ -32,6 +32,10 @@ export const useAnalyzeRunControl = (
         resultCount,
         ...(payment?.paymentGateway !== undefined && { paymentGateway: payment.paymentGateway }),
         ...(payment?.paypalOrderId !== undefined && { paypalOrderId: payment.paypalOrderId }),
+        ...(payment?.paymobOrderId !== undefined && { paymobOrderId: payment.paymobOrderId }),
+        ...(payment?.paymobTransactionId !== undefined && {
+          paymobTransactionId: payment.paymobTransactionId,
+        }),
       });
     },
     [start],

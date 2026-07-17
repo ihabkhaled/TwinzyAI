@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 
 import { PaymentGateway } from '@twinzy/shared';
 
-import { awaitPaymobPopupClosed, openPaymobPopup, startPaymobCheckout } from '@/packages/paymob';
+import { awaitPaymobResult, openPaymobPopup, startPaymobCheckout } from '@/packages/paymob';
 
 import { createPaymobIntentionRequest } from '../gateway/payment.gateway';
 import type {
@@ -45,9 +45,9 @@ export const usePaymobCheckout = (
     setIsPaymobPending(true);
     const run = async (): Promise<void> => {
       try {
-        const { clientSecret, publicKey } = await createPaymobIntentionRequest(requestId);
+        const { clientSecret, publicKey, orderId } = await createPaymobIntentionRequest(requestId);
         startPaymobCheckout(popup, publicKey, clientSecret);
-        await awaitPaymobPopupClosed(popup);
+        const { transactionId } = await awaitPaymobResult(popup);
         // cancelPayment clears the request id; skip the run if it was cancelled
         // while the popup was open.
         if (requestIdRef.current !== requestId) {
@@ -57,6 +57,8 @@ export const usePaymobCheckout = (
         beginRun(pending.file, pending.resultCount, {
           requestId,
           paymentGateway: PaymentGateway.Paymob,
+          paymobOrderId: orderId,
+          ...(transactionId !== undefined && { paymobTransactionId: transactionId }),
         });
       } catch {
         popup.close();

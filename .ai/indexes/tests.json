@@ -126,6 +126,7 @@
       "apps/web/src/modules/game/test/game-display.helper.test.ts",
       "apps/web/src/modules/game/test/game-error.helper.test.ts",
       "apps/web/src/modules/game/test/game-fixtures.ts",
+      "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
       "apps/web/src/modules/game/test/game-processing.container.test.tsx",
       "apps/web/src/modules/game/test/game-result.container.test.tsx",
       "apps/web/src/modules/game/test/game-stream.gateway.test.ts",

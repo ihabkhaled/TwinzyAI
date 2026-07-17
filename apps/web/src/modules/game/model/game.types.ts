@@ -123,6 +123,10 @@ export interface AnalyzeRunInput {
   paymentGateway?: PaymentGatewayValue;
   /** Present only for a paid PayPal run (the approved order id). */
   paypalOrderId?: string;
+  /** Present only for a paid Paymob run (the verified order id). */
+  paymobOrderId?: number;
+  /** Paymob transaction id (relayed from checkout; used only to refund an undelivered run). */
+  paymobTransactionId?: number;
 }
 
 /** Per-run correlation + cancel controls + result count threaded to the streaming gateway. */
@@ -132,7 +136,15 @@ export interface AnalyzeStreamOptions {
   resultCount: number;
   paymentGateway?: PaymentGatewayValue;
   paypalOrderId?: string;
+  paymobOrderId?: number;
+  paymobTransactionId?: number;
 }
+
+/** The payment-binding fields appended to the analyze multipart body (all absent on a free run). */
+export type AnalyzePaymentFields = Pick<
+  AnalyzeStreamOptions,
+  'paymentGateway' | 'paypalOrderId' | 'paymobOrderId' | 'paymobTransactionId'
+>;
 
 /** The run-control surface: start a fresh analyze run, or cancel the in-flight one. */
 /** Optional payment binding threaded into a paid run (shared requestId + gateway). */
@@ -141,6 +153,10 @@ export interface AnalyzeRunPayment {
   paymentGateway: PaymentGatewayValue;
   /** Present only for PayPal (the approved order id); Paymob verifies by requestId. */
   paypalOrderId?: string;
+  /** Present only for Paymob (the verified order id). */
+  paymobOrderId?: number;
+  /** Paymob transaction id (relayed from checkout; used only to refund an undelivered run). */
+  paymobTransactionId?: number;
 }
 
 export interface AnalyzeRunControl {

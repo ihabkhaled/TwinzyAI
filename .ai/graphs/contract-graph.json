@@ -31,7 +31,7 @@
       ]
     },
     {
-      "name": "PaymobTransactionSchema",
+      "name": "PaymobOrderSchema",
       "path": "apps/api/src/modules/payments/model/paymob.schemas.ts",
       "usedBy": [
         "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
@@ -516,6 +516,27 @@
     },
     {
       "name": "PaymentGatewayValue",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PAYMOB_ID_PATTERN",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PAYMOB_ORDER_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "PAYMOB_TRANSACTION_FIELD_NAME",
       "path": "packages/shared/src/schemas/payment.schema.ts",
       "usedBy": [
         "packages/shared/src/schemas/index.ts"

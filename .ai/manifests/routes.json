@@ -84,6 +84,11 @@
       "path": "/help"
     },
     {
+      "file": "apps/web/src/app/paymob/return/page.tsx",
+      "kind": "page",
+      "path": "/paymob/return"
+    },
+    {
       "file": "apps/web/src/app/privacy/page.tsx",
       "kind": "page",
       "path": "/privacy"
@@ -99,5 +104,5 @@
       "path": "/terms"
     }
   ],
-  "webCount": 7
+  "webCount": 8
 }

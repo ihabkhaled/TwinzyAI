@@ -11,15 +11,19 @@ interface PaypalCaptureRecord {
 
 export interface PaymobCaptureRecord {
   readonly gateway: 'paymob';
-  readonly transactionId: number;
+  readonly orderId: number;
+  /** From the checkout redirect; needed to refund. Absent if the buyer closed early. */
+  readonly transactionId: number | undefined;
   readonly amountCents: number;
 }
 
 export type PaymentCaptureRecord = PaypalCaptureRecord | PaymobCaptureRecord;
 
-/** What a freshly-created Paymob intention hands back to the client for Pixel checkout. */
+/** What a freshly-created Paymob intention hands back to the client for checkout. */
 export interface PaymobIntention {
   readonly clientSecret: string;
+  /** The Paymob order id, verified against at consumption. */
+  readonly orderId: number;
   readonly amountCents: number;
   readonly currency: string;
 }

@@ -576,6 +576,9 @@
   "apps/web/src/modules/game/containers/share-page.container.tsx": [
     "apps/web/src/modules/game/test/share-page.container.test.tsx"
   ],
+  "apps/web/src/modules/game/gateway/game-form-data.builder.ts": [
+    "apps/web/src/modules/game/test/game-form-data.builder.test.ts"
+  ],
   "apps/web/src/modules/game/gateway/game-stream.gateway.ts": [
     "apps/web/src/modules/game/test/game-stream.gateway.test.ts"
   ],
@@ -686,6 +689,7 @@
   ],
   "apps/web/src/modules/game/test/game-fixtures.ts": [
     "apps/web/src/modules/game/test/game-display.helper.test.ts",
+    "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
     "apps/web/src/modules/game/test/game-result.container.test.tsx",
     "apps/web/src/modules/game/test/game-stream.gateway.test.ts",
     "apps/web/src/modules/game/test/game-translate.gateway.test.ts",

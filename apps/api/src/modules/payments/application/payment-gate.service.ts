@@ -8,7 +8,12 @@ import { buildPaymentError, ErrorCode } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger';
 import { PaymobAdapter } from '../adapters/paymob.adapter';
 import { PaypalAdapter } from '../adapters/paypal.adapter';
-import { resolvePaymentGateway, resolvePaymentOrderId } from '../lib/payment-order.util';
+import {
+  resolvePaymentGateway,
+  resolvePaymentOrderId,
+  resolvePaymobOrderId,
+  resolvePaymobTransactionId,
+} from '../lib/payment-order.util';
 import {
   PAYMENT_ORDER_INVALID_MESSAGE,
   PAYMENT_REQUIRED_MESSAGE,
@@ -62,6 +67,7 @@ export class PaymentGateService {
     return PaymobIntentionResponseSchema.parse({
       clientSecret: intention.clientSecret,
       publicKey: this.config.paymob.publicKey,
+      orderId: intention.orderId,
       amountCents: intention.amountCents,
       currency: intention.currency,
       usdBaseValue: price.value,
@@ -82,7 +88,7 @@ export class PaymentGateService {
       return undefined;
     }
     return resolvePaymentGateway(body) === PaymentGateway.Paymob
-      ? this.capturePaymob(expectedRequestId)
+      ? this.capturePaymob(body, expectedRequestId)
       : this.capturePaypal(body, expectedRequestId);
   }
 
@@ -111,14 +117,24 @@ export class PaymentGateService {
     }
   }
 
-  private async capturePaymob(expectedRequestId?: string): Promise<PaymentCaptureRecord> {
+  private async capturePaymob(
+    body: unknown,
+    expectedRequestId?: string,
+  ): Promise<PaymentCaptureRecord> {
     if (!this.config.isPaymobEnabled) {
       throw buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
     }
     if (expectedRequestId === undefined) {
       throw buildPaymentError(ErrorCode.PaymentRequired, PAYMENT_REQUIRED_MESSAGE);
     }
-    return this.paymob.verifyPayment(expectedRequestId);
+    const orderId = resolvePaymobOrderId(body);
+    if (orderId === undefined) {
+      throw buildPaymentError(ErrorCode.PaymentRequired, PAYMENT_REQUIRED_MESSAGE);
+    }
+    if (orderId === null) {
+      throw buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
+    }
+    return this.paymob.verifyPayment(expectedRequestId, orderId, resolvePaymobTransactionId(body));
   }
 
   private async capturePaypal(

@@ -78,8 +78,20 @@ export const PAYMENTS_ROUTE_PAYMOB_INTENTION = 'paymob/intention';
 /** Paymob Accept REST paths (relative to PAYMOB_API_BASE_URL). */
 export const PAYMOB_INTENTION_PATH = '/v1/intention/';
 export const PAYMOB_AUTH_TOKEN_PATH = '/api/auth/tokens';
-export const PAYMOB_TRANSACTION_INQUIRY_PATH = '/api/ecommerce/orders/transaction_inquiry/';
+/** Order retrieve: `${PAYMOB_ORDERS_PATH}/${orderId}` (GET, Bearer auth token). */
+export const PAYMOB_ORDERS_PATH = '/api/ecommerce/orders';
 export const PAYMOB_REFUND_PATH = '/api/acceptance/void_refund/refund';
+
+/** `payment_status` value on a fully-paid order. */
+export const PAYMOB_ORDER_PAID_STATUS = 'PAID';
+
+/**
+ * Web route the Paymob checkout popup is redirected to on completion, appended
+ * to the frontend origin as the intention's `redirection_url`. The page there
+ * relays the transaction id back to the opener and closes the popup. Must match
+ * the frontend route at apps/web/src/app/paymob/return.
+ */
+export const PAYMOB_RETURN_PATH = '/paymob/return';
 
 /** One Paymob call is bounded so a provider outage cannot hang a stream. */
 export const PAYMOB_REQUEST_TIMEOUT_MS = 15_000;

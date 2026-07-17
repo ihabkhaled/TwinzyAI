@@ -4,6 +4,9 @@ import {
   PAYMENT_GATEWAY_FIELD_NAME,
   PaymentGateway,
   PaymentGatewaySchema,
+  PAYMOB_ID_PATTERN,
+  PAYMOB_ORDER_FIELD_NAME,
+  PAYMOB_TRANSACTION_FIELD_NAME,
 } from '@twinzy/shared';
 
 import { PAYMENT_ORDER_FIELD_NAME, PAYPAL_ORDER_ID_PATTERN } from '../model/payment.constants';
@@ -35,4 +38,30 @@ export const resolvePaymentGateway = (body: unknown): PaymentGatewayValue => {
   }
   const parsed = PaymentGatewaySchema.safeParse(body[PAYMENT_GATEWAY_FIELD_NAME]);
   return parsed.success ? parsed.data : PaymentGateway.Paypal;
+};
+
+/**
+ * Read the paid Paymob order id off the multipart body (numeric).
+ * - `undefined` → absent (no payment attempted);
+ * - `null` → present but malformed;
+ * - `number` → a valid order id to verify.
+ */
+export const resolvePaymobOrderId = (body: unknown): number | null | undefined => {
+  if (!isRecord(body)) {
+    return undefined;
+  }
+  const raw = body[PAYMOB_ORDER_FIELD_NAME];
+  if (raw === undefined) {
+    return undefined;
+  }
+  return typeof raw === 'string' && PAYMOB_ID_PATTERN.test(raw) ? Number(raw) : null;
+};
+
+/** Read the Paymob transaction id off the body (optional; only used to refund). */
+export const resolvePaymobTransactionId = (body: unknown): number | undefined => {
+  if (!isRecord(body)) {
+    return undefined;
+  }
+  const raw = body[PAYMOB_TRANSACTION_FIELD_NAME];
+  return typeof raw === 'string' && PAYMOB_ID_PATTERN.test(raw) ? Number(raw) : undefined;
 };

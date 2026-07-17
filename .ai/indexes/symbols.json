@@ -179,6 +179,9 @@
   "analyzeImageStreamRequest": [
     "apps/web/src/modules/game/gateway/game-stream.gateway.ts"
   ],
+  "AnalyzePaymentFields": [
+    "apps/web/src/modules/game/model/game.types.ts"
+  ],
   "AnalyzeRequestBodySchema": [
     "apps/api/src/modules/game/api/dto/analyze-request.dto.ts"
   ],
@@ -335,7 +338,7 @@
   "attachExternalAbort": [
     "apps/api/src/modules/ai/lib/abort-bridge.util.ts"
   ],
-  "awaitPaymobPopupClosed": [
+  "awaitPaymobResult": [
     "apps/web/src/packages/paymob/index.ts",
     "apps/web/src/packages/paymob/paymob-checkout.ts"
   ],
@@ -1387,6 +1390,7 @@
     "apps/web/src/app/help/page.tsx",
     "apps/web/src/app/layout.tsx",
     "apps/web/src/app/not-found.tsx",
+    "apps/web/src/app/paymob/return/page.tsx",
     "apps/web/src/app/privacy/page.tsx",
     "apps/web/src/app/share/[shareId]/page.tsx",
     "apps/web/src/app/terms/page.tsx"
@@ -2352,6 +2356,12 @@
   "PAYMOB_CHECKOUT_BASE_URL": [
     "apps/web/src/packages/paymob/paymob.constants.ts"
   ],
+  "PAYMOB_ID_PATTERN": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PAYMOB_ID_QUERY_PATTERN": [
+    "apps/web/src/packages/paymob/paymob.constants.ts"
+  ],
   "PAYMOB_INTEGRATION_ID_PATTERN": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -2359,6 +2369,15 @@
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
   "PAYMOB_ITEM_NAME": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_ORDER_FIELD_NAME": [
+    "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PAYMOB_ORDER_PAID_STATUS": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_ORDERS_PATH": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
   "PAYMOB_POPUP_FEATURES": [
@@ -2373,8 +2392,14 @@
   "PAYMOB_REQUEST_TIMEOUT_MS": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
-  "PAYMOB_TRANSACTION_INQUIRY_PATH": [
+  "PAYMOB_RETURN_MESSAGE_TYPE": [
+    "apps/web/src/packages/paymob/paymob.constants.ts"
+  ],
+  "PAYMOB_RETURN_PATH": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_TRANSACTION_FIELD_NAME": [
+    "packages/shared/src/schemas/payment.schema.ts"
   ],
   "PaymobAdapter": [
     "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
@@ -2418,8 +2443,12 @@
   "PaymobOptionProps": [
     "apps/web/src/modules/game/model/payment.types.ts"
   ],
-  "PaymobTransactionSchema": [
+  "PaymobOrderSchema": [
     "apps/api/src/modules/payments/model/paymob.schemas.ts"
+  ],
+  "PaymobReturnContainer": [
+    "apps/web/src/modules/game/containers/paymob-return.container.tsx",
+    "apps/web/src/modules/game/index.ts"
   ],
   "PAYPAL_BASE_URL_BY_ENV": [
     "apps/api/src/config/payment.constants.ts"
@@ -2710,6 +2739,10 @@
   "REGION_HINT_BY_LANGUAGE": [
     "apps/api/src/modules/ai/model/region-hint.constants.ts"
   ],
+  "relayPaymobReturn": [
+    "apps/web/src/packages/paymob/index.ts",
+    "apps/web/src/packages/paymob/paymob-checkout.ts"
+  ],
   "RemovedCandidate": [
     "packages/shared/src/schemas/judge.schema.ts"
   ],
@@ -2763,6 +2796,12 @@
   ],
   "resolvePaymentPriceLabel": [
     "apps/web/src/modules/game/helpers/payment-price.helper.ts"
+  ],
+  "resolvePaymobOrderId": [
+    "apps/api/src/modules/payments/lib/payment-order.util.ts"
+  ],
+  "resolvePaymobTransactionId": [
+    "apps/api/src/modules/payments/lib/payment-order.util.ts"
   ],
   "resolvePhase": [
     "apps/web/src/modules/game/helpers/game-display.helper.ts"

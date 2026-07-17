@@ -3,8 +3,10 @@ import { publicEnv } from '@/packages/env';
 
 import {
   PAYMOB_CHECKOUT_BASE_URL,
+  PAYMOB_ID_QUERY_PATTERN,
   PAYMOB_POPUP_FEATURES,
   PAYMOB_POPUP_POLL_MS,
+  PAYMOB_RETURN_MESSAGE_TYPE,
 } from './paymob.constants';
 
 /**
@@ -44,18 +46,76 @@ export const startPaymobCheckout = (
   popup.location.href = buildCheckoutUrl(publicKey, clientSecret);
 };
 
+/** True for the {@link PAYMOB_RETURN_MESSAGE_TYPE} message from the return page. */
+const isReturnMessage = (data: unknown): data is { transactionId: number | undefined } => {
+  if (typeof data !== 'object' || data === null) {
+    return false;
+  }
+  const record = data as Record<string, unknown>;
+  return (
+    record['type'] === PAYMOB_RETURN_MESSAGE_TYPE &&
+    (record['transactionId'] === undefined || typeof record['transactionId'] === 'number')
+  );
+};
+
 /**
- * Resolve when the checkout popup closes (the buyer finished or cancelled).
- * Completion is deliberately NOT trusted here — the backend verifies with
- * Paymob whether the request was actually paid before delivering the result.
+ * Resolve when the checkout finishes — either the return page posts back (the
+ * popup redirected on completion; carries the transaction id) or the buyer
+ * closed the popup (no transaction id). Completion is NOT trusted here: the
+ * backend verifies the ORDER with Paymob before delivering. The transaction id
+ * is only relayed so an undelivered paid run can be refunded.
  */
-export const awaitPaymobPopupClosed = (popup: Window): Promise<void> =>
+export const awaitPaymobResult = (popup: Window): Promise<{ transactionId: number | undefined }> =>
   new Promise((resolve) => {
-    const timer = globalThis.setInterval(() => {
-      if (!popup.closed) {
+    const safeWindow = getSafeWindow();
+    const timers: { interval?: ReturnType<typeof globalThis.setInterval> } = {};
+    let settled = false;
+    const finish = (transactionId: number | undefined): void => {
+      if (settled) {
         return;
       }
-      globalThis.clearInterval(timer);
-      resolve();
+      settled = true;
+      if (timers.interval !== undefined) {
+        globalThis.clearInterval(timers.interval);
+      }
+      safeWindow?.removeEventListener('message', onMessage);
+      resolve({ transactionId });
+    };
+    const onMessage = (event: MessageEvent): void => {
+      if (event.origin !== safeWindow?.location.origin) {
+        return;
+      }
+      if (isReturnMessage(event.data)) {
+        popup.close();
+        finish(event.data.transactionId);
+      }
+    };
+    safeWindow?.addEventListener('message', onMessage);
+    timers.interval = globalThis.setInterval(() => {
+      if (popup.closed) {
+        finish(undefined);
+      }
     }, PAYMOB_POPUP_POLL_MS);
   });
+
+/**
+ * Run on the /paymob/return page the checkout popup lands on: read the Paymob
+ * transaction id from the redirect query, hand it to the opener, and close the
+ * popup automatically. The opener re-verifies server-side, so this only relays.
+ */
+export const relayPaymobReturn = (): void => {
+  const safeWindow = getSafeWindow();
+  if (safeWindow === null) {
+    return;
+  }
+  const rawId = new URLSearchParams(safeWindow.location.search).get('id');
+  const transactionId =
+    rawId !== null && PAYMOB_ID_QUERY_PATTERN.test(rawId) ? Number(rawId) : undefined;
+  // `Window.opener` is typed `any` by the DOM lib; narrow before calling it.
+  const opener = safeWindow.opener as Window | null;
+  opener?.postMessage(
+    { type: PAYMOB_RETURN_MESSAGE_TYPE, transactionId },
+    safeWindow.location.origin,
+  );
+  safeWindow.close();
+};

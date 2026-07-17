@@ -1,5 +1,5 @@
 {
-  "count": 1441,
+  "count": 1456,
   "symbols": [
     {
       "kind": "const",
@@ -450,6 +450,13 @@
       "path": "apps/web/src/modules/game/gateway/game-stream.gateway.ts"
     },
     {
+      "kind": "type",
+      "layer": "model",
+      "module": "web:game",
+      "name": "AnalyzePaymentFields",
+      "path": "apps/web/src/modules/game/model/game.types.ts"
+    },
+    {
       "kind": "const",
       "layer": "api",
       "module": "api:game",
@@ -873,14 +880,14 @@
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-paymob",
-      "name": "awaitPaymobPopupClosed",
+      "name": "awaitPaymobResult",
       "path": "apps/web/src/packages/paymob/index.ts"
     },
     {
       "kind": "const",
       "layer": "packages",
       "module": "web:pkg-paymob",
-      "name": "awaitPaymobPopupClosed",
+      "name": "awaitPaymobResult",
       "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
     },
     {
@@ -3499,6 +3506,13 @@
       "layer": "app",
       "module": "web:app",
       "name": "generateMetadata",
+      "path": "apps/web/src/app/paymob/return/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
       "path": "apps/web/src/app/privacy/page.tsx"
     },
     {
@@ -5946,6 +5960,20 @@
     },
     {
       "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PAYMOB_ID_PATTERN",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "PAYMOB_ID_QUERY_PATTERN",
+      "path": "apps/web/src/packages/paymob/paymob.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "config",
       "module": "api:config",
       "name": "PAYMOB_INTEGRATION_ID_PATTERN",
@@ -5963,6 +5991,27 @@
       "layer": "model",
       "module": "api:payments",
       "name": "PAYMOB_ITEM_NAME",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PAYMOB_ORDER_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_ORDER_PAID_STATUS",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYMOB_ORDERS_PATH",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
     {
@@ -5995,10 +6044,24 @@
     },
     {
       "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "PAYMOB_RETURN_MESSAGE_TYPE",
+      "path": "apps/web/src/packages/paymob/paymob.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "api:payments",
-      "name": "PAYMOB_TRANSACTION_INQUIRY_PATH",
+      "name": "PAYMOB_RETURN_PATH",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PAYMOB_TRANSACTION_FIELD_NAME",
+      "path": "packages/shared/src/schemas/payment.schema.ts"
     },
     {
       "kind": "class",
@@ -6102,8 +6165,22 @@
       "kind": "const",
       "layer": "model",
       "module": "api:payments",
-      "name": "PaymobTransactionSchema",
+      "name": "PaymobOrderSchema",
       "path": "apps/api/src/modules/payments/model/paymob.schemas.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "containers",
+      "module": "web:game",
+      "name": "PaymobReturnContainer",
+      "path": "apps/web/src/modules/game/containers/paymob-return.container.tsx"
+    },
+    {
+      "kind": "re-export",
+      "layer": "root",
+      "module": "web:game",
+      "name": "PaymobReturnContainer",
+      "path": "apps/web/src/modules/game/index.ts"
     },
     {
       "kind": "const",
@@ -6827,6 +6904,20 @@
       "path": "apps/api/src/modules/ai/model/region-hint.constants.ts"
     },
     {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "relayPaymobReturn",
+      "path": "apps/web/src/packages/paymob/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "relayPaymobReturn",
+      "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
+    },
+    {
       "kind": "type",
       "layer": "schemas",
       "module": "shared",
@@ -6965,6 +7056,20 @@
       "module": "web:game",
       "name": "resolvePaymentPriceLabel",
       "path": "apps/web/src/modules/game/helpers/payment-price.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:payments",
+      "name": "resolvePaymobOrderId",
+      "path": "apps/api/src/modules/payments/lib/payment-order.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:payments",
+      "name": "resolvePaymobTransactionId",
+      "path": "apps/api/src/modules/payments/lib/payment-order.util.ts"
     },
     {
       "kind": "const",

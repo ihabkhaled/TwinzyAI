@@ -1,5 +1,5 @@
 {
-  "count": 674,
+  "count": 677,
   "files": [
     {
       "exports": [
@@ -5363,7 +5363,7 @@
           "name": "PaymobAdapter"
         }
       ],
-      "hash": "3e62361052c8cb6b947d14f2279bb6be482d424dc487924e3e7cc126123bd544",
+      "hash": "29e6ca5dc8ae9df42332b2b418f6884b4bf8ff9d01ccdcc23d27077fce9574f4",
       "imports": [
         "../../../config/app-config.service",
         "../../../config/payment.constants",
@@ -5378,7 +5378,7 @@
       ],
       "isTest": false,
       "layer": "adapters",
-      "loc": 250,
+      "loc": 287,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/adapters/paymob.adapter.ts"
     },
@@ -5436,7 +5436,7 @@
           "name": "PaymentGateService"
         }
       ],
-      "hash": "bdd018d75c62b321214a728b3116cb3f97262e9a6e9f68510a6121615ed07c3a",
+      "hash": "7633686483dd80ea6c7aade78749cd995163c464dcd20e735638a4c019b20737",
       "imports": [
         "../../../config/app-config.service",
         "../../../core/errors",
@@ -5451,7 +5451,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 147,
+      "loc": 163,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/application/payment-gate.service.ts"
     },
@@ -5487,16 +5487,24 @@
         {
           "kind": "const",
           "name": "resolvePaymentOrderId"
+        },
+        {
+          "kind": "const",
+          "name": "resolvePaymobOrderId"
+        },
+        {
+          "kind": "const",
+          "name": "resolvePaymobTransactionId"
         }
       ],
-      "hash": "73f2d236df67fe9ea20b48931456c95544d8fe394f459c4a4be55e72c42cde9c",
+      "hash": "f905a155b1f7b53b933cc1e95a071c12d076ff27ec169de1a2a8a9254b89123f",
       "imports": [
         "../model/payment.constants",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 39,
+      "loc": 68,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/lib/payment-order.util.ts"
     },
@@ -5589,6 +5597,14 @@
         },
         {
           "kind": "const",
+          "name": "PAYMOB_ORDER_PAID_STATUS"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_ORDERS_PATH"
+        },
+        {
+          "kind": "const",
           "name": "PAYMOB_REFUND_PATH"
         },
         {
@@ -5597,7 +5613,7 @@
         },
         {
           "kind": "const",
-          "name": "PAYMOB_TRANSACTION_INQUIRY_PATH"
+          "name": "PAYMOB_RETURN_PATH"
         },
         {
           "kind": "const",
@@ -5632,13 +5648,13 @@
           "name": "PAYPAL_TOKEN_EXPIRY_MARGIN_SECONDS"
         }
       ],
-      "hash": "361be53a5cf2091fbd5e94e4fa8321309409ea2462ae82631a76216a36c6dedf",
+      "hash": "26e55201f0ab52b30b48460dbe532d79971c057cc00dcd09d6e209189ba38dc7",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 117,
+      "loc": 129,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
@@ -5661,11 +5677,11 @@
           "name": "PaymobIntention"
         }
       ],
-      "hash": "df554c8f86d90bcfea7ca3f095fa43cce9c545430ac280cc6bf488068814c8a8",
+      "hash": "dc9dab6d0b991edd4941834848ea69d06a7da90c7f16ce4376176671c409bfdc",
       "imports": [],
       "isTest": false,
       "layer": "model",
-      "loc": 35,
+      "loc": 39,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/payment.types.ts"
     },
@@ -5681,16 +5697,16 @@
         },
         {
           "kind": "const",
-          "name": "PaymobTransactionSchema"
+          "name": "PaymobOrderSchema"
         }
       ],
-      "hash": "f379749b8c3cd571a4d11544f758af7f57d16164036f3124ba05f95784a9316f",
+      "hash": "9b8ad306a3d9673b5c4b6f86ee2be4a21192e629d7d89b4f83f323c7bac88b62",
       "imports": [
         "zod"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 45,
+      "loc": 36,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/paymob.schemas.ts"
     },
@@ -5751,7 +5767,7 @@
     },
     {
       "exports": [],
-      "hash": "8d77f5d973b06e834e8f20ca8f1a5c67e959777dec456fc8249d6bcf9c8b7f89",
+      "hash": "ade071b83746f2ae066b7e180e5bdd158f0a48f2e761ad61c2aef1c43bd8bb7c",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/stubs",
@@ -5765,7 +5781,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 275,
+      "loc": 331,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/tests/payment-gate.service.test.ts"
     },
@@ -7530,6 +7546,26 @@
           "name": "generateMetadata"
         }
       ],
+      "hash": "1d6fd132ff3e25d8102d576ebe137c1c6c6a7e2ab87d5c8d0428bf6e4d6dae5f",
+      "imports": [
+        "@/modules/game",
+        "@/packages/ui-primitives",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 23,
+      "module": "web:app",
+      "path": "apps/web/src/app/paymob/return/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
       "hash": "987092c440efc5daf4d29202bd2658e04b2d30cbfd51419e27bf668955c0df5d",
       "imports": [
         "../content.variants",
@@ -8676,6 +8712,26 @@
     {
       "exports": [
         {
+          "kind": "function",
+          "name": "PaymobReturnContainer"
+        }
+      ],
+      "hash": "1b6ad12dffbca034e94d6796c2955c9a28201eb94f5029d29c6ecde25be09340",
+      "imports": [
+        "@/packages/i18n",
+        "@/packages/paymob",
+        "@/packages/ui-primitives",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "containers",
+      "loc": 30,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/containers/paymob-return.container.tsx"
+    },
+    {
+      "exports": [
+        {
           "kind": "const",
           "name": "PaypalOption"
         }
@@ -8937,14 +8993,15 @@
           "name": "buildAnalyzeFormData"
         }
       ],
-      "hash": "3fef38318e55b40eb289a1f16cca4a44e5c28a15ac1ed44239afe3e0c1dcb5cf",
+      "hash": "6d65094dd79fc833b64c0c8311e6f448c23a4d4c2dc42b23fca43bc83dbbe7a6",
       "imports": [
         "../model/game.constants",
+        "../model/game.types",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "gateway",
-      "loc": 38,
+      "loc": 57,
       "module": "web:game",
       "path": "apps/web/src/modules/game/gateway/game-form-data.builder.ts"
     },
@@ -8955,7 +9012,7 @@
           "name": "analyzeImageStreamRequest"
         }
       ],
-      "hash": "b056e7e8c8b6e01913ee41a643c6a865994637cd7d44a6815e8f7c84dbb83c51",
+      "hash": "ec79e95df2563ced37073d0abd634b874851f15f4b43c8ec6d8175dc9206c0a1",
       "imports": [
         "../helpers/stream-frame.helper",
         "../helpers/stream-identity.helper",
@@ -8967,7 +9024,7 @@
       ],
       "isTest": false,
       "layer": "gateway",
-      "loc": 109,
+      "loc": 103,
       "module": "web:game",
       "path": "apps/web/src/modules/game/gateway/game-stream.gateway.ts"
     },
@@ -9404,7 +9461,7 @@
           "name": "useAnalyzeRunControl"
         }
       ],
-      "hash": "c8379a9888a905b86230f39c72629661266d365cd0339db27699bb9a4c2e53e0",
+      "hash": "2f942b694302db792ee141c3bb8becdee7b08c3dab9afee3a10f4bd17b4c8bc5",
       "imports": [
         "../helpers/stream-identity.helper",
         "../model/game.types",
@@ -9412,7 +9469,7 @@
       ],
       "isTest": false,
       "layer": "hooks",
-      "loc": 44,
+      "loc": 48,
       "module": "web:game",
       "path": "apps/web/src/modules/game/hooks/useAnalyzeRunControl.hook.ts"
     },
@@ -9563,7 +9620,7 @@
           "name": "usePaymobCheckout"
         }
       ],
-      "hash": "1dc0a71134f1ab89538731f4d6113f530dd776c6a27a6209752aa25281bc6dc6",
+      "hash": "cb60a996786c477ff7da1be5b2282e4129b13835da74858145b0e6e78f4e6d30",
       "imports": [
         "../gateway/payment.gateway",
         "../model/payment-flow.types",
@@ -9573,7 +9630,7 @@
       ],
       "isTest": false,
       "layer": "hooks",
-      "loc": 73,
+      "loc": 75,
       "module": "web:game",
       "path": "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts"
     },
@@ -9750,6 +9807,10 @@
         },
         {
           "kind": "re-export",
+          "name": "PaymobReturnContainer"
+        },
+        {
+          "kind": "re-export",
           "name": "PrivacyNotice"
         },
         {
@@ -9757,16 +9818,17 @@
           "name": "SharePageContainer"
         }
       ],
-      "hash": "c92488fa62cb2f72ab9c9359b478706028ecc2756520064dfdbef456678b822c",
+      "hash": "cd106d0a0b1728ca95f4a4df74a97526c8634873f76996a2f62338f36b7e977c",
       "imports": [
         "./components/privacy-notice.component",
         "./containers/game.container",
         "./containers/landing.container",
+        "./containers/paymob-return.container",
         "./containers/share-page.container"
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 9,
+      "loc": 10,
       "module": "web:game",
       "path": "apps/web/src/modules/game/index.ts"
     },
@@ -10104,6 +10166,10 @@
           "name": "AnalyzeGameMutation"
         },
         {
+          "kind": "type",
+          "name": "AnalyzePaymentFields"
+        },
+        {
           "kind": "interface",
           "name": "AnalyzeRunControl"
         },
@@ -10228,7 +10294,7 @@
           "name": "UploadViewModelInput"
         }
       ],
-      "hash": "6a086adf81fdfd9907dce9c4c555a3e51e07e15d88f7566677c6078a669a0823",
+      "hash": "9f373aeaee927af5215b1ee7be0f318a73993e4a448e91228f462b701afb71e4",
       "imports": [
         "./camera.types",
         "./game.enums",
@@ -10239,7 +10305,7 @@
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 405,
+      "loc": 421,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/game.types.ts"
     },
@@ -10515,7 +10581,7 @@
           "name": "useTranslateResultMutation"
         }
       ],
-      "hash": "609a235f6b728864478f3ad53217e143e62220e2a128d5b3f1b3776a4b9cd1ce",
+      "hash": "ab7a5faeb3a0359a16ab6211141b7ca5c4a64289591cfe7bd6168a2b74f3bb1e",
       "imports": [
         "../model/game.types",
         "../services/game.service",
@@ -10525,7 +10591,7 @@
       ],
       "isTest": false,
       "layer": "queries",
-      "loc": 72,
+      "loc": 76,
       "module": "web:game",
       "path": "apps/web/src/modules/game/queries/game.mutations.ts"
     },
@@ -10765,6 +10831,21 @@
       "loc": 89,
       "module": "web:game",
       "path": "apps/web/src/modules/game/test/game-fixtures.ts"
+    },
+    {
+      "exports": [],
+      "hash": "782de7ebd51e0f3c42e73abb042454cbc7d474d9343abaa98a6a37926d422633",
+      "imports": [
+        "../gateway/game-form-data.builder",
+        "./game-fixtures",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "test",
+      "loc": 63,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/test/game-form-data.builder.test.ts"
     },
     {
       "exports": [],
@@ -12616,7 +12697,7 @@
       "exports": [
         {
           "kind": "re-export",
-          "name": "awaitPaymobPopupClosed"
+          "name": "awaitPaymobResult"
         },
         {
           "kind": "re-export",
@@ -12628,16 +12709,20 @@
         },
         {
           "kind": "re-export",
+          "name": "relayPaymobReturn"
+        },
+        {
+          "kind": "re-export",
           "name": "startPaymobCheckout"
         }
       ],
-      "hash": "bc969ab0afdcbb571720d155d54e3ee09aef685f7383e6b6777421160e8964fb",
+      "hash": "df4056135bca53a2f8b9081a7b50d81f4552b8604b10eab45757d3063db02c1f",
       "imports": [
         "./paymob-checkout"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 7,
+      "loc": 8,
       "module": "web:pkg-paymob",
       "path": "apps/web/src/packages/paymob/index.ts"
     },
@@ -12645,7 +12730,7 @@
       "exports": [
         {
           "kind": "const",
-          "name": "awaitPaymobPopupClosed"
+          "name": "awaitPaymobResult"
         },
         {
           "kind": "const",
@@ -12657,10 +12742,14 @@
         },
         {
           "kind": "const",
+          "name": "relayPaymobReturn"
+        },
+        {
+          "kind": "const",
           "name": "startPaymobCheckout"
         }
       ],
-      "hash": "01d57a96475007057fe758cd027be0bf774d4be3e4b527490c9884c1ec53dc6f",
+      "hash": "c989f946123a869a4127825026d56d030bf6a52766a9d1bffa9a47401105d19a",
       "imports": [
         "./paymob.constants",
         "@/packages/browser",
@@ -12668,7 +12757,7 @@
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 62,
+      "loc": 122,
       "module": "web:pkg-paymob",
       "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
     },
@@ -12680,18 +12769,26 @@
         },
         {
           "kind": "const",
+          "name": "PAYMOB_ID_QUERY_PATTERN"
+        },
+        {
+          "kind": "const",
           "name": "PAYMOB_POPUP_FEATURES"
         },
         {
           "kind": "const",
           "name": "PAYMOB_POPUP_POLL_MS"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_RETURN_MESSAGE_TYPE"
         }
       ],
-      "hash": "879630602387e19ff35345bd470acc518dd09d29707e0c5b3bc8c9865d1defaa",
+      "hash": "cd74b21a64d50cc9b56cd837607f01e2137be2130943da6e1a869d86d5158bf1",
       "imports": [],
       "isTest": false,
       "layer": "packages",
-      "loc": 15,
+      "loc": 21,
       "module": "web:pkg-paymob",
       "path": "apps/web/src/packages/paymob/paymob.constants.ts"
     },
@@ -15929,6 +16026,18 @@
           "name": "PaymentGatewayValue"
         },
         {
+          "kind": "const",
+          "name": "PAYMOB_ID_PATTERN"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_ORDER_FIELD_NAME"
+        },
+        {
+          "kind": "const",
+          "name": "PAYMOB_TRANSACTION_FIELD_NAME"
+        },
+        {
           "kind": "type",
           "name": "PaymobIntentionRequest"
         },
@@ -15949,14 +16058,14 @@
           "name": "PaypalOrderIdSchema"
         }
       ],
-      "hash": "ff403f310ff4a005b2e9b6a1c12ec610439011a995d077406a846686b1c138f9",
+      "hash": "6e7c9880617a40e22b5732a46b3c1ed4315a79e82de730e1470d7fcd1d606c56",
       "imports": [
         "./game-stream.schema",
         "zod"
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 67,
+      "loc": 78,
       "module": "shared",
       "path": "packages/shared/src/schemas/payment.schema.ts"
     },

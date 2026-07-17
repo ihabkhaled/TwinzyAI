@@ -299,7 +299,7 @@
       "packages/shared/src/schemas/traits.schema.ts",
       "packages/shared/src/schemas/translate-result.schema.ts"
     ],
-    "inputsHash": "daefcdfd8cab685c6e9ffee6cfce79ecf2aa3cf3e1b46259978ffef8580aac6b"
+    "inputsHash": "fbbb7f8c8d973f946c22686a2835e6c81c9d92ff2723d3fb8f4761b2a4f85d13"
   },
   ".ai/manifests/dependencies.json": {
     "inputs": [
@@ -1363,6 +1363,7 @@
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
       "apps/web/src/app/page.tsx",
+      "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
       "apps/web/src/app/providers.tsx",
       "apps/web/src/app/share/[shareId]/page.tsx",
@@ -1414,6 +1415,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paymob-return.container.tsx",
       "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
@@ -1488,6 +1490,7 @@
       "apps/web/src/modules/game/test/game-display.helper.test.ts",
       "apps/web/src/modules/game/test/game-error.helper.test.ts",
       "apps/web/src/modules/game/test/game-fixtures.ts",
+      "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
       "apps/web/src/modules/game/test/game-processing.container.test.tsx",
       "apps/web/src/modules/game/test/game-result.container.test.tsx",
       "apps/web/src/modules/game/test/game-stream.gateway.test.ts",
@@ -1723,7 +1726,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "73f0c75b5dced4212b8991dcf2b8ad5f5e72e4a327439ae43f577b0550c97904"
+    "inputsHash": "d578e6cb415e00d32dc935649a1af83fa330b85a18feac25f5a2c44a9bba4c2e"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2054,6 +2057,7 @@
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
       "apps/web/src/app/page.tsx",
+      "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
       "apps/web/src/app/providers.tsx",
       "apps/web/src/app/share/[shareId]/page.tsx",
@@ -2105,6 +2109,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paymob-return.container.tsx",
       "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
@@ -2179,6 +2184,7 @@
       "apps/web/src/modules/game/test/game-display.helper.test.ts",
       "apps/web/src/modules/game/test/game-error.helper.test.ts",
       "apps/web/src/modules/game/test/game-fixtures.ts",
+      "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
       "apps/web/src/modules/game/test/game-processing.container.test.tsx",
       "apps/web/src/modules/game/test/game-result.container.test.tsx",
       "apps/web/src/modules/game/test/game-stream.gateway.test.ts",
@@ -2413,7 +2419,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "a12609c12245af9bd338b0d6141ad9a9cd0be224abd7aaf1e3c67d59dcfea935"
+    "inputsHash": "f4c1aa3de6be7b06e904ff8066bd90af6aa3251596a0a6fc8641fae183431e88"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2425,11 +2431,12 @@
       "apps/web/src/app/help/page.tsx",
       "apps/web/src/app/layout.tsx",
       "apps/web/src/app/page.tsx",
+      "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "2bb845763024b49e7746fbdd4fea143d7ba4c9a3ab64db6882685c68c3636d5e"
+    "inputsHash": "16537ee6a503a2d9da56631c822c66cd27f9b7e2b2db91ec8a17878da277c213"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -2749,6 +2756,7 @@
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
       "apps/web/src/app/page.tsx",
+      "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
       "apps/web/src/app/providers.tsx",
       "apps/web/src/app/share/[shareId]/page.tsx",
@@ -2800,6 +2808,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paymob-return.container.tsx",
       "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
@@ -2874,6 +2883,7 @@
       "apps/web/src/modules/game/test/game-display.helper.test.ts",
       "apps/web/src/modules/game/test/game-error.helper.test.ts",
       "apps/web/src/modules/game/test/game-fixtures.ts",
+      "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
       "apps/web/src/modules/game/test/game-processing.container.test.tsx",
       "apps/web/src/modules/game/test/game-result.container.test.tsx",
       "apps/web/src/modules/game/test/game-stream.gateway.test.ts",
@@ -3108,7 +3118,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "a12609c12245af9bd338b0d6141ad9a9cd0be224abd7aaf1e3c67d59dcfea935"
+    "inputsHash": "f4c1aa3de6be7b06e904ff8066bd90af6aa3251596a0a6fc8641fae183431e88"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3428,6 +3438,7 @@
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
       "apps/web/src/app/page.tsx",
+      "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
       "apps/web/src/app/providers.tsx",
       "apps/web/src/app/share/[shareId]/page.tsx",
@@ -3479,6 +3490,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paymob-return.container.tsx",
       "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
@@ -3553,6 +3565,7 @@
       "apps/web/src/modules/game/test/game-display.helper.test.ts",
       "apps/web/src/modules/game/test/game-error.helper.test.ts",
       "apps/web/src/modules/game/test/game-fixtures.ts",
+      "apps/web/src/modules/game/test/game-form-data.builder.test.ts",
       "apps/web/src/modules/game/test/game-processing.container.test.tsx",
       "apps/web/src/modules/game/test/game-result.container.test.tsx",
       "apps/web/src/modules/game/test/game-stream.gateway.test.ts",
@@ -3787,7 +3800,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "a12609c12245af9bd338b0d6141ad9a9cd0be224abd7aaf1e3c67d59dcfea935"
+    "inputsHash": "f4c1aa3de6be7b06e904ff8066bd90af6aa3251596a0a6fc8641fae183431e88"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

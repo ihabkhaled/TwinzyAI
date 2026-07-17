@@ -247,7 +247,7 @@
       "structure/repository-map.md",
       "docs/frontend-architecture.md"
     ],
-    "fileCount": 14,
+    "fileCount": 15,
     "lane": "standard",
     "layers": [
       "app"
@@ -273,7 +273,7 @@
       "structure/flows/analyze-flow.md",
       "docs/frontend-architecture.md"
     ],
-    "fileCount": 146,
+    "fileCount": 148,
     "lane": "standard",
     "layers": [
       "components",
