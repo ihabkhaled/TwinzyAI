@@ -19,6 +19,9 @@ export const PAYPAL_ME_USERNAME_PATTERN = /^[A-Z0-9]{1,50}$/i;
 /** PayPal REST client ids are URL-safe base64-ish tokens; bound charset + length. */
 export const PAYPAL_CLIENT_ID_PATTERN = /^[\w-]{20,120}$/;
 
+/** Paymob public keys (e.g. egy_pk_test_…): word chars only; bound charset + length. */
+const PAYMOB_PUBLIC_KEY_PATTERN = /^[\w-]{20,120}$/;
+
 /** Treat an unset OR empty-string env value as "feature off" (link hidden). */
 const emptyToUndefined = (value: unknown): unknown => (value === '' ? undefined : value);
 
@@ -34,6 +37,13 @@ export const publicEnvSchema = z.object({
   paypalClientId: z.preprocess(
     emptyToUndefined,
     z.string().regex(PAYPAL_CLIENT_ID_PATTERN).optional(),
+  ),
+  // Public Paymob key for the browser unified-checkout popup (safe to expose).
+  // Presence gates the "Pay with card" option; the intention response also
+  // returns the key, so this is only the client-side visibility switch.
+  paymobPublicKey: z.preprocess(
+    emptyToUndefined,
+    z.string().regex(PAYMOB_PUBLIC_KEY_PATTERN).optional(),
   ),
   // Display-only price shown on the payment step. MUST mirror the server's
   // PAYMENT_PRICE_VALUE/CURRENCY (the server price is authoritative and every
@@ -57,6 +67,7 @@ export const publicEnv: PublicEnv = parseSchema(
     apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     paypalMeUsername: process.env.NEXT_PUBLIC_PAYPAL_ME_USERNAME,
     paypalClientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+    paymobPublicKey: process.env.NEXT_PUBLIC_PAYMOB_PUBLIC_KEY,
     paymentPriceValue: process.env.NEXT_PUBLIC_PAYMENT_PRICE_VALUE,
     paymentPriceCurrency: process.env.NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY,
   },

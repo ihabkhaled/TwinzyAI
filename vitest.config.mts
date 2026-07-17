@@ -41,6 +41,9 @@ export default defineConfig({
           env: {
             PAYPAL_CLIENT_ID: '',
             PAYPAL_CLIENT_SECRET: '',
+            PAYMOB_SECRET_KEY: '',
+            PAYMOB_PUBLIC_KEY: '',
+            PAYMOB_CARD_INTEGRATION_ID: '',
             AI_PARALLEL_PIPELINE_ENABLED: 'false',
           },
         },
@@ -57,6 +60,9 @@ export default defineConfig({
           env: {
             PAYPAL_CLIENT_ID: '',
             PAYPAL_CLIENT_SECRET: '',
+            PAYMOB_SECRET_KEY: '',
+            PAYMOB_PUBLIC_KEY: '',
+            PAYMOB_CARD_INTEGRATION_ID: '',
             AI_PARALLEL_PIPELINE_ENABLED: 'false',
           },
         },

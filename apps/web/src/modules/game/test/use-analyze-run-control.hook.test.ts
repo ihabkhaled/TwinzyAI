@@ -38,6 +38,7 @@ describe('useAnalyzeRunControl cancel', () => {
     act(() => {
       result.current.beginRun(FILE, 5, {
         requestId: '3b241101-e2bb-4255-8caf-4136c566a962',
+        paymentGateway: 'paypal',
         paypalOrderId: 'ORDER123',
       });
     });

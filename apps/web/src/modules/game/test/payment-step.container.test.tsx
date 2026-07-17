@@ -42,9 +42,13 @@ vi.mock('@/packages/paypal', () => ({
 
 const buildPayment = (overrides: Partial<PaymentViewModel> = {}): PaymentViewModel => ({
   isPaywallEnabled: true,
+  isPaypalEnabled: true,
+  isPaymobEnabled: false,
   isPaying: true,
+  isPaymobPending: false,
   createOrder: vi.fn(() => Promise.resolve('ORDER-1')),
   onApprove: vi.fn(),
+  payWithPaymob: vi.fn(),
   onCancel: vi.fn(),
   onError: vi.fn(),
   ...overrides,
@@ -55,6 +59,7 @@ const labels = {
   description: 'Pay to reveal results.',
   loadingLabel: 'Loading secure payment options…',
   cancelLabel: 'Cancel and go back',
+  paymobButtonLabel: 'Pay with card',
 };
 
 describe('PaymentStep', () => {
@@ -112,6 +117,25 @@ describe('PaymentStep', () => {
       expect(onApprove).toHaveBeenCalledWith('ORDER-9');
     });
     expect(createOrder).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders the Paymob card option and opens its checkout on click', async () => {
+    const payWithPaymob = vi.fn();
+    render(
+      <PaymentStep
+        {...labels}
+        errorMessage={undefined}
+        payment={buildPayment({ isPaypalEnabled: false, isPaymobEnabled: true, payWithPaymob })}
+      />,
+    );
+
+    const button = screen.getByTestId('paymob-card-button');
+    expect(button).toHaveTextContent('Pay with card');
+
+    await userEvent.click(button);
+    expect(payWithPaymob).toHaveBeenCalledTimes(1);
+    // With PayPal disabled, the buttons SDK mount never appears.
+    expect(screen.queryByTestId('paypal-buttons')).not.toBeInTheDocument();
   });
 
   it('shows a recoverable error and a working cancel button', async () => {

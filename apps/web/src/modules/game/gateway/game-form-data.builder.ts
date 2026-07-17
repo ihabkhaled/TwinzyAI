@@ -1,5 +1,5 @@
-import type { LanguageCodeValue } from '@twinzy/shared';
-import { PAYMENT_ORDER_FIELD_NAME } from '@twinzy/shared';
+import type { LanguageCodeValue, PaymentGatewayValue } from '@twinzy/shared';
+import { PAYMENT_GATEWAY_FIELD_NAME, PAYMENT_ORDER_FIELD_NAME } from '@twinzy/shared';
 
 import {
   CONSENT_FIELD_NAME,
@@ -19,6 +19,7 @@ export function buildAnalyzeFormData(
   file: File,
   languageCode: LanguageCodeValue,
   resultCount: number,
+  paymentGateway?: PaymentGatewayValue,
   paypalOrderId?: string,
 ): FormData {
   const formData = new FormData();
@@ -26,6 +27,9 @@ export function buildAnalyzeFormData(
   formData.append(UPLOAD_FIELD_NAME, file, file.name);
   formData.append(LANGUAGE_FIELD_NAME, languageCode);
   formData.append(RESULT_COUNT_FIELD_NAME, String(resultCount));
+  if (paymentGateway !== undefined) {
+    formData.append(PAYMENT_GATEWAY_FIELD_NAME, paymentGateway);
+  }
   if (paypalOrderId !== undefined) {
     formData.append(PAYMENT_ORDER_FIELD_NAME, paypalOrderId);
   }

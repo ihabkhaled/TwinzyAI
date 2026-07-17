@@ -335,6 +335,10 @@
   "attachExternalAbort": [
     "apps/api/src/modules/ai/lib/abort-bridge.util.ts"
   ],
+  "awaitPaymobPopupClosed": [
+    "apps/web/src/packages/paymob/index.ts",
+    "apps/web/src/packages/paymob/paymob-checkout.ts"
+  ],
   "BASE64_RUN_PATTERN": [
     "apps/api/src/modules/privacy/model/privacy.constants.ts"
   ],
@@ -904,6 +908,9 @@
   ],
   "CreatePaymentOrderResponseSchema": [
     "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "createPaymobIntentionRequest": [
+    "apps/web/src/modules/game/gateway/payment.gateway.ts"
   ],
   "createShareLink": [
     "apps/web/src/modules/game/services/share.service.ts"
@@ -1604,6 +1611,10 @@
   "isModelRetryable": [
     "apps/api/src/modules/ai/lib/provider-error.util.ts"
   ],
+  "isPaymobConfigured": [
+    "apps/web/src/packages/paymob/index.ts",
+    "apps/web/src/packages/paymob/paymob-checkout.ts"
+  ],
   "isPayPalConfigured": [
     "apps/web/src/packages/paypal/index.ts",
     "apps/web/src/packages/paypal/paypal-sdk.ts"
@@ -2168,6 +2179,10 @@
   "OpenAiCompatResponseBody": [
     "apps/api/src/modules/ai/model/openai-compat.types.ts"
   ],
+  "openPaymobPopup": [
+    "apps/web/src/packages/paymob/index.ts",
+    "apps/web/src/packages/paymob/paymob-checkout.ts"
+  ],
   "OutboundStreamStamp": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
@@ -2288,6 +2303,9 @@
   "PAYMENTS_ORDERS_PATH": [
     "packages/shared/src/constants/app.constants.ts"
   ],
+  "PAYMENTS_PAYMOB_INTENTION_PATH": [
+    "packages/shared/src/constants/app.constants.ts"
+  ],
   "PAYMENTS_ROUTE_ORDERS": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
@@ -2331,6 +2349,9 @@
   "PAYMOB_BILLING_PLACEHOLDER": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
+  "PAYMOB_CHECKOUT_BASE_URL": [
+    "apps/web/src/packages/paymob/paymob.constants.ts"
+  ],
   "PAYMOB_INTEGRATION_ID_PATTERN": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -2339,6 +2360,12 @@
   ],
   "PAYMOB_ITEM_NAME": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
+  "PAYMOB_POPUP_FEATURES": [
+    "apps/web/src/packages/paymob/paymob.constants.ts"
+  ],
+  "PAYMOB_POPUP_POLL_MS": [
+    "apps/web/src/packages/paymob/paymob.constants.ts"
   ],
   "PAYMOB_REFUND_PATH": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
@@ -2357,6 +2384,9 @@
   ],
   "PaymobCaptureRecord": [
     "apps/api/src/modules/payments/model/payment.types.ts"
+  ],
+  "PaymobCheckoutController": [
+    "apps/web/src/modules/game/model/payment-flow.types.ts"
   ],
   "PaymobConfig": [
     "apps/api/src/config/payment.constants.ts"
@@ -2381,6 +2411,12 @@
   ],
   "PaymobIntentionResponseSchema": [
     "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaymobOption": [
+    "apps/web/src/modules/game/components/paymob-option.component.tsx"
+  ],
+  "PaymobOptionProps": [
+    "apps/web/src/modules/game/model/payment.types.ts"
   ],
   "PaymobTransactionSchema": [
     "apps/api/src/modules/payments/model/paymob.schemas.ts"
@@ -2469,6 +2505,12 @@
   "PaypalErrorResponseSchema": [
     "apps/api/src/modules/payments/model/paypal.schemas.ts"
   ],
+  "PaypalOption": [
+    "apps/web/src/modules/game/containers/paypal-option.container.tsx"
+  ],
+  "PaypalOptionProps": [
+    "apps/web/src/modules/game/model/payment.types.ts"
+  ],
   "PayPalOrderActions": [
     "apps/web/src/packages/paypal/paypal-sdk.types.ts"
   ],
@@ -2477,6 +2519,9 @@
   ],
   "PaypalTokenResponseSchema": [
     "apps/api/src/modules/payments/model/paypal.schemas.ts"
+  ],
+  "PendingRun": [
+    "apps/web/src/modules/game/model/payment-flow.types.ts"
   ],
   "PERCENTILE_SCALE": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
@@ -3293,6 +3338,10 @@
   "stampStreamFrame": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
+  "startPaymobCheckout": [
+    "apps/web/src/packages/paymob/index.ts",
+    "apps/web/src/packages/paymob/paymob-checkout.ts"
+  ],
   "statusForStreamEvent": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
@@ -3803,6 +3852,9 @@
   ],
   "usePaymentFlow": [
     "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts"
+  ],
+  "usePaymobCheckout": [
+    "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts"
   ],
   "usePayPalButtons": [
     "apps/web/src/modules/game/hooks/usePayPalButtons.hook.ts"

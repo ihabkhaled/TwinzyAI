@@ -2,6 +2,7 @@ import type {
   FinalGameResult,
   GameStreamStageValue,
   LanguageCodeValue,
+  PaymentGatewayValue,
   TraitCategoryKey,
 } from '@twinzy/shared';
 
@@ -118,7 +119,9 @@ export interface AnalyzeRunInput {
   requestId: string;
   signal: AbortSignal;
   resultCount: number;
-  /** Present only when the paid-analysis gate is on (approved PayPal order). */
+  /** Which gateway proved payment (absent on a free run). */
+  paymentGateway?: PaymentGatewayValue;
+  /** Present only for a paid PayPal run (the approved order id). */
   paypalOrderId?: string;
 }
 
@@ -127,14 +130,17 @@ export interface AnalyzeStreamOptions {
   requestId: string;
   signal: AbortSignal;
   resultCount: number;
+  paymentGateway?: PaymentGatewayValue;
   paypalOrderId?: string;
 }
 
 /** The run-control surface: start a fresh analyze run, or cancel the in-flight one. */
-/** Optional payment binding threaded into a paid run (shared requestId + order). */
+/** Optional payment binding threaded into a paid run (shared requestId + gateway). */
 export interface AnalyzeRunPayment {
   requestId: string;
-  paypalOrderId: string;
+  paymentGateway: PaymentGatewayValue;
+  /** Present only for PayPal (the approved order id); Paymob verifies by requestId. */
+  paypalOrderId?: string;
 }
 
 export interface AnalyzeRunControl {
@@ -338,6 +344,7 @@ export interface GameScreenLabels {
   paymentDescription: string;
   paymentLoading: string;
   paymentCancel: string;
+  paymentPaymobButton: string;
   upload: UploadLabels;
   resultCount: ResultCountLabels;
   camera: CameraLabels;

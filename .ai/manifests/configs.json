@@ -454,7 +454,9 @@
       "inEnvExample": true,
       "isPublic": true,
       "name": "NEXT_PUBLIC_PAYMOB_PUBLIC_KEY",
-      "readBy": []
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
     },
     {
       "description": "Public PayPal client id for the browser Buttons SDK (safe to expose; enables the frontend payment step). Leave blank to keep the free UI.",

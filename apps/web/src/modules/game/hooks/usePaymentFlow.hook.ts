@@ -1,32 +1,56 @@
 'use client';
-// client-boundary-reason: owns the paid-analysis run id, order creation, and approval callbacks around the analyze mutation's browser state.
+// client-boundary-reason: owns the paid-analysis run id, order/intention creation, and approval callbacks around the analyze mutation's browser state.
 
 import { useCallback, useRef, useState } from 'react';
 
+import { PaymentGateway } from '@twinzy/shared';
+
+import { isPaymobConfigured } from '@/packages/paymob';
 import { isPayPalConfigured } from '@/packages/paypal';
 import { ERROR_MESSAGE_KEYS, type ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 
 import { createPaymentOrderRequest } from '../gateway/payment.gateway';
 import { newRequestId } from '../helpers/stream-identity.helper';
-import type { PaymentFlowController, PaymentFlowDeps } from '../model/payment-flow.types';
+import type {
+  PaymentFlowController,
+  PaymentFlowDeps,
+  PendingRun,
+} from '../model/payment-flow.types';
+
+import { usePaymobCheckout } from './usePaymobCheckout.hook';
 
 /**
- * Bridges the paid-analysis payment step to the analyze run. When the paywall
- * is off, `beginPaidRun` starts the free run directly. When on, it enters the
- * payment phase with a freshly-minted request id, creates the server-priced
- * order bound to that id, and — on buyer approval — starts the analyze run with
- * the same id + approved order id so the backend captures at consumption.
+ * Bridges the paid-analysis payment step to the analyze run across both gateways.
+ * When no gateway is configured, `beginPaidRun` starts the free run directly.
+ * Otherwise it enters the payment phase with a freshly-minted request id (shared
+ * by BOTH gateways) and, on PayPal approval or Paymob completion, starts the run
+ * with that same id so the backend verifies at consumption.
  */
 export const usePaymentFlow = (deps: PaymentFlowDeps): PaymentFlowController => {
   const [isPaying, setIsPaying] = useState(false);
   const [errorKey, setErrorKey] = useState<ErrorMessageKey | undefined>();
   const requestIdRef = useRef<string | undefined>(undefined);
-  const pendingRef = useRef<{ file: File; resultCount: number } | undefined>(undefined);
+  const pendingRef = useRef<PendingRun | undefined>(undefined);
+
+  const onError = useCallback((): void => {
+    setErrorKey(ERROR_MESSAGE_KEYS.payment);
+  }, []);
+  const settlePayment = useCallback((): void => {
+    setIsPaying(false);
+  }, []);
+
+  const { isPaymobPending, payWithPaymob } = usePaymobCheckout(
+    deps.beginRun,
+    requestIdRef,
+    pendingRef,
+    settlePayment,
+    onError,
+  );
 
   const beginPaidRun = useCallback(
     (file: File, resultCount: number): void => {
       setErrorKey(undefined);
-      if (!isPayPalConfigured()) {
+      if (!isPayPalConfigured() && !isPaymobConfigured()) {
         deps.beginRun(file, resultCount);
         return;
       }
@@ -36,10 +60,6 @@ export const usePaymentFlow = (deps: PaymentFlowDeps): PaymentFlowController => 
     },
     [deps],
   );
-
-  const onError = useCallback((): void => {
-    setErrorKey(ERROR_MESSAGE_KEYS.payment);
-  }, []);
 
   const createOrder = useCallback(async (): Promise<string> => {
     const requestId = requestIdRef.current;
@@ -58,7 +78,11 @@ export const usePaymentFlow = (deps: PaymentFlowDeps): PaymentFlowController => 
         return;
       }
       setIsPaying(false);
-      deps.beginRun(pending.file, pending.resultCount, { requestId, paypalOrderId: orderId });
+      deps.beginRun(pending.file, pending.resultCount, {
+        requestId,
+        paymentGateway: PaymentGateway.Paypal,
+        paypalOrderId: orderId,
+      });
     },
     [deps],
   );
@@ -70,12 +94,16 @@ export const usePaymentFlow = (deps: PaymentFlowDeps): PaymentFlowController => 
   }, []);
 
   return {
-    isPaywallEnabled: isPayPalConfigured(),
+    isPaywallEnabled: isPayPalConfigured() || isPaymobConfigured(),
+    isPaypalEnabled: isPayPalConfigured(),
+    isPaymobEnabled: isPaymobConfigured(),
     isPaying,
+    isPaymobPending,
     errorKey,
     beginPaidRun,
     createOrder,
     onApprove,
+    payWithPaymob,
     onError,
     cancelPayment,
   };

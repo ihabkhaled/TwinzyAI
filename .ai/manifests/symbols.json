@@ -1,5 +1,5 @@
 {
-  "count": 1421,
+  "count": 1441,
   "symbols": [
     {
       "kind": "const",
@@ -868,6 +868,20 @@
       "module": "api:ai",
       "name": "attachExternalAbort",
       "path": "apps/api/src/modules/ai/lib/abort-bridge.util.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "awaitPaymobPopupClosed",
+      "path": "apps/web/src/packages/paymob/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "awaitPaymobPopupClosed",
+      "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
     },
     {
       "kind": "const",
@@ -2268,6 +2282,13 @@
       "module": "shared",
       "name": "CreatePaymentOrderResponseSchema",
       "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "gateway",
+      "module": "web:game",
+      "name": "createPaymobIntentionRequest",
+      "path": "apps/web/src/modules/game/gateway/payment.gateway.ts"
     },
     {
       "kind": "const",
@@ -4085,6 +4106,20 @@
     {
       "kind": "re-export",
       "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "isPaymobConfigured",
+      "path": "apps/web/src/packages/paymob/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "isPaymobConfigured",
+      "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
       "module": "web:pkg-paypal",
       "name": "isPayPalConfigured",
       "path": "apps/web/src/packages/paypal/index.ts"
@@ -5469,6 +5504,20 @@
       "path": "apps/api/src/modules/ai/model/openai-compat.types.ts"
     },
     {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "openPaymobPopup",
+      "path": "apps/web/src/packages/paymob/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "openPaymobPopup",
+      "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
+    },
+    {
       "kind": "interface",
       "layer": "lib",
       "module": "api:game",
@@ -5778,6 +5827,13 @@
     },
     {
       "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "PAYMENTS_PAYMOB_INTENTION_PATH",
+      "path": "packages/shared/src/constants/app.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "api:payments",
       "name": "PAYMENTS_ROUTE_ORDERS",
@@ -5883,6 +5939,13 @@
     },
     {
       "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "PAYMOB_CHECKOUT_BASE_URL",
+      "path": "apps/web/src/packages/paymob/paymob.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "config",
       "module": "api:config",
       "name": "PAYMOB_INTEGRATION_ID_PATTERN",
@@ -5901,6 +5964,20 @@
       "module": "api:payments",
       "name": "PAYMOB_ITEM_NAME",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "PAYMOB_POPUP_FEATURES",
+      "path": "apps/web/src/packages/paymob/paymob.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "PAYMOB_POPUP_POLL_MS",
+      "path": "apps/web/src/packages/paymob/paymob.constants.ts"
     },
     {
       "kind": "const",
@@ -5943,6 +6020,13 @@
       "module": "api:payments",
       "name": "PaymobCaptureRecord",
       "path": "apps/api/src/modules/payments/model/payment.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PaymobCheckoutController",
+      "path": "apps/web/src/modules/game/model/payment-flow.types.ts"
     },
     {
       "kind": "interface",
@@ -5999,6 +6083,20 @@
       "module": "shared",
       "name": "PaymobIntentionResponseSchema",
       "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "components",
+      "module": "web:game",
+      "name": "PaymobOption",
+      "path": "apps/web/src/modules/game/components/paymob-option.component.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PaymobOptionProps",
+      "path": "apps/web/src/modules/game/model/payment.types.ts"
     },
     {
       "kind": "const",
@@ -6218,6 +6316,20 @@
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts"
     },
     {
+      "kind": "const",
+      "layer": "containers",
+      "module": "web:game",
+      "name": "PaypalOption",
+      "path": "apps/web/src/modules/game/containers/paypal-option.container.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PaypalOptionProps",
+      "path": "apps/web/src/modules/game/model/payment.types.ts"
+    },
+    {
       "kind": "interface",
       "layer": "packages",
       "module": "web:pkg-paypal",
@@ -6237,6 +6349,13 @@
       "module": "api:payments",
       "name": "PaypalTokenResponseSchema",
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PendingRun",
+      "path": "apps/web/src/modules/game/model/payment-flow.types.ts"
     },
     {
       "kind": "const",
@@ -8248,6 +8367,20 @@
       "path": "apps/api/src/modules/game/lib/game-stream.ts"
     },
     {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "startPaymobCheckout",
+      "path": "apps/web/src/packages/paymob/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-paymob",
+      "name": "startPaymobCheckout",
+      "path": "apps/web/src/packages/paymob/paymob-checkout.ts"
+    },
+    {
       "kind": "const",
       "layer": "lib",
       "module": "api:game",
@@ -9513,6 +9646,13 @@
       "module": "web:game",
       "name": "usePaymentFlow",
       "path": "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "hooks",
+      "module": "web:game",
+      "name": "usePaymobCheckout",
+      "path": "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts"
     },
     {
       "kind": "const",

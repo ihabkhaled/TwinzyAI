@@ -122,6 +122,7 @@ export const GameContainer = (): ReactElement => {
           description={labels.paymentDescription}
           loadingLabel={labels.paymentLoading}
           cancelLabel={labels.paymentCancel}
+          paymobButtonLabel={labels.paymentPaymobButton}
           errorMessage={vm.paymentErrorMessage}
           payment={vm.payment}
         />

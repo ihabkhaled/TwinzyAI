@@ -16,12 +16,16 @@ export interface PayPalButtonsController {
   status: PayPalButtonsStatusValue;
 }
 
-/** The paid-analysis sub-view: whether we are paying + the button callbacks. */
+/** The paid-analysis sub-view: which gateways to show + the button callbacks. */
 export interface PaymentViewModel {
   isPaywallEnabled: boolean;
+  isPaypalEnabled: boolean;
+  isPaymobEnabled: boolean;
   isPaying: boolean;
+  isPaymobPending: boolean;
   createOrder: () => Promise<string>;
   onApprove: (orderId: string) => void;
+  payWithPaymob: () => void;
   onCancel: () => void;
   onError: (error: unknown) => void;
 }
@@ -32,6 +36,23 @@ export interface PaymentStepProps {
   description: string;
   loadingLabel: string;
   cancelLabel: string;
+  paymobButtonLabel: string;
   errorMessage: string | undefined;
   payment: PaymentViewModel;
+}
+
+/** Props for the PayPal option block (Buttons SDK mount + loader). */
+export interface PaypalOptionProps {
+  createOrder: () => Promise<string>;
+  onApprove: (orderId: string) => void;
+  onCancel: () => void;
+  onError: (error: unknown) => void;
+  loadingLabel: string;
+}
+
+/** Props for the Paymob card option (a button that opens the popup checkout). */
+export interface PaymobOptionProps {
+  label: string;
+  isPending: boolean;
+  onPay: () => void;
 }

@@ -273,7 +273,7 @@
       "structure/flows/analyze-flow.md",
       "docs/frontend-architecture.md"
     ],
-    "fileCount": 143,
+    "fileCount": 146,
     "lane": "standard",
     "layers": [
       "components",
@@ -413,6 +413,16 @@
       "packages"
     ],
     "responsibility": "useAppNavigation - typed wrapper over next/navigation.",
+    "root": "apps/web"
+  },
+  "web:pkg-paymob": {
+    "docs": [],
+    "fileCount": 3,
+    "lane": null,
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "",
     "root": "apps/web"
   },
   "web:pkg-paypal": {

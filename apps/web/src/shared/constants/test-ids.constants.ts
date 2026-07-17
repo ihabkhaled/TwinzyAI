@@ -46,6 +46,7 @@ export const TEST_IDS = {
   navDonateLink: 'nav-donate-link',
   paymentStep: 'payment-step',
   paypalButtons: 'paypal-buttons',
+  paymobCardButton: 'paymob-card-button',
   paymentLoader: 'payment-loader',
   cancelPayment: 'cancel-payment',
   errorState: 'error-state',

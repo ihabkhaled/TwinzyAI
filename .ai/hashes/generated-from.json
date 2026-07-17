@@ -277,7 +277,7 @@
       "apps/api/src/bootstrap/fastify-adapter.ts",
       "apps/web/src/packages/env/public-env.ts"
     ],
-    "inputsHash": "8b428bf66fb60d1b8bc8f0de4f7a58642f7a7b21308c80344b018e64bb026943"
+    "inputsHash": "b3ca006cc7aebc373f6139b8e2b98d84a2d0fe2581fd69cfa25af2bd8e55d87b"
   },
   ".ai/manifests/contracts.json": {
     "inputs": [
@@ -1376,6 +1376,7 @@
       "apps/web/src/modules/game/components/game-intro.variants.ts",
       "apps/web/src/modules/game/components/landing-hero.component.tsx",
       "apps/web/src/modules/game/components/landing-hero.variants.ts",
+      "apps/web/src/modules/game/components/paymob-option.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.variants.ts",
       "apps/web/src/modules/game/components/processing-card.component.tsx",
@@ -1413,6 +1414,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
       "apps/web/src/modules/game/containers/share-modal.container.tsx",
@@ -1449,6 +1451,7 @@
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
       "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts",
+      "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts",
       "apps/web/src/modules/game/hooks/usePayPalButtons.hook.ts",
       "apps/web/src/modules/game/hooks/useResultCount.hook.ts",
       "apps/web/src/modules/game/hooks/useResultTranslation.hook.ts",
@@ -1571,6 +1574,9 @@
       "apps/web/src/packages/navigation/index.ts",
       "apps/web/src/packages/navigation/navigation-types.ts",
       "apps/web/src/packages/navigation/use-app-navigation.hook.ts",
+      "apps/web/src/packages/paymob/index.ts",
+      "apps/web/src/packages/paymob/paymob-checkout.ts",
+      "apps/web/src/packages/paymob/paymob.constants.ts",
       "apps/web/src/packages/paypal/index.ts",
       "apps/web/src/packages/paypal/paypal-sdk.ts",
       "apps/web/src/packages/paypal/paypal-sdk.types.ts",
@@ -1717,7 +1723,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "a92035ff9fb214d3ac615b9fafd8434cf6baaa073af9556828ce27d40fa5f6b1"
+    "inputsHash": "1286520f62c6032f7a90da9c4949a61e13e79ef196b70cfe5d59038c0ea84a53"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2061,6 +2067,7 @@
       "apps/web/src/modules/game/components/game-intro.variants.ts",
       "apps/web/src/modules/game/components/landing-hero.component.tsx",
       "apps/web/src/modules/game/components/landing-hero.variants.ts",
+      "apps/web/src/modules/game/components/paymob-option.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.variants.ts",
       "apps/web/src/modules/game/components/processing-card.component.tsx",
@@ -2098,6 +2105,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
       "apps/web/src/modules/game/containers/share-modal.container.tsx",
@@ -2134,6 +2142,7 @@
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
       "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts",
+      "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts",
       "apps/web/src/modules/game/hooks/usePayPalButtons.hook.ts",
       "apps/web/src/modules/game/hooks/useResultCount.hook.ts",
       "apps/web/src/modules/game/hooks/useResultTranslation.hook.ts",
@@ -2256,6 +2265,9 @@
       "apps/web/src/packages/navigation/index.ts",
       "apps/web/src/packages/navigation/navigation-types.ts",
       "apps/web/src/packages/navigation/use-app-navigation.hook.ts",
+      "apps/web/src/packages/paymob/index.ts",
+      "apps/web/src/packages/paymob/paymob-checkout.ts",
+      "apps/web/src/packages/paymob/paymob.constants.ts",
       "apps/web/src/packages/paypal/index.ts",
       "apps/web/src/packages/paypal/paypal-sdk.ts",
       "apps/web/src/packages/paypal/paypal-sdk.types.ts",
@@ -2401,7 +2413,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "e822ac84fe9aa7e02ae8247e2f6c22c79f1edb2ecb4ec086b5fceb9bbfe57d25"
+    "inputsHash": "a5b89b906a6ad089d65bd88a43266315658354668a939b7306922c767edfe6f2"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2750,6 +2762,7 @@
       "apps/web/src/modules/game/components/game-intro.variants.ts",
       "apps/web/src/modules/game/components/landing-hero.component.tsx",
       "apps/web/src/modules/game/components/landing-hero.variants.ts",
+      "apps/web/src/modules/game/components/paymob-option.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.variants.ts",
       "apps/web/src/modules/game/components/processing-card.component.tsx",
@@ -2787,6 +2800,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
       "apps/web/src/modules/game/containers/share-modal.container.tsx",
@@ -2823,6 +2837,7 @@
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
       "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts",
+      "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts",
       "apps/web/src/modules/game/hooks/usePayPalButtons.hook.ts",
       "apps/web/src/modules/game/hooks/useResultCount.hook.ts",
       "apps/web/src/modules/game/hooks/useResultTranslation.hook.ts",
@@ -2945,6 +2960,9 @@
       "apps/web/src/packages/navigation/index.ts",
       "apps/web/src/packages/navigation/navigation-types.ts",
       "apps/web/src/packages/navigation/use-app-navigation.hook.ts",
+      "apps/web/src/packages/paymob/index.ts",
+      "apps/web/src/packages/paymob/paymob-checkout.ts",
+      "apps/web/src/packages/paymob/paymob.constants.ts",
       "apps/web/src/packages/paypal/index.ts",
       "apps/web/src/packages/paypal/paypal-sdk.ts",
       "apps/web/src/packages/paypal/paypal-sdk.types.ts",
@@ -3090,7 +3108,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "e822ac84fe9aa7e02ae8247e2f6c22c79f1edb2ecb4ec086b5fceb9bbfe57d25"
+    "inputsHash": "a5b89b906a6ad089d65bd88a43266315658354668a939b7306922c767edfe6f2"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3423,6 +3441,7 @@
       "apps/web/src/modules/game/components/game-intro.variants.ts",
       "apps/web/src/modules/game/components/landing-hero.component.tsx",
       "apps/web/src/modules/game/components/landing-hero.variants.ts",
+      "apps/web/src/modules/game/components/paymob-option.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.component.tsx",
       "apps/web/src/modules/game/components/privacy-notice.variants.ts",
       "apps/web/src/modules/game/components/processing-card.component.tsx",
@@ -3460,6 +3479,7 @@
       "apps/web/src/modules/game/containers/landing.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.container.tsx",
       "apps/web/src/modules/game/containers/payment-step.variants.ts",
+      "apps/web/src/modules/game/containers/paypal-option.container.tsx",
       "apps/web/src/modules/game/containers/result-sections.container.tsx",
       "apps/web/src/modules/game/containers/result-summary.container.tsx",
       "apps/web/src/modules/game/containers/share-modal.container.tsx",
@@ -3496,6 +3516,7 @@
       "apps/web/src/modules/game/hooks/useGame.hook.ts",
       "apps/web/src/modules/game/hooks/useImageUpload.hook.ts",
       "apps/web/src/modules/game/hooks/usePaymentFlow.hook.ts",
+      "apps/web/src/modules/game/hooks/usePaymobCheckout.hook.ts",
       "apps/web/src/modules/game/hooks/usePayPalButtons.hook.ts",
       "apps/web/src/modules/game/hooks/useResultCount.hook.ts",
       "apps/web/src/modules/game/hooks/useResultTranslation.hook.ts",
@@ -3618,6 +3639,9 @@
       "apps/web/src/packages/navigation/index.ts",
       "apps/web/src/packages/navigation/navigation-types.ts",
       "apps/web/src/packages/navigation/use-app-navigation.hook.ts",
+      "apps/web/src/packages/paymob/index.ts",
+      "apps/web/src/packages/paymob/paymob-checkout.ts",
+      "apps/web/src/packages/paymob/paymob.constants.ts",
       "apps/web/src/packages/paypal/index.ts",
       "apps/web/src/packages/paypal/paypal-sdk.ts",
       "apps/web/src/packages/paypal/paypal-sdk.types.ts",
@@ -3763,7 +3787,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "e822ac84fe9aa7e02ae8247e2f6c22c79f1edb2ecb4ec086b5fceb9bbfe57d25"
+    "inputsHash": "a5b89b906a6ad089d65bd88a43266315658354668a939b7306922c767edfe6f2"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

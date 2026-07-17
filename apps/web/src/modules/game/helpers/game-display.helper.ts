@@ -161,6 +161,7 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
   paymentDescription: translate('game.paymentDescription', { price: resolvePaymentPriceLabel() }),
   paymentLoading: translate('game.paymentLoading'),
   paymentCancel: translate('game.paymentCancel'),
+  paymentPaymobButton: translate('game.paymentPaymobButton'),
   upload: {
     label: translate('upload.label'),
     hint: translate('upload.hint'),

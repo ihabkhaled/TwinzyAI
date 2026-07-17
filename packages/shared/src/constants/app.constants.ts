@@ -42,6 +42,13 @@ export const HEALTH_PATH = `${API_BASE_PATH}/health`;
 export const PAYMENTS_ORDERS_PATH = `${API_BASE_PATH}/payments/orders`;
 
 /**
+ * Creates a server-side Paymob intention for one paid analysis run (charged in
+ * EGP, converted from the canonical USD price). Only meaningful when the Paymob
+ * credentials are configured; otherwise the game is free of it.
+ */
+export const PAYMENTS_PAYMOB_INTENTION_PATH = `${API_BASE_PATH}/payments/paymob/intention`;
+
+/**
  * The active prompt-contract version. Every AI response must echo it; a
  * mismatch fails schema validation, so a stale model/template pairing can
  * never silently serve the old contract.

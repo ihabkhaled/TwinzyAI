@@ -1,5 +1,5 @@
 {
-  "count": 39,
+  "count": 40,
   "modules": [
     {
       "docs": [
@@ -309,7 +309,7 @@
         "structure/flows/analyze-flow.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 143,
+      "fileCount": 146,
       "lane": "standard",
       "layers": [
         "components",
@@ -471,6 +471,18 @@
       "module": "web:pkg-navigation",
       "owner": "repository owner",
       "responsibility": "useAppNavigation - typed wrapper over next/navigation.",
+      "root": "apps/web"
+    },
+    {
+      "docs": [],
+      "fileCount": 3,
+      "lane": null,
+      "layers": [
+        "packages"
+      ],
+      "module": "web:pkg-paymob",
+      "owner": "unassigned",
+      "responsibility": "",
       "root": "apps/web"
     },
     {
@@ -638,6 +650,7 @@
   ],
   "unmappedModules": [
     "api:root",
+    "web:pkg-paymob",
     "web:root",
     "web:tests"
   ]

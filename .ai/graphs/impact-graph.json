@@ -1352,6 +1352,12 @@
     "docs": [],
     "tests": []
   },
+  "web:pkg-paymob": {
+    "consumers": [],
+    "dependsOn": [],
+    "docs": [],
+    "tests": []
+  },
   "web:pkg-paypal": {
     "consumers": [],
     "dependsOn": [],

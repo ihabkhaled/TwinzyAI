@@ -72,6 +72,7 @@ describe('usePaymentFlow with the paywall ON', () => {
     });
     expect(beginRun).toHaveBeenCalledWith(FILE, 7, {
       requestId: boundRequestId,
+      paymentGateway: 'paypal',
       paypalOrderId: 'ORDER-1',
     });
   });

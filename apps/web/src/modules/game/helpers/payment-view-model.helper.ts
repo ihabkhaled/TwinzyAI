@@ -17,9 +17,13 @@ export const buildPaymentViewModel = ({
   onError,
 }: PaymentViewModelInput): PaymentViewModel => ({
   isPaywallEnabled: flow.isPaywallEnabled,
+  isPaypalEnabled: flow.isPaypalEnabled,
+  isPaymobEnabled: flow.isPaymobEnabled,
   isPaying: flow.isPaying,
+  isPaymobPending: flow.isPaymobPending,
   createOrder: flow.createOrder,
   onApprove: flow.onApprove,
+  payWithPaymob: flow.payWithPaymob,
   onCancel: flow.cancelPayment,
   onError,
 });

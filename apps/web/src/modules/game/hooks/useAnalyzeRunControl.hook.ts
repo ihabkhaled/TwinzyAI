@@ -30,6 +30,7 @@ export const useAnalyzeRunControl = (
         requestId: payment?.requestId ?? newRequestId(),
         signal: controller.signal,
         resultCount,
+        ...(payment?.paymentGateway !== undefined && { paymentGateway: payment.paymentGateway }),
         ...(payment?.paypalOrderId !== undefined && { paypalOrderId: payment.paypalOrderId }),
       });
     },
