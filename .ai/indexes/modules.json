@@ -292,6 +292,16 @@
     "responsibility": "Core game feature module - setup, payment step, SSE progress, results, translation, share.",
     "root": "apps"
   },
+  "web:pkg-adsense": {
+    "docs": [],
+    "fileCount": 4,
+    "lane": null,
+    "layers": [
+      "packages"
+    ],
+    "responsibility": "",
+    "root": "apps"
+  },
   "web:pkg-axios": {
     "docs": [
       "docs/library-wrapping.md",
@@ -527,7 +537,7 @@
       "structure/layer-map.md",
       "docs/frontend-architecture.md"
     ],
-    "fileCount": 46,
+    "fileCount": 47,
     "lane": "standard",
     "layers": [
       "shared"

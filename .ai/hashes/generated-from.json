@@ -277,7 +277,7 @@
       "apps/api/src/bootstrap/fastify-adapter.ts",
       "apps/web/src/packages/env/public-env.ts"
     ],
-    "inputsHash": "b3ca006cc7aebc373f6139b8e2b98d84a2d0fe2581fd69cfa25af2bd8e55d87b"
+    "inputsHash": "a60711fe45586c78d2a89c550a3b3b1c6fdb373b376bf6246efb644a41411fa9"
   },
   ".ai/manifests/contracts.json": {
     "inputs": [
@@ -1536,6 +1536,10 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.tsx",
+      "apps/web/src/packages/adsense/adsense.constants.ts",
+      "apps/web/src/packages/adsense/adsense.types.ts",
+      "apps/web/src/packages/adsense/index.ts",
       "apps/web/src/packages/axios/http-client.ts",
       "apps/web/src/packages/axios/http-error.test.ts",
       "apps/web/src/packages/axios/http-error.ts",
@@ -1679,6 +1683,7 @@
       "apps/web/src/shared/security/content-security-policy.ts",
       "apps/web/src/shared/security/external-url.helper.test.ts",
       "apps/web/src/shared/security/external-url.helper.ts",
+      "apps/web/src/shared/security/security.constants.ts",
       "apps/web/src/shared/testing/test-id.helper.test.ts",
       "apps/web/src/shared/testing/test-id.helper.ts",
       "apps/web/src/shared/utils/assert-never.util.test.ts",
@@ -1726,7 +1731,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "d578e6cb415e00d32dc935649a1af83fa330b85a18feac25f5a2c44a9bba4c2e"
+    "inputsHash": "563d41a5ea84485699382193b03f3b4c6951ba4dc7e8287767edeaf10e5bcdbb"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2230,6 +2235,10 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.tsx",
+      "apps/web/src/packages/adsense/adsense.constants.ts",
+      "apps/web/src/packages/adsense/adsense.types.ts",
+      "apps/web/src/packages/adsense/index.ts",
       "apps/web/src/packages/axios/http-client.ts",
       "apps/web/src/packages/axios/http-error.test.ts",
       "apps/web/src/packages/axios/http-error.ts",
@@ -2373,6 +2382,7 @@
       "apps/web/src/shared/security/content-security-policy.ts",
       "apps/web/src/shared/security/external-url.helper.test.ts",
       "apps/web/src/shared/security/external-url.helper.ts",
+      "apps/web/src/shared/security/security.constants.ts",
       "apps/web/src/shared/testing/test-id.helper.test.ts",
       "apps/web/src/shared/testing/test-id.helper.ts",
       "apps/web/src/shared/utils/assert-never.util.test.ts",
@@ -2419,7 +2429,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "f4c1aa3de6be7b06e904ff8066bd90af6aa3251596a0a6fc8641fae183431e88"
+    "inputsHash": "257d7d54bdab61b5b52c2be199c21b1d26725bdadf19322ec14a23a4e4f7298e"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2436,7 +2446,7 @@
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "16537ee6a503a2d9da56631c822c66cd27f9b7e2b2db91ec8a17878da277c213"
+    "inputsHash": "db37ff51553721e7d1eaebde34c78124ccc48cbfc82a4db8f700f61dcdae07ca"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -2929,6 +2939,10 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.tsx",
+      "apps/web/src/packages/adsense/adsense.constants.ts",
+      "apps/web/src/packages/adsense/adsense.types.ts",
+      "apps/web/src/packages/adsense/index.ts",
       "apps/web/src/packages/axios/http-client.ts",
       "apps/web/src/packages/axios/http-error.test.ts",
       "apps/web/src/packages/axios/http-error.ts",
@@ -3072,6 +3086,7 @@
       "apps/web/src/shared/security/content-security-policy.ts",
       "apps/web/src/shared/security/external-url.helper.test.ts",
       "apps/web/src/shared/security/external-url.helper.ts",
+      "apps/web/src/shared/security/security.constants.ts",
       "apps/web/src/shared/testing/test-id.helper.test.ts",
       "apps/web/src/shared/testing/test-id.helper.ts",
       "apps/web/src/shared/utils/assert-never.util.test.ts",
@@ -3118,7 +3133,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "f4c1aa3de6be7b06e904ff8066bd90af6aa3251596a0a6fc8641fae183431e88"
+    "inputsHash": "257d7d54bdab61b5b52c2be199c21b1d26725bdadf19322ec14a23a4e4f7298e"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3611,6 +3626,10 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.tsx",
+      "apps/web/src/packages/adsense/adsense.constants.ts",
+      "apps/web/src/packages/adsense/adsense.types.ts",
+      "apps/web/src/packages/adsense/index.ts",
       "apps/web/src/packages/axios/http-client.ts",
       "apps/web/src/packages/axios/http-error.test.ts",
       "apps/web/src/packages/axios/http-error.ts",
@@ -3754,6 +3773,7 @@
       "apps/web/src/shared/security/content-security-policy.ts",
       "apps/web/src/shared/security/external-url.helper.test.ts",
       "apps/web/src/shared/security/external-url.helper.ts",
+      "apps/web/src/shared/security/security.constants.ts",
       "apps/web/src/shared/testing/test-id.helper.test.ts",
       "apps/web/src/shared/testing/test-id.helper.ts",
       "apps/web/src/shared/utils/assert-never.util.test.ts",
@@ -3800,7 +3820,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "f4c1aa3de6be7b06e904ff8066bd90af6aa3251596a0a6fc8641fae183431e88"
+    "inputsHash": "257d7d54bdab61b5b52c2be199c21b1d26725bdadf19322ec14a23a4e4f7298e"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

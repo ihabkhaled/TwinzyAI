@@ -1,5 +1,5 @@
 {
-  "count": 40,
+  "count": 41,
   "modules": [
     {
       "docs": [
@@ -331,6 +331,18 @@
       "root": "apps"
     },
     {
+      "docs": [],
+      "fileCount": 4,
+      "lane": null,
+      "layers": [
+        "packages"
+      ],
+      "module": "web:pkg-adsense",
+      "owner": "unassigned",
+      "responsibility": "",
+      "root": "apps"
+    },
+    {
       "docs": [
         "docs/library-wrapping.md",
         "structure/layer-map.md"
@@ -603,7 +615,7 @@
         "structure/layer-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 46,
+      "fileCount": 47,
       "lane": "standard",
       "layers": [
         "shared"
@@ -650,6 +662,7 @@
   ],
   "unmappedModules": [
     "api:root",
+    "web:pkg-adsense",
     "web:pkg-paymob",
     "web:root",
     "web:tests"

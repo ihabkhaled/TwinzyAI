@@ -18,5 +18,6 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_PAYMOB_PUBLIC_KEY?: string;
     readonly NEXT_PUBLIC_PAYMENT_PRICE_VALUE?: string;
     readonly NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY?: string;
+    readonly NEXT_PUBLIC_ADSENSE_CLIENT_ID?: string;
   }
 }

@@ -24,6 +24,20 @@
   "AcquireOutcome": [
     "apps/api/src/core/streaming/concurrency-limiter.types.ts"
   ],
+  "ADSENSE_CSP_ORIGINS": [
+    "apps/web/src/packages/adsense/adsense.constants.ts",
+    "apps/web/src/packages/adsense/index.ts"
+  ],
+  "ADSENSE_SCRIPT_BASE_URL": [
+    "apps/web/src/packages/adsense/adsense.constants.ts"
+  ],
+  "AdsenseScript": [
+    "apps/web/src/packages/adsense/adsense-script.tsx",
+    "apps/web/src/packages/adsense/index.ts"
+  ],
+  "AdsenseScriptProps": [
+    "apps/web/src/packages/adsense/adsense.types.ts"
+  ],
   "aggregateEntryMetrics": [
     "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
   ],
@@ -2142,6 +2156,9 @@
   ],
   "NodeEnvironment": [
     "apps/api/src/config/env.schema.ts"
+  ],
+  "NONCE_HEADER_NAME": [
+    "apps/web/src/shared/security/security.constants.ts"
   ],
   "normalizeLanguageCode": [
     "packages/shared/src/constants/language.constants.ts"

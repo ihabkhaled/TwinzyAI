@@ -1,5 +1,5 @@
 {
-  "count": 1456,
+  "count": 1463,
   "symbols": [
     {
       "kind": "const",
@@ -63,6 +63,48 @@
       "module": "api:core",
       "name": "AcquireOutcome",
       "path": "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-adsense",
+      "name": "ADSENSE_CSP_ORIGINS",
+      "path": "apps/web/src/packages/adsense/adsense.constants.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-adsense",
+      "name": "ADSENSE_CSP_ORIGINS",
+      "path": "apps/web/src/packages/adsense/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-adsense",
+      "name": "ADSENSE_SCRIPT_BASE_URL",
+      "path": "apps/web/src/packages/adsense/adsense.constants.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "packages",
+      "module": "web:pkg-adsense",
+      "name": "AdsenseScript",
+      "path": "apps/web/src/packages/adsense/adsense-script.tsx"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-adsense",
+      "name": "AdsenseScript",
+      "path": "apps/web/src/packages/adsense/index.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "packages",
+      "module": "web:pkg-adsense",
+      "name": "AdsenseScriptProps",
+      "path": "apps/web/src/packages/adsense/adsense.types.ts"
     },
     {
       "kind": "const",
@@ -5418,6 +5460,13 @@
       "module": "api:config",
       "name": "NodeEnvironment",
       "path": "apps/api/src/config/env.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "NONCE_HEADER_NAME",
+      "path": "apps/web/src/shared/security/security.constants.ts"
     },
     {
       "kind": "const",

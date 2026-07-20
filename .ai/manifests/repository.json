@@ -1,5 +1,5 @@
 {
-  "count": 677,
+  "count": 682,
   "files": [
     {
       "exports": [
@@ -7444,12 +7444,13 @@
           "name": "viewport"
         }
       ],
-      "hash": "4c547d7b75c61d42edb38aee72c3b335833868060dcbeb8e773bb2dc3068b13c",
+      "hash": "1af14acf393de44f1da6e5543f3cbd467536d0d555722c171c97d9c7166dbf14",
       "imports": [
         "./layout.variants",
         "./providers",
         "./styles.css",
         "@/modules/ui-preferences",
+        "@/packages/adsense",
         "@/packages/i18n",
         "@/packages/toast",
         "@/shared/components/layout/app-header.component",
@@ -7461,12 +7462,14 @@
         "@/shared/helpers/donate-link.helper",
         "@/shared/helpers/page-title.helper",
         "@/shared/helpers/read-theme-cookie.helper",
+        "@/shared/security/security.constants",
         "next",
+        "next/headers",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 102,
+      "loc": 110,
       "module": "web:app",
       "path": "apps/web/src/app/layout.tsx"
     },
@@ -11665,6 +11668,82 @@
       "exports": [
         {
           "kind": "function",
+          "name": "AdsenseScript"
+        }
+      ],
+      "hash": "697150f1ea07b607e92939bbc59a12d442bea2bbc64308d721b26ba834093c09",
+      "imports": [
+        "./adsense.constants",
+        "./adsense.types",
+        "@/packages/env",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "packages",
+      "loc": 34,
+      "module": "web:pkg-adsense",
+      "path": "apps/web/src/packages/adsense/adsense-script.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ADSENSE_CSP_ORIGINS"
+        },
+        {
+          "kind": "const",
+          "name": "ADSENSE_SCRIPT_BASE_URL"
+        }
+      ],
+      "hash": "624951f2d6ff59b3346d1d4cb405ec490831b141b7218dffe23afe0a731ff058",
+      "imports": [],
+      "isTest": false,
+      "layer": "packages",
+      "loc": 23,
+      "module": "web:pkg-adsense",
+      "path": "apps/web/src/packages/adsense/adsense.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "AdsenseScriptProps"
+        }
+      ],
+      "hash": "80040f45ca7550682107c88aa12e3649c57a64f11364e3b514a4ec38a78a4885",
+      "imports": [],
+      "isTest": false,
+      "layer": "packages",
+      "loc": 9,
+      "module": "web:pkg-adsense",
+      "path": "apps/web/src/packages/adsense/adsense.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "re-export",
+          "name": "ADSENSE_CSP_ORIGINS"
+        },
+        {
+          "kind": "re-export",
+          "name": "AdsenseScript"
+        }
+      ],
+      "hash": "1b47d13073fce552b0a3e3e0748f2f25576d6f669d6686907dc2ce82f151a11a",
+      "imports": [
+        "./adsense-script",
+        "./adsense.constants"
+      ],
+      "isTest": false,
+      "layer": "packages",
+      "loc": 3,
+      "module": "web:pkg-adsense",
+      "path": "apps/web/src/packages/adsense/index.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
           "name": "getJson"
         },
         {
@@ -12224,13 +12303,13 @@
           "name": "publicEnvSchema"
         }
       ],
-      "hash": "fffc5b7419ff1b1414182ef9230684c80168920860a3a0ff11a3034658dfef20",
+      "hash": "e41be8c057d262a7c290e3efc818f5bde7851c86694cbbd3087b154d09febf4b",
       "imports": [
         "@/packages/zod"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 83,
+      "loc": 98,
       "module": "web:pkg-env",
       "path": "apps/web/src/packages/env/public-env.ts"
     },
@@ -14084,15 +14163,16 @@
           "name": "proxy"
         }
       ],
-      "hash": "88855383eac9e17234a4833492e831f3fef80000a1a7f8a60a9ee74d2b84c42e",
+      "hash": "7b164c7e1611ca6e4dcef7015beb08be9cc31f799b60e8637389067e3f63d6a8",
       "imports": [
         "@/packages/env",
         "@/shared/security/content-security-policy",
+        "@/shared/security/security.constants",
         "next/server"
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 45,
+      "loc": 46,
       "module": "web:root",
       "path": "apps/web/src/proxy.ts"
     },
@@ -14777,14 +14857,14 @@
     },
     {
       "exports": [],
-      "hash": "0722d56001bcacadf8c41a0db7a26a51507ba2041517d0e5455a874ac652e39c",
+      "hash": "110d24c3f829e6880c909101a07f79f4254e8bf8ca385d80ff2a4bc39106a277",
       "imports": [
         "./content-security-policy",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 69,
+      "loc": 101,
       "module": "web:shared",
       "path": "apps/web/src/shared/security/content-security-policy.test.ts"
     },
@@ -14799,13 +14879,14 @@
           "name": "ContentSecurityPolicyInput"
         }
       ],
-      "hash": "f9fa3d98cf5b932832219754e7c9469cc636cae37a04ab80994a98e6e994f9ec",
+      "hash": "7c865015e96f3821e936c54a4558b4f587515426b0e5c835969cfff383e69668",
       "imports": [
+        "@/packages/adsense",
         "@/packages/paypal"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 57,
+      "loc": 65,
       "module": "web:shared",
       "path": "apps/web/src/shared/security/content-security-policy.ts"
     },
@@ -14836,6 +14917,21 @@
       "loc": 18,
       "module": "web:shared",
       "path": "apps/web/src/shared/security/external-url.helper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "NONCE_HEADER_NAME"
+        }
+      ],
+      "hash": "3ac7b6be84c414049107386cdb8f2641b649c7faf1b664881833c120e954938b",
+      "imports": [],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 7,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/security/security.constants.ts"
     },
     {
       "exports": [],

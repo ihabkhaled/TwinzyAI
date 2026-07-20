@@ -409,6 +409,16 @@
       "readBy": []
     },
     {
+      "description": "Google AdSense publisher id (e.g. ca-pub-1234567890123456). Leave blank to ship no ad script at all - presence of this value is the ads switch.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_ADSENSE_CLIENT_ID",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
       "description": "",
       "example": "http://localhost:4000",
       "inEnvExample": true,
@@ -691,6 +701,6 @@
       "readBy": []
     }
   ],
-  "count": 84,
+  "count": 85,
   "undocumented": []
 }

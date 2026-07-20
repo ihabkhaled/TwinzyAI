@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next';
+import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 
 import { LocaleSwitcher, ThemeToggle } from '@/modules/ui-preferences';
+import { AdsenseScript } from '@/packages/adsense';
 import {
   AppIntlProvider,
   DEFAULT_LOCALE,
@@ -21,6 +23,7 @@ import { interFont } from '@/shared/fonts/app-fonts';
 import { resolveDonateUrl } from '@/shared/helpers/donate-link.helper';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { readThemeAttribute } from '@/shared/helpers/read-theme-cookie.helper';
+import { NONCE_HEADER_NAME } from '@/shared/security/security.constants';
 
 import { bodyClassName } from './layout.variants';
 import { Providers } from './providers';
@@ -68,6 +71,8 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
   const messages = await getServerMessages();
   const themeAttribute = await readThemeAttribute();
   const donateUrl = resolveDonateUrl();
+  const requestHeaders = await headers();
+  const nonce = requestHeaders.get(NONCE_HEADER_NAME) ?? undefined;
 
   return (
     <html
@@ -77,6 +82,9 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
       className={interFont.variable}
       suppressHydrationWarning
     >
+      <head>
+        <AdsenseScript nonce={nonce} />
+      </head>
       <body className={bodyClassName}>
         <AppIntlProvider locale={locale} messages={messages}>
           <Providers>

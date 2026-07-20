@@ -1233,6 +1233,12 @@
       "apps/web/src/modules/game/test/use-share-create.hook.test.tsx"
     ]
   },
+  "web:pkg-adsense": {
+    "consumers": [],
+    "dependsOn": [],
+    "docs": [],
+    "tests": []
+  },
   "web:pkg-axios": {
     "consumers": [],
     "dependsOn": [

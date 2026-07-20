@@ -7,6 +7,7 @@ const baseInput = {
   isDevRuntime: false,
   apiBaseUrl: 'https://api.twinzy.test',
   paypalClientId: undefined,
+  adsenseClientId: undefined,
 };
 
 const directive = (csp: string, name: string): string =>
@@ -64,5 +65,36 @@ describe('buildContentSecurityPolicy with the paywall configured', () => {
   it('allows the checkout iframe and REST calls to paypal.com', () => {
     expect(directive(csp, 'frame-src')).toContain('https://www.paypal.com');
     expect(directive(csp, 'connect-src')).toContain('https://*.paypal.com');
+  });
+});
+
+describe('buildContentSecurityPolicy with ads switched off (the default)', () => {
+  it('contains no ad origins anywhere', () => {
+    const csp = buildContentSecurityPolicy(baseInput);
+
+    expect(csp).not.toContain('googlesyndication');
+    expect(csp).not.toContain('doubleclick');
+  });
+});
+
+describe('buildContentSecurityPolicy with AdSense configured', () => {
+  const csp = buildContentSecurityPolicy({ ...baseInput, adsenseClientId: 'ca-pub-123' });
+
+  it('allows the AdSense loader host so the nonced tag can pull its own scripts', () => {
+    expect(directive(csp, 'script-src')).toContain('https://pagead2.googlesyndication.com');
+  });
+
+  it('allows the ad iframes and creative images', () => {
+    expect(directive(csp, 'frame-src')).toContain('https://*.doubleclick.net');
+    expect(directive(csp, 'img-src')).toContain('https://*.googlesyndication.com');
+  });
+
+  it('allows the measurement calls AdSense reports through', () => {
+    expect(directive(csp, 'connect-src')).toContain('https://*.doubleclick.net');
+  });
+
+  it('keeps the API origin and the nonce intact alongside the ad origins', () => {
+    expect(directive(csp, 'connect-src')).toContain('https://api.twinzy.test');
+    expect(directive(csp, 'script-src')).toContain(`'nonce-test-nonce'`);
   });
 });

@@ -22,6 +22,14 @@ export const PAYPAL_CLIENT_ID_PATTERN = /^[\w-]{20,120}$/;
 /** Paymob public keys (e.g. egy_pk_test_…): word chars only; bound charset + length. */
 const PAYMOB_PUBLIC_KEY_PATTERN = /^[\w-]{20,120}$/;
 
+/**
+ * AdSense publisher ids are the literal `ca-pub-` prefix plus digits. The
+ * pattern is the security boundary for the ad tag: the id is interpolated into
+ * the loader's query string, so anything that could alter the URL must fail the
+ * build instead of shipping.
+ */
+const ADSENSE_CLIENT_ID_PATTERN = /^ca-pub-\d{10,20}$/;
+
 /** Treat an unset OR empty-string env value as "feature off" (link hidden). */
 const emptyToUndefined = (value: unknown): unknown => (value === '' ? undefined : value);
 
@@ -56,6 +64,12 @@ export const publicEnvSchema = z.object({
     .string()
     .regex(/^[A-Z]{3}$/)
     .default('USD'),
+  // Google AdSense publisher id. Presence is the ad switch: unset (the default)
+  // ships no third-party ad script at all.
+  adsenseClientId: z.preprocess(
+    emptyToUndefined,
+    z.string().regex(ADSENSE_CLIENT_ID_PATTERN).optional(),
+  ),
 });
 
 export type PublicEnv = z.output<typeof publicEnvSchema>;
@@ -70,6 +84,7 @@ export const publicEnv: PublicEnv = parseSchema(
     paymobPublicKey: process.env.NEXT_PUBLIC_PAYMOB_PUBLIC_KEY,
     paymentPriceValue: process.env.NEXT_PUBLIC_PAYMENT_PRICE_VALUE,
     paymentPriceCurrency: process.env.NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY,
+    adsenseClientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
   },
   'public environment',
 );

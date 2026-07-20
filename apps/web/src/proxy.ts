@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 
 import { isDevRuntime, publicEnv } from '@/packages/env';
 import { buildContentSecurityPolicy } from '@/shared/security/content-security-policy';
+import { NONCE_HEADER_NAME } from '@/shared/security/security.constants';
 
-const NONCE_HEADER = 'x-nonce';
 const CSP_HEADER = 'content-security-policy';
 
 /**
@@ -19,10 +19,11 @@ export function proxy(request: NextRequest): NextResponse {
     isDevRuntime,
     apiBaseUrl: publicEnv.apiBaseUrl,
     paypalClientId: publicEnv.paypalClientId,
+    adsenseClientId: publicEnv.adsenseClientId,
   });
 
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set(NONCE_HEADER, nonce);
+  requestHeaders.set(NONCE_HEADER_NAME, nonce);
   requestHeaders.set(CSP_HEADER, contentSecurityPolicy);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
