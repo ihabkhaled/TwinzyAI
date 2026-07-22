@@ -489,6 +489,16 @@
       ]
     },
     {
+      "description": "Public origin of the deployed site (sitemap, robots, metadataBase). Leave blank locally to use the http://localhost:3000 default.",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_SITE_BASE_URL",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
       "description": "--- Runtime ---",
       "example": "development",
       "inEnvExample": true,
@@ -701,6 +711,6 @@
       "readBy": []
     }
   ],
-  "count": 85,
+  "count": 86,
   "undocumented": []
 }

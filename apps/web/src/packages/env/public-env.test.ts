@@ -11,6 +11,7 @@ describe('publicEnvSchema', () => {
       apiBaseUrl: 'http://localhost:4000',
       paymentPriceValue: '0.50',
       paymentPriceCurrency: 'USD',
+      siteBaseUrl: 'http://localhost:3000',
     });
   });
 
@@ -22,7 +23,19 @@ describe('publicEnvSchema', () => {
       apiBaseUrl: 'https://api.twinzy.test',
       paymentPriceValue: '0.50',
       paymentPriceCurrency: 'USD',
+      siteBaseUrl: 'http://localhost:3000',
     });
+  });
+
+  it('reads the public site origin from the env and rejects a malformed one', () => {
+    expect(publicEnvSchema.parse({ siteBaseUrl: 'https://twinzy.example' }).siteBaseUrl).toBe(
+      'https://twinzy.example',
+    );
+    expect(publicEnvSchema.safeParse({ siteBaseUrl: 'not-a-url' }).success).toBe(false);
+  });
+
+  it('treats an empty site origin as unset and falls back to the local default', () => {
+    expect(publicEnvSchema.parse({ siteBaseUrl: '' }).siteBaseUrl).toBe('http://localhost:3000');
   });
 
   it('reads the display price + currency from the env', () => {

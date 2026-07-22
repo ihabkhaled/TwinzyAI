@@ -1,4 +1,14 @@
+import type { Route } from 'next';
 import type { ReactNode } from 'react';
+
+/** Resolves an i18n key to a translated string (injected so helpers stay React-free). */
+export type TranslateLabel = (key: string) => string;
+
+/** One internal navigation entry: a typed route plus its translated label. */
+export interface NavLinkItem {
+  href: Route;
+  label: string;
+}
 
 /** Props for {@link EmptyState}: a single already-translated message. */
 export interface EmptyStateProps {
@@ -43,5 +53,30 @@ export interface DonateNavLinkProps {
 
 /** Props for {@link HomeLink}: the accessible label for the icon link home. */
 export interface HomeLinkProps {
+  label: string;
+}
+
+/** Props for {@link AppFooter}: the nav label + note, links passed as children. */
+export interface AppFooterProps {
+  navigationLabel: string;
+  note: string;
+  children: ReactNode;
+}
+
+/** Props for {@link FooterNavLink}: one footer navigation entry. */
+export interface FooterNavLinkProps {
+  href: Route;
+  label: string;
+}
+
+/** Props for {@link ContentLinks}: the "keep reading" block; items passed as children. */
+export interface ContentLinksProps {
+  title: string;
+  children: ReactNode;
+}
+
+/** Props for {@link ContentLinkItem}: one editorial cross-link entry. */
+export interface ContentLinkItemProps {
+  href: Route;
   label: string;
 }

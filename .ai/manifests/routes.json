@@ -74,6 +74,21 @@
       "path": "/"
     },
     {
+      "file": "apps/web/src/app/about/page.tsx",
+      "kind": "page",
+      "path": "/about"
+    },
+    {
+      "file": "apps/web/src/app/ai-safety/page.tsx",
+      "kind": "page",
+      "path": "/ai-safety"
+    },
+    {
+      "file": "apps/web/src/app/faq/page.tsx",
+      "kind": "page",
+      "path": "/faq"
+    },
+    {
       "file": "apps/web/src/app/game/page.tsx",
       "kind": "page",
       "path": "/game"
@@ -82,6 +97,11 @@
       "file": "apps/web/src/app/help/page.tsx",
       "kind": "page",
       "path": "/help"
+    },
+    {
+      "file": "apps/web/src/app/how-it-works/page.tsx",
+      "kind": "page",
+      "path": "/how-it-works"
     },
     {
       "file": "apps/web/src/app/paymob/return/page.tsx",
@@ -104,5 +124,5 @@
       "path": "/terms"
     }
   ],
-  "webCount": 8
+  "webCount": 12
 }

@@ -70,6 +70,10 @@ export const publicEnvSchema = z.object({
     emptyToUndefined,
     z.string().regex(ADSENSE_CLIENT_ID_PATTERN).optional(),
   ),
+  // Public origin of the deployed site — used for the sitemap, robots, and
+  // metadataBase, so crawler-facing URLs are absolute and correct per env.
+  // Empty means unset (the local default), so a blank template line never crashes.
+  siteBaseUrl: z.preprocess(emptyToUndefined, z.url().default('http://localhost:3000')),
 });
 
 export type PublicEnv = z.output<typeof publicEnvSchema>;
@@ -85,6 +89,7 @@ export const publicEnv: PublicEnv = parseSchema(
     paymentPriceValue: process.env.NEXT_PUBLIC_PAYMENT_PRICE_VALUE,
     paymentPriceCurrency: process.env.NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY,
     adsenseClientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
+    siteBaseUrl: process.env.NEXT_PUBLIC_SITE_BASE_URL,
   },
   'public environment',
 );

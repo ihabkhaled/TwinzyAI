@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 
 import { LocaleSwitcher, ThemeToggle } from '@/modules/ui-preferences';
 import { AdsenseScript } from '@/packages/adsense';
+import { publicEnv } from '@/packages/env';
 import {
   AppIntlProvider,
   DEFAULT_LOCALE,
@@ -14,16 +15,20 @@ import {
   isSupportedLanguageCode,
 } from '@/packages/i18n';
 import { AppToaster } from '@/packages/toast';
+import { AppFooter } from '@/shared/components/layout/app-footer.component';
 import { AppHeader } from '@/shared/components/layout/app-header.component';
 import { DonateNavLink } from '@/shared/components/layout/donate-nav-link.component';
+import { FooterNavLink } from '@/shared/components/layout/footer-nav-link.component';
 import { HomeLink } from '@/shared/components/layout/home-link.component';
 import { SkipLink } from '@/shared/components/primitives/skip-link.component';
 import { THEME_PALETTE } from '@/shared/constants/theme-palette.constants';
 import { interFont } from '@/shared/fonts/app-fonts';
+import { isAdEligiblePath } from '@/shared/helpers/ad-eligibility.helper';
 import { resolveDonateUrl } from '@/shared/helpers/donate-link.helper';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { readThemeAttribute } from '@/shared/helpers/read-theme-cookie.helper';
-import { NONCE_HEADER_NAME } from '@/shared/security/security.constants';
+import { buildFooterNavLinks } from '@/shared/helpers/site-nav.helper';
+import { NONCE_HEADER_NAME, PATHNAME_HEADER_NAME } from '@/shared/security/security.constants';
 
 import { bodyClassName } from './layout.variants';
 import { Providers } from './providers';
@@ -38,6 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('app');
 
   return {
+    metadataBase: new URL(publicEnv.siteBaseUrl),
     title: buildPageTitle(t('tagline')),
     description: t('subtitle'),
     applicationName: t('name'),
@@ -73,6 +79,9 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
   const donateUrl = resolveDonateUrl();
   const requestHeaders = await headers();
   const nonce = requestHeaders.get(NONCE_HEADER_NAME) ?? undefined;
+  // Route-scoped ad control: the loader is injected ONLY on editorial content
+  // pages; the game, share, payment, and error surfaces always render ad-free.
+  const showAds = isAdEligiblePath(requestHeaders.get(PATHNAME_HEADER_NAME));
 
   return (
     <html
@@ -82,9 +91,7 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
       className={interFont.variable}
       suppressHydrationWarning
     >
-      <head>
-        <AdsenseScript nonce={nonce} />
-      </head>
+      <head>{showAds ? <AdsenseScript nonce={nonce} /> : null}</head>
       <body className={bodyClassName}>
         <AppIntlProvider locale={locale} messages={messages}>
           <Providers>
@@ -98,6 +105,11 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
               <ThemeToggle />
             </AppHeader>
             <main id="main-content">{children}</main>
+            <AppFooter navigationLabel={t('footer.navigationLabel')} note={t('app.footerNote')}>
+              {buildFooterNavLinks((key) => t(key)).map((link) => (
+                <FooterNavLink key={link.href} href={link.href} label={link.label} />
+              ))}
+            </AppFooter>
             <AppToaster />
           </Providers>
         </AppIntlProvider>

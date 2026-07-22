@@ -1,6 +1,13 @@
 {
-  "count": 1463,
+  "count": 1507,
   "symbols": [
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ABOUT_SECTION_KEYS",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
+    },
     {
       "kind": "const",
       "layer": "schemas",
@@ -63,6 +70,13 @@
       "module": "api:core",
       "name": "AcquireOutcome",
       "path": "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "AD_ELIGIBLE_PATHS",
+      "path": "apps/web/src/shared/constants/ad-routes.constants.ts"
     },
     {
       "kind": "const",
@@ -147,6 +161,13 @@
       "module": "api:ai",
       "name": "AI_RATE_LIMITED_MESSAGE",
       "path": "apps/api/src/modules/ai/model/gemini.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "AI_SAFETY_SECTION_KEYS",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
     },
     {
       "kind": "const",
@@ -656,6 +677,55 @@
       "kind": "function",
       "layer": "shared",
       "module": "web:shared",
+      "name": "AppFooter",
+      "path": "apps/web/src/shared/components/layout/app-footer.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "appFooterClass",
+      "path": "apps/web/src/shared/components/layout/app-footer.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "appFooterInnerClass",
+      "path": "apps/web/src/shared/components/layout/app-footer.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "appFooterLinkClass",
+      "path": "apps/web/src/shared/components/layout/app-footer.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "appFooterNavClass",
+      "path": "apps/web/src/shared/components/layout/app-footer.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "appFooterNoteClass",
+      "path": "apps/web/src/shared/components/layout/app-footer.variants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "AppFooterProps",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
       "name": "AppHeader",
       "path": "apps/web/src/shared/components/layout/app-header.component.tsx"
     },
@@ -1076,6 +1146,13 @@
       "kind": "const",
       "layer": "shared",
       "module": "web:shared",
+      "name": "buildContentPageLinks",
+      "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
       "name": "buildContentSecurityPolicy",
       "path": "apps/web/src/shared/security/content-security-policy.ts"
     },
@@ -1085,6 +1162,13 @@
       "module": "api:game",
       "name": "buildDuplicateStreamMessage",
       "path": "apps/api/src/modules/game/lib/game-stream.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildFooterNavLinks",
+      "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
     },
     {
       "kind": "const",
@@ -1193,6 +1277,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildRobotsConfig",
+      "path": "apps/web/src/shared/helpers/robots.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "lib",
       "module": "api:ai",
       "name": "buildSchemaValidator",
@@ -1239,6 +1330,13 @@
       "module": "web:game",
       "name": "buildShareViewModel",
       "path": "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildSitemapEntries",
+      "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
     },
     {
       "kind": "const",
@@ -2105,6 +2203,13 @@
       "kind": "const",
       "layer": "app",
       "module": "web:app",
+      "name": "contentBodyClass",
+      "path": "apps/web/src/app/content.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
       "name": "contentDefinitionListClass",
       "path": "apps/web/src/app/content.variants.ts"
     },
@@ -2123,10 +2228,80 @@
       "path": "apps/web/src/app/content.variants.ts"
     },
     {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ContentLinkItem",
+      "path": "apps/web/src/shared/components/content/content-link-item.component.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ContentLinkItemProps",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ContentLinks",
+      "path": "apps/web/src/shared/components/content/content-links.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "contentLinksItemClass",
+      "path": "apps/web/src/shared/components/content/content-links.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "contentLinksListClass",
+      "path": "apps/web/src/shared/components/content/content-links.variants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ContentLinksProps",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "contentLinksSectionClass",
+      "path": "apps/web/src/shared/components/content/content-links.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "contentLinksTitleClass",
+      "path": "apps/web/src/shared/components/content/content-links.variants.ts"
+    },
+    {
       "kind": "const",
       "layer": "app",
       "module": "web:app",
       "name": "contentListClass",
+      "path": "apps/web/src/app/content.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "contentSectionClass",
+      "path": "apps/web/src/app/content.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "contentSectionTitleClass",
       "path": "apps/web/src/app/content.variants.ts"
     },
     {
@@ -2705,6 +2880,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "DEFAULT_SITEMAP_PRIORITY",
+      "path": "apps/web/src/shared/constants/seo.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "config",
       "module": "api:config",
       "name": "DEFAULT_STREAM_TTL_MS",
@@ -2999,6 +3181,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "FAQ_QUESTION_NUMBERS",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "services",
       "module": "web:game",
       "name": "fetchSharedResult",
@@ -3115,6 +3304,20 @@
       "module": "api:core",
       "name": "flattenZodIssues",
       "path": "apps/api/src/core/validation/zod-issue.mapper.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "FooterNavLink",
+      "path": "apps/web/src/shared/components/layout/footer-nav-link.component.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "FooterNavLinkProps",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
     },
     {
       "kind": "const",
@@ -3520,6 +3723,27 @@
       "layer": "app",
       "module": "web:app",
       "name": "generateMetadata",
+      "path": "apps/web/src/app/about/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
+      "path": "apps/web/src/app/ai-safety/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
+      "path": "apps/web/src/app/faq/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
       "path": "apps/web/src/app/game/page.tsx"
     },
     {
@@ -3534,6 +3758,13 @@
       "layer": "app",
       "module": "web:app",
       "name": "generateMetadata",
+      "path": "apps/web/src/app/how-it-works/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
       "path": "apps/web/src/app/layout.tsx"
     },
     {
@@ -3542,6 +3773,13 @@
       "module": "web:app",
       "name": "generateMetadata",
       "path": "apps/web/src/app/not-found.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
+      "path": "apps/web/src/app/page.tsx"
     },
     {
       "kind": "function",
@@ -3831,6 +4069,13 @@
       "path": "apps/web/src/packages/icons/index.ts"
     },
     {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "HOME_SECTION_KEYS",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-icons",
@@ -3850,6 +4095,20 @@
       "module": "web:shared",
       "name": "HomeLinkProps",
       "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "homeSectionsClass",
+      "path": "apps/web/src/app/content.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "HOW_IT_WORKS_SECTION_KEYS",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
     },
     {
       "kind": "const",
@@ -4074,6 +4333,13 @@
       "module": "api:file-security",
       "name": "InvalidImageError",
       "path": "apps/api/src/modules/file-security/model/file-security.errors.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "isAdEligiblePath",
+      "path": "apps/web/src/shared/helpers/ad-eligibility.helper.ts"
     },
     {
       "kind": "function",
@@ -5434,6 +5700,13 @@
       "path": "apps/api/src/core/http/multipart.types.ts"
     },
     {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "NavLinkItem",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
       "kind": "const",
       "layer": "helpers",
       "module": "web:game",
@@ -5698,6 +5971,13 @@
       "module": "api:benchmark",
       "name": "passesSafetyScan",
       "path": "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "PATHNAME_HEADER_NAME",
+      "path": "apps/web/src/shared/security/security.constants.ts"
     },
     {
       "kind": "re-export",
@@ -6601,6 +6881,13 @@
       "module": "web:game",
       "name": "PREVIEW_IMAGE_SIZE",
       "path": "apps/web/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "PRIVACY_SECTION_KEYS",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
     },
     {
       "kind": "class",
@@ -7598,6 +7885,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ROBOTS_DISALLOWED_PATH_PREFIXES",
+      "path": "apps/web/src/shared/constants/seo.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "core",
       "module": "api:core",
       "name": "ROOT_FIELD_NAME",
@@ -8309,6 +8603,13 @@
       "module": "web:pkg-toast",
       "name": "ShowToastOptions",
       "path": "apps/web/src/packages/toast/show-toast.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "SITEMAP_PRIORITY_BY_PATH",
+      "path": "apps/web/src/shared/constants/seo.constants.ts"
     },
     {
       "kind": "re-export",
@@ -9226,6 +9527,13 @@
       "module": "api:game",
       "name": "TRANSLATE_THROTTLE",
       "path": "apps/api/src/modules/game/model/game.constants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "TranslateLabel",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
     },
     {
       "kind": "type",

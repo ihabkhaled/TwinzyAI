@@ -1,5 +1,5 @@
 {
-  "count": 2490,
+  "count": 2496,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -3122,6 +3122,18 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/shared/components/layout/app-footer.component.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/shared/components/layout/app-footer.component.tsx",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/components/layout/app-footer.component.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/shared/components/layout/footer-nav-link.component.tsx",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/shared/components/layout/app-header.component.test.tsx",
       "label": "generated",
       "to": "apps/web/src/shared/components/layout/app-header.component.tsx",
@@ -3146,6 +3158,12 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/ad-eligibility.helper.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/shared/helpers/donate-link.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/donate-link.helper.ts",
@@ -3161,6 +3179,24 @@
       "from": "apps/web/src/shared/helpers/read-theme-cookie.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/read-theme-cookie.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/robots.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/robots.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/site-nav.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/site-nav.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/sitemap.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/sitemap.helper.ts",
       "type": "covers"
     },
     {

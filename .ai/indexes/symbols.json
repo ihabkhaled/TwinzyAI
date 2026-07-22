@@ -1,4 +1,7 @@
 {
+  "ABOUT_SECTION_KEYS": [
+    "apps/web/src/shared/constants/content-pages.constants.ts"
+  ],
   "AcceptedStreamMessageSchema": [
     "packages/shared/src/schemas/game-stream.schema.ts"
   ],
@@ -23,6 +26,9 @@
   ],
   "AcquireOutcome": [
     "apps/api/src/core/streaming/concurrency-limiter.types.ts"
+  ],
+  "AD_ELIGIBLE_PATHS": [
+    "apps/web/src/shared/constants/ad-routes.constants.ts"
   ],
   "ADSENSE_CSP_ORIGINS": [
     "apps/web/src/packages/adsense/adsense.constants.ts",
@@ -55,6 +61,9 @@
   ],
   "AI_RATE_LIMITED_MESSAGE": [
     "apps/api/src/modules/ai/model/gemini.constants.ts"
+  ],
+  "AI_SAFETY_SECTION_KEYS": [
+    "apps/web/src/shared/constants/content-pages.constants.ts"
   ],
   "AI_STEP_ROUTE_ENV_KEYS": [
     "apps/api/src/config/gemini-step.constants.ts"
@@ -258,6 +267,27 @@
   "AppExceptionFilter": [
     "apps/api/src/core/errors/app-exception.filter.ts"
   ],
+  "AppFooter": [
+    "apps/web/src/shared/components/layout/app-footer.component.tsx"
+  ],
+  "appFooterClass": [
+    "apps/web/src/shared/components/layout/app-footer.variants.ts"
+  ],
+  "appFooterInnerClass": [
+    "apps/web/src/shared/components/layout/app-footer.variants.ts"
+  ],
+  "appFooterLinkClass": [
+    "apps/web/src/shared/components/layout/app-footer.variants.ts"
+  ],
+  "appFooterNavClass": [
+    "apps/web/src/shared/components/layout/app-footer.variants.ts"
+  ],
+  "appFooterNoteClass": [
+    "apps/web/src/shared/components/layout/app-footer.variants.ts"
+  ],
+  "AppFooterProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
   "AppHeader": [
     "apps/web/src/shared/components/layout/app-header.component.tsx"
   ],
@@ -416,11 +446,17 @@
   "buildCandidateGenerationLanes": [
     "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
   ],
+  "buildContentPageLinks": [
+    "apps/web/src/shared/helpers/site-nav.helper.ts"
+  ],
   "buildContentSecurityPolicy": [
     "apps/web/src/shared/security/content-security-policy.ts"
   ],
   "buildDuplicateStreamMessage": [
     "apps/api/src/modules/game/lib/game-stream.ts"
+  ],
+  "buildFooterNavLinks": [
+    "apps/web/src/shared/helpers/site-nav.helper.ts"
   ],
   "buildGameScreenLabels": [
     "apps/web/src/modules/game/helpers/game-display.helper.ts"
@@ -463,6 +499,9 @@
   "buildPlatformLinks": [
     "apps/web/src/modules/game/helpers/share-platform.helper.ts"
   ],
+  "buildRobotsConfig": [
+    "apps/web/src/shared/helpers/robots.helper.ts"
+  ],
   "buildSchemaValidator": [
     "apps/api/src/modules/ai/lib/json-response.util.ts"
   ],
@@ -483,6 +522,9 @@
   ],
   "buildShareViewModel": [
     "apps/web/src/modules/game/helpers/game-view-model.helper.ts"
+  ],
+  "buildSitemapEntries": [
+    "apps/web/src/shared/helpers/sitemap.helper.ts"
   ],
   "buildStreamCorsHeaders": [
     "apps/api/src/modules/game/lib/stream-cors.ts"
@@ -833,6 +875,9 @@
   "containsForbiddenWording": [
     "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts"
   ],
+  "contentBodyClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
   "contentDefinitionListClass": [
     "apps/web/src/app/content.variants.ts"
   ],
@@ -842,7 +887,37 @@
   "contentLeadClass": [
     "apps/web/src/app/content.variants.ts"
   ],
+  "ContentLinkItem": [
+    "apps/web/src/shared/components/content/content-link-item.component.tsx"
+  ],
+  "ContentLinkItemProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "ContentLinks": [
+    "apps/web/src/shared/components/content/content-links.component.tsx"
+  ],
+  "contentLinksItemClass": [
+    "apps/web/src/shared/components/content/content-links.variants.ts"
+  ],
+  "contentLinksListClass": [
+    "apps/web/src/shared/components/content/content-links.variants.ts"
+  ],
+  "ContentLinksProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "contentLinksSectionClass": [
+    "apps/web/src/shared/components/content/content-links.variants.ts"
+  ],
+  "contentLinksTitleClass": [
+    "apps/web/src/shared/components/content/content-links.variants.ts"
+  ],
   "contentListClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "contentSectionClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "contentSectionTitleClass": [
     "apps/web/src/app/content.variants.ts"
   ],
   "ContentSecurityPolicyInput": [
@@ -1073,6 +1148,9 @@
   "DEFAULT_SHARE_RESULT_TTL_SECONDS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "DEFAULT_SITEMAP_PRIORITY": [
+    "apps/web/src/shared/constants/seo.constants.ts"
+  ],
   "DEFAULT_STREAM_TTL_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -1191,6 +1269,9 @@
   "FALLBACK_ERROR_COPY": [
     "apps/web/src/shared/constants/fallback-copy.constants.ts"
   ],
+  "FAQ_QUESTION_NUMBERS": [
+    "apps/web/src/shared/constants/content-pages.constants.ts"
+  ],
   "fetchSharedResult": [
     "apps/web/src/modules/game/services/share.service.ts"
   ],
@@ -1235,6 +1316,12 @@
   ],
   "flattenZodIssues": [
     "apps/api/src/core/validation/zod-issue.mapper.ts"
+  ],
+  "FooterNavLink": [
+    "apps/web/src/shared/components/layout/footer-nav-link.component.tsx"
+  ],
+  "FooterNavLinkProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
   ],
   "FORBIDDEN_RESULT_PHRASES": [
     "packages/shared/src/constants/safety.constants.ts"
@@ -1400,10 +1487,15 @@
     "apps/api/src/config/gemini-step.constants.ts"
   ],
   "generateMetadata": [
+    "apps/web/src/app/about/page.tsx",
+    "apps/web/src/app/ai-safety/page.tsx",
+    "apps/web/src/app/faq/page.tsx",
     "apps/web/src/app/game/page.tsx",
     "apps/web/src/app/help/page.tsx",
+    "apps/web/src/app/how-it-works/page.tsx",
     "apps/web/src/app/layout.tsx",
     "apps/web/src/app/not-found.tsx",
+    "apps/web/src/app/page.tsx",
     "apps/web/src/app/paymob/return/page.tsx",
     "apps/web/src/app/privacy/page.tsx",
     "apps/web/src/app/share/[shareId]/page.tsx",
@@ -1504,6 +1596,9 @@
   "HeartIcon": [
     "apps/web/src/packages/icons/index.ts"
   ],
+  "HOME_SECTION_KEYS": [
+    "apps/web/src/shared/constants/content-pages.constants.ts"
+  ],
   "HomeIcon": [
     "apps/web/src/packages/icons/index.ts"
   ],
@@ -1512,6 +1607,12 @@
   ],
   "HomeLinkProps": [
     "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "homeSectionsClass": [
+    "apps/web/src/app/content.variants.ts"
+  ],
+  "HOW_IT_WORKS_SECTION_KEYS": [
+    "apps/web/src/shared/constants/content-pages.constants.ts"
   ],
   "HTTP_STATUS_INTERNAL_SERVER_ERROR": [
     "packages/shared/src/constants/response-bounds.constants.ts"
@@ -1596,6 +1697,9 @@
   ],
   "InvalidImageError": [
     "apps/api/src/modules/file-security/model/file-security.errors.ts"
+  ],
+  "isAdEligiblePath": [
+    "apps/web/src/shared/helpers/ad-eligibility.helper.ts"
   ],
   "isAppError": [
     "apps/web/src/shared/errors/app-error.ts"
@@ -2145,6 +2249,9 @@
   "MultipartRequestLike": [
     "apps/api/src/core/http/multipart.types.ts"
   ],
+  "NavLinkItem": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
   "newRequestId": [
     "apps/web/src/modules/game/helpers/stream-identity.helper.ts"
   ],
@@ -2250,6 +2357,9 @@
   ],
   "passesSafetyScan": [
     "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+  ],
+  "PATHNAME_HEADER_NAME": [
+    "apps/web/src/shared/security/security.constants.ts"
   ],
   "PayloadTooLargeError": [
     "apps/api/src/core/errors/index.ts",
@@ -2615,6 +2725,9 @@
   ],
   "PREVIEW_IMAGE_SIZE": [
     "apps/web/src/modules/game/model/game.constants.ts"
+  ],
+  "PRIVACY_SECTION_KEYS": [
+    "apps/web/src/shared/constants/content-pages.constants.ts"
   ],
   "PrivacyModule": [
     "apps/api/src/modules/privacy/privacy.module.ts"
@@ -3014,6 +3127,9 @@
     "apps/web/src/packages/browser/browser-environment.ts",
     "apps/web/src/packages/browser/index.ts"
   ],
+  "ROBOTS_DISALLOWED_PATH_PREFIXES": [
+    "apps/web/src/shared/constants/seo.constants.ts"
+  ],
   "ROOT_FIELD_NAME": [
     "apps/api/src/core/validation/validation.constants.ts"
   ],
@@ -3309,6 +3425,9 @@
   ],
   "ShowToastOptions": [
     "apps/web/src/packages/toast/show-toast.ts"
+  ],
+  "SITEMAP_PRIORITY_BY_PATH": [
+    "apps/web/src/shared/constants/seo.constants.ts"
   ],
   "Skeleton": [
     "apps/web/src/packages/ui-primitives/index.ts",
@@ -3676,6 +3795,9 @@
   ],
   "TRANSLATE_THROTTLE": [
     "apps/api/src/modules/game/model/game.constants.ts"
+  ],
+  "TranslateLabel": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
   ],
   "TranslateMessage": [
     "apps/web/src/modules/game/model/game.types.ts"

@@ -1,5 +1,5 @@
 {
-  "count": 682,
+  "count": 707,
   "files": [
     {
       "exports": [
@@ -7326,6 +7326,64 @@
     {
       "exports": [
         {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "deba808146c081d26850b76185862c398b4b95a89142233a5559e204a61d7359",
+      "imports": [
+        "../content.variants",
+        "@/packages/i18n",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/content-pages.constants",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/site-nav.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 54,
+      "module": "web:app",
+      "path": "apps/web/src/app/about/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "25ae5034d382bed933deeaf14705d4760161b312078d4474a7e2cb687cb283e4",
+      "imports": [
+        "../content.variants",
+        "@/packages/i18n",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/content-pages.constants",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/site-nav.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 54,
+      "module": "web:app",
+      "path": "apps/web/src/app/ai-safety/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "contentBodyClass"
+        },
+        {
           "kind": "const",
           "name": "contentDefinitionListClass"
         },
@@ -7343,18 +7401,30 @@
         },
         {
           "kind": "const",
+          "name": "contentSectionClass"
+        },
+        {
+          "kind": "const",
+          "name": "contentSectionTitleClass"
+        },
+        {
+          "kind": "const",
           "name": "contentTermClass"
         },
         {
           "kind": "const",
           "name": "contentTitleClass"
+        },
+        {
+          "kind": "const",
+          "name": "homeSectionsClass"
         }
       ],
-      "hash": "8baedc798d3db1e1ae1b59183e48327b07e82f7fdd15ba43b19dad04442b06ff",
+      "hash": "8825697ca0ca053b05c09794fb1fcd02b9db82e2dc62de09e1c505dee676b0e1",
       "imports": [],
       "isTest": false,
       "layer": "app",
-      "loc": 17,
+      "loc": 27,
       "module": "web:app",
       "path": "apps/web/src/app/content.variants.ts"
     },
@@ -7374,6 +7444,33 @@
       "loc": 34,
       "module": "web:app",
       "path": "apps/web/src/app/error.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "efa81dc02c7e678516a8b9886dbd6e2b47a5d8d2b67bcc66f162b9135c6c0410",
+      "imports": [
+        "../content.variants",
+        "@/packages/i18n",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/content-pages.constants",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/site-nav.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 55,
+      "module": "web:app",
+      "path": "apps/web/src/app/faq/page.tsx"
     },
     {
       "exports": [
@@ -7438,30 +7535,62 @@
         {
           "kind": "function",
           "name": "generateMetadata"
+        }
+      ],
+      "hash": "f5ee3a4210061cf51054b13e537ea047893d608d91f22e71b44de37385a907f3",
+      "imports": [
+        "../content.variants",
+        "@/packages/i18n",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/content-pages.constants",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/site-nav.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 54,
+      "module": "web:app",
+      "path": "apps/web/src/app/how-it-works/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
         },
         {
           "kind": "const",
           "name": "viewport"
         }
       ],
-      "hash": "1af14acf393de44f1da6e5543f3cbd467536d0d555722c171c97d9c7166dbf14",
+      "hash": "190f09660763416e0df0c658439bbfe9bd39e5b4bb3afa2ca27838c7ce4ff703",
       "imports": [
         "./layout.variants",
         "./providers",
         "./styles.css",
         "@/modules/ui-preferences",
         "@/packages/adsense",
+        "@/packages/env",
         "@/packages/i18n",
         "@/packages/toast",
+        "@/shared/components/layout/app-footer.component",
         "@/shared/components/layout/app-header.component",
         "@/shared/components/layout/donate-nav-link.component",
+        "@/shared/components/layout/footer-nav-link.component",
         "@/shared/components/layout/home-link.component",
         "@/shared/components/primitives/skip-link.component",
         "@/shared/constants/theme-palette.constants",
         "@/shared/fonts/app-fonts",
+        "@/shared/helpers/ad-eligibility.helper",
         "@/shared/helpers/donate-link.helper",
         "@/shared/helpers/page-title.helper",
         "@/shared/helpers/read-theme-cookie.helper",
+        "@/shared/helpers/site-nav.helper",
         "@/shared/security/security.constants",
         "next",
         "next/headers",
@@ -7469,7 +7598,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 110,
+      "loc": 122,
       "module": "web:app",
       "path": "apps/web/src/app/layout.tsx"
     },
@@ -7529,16 +7658,29 @@
       "path": "apps/web/src/app/not-found.tsx"
     },
     {
-      "exports": [],
-      "hash": "bf3b20ba14a8822e3283234b5b8d8e7e28982a10be512f8d6736bf46a488699f",
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "0416906fa070c4db277b7822f2bbc9cc4e7c88200942a50b3283190e32ef9bff",
       "imports": [
+        "./content.variants",
         "@/modules/game",
+        "@/packages/i18n",
         "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/content-pages.constants",
+        "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/site-nav.helper",
+        "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 13,
+      "loc": 57,
       "module": "web:app",
       "path": "apps/web/src/app/page.tsx"
     },
@@ -7569,20 +7711,25 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "987092c440efc5daf4d29202bd2658e04b2d30cbfd51419e27bf668955c0df5d",
+      "hash": "487742bef5596d5acaf796758436fe1b654d07664e0dab1dba68c4383771ec4d",
       "imports": [
         "../content.variants",
         "@/modules/game",
         "@/packages/i18n",
         "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/content-pages.constants",
+        "@/shared/constants/route-paths.constants",
         "@/shared/constants/test-ids.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 41,
+      "loc": 70,
       "module": "web:app",
       "path": "apps/web/src/app/privacy/page.tsx"
     },
@@ -7606,6 +7753,20 @@
       "path": "apps/web/src/app/providers.tsx"
     },
     {
+      "exports": [],
+      "hash": "a959ee9bb64aee4e2389b9bcdaaf528554c9399bef95d94a5c4a97256bf55a85",
+      "imports": [
+        "@/packages/env",
+        "@/shared/helpers/robots.helper",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 10,
+      "module": "web:app",
+      "path": "apps/web/src/app/robots.ts"
+    },
+    {
       "exports": [
         {
           "kind": "function",
@@ -7626,6 +7787,20 @@
       "loc": 41,
       "module": "web:app",
       "path": "apps/web/src/app/share/[shareId]/page.tsx"
+    },
+    {
+      "exports": [],
+      "hash": "4e8b48d0f9037b2015bb7c9bb09d1b601aecf3af00a85edf8336fda25f523014",
+      "imports": [
+        "@/packages/env",
+        "@/shared/helpers/sitemap.helper",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 10,
+      "module": "web:app",
+      "path": "apps/web/src/app/sitemap.ts"
     },
     {
       "exports": [
@@ -12265,14 +12440,14 @@
     },
     {
       "exports": [],
-      "hash": "a6624754f5d7766405821ccc07e23d1b9d8e4b8976d5f2be122059232bad4199",
+      "hash": "5dbeb953e6e056e861d66ed03468b1948354664866b4a1dcd37cb52f6fc939a0",
       "imports": [
         "./public-env",
         "vitest"
       ],
       "isTest": true,
       "layer": "packages",
-      "loc": 80,
+      "loc": 93,
       "module": "web:pkg-env",
       "path": "apps/web/src/packages/env/public-env.test.ts"
     },
@@ -12303,13 +12478,13 @@
           "name": "publicEnvSchema"
         }
       ],
-      "hash": "e41be8c057d262a7c290e3efc818f5bde7851c86694cbbd3087b154d09febf4b",
+      "hash": "9b5e259855996d1111f0b3bfbf217e0d0d61fa44cbaf8e50082712dd40f878e3",
       "imports": [
         "@/packages/zod"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 98,
+      "loc": 103,
       "module": "web:pkg-env",
       "path": "apps/web/src/packages/env/public-env.ts"
     },
@@ -12482,6 +12657,20 @@
       "loc": 48,
       "module": "web:pkg-i18n",
       "path": "apps/web/src/packages/i18n/locale.constants.ts"
+    },
+    {
+      "exports": [],
+      "hash": "fbbbe427ea39399709d4a2d857dfe429d6e25baed0f69d55e5229c2f7acc2556",
+      "imports": [
+        "./messages/ar.json",
+        "./messages/en.json",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "packages",
+      "loc": 44,
+      "module": "web:pkg-i18n",
+      "path": "apps/web/src/packages/i18n/messages-parity.test.ts"
     },
     {
       "exports": [],
@@ -14163,7 +14352,7 @@
           "name": "proxy"
         }
       ],
-      "hash": "7b164c7e1611ca6e4dcef7015beb08be9cc31f799b60e8637389067e3f63d6a8",
+      "hash": "0492752b66af47f020a32b0a9dac926c923e66381eded7647c394930842181a2",
       "imports": [
         "@/packages/env",
         "@/shared/security/content-security-policy",
@@ -14172,7 +14361,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 46,
+      "loc": 47,
       "module": "web:root",
       "path": "apps/web/src/proxy.ts"
     },
@@ -14207,6 +14396,72 @@
       "loc": 22,
       "module": "web:shared",
       "path": "apps/web/src/shared/api/api-routes.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "ContentLinkItem"
+        }
+      ],
+      "hash": "e8b32fb45cb838df67c998f5e6dd0e12d6d94211b7b6230ecc4a70ae28f5dfbb",
+      "imports": [
+        "../types/shared-component.types",
+        "./content-links.variants",
+        "@/packages/link",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 19,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/content/content-link-item.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "ContentLinks"
+        }
+      ],
+      "hash": "009cd1bf45693a74af694b267370be47a452f460ff067d357195c0c4f3b59111",
+      "imports": [
+        "../types/shared-component.types",
+        "./content-links.variants",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 25,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/content/content-links.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "contentLinksItemClass"
+        },
+        {
+          "kind": "const",
+          "name": "contentLinksListClass"
+        },
+        {
+          "kind": "const",
+          "name": "contentLinksSectionClass"
+        },
+        {
+          "kind": "const",
+          "name": "contentLinksTitleClass"
+        }
+      ],
+      "hash": "94ab2271925b5ddfe0edc7826474b481619d25e0b4c5c017352dc2310a567721",
+      "imports": [],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 10,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/content/content-links.variants.ts"
     },
     {
       "exports": [
@@ -14265,6 +14520,71 @@
       "loc": 14,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/feedback/loading-state.component.tsx"
+    },
+    {
+      "exports": [],
+      "hash": "fc374e8ff4b42ebe06ac9869ee3ba53fce17bab0c9591c3ac8ee64acfcf32701",
+      "imports": [
+        "./app-footer.component",
+        "./footer-nav-link.component",
+        "@testing-library/react",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 33,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/layout/app-footer.component.test.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "AppFooter"
+        }
+      ],
+      "hash": "82625f9a21f3b57bd772e6b41953200bb94a8571e6f7be1c38f42d3dd05fcd5a",
+      "imports": [
+        "../types/shared-component.types",
+        "./app-footer.variants",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 33,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/layout/app-footer.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "appFooterClass"
+        },
+        {
+          "kind": "const",
+          "name": "appFooterInnerClass"
+        },
+        {
+          "kind": "const",
+          "name": "appFooterLinkClass"
+        },
+        {
+          "kind": "const",
+          "name": "appFooterNavClass"
+        },
+        {
+          "kind": "const",
+          "name": "appFooterNoteClass"
+        }
+      ],
+      "hash": "82ed190f19486822bc81b2e7bf0186b17301d2f48d33d75c3dd3742647bc93d6",
+      "imports": [],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 12,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/layout/app-footer.variants.ts"
     },
     {
       "exports": [],
@@ -14369,6 +14689,26 @@
       "exports": [
         {
           "kind": "function",
+          "name": "FooterNavLink"
+        }
+      ],
+      "hash": "9fb1b0adb869daba873ae7ea02b6454adff1d12f0edcfccca47593bcbedd246d",
+      "imports": [
+        "../types/shared-component.types",
+        "./app-footer.variants",
+        "@/packages/link",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 17,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/layout/footer-nav-link.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
           "name": "HomeLink"
         }
       ],
@@ -14425,7 +14765,19 @@
       "exports": [
         {
           "kind": "interface",
+          "name": "AppFooterProps"
+        },
+        {
+          "kind": "interface",
           "name": "AppHeaderProps"
+        },
+        {
+          "kind": "interface",
+          "name": "ContentLinkItemProps"
+        },
+        {
+          "kind": "interface",
+          "name": "ContentLinksProps"
         },
         {
           "kind": "interface",
@@ -14441,6 +14793,10 @@
         },
         {
           "kind": "interface",
+          "name": "FooterNavLinkProps"
+        },
+        {
+          "kind": "interface",
           "name": "HomeLinkProps"
         },
         {
@@ -14449,18 +14805,79 @@
         },
         {
           "kind": "interface",
+          "name": "NavLinkItem"
+        },
+        {
+          "kind": "interface",
           "name": "SkipLinkProps"
+        },
+        {
+          "kind": "type",
+          "name": "TranslateLabel"
         }
       ],
-      "hash": "db212c1e235169ba3a1e597aa4cc9d804b15ddc6cee3ed99500c43e10ca08919",
+      "hash": "c0ac7319079051b78486727a722bd760186400c9aa8ef1c9464d8a8df267fe8d",
       "imports": [
+        "next",
         "react"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 48,
+      "loc": 83,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "AD_ELIGIBLE_PATHS"
+        }
+      ],
+      "hash": "e6c8af036ebcae73f7069849a26d22f861b58f485951679ff6a6c5ad03e0c270",
+      "imports": [
+        "./route-paths.constants"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 25,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/constants/ad-routes.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ABOUT_SECTION_KEYS"
+        },
+        {
+          "kind": "const",
+          "name": "AI_SAFETY_SECTION_KEYS"
+        },
+        {
+          "kind": "const",
+          "name": "FAQ_QUESTION_NUMBERS"
+        },
+        {
+          "kind": "const",
+          "name": "HOME_SECTION_KEYS"
+        },
+        {
+          "kind": "const",
+          "name": "HOW_IT_WORKS_SECTION_KEYS"
+        },
+        {
+          "kind": "const",
+          "name": "PRIVACY_SECTION_KEYS"
+        }
+      ],
+      "hash": "ab11f7b0e5f4425278575344190c5d2cf355714aa9531bc07b1451a6f87d0142",
+      "imports": [],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 53,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/constants/content-pages.constants.ts"
     },
     {
       "exports": [
@@ -14499,15 +14916,40 @@
           "name": "ROUTE_PATHS"
         }
       ],
-      "hash": "c84aa37112f7163a4f3323f8befc1669cf6a9d9f316f4a3b610c745efe65ec42",
+      "hash": "0b7ec86abf4701154a5e5803688a2cf433d0598a425b68a02f7e9dab78caed16",
       "imports": [
         "next"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 16,
+      "loc": 20,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/route-paths.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "DEFAULT_SITEMAP_PRIORITY"
+        },
+        {
+          "kind": "const",
+          "name": "ROBOTS_DISALLOWED_PATH_PREFIXES"
+        },
+        {
+          "kind": "const",
+          "name": "SITEMAP_PRIORITY_BY_PATH"
+        }
+      ],
+      "hash": "05c2a280da614b14c95fb1c20ce592535ce122821220bafc12f49e318377c963",
+      "imports": [
+        "./route-paths.constants"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 21,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/constants/seo.constants.ts"
     },
     {
       "exports": [
@@ -14704,6 +15146,36 @@
     },
     {
       "exports": [],
+      "hash": "419ef3963e5a57a7f0a9119739d90b4eda588739ca1c9596823e27729281ae88",
+      "imports": [
+        "./ad-eligibility.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 48,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "isAdEligiblePath"
+        }
+      ],
+      "hash": "b14532757294c8c1e5a9997d4d80b4e07d81283c5896f3d2db0a06b6d64de22b",
+      "imports": [
+        "@/shared/constants/ad-routes.constants"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 17,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/ad-eligibility.helper.ts"
+    },
+    {
+      "exports": [],
       "hash": "643c48771bba6d930ddbc08d60ce544304304947ca8816a490fc286c3cd07d80",
       "imports": [
         "./donate-link.helper",
@@ -14801,6 +15273,104 @@
       "loc": 19,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/read-theme-cookie.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "67fd344ea0881b5ab7907422e30d6fc26dbc7c034870433b1bdb87f897f863dd",
+      "imports": [
+        "./robots.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 22,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/robots.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildRobotsConfig"
+        }
+      ],
+      "hash": "e0a85ddc7fb554fe651e3ac23b441f6b2c3bfc3b263f950d6a3ac630e6736e9c",
+      "imports": [
+        "@/shared/constants/seo.constants",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 27,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/robots.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "7552c0f8f3a38bfba06540287f52d05aa4becd546fbe3c7cf0f60acd3043ba62",
+      "imports": [
+        "./site-nav.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 65,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/site-nav.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildContentPageLinks"
+        },
+        {
+          "kind": "const",
+          "name": "buildFooterNavLinks"
+        }
+      ],
+      "hash": "0dcdd93fdcc5b978ca901bed50ba7a4ee35baf7739c1412b94402a2704c7a022",
+      "imports": [
+        "@/shared/components/types/shared-component.types",
+        "@/shared/constants/route-paths.constants"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 43,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "b18d87c05ca72c317438af9b1122005843e75ac722f7ec7b1e8ce729f58cbb2c",
+      "imports": [
+        "./sitemap.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 46,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildSitemapEntries"
+        }
+      ],
+      "hash": "9ad4a32914f24f21724797dbf405365972042bccee66864d7846c1ca0a493c99",
+      "imports": [
+        "@/shared/constants/route-paths.constants",
+        "@/shared/constants/seo.constants",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 27,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
     },
     {
       "exports": [],
@@ -14923,13 +15493,17 @@
         {
           "kind": "const",
           "name": "NONCE_HEADER_NAME"
+        },
+        {
+          "kind": "const",
+          "name": "PATHNAME_HEADER_NAME"
         }
       ],
-      "hash": "3ac7b6be84c414049107386cdb8f2641b649c7faf1b664881833c120e954938b",
+      "hash": "1cd36cf9e244b75f195a251fa4d66e9cc6becd776fa54cd179a96d8eeb8c756b",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 7,
+      "loc": 14,
       "module": "web:shared",
       "path": "apps/web/src/shared/security/security.constants.ts"
     },

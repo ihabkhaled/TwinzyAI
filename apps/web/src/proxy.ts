@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { isDevRuntime, publicEnv } from '@/packages/env';
 import { buildContentSecurityPolicy } from '@/shared/security/content-security-policy';
-import { NONCE_HEADER_NAME } from '@/shared/security/security.constants';
+import { NONCE_HEADER_NAME, PATHNAME_HEADER_NAME } from '@/shared/security/security.constants';
 
 const CSP_HEADER = 'content-security-policy';
 
@@ -24,6 +24,7 @@ export function proxy(request: NextRequest): NextResponse {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set(NONCE_HEADER_NAME, nonce);
+  requestHeaders.set(PATHNAME_HEADER_NAME, request.nextUrl.pathname);
   requestHeaders.set(CSP_HEADER, contentSecurityPolicy);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });

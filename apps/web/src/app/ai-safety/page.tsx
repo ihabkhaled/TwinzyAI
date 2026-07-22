@@ -1,50 +1,47 @@
 import type { Metadata } from 'next';
 import type { ReactElement } from 'react';
 
-import { LandingContainer } from '@/modules/game';
 import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ContentLinkItem } from '@/shared/components/content/content-link-item.component';
 import { ContentLinks } from '@/shared/components/content/content-links.component';
-import { HOME_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
+import { AI_SAFETY_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import {
   contentBodyClass,
+  contentLeadClass,
   contentSectionClass,
   contentSectionTitleClass,
-  homeSectionsClass,
-} from './content.variants';
+  contentTitleClass,
+} from '../content.variants';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getServerTranslations('home');
+  const t = await getServerTranslations('aiSafety');
 
   return { title: buildPageTitle(t('metaTitle')), description: t('metaDescription') };
 }
 
-/**
- * The homepage: the playable landing hero followed by substantial editorial
- * content — what Twinzy is, how a round works, the privacy design, the AI's
- * honest limits, the safety rules, how to read a result — and internal links
- * to every supporting page.
- */
-const HomePage = async (): Promise<ReactElement> => {
+/** The safety rules enforced in code on every round, and their honest limits. */
+const AiSafetyPage = async (): Promise<ReactElement> => {
   const t = await getServerTranslations();
 
   return (
     <PageContainer>
-      <LandingContainer />
-      <Stack gap="md" className={homeSectionsClass}>
-        {HOME_SECTION_KEYS.map((key) => (
+      <Stack gap="md">
+        <h1 className={contentTitleClass}>{t('aiSafety.title')}</h1>
+        <p className={contentLeadClass}>{t('aiSafety.intro')}</p>
+        {AI_SAFETY_SECTION_KEYS.map((key) => (
           <section key={key} className={contentSectionClass}>
-            <h2 className={contentSectionTitleClass}>{t(`home.${key}Title`)}</h2>
-            <p className={contentBodyClass}>{t(`home.${key}Body1`)}</p>
-            <p className={contentBodyClass}>{t(`home.${key}Body2`)}</p>
+            <h2 className={contentSectionTitleClass}>{t(`aiSafety.${key}Title`)}</h2>
+            <p className={contentBodyClass}>{t(`aiSafety.${key}Body1`)}</p>
+            <p className={contentBodyClass}>{t(`aiSafety.${key}Body2`)}</p>
           </section>
         ))}
         <ContentLinks title={t('home.learnMoreTitle')}>
-          {buildContentPageLinks((key) => t(key)).map((link) => (
+          {buildContentPageLinks((key) => t(key), ROUTE_PATHS.aiSafety).map((link) => (
             <ContentLinkItem key={link.href} href={link.href} label={link.label} />
           ))}
         </ContentLinks>
@@ -53,4 +50,4 @@ const HomePage = async (): Promise<ReactElement> => {
   );
 };
 
-export default HomePage;
+export default AiSafetyPage;

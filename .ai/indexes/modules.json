@@ -247,7 +247,7 @@
       "structure/repository-map.md",
       "docs/frontend-architecture.md"
     ],
-    "fileCount": 15,
+    "fileCount": 21,
     "lane": "standard",
     "layers": [
       "app"
@@ -357,7 +357,7 @@
       "rules/12-i18n.md",
       "docs/library-wrapping.md"
     ],
-    "fileCount": 8,
+    "fileCount": 9,
     "lane": "standard",
     "layers": [
       "packages"
@@ -537,7 +537,7 @@
       "structure/layer-map.md",
       "docs/frontend-architecture.md"
     ],
-    "fileCount": 47,
+    "fileCount": 65,
     "lane": "standard",
     "layers": [
       "shared"

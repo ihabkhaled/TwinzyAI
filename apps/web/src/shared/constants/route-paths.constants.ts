@@ -12,4 +12,8 @@ export const ROUTE_PATHS = {
   help: '/help' as Route,
   privacy: '/privacy' as Route,
   terms: '/terms' as Route,
+  about: '/about' as Route,
+  howItWorks: '/how-it-works' as Route,
+  aiSafety: '/ai-safety' as Route,
+  faq: '/faq' as Route,
 } as const;
