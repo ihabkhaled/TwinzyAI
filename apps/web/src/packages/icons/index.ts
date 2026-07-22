@@ -7,7 +7,6 @@
 
 export {
   ChevronDown as ChevronDownIcon,
-  Globe as GlobeIcon,
   Heart as HeartIcon,
   House as HomeIcon,
   Moon as MoonIcon,

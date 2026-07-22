@@ -68,6 +68,8 @@ export default defineConfig({
       // because next.config's root-.env loader would otherwise inject the
       // developer's real client id; an already-set key always wins.
       NEXT_PUBLIC_PAYPAL_CLIENT_ID: '',
+      NEXT_PUBLIC_PAYMOB_PUBLIC_KEY: '',
+      NEXT_PUBLIC_ADSENSE_CLIENT_ID: '',
     },
     timeout: 180_000,
   },

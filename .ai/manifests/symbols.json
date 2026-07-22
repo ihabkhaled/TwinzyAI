@@ -1,5 +1,5 @@
 {
-  "count": 1516,
+  "count": 1515,
   "symbols": [
     {
       "kind": "const",
@@ -3983,13 +3983,6 @@
       "module": "web:game",
       "name": "getTabId",
       "path": "apps/web/src/modules/game/helpers/stream-identity.helper.ts"
-    },
-    {
-      "kind": "re-export",
-      "layer": "packages",
-      "module": "web:pkg-icons",
-      "name": "GlobeIcon",
-      "path": "apps/web/src/packages/icons/index.ts"
     },
     {
       "kind": "const",

@@ -14,7 +14,7 @@ test.describe('result translation', () => {
     await playHappyPathUntilAnalyze(page);
     await expect(page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1))).toBeVisible();
 
-    await page.getByTestId(TEST_IDS.localeSwitch).click();
+    await page.getByTestId(TEST_IDS.localeSwitch).selectOption('ar');
     await expect(
       page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1)).getByText('تطابق أسلوبي عام'),
     ).toBeVisible();
@@ -28,7 +28,7 @@ test.describe('result translation', () => {
 
     await playHappyPathUntilAnalyze(page);
 
-    await page.getByTestId(TEST_IDS.localeSwitch).click();
+    await page.getByTestId(TEST_IDS.localeSwitch).selectOption('ar');
     await expect(page.getByTestId(TEST_IDS.translationBanner)).toBeHidden();
 
     const firstCard = page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1));

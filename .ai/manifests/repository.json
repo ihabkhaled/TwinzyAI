@@ -7122,7 +7122,7 @@
     },
     {
       "exports": [],
-      "hash": "741d20ee7a4ff7d0da2a2d06891f0d91e34d6b72fbf366cbf639da6096ef0ae9",
+      "hash": "7eaea6711aea4735b81eb536c7521164c5490be36396703f9f6a7f8bc3e764bb",
       "imports": [
         "../src/shared/constants/test-ids.constants",
         "../src/shared/testing/test-id.helper",
@@ -12762,10 +12762,6 @@
         },
         {
           "kind": "re-export",
-          "name": "GlobeIcon"
-        },
-        {
-          "kind": "re-export",
           "name": "HeartIcon"
         },
         {
@@ -12785,13 +12781,13 @@
           "name": "SunIcon"
         }
       ],
-      "hash": "71b5ca7db05524a891635dc4b3a5668990a290a50573f999dcee71c4aeb337d2",
+      "hash": "0a74ec892901ad5ff9fe8038a8619788638a715f13575dfa5d783cffda3bfe39",
       "imports": [
         "lucide-react"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 17,
+      "loc": 16,
       "module": "web:pkg-icons",
       "path": "apps/web/src/packages/icons/index.ts"
     },

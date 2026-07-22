@@ -269,7 +269,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "49168385c6442e68b2fc1d628cd60a789df60849b4da19b6b380f2fea2c95f9e"
+    "inputsHash": "ade4901b0c3656c27ed28654f37777110b7d6325f02a9e2419af6eeb776a1ee7"
   },
   ".ai/manifests/configs.json": {
     "inputs": [
@@ -310,7 +310,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "49168385c6442e68b2fc1d628cd60a789df60849b4da19b6b380f2fea2c95f9e"
+    "inputsHash": "ade4901b0c3656c27ed28654f37777110b7d6325f02a9e2419af6eeb776a1ee7"
   },
   ".ai/manifests/documents.json": {
     "inputs": [
@@ -1761,7 +1761,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "d3433a9552c94f917fe0532a73f4a8968acc889f094589c13fc4cbc812412acb"
+    "inputsHash": "d7057f290a3a8e6c1d98b3d79f4b5eb51ee0f08cdd3018251d902319f6749a0d"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2489,7 +2489,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "1edd4effd36d7509b31e851a19a9ae2c56380593330390052cef292d648b7866"
+    "inputsHash": "3bd90c603840be80114f4de366651d4691afdd4e6ec9344e7cbe23250a75250c"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -3227,7 +3227,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "1edd4effd36d7509b31e851a19a9ae2c56380593330390052cef292d648b7866"
+    "inputsHash": "3bd90c603840be80114f4de366651d4691afdd4e6ec9344e7cbe23250a75250c"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3944,7 +3944,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "1edd4effd36d7509b31e851a19a9ae2c56380593330390052cef292d648b7866"
+    "inputsHash": "3bd90c603840be80114f4de366651d4691afdd4e6ec9344e7cbe23250a75250c"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

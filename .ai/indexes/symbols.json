@@ -1560,9 +1560,6 @@
   "getTabId": [
     "apps/web/src/modules/game/helpers/stream-identity.helper.ts"
   ],
-  "GlobeIcon": [
-    "apps/web/src/packages/icons/index.ts"
-  ],
   "hasSameJsonShape": [
     "apps/api/src/modules/ai/lib/json-shape.util.ts"
   ],
