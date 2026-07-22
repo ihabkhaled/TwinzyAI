@@ -26,7 +26,7 @@ const flattenKeys = (tree: Record<string, unknown>, prefix = ''): string[] =>
 /** ar.json carries a translators' note that has no counterpart elsewhere. */
 const isTranslatorNote = (key: string): boolean => key.startsWith('_note');
 
-const LOCALE_CATALOGS: ReadonlyArray<readonly [string, Record<string, unknown>]> = [
+const LOCALE_CATALOGS: readonly (readonly [string, Record<string, unknown>])[] = [
   ['ar', arMessages],
   ['de', deMessages],
   ['es', esMessages],

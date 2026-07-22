@@ -7,7 +7,7 @@ import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ContentLinkItem } from '@/shared/components/content/content-link-item.component';
 import { ContentLinks } from '@/shared/components/content/content-links.component';
-import { JsonLdScript } from '@/shared/components/seo/json-ld.component';
+import { JsonLdScript } from '@/shared/components/seo/json-ld.container';
 import { HOME_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';

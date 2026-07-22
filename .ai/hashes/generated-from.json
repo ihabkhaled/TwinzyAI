@@ -1043,7 +1043,7 @@
       "packages/shared/src/constants/language.constants.ts",
       "packages/shared/src/constants/response-bounds.constants.ts"
     ],
-    "inputsHash": "59df48d8dd7c922ebf13405dd696805a432cd836ed8089390a365217696fd912"
+    "inputsHash": "07392d2c360cbc0e431da657ec090b10adc5794c5b7f100408e2917cdaa4dbc4"
   },
   ".ai/manifests/ownership.json": {
     "inputs": [
@@ -1669,6 +1669,7 @@
       "apps/web/src/shared/components/layout/home-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.variants.ts",
+      "apps/web/src/shared/components/seo/json-ld.container.tsx",
       "apps/web/src/shared/components/types/shared-component.types.ts",
       "apps/web/src/shared/constants/ad-routes.constants.ts",
       "apps/web/src/shared/constants/content-pages.constants.ts",
@@ -1701,8 +1702,12 @@
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "apps/web/src/shared/hooks/useEscapeKey.hook.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.ts",
       "apps/web/src/shared/hooks/useRouteErrorLogger.hook.ts",
       "apps/web/src/shared/security/content-security-policy.test.ts",
       "apps/web/src/shared/security/content-security-policy.ts",
@@ -1756,7 +1761,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "b46575e3d6244a19cdbc4b8b39cae2c1b71e1d1bc4dcb465ccdc3a8aa2fc522f"
+    "inputsHash": "d3433a9552c94f917fe0532a73f4a8968acc889f094589c13fc4cbc812412acb"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2393,6 +2398,7 @@
       "apps/web/src/shared/components/layout/home-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.variants.ts",
+      "apps/web/src/shared/components/seo/json-ld.container.tsx",
       "apps/web/src/shared/components/types/shared-component.types.ts",
       "apps/web/src/shared/constants/ad-routes.constants.ts",
       "apps/web/src/shared/constants/content-pages.constants.ts",
@@ -2425,8 +2431,12 @@
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "apps/web/src/shared/hooks/useEscapeKey.hook.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.ts",
       "apps/web/src/shared/hooks/useRouteErrorLogger.hook.ts",
       "apps/web/src/shared/security/content-security-policy.test.ts",
       "apps/web/src/shared/security/content-security-policy.ts",
@@ -2479,7 +2489,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "7a11248943aefe688b1b2406803b5f036c0a757af34515dae5c3522a2d2ff7dc"
+    "inputsHash": "1edd4effd36d7509b31e851a19a9ae2c56380593330390052cef292d648b7866"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2500,7 +2510,7 @@
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "d9055505534776be19c130c7292aefed754b09cc53ee81faf4c1a65280f1f999"
+    "inputsHash": "30b2502a07dc77a673cdac0d20c44681d958f529fb21320276503341f6decfcc"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -3126,6 +3136,7 @@
       "apps/web/src/shared/components/layout/home-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.variants.ts",
+      "apps/web/src/shared/components/seo/json-ld.container.tsx",
       "apps/web/src/shared/components/types/shared-component.types.ts",
       "apps/web/src/shared/constants/ad-routes.constants.ts",
       "apps/web/src/shared/constants/content-pages.constants.ts",
@@ -3158,8 +3169,12 @@
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "apps/web/src/shared/hooks/useEscapeKey.hook.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.ts",
       "apps/web/src/shared/hooks/useRouteErrorLogger.hook.ts",
       "apps/web/src/shared/security/content-security-policy.test.ts",
       "apps/web/src/shared/security/content-security-policy.ts",
@@ -3212,7 +3227,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "7a11248943aefe688b1b2406803b5f036c0a757af34515dae5c3522a2d2ff7dc"
+    "inputsHash": "1edd4effd36d7509b31e851a19a9ae2c56380593330390052cef292d648b7866"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3838,6 +3853,7 @@
       "apps/web/src/shared/components/layout/home-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.component.tsx",
       "apps/web/src/shared/components/primitives/skip-link.variants.ts",
+      "apps/web/src/shared/components/seo/json-ld.container.tsx",
       "apps/web/src/shared/components/types/shared-component.types.ts",
       "apps/web/src/shared/constants/ad-routes.constants.ts",
       "apps/web/src/shared/constants/content-pages.constants.ts",
@@ -3870,8 +3886,12 @@
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "apps/web/src/shared/hooks/useEscapeKey.hook.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
+      "apps/web/src/shared/hooks/useJsonLd.hook.ts",
       "apps/web/src/shared/hooks/useRouteErrorLogger.hook.ts",
       "apps/web/src/shared/security/content-security-policy.test.ts",
       "apps/web/src/shared/security/content-security-policy.ts",
@@ -3924,7 +3944,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "7a11248943aefe688b1b2406803b5f036c0a757af34515dae5c3522a2d2ff7dc"
+    "inputsHash": "1edd4effd36d7509b31e851a19a9ae2c56380593330390052cef292d648b7866"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

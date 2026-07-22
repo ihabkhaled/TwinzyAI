@@ -11,7 +11,7 @@ describe('serializeJsonLd', () => {
     const serialized = serializeJsonLd({ name: '</script><b>x' });
 
     expect(serialized).not.toContain('<');
-    expect(serialized).toContain('\\u003C/script');
+    expect(serialized).toContain(String.raw`\u003C/script`);
   });
 });
 

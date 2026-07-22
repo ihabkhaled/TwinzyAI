@@ -1,5 +1,5 @@
 {
-  "count": 707,
+  "count": 712,
   "files": [
     {
       "exports": [
@@ -3667,13 +3667,13 @@
           "name": "REGION_HINT_BY_LANGUAGE"
         }
       ],
-      "hash": "0cfea1a4330739e84f5732021133eff76b3a25fddaf3961818e27202bedb6b42",
+      "hash": "59e11203f712559ad9fd7b2946b72973e5ea3b04f7ef399d6cecd079f36a5cce",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 14,
+      "loc": 24,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/region-hint.constants.ts"
     },
@@ -5187,14 +5187,14 @@
     },
     {
       "exports": [],
-      "hash": "49907852423508b0ae2cb2357cd11f057d6fa85efdeea9c8f47e53661336bc6a",
+      "hash": "fd02f5aa1ad090bc8ae89758de8d7be08fa8cf6106d98609854b89a9f9d0273b",
       "imports": [
         "../lib/request-language",
         "vitest"
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 22,
+      "loc": 24,
       "module": "api:game",
       "path": "apps/api/src/modules/game/tests/request-language.test.ts"
     },
@@ -7330,7 +7330,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "deba808146c081d26850b76185862c398b4b95a89142233a5559e204a61d7359",
+      "hash": "b6243aab38b05d0c6f8713949c359ba8a6c01214ece0e30faa80c8dfd5b6cceb",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -7346,7 +7346,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 54,
+      "loc": 59,
       "module": "web:app",
       "path": "apps/web/src/app/about/page.tsx"
     },
@@ -7357,7 +7357,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "25ae5034d382bed933deeaf14705d4760161b312078d4474a7e2cb687cb283e4",
+      "hash": "ad546cbab482ab5d1749b5080555930c1a5d3fa3f7043bb7f2c513d0dcee22f7",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -7373,7 +7373,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 54,
+      "loc": 63,
       "module": "web:app",
       "path": "apps/web/src/app/ai-safety/page.tsx"
     },
@@ -7452,23 +7452,25 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "efa81dc02c7e678516a8b9886dbd6e2b47a5d8d2b67bcc66f162b9135c6c0410",
+      "hash": "e6e635f125d31aa4605a1c260f79343377e1bf35f8515728e9a74e2f79bf48de",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
         "@/packages/ui-primitives",
         "@/shared/components/content/content-link-item.component",
         "@/shared/components/content/content-links.component",
+        "@/shared/components/seo/json-ld.container",
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
         "@/shared/helpers/site-nav.helper",
+        "@/shared/helpers/structured-data.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 55,
+      "loc": 66,
       "module": "web:app",
       "path": "apps/web/src/app/faq/page.tsx"
     },
@@ -7515,18 +7517,19 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "25f58a3b846cc9ec3afd040515d5c3f052de1cb9f0e5514e7dd63d1c299003fd",
+      "hash": "0c1cfa640a015e94dde22d4f0ef7ec5ea0bdc2d8314a3f3e8cb0bf71c9587cc9",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
         "@/packages/ui-primitives",
+        "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 56,
+      "loc": 61,
       "module": "web:app",
       "path": "apps/web/src/app/help/page.tsx"
     },
@@ -7537,7 +7540,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "f5ee3a4210061cf51054b13e537ea047893d608d91f22e71b44de37385a907f3",
+      "hash": "60f0a3be7665c0c355e074a233eec232a281b5ef5ddb4881bf4c8630f30a6b35",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -7553,7 +7556,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 54,
+      "loc": 63,
       "module": "web:app",
       "path": "apps/web/src/app/how-it-works/page.tsx"
     },
@@ -7568,7 +7571,7 @@
           "name": "viewport"
         }
       ],
-      "hash": "190f09660763416e0df0c658439bbfe9bd39e5b4bb3afa2ca27838c7ce4ff703",
+      "hash": "a300e3074c9a90855fa5af0b8f520a26975443466d25cabac827cc522ebfb92a",
       "imports": [
         "./layout.variants",
         "./providers",
@@ -7584,6 +7587,7 @@
         "@/shared/components/layout/footer-nav-link.component",
         "@/shared/components/layout/home-link.component",
         "@/shared/components/primitives/skip-link.component",
+        "@/shared/constants/seo.constants",
         "@/shared/constants/theme-palette.constants",
         "@/shared/fonts/app-fonts",
         "@/shared/helpers/ad-eligibility.helper",
@@ -7598,7 +7602,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 122,
+      "loc": 133,
       "module": "web:app",
       "path": "apps/web/src/app/layout.tsx"
     },
@@ -7664,23 +7668,27 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "0416906fa070c4db277b7822f2bbc9cc4e7c88200942a50b3283190e32ef9bff",
+      "hash": "e6bac50b31ef7962f88ff95b2b9d2eca9d768305925c558f9a3e6edc1f8eca0f",
       "imports": [
         "./content.variants",
         "@/modules/game",
+        "@/packages/env",
         "@/packages/i18n",
         "@/packages/ui-primitives",
         "@/shared/components/content/content-link-item.component",
         "@/shared/components/content/content-links.component",
+        "@/shared/components/seo/json-ld.container",
         "@/shared/constants/content-pages.constants",
+        "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
         "@/shared/helpers/site-nav.helper",
+        "@/shared/helpers/structured-data.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 57,
+      "loc": 79,
       "module": "web:app",
       "path": "apps/web/src/app/page.tsx"
     },
@@ -7711,7 +7719,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "487742bef5596d5acaf796758436fe1b654d07664e0dab1dba68c4383771ec4d",
+      "hash": "347a60866f0f313fc0ff0422e9c578f734c4ab1c04b21b602ad8b0a884bd4080",
       "imports": [
         "../content.variants",
         "@/modules/game",
@@ -7729,7 +7737,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 70,
+      "loc": 75,
       "module": "web:app",
       "path": "apps/web/src/app/privacy/page.tsx"
     },
@@ -7790,7 +7798,7 @@
     },
     {
       "exports": [],
-      "hash": "4e8b48d0f9037b2015bb7c9bb09d1b601aecf3af00a85edf8336fda25f523014",
+      "hash": "40106fb7e33fb241834ca32b7e531df7ffbd38a75b731ff8d75ed5751063c219",
       "imports": [
         "@/packages/env",
         "@/shared/helpers/sitemap.helper",
@@ -7809,18 +7817,19 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "a9600a2701560278410e93c8e20ddf350876a3863cef163a5e0efa426837c972",
+      "hash": "8cdf6dde3b5b2481e05b5dc368194f8a366efcd62266a349c82793bb11db0e60",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
         "@/packages/ui-primitives",
+        "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 36,
+      "loc": 41,
       "module": "web:app",
       "path": "apps/web/src/app/terms/page.tsx"
     },
@@ -11431,20 +11440,17 @@
           "name": "LocaleSwitcher"
         }
       ],
-      "hash": "67b69ee6b8ca7a332cf5c8367aea3af401da376d022ee54da737f3443db38d72",
+      "hash": "b54bc5b4bc678d49bbc9b4f359cc1d413e4d9e795dbbdfb49eee2693ec824bab",
       "imports": [
         "../hooks/useLocaleSwitcher.hook",
-        "../model/ui-preferences.constants",
         "@/packages/i18n",
-        "@/packages/icons",
-        "@/packages/ui-primitives",
         "@/shared/components/layout/app-header.variants",
         "@/shared/constants/test-ids.constants",
         "react"
       ],
       "isTest": false,
       "layer": "containers",
-      "loc": 33,
+      "loc": 37,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx"
     },
@@ -11494,7 +11500,7 @@
           "name": "useLocaleSwitcher"
         }
       ],
-      "hash": "1d27ae415f3ac941283fdd7a27f80cd7e8f4fda1eff0b92cb926f6b68bbacbeb",
+      "hash": "1afe72c45f5feb651d1639c1038b89aa75276b0c29aabe6cb1f2a588d901f868",
       "imports": [
         "../types/ui-preferences.types",
         "@/packages/i18n",
@@ -11504,7 +11510,7 @@
       ],
       "isTest": false,
       "layer": "hooks",
-      "loc": 40,
+      "loc": 47,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts"
     },
@@ -11592,10 +11598,6 @@
         },
         {
           "kind": "const",
-          "name": "LOCALE_LABEL_KEYS"
-        },
-        {
-          "kind": "const",
           "name": "resolveInitialTheme"
         },
         {
@@ -11607,16 +11609,15 @@
           "name": "UI_PREFERENCE_DOM_ATTRIBUTES"
         }
       ],
-      "hash": "64926ae1347f5bb110ce6339f1caa7832b5b0be69409d0040e8e79becda717b5",
+      "hash": "7f6f606a7341f0cb36c642c953dc45d31f3b9f0c75e87593b697207651b85a30",
       "imports": [
         "../types/ui-preferences.types",
         "@/packages/browser",
-        "@/packages/i18n",
         "@/shared/enums/app-theme.enum"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 57,
+      "loc": 47,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
     },
@@ -11757,18 +11758,19 @@
     },
     {
       "exports": [],
-      "hash": "1e6ec10eb3bafc455945c70afb6671a760356fda3777e9228d8724a3448e5a59",
+      "hash": "d515a042901d8b4d2c9e2763b71d3cf58d85ddefefca7d13b2a31cc53230880b",
       "imports": [
         "../hooks/useLocaleSwitcher.hook",
         "@/packages/i18n",
         "@/packages/navigation",
         "@/packages/storage",
         "@testing-library/react",
+        "react",
         "vitest"
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 66,
+      "loc": 90,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts"
     },
@@ -11827,15 +11829,16 @@
           "name": "UiPreferencesState"
         }
       ],
-      "hash": "b35fd62fdf09f96df074423eccfc704d8ca7c9b136bd4af7a9f30281f8342228",
+      "hash": "680f0d3aec8563c5b5be1618a39b3ea6903dc8845407994a4fee65d394559465",
       "imports": [
         "../schemas/ui-preferences.schema",
         "@/packages/i18n",
-        "@/shared/enums/app-theme.enum"
+        "@/shared/enums/app-theme.enum",
+        "react"
       ],
       "isTest": false,
       "layer": "types",
-      "loc": 47,
+      "loc": 48,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
     },
@@ -12547,6 +12550,10 @@
         },
         {
           "kind": "re-export",
+          "name": "LANGUAGE_ENDONYMS"
+        },
+        {
+          "kind": "re-export",
           "name": "LOCALE_COOKIE_MAX_AGE_SECONDS"
         },
         {
@@ -12562,7 +12569,7 @@
           "name": "useAppTranslation"
         }
       ],
-      "hash": "45924baded52c98b4767273bb882ba958f4e934da07dee1d03964486a1de4369",
+      "hash": "67f66e09405e514a723c8393d71580507a45a424e359813af553ed3ae64e6474",
       "imports": [
         "./app-intl-provider",
         "./intl-messages-provider",
@@ -12572,7 +12579,7 @@
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 19,
+      "loc": 20,
       "module": "web:pkg-i18n",
       "path": "apps/web/src/packages/i18n/index.ts"
     },
@@ -12601,7 +12608,7 @@
     },
     {
       "exports": [],
-      "hash": "54de156a4381963e0235aeb02a623ce29f6328e2a6e2a2713fdff3f599864191",
+      "hash": "9552209bf71194bcfff94c162c17db375cd0b916d77a1e301882dda786c49a8a",
       "imports": [
         "./locale.constants",
         "@twinzy/shared",
@@ -12609,7 +12616,7 @@
       ],
       "isTest": true,
       "layer": "packages",
-      "loc": 52,
+      "loc": 68,
       "module": "web:pkg-i18n",
       "path": "apps/web/src/packages/i18n/locale.constants.test.ts"
     },
@@ -12640,6 +12647,10 @@
           "name": "LANGUAGE_CODES"
         },
         {
+          "kind": "re-export",
+          "name": "LANGUAGE_ENDONYMS"
+        },
+        {
           "kind": "const",
           "name": "LOCALE_COOKIE_MAX_AGE_SECONDS"
         },
@@ -12648,27 +12659,37 @@
           "name": "LOCALE_COOKIE_NAME"
         }
       ],
-      "hash": "3c12821bab217c8b860e18e88ce6b729d33058e98af9cff8dfd410175485c2ae",
+      "hash": "2930cfd9c411ae48074914cb8de0ae8094f3de94e8fad50188f98952b88a5e3d",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 48,
+      "loc": 53,
       "module": "web:pkg-i18n",
       "path": "apps/web/src/packages/i18n/locale.constants.ts"
     },
     {
       "exports": [],
-      "hash": "fbbbe427ea39399709d4a2d857dfe429d6e25baed0f69d55e5229c2f7acc2556",
+      "hash": "a6e912a3259f59483bbf837ae1358b559c0e6f782d54476916dcd37c8c45de0a",
       "imports": [
         "./messages/ar.json",
+        "./messages/de.json",
         "./messages/en.json",
+        "./messages/es.json",
+        "./messages/fa.json",
+        "./messages/fr.json",
+        "./messages/hi.json",
+        "./messages/it.json",
+        "./messages/ja.json",
+        "./messages/pt.json",
+        "./messages/th.json",
+        "./messages/zh.json",
         "vitest"
       ],
       "isTest": true,
       "layer": "packages",
-      "loc": 44,
+      "loc": 71,
       "module": "web:pkg-i18n",
       "path": "apps/web/src/packages/i18n/messages-parity.test.ts"
     },
@@ -14652,10 +14673,10 @@
         },
         {
           "kind": "const",
-          "name": "headerLocaleLabelClass"
+          "name": "headerLocaleSelectClass"
         }
       ],
-      "hash": "874be6b40edd136dd22adc9267b8acc1b4ff8e200e3efca45b8eca8aac6309de",
+      "hash": "bd5fdca0737a7ad5a43ce7f858bf8ea926658e33c9cb714fac9dc61901087c65",
       "imports": [],
       "isTest": false,
       "layer": "shared",
@@ -14764,6 +14785,24 @@
     {
       "exports": [
         {
+          "kind": "function",
+          "name": "JsonLdScript"
+        }
+      ],
+      "hash": "2d3d45177eb341cf0e7d5265a0dcb192636b94d39af4a531dd5e017b58e6a208",
+      "imports": [
+        "../types/shared-component.types",
+        "@/shared/hooks/useJsonLd.hook"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 18,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/seo/json-ld.container.tsx"
+    },
+    {
+      "exports": [
+        {
           "kind": "interface",
           "name": "AppFooterProps"
         },
@@ -14801,6 +14840,10 @@
         },
         {
           "kind": "interface",
+          "name": "JsonLdScriptProps"
+        },
+        {
+          "kind": "interface",
           "name": "LoadingStateProps"
         },
         {
@@ -14816,14 +14859,14 @@
           "name": "TranslateLabel"
         }
       ],
-      "hash": "c0ac7319079051b78486727a722bd760186400c9aa8ef1c9464d8a8df267fe8d",
+      "hash": "069b09b48f72b25219669b2e9fc8c5bc3c3c8f569a326eb293e3c33c1152cdae",
       "imports": [
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 83,
+      "loc": 88,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/types/shared-component.types.ts"
     },
@@ -14934,6 +14977,10 @@
         },
         {
           "kind": "const",
+          "name": "OG_LOCALE_BY_LANGUAGE"
+        },
+        {
+          "kind": "const",
           "name": "ROBOTS_DISALLOWED_PATH_PREFIXES"
         },
         {
@@ -14941,13 +14988,14 @@
           "name": "SITEMAP_PRIORITY_BY_PATH"
         }
       ],
-      "hash": "05c2a280da614b14c95fb1c20ce592535ce122821220bafc12f49e318377c963",
+      "hash": "31cbd812a396e4a357c33bdf3a66937fd8cb85217213b4e575373597bc5dfaa6",
       "imports": [
-        "./route-paths.constants"
+        "./route-paths.constants",
+        "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 21,
+      "loc": 39,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/seo.constants.ts"
     },
@@ -15342,14 +15390,14 @@
     },
     {
       "exports": [],
-      "hash": "b18d87c05ca72c317438af9b1122005843e75ac722f7ec7b1e8ce729f58cbb2c",
+      "hash": "7c6c8b02058b69a89e09335dd8f4e119b661c483fd4373c6b671523cbe6f709b",
       "imports": [
         "./sitemap.helper",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 46,
+      "loc": 55,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts"
     },
@@ -15360,7 +15408,7 @@
           "name": "buildSitemapEntries"
         }
       ],
-      "hash": "9ad4a32914f24f21724797dbf405365972042bccee66864d7846c1ca0a493c99",
+      "hash": "42562b3ba1dc4085ba42cde5d0607e975b4f15a12809a4dc023a4eb2a914cd0b",
       "imports": [
         "@/shared/constants/route-paths.constants",
         "@/shared/constants/seo.constants",
@@ -15368,9 +15416,45 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 27,
+      "loc": 28,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "2fd6747ef277acf40360b965c96d8c0691a8baa22b3d9b8e36fd19bfa5e63f14",
+      "imports": [
+        "./structured-data.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 61,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildFaqPageJsonLd"
+        },
+        {
+          "kind": "const",
+          "name": "buildWebApplicationJsonLd"
+        },
+        {
+          "kind": "const",
+          "name": "serializeJsonLd"
+        }
+      ],
+      "hash": "009b9b2c8d279e5020fbc9b1ffc4d7793d46b57028b3a20fc21bf3568ceaa317",
+      "imports": [],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 53,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
     },
     {
       "exports": [],
@@ -15406,6 +15490,38 @@
       "loc": 30,
       "module": "web:shared",
       "path": "apps/web/src/shared/hooks/useEscapeKey.hook.ts"
+    },
+    {
+      "exports": [],
+      "hash": "bba4d2a2095274bd0a7e933c3f6f0e6593ee504ed056d648e7338a8fbfa02db2",
+      "imports": [
+        "./useJsonLd.hook",
+        "@testing-library/react",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 43,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/hooks/useJsonLd.hook.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "useJsonLd"
+        }
+      ],
+      "hash": "2882b28c1b9bf0445d2f2abb31db6a7a0bbd1eece7bd7f2387b0693b7a75c50a",
+      "imports": [
+        "@/packages/browser",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 30,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/hooks/useJsonLd.hook.ts"
     },
     {
       "exports": [
@@ -15713,13 +15829,13 @@
           "name": "RESULT_DISCLAIMER_BY_LANGUAGE"
         }
       ],
-      "hash": "829529b266212e0172369f924ea7e062d097afbf484169e480b5201c367da7a1",
+      "hash": "dc9f05fdc01d7bbdae91b364e67d90988da9f34e7e283aeef7be82913aab4ab9",
       "imports": [
         "./language.constants"
       ],
       "isTest": false,
       "layer": "constants",
-      "loc": 79,
+      "loc": 99,
       "module": "shared",
       "path": "packages/shared/src/constants/app.constants.ts"
     },
@@ -15778,6 +15894,10 @@
           "name": "LANGUAGE_CODES"
         },
         {
+          "kind": "const",
+          "name": "LANGUAGE_ENDONYMS"
+        },
+        {
           "kind": "type",
           "name": "LanguageCodeValue"
         },
@@ -15786,11 +15906,11 @@
           "name": "normalizeLanguageCode"
         }
       ],
-      "hash": "fa43d3ceb0c346f7b687528187973f709b8aac0ad40c4de86e163382ef822f5c",
+      "hash": "8967babcb54234a2ce59ab53404a937f9f9f9baccf3ca450f4790c9137079460",
       "imports": [],
       "isTest": false,
       "layer": "constants",
-      "loc": 25,
+      "loc": 57,
       "module": "shared",
       "path": "packages/shared/src/constants/language.constants.ts"
     },

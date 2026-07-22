@@ -455,6 +455,9 @@
   "buildDuplicateStreamMessage": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
+  "buildFaqPageJsonLd": [
+    "apps/web/src/shared/helpers/structured-data.helper.ts"
+  ],
   "buildFooterNavLinks": [
     "apps/web/src/shared/helpers/site-nav.helper.ts"
   ],
@@ -547,6 +550,9 @@
   ],
   "buildValidResponseText": [
     "apps/api/src/benchmark/benchmark-fixtures.ts"
+  ],
+  "buildWebApplicationJsonLd": [
+    "apps/web/src/shared/helpers/structured-data.helper.ts"
   ],
   "BUSY_ACQUIRE_OUTCOME": [
     "apps/api/src/core/streaming/concurrency-limiter.constants.ts"
@@ -1569,7 +1575,7 @@
   "headerIconLinkClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
-  "headerLocaleLabelClass": [
+  "headerLocaleSelectClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
   "HEALTH_PATH": [
@@ -1797,6 +1803,12 @@
   "JSON_ROUTE_BODY_LIMITS": [
     "apps/api/src/bootstrap/bootstrap.constants.ts"
   ],
+  "JsonLdScript": [
+    "apps/web/src/shared/components/seo/json-ld.container.tsx"
+  ],
+  "JsonLdScriptProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
   "jsonRouteBodyLimitFor": [
     "apps/api/src/bootstrap/json-route-body-limit.util.ts"
   ],
@@ -1870,6 +1882,11 @@
     "apps/web/src/packages/i18n/locale.constants.ts",
     "packages/shared/src/constants/language.constants.ts"
   ],
+  "LANGUAGE_ENDONYMS": [
+    "apps/web/src/packages/i18n/index.ts",
+    "apps/web/src/packages/i18n/locale.constants.ts",
+    "packages/shared/src/constants/language.constants.ts"
+  ],
   "LANGUAGE_FIELD_NAME": [
     "apps/web/src/modules/game/model/game.constants.ts"
   ],
@@ -1895,9 +1912,6 @@
   "LOCALE_COOKIE_NAME": [
     "apps/web/src/packages/i18n/index.ts",
     "apps/web/src/packages/i18n/locale.constants.ts"
-  ],
-  "LOCALE_LABEL_KEYS": [
-    "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
   ],
   "LocaleSwitcher": [
     "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx",
@@ -2276,6 +2290,9 @@
   "NotFoundError": [
     "apps/api/src/core/errors/index.ts",
     "apps/api/src/core/errors/not-found.error.ts"
+  ],
+  "OG_LOCALE_BY_LANGUAGE": [
+    "apps/web/src/shared/constants/seo.constants.ts"
   ],
   "ONE_FILE_MESSAGE": [
     "apps/api/src/core/errors/error.constants.ts"
@@ -3197,6 +3214,9 @@
   "SemaphoreWaiter": [
     "apps/api/src/core/concurrency/concurrency.types.ts"
   ],
+  "serializeJsonLd": [
+    "apps/web/src/shared/helpers/structured-data.helper.ts"
+  ],
   "SERVER_BUSY_MESSAGE": [
     "apps/api/src/modules/game/model/game.messages.ts"
   ],
@@ -4024,6 +4044,9 @@
   ],
   "useImageUpload": [
     "apps/web/src/modules/game/hooks/useImageUpload.hook.ts"
+  ],
+  "useJsonLd": [
+    "apps/web/src/shared/hooks/useJsonLd.hook.ts"
   ],
   "useLocaleSwitcher": [
     "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts"

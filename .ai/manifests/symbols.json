@@ -1,5 +1,5 @@
 {
-  "count": 1507,
+  "count": 1516,
   "symbols": [
     {
       "kind": "const",
@@ -1167,6 +1167,13 @@
       "kind": "const",
       "layer": "shared",
       "module": "web:shared",
+      "name": "buildFaqPageJsonLd",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
       "name": "buildFooterNavLinks",
       "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
     },
@@ -1393,6 +1400,13 @@
       "module": "api:benchmark",
       "name": "buildValidResponseText",
       "path": "apps/api/src/benchmark/benchmark-fixtures.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildWebApplicationJsonLd",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
     },
     {
       "kind": "const",
@@ -4009,7 +4023,7 @@
       "kind": "const",
       "layer": "shared",
       "module": "web:shared",
-      "name": "headerLocaleLabelClass",
+      "name": "headerLocaleSelectClass",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
     {
@@ -4594,6 +4608,20 @@
       "path": "apps/api/src/bootstrap/bootstrap.constants.ts"
     },
     {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "JsonLdScript",
+      "path": "apps/web/src/shared/components/seo/json-ld.container.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "JsonLdScriptProps",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
       "kind": "const",
       "layer": "bootstrap",
       "module": "api:bootstrap",
@@ -4783,6 +4811,27 @@
       "path": "packages/shared/src/constants/language.constants.ts"
     },
     {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-i18n",
+      "name": "LANGUAGE_ENDONYMS",
+      "path": "apps/web/src/packages/i18n/index.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-i18n",
+      "name": "LANGUAGE_ENDONYMS",
+      "path": "apps/web/src/packages/i18n/locale.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "LANGUAGE_ENDONYMS",
+      "path": "packages/shared/src/constants/language.constants.ts"
+    },
+    {
       "kind": "const",
       "layer": "model",
       "module": "web:game",
@@ -4851,13 +4900,6 @@
       "module": "web:pkg-i18n",
       "name": "LOCALE_COOKIE_NAME",
       "path": "apps/web/src/packages/i18n/locale.constants.ts"
-    },
-    {
-      "kind": "const",
-      "layer": "model",
-      "module": "web:ui-preferences",
-      "name": "LOCALE_LABEL_KEYS",
-      "path": "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
     },
     {
       "kind": "const",
@@ -5768,6 +5810,13 @@
       "module": "api:core",
       "name": "NotFoundError",
       "path": "apps/api/src/core/errors/not-found.error.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "OG_LOCALE_BY_LANGUAGE",
+      "path": "apps/web/src/shared/constants/seo.constants.ts"
     },
     {
       "kind": "const",
@@ -8053,6 +8102,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "serializeJsonLd",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "api:game",
       "name": "SERVER_BUSY_MESSAGE",
@@ -10094,6 +10150,13 @@
       "module": "web:game",
       "name": "useImageUpload",
       "path": "apps/web/src/modules/game/hooks/useImageUpload.hook.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "useJsonLd",
+      "path": "apps/web/src/shared/hooks/useJsonLd.hook.ts"
     },
     {
       "kind": "const",

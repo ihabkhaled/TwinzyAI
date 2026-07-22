@@ -14,7 +14,7 @@ const normalizeBaseUrl = (baseUrl: string): string =>
  * element early (the standard XSS-hardening for embedded JSON).
  */
 export const serializeJsonLd = (data: Record<string, unknown>): string =>
-  JSON.stringify(data).replaceAll('<', '\\u003C');
+  JSON.stringify(data).replaceAll('<', String.raw`\u003C`);
 
 /** The WebApplication descriptor for the homepage. */
 export const buildWebApplicationJsonLd = (
@@ -40,7 +40,7 @@ export const buildWebApplicationJsonLd = (
 
 /** The FAQPage descriptor: `[question, answer]` pairs in display order. */
 export const buildFaqPageJsonLd = (
-  items: ReadonlyArray<readonly [string, string]>,
+  items: readonly (readonly [string, string])[],
 ): Record<string, unknown> => ({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',

@@ -615,7 +615,7 @@
         "structure/layer-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 65,
+      "fileCount": 70,
       "lane": "standard",
       "layers": [
         "shared"

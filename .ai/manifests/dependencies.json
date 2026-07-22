@@ -246,7 +246,7 @@
       "to": "shared"
     },
     {
-      "count": 1,
+      "count": 2,
       "from": "web:shared",
       "to": "shared"
     }

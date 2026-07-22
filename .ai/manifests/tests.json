@@ -1,5 +1,5 @@
 {
-  "count": 176,
+  "count": 178,
   "tests": [
     {
       "kind": "unit",
@@ -1617,10 +1617,26 @@
     {
       "kind": "unit",
       "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/helpers/structured-data.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
       "path": "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "targets": [
         "apps/web/src/shared/hooks/useEscapeKey.hook.ts",
         "apps/web/src/shared/hooks/useRouteErrorLogger.hook.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
+      "path": "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
+      "targets": [
+        "apps/web/src/shared/hooks/useJsonLd.hook.ts"
       ]
     },
     {
