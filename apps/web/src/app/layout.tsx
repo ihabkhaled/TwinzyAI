@@ -21,6 +21,7 @@ import { DonateNavLink } from '@/shared/components/layout/donate-nav-link.compon
 import { FooterNavLink } from '@/shared/components/layout/footer-nav-link.component';
 import { HomeLink } from '@/shared/components/layout/home-link.component';
 import { SkipLink } from '@/shared/components/primitives/skip-link.component';
+import { OG_LOCALE_BY_LANGUAGE } from '@/shared/constants/seo.constants';
 import { THEME_PALETTE } from '@/shared/constants/theme-palette.constants';
 import { interFont } from '@/shared/fonts/app-fonts';
 import { isAdEligiblePath } from '@/shared/helpers/ad-eligibility.helper';
@@ -41,6 +42,8 @@ interface RootLayoutProps {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('app');
+  const resolvedLocale = await getServerLocale();
+  const locale = isSupportedLanguageCode(resolvedLocale) ? resolvedLocale : DEFAULT_LOCALE;
 
   return {
     metadataBase: new URL(publicEnv.siteBaseUrl),
@@ -55,6 +58,14 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     icons: {
       icon: '/icons/icon.svg',
+    },
+    openGraph: {
+      type: 'website',
+      siteName: t('name'),
+      locale: OG_LOCALE_BY_LANGUAGE[locale],
+    },
+    twitter: {
+      card: 'summary',
     },
   };
 }

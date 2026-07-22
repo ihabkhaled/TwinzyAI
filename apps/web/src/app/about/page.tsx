@@ -21,7 +21,12 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('about');
 
-  return { title: buildPageTitle(t('metaTitle')), description: t('metaDescription') };
+  return {
+    title: buildPageTitle(t('metaTitle')),
+    description: t('metaDescription'),
+    alternates: { canonical: ROUTE_PATHS.about },
+    openGraph: { title: t('metaTitle'), description: t('metaDescription'), url: ROUTE_PATHS.about },
+  };
 }
 
 /** Who is behind Twinzy, why it exists, and the promises it is built around. */

@@ -21,7 +21,16 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('aiSafety');
 
-  return { title: buildPageTitle(t('metaTitle')), description: t('metaDescription') };
+  return {
+    title: buildPageTitle(t('metaTitle')),
+    description: t('metaDescription'),
+    alternates: { canonical: ROUTE_PATHS.aiSafety },
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      url: ROUTE_PATHS.aiSafety,
+    },
+  };
 }
 
 /** The safety rules enforced in code on every round, and their honest limits. */

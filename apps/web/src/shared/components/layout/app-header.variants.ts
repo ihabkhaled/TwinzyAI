@@ -25,9 +25,9 @@ export const headerDonateLinkClass = `${headerIconLinkClass} gap-1.5`;
 export const headerDonateLabelClass = 'hidden sm:inline';
 
 /**
- * The locale endonym ("العربية"/"English") is the only header control with
- * variable, font-dependent width — hidden on phones so every control is a
- * fixed-width icon and the 320px header cannot overflow across platforms
- * (the globe icon + aria-label still convey the action).
+ * The language dropdown: styled to sit among the icon controls. Width is
+ * bounded on phones so twelve endonyms of very different lengths can never
+ * overflow the 320px header; the full name is visible in the opened list.
  */
-export const headerLocaleLabelClass = 'hidden sm:inline';
+export const headerLocaleSelectClass =
+  'h-9 max-w-24 cursor-pointer rounded-xl border border-border bg-background px-1.5 text-sm text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-w-32 sm:px-2';

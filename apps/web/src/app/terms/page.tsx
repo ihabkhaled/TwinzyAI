@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 
 import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
 import { contentListClass, contentTitleClass } from '../content.variants';
@@ -10,7 +11,11 @@ import { contentListClass, contentTitleClass } from '../content.variants';
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('terms');
 
-  return { title: buildPageTitle(t('title')) };
+  return {
+    title: buildPageTitle(t('title')),
+    alternates: { canonical: ROUTE_PATHS.terms },
+    openGraph: { title: t('title'), url: ROUTE_PATHS.terms },
+  };
 }
 
 const TermsPage = async (): Promise<ReactElement> => {

@@ -4,9 +4,41 @@
  * sides: the web i18n locale set and the API `languageCode` field must stay
  * in lock-step with this list.
  */
-export const LANGUAGE_CODES = ['en', 'ar'] as const;
+export const LANGUAGE_CODES = [
+  'en',
+  'ar',
+  'it',
+  'fa',
+  'fr',
+  'de',
+  'es',
+  'pt',
+  'hi',
+  'th',
+  'zh',
+  'ja',
+] as const;
 
 export type LanguageCodeValue = (typeof LANGUAGE_CODES)[number];
+
+/**
+ * Each language's endonym (its name in its own script) — what a native speaker
+ * scans for in a language picker, so these are deliberately NOT translated.
+ */
+export const LANGUAGE_ENDONYMS: Readonly<Record<LanguageCodeValue, string>> = {
+  en: 'English',
+  ar: 'العربية',
+  it: 'Italiano',
+  fa: 'فارسی',
+  fr: 'Français',
+  de: 'Deutsch',
+  es: 'Español',
+  pt: 'Português',
+  hi: 'हिन्दी',
+  th: 'ไทย',
+  zh: '中文',
+  ja: '日本語',
+};
 
 /** Language used when a request omits or sends an unsupported code. */
 export const DEFAULT_LANGUAGE_CODE: LanguageCodeValue = 'en';

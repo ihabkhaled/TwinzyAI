@@ -3,30 +3,34 @@
 
 import type { ReactElement } from 'react';
 
-import { useAppTranslation } from '@/packages/i18n';
-import { GlobeIcon } from '@/packages/icons';
-import { Button } from '@/packages/ui-primitives';
-import { headerLocaleLabelClass } from '@/shared/components/layout/app-header.variants';
+import { LANGUAGE_CODES, LANGUAGE_ENDONYMS, useAppTranslation } from '@/packages/i18n';
+import { headerLocaleSelectClass } from '@/shared/components/layout/app-header.variants';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import { useLocaleSwitcher } from '../hooks/useLocaleSwitcher.hook';
-import { LOCALE_LABEL_KEYS } from '../model/ui-preferences.constants';
 
-/** Header control that toggles between the supported locales. */
+/**
+ * Header language dropdown: every supported locale by its endonym (the name a
+ * native speaker scans for), switching the whole app on selection. A native
+ * `<select>` keeps it keyboard-, screen-reader-, and mobile-friendly.
+ */
 export const LocaleSwitcher = (): ReactElement => {
   const t = useAppTranslation();
-  const { nextLocale, onSwitchLocale } = useLocaleSwitcher();
+  const { activeLocale, onSelectLocale } = useLocaleSwitcher();
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={onSwitchLocale}
+    <select
+      value={activeLocale}
+      onChange={onSelectLocale}
       aria-label={t('app.localeSwitch')}
-      testId={TEST_IDS.localeSwitch}
+      className={headerLocaleSelectClass}
+      data-testid={TEST_IDS.localeSwitch}
     >
-      <GlobeIcon aria-hidden size={18} />
-      <span className={headerLocaleLabelClass}>{t(LOCALE_LABEL_KEYS[nextLocale])}</span>
-    </Button>
+      {LANGUAGE_CODES.map((code) => (
+        <option key={code} value={code}>
+          {LANGUAGE_ENDONYMS[code]}
+        </option>
+      ))}
+    </select>
   );
 };

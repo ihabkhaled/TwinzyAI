@@ -11,6 +11,7 @@ export {
   getLocaleDirection,
   isSupportedLanguageCode,
   LANGUAGE_CODES,
+  LANGUAGE_ENDONYMS,
   LOCALE_COOKIE_MAX_AGE_SECONDS,
   LOCALE_COOKIE_NAME,
 } from './locale.constants';

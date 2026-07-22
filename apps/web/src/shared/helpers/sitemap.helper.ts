@@ -15,11 +15,12 @@ const normalizeBaseUrl = (baseUrl: string): string =>
  * payment return route are deliberately absent — they are noindex, transient
  * surfaces that must never be crawled.
  */
-export const buildSitemapEntries = (baseUrl: string): MetadataRoute.Sitemap => {
+export const buildSitemapEntries = (baseUrl: string, lastModified: Date): MetadataRoute.Sitemap => {
   const base = normalizeBaseUrl(baseUrl);
 
   return Object.values(ROUTE_PATHS).map((path) => ({
     url: path === ROUTE_PATHS.home ? `${base}/` : `${base}${path}`,
+    lastModified,
     changeFrequency: 'monthly',
     priority: SITEMAP_PRIORITY_BY_PATH[path] ?? DEFAULT_SITEMAP_PRIORITY,
   }));

@@ -2,13 +2,20 @@ import type { Metadata } from 'next';
 import type { ReactElement } from 'react';
 
 import { LandingContainer } from '@/modules/game';
+import { publicEnv } from '@/packages/env';
 import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ContentLinkItem } from '@/shared/components/content/content-link-item.component';
 import { ContentLinks } from '@/shared/components/content/content-links.component';
+import { JsonLdScript } from '@/shared/components/seo/json-ld.component';
 import { HOME_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
+import {
+  buildWebApplicationJsonLd,
+  serializeJsonLd,
+} from '@/shared/helpers/structured-data.helper';
 
 import {
   contentBodyClass,
@@ -20,7 +27,12 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('home');
 
-  return { title: buildPageTitle(t('metaTitle')), description: t('metaDescription') };
+  return {
+    title: buildPageTitle(t('metaTitle')),
+    description: t('metaDescription'),
+    alternates: { canonical: ROUTE_PATHS.home },
+    openGraph: { title: t('metaTitle'), description: t('metaDescription'), url: ROUTE_PATHS.home },
+  };
 }
 
 /**
@@ -31,9 +43,19 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 const HomePage = async (): Promise<ReactElement> => {
   const t = await getServerTranslations();
+  const webAppJson = serializeJsonLd(
+    buildWebApplicationJsonLd(
+      publicEnv.siteBaseUrl,
+      t('app.name'),
+      t('home.metaDescription'),
+      publicEnv.paymentPriceValue,
+      publicEnv.paymentPriceCurrency,
+    ),
+  );
 
   return (
     <PageContainer>
+      <JsonLdScript json={webAppJson} />
       <LandingContainer />
       <Stack gap="md" className={homeSectionsClass}>
         {HOME_SECTION_KEYS.map((key) => (

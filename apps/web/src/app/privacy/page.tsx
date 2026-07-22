@@ -24,7 +24,12 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('privacy');
 
-  return { title: buildPageTitle(t('title')), description: t('metaDescription') };
+  return {
+    title: buildPageTitle(t('title')),
+    description: t('metaDescription'),
+    alternates: { canonical: ROUTE_PATHS.privacy },
+    openGraph: { title: t('title'), description: t('metaDescription'), url: ROUTE_PATHS.privacy },
+  };
 }
 
 /**

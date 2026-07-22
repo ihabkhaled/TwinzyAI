@@ -36,7 +36,7 @@ export const LOCALE_COOKIE_MAX_AGE_SECONDS =
 export type AppTextDirection = 'ltr' | 'rtl';
 
 /** Locales that render right-to-left. */
-const RTL_LOCALES: ReadonlySet<LanguageCodeValue> = new Set<LanguageCodeValue>(['ar']);
+const RTL_LOCALES: ReadonlySet<LanguageCodeValue> = new Set<LanguageCodeValue>(['ar', 'fa']);
 
 /** Resolve the writing direction for a supported locale. */
 export const getLocaleDirection = (locale: LanguageCodeValue): AppTextDirection =>
@@ -44,4 +44,9 @@ export const getLocaleDirection = (locale: LanguageCodeValue): AppTextDirection 
 
 /** Re-export the shared canonical locale primitives under their shared names. */
 
-export { isSupportedLanguageCode, LANGUAGE_CODES, type LanguageCodeValue } from '@twinzy/shared';
+export {
+  isSupportedLanguageCode,
+  LANGUAGE_CODES,
+  LANGUAGE_ENDONYMS,
+  type LanguageCodeValue,
+} from '@twinzy/shared';

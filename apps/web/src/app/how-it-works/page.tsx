@@ -21,7 +21,16 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('howItWorks');
 
-  return { title: buildPageTitle(t('metaTitle')), description: t('metaDescription') };
+  return {
+    title: buildPageTitle(t('metaTitle')),
+    description: t('metaDescription'),
+    alternates: { canonical: ROUTE_PATHS.howItWorks },
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      url: ROUTE_PATHS.howItWorks,
+    },
+  };
 }
 
 /** Every step of a round, in order, including what happens to the photo. */

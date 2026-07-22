@@ -1,3 +1,5 @@
+import type { ChangeEvent } from 'react';
+
 import type { LanguageCodeValue } from '@/packages/i18n';
 import type { AppTheme, AppThemeValue } from '@/shared/enums/app-theme.enum';
 
@@ -36,11 +38,10 @@ export interface ThemeToggleController {
 }
 
 /**
- * View-model returned by `useLocaleSwitcher` for the header language control:
- * the active locale, the locale a click switches to, and the switch handler.
+ * View-model returned by `useLocaleSwitcher` for the header language dropdown:
+ * the active locale and the change handler for the `<select>` control.
  */
 export interface LocaleSwitcherController {
   activeLocale: LanguageCodeValue;
-  nextLocale: LanguageCodeValue;
-  onSwitchLocale: () => void;
+  onSelectLocale: (event: ChangeEvent<HTMLSelectElement>) => void;
 }

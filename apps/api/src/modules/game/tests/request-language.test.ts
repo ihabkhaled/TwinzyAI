@@ -5,10 +5,12 @@ import { resolveRequestLanguage } from '../lib/request-language';
 describe('resolveRequestLanguage', () => {
   it('returns the provided supported language code', () => {
     expect(resolveRequestLanguage({ languageCode: 'ar' })).toBe('ar');
+    expect(resolveRequestLanguage({ languageCode: 'fr' })).toBe('fr');
+    expect(resolveRequestLanguage({ languageCode: 'ja' })).toBe('ja');
   });
 
   it('normalizes an unsupported code to the default', () => {
-    expect(resolveRequestLanguage({ languageCode: 'fr' })).toBe('en');
+    expect(resolveRequestLanguage({ languageCode: 'xx' })).toBe('en');
   });
 
   it('falls back to the default when languageCode is missing', () => {

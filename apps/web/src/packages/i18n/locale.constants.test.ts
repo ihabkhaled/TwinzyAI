@@ -12,7 +12,7 @@ describe('isSupportedLanguageCode', () => {
   });
 
   it('rejects an unknown locale string', () => {
-    expect(isSupportedLanguageCode('fr')).toBe(false);
+    expect(isSupportedLanguageCode('xx')).toBe(false);
     expect(isSupportedLanguageCode('')).toBe(false);
   });
 
@@ -27,12 +27,15 @@ describe('isSupportedLanguageCode', () => {
 });
 
 describe('getLocaleDirection', () => {
-  it('returns rtl for Arabic', () => {
+  it('returns rtl for the right-to-left locales', () => {
     expect(getLocaleDirection('ar')).toBe('rtl');
+    expect(getLocaleDirection('fa')).toBe('rtl');
   });
 
-  it('returns ltr for English', () => {
+  it('returns ltr for the left-to-right locales', () => {
     expect(getLocaleDirection('en')).toBe('ltr');
+    expect(getLocaleDirection('fr')).toBe('ltr');
+    expect(getLocaleDirection('ja')).toBe('ltr');
   });
 });
 
@@ -45,7 +48,20 @@ describe('locale constants', () => {
     expect(LOCALE_COOKIE_NAME).toBe('NEXT_LOCALE');
   });
 
-  it('ships English and Arabic via the shared language codes', () => {
-    expect(LANGUAGE_CODES).toStrictEqual(['en', 'ar']);
+  it('ships all twelve supported locales via the shared language codes', () => {
+    expect(LANGUAGE_CODES).toStrictEqual([
+      'en',
+      'ar',
+      'it',
+      'fa',
+      'fr',
+      'de',
+      'es',
+      'pt',
+      'hi',
+      'th',
+      'zh',
+      'ja',
+    ]);
   });
 });

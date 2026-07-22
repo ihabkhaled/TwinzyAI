@@ -80,3 +80,8 @@ export interface ContentLinkItemProps {
   href: Route;
   label: string;
 }
+
+/** Props for {@link JsonLdScript}: an already-serialized JSON-LD payload. */
+export interface JsonLdScriptProps {
+  json: string;
+}

@@ -63,6 +63,16 @@ export const GAME_PROMPT_VERSION = 'written-traits-v5';
 export const RESULT_DISCLAIMER_BY_LANGUAGE: Record<LanguageCodeValue, string> = {
   en: 'This is a playful style/vibe result based on written visible traits only. It is not face recognition, identity matching, or biometric comparison.',
   ar: 'هذه نتيجة ممتعة عن الأسلوب والانطباع العام تعتمد على الملامح الظاهرة المكتوبة فقط. وهي ليست تعرّفًا على الوجه ولا مطابقة هوية ولا مقارنة بيومترية.',
+  it: 'Questo è un risultato giocoso di stile e vibe basato solo su tratti visibili descritti per iscritto. Non è riconoscimento facciale, né identificazione, né confronto biometrico.',
+  fa: 'این یک نتیجهٔ سرگرم‌کننده دربارهٔ سبک و حال‌وهوا است که فقط بر پایهٔ ویژگی‌های ظاهری نوشته‌شده ساخته می‌شود. این تشخیص چهره، تطبیق هویت یا مقایسهٔ بیومتریک نیست.',
+  fr: 'Ceci est un résultat ludique de style et de vibe fondé uniquement sur des traits visibles décrits par écrit. Ce n’est ni de la reconnaissance faciale, ni une identification, ni une comparaison biométrique.',
+  de: 'Dies ist ein spielerisches Stil-/Vibe-Ergebnis, das ausschließlich auf schriftlich beschriebenen sichtbaren Merkmalen beruht. Es ist keine Gesichtserkennung, kein Identitätsabgleich und kein biometrischer Vergleich.',
+  es: 'Este es un resultado lúdico de estilo y vibra basado únicamente en rasgos visibles descritos por escrito. No es reconocimiento facial, ni coincidencia de identidad, ni comparación biométrica.',
+  pt: 'Este é um resultado divertido de estilo e vibe baseado apenas em traços visíveis descritos por escrito. Não é reconhecimento facial, correspondência de identidade nem comparação biométrica.',
+  hi: 'यह केवल लिखित रूप से दर्ज दिखाई देने वाले लक्षणों पर आधारित एक मज़ेदार स्टाइल/वाइब परिणाम है। यह चेहरे की पहचान, पहचान का मिलान या बायोमेट्रिक तुलना नहीं है।',
+  th: 'นี่คือผลลัพธ์สนุก ๆ ด้านสไตล์และลุคที่อิงจากลักษณะภายนอกที่บันทึกเป็นข้อความเท่านั้น ไม่ใช่การจดจำใบหน้า การจับคู่ตัวตน หรือการเปรียบเทียบไบโอเมตริกซ์',
+  zh: '这是一个仅基于书面描述的可见特征得出的趣味风格/气质结果，不是人脸识别、身份匹配或生物特征比对。',
+  ja: 'これは書き起こされた見た目の特徴だけに基づく、遊び心のあるスタイル/雰囲気の結果です。顔認識、本人特定、生体情報の比較ではありません。',
 };
 
 /** English disclaimer kept as the canonical reference copy. */
@@ -72,6 +82,16 @@ export const RESULT_DISCLAIMER = RESULT_DISCLAIMER_BY_LANGUAGE.en;
 export const NO_MATCH_FALLBACK_BY_LANGUAGE: Record<LanguageCodeValue, string> = {
   en: 'We could not find a confident style/vibe match this time. Try another photo with clearer lighting.',
   ar: 'لم نعثر على تطابق واثق في الأسلوب والانطباع هذه المرة. جرّب صورة أخرى بإضاءة أوضح.',
+  it: 'Questa volta non abbiamo trovato un abbinamento di stile e vibe abbastanza sicuro. Prova con un’altra foto con una luce più chiara.',
+  fa: 'این بار تطبیق مطمئنی از نظر سبک و حال‌وهوا پیدا نکردیم. عکس دیگری با نور واضح‌تر امتحان کنید.',
+  fr: 'Nous n’avons pas trouvé de correspondance de style et de vibe assez sûre cette fois-ci. Essayez une autre photo avec un éclairage plus net.',
+  de: 'Diesmal konnten wir keinen sicheren Stil-/Vibe-Treffer finden. Versuche es mit einem anderen Foto bei klarerem Licht.',
+  es: 'Esta vez no encontramos una coincidencia de estilo y vibra con suficiente confianza. Prueba con otra foto con mejor iluminación.',
+  pt: 'Desta vez não encontramos uma correspondência de estilo e vibe com confiança suficiente. Tente outra foto com iluminação mais clara.',
+  hi: 'इस बार हमें स्टाइल/वाइब का कोई भरोसेमंद मिलान नहीं मिला। साफ़ रोशनी वाली कोई दूसरी फ़ोटो आज़माएँ।',
+  th: 'ครั้งนี้เราไม่พบการจับคู่สไตล์และลุคที่มั่นใจพอ ลองใช้รูปอื่นที่มีแสงชัดเจนกว่านี้',
+  zh: '这次没有找到足够有把握的风格/气质匹配。请换一张光线更清晰的照片试试。',
+  ja: '今回は自信を持てるスタイル/雰囲気のマッチが見つかりませんでした。より明るく鮮明な別の写真でお試しください。',
 };
 
 /** English fallback kept as the canonical reference copy. */

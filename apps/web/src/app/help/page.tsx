@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 
 import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 
 import {
@@ -15,7 +16,11 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('help');
 
-  return { title: buildPageTitle(t('title')) };
+  return {
+    title: buildPageTitle(t('title')),
+    alternates: { canonical: ROUTE_PATHS.help },
+    openGraph: { title: t('title'), url: ROUTE_PATHS.help },
+  };
 }
 
 const HelpPage = async (): Promise<ReactElement> => {
