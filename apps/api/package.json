@@ -14,7 +14,7 @@
     "@fastify/cors": "^11.3.0",
     "@fastify/helmet": "^13.1.0",
     "@fastify/multipart": "^10.1.0",
-    "@fastify/static": "^9.3.0",
+    "@fastify/static": "^10.1.2",
     "@google/genai": "^2.12.0",
     "@nestjs/cli": "^11.0.24",
     "@nestjs/common": "^11.1.28",
