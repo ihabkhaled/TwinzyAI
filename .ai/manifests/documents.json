@@ -10797,7 +10797,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "f3b295bc0f23f2387ccb56388b3415e3a50b484f0e9e3ff9ce30a5d3c2108ab5",
+      "hash": "b51c9bade901e4dba2f7abbeb6b155ba90cbe80d407ddeccb4f8d1ef02364010",
       "headings": [
         "22 — Go / no-go"
       ],
@@ -10819,7 +10819,7 @@
       "sourceMentions": [],
       "summary": "Status: **GO after automated gates pass**.",
       "title": "22 — Go / no-go",
-      "tokens": 126,
+      "tokens": 158,
       "type": "doc"
     },
     {

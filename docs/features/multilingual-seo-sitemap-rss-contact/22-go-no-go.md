@@ -8,3 +8,6 @@ the feature commit; no migration or persisted data exists.
 
 Contact release additionally requires server-only SMTP configuration, disabled-by-default
 behavior, rate-limit verification, and a credential rotation whenever a secret is exposed.
+
+The generated knowledge snapshot must be rebuilt until its stale-item analysis is stable before
+the release commit is pushed.
