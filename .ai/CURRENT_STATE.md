@@ -6,14 +6,14 @@
 
 | Fact | Value |
 | --- | --- |
-| Source files scanned | 712 |
-| Source modules | 41 |
-| API endpoints | 10 |
-| Web routes | 12 |
-| Test files | 178 |
-| Canonical documents | 706 |
+| Source files scanned | 743 |
+| Source modules | 42 |
+| API endpoints | 11 |
+| Web routes | 15 |
+| Test files | 183 |
+| Canonical documents | 709 |
 | Open contradiction-registry entries | 3 |
-| Stale items at last analysis | 0 |
+| Stale items at last analysis | 6 |
 | Broken links at last analysis | 9 |
 
 ## Active feature folders (docs/features/)

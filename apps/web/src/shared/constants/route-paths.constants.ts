@@ -16,4 +16,5 @@ export const ROUTE_PATHS = {
   howItWorks: '/how-it-works' as Route,
   aiSafety: '/ai-safety' as Route,
   faq: '/faq' as Route,
+  contact: '/contact' as Route,
 } as const;

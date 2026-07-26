@@ -31,6 +31,9 @@
       "apps/api/src/config/app-config.service.test.ts",
       "apps/api/src/config/env.schema.test.ts"
     ],
+    "api:contact": [
+      "apps/api/src/modules/contact/tests/contact.test.ts"
+    ],
     "api:core": [
       "apps/api/src/core/concurrency/tests/semaphore.test.ts",
       "apps/api/src/core/errors/tests/app-exception.filter.test.ts",
@@ -98,6 +101,9 @@
       "apps/api/src/tests/health.integration.test.ts",
       "apps/api/src/tests/share-results.integration.test.ts",
       "apps/api/src/tests/swagger-boot.integration.test.ts"
+    ],
+    "shared": [
+      "packages/shared/src/schemas/contact.schemas.test.ts"
     ],
     "web:e2e": [
       "apps/web/e2e/donations.spec.ts",
@@ -209,12 +215,15 @@
       "apps/web/src/shared/errors/http-error-to-message-key.mapper.test.ts",
       "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts",
       "apps/web/src/shared/helpers/donate-link.helper.test.ts",
+      "apps/web/src/shared/helpers/locale-route.helper.test.ts",
       "apps/web/src/shared/helpers/page-title.helper.test.ts",
       "apps/web/src/shared/helpers/read-theme-cookie.helper.test.ts",
       "apps/web/src/shared/helpers/robots.helper.test.ts",
+      "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "apps/web/src/shared/helpers/xml-response.helper.test.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
       "apps/web/src/shared/security/content-security-policy.test.ts",

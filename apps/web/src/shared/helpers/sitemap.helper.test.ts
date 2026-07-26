@@ -19,6 +19,7 @@ describe('buildSitemapEntries', () => {
       `${BASE}/how-it-works`,
       `${BASE}/ai-safety`,
       `${BASE}/faq`,
+      `${BASE}/contact`,
     ]);
   });
 

@@ -1,5 +1,5 @@
 {
-  "count": 2498,
+  "count": 2518,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -194,6 +194,24 @@
       "type": "imports"
     },
     {
+      "from": "api:contact",
+      "label": "generated",
+      "to": "api:config",
+      "type": "imports"
+    },
+    {
+      "from": "api:contact",
+      "label": "generated",
+      "to": "api:core",
+      "type": "imports"
+    },
+    {
+      "from": "api:contact",
+      "label": "generated",
+      "to": "shared",
+      "type": "imports"
+    },
+    {
       "from": "api:core",
       "label": "generated",
       "to": "api:config",
@@ -323,6 +341,12 @@
       "from": "api:root",
       "label": "generated",
       "to": "api:config",
+      "type": "imports"
+    },
+    {
+      "from": "api:root",
+      "label": "generated",
+      "to": "api:contact",
       "type": "imports"
     },
     {
@@ -1019,6 +1043,24 @@
       "from": "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
       "label": "generated",
       "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/contact/tests/contact.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/contact/tests/contact.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/contact/tests/contact.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/contact/application/send-contact.use-case.ts",
       "type": "covers"
     },
     {
@@ -3170,6 +3212,18 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/shared/helpers/locale-route.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/constants/route-paths.constants.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/locale-route.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/locale-route.helper.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/shared/helpers/page-title.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/page-title.helper.ts",
@@ -3188,6 +3242,12 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/seo-xml.helper.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/site-nav.helper.ts",
@@ -3203,6 +3263,12 @@
       "from": "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/structured-data.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/xml-response.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/xml-response.helper.ts",
       "type": "covers"
     },
     {
@@ -9800,6 +9866,24 @@
       "type": "uses-contract"
     },
     {
+      "from": "packages/shared/src/schemas/contact.schemas.test.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts",
+      "type": "covers"
+    },
+    {
+      "from": "packages/shared/src/schemas/contact.schemas.test.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts#ContactRequestSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/contact.schemas.test.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts#ContactResponseSchema",
+      "type": "uses-contract"
+    },
+    {
       "from": "packages/shared/src/schemas/game-result.schema.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/judge.schema.ts#CandidateJudgeResponse",
@@ -9959,6 +10043,18 @@
       "from": "packages/shared/src/schemas/index.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/candidates.schema.ts#CandidateSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts#ContactRequestSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts#ContactResponseSchema",
       "type": "uses-contract"
     },
     {
@@ -10637,6 +10733,18 @@
       "from": "packages/shared/src/schemas/translate-result.schema.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/language.schema.ts#LanguageCodeSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/types/contact.types.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts#ContactRequestSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/types/contact.types.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/contact.schemas.ts#ContactResponseSchema",
       "type": "uses-contract"
     },
     {
@@ -14964,6 +15072,18 @@
       "label": "inferred",
       "to": "apps/api/src/core/errors/error-code.constants.ts",
       "type": "describes"
+    },
+    {
+      "from": "web:app",
+      "label": "generated",
+      "to": "shared",
+      "type": "imports"
+    },
+    {
+      "from": "web:app",
+      "label": "generated",
+      "to": "web:shared",
+      "type": "imports"
     },
     {
       "from": "web:game",

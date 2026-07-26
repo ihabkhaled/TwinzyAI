@@ -2,6 +2,7 @@
   "DELETE /share-results/:shareId": "apps/api/src/modules/share-results/api/share-results.controller.ts",
   "GET /health": "apps/api/src/modules/health/api/health.controller.ts",
   "GET /share-results/:shareId": "apps/api/src/modules/share-results/api/share-results.controller.ts",
+  "POST /contact": "apps/api/src/modules/contact/api/contact.controller.ts",
   "POST /game/analyze": "apps/api/src/modules/game/api/game.controller.ts",
   "POST /game/analyze/stream": "apps/api/src/modules/game/api/game.controller.ts",
   "POST /game/cancel": "apps/api/src/modules/game/api/game.controller.ts",

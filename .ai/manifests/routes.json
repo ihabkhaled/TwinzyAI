@@ -1,6 +1,12 @@
 {
   "api": [
     {
+      "file": "apps/api/src/modules/contact/api/contact.controller.ts",
+      "handler": "send",
+      "method": "POST",
+      "path": "/contact"
+    },
+    {
       "file": "apps/api/src/modules/game/api/game.controller.ts",
       "handler": "analyze",
       "method": "POST",
@@ -61,7 +67,7 @@
       "path": "/share-results/:shareId"
     }
   ],
-  "apiCount": 10,
+  "apiCount": 11,
   "web": [
     {
       "file": "apps/web/src/app/layout.tsx",
@@ -74,6 +80,11 @@
       "path": "/"
     },
     {
+      "file": "apps/web/src/app/[locale]/feed.xml/route.ts",
+      "kind": "route",
+      "path": "/[locale]/feed.xml"
+    },
+    {
       "file": "apps/web/src/app/about/page.tsx",
       "kind": "page",
       "path": "/about"
@@ -82,6 +93,11 @@
       "file": "apps/web/src/app/ai-safety/page.tsx",
       "kind": "page",
       "path": "/ai-safety"
+    },
+    {
+      "file": "apps/web/src/app/contact/page.tsx",
+      "kind": "page",
+      "path": "/contact"
     },
     {
       "file": "apps/web/src/app/faq/page.tsx",
@@ -119,10 +135,15 @@
       "path": "/share/[shareId]"
     },
     {
+      "file": "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "kind": "route",
+      "path": "/sitemaps/[locale].xml"
+    },
+    {
       "file": "apps/web/src/app/terms/page.tsx",
       "kind": "page",
       "path": "/terms"
     }
   ],
-  "webCount": 12
+  "webCount": 15
 }

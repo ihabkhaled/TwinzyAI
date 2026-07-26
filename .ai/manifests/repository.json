@@ -1,5 +1,5 @@
 {
-  "count": 712,
+  "count": 743,
   "files": [
     {
       "exports": [
@@ -8,11 +8,12 @@
           "name": "AppModule"
         }
       ],
-      "hash": "a736f7d7f9510abc49f13382849a9404ffffca1642b5a2fb4222d3a08450603c",
+      "hash": "01a112856474f7c9ac80b039e0c40c18b6a85fa85ff86ffdd1a72f561e16ca7f",
       "imports": [
         "./config/config.module",
         "./core/core.module",
         "./core/logger/logger.module",
+        "./modules/contact",
         "./modules/game",
         "./modules/health",
         "./modules/payments",
@@ -22,7 +23,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 30,
+      "loc": 32,
       "module": "api:root",
       "path": "apps/api/src/app.module.ts"
     },
@@ -716,11 +717,12 @@
           "name": "AppConfigService"
         }
       ],
-      "hash": "3e598eea13eb0c3fcae06c1d73fb8888369099f695d1709377252c427a7959cf",
+      "hash": "e8bf7257a640c3e6f297e4ede0fe3c9a681a5a708311a77b173108e4e3a2df6a",
       "imports": [
         "./ai-provider.constants",
         "./ai-route.types",
         "./ai-route.util",
+        "./contact-config.types",
         "./env.schema",
         "./gemini-step.constants",
         "./payment.constants",
@@ -729,7 +731,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 365,
+      "loc": 381,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.ts"
     },
@@ -753,6 +755,43 @@
       "loc": 38,
       "module": "api:config",
       "path": "apps/api/src/config/config.module.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "ContactEmailConfig"
+        }
+      ],
+      "hash": "ff256086c583d71bf2661928a1c2dced62b815e1d859b5c13bd3b52762872a65",
+      "imports": [],
+      "isTest": false,
+      "layer": "config",
+      "loc": 13,
+      "module": "api:config",
+      "path": "apps/api/src/config/contact-config.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "contactEnvShape"
+        },
+        {
+          "kind": "const",
+          "name": "validateContactEnv"
+        }
+      ],
+      "hash": "241c7623fddc05a1656db1ced553523097eb100a19d44a81c72e2152dec3366e",
+      "imports": [
+        "./env-bounds.constants",
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "config",
+      "loc": 48,
+      "module": "api:config",
+      "path": "apps/api/src/config/contact-env.schema.ts"
     },
     {
       "exports": [
@@ -1061,7 +1100,7 @@
     },
     {
       "exports": [],
-      "hash": "8b2f29f3143887e29133adefcf2abd442b051c9724bc70f22df6a9ac84389a70",
+      "hash": "de87c0243858fa5ba17bbcd7502a57ed14bfa722ba23250cf5cf17dd050e53fe",
       "imports": [
         "./env.schema",
         "@twinzy/shared",
@@ -1069,7 +1108,7 @@
       ],
       "isTest": true,
       "layer": "config",
-      "loc": 62,
+      "loc": 77,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.test.ts"
     },
@@ -1092,8 +1131,9 @@
           "name": "validateEnv"
         }
       ],
-      "hash": "00501b58aeaf06b1efac75fe7d0409a0155d37408e3664e2ab5a5060c3119996",
+      "hash": "d1c0af0b1e53fa581532ab1ba5b3706d99396755aca7f9f96db130de207424d4",
       "imports": [
+        "./contact-env.schema",
         "./env-bounds.constants",
         "./payment-env.schema",
         "./payment.constants",
@@ -1101,7 +1141,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 385,
+      "loc": 388,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.ts"
     },
@@ -3959,6 +3999,141 @@
       "loc": 49,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/trait-text.util.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "SmtpMailAdapter"
+        }
+      ],
+      "hash": "de6eef463d0b8a424121ca2ffe8a5a9e3881758d418deb9ba13c0e0d6cbedf94",
+      "imports": [
+        "../../../config",
+        "@nestjs/common",
+        "@twinzy/shared",
+        "nodemailer"
+      ],
+      "isTest": false,
+      "layer": "adapters",
+      "loc": 36,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "ContactController"
+        }
+      ],
+      "hash": "462bfb768b21016bde59a559fe59280e3a11bea8742b514b43b24521c7aa02ba",
+      "imports": [
+        "../../../core/openapi",
+        "../../../core/rate-limit",
+        "../../../core/validation",
+        "../application/send-contact.use-case",
+        "../model/contact.constants",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "api",
+      "loc": 24,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/api/contact.controller.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "SendContactUseCase"
+        }
+      ],
+      "hash": "a0d775d25e21267a10c00eadbb84edfeeb68340066536cacc7d68fd9f757e591",
+      "imports": [
+        "../adapters/smtp-mail.adapter",
+        "../model/contact.constants",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 17,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/application/send-contact.use-case.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "ContactModule"
+        }
+      ],
+      "hash": "d54fa26a51d556a37c52b02177bc1eb02ca0c00bddba0e7430322890245a130d",
+      "imports": [
+        "./adapters/smtp-mail.adapter",
+        "./api/contact.controller",
+        "./application/send-contact.use-case",
+        "@nestjs/common"
+      ],
+      "isTest": false,
+      "layer": "root",
+      "loc": 12,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/contact.module.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "re-export",
+          "name": "ContactModule"
+        }
+      ],
+      "hash": "1338ad4c13b67a00e9e47fad24520a3ef8dcb7361750c26fdb92ba115342b625",
+      "imports": [
+        "./contact.module"
+      ],
+      "isTest": false,
+      "layer": "root",
+      "loc": 2,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/index.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "CONTACT_SUCCESS_RESPONSE"
+        },
+        {
+          "kind": "const",
+          "name": "CONTACT_THROTTLE"
+        }
+      ],
+      "hash": "80923155404106bc142612b0695e62234c86026d40ed4294f3e595e8cabc3315",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 6,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/model/contact.constants.ts"
+    },
+    {
+      "exports": [],
+      "hash": "2fc8f77cd8eb3ebadcbe6320ead5671b98926bdac830097e097c1941a05519dc",
+      "imports": [
+        "../../../config",
+        "../adapters/smtp-mail.adapter",
+        "../application/send-contact.use-case",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 64,
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/tests/contact.test.ts"
     },
     {
       "exports": [
@@ -7326,6 +7501,29 @@
     {
       "exports": [
         {
+          "kind": "const",
+          "name": "GET"
+        }
+      ],
+      "hash": "0f45481b16d84f480c4fb5eb102a20ca9a7e044ac61404ec1733db8bac125bba",
+      "imports": [
+        "@/packages/env",
+        "@/packages/i18n",
+        "@/packages/i18n/request",
+        "@/shared/components/types/route-handler.types",
+        "@/shared/helpers/seo-xml.helper",
+        "@/shared/helpers/xml-response.helper",
+        "next/server"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 31,
+      "module": "web:app",
+      "path": "apps/web/src/app/[locale]/feed.xml/route.ts"
+    },
+    {
+      "exports": [
+        {
           "kind": "function",
           "name": "generateMetadata"
         }
@@ -7376,6 +7574,176 @@
       "loc": 63,
       "module": "web:app",
       "path": "apps/web/src/app/ai-safety/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ContactForm"
+        }
+      ],
+      "hash": "4257cec334e8f70d46a6fe936ce6d54998c01eef04ca4788e557f9edc4daa4de",
+      "imports": [
+        "./contact-form.types",
+        "./contact-ui.constants",
+        "./contact.variants",
+        "@twinzy/shared",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 65,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/contact-form.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ContactFormContainer"
+        }
+      ],
+      "hash": "9bd5d2bf28c746d5022d202ed3b7ff7cb0f7cd03d21aa0728a8a2907005b33a7",
+      "imports": [
+        "./contact-form.component",
+        "./use-contact-form.hook",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 13,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/contact-form.container.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "ContactFormProps"
+        },
+        {
+          "kind": "type",
+          "name": "ContactStatus"
+        },
+        {
+          "kind": "type",
+          "name": "ContactSubmitEvent"
+        }
+      ],
+      "hash": "686e1c768ae3164708d7832734db8b70bb08ac06dc3b812bbbac1457e28afc7a",
+      "imports": [
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 12,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/contact-form.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "getContactStatusView"
+        }
+      ],
+      "hash": "ae0c9a66e788dff8ff38bc8fb1fa8b6593ee5bc55f177c6e0d4fbbe9f2cda604",
+      "imports": [
+        "./contact-form.types",
+        "./contact-ui.constants"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 22,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/contact-status.helper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "CONTACT_ARIA_LIVE"
+        },
+        {
+          "kind": "const",
+          "name": "CONTACT_LABELS"
+        }
+      ],
+      "hash": "f536cca8e32969e41a76da5712fee255ba6aca811d79837ce8c4c4c408245337",
+      "imports": [],
+      "isTest": false,
+      "layer": "app",
+      "loc": 12,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/contact-ui.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "contactInputClass"
+        },
+        {
+          "kind": "const",
+          "name": "contactSubmitClass"
+        },
+        {
+          "kind": "const",
+          "name": "contactTextAreaClass"
+        }
+      ],
+      "hash": "dbf1c13536101da7d42cc83538f447add97dfa11ea14fad1a3afbb92cdc9325b",
+      "imports": [],
+      "isTest": false,
+      "layer": "app",
+      "loc": 7,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/contact.variants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "5fabc262a645904e00047e2d8a1ba7fcf89fcd9e8139957546aee045a6b14bb8",
+      "imports": [
+        "../content.variants",
+        "./contact-form.container",
+        "@/packages/i18n",
+        "@/packages/ui-primitives",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/page-title.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 48,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "useContactForm"
+        }
+      ],
+      "hash": "01f318c3d8cf3d03801aecb388d531d3d870a48c322dd0afe42ea4f8c6685fc5",
+      "imports": [
+        "./contact-form.types",
+        "./contact-status.helper",
+        "@/packages/axios",
+        "@twinzy/shared",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 43,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/use-contact-form.hook.ts"
     },
     {
       "exports": [
@@ -7809,6 +8177,28 @@
       "loc": 10,
       "module": "web:app",
       "path": "apps/web/src/app/sitemap.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "GET"
+        }
+      ],
+      "hash": "e5251b31fa52a0047c39ed2749c5d4ecec8459ad4009da9f788c9ac300f478fe",
+      "imports": [
+        "../../../shared/components/types/route-handler.types",
+        "@/packages/env",
+        "@/packages/i18n",
+        "@/shared/helpers/seo-xml.helper",
+        "@/shared/helpers/xml-response.helper",
+        "next/server"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 26,
+      "module": "web:app",
+      "path": "apps/web/src/app/sitemaps/[locale].xml/route.ts"
     },
     {
       "exports": [
@@ -12694,8 +13084,13 @@
       "path": "apps/web/src/packages/i18n/messages-parity.test.ts"
     },
     {
-      "exports": [],
-      "hash": "377180e37a7afa11a95a842fcdf6444652d92080f3f5bcd4deae8dc111ecdeff",
+      "exports": [
+        {
+          "kind": "const",
+          "name": "loadMessagesForLocale"
+        }
+      ],
+      "hash": "0fc8cec459e23282f5f35513f9df2f5e13f96979130c9dafb87966b1986844a4",
       "imports": [
         "./locale.constants",
         "next-intl",
@@ -12704,7 +13099,7 @@
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 42,
+      "loc": 43,
       "module": "web:pkg-i18n",
       "path": "apps/web/src/packages/i18n/request.ts"
     },
@@ -14369,16 +14764,18 @@
           "name": "proxy"
         }
       ],
-      "hash": "0492752b66af47f020a32b0a9dac926c923e66381eded7647c394930842181a2",
+      "hash": "e486870b5ed0853d29bb1375fa29ae24289b2385af03f8835c9aca88182890f5",
       "imports": [
         "@/packages/env",
+        "@/packages/i18n",
+        "@/shared/helpers/locale-route.helper",
         "@/shared/security/content-security-policy",
         "@/shared/security/security.constants",
         "next/server"
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 47,
+      "loc": 74,
       "module": "web:root",
       "path": "apps/web/src/proxy.ts"
     },
@@ -14800,6 +15197,53 @@
       "exports": [
         {
           "kind": "interface",
+          "name": "LocaleXmlRouteContext"
+        },
+        {
+          "kind": "type",
+          "name": "RssMessageShape"
+        }
+      ],
+      "hash": "3a00147ceb05906b42a63ae8e21b7ec267d85c26187455c3a6db34b6d66b0a94",
+      "imports": [
+        "./seo.types",
+        "@/packages/i18n"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 10,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/types/route-handler.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "RssDocumentOptions"
+        },
+        {
+          "kind": "interface",
+          "name": "RssMessages"
+        },
+        {
+          "kind": "interface",
+          "name": "SitemapDocumentOptions"
+        }
+      ],
+      "hash": "f23df81e12cefcdf9248ddbcade40e1cd6c4b19b97bc039af5600fd1965e0887",
+      "imports": [
+        "@/packages/i18n"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 26,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/types/seo.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
           "name": "AppFooterProps"
         },
         {
@@ -14955,13 +15399,13 @@
           "name": "ROUTE_PATHS"
         }
       ],
-      "hash": "0b7ec86abf4701154a5e5803688a2cf433d0598a425b68a02f7e9dab78caed16",
+      "hash": "54908176d28e7089f3c8d83d3174d8dc195a5b5bd96bcffbaa6ebd2463f58721",
       "imports": [
         "next"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 20,
+      "loc": 21,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/route-paths.constants.ts"
     },
@@ -15256,6 +15700,55 @@
     },
     {
       "exports": [],
+      "hash": "6c8a0ecafef024d24fd2c7e7293204a305c677ac0e90c607100425841f159ba8",
+      "imports": [
+        "../constants/route-paths.constants",
+        "./locale-route.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 41,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildLocalizedAlternates"
+        },
+        {
+          "kind": "const",
+          "name": "buildLocalizedPath"
+        },
+        {
+          "kind": "const",
+          "name": "isMachinePath"
+        },
+        {
+          "kind": "const",
+          "name": "isPublicPagePath"
+        },
+        {
+          "kind": "const",
+          "name": "parseLocalizedPath"
+        }
+      ],
+      "hash": "079556c613a713faa5445213db7bf3af649981825f362636c2867854fa4b1042",
+      "imports": [
+        "../constants/route-paths.constants",
+        "@/packages/i18n",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 59,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
+    },
+    {
+      "exports": [],
       "hash": "b98f84a89d22b46b1547d6dd58160bd79e21c6aa53297fabe6c46719cdc6ffb3",
       "imports": [
         "./page-title.helper",
@@ -15351,14 +15844,57 @@
     },
     {
       "exports": [],
-      "hash": "7552c0f8f3a38bfba06540287f52d05aa4becd546fbe3c7cf0f60acd3043ba62",
+      "hash": "481ced1ce8c60cbe290e9f4c82d7a5714209943258e23b7c2cb0e896137f77cb",
+      "imports": [
+        "./seo-xml.helper",
+        "@/shared/components/types/seo.types",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 55,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/seo-xml.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildLocaleSitemapXml"
+        },
+        {
+          "kind": "const",
+          "name": "buildRssXml"
+        },
+        {
+          "kind": "const",
+          "name": "buildSitemapIndexXml"
+        }
+      ],
+      "hash": "8f0819901afb90da8330ae76408d2aed41df309dca50603f3054700f210777af",
+      "imports": [
+        "./locale-route.helper",
+        "./xml-response.helper",
+        "@/packages/i18n",
+        "@/shared/components/types/seo.types",
+        "@/shared/constants/route-paths.constants"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 86,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/seo-xml.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "c6e7cc3440b516336343f9350bdda19013d4bf937ace5762dfcff1b8fb7ddeef",
       "imports": [
         "./site-nav.helper",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 65,
+      "loc": 68,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/site-nav.helper.test.ts"
     },
@@ -15373,27 +15909,27 @@
           "name": "buildFooterNavLinks"
         }
       ],
-      "hash": "0dcdd93fdcc5b978ca901bed50ba7a4ee35baf7739c1412b94402a2704c7a022",
+      "hash": "ff06bf7ea72e38305c13f91bd650279c811f0dc8fa16c5fda140dafd4b31f141",
       "imports": [
         "@/shared/components/types/shared-component.types",
         "@/shared/constants/route-paths.constants"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 43,
+      "loc": 45,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
     },
     {
       "exports": [],
-      "hash": "7c6c8b02058b69a89e09335dd8f4e119b661c483fd4373c6b671523cbe6f709b",
+      "hash": "81dcc35b451c54bc7231df20f88fdf41e046e6e9712c818b50e53238d34cdf0d",
       "imports": [
         "./sitemap.helper",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 55,
+      "loc": 56,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts"
     },
@@ -15451,6 +15987,40 @@
       "loc": 53,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "4915bb7a6ff5c975fabd782adb932af5ee57558bd73d0ae0940dcf01a7fe9e9a",
+      "imports": [
+        "./xml-response.helper",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 18,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/xml-response.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "createXmlResponse"
+        },
+        {
+          "kind": "const",
+          "name": "escapeXml"
+        }
+      ],
+      "hash": "c19c81c2dbc7c13c347301e911ff9c930eeeb7067660e2631d51298bef1bb05e",
+      "imports": [
+        "next/server"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 24,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/xml-response.helper.ts"
     },
     {
       "exports": [],
@@ -15839,6 +16409,37 @@
       "exports": [
         {
           "kind": "const",
+          "name": "CONTACT_EMAIL_MAX_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "CONTACT_MESSAGE_MAX_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "CONTACT_MESSAGE_MIN_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "CONTACT_SUBJECT_MAX_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "CONTACT_SUBJECT_MIN_LENGTH"
+        }
+      ],
+      "hash": "a134d3baeccc11e3ce9ac5042d9f3f77bb7b64f42247ca4247aadbfd29f70c6e",
+      "imports": [],
+      "isTest": false,
+      "layer": "constants",
+      "loc": 6,
+      "module": "shared",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "ErrorCode"
         },
         {
@@ -15856,9 +16457,10 @@
     },
     {
       "exports": [],
-      "hash": "a111946179bbc82f91e09ecfd5972c5c42969c7166079be81cf1e6d6c474f8b0",
+      "hash": "7b33c8293eebfbe6817dd126a355ba36f2e7dc6831aa0f889d56157c22373819",
       "imports": [
         "./app.constants",
+        "./contact.constants",
         "./error-code.constants",
         "./language.constants",
         "./response-bounds.constants",
@@ -15871,7 +16473,7 @@
       ],
       "isTest": false,
       "layer": "constants",
-      "loc": 11,
+      "loc": 12,
       "module": "shared",
       "path": "packages/shared/src/constants/index.ts"
     },
@@ -16511,6 +17113,41 @@
       "path": "packages/shared/src/schemas/candidates.schema.ts"
     },
     {
+      "exports": [],
+      "hash": "ac660c568d59be0152362d4458b91f90450b54126b621a99b5b8b35fc1637f05",
+      "imports": [
+        "./contact.schemas",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "schemas",
+      "loc": 27,
+      "module": "shared",
+      "path": "packages/shared/src/schemas/contact.schemas.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ContactRequestSchema"
+        },
+        {
+          "kind": "const",
+          "name": "ContactResponseSchema"
+        }
+      ],
+      "hash": "d8568c473bf24f1c684ef80f220f937a9976a2dc689b1ea58b88a83d00abc463",
+      "imports": [
+        "../constants/contact.constants",
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "schemas",
+      "loc": 20,
+      "module": "shared",
+      "path": "packages/shared/src/schemas/contact.schemas.ts"
+    },
+    {
       "exports": [
         {
           "kind": "type",
@@ -16683,9 +17320,10 @@
     },
     {
       "exports": [],
-      "hash": "240285011c37eb08b0dccc00333d0253b6941517f828a4d1512ab31264aa382e",
+      "hash": "0d71049eb7c093b676bcc1b874cb4cb157f6d3a1f22eb55f183bbe84d506746b",
       "imports": [
         "./candidates.schema",
+        "./contact.schemas",
         "./game-result.schema",
         "./game-stream.schema",
         "./health.schema",
@@ -16699,7 +17337,7 @@
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 12,
+      "loc": 13,
       "module": "shared",
       "path": "packages/shared/src/schemas/index.ts"
     },
@@ -17029,14 +17667,37 @@
       "path": "packages/shared/src/types/api-error.schema.ts"
     },
     {
-      "exports": [],
-      "hash": "399f29acb781167b0df1ffa8738326cb97cf42eedd06eb648fa309455324a2bb",
+      "exports": [
+        {
+          "kind": "type",
+          "name": "ContactRequest"
+        },
+        {
+          "kind": "type",
+          "name": "ContactResponse"
+        }
+      ],
+      "hash": "844b30a55227c17345eb8d7aa4d08823b181a38586561a896f5a97512b0173e7",
       "imports": [
-        "./api-error.schema"
+        "../schemas/contact.schemas",
+        "zod"
       ],
       "isTest": false,
       "layer": "types",
-      "loc": 2,
+      "loc": 7,
+      "module": "shared",
+      "path": "packages/shared/src/types/contact.types.ts"
+    },
+    {
+      "exports": [],
+      "hash": "8838a20f56cdaba5e1cc6a3e76c3130fb7bad0e34881439d5e04595fdee3a58e",
+      "imports": [
+        "./api-error.schema",
+        "./contact.types"
+      ],
+      "isTest": false,
+      "layer": "types",
+      "loc": 3,
       "module": "shared",
       "path": "packages/shared/src/types/index.ts"
     },

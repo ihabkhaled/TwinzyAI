@@ -5,6 +5,21 @@ import { UPLOAD_TRANSPORT_HARD_CAP_BYTES } from '@twinzy/shared';
 import { validateEnv } from './env.schema';
 
 describe('validateEnv boolean configuration', () => {
+  it('requires complete SMTP configuration when contact email is enabled', () => {
+    expect(() => validateEnv({ CONTACT_EMAIL_ENABLED: 'true' })).toThrow(
+      /complete SMTP configuration/u,
+    );
+    expect(
+      validateEnv({
+        CONTACT_EMAIL_ENABLED: 'true',
+        CONTACT_EMAIL_FROM: 'from@example.com',
+        CONTACT_EMAIL_TO: 'to@example.com',
+        CONTACT_SMTP_HOST: 'smtp.example.com',
+        CONTACT_SMTP_USER: 'user',
+        CONTACT_SMTP_PASS: 'secret',
+      }).CONTACT_EMAIL_ENABLED,
+    ).toBe(true);
+  });
   it('parses explicit true and false values', () => {
     expect(validateEnv({ ENABLE_CLAMAV: 'true' }).ENABLE_CLAMAV).toBe(true);
     expect(validateEnv({ TRUST_PROXY: 'false' }).TRUST_PROXY).toBe(false);

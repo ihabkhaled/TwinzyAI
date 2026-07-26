@@ -15,6 +15,7 @@ describe('buildFooterNavLinks', () => {
       '/how-it-works',
       '/ai-safety',
       '/faq',
+      '/contact',
       '/help',
       '/privacy',
       '/terms',
@@ -26,6 +27,7 @@ describe('buildFooterNavLinks', () => {
       'nav.howItWorks',
       'nav.aiSafety',
       'nav.faq',
+      'about.contactTitle',
       'nav.help',
       'nav.privacy',
       'nav.terms',
@@ -49,6 +51,7 @@ describe('buildContentPageLinks', () => {
       '/how-it-works',
       '/ai-safety',
       '/faq',
+      '/contact',
       '/help',
       '/privacy',
       '/terms',
@@ -59,6 +62,6 @@ describe('buildContentPageLinks', () => {
     const hrefs = buildContentPageLinks(echoTranslate, '/faq').map((link) => link.href);
 
     expect(hrefs).not.toContain('/faq');
-    expect(hrefs).toHaveLength(6);
+    expect(hrefs).toHaveLength(7);
   });
 });

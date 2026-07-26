@@ -12,9 +12,8 @@ import {
 
 /**
  * next-intl request configuration. Locale is read from the {@link LOCALE_COOKIE_NAME}
- * cookie (there is no locale routing); messages for the active locale are loaded
- * lazily. Wire this into `next.config` via `withNextIntl('./src/packages/i18n/request.ts')`
- * in the app-shell wave.
+ * cookie (the locale proxy writes it for prefixed routes); messages for the
+ * active locale are loaded lazily.
  */
 
 const resolveLocaleFromCookie = async (): Promise<LanguageCodeValue> => {
@@ -24,7 +23,9 @@ const resolveLocaleFromCookie = async (): Promise<LanguageCodeValue> => {
   return isSupportedLanguageCode(cookieValue) ? cookieValue : DEFAULT_LOCALE;
 };
 
-const loadMessages = async (locale: LanguageCodeValue): Promise<AbstractIntlMessages> => {
+export const loadMessagesForLocale = async (
+  locale: LanguageCodeValue,
+): Promise<AbstractIntlMessages> => {
   // Dynamic specifier: only the active locale's dictionary reaches the bundle.
   const imported = (await import(`./messages/${locale}.json`)) as {
     readonly default: AbstractIntlMessages;
@@ -35,7 +36,7 @@ const loadMessages = async (locale: LanguageCodeValue): Promise<AbstractIntlMess
 
 export default getRequestConfig(async () => {
   const locale = await resolveLocaleFromCookie();
-  const messages = await loadMessages(locale);
+  const messages = await loadMessagesForLocale(locale);
 
   return { locale, messages, timeZone: DEFAULT_TIME_ZONE };
 });

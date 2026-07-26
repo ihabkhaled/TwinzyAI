@@ -1,5 +1,5 @@
 {
-  "count": 706,
+  "count": 709,
   "documents": [
     {
       "authority": "canonical",
@@ -10727,6 +10727,99 @@
       "summary": "**GO — 2026-07-26.** Scope, owners, architecture, privacy boundary, test plan, rollback (`git revert`",
       "title": "13 — Implementation Readiness",
       "tokens": 73,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "548911c255f7ebf64e1a959420872a51629b1066102491ffe1f6aebf45b6dd82",
+      "headings": [
+        "14 — Implementation"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-14-implementation",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "implementation",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/14-implementation.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Implemented the Twinzy-relevant subset of the external pack:",
+      "title": "14 — Implementation",
+      "tokens": 324,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "06037f72203e61b5c8093300ec96fa5a69c777c1afd9d867e6f02c92d6a0fd5f",
+      "headings": [
+        "15 — Code review"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-15-code-review",
+      "keywords": [
+        "code",
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "review",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/15-code-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Boundaries: XML rendering is owned by shared helpers; Route Handlers only validate parameters and",
+      "title": "15 — Code review",
+      "tokens": 174,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "f3b295bc0f23f2387ccb56388b3415e3a50b484f0e9e3ff9ce30a5d3c2108ab5",
+      "headings": [
+        "22 — Go / no-go"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-22-go-no-go",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/22-go-no-go.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Status: **GO after automated gates pass**.",
+      "title": "22 — Go / no-go",
+      "tokens": 126,
       "type": "doc"
     },
     {

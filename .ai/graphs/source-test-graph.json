@@ -74,6 +74,7 @@
     "apps/api/src/tests/fixtures/stubs.ts"
   ],
   "apps/api/src/config/index.ts": [
+    "apps/api/src/modules/contact/tests/contact.test.ts",
     "apps/api/src/modules/share-results/tests/share-result-services.test.ts",
     "apps/api/src/modules/share-results/tests/share-result-use-cases.test.ts",
     "apps/api/src/tests/share-results.integration.test.ts"
@@ -275,6 +276,12 @@
   ],
   "apps/api/src/modules/ai/model/prompt-version.constants.ts": [
     "apps/api/src/modules/ai/tests/prompt-template.repository.test.ts"
+  ],
+  "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts": [
+    "apps/api/src/modules/contact/tests/contact.test.ts"
+  ],
+  "apps/api/src/modules/contact/application/send-contact.use-case.ts": [
+    "apps/api/src/modules/contact/tests/contact.test.ts"
   ],
   "apps/api/src/modules/file-security/adapters/clamav.adapter.ts": [
     "apps/api/src/modules/file-security/tests/file-security.service.test.ts",
@@ -819,6 +826,9 @@
   "apps/web/src/shared/components/layout/footer-nav-link.component.tsx": [
     "apps/web/src/shared/components/layout/app-footer.component.test.tsx"
   ],
+  "apps/web/src/shared/constants/route-paths.constants.ts": [
+    "apps/web/src/shared/helpers/locale-route.helper.test.ts"
+  ],
   "apps/web/src/shared/constants/test-ids.constants.ts": [
     "apps/web/e2e/donations.spec.ts",
     "apps/web/e2e/game-cancel.spec.ts",
@@ -850,6 +860,9 @@
   "apps/web/src/shared/helpers/donate-link.helper.ts": [
     "apps/web/src/shared/helpers/donate-link.helper.test.ts"
   ],
+  "apps/web/src/shared/helpers/locale-route.helper.ts": [
+    "apps/web/src/shared/helpers/locale-route.helper.test.ts"
+  ],
   "apps/web/src/shared/helpers/page-title.helper.ts": [
     "apps/web/src/shared/helpers/page-title.helper.test.ts"
   ],
@@ -859,6 +872,9 @@
   "apps/web/src/shared/helpers/robots.helper.ts": [
     "apps/web/src/shared/helpers/robots.helper.test.ts"
   ],
+  "apps/web/src/shared/helpers/seo-xml.helper.ts": [
+    "apps/web/src/shared/helpers/seo-xml.helper.test.ts"
+  ],
   "apps/web/src/shared/helpers/site-nav.helper.ts": [
     "apps/web/src/shared/helpers/site-nav.helper.test.ts"
   ],
@@ -867,6 +883,9 @@
   ],
   "apps/web/src/shared/helpers/structured-data.helper.ts": [
     "apps/web/src/shared/helpers/structured-data.helper.test.ts"
+  ],
+  "apps/web/src/shared/helpers/xml-response.helper.ts": [
+    "apps/web/src/shared/helpers/xml-response.helper.test.ts"
   ],
   "apps/web/src/shared/hooks/useEscapeKey.hook.ts": [
     "apps/web/src/shared/hooks/shared-hooks.test.ts"
@@ -903,5 +922,8 @@
   ],
   "apps/web/src/shared/utils/is-defined.util.ts": [
     "apps/web/src/shared/utils/is-defined.util.test.ts"
+  ],
+  "packages/shared/src/schemas/contact.schemas.ts": [
+    "packages/shared/src/schemas/contact.schemas.test.ts"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "count": 178,
+  "count": 183,
   "tests": [
     {
       "kind": "unit",
@@ -344,6 +344,16 @@
       "targets": [
         "apps/api/src/modules/ai/lib/trait-text.util.ts",
         "apps/api/src/tests/fixtures/fake-ai-adapter.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:contact",
+      "path": "apps/api/src/modules/contact/tests/contact.test.ts",
+      "targets": [
+        "apps/api/src/config/index.ts",
+        "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts",
+        "apps/api/src/modules/contact/application/send-contact.use-case.ts"
       ]
     },
     {
@@ -1577,6 +1587,15 @@
     {
       "kind": "unit",
       "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/constants/route-paths.constants.ts",
+        "apps/web/src/shared/helpers/locale-route.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
       "path": "apps/web/src/shared/helpers/page-title.helper.test.ts",
       "targets": [
         "apps/web/src/shared/helpers/page-title.helper.ts"
@@ -1601,6 +1620,14 @@
     {
       "kind": "unit",
       "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/helpers/seo-xml.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
       "path": "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "targets": [
         "apps/web/src/shared/helpers/site-nav.helper.ts"
@@ -1620,6 +1647,14 @@
       "path": "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "targets": [
         "apps/web/src/shared/helpers/structured-data.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/xml-response.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/helpers/xml-response.helper.ts"
       ]
     },
     {
@@ -1696,6 +1731,14 @@
       "module": "web:tests",
       "path": "apps/web/src/tests/setup.ts",
       "targets": []
+    },
+    {
+      "kind": "unit",
+      "module": "shared",
+      "path": "packages/shared/src/schemas/contact.schemas.test.ts",
+      "targets": [
+        "packages/shared/src/schemas/contact.schemas.ts"
+      ]
     }
   ]
 }

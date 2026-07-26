@@ -142,6 +142,24 @@
       ]
     },
     {
+      "name": "ContactRequestSchema",
+      "path": "packages/shared/src/schemas/contact.schemas.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/contact.schemas.test.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/types/contact.types.ts"
+      ]
+    },
+    {
+      "name": "ContactResponseSchema",
+      "path": "packages/shared/src/schemas/contact.schemas.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/contact.schemas.test.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/types/contact.types.ts"
+      ]
+    },
+    {
       "name": "FinalGameResult",
       "path": "packages/shared/src/schemas/game-result.schema.ts",
       "usedBy": [

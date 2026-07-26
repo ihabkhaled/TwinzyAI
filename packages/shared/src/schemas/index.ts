@@ -1,4 +1,5 @@
 export * from './candidates.schema';
+export * from './contact.schemas';
 export * from './game-result.schema';
 export * from './game-stream.schema';
 export * from './health.schema';

@@ -169,6 +169,94 @@
       "readBy": []
     },
     {
+      "description": "Contact delivery is disabled unless every SMTP value is configured.",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_EMAIL_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_EMAIL_FROM",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "smtp",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_EMAIL_PROVIDER",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_EMAIL_TO",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "3",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_RATE_LIMIT_MAX",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "3600000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_RATE_LIMIT_WINDOW_MS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_SMTP_HOST",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_SMTP_PASS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "587",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_SMTP_PORT",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_SMTP_SECURE",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "CONTACT_SMTP_USER",
+      "readBy": []
+    },
+    {
       "description": "--- CORS --- Comma-separated list of allowed web origins for the API.",
       "example": "http://localhost:3000",
       "inEnvExample": true,
@@ -711,6 +799,6 @@
       "readBy": []
     }
   ],
-  "count": 86,
+  "count": 97,
   "undocumented": []
 }

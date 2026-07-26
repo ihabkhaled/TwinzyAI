@@ -210,6 +210,7 @@
       "api:ai",
       "api:benchmark",
       "api:bootstrap",
+      "api:contact",
       "api:core",
       "api:file-security",
       "api:game",
@@ -305,6 +306,7 @@
       "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
       "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
+      "apps/api/src/modules/contact/tests/contact.test.ts",
       "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
       "apps/api/src/modules/share-results/tests/share-result-services.test.ts",
       "apps/api/src/modules/share-results/tests/share-result-use-cases.test.ts",
@@ -313,10 +315,25 @@
       "apps/api/src/tests/share-results.integration.test.ts"
     ]
   },
+  "api:contact": {
+    "consumers": [
+      "api:root"
+    ],
+    "dependsOn": [
+      "api:config",
+      "api:core",
+      "shared"
+    ],
+    "docs": [],
+    "tests": [
+      "apps/api/src/modules/contact/tests/contact.test.ts"
+    ]
+  },
   "api:core": {
     "consumers": [
       "api:ai",
       "api:bootstrap",
+      "api:contact",
       "api:file-security",
       "api:game",
       "api:health",
@@ -731,6 +748,7 @@
     "dependsOn": [
       "api:bootstrap",
       "api:config",
+      "api:contact",
       "api:core",
       "api:game",
       "api:health",
@@ -960,6 +978,7 @@
       "api:benchmark",
       "api:bootstrap",
       "api:config",
+      "api:contact",
       "api:core",
       "api:file-security",
       "api:game",
@@ -967,6 +986,7 @@
       "api:payments",
       "api:result-aggregation",
       "api:share-results",
+      "web:app",
       "web:game",
       "web:pkg-axios",
       "web:pkg-i18n",
@@ -1072,11 +1092,16 @@
       "support/AI-result-expectations.md",
       "support/error-code-catalog.md"
     ],
-    "tests": []
+    "tests": [
+      "packages/shared/src/schemas/contact.schemas.test.ts"
+    ]
   },
   "web:app": {
     "consumers": [],
-    "dependsOn": [],
+    "dependsOn": [
+      "shared",
+      "web:shared"
+    ],
     "docs": [
       "agents/accessibility-reviewer.md",
       "agents/i18n-rtl-reviewer.md",
@@ -1473,7 +1498,9 @@
     "tests": []
   },
   "web:shared": {
-    "consumers": [],
+    "consumers": [
+      "web:app"
+    ],
     "dependsOn": [
       "shared"
     ],
@@ -1550,12 +1577,15 @@
       "apps/web/src/shared/errors/http-error-to-message-key.mapper.test.ts",
       "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts",
       "apps/web/src/shared/helpers/donate-link.helper.test.ts",
+      "apps/web/src/shared/helpers/locale-route.helper.test.ts",
       "apps/web/src/shared/helpers/page-title.helper.test.ts",
       "apps/web/src/shared/helpers/read-theme-cookie.helper.test.ts",
       "apps/web/src/shared/helpers/robots.helper.test.ts",
+      "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
+      "apps/web/src/shared/helpers/xml-response.helper.test.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
       "apps/web/src/shared/hooks/useJsonLd.hook.test.ts",
       "apps/web/src/shared/security/content-security-policy.test.ts",

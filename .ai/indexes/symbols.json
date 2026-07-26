@@ -480,6 +480,15 @@
   "buildLaneFocusSection": [
     "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
   ],
+  "buildLocaleSitemapXml": [
+    "apps/web/src/shared/helpers/seo-xml.helper.ts"
+  ],
+  "buildLocalizedAlternates": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
+  ],
+  "buildLocalizedPath": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
+  ],
   "buildMatchingEvidence": [
     "apps/api/src/modules/ai/lib/matching-evidence.util.ts"
   ],
@@ -505,6 +514,9 @@
   "buildRobotsConfig": [
     "apps/web/src/shared/helpers/robots.helper.ts"
   ],
+  "buildRssXml": [
+    "apps/web/src/shared/helpers/seo-xml.helper.ts"
+  ],
   "buildSchemaValidator": [
     "apps/api/src/modules/ai/lib/json-response.util.ts"
   ],
@@ -528,6 +540,9 @@
   ],
   "buildSitemapEntries": [
     "apps/web/src/shared/helpers/sitemap.helper.ts"
+  ],
+  "buildSitemapIndexXml": [
+    "apps/web/src/shared/helpers/seo-xml.helper.ts"
   ],
   "buildStreamCorsHeaders": [
     "apps/api/src/modules/game/lib/stream-cors.ts"
@@ -872,6 +887,82 @@
   "CONSENT_REQUIRED_MESSAGE": [
     "apps/api/src/core/errors/error.constants.ts"
   ],
+  "CONTACT_ARIA_LIVE": [
+    "apps/web/src/app/contact/contact-ui.constants.ts"
+  ],
+  "CONTACT_EMAIL_MAX_LENGTH": [
+    "packages/shared/src/constants/contact.constants.ts"
+  ],
+  "CONTACT_LABELS": [
+    "apps/web/src/app/contact/contact-ui.constants.ts"
+  ],
+  "CONTACT_MESSAGE_MAX_LENGTH": [
+    "packages/shared/src/constants/contact.constants.ts"
+  ],
+  "CONTACT_MESSAGE_MIN_LENGTH": [
+    "packages/shared/src/constants/contact.constants.ts"
+  ],
+  "CONTACT_SUBJECT_MAX_LENGTH": [
+    "packages/shared/src/constants/contact.constants.ts"
+  ],
+  "CONTACT_SUBJECT_MIN_LENGTH": [
+    "packages/shared/src/constants/contact.constants.ts"
+  ],
+  "CONTACT_SUCCESS_RESPONSE": [
+    "apps/api/src/modules/contact/model/contact.constants.ts"
+  ],
+  "CONTACT_THROTTLE": [
+    "apps/api/src/modules/contact/model/contact.constants.ts"
+  ],
+  "ContactController": [
+    "apps/api/src/modules/contact/api/contact.controller.ts"
+  ],
+  "ContactEmailConfig": [
+    "apps/api/src/config/contact-config.types.ts"
+  ],
+  "contactEnvShape": [
+    "apps/api/src/config/contact-env.schema.ts"
+  ],
+  "ContactForm": [
+    "apps/web/src/app/contact/contact-form.component.tsx"
+  ],
+  "ContactFormContainer": [
+    "apps/web/src/app/contact/contact-form.container.tsx"
+  ],
+  "ContactFormProps": [
+    "apps/web/src/app/contact/contact-form.types.ts"
+  ],
+  "contactInputClass": [
+    "apps/web/src/app/contact/contact.variants.ts"
+  ],
+  "ContactModule": [
+    "apps/api/src/modules/contact/contact.module.ts",
+    "apps/api/src/modules/contact/index.ts"
+  ],
+  "ContactRequest": [
+    "packages/shared/src/types/contact.types.ts"
+  ],
+  "ContactRequestSchema": [
+    "packages/shared/src/schemas/contact.schemas.ts"
+  ],
+  "ContactResponse": [
+    "packages/shared/src/types/contact.types.ts"
+  ],
+  "ContactResponseSchema": [
+    "packages/shared/src/schemas/contact.schemas.ts"
+  ],
+  "ContactStatus": [
+    "apps/web/src/app/contact/contact-form.types.ts"
+  ],
+  "contactSubmitClass": [
+    "apps/web/src/app/contact/contact.variants.ts"
+  ],
+  "ContactSubmitEvent": [
+    "apps/web/src/app/contact/contact-form.types.ts"
+  ],
+  "contactTextAreaClass": [
+    "apps/web/src/app/contact/contact.variants.ts"
+  ],
   "containsEmbeddedImageData": [
     "apps/api/src/modules/share-results/lib/share-result-safety.util.ts"
   ],
@@ -1045,6 +1136,9 @@
   ],
   "createValidationException": [
     "apps/api/src/core/validation/validation-exception.factory.ts"
+  ],
+  "createXmlResponse": [
+    "apps/web/src/shared/helpers/xml-response.helper.ts"
   ],
   "createZodValidationPipe": [
     "apps/api/src/core/validation/index.ts",
@@ -1240,6 +1334,9 @@
   ],
   "ErrorStreamMessageSchema": [
     "packages/shared/src/schemas/game-stream.schema.ts"
+  ],
+  "escapeXml": [
+    "apps/web/src/shared/helpers/xml-response.helper.ts"
   ],
   "evaluateResponseText": [
     "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
@@ -1495,6 +1592,7 @@
   "generateMetadata": [
     "apps/web/src/app/about/page.tsx",
     "apps/web/src/app/ai-safety/page.tsx",
+    "apps/web/src/app/contact/page.tsx",
     "apps/web/src/app/faq/page.tsx",
     "apps/web/src/app/game/page.tsx",
     "apps/web/src/app/help/page.tsx",
@@ -1518,6 +1616,13 @@
   ],
   "GENERIC_PROMPT_ERROR": [
     "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+  ],
+  "GET": [
+    "apps/web/src/app/[locale]/feed.xml/route.ts",
+    "apps/web/src/app/sitemaps/[locale].xml/route.ts"
+  ],
+  "getContactStatusView": [
+    "apps/web/src/app/contact/contact-status.helper.ts"
   ],
   "getJson": [
     "apps/web/src/packages/axios/http-client.ts",
@@ -1730,6 +1835,9 @@
     "apps/web/src/packages/axios/http-error.ts",
     "apps/web/src/packages/axios/index.ts"
   ],
+  "isMachinePath": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
+  ],
   "isMatchingStreamFrame": [
     "apps/web/src/modules/game/helpers/stream-frame.helper.ts"
   ],
@@ -1743,6 +1851,9 @@
   "isPayPalConfigured": [
     "apps/web/src/packages/paypal/index.ts",
     "apps/web/src/packages/paypal/paypal-sdk.ts"
+  ],
+  "isPublicPagePath": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
   ],
   "isRecord": [
     "packages/shared/src/utils/guards.util.ts"
@@ -1902,6 +2013,9 @@
   "LoadingStateProps": [
     "apps/web/src/shared/components/types/shared-component.types.ts"
   ],
+  "loadMessagesForLocale": [
+    "apps/web/src/packages/i18n/request.ts"
+  ],
   "LOCALE_COOKIE_MAX_AGE_SECONDS": [
     "apps/web/src/packages/i18n/index.ts",
     "apps/web/src/packages/i18n/locale.constants.ts"
@@ -1916,6 +2030,9 @@
   ],
   "LocaleSwitcherController": [
     "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+  ],
+  "LocaleXmlRouteContext": [
+    "apps/web/src/shared/components/types/route-handler.types.ts"
   ],
   "LogContext": [
     "apps/api/src/core/logger/logger.port.ts"
@@ -2361,6 +2478,9 @@
   ],
   "ParsedUploadedFile": [
     "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "parseLocalizedPath": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
   ],
   "parseMultipartUpload": [
     "apps/api/src/core/http/multipart-upload.parser.ts"
@@ -3159,6 +3279,15 @@
   "routeEntryKey": [
     "apps/api/src/config/ai-route.types.ts"
   ],
+  "RssDocumentOptions": [
+    "apps/web/src/shared/components/types/seo.types.ts"
+  ],
+  "RssMessages": [
+    "apps/web/src/shared/components/types/seo.types.ts"
+  ],
+  "RssMessageShape": [
+    "apps/web/src/shared/components/types/route-handler.types.ts"
+  ],
   "runMockBenchmark": [
     "apps/api/src/benchmark/benchmark-runner.ts"
   ],
@@ -3210,6 +3339,9 @@
   ],
   "SemaphoreWaiter": [
     "apps/api/src/core/concurrency/concurrency.types.ts"
+  ],
+  "SendContactUseCase": [
+    "apps/api/src/modules/contact/application/send-contact.use-case.ts"
   ],
   "serializeJsonLd": [
     "apps/web/src/shared/helpers/structured-data.helper.ts"
@@ -3446,6 +3578,9 @@
   "SITEMAP_PRIORITY_BY_PATH": [
     "apps/web/src/shared/constants/seo.constants.ts"
   ],
+  "SitemapDocumentOptions": [
+    "apps/web/src/shared/components/types/seo.types.ts"
+  ],
   "Skeleton": [
     "apps/web/src/packages/ui-primitives/index.ts",
     "apps/web/src/packages/ui-primitives/skeleton.tsx"
@@ -3476,6 +3611,9 @@
   ],
   "SkipLinkProps": [
     "apps/web/src/shared/components/types/shared-component.types.ts"
+  ],
+  "SmtpMailAdapter": [
+    "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts"
   ],
   "SparklesIcon": [
     "apps/web/src/packages/icons/index.ts"
@@ -4027,6 +4165,9 @@
   "useCameraSettings": [
     "apps/web/src/modules/game/hooks/useCameraSettings.hook.ts"
   ],
+  "useContactForm": [
+    "apps/web/src/app/contact/use-contact-form.hook.ts"
+  ],
   "useCountdown": [
     "apps/web/src/modules/game/hooks/useCountdown.hook.ts"
   ],
@@ -4095,6 +4236,9 @@
   ],
   "useUiPreferencesStore": [
     "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts"
+  ],
+  "validateContactEnv": [
+    "apps/api/src/config/contact-env.schema.ts"
   ],
   "validateEnv": [
     "apps/api/src/config/env.schema.ts"

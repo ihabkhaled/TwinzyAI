@@ -1,5 +1,5 @@
 {
-  "count": 41,
+  "count": 42,
   "modules": [
     {
       "docs": [
@@ -60,7 +60,7 @@
         "docs/env-vars.md",
         "rules/25-configuration-and-environment.md"
       ],
-      "fileCount": 15,
+      "fileCount": 17,
       "lane": "critical",
       "layers": [
         "config"
@@ -68,6 +68,23 @@
       "module": "api:config",
       "owner": "repository owner",
       "responsibility": "Typed zod-validated fail-fast env configuration - env.schema.ts single source, AppConfigService the only injectable surface.",
+      "root": "apps"
+    },
+    {
+      "docs": [],
+      "fileCount": 7,
+      "lane": null,
+      "layers": [
+        "adapters",
+        "api",
+        "application",
+        "model",
+        "root",
+        "tests"
+      ],
+      "module": "api:contact",
+      "owner": "unassigned",
+      "responsibility": "",
       "root": "apps"
     },
     {
@@ -259,7 +276,7 @@
         "structure/modules/shared.md",
         "docs/ai-safety.md"
       ],
-      "fileCount": 36,
+      "fileCount": 40,
       "lane": "standard",
       "layers": [
         "constants",
@@ -279,7 +296,7 @@
         "structure/repository-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 21,
+      "fileCount": 31,
       "lane": "standard",
       "layers": [
         "app"
@@ -615,7 +632,7 @@
         "structure/layer-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 70,
+      "fileCount": 78,
       "lane": "standard",
       "layers": [
         "shared"
@@ -661,6 +678,7 @@
     }
   ],
   "unmappedModules": [
+    "api:contact",
     "api:root",
     "web:pkg-adsense",
     "web:pkg-paymob",

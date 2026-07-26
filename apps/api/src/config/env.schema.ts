@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { contactEnvShape, validateContactEnv } from './contact-env.schema';
 import {
   DEFAULT_AI_CALLS_PER_ANALYSIS,
   DEFAULT_AI_GENERATION_CONCURRENCY,
@@ -110,6 +111,7 @@ const EnvSchema = z
       .max(MAX_PORT_NUMBER)
       .default(DEFAULT_API_PORT),
     CORS_ALLOWED_ORIGINS: z.string().default(DEFAULT_CORS_ORIGIN),
+    ...contactEnvShape,
     LOG_LEVEL: z.enum(LOG_LEVELS).default('info'),
     ENABLE_SWAGGER: optionalBooleanFromString,
     RATE_LIMIT_TTL_MS: z.coerce
@@ -360,6 +362,7 @@ const EnvSchema = z
     SHARE_RESULT_PUBLIC_BASE_URL: z.url().default(DEFAULT_SHARE_RESULT_PUBLIC_BASE_URL),
   })
   .superRefine((env, context) => {
+    validateContactEnv(env, context);
     if (env.STREAM_TTL_MS < env.ANALYSIS_TIMEOUT_MS) {
       context.addIssue({
         code: 'custom',

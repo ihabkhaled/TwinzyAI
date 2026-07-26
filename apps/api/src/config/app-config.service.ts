@@ -11,6 +11,7 @@ import {
 } from './ai-provider.constants';
 import type { AiRouteEntry } from './ai-route.types';
 import { parseAiRouteList } from './ai-route.util';
+import type { ContactEmailConfig } from './contact-config.types';
 import type { LogLevelValue, NodeEnvironment, ParsedEnv } from './env.schema';
 import {
   AI_STEP_ROUTE_ENV_KEYS,
@@ -52,6 +53,21 @@ export class AppConfigService {
 
   public get corsAllowedOrigins(): readonly string[] {
     return this.toList(this.configService.get('CORS_ALLOWED_ORIGINS', { infer: true }));
+  }
+
+  public get contactEmailConfig(): ContactEmailConfig {
+    return {
+      enabled: this.configService.get('CONTACT_EMAIL_ENABLED', { infer: true }),
+      from: this.configService.get('CONTACT_EMAIL_FROM', { infer: true }),
+      to: this.configService.get('CONTACT_EMAIL_TO', { infer: true }),
+      rateLimitMax: this.configService.get('CONTACT_RATE_LIMIT_MAX', { infer: true }),
+      rateLimitWindowMs: this.configService.get('CONTACT_RATE_LIMIT_WINDOW_MS', { infer: true }),
+      host: this.configService.get('CONTACT_SMTP_HOST', { infer: true }),
+      port: this.configService.get('CONTACT_SMTP_PORT', { infer: true }),
+      secure: this.configService.get('CONTACT_SMTP_SECURE', { infer: true }),
+      user: this.configService.get('CONTACT_SMTP_USER', { infer: true }),
+      pass: this.configService.get('CONTACT_SMTP_PASS', { infer: true }),
+    };
   }
 
   public get logLevel(): LogLevelValue {

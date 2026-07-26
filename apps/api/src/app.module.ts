@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppConfigModule } from './config/config.module';
 import { CoreModule } from './core/core.module';
 import { LoggerModule } from './core/logger/logger.module';
+import { ContactModule } from './modules/contact';
 import { GameModule } from './modules/game';
 import { HealthModule } from './modules/health';
 import { PaymentsModule } from './modules/payments';
@@ -21,6 +22,7 @@ import { ShareResultsModule } from './modules/share-results';
     CoreModule,
     HealthModule,
     PrivacyModule,
+    ContactModule,
     GameModule,
     PaymentsModule,
     ShareResultsModule,

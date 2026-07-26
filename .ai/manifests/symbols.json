@@ -1,5 +1,5 @@
 {
-  "count": 1515,
+  "count": 1565,
   "symbols": [
     {
       "kind": "const",
@@ -1228,6 +1228,27 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildLocaleSitemapXml",
+      "path": "apps/web/src/shared/helpers/seo-xml.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildLocalizedAlternates",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildLocalizedPath",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "lib",
       "module": "api:ai",
       "name": "buildMatchingEvidence",
@@ -1291,6 +1312,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildRssXml",
+      "path": "apps/web/src/shared/helpers/seo-xml.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "lib",
       "module": "api:ai",
       "name": "buildSchemaValidator",
@@ -1344,6 +1372,13 @@
       "module": "web:shared",
       "name": "buildSitemapEntries",
       "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildSitemapIndexXml",
+      "path": "apps/web/src/shared/helpers/seo-xml.helper.ts"
     },
     {
       "kind": "const",
@@ -2194,6 +2229,188 @@
     },
     {
       "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "CONTACT_ARIA_LIVE",
+      "path": "apps/web/src/app/contact/contact-ui.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "CONTACT_EMAIL_MAX_LENGTH",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "CONTACT_LABELS",
+      "path": "apps/web/src/app/contact/contact-ui.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "CONTACT_MESSAGE_MAX_LENGTH",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "CONTACT_MESSAGE_MIN_LENGTH",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "CONTACT_SUBJECT_MAX_LENGTH",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "CONTACT_SUBJECT_MIN_LENGTH",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:contact",
+      "name": "CONTACT_SUCCESS_RESPONSE",
+      "path": "apps/api/src/modules/contact/model/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:contact",
+      "name": "CONTACT_THROTTLE",
+      "path": "apps/api/src/modules/contact/model/contact.constants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "api",
+      "module": "api:contact",
+      "name": "ContactController",
+      "path": "apps/api/src/modules/contact/api/contact.controller.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "config",
+      "module": "api:config",
+      "name": "ContactEmailConfig",
+      "path": "apps/api/src/config/contact-config.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "contactEnvShape",
+      "path": "apps/api/src/config/contact-env.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "ContactForm",
+      "path": "apps/web/src/app/contact/contact-form.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "ContactFormContainer",
+      "path": "apps/web/src/app/contact/contact-form.container.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "app",
+      "module": "web:app",
+      "name": "ContactFormProps",
+      "path": "apps/web/src/app/contact/contact-form.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "contactInputClass",
+      "path": "apps/web/src/app/contact/contact.variants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "root",
+      "module": "api:contact",
+      "name": "ContactModule",
+      "path": "apps/api/src/modules/contact/contact.module.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "root",
+      "module": "api:contact",
+      "name": "ContactModule",
+      "path": "apps/api/src/modules/contact/index.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "types",
+      "module": "shared",
+      "name": "ContactRequest",
+      "path": "packages/shared/src/types/contact.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ContactRequestSchema",
+      "path": "packages/shared/src/schemas/contact.schemas.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "types",
+      "module": "shared",
+      "name": "ContactResponse",
+      "path": "packages/shared/src/types/contact.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ContactResponseSchema",
+      "path": "packages/shared/src/schemas/contact.schemas.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "app",
+      "module": "web:app",
+      "name": "ContactStatus",
+      "path": "apps/web/src/app/contact/contact-form.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "contactSubmitClass",
+      "path": "apps/web/src/app/contact/contact.variants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "app",
+      "module": "web:app",
+      "name": "ContactSubmitEvent",
+      "path": "apps/web/src/app/contact/contact-form.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "contactTextAreaClass",
+      "path": "apps/web/src/app/contact/contact.variants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "lib",
       "module": "api:share-results",
       "name": "containsEmbeddedImageData",
@@ -2611,6 +2828,13 @@
       "module": "api:core",
       "name": "createValidationException",
       "path": "apps/api/src/core/validation/validation-exception.factory.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "createXmlResponse",
+      "path": "apps/web/src/shared/helpers/xml-response.helper.ts"
     },
     {
       "kind": "re-export",
@@ -3108,6 +3332,13 @@
       "module": "shared",
       "name": "ErrorStreamMessageSchema",
       "path": "packages/shared/src/schemas/game-stream.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "escapeXml",
+      "path": "apps/web/src/shared/helpers/xml-response.helper.ts"
     },
     {
       "kind": "const",
@@ -3751,6 +3982,13 @@
       "layer": "app",
       "module": "web:app",
       "name": "generateMetadata",
+      "path": "apps/web/src/app/contact/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
       "path": "apps/web/src/app/faq/page.tsx"
     },
     {
@@ -3850,6 +4088,27 @@
       "module": "api:ai",
       "name": "GENERIC_PROMPT_ERROR",
       "path": "apps/api/src/modules/ai/model/prompt-version.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "GET",
+      "path": "apps/web/src/app/[locale]/feed.xml/route.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "GET",
+      "path": "apps/web/src/app/sitemaps/[locale].xml/route.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "getContactStatusView",
+      "path": "apps/web/src/app/contact/contact-status.helper.ts"
     },
     {
       "kind": "function",
@@ -4420,6 +4679,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "isMachinePath",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "helpers",
       "module": "web:game",
       "name": "isMatchingStreamFrame",
@@ -4459,6 +4725,13 @@
       "module": "web:pkg-paypal",
       "name": "isPayPalConfigured",
       "path": "apps/web/src/packages/paypal/paypal-sdk.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "isPublicPagePath",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },
     {
       "kind": "const",
@@ -4867,6 +5140,13 @@
       "path": "apps/web/src/shared/components/types/shared-component.types.ts"
     },
     {
+      "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-i18n",
+      "name": "loadMessagesForLocale",
+      "path": "apps/web/src/packages/i18n/request.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-i18n",
@@ -4914,6 +5194,13 @@
       "module": "web:ui-preferences",
       "name": "LocaleSwitcherController",
       "path": "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "LocaleXmlRouteContext",
+      "path": "apps/web/src/shared/components/types/route-handler.types.ts"
     },
     {
       "kind": "type",
@@ -5985,6 +6272,13 @@
       "module": "api:core",
       "name": "ParsedUploadedFile",
       "path": "apps/api/src/core/http/multipart.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "parseLocalizedPath",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },
     {
       "kind": "const",
@@ -7968,6 +8262,27 @@
       "path": "apps/api/src/config/ai-route.types.ts"
     },
     {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "RssDocumentOptions",
+      "path": "apps/web/src/shared/components/types/seo.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "RssMessages",
+      "path": "apps/web/src/shared/components/types/seo.types.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "RssMessageShape",
+      "path": "apps/web/src/shared/components/types/route-handler.types.ts"
+    },
+    {
       "kind": "const",
       "layer": "benchmark",
       "module": "api:benchmark",
@@ -8092,6 +8407,13 @@
       "module": "api:core",
       "name": "SemaphoreWaiter",
       "path": "apps/api/src/core/concurrency/concurrency.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:contact",
+      "name": "SendContactUseCase",
+      "path": "apps/api/src/modules/contact/application/send-contact.use-case.ts"
     },
     {
       "kind": "const",
@@ -8661,6 +8983,13 @@
       "path": "apps/web/src/shared/constants/seo.constants.ts"
     },
     {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "SitemapDocumentOptions",
+      "path": "apps/web/src/shared/components/types/seo.types.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-ui-primitives",
@@ -8736,6 +9065,13 @@
       "module": "web:shared",
       "name": "SkipLinkProps",
       "path": "apps/web/src/shared/components/types/shared-component.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "adapters",
+      "module": "api:contact",
+      "name": "SmtpMailAdapter",
+      "path": "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts"
     },
     {
       "kind": "re-export",
@@ -10111,6 +10447,13 @@
     },
     {
       "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "useContactForm",
+      "path": "apps/web/src/app/contact/use-contact-form.hook.ts"
+    },
+    {
+      "kind": "const",
       "layer": "hooks",
       "module": "web:game",
       "name": "useCountdown",
@@ -10269,6 +10612,13 @@
       "module": "web:ui-preferences",
       "name": "useUiPreferencesStore",
       "path": "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "validateContactEnv",
+      "path": "apps/api/src/config/contact-env.schema.ts"
     },
     {
       "kind": "const",
