@@ -13,7 +13,7 @@
 | Test files | 183 |
 | Canonical documents | 709 |
 | Open contradiction-registry entries | 3 |
-| Stale items at last analysis | 6 |
+| Stale items at last analysis | 0 |
 | Broken links at last analysis | 9 |
 
 ## Active feature folders (docs/features/)
