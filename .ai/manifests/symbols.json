@@ -1,5 +1,5 @@
 {
-  "count": 1573,
+  "count": 1574,
   "symbols": [
     {
       "kind": "const",
@@ -734,6 +734,13 @@
       "layer": "shared",
       "module": "web:shared",
       "name": "appHeaderBrandClass",
+      "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "appHeaderBrandLabelClass",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
     {

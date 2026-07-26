@@ -18,6 +18,8 @@ Implemented the Twinzy-relevant subset of the external pack:
   Next.js launches, while preserving production build output required by `next start`.
 - machine-readable sitemap, feed, and robots responses omit the HTML-only nonce CSP so browser XML
   viewers can render their native tree presentation; CSP remains mandatory on HTML pages.
+- the header keeps all five navigation controls discoverable at 320px by collapsing only the
+  decorative brand wordmark below the `sm` breakpoint while retaining its icon and accessible name.
 
 The foreign pack's accounts, database migrations, public-chat indexing, internal token feeds, and
 unreviewed thirteenth locale were intentionally excluded.

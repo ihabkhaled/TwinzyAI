@@ -294,6 +294,9 @@
   "appHeaderBrandClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
+  "appHeaderBrandLabelClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
   "appHeaderClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],

@@ -15,3 +15,5 @@
   through npm lifecycle hooks for development, E2E development, and production start commands.
 - Header scope: the proxy applies the nonce CSP only to HTML surfaces; machine XML keeps its XML
   content type and security headers without an irrelevant policy that breaks Chrome's XML viewer.
+- Mobile layout: the five-control header no longer overflows at the supported 320px viewport; the
+  Contact link remains present and labeled from `sm` upward, with its mail icon available on phones.

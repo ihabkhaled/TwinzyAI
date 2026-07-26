@@ -15059,7 +15059,7 @@
           "name": "AppHeader"
         }
       ],
-      "hash": "4ce41ad3b8f6379c03582868898f028d6866c4354a0866a2a23e3a2579060d80",
+      "hash": "fa933138e9336078ec6ecd310180223ed195208e8f141ca3cbe96b7e1ae0e9ed",
       "imports": [
         "../types/shared-component.types",
         "./app-header.variants",
@@ -15068,7 +15068,7 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 32,
+      "loc": 33,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/layout/app-header.component.tsx"
     },
@@ -15077,6 +15077,10 @@
         {
           "kind": "const",
           "name": "appHeaderBrandClass"
+        },
+        {
+          "kind": "const",
+          "name": "appHeaderBrandLabelClass"
         },
         {
           "kind": "const",
@@ -15115,11 +15119,11 @@
           "name": "headerLocaleSelectClass"
         }
       ],
-      "hash": "3bf0d269c21a8972e82921c8431a569987218d6f076200d5240884d3227b650b",
+      "hash": "a622dfafdf88a168ae36dacc88203917c1a9383aa85ee500fecacff7a2c76e35",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 40,
+      "loc": 43,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },

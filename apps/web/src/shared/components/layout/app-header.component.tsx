@@ -6,6 +6,7 @@ import type { AppHeaderProps } from '../types/shared-component.types';
 
 import {
   appHeaderBrandClass,
+  appHeaderBrandLabelClass,
   appHeaderClass,
   appHeaderControlsClass,
   appHeaderInnerClass,
@@ -22,7 +23,7 @@ export function AppHeader({ brandLabel, children }: Readonly<AppHeaderProps>): R
       <div className={appHeaderInnerClass}>
         <span className={appHeaderBrandClass}>
           <SparklesIcon aria-hidden size={20} />
-          {brandLabel}
+          <span className={appHeaderBrandLabelClass}>{brandLabel}</span>
         </span>
         <div className={appHeaderControlsClass}>{children}</div>
       </div>
