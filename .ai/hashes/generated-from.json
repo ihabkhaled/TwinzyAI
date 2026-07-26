@@ -1813,7 +1813,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "5d53e087e4664ee0ab5e0518dca2b58d13a29ac6361db7ab63afd80c3e44a520"
+    "inputsHash": "feda26f980140bd5fa30e42f16a3226c46e88cd7c6dc5768a4136d30a89280b4"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2572,7 +2572,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "5b39fd887782d4ecc0f6eeb5b0e69b8d26fcf4614c05810aaa3b8080412c2087"
+    "inputsHash": "42b3319605f8615c68d2466bc2df018984e31745763322d2a597215c926f6253"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -3345,7 +3345,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "5b39fd887782d4ecc0f6eeb5b0e69b8d26fcf4614c05810aaa3b8080412c2087"
+    "inputsHash": "42b3319605f8615c68d2466bc2df018984e31745763322d2a597215c926f6253"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -4093,7 +4093,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "5b39fd887782d4ecc0f6eeb5b0e69b8d26fcf4614c05810aaa3b8080412c2087"
+    "inputsHash": "42b3319605f8615c68d2466bc2df018984e31745763322d2a597215c926f6253"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

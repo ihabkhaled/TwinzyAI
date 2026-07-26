@@ -31,6 +31,7 @@ describe('locale route helpers', () => {
 
   it('classifies public and machine paths', () => {
     expect(isPublicPagePath('/about')).toBe(true);
+    expect(isPublicPagePath('/game')).toBe(false);
     expect(isPublicPagePath('/share/id')).toBe(false);
     expect(isMachinePath('/sitemap.xml')).toBe(true);
     expect(isMachinePath('/sitemaps/en.xml')).toBe(true);

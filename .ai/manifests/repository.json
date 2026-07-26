@@ -15700,7 +15700,7 @@
     },
     {
       "exports": [],
-      "hash": "6c8a0ecafef024d24fd2c7e7293204a305c677ac0e90c607100425841f159ba8",
+      "hash": "028b093d2db72dea71b04f9d446e157cb138b1cb9c07952c4f1f5071dcd2ba30",
       "imports": [
         "../constants/route-paths.constants",
         "./locale-route.helper",
@@ -15708,7 +15708,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 41,
+      "loc": 42,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts"
     },
@@ -15735,7 +15735,7 @@
           "name": "parseLocalizedPath"
         }
       ],
-      "hash": "079556c613a713faa5445213db7bf3af649981825f362636c2867854fa4b1042",
+      "hash": "8b2ae2d72f333a83292eaa64cd8a62b589e86b3b8dc32c064bd48e4fe5d19df4",
       "imports": [
         "../constants/route-paths.constants",
         "@/packages/i18n",
@@ -15743,7 +15743,7 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 59,
+      "loc": 61,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },

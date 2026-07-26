@@ -9,7 +9,9 @@ import {
 
 import { ROUTE_PATHS } from '../constants/route-paths.constants';
 
-const PUBLIC_ROUTE_PATHS = new Set<string>(Object.values(ROUTE_PATHS));
+const PUBLIC_ROUTE_PATHS = new Set<string>(
+  Object.values(ROUTE_PATHS).filter((path) => path !== ROUTE_PATHS.game),
+);
 const MACHINE_PATH_PREFIXES = ['/sitemaps/', '/_next/', '/api/'] as const;
 
 /** Prefix a first-class route with its reviewed content locale. */
