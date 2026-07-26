@@ -1393,6 +1393,7 @@
       "apps/web/src/app/contact/contact-ui.constants.ts",
       "apps/web/src/app/contact/contact.variants.ts",
       "apps/web/src/app/contact/page.tsx",
+      "apps/web/src/app/contact/use-contact-form.hook.test.tsx",
       "apps/web/src/app/contact/use-contact-form.hook.ts",
       "apps/web/src/app/content.variants.ts",
       "apps/web/src/app/error.tsx",
@@ -1704,6 +1705,7 @@
       "apps/web/src/shared/components/layout/app-header.component.test.tsx",
       "apps/web/src/shared/components/layout/app-header.component.tsx",
       "apps/web/src/shared/components/layout/app-header.variants.ts",
+      "apps/web/src/shared/components/layout/contact-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/donate-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/footer-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/home-link.component.tsx",
@@ -1813,7 +1815,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "2cf63e5ca9d4a458ef9395505e61ca1d8bb809947e7eb1d4d18cdb91d542d67c"
+    "inputsHash": "8541e5b4842a2e53c69565bc59bcb9c2de491facb14974d0df8d2bbc58c2372d"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2153,6 +2155,7 @@
       "apps/web/src/app/contact/contact-ui.constants.ts",
       "apps/web/src/app/contact/contact.variants.ts",
       "apps/web/src/app/contact/page.tsx",
+      "apps/web/src/app/contact/use-contact-form.hook.test.tsx",
       "apps/web/src/app/contact/use-contact-form.hook.ts",
       "apps/web/src/app/content.variants.ts",
       "apps/web/src/app/error.tsx",
@@ -2464,6 +2467,7 @@
       "apps/web/src/shared/components/layout/app-header.component.test.tsx",
       "apps/web/src/shared/components/layout/app-header.component.tsx",
       "apps/web/src/shared/components/layout/app-header.variants.ts",
+      "apps/web/src/shared/components/layout/contact-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/donate-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/footer-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/home-link.component.tsx",
@@ -2572,7 +2576,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "b2cfbb215e4191776260c8372b06fa3ed2455d5fa6f9a48a52b33458939ca254"
+    "inputsHash": "6bad29d1eb89cef250c739a4b62cc8a20e75e549ce16884fe4cc94e0e157f6ed"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2597,7 +2601,7 @@
       "apps/web/src/app/sitemaps/[locale].xml/route.ts",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "e1a2f6ef8086524039b8d4e816e17521616962decd36105a85393421651ccc20"
+    "inputsHash": "64bfccce3b3e98125a1690a69789efe6e27df3794dbe1a03eda439151495c905"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -2926,6 +2930,7 @@
       "apps/web/src/app/contact/contact-ui.constants.ts",
       "apps/web/src/app/contact/contact.variants.ts",
       "apps/web/src/app/contact/page.tsx",
+      "apps/web/src/app/contact/use-contact-form.hook.test.tsx",
       "apps/web/src/app/contact/use-contact-form.hook.ts",
       "apps/web/src/app/content.variants.ts",
       "apps/web/src/app/error.tsx",
@@ -3237,6 +3242,7 @@
       "apps/web/src/shared/components/layout/app-header.component.test.tsx",
       "apps/web/src/shared/components/layout/app-header.component.tsx",
       "apps/web/src/shared/components/layout/app-header.variants.ts",
+      "apps/web/src/shared/components/layout/contact-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/donate-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/footer-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/home-link.component.tsx",
@@ -3345,7 +3351,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "b2cfbb215e4191776260c8372b06fa3ed2455d5fa6f9a48a52b33458939ca254"
+    "inputsHash": "6bad29d1eb89cef250c739a4b62cc8a20e75e549ce16884fe4cc94e0e157f6ed"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3674,6 +3680,7 @@
       "apps/web/src/app/contact/contact-ui.constants.ts",
       "apps/web/src/app/contact/contact.variants.ts",
       "apps/web/src/app/contact/page.tsx",
+      "apps/web/src/app/contact/use-contact-form.hook.test.tsx",
       "apps/web/src/app/contact/use-contact-form.hook.ts",
       "apps/web/src/app/content.variants.ts",
       "apps/web/src/app/error.tsx",
@@ -3985,6 +3992,7 @@
       "apps/web/src/shared/components/layout/app-header.component.test.tsx",
       "apps/web/src/shared/components/layout/app-header.component.tsx",
       "apps/web/src/shared/components/layout/app-header.variants.ts",
+      "apps/web/src/shared/components/layout/contact-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/donate-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/footer-nav-link.component.tsx",
       "apps/web/src/shared/components/layout/home-link.component.tsx",
@@ -4093,7 +4101,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "b2cfbb215e4191776260c8372b06fa3ed2455d5fa6f9a48a52b33458939ca254"
+    "inputsHash": "6bad29d1eb89cef250c739a4b62cc8a20e75e549ce16884fe4cc94e0e157f6ed"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 
-import { ContactResponseSchema } from '@twinzy/shared';
+import { CONTACT_PATH, ContactResponseSchema } from '@twinzy/shared';
 
 import { httpClient, postJson } from '@/packages/axios';
 
@@ -20,7 +20,7 @@ export const useContactForm = (): ContactFormProps => {
     setStatus('sending');
     void postJson(
       httpClient,
-      '/contact',
+      CONTACT_PATH,
       {
         email: form.get('email'),
         subject: form.get('subject'),

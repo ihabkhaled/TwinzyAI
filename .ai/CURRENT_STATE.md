@@ -6,11 +6,11 @@
 
 | Fact | Value |
 | --- | --- |
-| Source files scanned | 743 |
+| Source files scanned | 745 |
 | Source modules | 42 |
 | API endpoints | 11 |
 | Web routes | 15 |
-| Test files | 183 |
+| Test files | 184 |
 | Canonical documents | 709 |
 | Open contradiction-registry entries | 3 |
 | Stale items at last analysis | 0 |

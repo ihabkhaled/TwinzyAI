@@ -1130,7 +1130,9 @@
       "support/privacy-and-data-handling.md",
       "support/product-behavior-guide.md"
     ],
-    "tests": []
+    "tests": [
+      "apps/web/src/app/contact/use-contact-form.hook.test.tsx"
+    ]
   },
   "web:e2e": {
     "consumers": [],

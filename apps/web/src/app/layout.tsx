@@ -17,6 +17,7 @@ import {
 import { AppToaster } from '@/packages/toast';
 import { AppFooter } from '@/shared/components/layout/app-footer.component';
 import { AppHeader } from '@/shared/components/layout/app-header.component';
+import { ContactNavLink } from '@/shared/components/layout/contact-nav-link.component';
 import { DonateNavLink } from '@/shared/components/layout/donate-nav-link.component';
 import { FooterNavLink } from '@/shared/components/layout/footer-nav-link.component';
 import { HomeLink } from '@/shared/components/layout/home-link.component';
@@ -109,6 +110,7 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
             <SkipLink targetHref="#main-content" label={t('nav.skipToContent')} />
             <AppHeader brandLabel={t('app.name')}>
               <HomeLink label={t('nav.home')} />
+              <ContactNavLink href="/contact" label={t('about.contactTitle')} />
               {donateUrl === undefined ? null : (
                 <DonateNavLink href={donateUrl} label={t('nav.donate')} />
               )}

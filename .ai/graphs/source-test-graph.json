@@ -559,6 +559,12 @@
     "apps/web/e2e/mobile-theme.spec.ts",
     "apps/web/e2e/share-flow.spec.ts"
   ],
+  "apps/web/src/app/contact/contact-form.types.ts": [
+    "apps/web/src/app/contact/use-contact-form.hook.test.tsx"
+  ],
+  "apps/web/src/app/contact/use-contact-form.hook.ts": [
+    "apps/web/src/app/contact/use-contact-form.hook.test.tsx"
+  ],
   "apps/web/src/modules/game/components/camera-capture.component.tsx": [
     "apps/web/src/modules/game/test/camera-capture.component.test.tsx"
   ],

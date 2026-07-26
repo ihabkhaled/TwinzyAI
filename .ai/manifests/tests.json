@@ -1,5 +1,5 @@
 {
-  "count": 183,
+  "count": 184,
   "tests": [
     {
       "kind": "unit",
@@ -965,6 +965,15 @@
       "module": "web:e2e",
       "path": "apps/web/e2e/viewport.helper.ts",
       "targets": []
+    },
+    {
+      "kind": "unit",
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/use-contact-form.hook.test.tsx",
+      "targets": [
+        "apps/web/src/app/contact/contact-form.types.ts",
+        "apps/web/src/app/contact/use-contact-form.hook.ts"
+      ]
     },
     {
       "kind": "unit",

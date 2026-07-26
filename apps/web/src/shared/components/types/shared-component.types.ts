@@ -56,6 +56,11 @@ export interface HomeLinkProps {
   label: string;
 }
 
+export interface ContactNavLinkProps {
+  href: Route;
+  label: string;
+}
+
 /** Props for {@link AppFooter}: the nav label + note, links passed as children. */
 export interface AppFooterProps {
   navigationLabel: string;

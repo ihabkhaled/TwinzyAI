@@ -105,6 +105,9 @@
     "shared": [
       "packages/shared/src/schemas/contact.schemas.test.ts"
     ],
+    "web:app": [
+      "apps/web/src/app/contact/use-contact-form.hook.test.tsx"
+    ],
     "web:e2e": [
       "apps/web/e2e/donations.spec.ts",
       "apps/web/e2e/game-cancel.spec.ts",

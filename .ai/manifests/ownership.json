@@ -296,7 +296,7 @@
         "structure/repository-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 31,
+      "fileCount": 32,
       "lane": "standard",
       "layers": [
         "app"
@@ -632,7 +632,7 @@
         "structure/layer-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 78,
+      "fileCount": 79,
       "lane": "standard",
       "layers": [
         "shared"

@@ -9,6 +9,7 @@ export {
   ChevronDown as ChevronDownIcon,
   Heart as HeartIcon,
   House as HomeIcon,
+  Mail as MailIcon,
   Moon as MoonIcon,
   Sparkles as SparklesIcon,
   Sun as SunIcon,

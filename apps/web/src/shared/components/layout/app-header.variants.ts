@@ -18,6 +18,9 @@ export const appHeaderControlsClass = 'inline-flex items-center gap-0.5 sm:gap-1
 export const headerIconLinkClass =
   'inline-flex h-9 cursor-pointer items-center justify-center rounded-xl px-2 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-3';
 
+/** Contact label is visible once the header has enough horizontal room. */
+export const headerContactLabelClass = 'hidden sm:inline';
+
 /** Donate nav link: the icon link recipe plus a small gap for its label. */
 export const headerDonateLinkClass = `${headerIconLinkClass} gap-1.5`;
 

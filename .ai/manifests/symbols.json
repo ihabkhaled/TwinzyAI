@@ -1,5 +1,5 @@
 {
-  "count": 1566,
+  "count": 1571,
   "symbols": [
     {
       "kind": "const",
@@ -2266,6 +2266,13 @@
       "kind": "const",
       "layer": "constants",
       "module": "shared",
+      "name": "CONTACT_PATH",
+      "path": "packages/shared/src/constants/contact.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
       "name": "CONTACT_SUBJECT_MAX_LENGTH",
       "path": "packages/shared/src/constants/contact.constants.ts"
     },
@@ -2352,6 +2359,20 @@
       "module": "api:contact",
       "name": "ContactModule",
       "path": "apps/api/src/modules/contact/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ContactNavLink",
+      "path": "apps/web/src/shared/components/layout/contact-nav-link.component.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "ContactNavLinkProps",
+      "path": "apps/web/src/shared/components/types/shared-component.types.ts"
     },
     {
       "kind": "type",
@@ -4254,6 +4275,13 @@
       "kind": "const",
       "layer": "shared",
       "module": "web:shared",
+      "name": "headerContactLabelClass",
+      "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
       "name": "headerDonateLabelClass",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
@@ -5250,6 +5278,13 @@
       "module": "api:file-security",
       "name": "MagicByteValidationService",
       "path": "apps/api/src/modules/file-security/application/magic-byte-validation.service.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-icons",
+      "name": "MailIcon",
+      "path": "apps/web/src/packages/icons/index.ts"
     },
     {
       "kind": "function",

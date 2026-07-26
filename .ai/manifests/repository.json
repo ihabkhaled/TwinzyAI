@@ -1,5 +1,5 @@
 {
-  "count": 743,
+  "count": 745,
   "files": [
     {
       "exports": [
@@ -7725,13 +7725,30 @@
       "path": "apps/web/src/app/contact/page.tsx"
     },
     {
+      "exports": [],
+      "hash": "2e5a167d09a4d1d6aa8c7ef3dd2a711485cd1f05504d7a23c7185347ed1d8a30",
+      "imports": [
+        "./contact-form.types",
+        "./use-contact-form.hook",
+        "@/packages/axios",
+        "@testing-library/react",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "app",
+      "loc": 46,
+      "module": "web:app",
+      "path": "apps/web/src/app/contact/use-contact-form.hook.test.tsx"
+    },
+    {
       "exports": [
         {
           "kind": "const",
           "name": "useContactForm"
         }
       ],
-      "hash": "01f318c3d8cf3d03801aecb388d531d3d870a48c322dd0afe42ea4f8c6685fc5",
+      "hash": "37dd7d0eb02a0a0b93dec758ddc0004757761542372bc02e6ba5a4dc77eb8ab8",
       "imports": [
         "./contact-form.types",
         "./contact-status.helper",
@@ -7939,7 +7956,7 @@
           "name": "viewport"
         }
       ],
-      "hash": "a300e3074c9a90855fa5af0b8f520a26975443466d25cabac827cc522ebfb92a",
+      "hash": "fc3720035665c6b5ace0aa199f05aa24c4da8847f1248758abf6cc3cf6332df8",
       "imports": [
         "./layout.variants",
         "./providers",
@@ -7951,6 +7968,7 @@
         "@/packages/toast",
         "@/shared/components/layout/app-footer.component",
         "@/shared/components/layout/app-header.component",
+        "@/shared/components/layout/contact-nav-link.component",
         "@/shared/components/layout/donate-nav-link.component",
         "@/shared/components/layout/footer-nav-link.component",
         "@/shared/components/layout/home-link.component",
@@ -7970,7 +7988,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 133,
+      "loc": 135,
       "module": "web:app",
       "path": "apps/web/src/app/layout.tsx"
     },
@@ -13166,6 +13184,10 @@
         },
         {
           "kind": "re-export",
+          "name": "MailIcon"
+        },
+        {
+          "kind": "re-export",
           "name": "MoonIcon"
         },
         {
@@ -13177,13 +13199,13 @@
           "name": "SunIcon"
         }
       ],
-      "hash": "0a74ec892901ad5ff9fe8038a8619788638a715f13575dfa5d783cffda3bfe39",
+      "hash": "bcce3a80ea6f68b8364adbe65986a7d5779ba5da29bdfa1029a031f2043448d3",
       "imports": [
         "lucide-react"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 16,
+      "loc": 17,
       "module": "web:pkg-icons",
       "path": "apps/web/src/packages/icons/index.ts"
     },
@@ -15056,6 +15078,10 @@
         },
         {
           "kind": "const",
+          "name": "headerContactLabelClass"
+        },
+        {
+          "kind": "const",
           "name": "headerDonateLabelClass"
         },
         {
@@ -15071,13 +15097,34 @@
           "name": "headerLocaleSelectClass"
         }
       ],
-      "hash": "bd5fdca0737a7ad5a43ce7f858bf8ea926658e33c9cb714fac9dc61901087c65",
+      "hash": "e320c8470a117a6a1f65b107fc5e28a52aaff0ecf8b39d140c08d859222f5842",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 34,
+      "loc": 37,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ContactNavLink"
+        }
+      ],
+      "hash": "cdfd5e18c0a0e38eb0cb8520f1bd095e6bba5fbc3b00ceccc9c5ddff59438ee1",
+      "imports": [
+        "../types/shared-component.types",
+        "./app-header.variants",
+        "@/packages/icons",
+        "@/packages/link",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 20,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/components/layout/contact-nav-link.component.tsx"
     },
     {
       "exports": [
@@ -15254,6 +15301,10 @@
         },
         {
           "kind": "interface",
+          "name": "ContactNavLinkProps"
+        },
+        {
+          "kind": "interface",
           "name": "ContentLinkItemProps"
         },
         {
@@ -15301,14 +15352,14 @@
           "name": "TranslateLabel"
         }
       ],
-      "hash": "069b09b48f72b25219669b2e9fc8c5bc3c3c8f569a326eb293e3c33c1152cdae",
+      "hash": "64f0737d38133b46a00ccbf89fd877c3a49170df5edd8519649c3702dfa65b0e",
       "imports": [
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 88,
+      "loc": 93,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/types/shared-component.types.ts"
     },
@@ -16427,6 +16478,10 @@
         },
         {
           "kind": "const",
+          "name": "CONTACT_PATH"
+        },
+        {
+          "kind": "const",
           "name": "CONTACT_SUBJECT_MAX_LENGTH"
         },
         {
@@ -16434,11 +16489,11 @@
           "name": "CONTACT_SUBJECT_MIN_LENGTH"
         }
       ],
-      "hash": "a134d3baeccc11e3ce9ac5042d9f3f77bb7b64f42247ca4247aadbfd29f70c6e",
+      "hash": "b5fc81d532099d924748514c1979bb9a5a0ad680070a68391126cb183ecca45d",
       "imports": [],
       "isTest": false,
       "layer": "constants",
-      "loc": 6,
+      "loc": 7,
       "module": "shared",
       "path": "packages/shared/src/constants/contact.constants.ts"
     },

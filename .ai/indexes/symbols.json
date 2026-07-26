@@ -902,6 +902,9 @@
   "CONTACT_MESSAGE_MIN_LENGTH": [
     "packages/shared/src/constants/contact.constants.ts"
   ],
+  "CONTACT_PATH": [
+    "packages/shared/src/constants/contact.constants.ts"
+  ],
   "CONTACT_SUBJECT_MAX_LENGTH": [
     "packages/shared/src/constants/contact.constants.ts"
   ],
@@ -938,6 +941,12 @@
   "ContactModule": [
     "apps/api/src/modules/contact/contact.module.ts",
     "apps/api/src/modules/contact/index.ts"
+  ],
+  "ContactNavLink": [
+    "apps/web/src/shared/components/layout/contact-nav-link.component.tsx"
+  ],
+  "ContactNavLinkProps": [
+    "apps/web/src/shared/components/types/shared-component.types.ts"
   ],
   "ContactRequest": [
     "packages/shared/src/types/contact.types.ts"
@@ -1668,6 +1677,9 @@
   "hasSameJsonShape": [
     "apps/api/src/modules/ai/lib/json-shape.util.ts"
   ],
+  "headerContactLabelClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
   "headerDonateLabelClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
@@ -2052,6 +2064,9 @@
   ],
   "MagicByteValidationService": [
     "apps/api/src/modules/file-security/application/magic-byte-validation.service.ts"
+  ],
+  "MailIcon": [
+    "apps/web/src/packages/icons/index.ts"
   ],
   "makeQueryClient": [
     "apps/web/src/packages/query/query-client.ts"
