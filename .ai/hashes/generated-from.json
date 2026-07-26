@@ -269,7 +269,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "65238f316a5e3660b2eef3b16e6e27fb826511fac4d8ef2ed2a6c94505610fba"
+    "inputsHash": "9a64d5ee09aad05dafe0b532b9795ac073fbd8550732725c73bc9aafef394734"
   },
   ".ai/manifests/configs.json": {
     "inputs": [
@@ -310,7 +310,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "65238f316a5e3660b2eef3b16e6e27fb826511fac4d8ef2ed2a6c94505610fba"
+    "inputsHash": "9a64d5ee09aad05dafe0b532b9795ac073fbd8550732725c73bc9aafef394734"
   },
   ".ai/manifests/documents.json": {
     "inputs": [
