@@ -1,5 +1,5 @@
 {
-  "count": 184,
+  "count": 185,
   "tests": [
     {
       "kind": "unit",
@@ -1533,6 +1533,14 @@
       "path": "apps/web/src/packages/zustand/create-app-store.test.ts",
       "targets": [
         "apps/web/src/packages/zustand/create-app-store.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:root",
+      "path": "apps/web/src/proxy.test.ts",
+      "targets": [
+        "apps/web/src/proxy.ts"
       ]
     },
     {

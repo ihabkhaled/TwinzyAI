@@ -617,7 +617,7 @@
     },
     {
       "docs": [],
-      "fileCount": 1,
+      "fileCount": 2,
       "lane": null,
       "layers": [
         "root"
@@ -625,7 +625,7 @@
       "module": "web:root",
       "owner": "unassigned",
       "responsibility": "",
-      "root": "apps/web"
+      "root": "apps"
     },
     {
       "docs": [

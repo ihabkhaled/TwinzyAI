@@ -1497,7 +1497,9 @@
       "structure/repository-map.md",
       "structure/runtime-topology.md"
     ],
-    "tests": []
+    "tests": [
+      "apps/web/src/proxy.test.ts"
+    ]
   },
   "web:shared": {
     "consumers": [

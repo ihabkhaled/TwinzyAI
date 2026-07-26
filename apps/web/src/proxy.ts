@@ -21,6 +21,7 @@ const PERMANENT_REDIRECT_STATUS = 308;
  * nonce) and the outgoing response.
  */
 export function proxy(request: NextRequest): NextResponse {
+  const machinePath = isMachinePath(request.nextUrl.pathname);
   const nonce = btoa(crypto.randomUUID());
   const contentSecurityPolicy = buildContentSecurityPolicy({
     nonce,
@@ -31,14 +32,16 @@ export function proxy(request: NextRequest): NextResponse {
   });
 
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set(NONCE_HEADER_NAME, nonce);
   requestHeaders.set(PATHNAME_HEADER_NAME, request.nextUrl.pathname);
-  requestHeaders.set(CSP_HEADER, contentSecurityPolicy);
+  if (!machinePath) {
+    requestHeaders.set(NONCE_HEADER_NAME, nonce);
+    requestHeaders.set(CSP_HEADER, contentSecurityPolicy);
+  }
 
   const localized = parseLocalizedPath(request.nextUrl.pathname);
   let response: NextResponse;
 
-  if (isMachinePath(request.nextUrl.pathname)) {
+  if (machinePath) {
     response = NextResponse.next({ request: { headers: requestHeaders } });
   } else if (isPublicPagePath(request.nextUrl.pathname)) {
     const redirectUrl = request.nextUrl.clone();
@@ -55,7 +58,9 @@ export function proxy(request: NextRequest): NextResponse {
   } else {
     response = NextResponse.next({ request: { headers: requestHeaders } });
   }
-  response.headers.set(CSP_HEADER, contentSecurityPolicy);
+  if (!machinePath) {
+    response.headers.set(CSP_HEADER, contentSecurityPolicy);
+  }
 
   return response;
 }

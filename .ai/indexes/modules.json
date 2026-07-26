@@ -539,13 +539,13 @@
   },
   "web:root": {
     "docs": [],
-    "fileCount": 1,
+    "fileCount": 2,
     "lane": null,
     "layers": [
       "root"
     ],
     "responsibility": "",
-    "root": "apps/web"
+    "root": "apps"
   },
   "web:shared": {
     "docs": [

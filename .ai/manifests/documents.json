@@ -10734,7 +10734,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "7123bd2e2133ab30c8fad2195ef9de7b9b6e5ed07929564f90e24017f4fcec6a",
+      "hash": "32ffdfaf68bd22f1f2839e762e088c327aceda0cf108b3564a36e1e311410a35",
       "headings": [
         "14 — Implementation"
       ],
@@ -10757,7 +10757,7 @@
       "sourceMentions": [],
       "summary": "Implemented the Twinzy-relevant subset of the external pack:",
       "title": "14 — Implementation",
-      "tokens": 404,
+      "tokens": 452,
       "type": "doc"
     },
     {
@@ -10765,7 +10765,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "e9e48c82477e47d02d90da4c3d73cb72f86b1aa7c21bd7d4c72d39e3fead6427",
+      "hash": "7197a85eefea520cdb152a8655eb78c2fef4acb8bf9d3b7b0934f711a043d377",
       "headings": [
         "15 — Code review"
       ],
@@ -10789,7 +10789,7 @@
       "sourceMentions": [],
       "summary": "- Boundaries: XML rendering is owned by shared helpers; Route Handlers only validate parameters and",
       "title": "15 — Code review",
-      "tokens": 266,
+      "tokens": 315,
       "type": "doc"
     },
     {

@@ -13,3 +13,5 @@
   tests assert the full 120-URL cross-product plus all hreflang alternatives.
 - Startup hygiene: cache cleanup targets only generated Twinzy frontend directories and is wired
   through npm lifecycle hooks for development, E2E development, and production start commands.
+- Header scope: the proxy applies the nonce CSP only to HTML surfaces; machine XML keeps its XML
+  content type and security headers without an irrelevant policy that breaks Chrome's XML viewer.

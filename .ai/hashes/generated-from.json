@@ -1025,7 +1025,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "e2fcb36a043864f248ea04feb02fbe95ef3427acb43cf3d0a3bd25749b430072"
+    "inputsHash": "c8b6e8e8d11c0ee2af208d2f7ebcad230cdc198be2a2eb8c29ebace9d9cba29e"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
@@ -1690,6 +1690,7 @@
       "apps/web/src/packages/zustand/create-app-store.test.ts",
       "apps/web/src/packages/zustand/create-app-store.ts",
       "apps/web/src/packages/zustand/index.ts",
+      "apps/web/src/proxy.test.ts",
       "apps/web/src/proxy.ts",
       "apps/web/src/shared/api/api-routes.constants.test.ts",
       "apps/web/src/shared/api/api-routes.constants.ts",
@@ -1815,7 +1816,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "e370d217a9bad54e42e1dddf77063e4e79a844a3017bb30b435023724ed4ae9b"
+    "inputsHash": "dc4f1f2a4b79b03df65ca7ccb3381d4d2ace5de72866445f084d6a723d7afed0"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2452,6 +2453,7 @@
       "apps/web/src/packages/zustand/create-app-store.test.ts",
       "apps/web/src/packages/zustand/create-app-store.ts",
       "apps/web/src/packages/zustand/index.ts",
+      "apps/web/src/proxy.test.ts",
       "apps/web/src/proxy.ts",
       "apps/web/src/shared/api/api-routes.constants.test.ts",
       "apps/web/src/shared/api/api-routes.constants.ts",
@@ -2576,7 +2578,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "c0a41d82c221b8870edae78fa654e4698a8d9477aa364bdc877e483aac1d4960"
+    "inputsHash": "b7bf1c1924e6e5c494ba7dc49a8811cec18cba378eca41abea05f822015b764b"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -3227,6 +3229,7 @@
       "apps/web/src/packages/zustand/create-app-store.test.ts",
       "apps/web/src/packages/zustand/create-app-store.ts",
       "apps/web/src/packages/zustand/index.ts",
+      "apps/web/src/proxy.test.ts",
       "apps/web/src/proxy.ts",
       "apps/web/src/shared/api/api-routes.constants.test.ts",
       "apps/web/src/shared/api/api-routes.constants.ts",
@@ -3351,7 +3354,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "c0a41d82c221b8870edae78fa654e4698a8d9477aa364bdc877e483aac1d4960"
+    "inputsHash": "b7bf1c1924e6e5c494ba7dc49a8811cec18cba378eca41abea05f822015b764b"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3977,6 +3980,7 @@
       "apps/web/src/packages/zustand/create-app-store.test.ts",
       "apps/web/src/packages/zustand/create-app-store.ts",
       "apps/web/src/packages/zustand/index.ts",
+      "apps/web/src/proxy.test.ts",
       "apps/web/src/proxy.ts",
       "apps/web/src/shared/api/api-routes.constants.test.ts",
       "apps/web/src/shared/api/api-routes.constants.ts",
@@ -4101,7 +4105,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "c0a41d82c221b8870edae78fa654e4698a8d9477aa364bdc877e483aac1d4960"
+    "inputsHash": "b7bf1c1924e6e5c494ba7dc49a8811cec18cba378eca41abea05f822015b764b"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

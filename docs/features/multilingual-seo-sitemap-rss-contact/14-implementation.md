@@ -16,6 +16,8 @@ Implemented the Twinzy-relevant subset of the external pack:
   marketing owner and are included in every localized crawl path.
 - every frontend start command clears Twinzy-owned `.next/cache` and `.next/dev` artifacts before
   Next.js launches, while preserving production build output required by `next start`.
+- machine-readable sitemap, feed, and robots responses omit the HTML-only nonce CSP so browser XML
+  viewers can render their native tree presentation; CSP remains mandatory on HTML pages.
 
 The foreign pack's accounts, database migrations, public-chat indexing, internal token feeds, and
 unreviewed thirteenth locale were intentionally excluded.

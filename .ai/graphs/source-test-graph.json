@@ -820,6 +820,9 @@
   "apps/web/src/packages/zustand/create-app-store.ts": [
     "apps/web/src/packages/zustand/create-app-store.test.ts"
   ],
+  "apps/web/src/proxy.ts": [
+    "apps/web/src/proxy.test.ts"
+  ],
   "apps/web/src/shared/api/api-routes.constants.ts": [
     "apps/web/src/shared/api/api-routes.constants.test.ts"
   ],

@@ -1,5 +1,5 @@
 {
-  "count": 2521,
+  "count": 2522,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -3167,6 +3167,12 @@
       "from": "apps/web/src/packages/zustand/create-app-store.test.ts",
       "label": "generated",
       "to": "apps/web/src/packages/zustand/create-app-store.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/proxy.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/proxy.ts",
       "type": "covers"
     },
     {

@@ -1,5 +1,5 @@
 {
-  "count": 745,
+  "count": 746,
   "files": [
     {
       "exports": [
@@ -14778,6 +14778,20 @@
       "path": "apps/web/src/packages/zustand/index.ts"
     },
     {
+      "exports": [],
+      "hash": "5a48fe7ce158f08bf902a75182c50c4078f5600848a49e164d032dbee12e0318",
+      "imports": [
+        "./proxy",
+        "next/server",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "root",
+      "loc": 19,
+      "module": "web:root",
+      "path": "apps/web/src/proxy.test.ts"
+    },
+    {
       "exports": [
         {
           "kind": "const",
@@ -14788,7 +14802,7 @@
           "name": "proxy"
         }
       ],
-      "hash": "e486870b5ed0853d29bb1375fa29ae24289b2385af03f8835c9aca88182890f5",
+      "hash": "b3c21d1c7c1e762e436227bb0cb51f40f8e2586f2267c8a93a5e489ea5972428",
       "imports": [
         "@/packages/env",
         "@/packages/i18n",
@@ -14799,7 +14813,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 74,
+      "loc": 79,
       "module": "web:root",
       "path": "apps/web/src/proxy.ts"
     },

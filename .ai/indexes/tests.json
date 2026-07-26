@@ -210,6 +210,9 @@
     "web:pkg-zustand": [
       "apps/web/src/packages/zustand/create-app-store.test.ts"
     ],
+    "web:root": [
+      "apps/web/src/proxy.test.ts"
+    ],
     "web:shared": [
       "apps/web/src/shared/api/api-routes.constants.test.ts",
       "apps/web/src/shared/components/layout/app-footer.component.test.tsx",
