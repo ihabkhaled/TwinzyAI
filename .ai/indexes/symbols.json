@@ -1628,7 +1628,7 @@
   ],
   "GET": [
     "apps/web/src/app/[locale]/feed.xml/route.ts",
-    "apps/web/src/app/sitemaps/[locale].xml/route.ts"
+    "apps/web/src/app/sitemaps/[locale]/route.ts"
   ],
   "getContactStatusView": [
     "apps/web/src/app/contact/contact-status.helper.ts"
@@ -2496,6 +2496,9 @@
   ],
   "ParsedUploadedFile": [
     "apps/api/src/core/http/multipart.types.ts"
+  ],
+  "parseLocaleSitemapSegment": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
   ],
   "parseLocalizedPath": [
     "apps/web/src/shared/helpers/locale-route.helper.ts"

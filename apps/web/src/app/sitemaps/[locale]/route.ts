@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 import { publicEnv } from '@/packages/env';
-import { isSupportedLanguageCode } from '@/packages/i18n';
+import { parseLocaleSitemapSegment } from '@/shared/helpers/locale-route.helper';
 import { buildLocaleSitemapXml } from '@/shared/helpers/seo-xml.helper';
 import { createXmlResponse } from '@/shared/helpers/xml-response.helper';
 
@@ -11,8 +11,9 @@ export const GET = async (
   _request: NextRequest,
   context: LocaleXmlRouteContext,
 ): Promise<Response> => {
-  const { locale } = await context.params;
-  if (!isSupportedLanguageCode(locale)) {
+  const { locale: segment } = await context.params;
+  const locale = parseLocaleSitemapSegment(segment);
+  if (locale === undefined) {
     return new Response('Not found', { status: 404 });
   }
   return createXmlResponse(

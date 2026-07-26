@@ -1,5 +1,5 @@
 {
-  "count": 1572,
+  "count": 1573,
   "symbols": [
     {
       "kind": "const",
@@ -4122,7 +4122,7 @@
       "layer": "app",
       "module": "web:app",
       "name": "GET",
-      "path": "apps/web/src/app/sitemaps/[locale].xml/route.ts"
+      "path": "apps/web/src/app/sitemaps/[locale]/route.ts"
     },
     {
       "kind": "const",
@@ -6314,6 +6314,13 @@
       "module": "api:core",
       "name": "ParsedUploadedFile",
       "path": "apps/api/src/core/http/multipart.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "parseLocaleSitemapSegment",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },
     {
       "kind": "const",

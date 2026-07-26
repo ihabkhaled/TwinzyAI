@@ -7,6 +7,7 @@ import {
   buildLocalizedPath,
   isMachinePath,
   isPublicPagePath,
+  parseLocaleSitemapSegment,
   parseLocalizedPath,
   replaceLocalizedPathLocale,
 } from './locale-route.helper';
@@ -35,6 +36,13 @@ describe('locale route helpers', () => {
     expect(replaceLocalizedPathLocale('/en', 'ar')).toBe('/ar');
     expect(replaceLocalizedPathLocale('/game', 'fr')).toBeUndefined();
     expect(replaceLocalizedPathLocale('/en/game', 'fr')).toBeUndefined();
+  });
+
+  it('parses only supported XML sitemap segments', () => {
+    expect(parseLocaleSitemapSegment('en.xml')).toBe('en');
+    expect(parseLocaleSitemapSegment('ar.xml')).toBe('ar');
+    expect(parseLocaleSitemapSegment('xx.xml')).toBeUndefined();
+    expect(parseLocaleSitemapSegment('en')).toBeUndefined();
   });
 
   it('classifies public and machine paths', () => {

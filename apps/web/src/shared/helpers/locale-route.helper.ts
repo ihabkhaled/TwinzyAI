@@ -13,6 +13,7 @@ const PUBLIC_ROUTE_PATHS = new Set<string>(
   Object.values(ROUTE_PATHS).filter((path) => path !== ROUTE_PATHS.game),
 );
 const MACHINE_PATH_PREFIXES = ['/sitemaps/', '/_next/', '/api/'] as const;
+const XML_FILE_SUFFIX = '.xml';
 
 /** Prefix a first-class route with its reviewed content locale. */
 export const buildLocalizedPath = (locale: LanguageCodeValue, path: Route): Route => {
@@ -46,6 +47,15 @@ export const parseLocalizedPath = (
   }
   const internalPath = `/${segments.join('/')}`.replace(/\/$/, '') || '/';
   return { locale: candidate, internalPath };
+};
+
+/** Parse a `<locale>.xml` sitemap path segment into a reviewed locale. */
+export const parseLocaleSitemapSegment = (segment: string): LanguageCodeValue | undefined => {
+  if (!segment.endsWith(XML_FILE_SUFFIX)) {
+    return undefined;
+  }
+  const locale = segment.slice(0, -XML_FILE_SUFFIX.length);
+  return isSupportedLanguageCode(locale) ? locale : undefined;
 };
 
 /** Replace an existing supported locale prefix while retaining the page owner path. */

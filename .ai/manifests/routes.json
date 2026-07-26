@@ -135,9 +135,9 @@
       "path": "/share/[shareId]"
     },
     {
-      "file": "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "file": "apps/web/src/app/sitemaps/[locale]/route.ts",
       "kind": "route",
-      "path": "/sitemaps/[locale].xml"
+      "path": "/sitemaps/[locale]"
     },
     {
       "file": "apps/web/src/app/terms/page.tsx",

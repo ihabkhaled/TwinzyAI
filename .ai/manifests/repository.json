@@ -8203,20 +8203,20 @@
           "name": "GET"
         }
       ],
-      "hash": "e5251b31fa52a0047c39ed2749c5d4ecec8459ad4009da9f788c9ac300f478fe",
+      "hash": "c7c10a267149123aa630a1fbbf689ab6ec94408cfc3f046646571236eeecf19e",
       "imports": [
         "../../../shared/components/types/route-handler.types",
         "@/packages/env",
-        "@/packages/i18n",
+        "@/shared/helpers/locale-route.helper",
         "@/shared/helpers/seo-xml.helper",
         "@/shared/helpers/xml-response.helper",
         "next/server"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 26,
+      "loc": 27,
       "module": "web:app",
-      "path": "apps/web/src/app/sitemaps/[locale].xml/route.ts"
+      "path": "apps/web/src/app/sitemaps/[locale]/route.ts"
     },
     {
       "exports": [
@@ -15757,7 +15757,7 @@
     },
     {
       "exports": [],
-      "hash": "7674abd1bd77bc346b8f2056adba5600f70fcba29680a74cc76d59262ee487ed",
+      "hash": "5cbd6559dc4309fa054b4926aa78dd05c72a56ecc7c4924a74bd14d083e58ab5",
       "imports": [
         "../constants/route-paths.constants",
         "./locale-route.helper",
@@ -15765,7 +15765,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 50,
+      "loc": 58,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts"
     },
@@ -15789,6 +15789,10 @@
         },
         {
           "kind": "const",
+          "name": "parseLocaleSitemapSegment"
+        },
+        {
+          "kind": "const",
           "name": "parseLocalizedPath"
         },
         {
@@ -15796,7 +15800,7 @@
           "name": "replaceLocalizedPathLocale"
         }
       ],
-      "hash": "9902d6b43c6d6e3652ffad84d7a8bcde6417f3c2eaf0078658d89b0637c9c8da",
+      "hash": "abb08dadbaf146b6bf03ac7fc2f60a852b7385a6e1c974382dd21d9d3e862099",
       "imports": [
         "../constants/route-paths.constants",
         "@/packages/i18n",
@@ -15804,7 +15808,7 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 73,
+      "loc": 83,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },

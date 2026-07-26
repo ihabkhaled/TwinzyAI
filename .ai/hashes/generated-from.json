@@ -1413,7 +1413,7 @@
       "apps/web/src/app/robots.ts",
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/sitemap.ts",
-      "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "apps/web/src/app/sitemaps/[locale]/route.ts",
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
@@ -1815,7 +1815,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "c05e7bdc0ecba27f85af0805e7abeb39ffc3c0868190b9dbb31657cc11fdf432"
+    "inputsHash": "e370d217a9bad54e42e1dddf77063e4e79a844a3017bb30b435023724ed4ae9b"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2175,7 +2175,7 @@
       "apps/web/src/app/robots.ts",
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/sitemap.ts",
-      "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "apps/web/src/app/sitemaps/[locale]/route.ts",
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
@@ -2576,7 +2576,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "b089ea3fd6d426c111a8f6111ca7f4c64e38f7a5097d9f2ef5c2a1ea69d59d19"
+    "inputsHash": "c0a41d82c221b8870edae78fa654e4698a8d9477aa364bdc877e483aac1d4960"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2598,10 +2598,10 @@
       "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
       "apps/web/src/app/share/[shareId]/page.tsx",
-      "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "apps/web/src/app/sitemaps/[locale]/route.ts",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "59e3efed05f5561e6efd7796510313ff1ef8b012666d5b263b5e720c271a6156"
+    "inputsHash": "835dbb4293e3ab345befc0508da8138f4398b2f6ad58f6dd2e30b148017cb42e"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -2950,7 +2950,7 @@
       "apps/web/src/app/robots.ts",
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/sitemap.ts",
-      "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "apps/web/src/app/sitemaps/[locale]/route.ts",
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
@@ -3351,7 +3351,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "b089ea3fd6d426c111a8f6111ca7f4c64e38f7a5097d9f2ef5c2a1ea69d59d19"
+    "inputsHash": "c0a41d82c221b8870edae78fa654e4698a8d9477aa364bdc877e483aac1d4960"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3700,7 +3700,7 @@
       "apps/web/src/app/robots.ts",
       "apps/web/src/app/share/[shareId]/page.tsx",
       "apps/web/src/app/sitemap.ts",
-      "apps/web/src/app/sitemaps/[locale].xml/route.ts",
+      "apps/web/src/app/sitemaps/[locale]/route.ts",
       "apps/web/src/app/terms/page.tsx",
       "apps/web/src/modules/game/components/camera-capture.component.tsx",
       "apps/web/src/modules/game/components/camera-capture.variants.ts",
@@ -4101,7 +4101,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "b089ea3fd6d426c111a8f6111ca7f4c64e38f7a5097d9f2ef5c2a1ea69d59d19"
+    "inputsHash": "c0a41d82c221b8870edae78fa654e4698a8d9477aa364bdc877e483aac1d4960"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [
