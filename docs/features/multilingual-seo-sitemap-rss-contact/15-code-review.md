@@ -9,3 +9,7 @@
   is disabled.
 - Compatibility: `app/sitemap.ts` was retained explicitly; share and payment surfaces remain
   excluded from crawl artifacts.
+- Completeness: root sitemap coverage is derived from the canonical route and language owners, and
+  tests assert the full 120-URL cross-product plus all hreflang alternatives.
+- Startup hygiene: cache cleanup targets only generated Twinzy frontend directories and is wired
+  through npm lifecycle hooks for development, E2E development, and production start commands.

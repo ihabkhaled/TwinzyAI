@@ -10,11 +10,16 @@
     }
   },
   "scripts": {
+    "cache:clear": "node scripts/clear-next-cache.mjs",
+    "predev": "npm run cache:clear",
     "dev": "next dev --turbopack --port 3000",
+    "predev:turbo": "npm run cache:clear",
     "dev:turbo": "next dev --port 3000",
+    "predev:e2e": "npm run cache:clear",
     "dev:e2e": "next dev --turbopack",
     "build": "npm --prefix ../.. run build:shared && next build --turbopack",
     "build:turbo": "npm --prefix ../.. run build:shared && next build",
+    "prestart": "npm run cache:clear",
     "start": "next start --port 3000",
     "typecheck": "node ../../node_modules/tsc7/bin/tsc --noEmit -p tsconfig.json && node ../../node_modules/tsc7/bin/tsc --noEmit -p e2e/tsconfig.json",
     "test:e2e": "playwright test --project=chromium --project=a11y --project=mobile-chromium",

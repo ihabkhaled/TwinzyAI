@@ -867,7 +867,8 @@
     "apps/web/src/shared/helpers/donate-link.helper.test.ts"
   ],
   "apps/web/src/shared/helpers/locale-route.helper.ts": [
-    "apps/web/src/shared/helpers/locale-route.helper.test.ts"
+    "apps/web/src/shared/helpers/locale-route.helper.test.ts",
+    "apps/web/src/shared/helpers/sitemap.helper.test.ts"
   ],
   "apps/web/src/shared/helpers/page-title.helper.ts": [
     "apps/web/src/shared/helpers/page-title.helper.test.ts"

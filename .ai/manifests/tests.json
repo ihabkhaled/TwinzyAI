@@ -1647,6 +1647,7 @@
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "targets": [
+        "apps/web/src/shared/helpers/locale-route.helper.ts",
         "apps/web/src/shared/helpers/sitemap.helper.ts"
       ]
     },

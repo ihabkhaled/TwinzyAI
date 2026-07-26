@@ -1,5 +1,5 @@
 {
-  "count": 2520,
+  "count": 2521,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -3263,6 +3263,12 @@
       "from": "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/site-nav.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/sitemap.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/locale-route.helper.ts",
       "type": "covers"
     },
     {

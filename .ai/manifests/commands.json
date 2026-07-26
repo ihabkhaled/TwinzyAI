@@ -41,6 +41,11 @@
       "workspace": "@twinzy/web"
     },
     {
+      "command": "node scripts/clear-next-cache.mjs",
+      "name": "cache:clear",
+      "workspace": "@twinzy/web"
+    },
+    {
       "command": "next dev --turbopack --port 3000",
       "name": "dev",
       "workspace": "@twinzy/web"
@@ -53,6 +58,26 @@
     {
       "command": "next dev --port 3000",
       "name": "dev:turbo",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "npm run cache:clear",
+      "name": "predev",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "npm run cache:clear",
+      "name": "predev:e2e",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "npm run cache:clear",
+      "name": "predev:turbo",
+      "workspace": "@twinzy/web"
+    },
+    {
+      "command": "npm run cache:clear",
+      "name": "prestart",
       "workspace": "@twinzy/web"
     },
     {
@@ -406,5 +431,5 @@
       "workspace": "twinzy"
     }
   ],
-  "count": 81
+  "count": 86
 }

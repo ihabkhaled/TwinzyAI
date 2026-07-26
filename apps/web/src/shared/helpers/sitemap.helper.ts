@@ -1,10 +1,13 @@
 import type { MetadataRoute } from 'next';
 
+import { LANGUAGE_CODES } from '@/packages/i18n';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import {
   DEFAULT_SITEMAP_PRIORITY,
   SITEMAP_PRIORITY_BY_PATH,
 } from '@/shared/constants/seo.constants';
+
+import { buildLocalizedPath } from './locale-route.helper';
 
 /** Strip one trailing slash so URL joins never produce `//`. */
 const normalizeBaseUrl = (baseUrl: string): string =>
@@ -18,10 +21,23 @@ const normalizeBaseUrl = (baseUrl: string): string =>
 export const buildSitemapEntries = (baseUrl: string, lastModified: Date): MetadataRoute.Sitemap => {
   const base = normalizeBaseUrl(baseUrl);
 
-  return Object.values(ROUTE_PATHS).map((path) => ({
-    url: path === ROUTE_PATHS.home ? `${base}/` : `${base}${path}`,
-    lastModified,
-    changeFrequency: 'monthly',
-    priority: SITEMAP_PRIORITY_BY_PATH[path] ?? DEFAULT_SITEMAP_PRIORITY,
-  }));
+  return LANGUAGE_CODES.flatMap((locale) =>
+    Object.values(ROUTE_PATHS).map((path) => ({
+      url: `${base}${buildLocalizedPath(locale, path)}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: SITEMAP_PRIORITY_BY_PATH[path] ?? DEFAULT_SITEMAP_PRIORITY,
+      alternates: {
+        languages: {
+          ...Object.fromEntries(
+            LANGUAGE_CODES.map((language) => [
+              language,
+              `${base}${buildLocalizedPath(language, path)}`,
+            ]),
+          ),
+          'x-default': `${base}${buildLocalizedPath('en', path)}`,
+        },
+      },
+    })),
+  );
 };

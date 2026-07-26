@@ -8184,7 +8184,7 @@
     },
     {
       "exports": [],
-      "hash": "40106fb7e33fb241834ca32b7e531df7ffbd38a75b731ff8d75ed5751063c219",
+      "hash": "8752b9942b382e01596e6fc8fdd279fb47615b6b5c1908e64e8ce20e18558fc5",
       "imports": [
         "@/packages/env",
         "@/shared/helpers/sitemap.helper",
@@ -15983,14 +15983,17 @@
     },
     {
       "exports": [],
-      "hash": "81dcc35b451c54bc7231df20f88fdf41e046e6e9712c818b50e53238d34cdf0d",
+      "hash": "d3e2a419e4d6f92a8f46d50829ccb954ffc8270bad2274e6021e89c536e01c1f",
       "imports": [
+        "./locale-route.helper",
         "./sitemap.helper",
+        "@/packages/i18n",
+        "@/shared/constants/route-paths.constants",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 56,
+      "loc": 64,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts"
     },
@@ -16001,15 +16004,17 @@
           "name": "buildSitemapEntries"
         }
       ],
-      "hash": "42562b3ba1dc4085ba42cde5d0607e975b4f15a12809a4dc023a4eb2a914cd0b",
+      "hash": "4a1214ba7c6447a19b2db6036e5f62727997f5584d12b72f86359fa23b9c5062",
       "imports": [
+        "./locale-route.helper",
+        "@/packages/i18n",
         "@/shared/constants/route-paths.constants",
         "@/shared/constants/seo.constants",
         "next"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 28,
+      "loc": 44,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
     },

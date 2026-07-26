@@ -10734,7 +10734,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "548911c255f7ebf64e1a959420872a51629b1066102491ffe1f6aebf45b6dd82",
+      "hash": "7123bd2e2133ab30c8fad2195ef9de7b9b6e5ed07929564f90e24017f4fcec6a",
       "headings": [
         "14 — Implementation"
       ],
@@ -10757,7 +10757,7 @@
       "sourceMentions": [],
       "summary": "Implemented the Twinzy-relevant subset of the external pack:",
       "title": "14 — Implementation",
-      "tokens": 324,
+      "tokens": 404,
       "type": "doc"
     },
     {
@@ -10765,7 +10765,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "06037f72203e61b5c8093300ec96fa5a69c777c1afd9d867e6f02c92d6a0fd5f",
+      "hash": "e9e48c82477e47d02d90da4c3d73cb72f86b1aa7c21bd7d4c72d39e3fead6427",
       "headings": [
         "15 — Code review"
       ],
@@ -10789,7 +10789,7 @@
       "sourceMentions": [],
       "summary": "- Boundaries: XML rendering is owned by shared helpers; Route Handlers only validate parameters and",
       "title": "15 — Code review",
-      "tokens": 174,
+      "tokens": 266,
       "type": "doc"
     },
     {
@@ -10797,7 +10797,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "b51c9bade901e4dba2f7abbeb6b155ba90cbe80d407ddeccb4f8d1ef02364010",
+      "hash": "7882ce976f6271f43f5c458a797c0006270e0f89b1e06fd608946faf1efa79f7",
       "headings": [
         "22 — Go / no-go"
       ],
@@ -10819,7 +10819,7 @@
       "sourceMentions": [],
       "summary": "Status: **GO after automated gates pass**.",
       "title": "22 — Go / no-go",
-      "tokens": 158,
+      "tokens": 208,
       "type": "doc"
     },
     {

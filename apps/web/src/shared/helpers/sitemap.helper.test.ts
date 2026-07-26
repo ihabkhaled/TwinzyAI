@@ -1,26 +1,34 @@
 import { describe, expect, it } from 'vitest';
 
+import { LANGUAGE_CODES } from '@/packages/i18n';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
+
+import { buildLocalizedPath } from './locale-route.helper';
 import { buildSitemapEntries } from './sitemap.helper';
 
 const BASE = 'https://twinzy.example';
 const LAST_MODIFIED = new Date('2026-07-18T00:00:00.000Z');
 
 describe('buildSitemapEntries', () => {
-  it('lists every first-class route as an absolute URL', () => {
+  it('lists every first-class route in every supported language', () => {
     const urls = buildSitemapEntries(BASE, LAST_MODIFIED).map((entry) => entry.url);
+    const expectedUrls = LANGUAGE_CODES.flatMap((locale) =>
+      Object.values(ROUTE_PATHS).map((path) => `${BASE}${buildLocalizedPath(locale, path)}`),
+    );
 
-    expect(urls).toStrictEqual([
-      `${BASE}/`,
-      `${BASE}/game`,
-      `${BASE}/help`,
-      `${BASE}/privacy`,
-      `${BASE}/terms`,
-      `${BASE}/about`,
-      `${BASE}/how-it-works`,
-      `${BASE}/ai-safety`,
-      `${BASE}/faq`,
-      `${BASE}/contact`,
-    ]);
+    expect(urls).toStrictEqual(expectedUrls);
+    expect(urls).toHaveLength(LANGUAGE_CODES.length * Object.keys(ROUTE_PATHS).length);
+  });
+
+  it('adds a complete hreflang cluster to every localized URL', () => {
+    const entries = buildSitemapEntries(BASE, LAST_MODIFIED);
+
+    for (const entry of entries) {
+      expect(Object.keys(entry.alternates?.languages ?? {})).toHaveLength(
+        LANGUAGE_CODES.length + 1,
+      );
+    }
+    expect(entries[0]?.alternates?.languages?.['x-default']).toBe(`${BASE}/en`);
   });
 
   it('never lists share or payment surfaces', () => {
@@ -35,9 +43,9 @@ describe('buildSitemapEntries', () => {
       buildSitemapEntries(BASE, LAST_MODIFIED).map((entry) => [entry.url, entry.priority]),
     );
 
-    expect(byUrl.get(`${BASE}/`)).toBe(1);
-    expect(byUrl.get(`${BASE}/game`)).toBeCloseTo(0.9);
-    expect(byUrl.get(`${BASE}/about`)).toBeCloseTo(0.7);
+    expect(byUrl.get(`${BASE}/en`)).toBe(1);
+    expect(byUrl.get(`${BASE}/en/game`)).toBeCloseTo(0.9);
+    expect(byUrl.get(`${BASE}/en/about`)).toBeCloseTo(0.7);
   });
 
   it('stamps the provided lastModified on every entry', () => {
@@ -49,7 +57,7 @@ describe('buildSitemapEntries', () => {
   it('normalizes a trailing slash on the base URL', () => {
     const urls = buildSitemapEntries(`${BASE}/`, LAST_MODIFIED).map((entry) => entry.url);
 
-    expect(urls).toContain(`${BASE}/game`);
+    expect(urls).toContain(`${BASE}/en/game`);
     expect(urls.some((url) => url.includes('//game'))).toBe(false);
   });
 });

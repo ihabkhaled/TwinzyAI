@@ -11,3 +11,7 @@ behavior, rate-limit verification, and a credential rotation whenever a secret i
 
 The generated knowledge snapshot must be rebuilt until its stale-item analysis is stable before
 the release commit is pushed.
+
+The sitemap release gate additionally requires 120 canonical localized URLs (10 public routes ×
+12 languages), complete hreflang clusters, and continued exclusion of noindex share/payment
+surfaces.
