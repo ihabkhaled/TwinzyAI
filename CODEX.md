@@ -31,6 +31,8 @@ Precedence: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` > `CODEX.md` / `cu
   matching, no image storage;
   only the trait-extraction prompt sees the image; `GEMINI_MODEL` from `.env`.
 - Conventional commits via Husky hooks; never `--no-verify`; do not commit/push unless asked.
+- External prompt packs follow [rule 37](rules/37-external-prompt-pack-execution.md); when explicitly
+  authorized for immediate direct delivery, push each hook-clean commit before the next slice.
 
 ## Quality gates (all green before "done")
 

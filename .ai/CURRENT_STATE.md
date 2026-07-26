@@ -11,7 +11,7 @@
 | API endpoints | 10 |
 | Web routes | 12 |
 | Test files | 178 |
-| Canonical documents | 689 |
+| Canonical documents | 706 |
 | Open contradiction-registry entries | 3 |
 | Stale items at last analysis | 0 |
 | Broken links at last analysis | 9 |
@@ -23,6 +23,7 @@
 - engineering-os-migration
 - multi-provider-ai
 - multi-tab-stream-isolation
+- multilingual-seo-sitemap-rss-contact
 - parallel-ai-pipeline
 - paypal-donations-and-paid-results
 - simple-readable-code-operating-system-and-codebase-refactor

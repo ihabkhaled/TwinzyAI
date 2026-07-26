@@ -215,6 +215,8 @@
     "docs/features/engineering-os-migration/09-impact-analysis.md",
     "docs/features/multi-provider-ai/09-impact-analysis.md",
     "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
     "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
     "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
     "docs/features/simple-readable-code-operating-system-implementation/01-business-analysis.md",
@@ -547,6 +549,8 @@
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/engineering-os-migration/01-business-analysis.md",
     "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
     "docs/features/simple-readable-code-operating-system-implementation/01-business-analysis.md",
     "docs/features/simple-readable-code-operating-system-implementation/02-business-development.md",
     "docs/features/temporary-shareable-results/01-business-analysis.md",
@@ -692,6 +696,7 @@
     "docs/features/_template/10-engineering-standards-check.md",
     "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
     "docs/features/engineering-os-migration/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
     "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
     "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
     "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md"
@@ -898,6 +903,23 @@
     "product/constraints.md",
     "product/README.md"
   ],
+  "contact": [
+    "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/08-architecture-review.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md"
+  ],
   "container": [
     "skills/create-container.md",
     "structure/modules/web-game.md"
@@ -1009,6 +1031,7 @@
     "docs/features/engineering-os-migration/12-coverage-plan.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
     "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
     "docs/features/temporary-shareable-results/12-coverage-plan.md",
@@ -1062,6 +1085,7 @@
     "docs/features/_template/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
     "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
     "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md"
@@ -1202,6 +1226,7 @@
     "docs/features/_template/05-delivery-plan.md",
     "docs/features/advanced-global-traits-v2/05-delivery-plan.md",
     "docs/features/engineering-os-migration/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/05-delivery-plan.md",
     "docs/features/temporary-shareable-results/05-delivery-plan.md",
     "docs/features/twinzy-hardening-v3/05-delivery-plan.md"
@@ -1267,6 +1292,7 @@
     "docs/features/_template/02-business-development.md",
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/engineering-os-migration/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
     "docs/features/simple-readable-code-operating-system-implementation/02-business-development.md",
     "docs/features/temporary-shareable-results/02-business-development.md",
     "docs/features/twinzy-hardening-v3/02-business-development.md",
@@ -1279,7 +1305,8 @@
     "docs/eslint/no-direct-browser-api-outside-packages.md"
   ],
   "discipline": [
-    "rules/30-refactor-discipline.md"
+    "rules/30-refactor-discipline.md",
+    "rules/37-external-prompt-pack-execution.md"
   ],
   "disclaimer": [
     "domain/invariants.md",
@@ -1447,6 +1474,7 @@
     "docs/features/engineering-os-migration/11-test-strategy.md",
     "docs/features/engineering-os-migration/12-coverage-plan.md",
     "docs/features/engineering-os-migration/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
     "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
     "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
     "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md",
@@ -1639,6 +1667,12 @@
     "quality/waiver-register.md",
     "rules/26-error-handling-and-exceptions.md"
   ],
+  "execute": [
+    "skills/execute-external-prompt-pack.md"
+  ],
+  "execution": [
+    "rules/37-external-prompt-pack-execution.md"
+  ],
   "exhaustion": [
     "docs/ai/fallback-routing.md"
   ],
@@ -1661,6 +1695,10 @@
   "exposure": [
     "runbooks/accidental-image-exposure.md",
     "runbooks/secret-rotation.md"
+  ],
+  "external": [
+    "rules/37-external-prompt-pack-execution.md",
+    "skills/execute-external-prompt-pack.md"
   ],
   "extract": [
     "skills/simplify-existing-code.md"
@@ -1852,6 +1890,7 @@
     "docs/features/_template/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
     "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
     "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md"
@@ -2171,6 +2210,7 @@
     "docs/features/engineering-os-migration/09-impact-analysis.md",
     "docs/features/multi-provider-ai/09-impact-analysis.md",
     "docs/features/multi-tab-stream-isolation/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
     "docs/features/parallel-ai-pipeline/09-impact-analysis.md",
     "docs/features/simple-readable-code-operating-system-implementation/09-impact-analysis.md",
     "docs/features/temporary-shareable-results/02-business-development.md",
@@ -2248,6 +2288,7 @@
     "docs/features/engineering-os-migration/00-intake.md",
     "docs/features/multi-provider-ai/00-intake.md",
     "docs/features/multi-tab-stream-isolation/00-intake.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
     "docs/features/parallel-ai-pipeline/00-intake.md",
     "docs/features/paypal-donations-and-paid-results/00-intake.md",
     "docs/features/simple-readable-code-operating-system-and-codebase-refactor/00-intake.md",
@@ -2584,6 +2625,9 @@
   "mappers": [
     "rules/frontend/08-utils-helpers-mappers.md"
   ],
+  "marketing": [
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md"
+  ],
   "matrix": [
     "TEST_CASES.md"
   ],
@@ -2766,6 +2810,23 @@
     "docs/features/multi-tab-stream-isolation/23-documentation-changelog.md",
     "docs/features/multi-tab-stream-isolation/README.md",
     "docs/provider-routing.md"
+  ],
+  "multilingual": [
+    "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/08-architecture-review.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md"
   ],
   "multipart": [
     "contracts/api/analyze.md",
@@ -2963,6 +3024,8 @@
     "rules/31-knowledge-management.md"
   ],
   "pack": [
+    "rules/37-external-prompt-pack-execution.md",
+    "skills/execute-external-prompt-pack.md",
     "skills/resolve-task-context.md"
   ],
   "package": [
@@ -3185,6 +3248,8 @@
     "docs/features/engineering-os-migration/12-coverage-plan.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
     "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/05-delivery-plan.md",
     "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
@@ -3331,6 +3396,7 @@
     "docs/features/ai-knowledge-os/03-product-requirements.md",
     "docs/features/engineering-os-migration/03-product-requirements.md",
     "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
     "docs/features/parallel-ai-pipeline/03-product-requirements.md",
     "docs/features/simple-readable-code-operating-system-implementation/03-product-requirements.md",
     "docs/features/temporary-shareable-results/03-product-requirements.md",
@@ -3354,7 +3420,9 @@
     "contracts/ai/prompt-io.md",
     "docs/ai/prompt-change-checklist.md",
     "docs/features/ai-knowledge-os/generic-knowledge-os-prompt.md",
-    "runbooks/ai-schema-failures.md"
+    "rules/37-external-prompt-pack-execution.md",
+    "runbooks/ai-schema-failures.md",
+    "skills/execute-external-prompt-pack.md"
   ],
   "prompt-drift": [
     "quality/risk-register.md"
@@ -3493,6 +3561,7 @@
     "docs/features/ai-knowledge-os/13-implementation-readiness.md",
     "docs/features/engineering-os-migration/13-implementation-readiness.md",
     "docs/features/multi-provider-ai/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
     "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
     "docs/features/simple-readable-code-operating-system-implementation/13-implementation-readiness.md",
     "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md",
@@ -3518,6 +3587,7 @@
     "docs/features/_template-frontend/README.md",
     "docs/features/_template/README.md",
     "docs/features/multi-tab-stream-isolation/README.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md",
     "docs/features/parallel-ai-pipeline/README.md",
     "docs/features/README.md",
     "docs/README.md",
@@ -3597,6 +3667,8 @@
     "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
     "docs/features/engineering-os-migration/06-technical-refinement.md",
     "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
     "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
     "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
@@ -3744,6 +3816,7 @@
     "docs/features/ai-knowledge-os/03-product-requirements.md",
     "docs/features/engineering-os-migration/03-product-requirements.md",
     "docs/features/multi-tab-stream-isolation/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
     "docs/features/parallel-ai-pipeline/03-product-requirements.md",
     "docs/features/simple-readable-code-operating-system-implementation/03-product-requirements.md",
     "docs/features/temporary-shareable-results/03-product-requirements.md",
@@ -3885,6 +3958,7 @@
     "docs/features/_template/07-technical-roadmap.md",
     "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
     "docs/features/engineering-os-migration/07-technical-roadmap.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
     "docs/features/simple-readable-code-operating-system-implementation/07-technical-roadmap.md",
     "docs/features/temporary-shareable-results/07-technical-roadmap.md",
     "docs/features/twinzy-hardening-v3/07-technical-roadmap.md"
@@ -3964,6 +4038,23 @@
     "rules/33-fast-context-routing.md",
     "skills/resolve-task-context.md",
     "support/troubleshooting-index.md"
+  ],
+  "rss": [
+    "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/08-architecture-review.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md"
   ],
   "rtl": [
     "agents/i18n-rtl-reviewer.md",
@@ -4162,6 +4253,23 @@
   "sensitive-inference": [
     "domain/safety-boundaries.md"
   ],
+  "seo": [
+    "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/08-architecture-review.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md"
+  ],
   "server": [
     "docs/eslint/no-server-only-import-in-client.md"
   ],
@@ -4322,6 +4430,23 @@
     "operations/scaling-model.md",
     "runbooks/event-loop-lag.md"
   ],
+  "sitemap": [
+    "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/08-architecture-review.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/README.md"
+  ],
   "skip-link": [
     "product/accessibility-expectations.md"
   ],
@@ -4425,6 +4550,7 @@
     "docs/features/_template/10-engineering-standards-check.md",
     "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
     "docs/features/engineering-os-migration/10-engineering-standards-check.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
     "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
     "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
     "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md",
@@ -4472,6 +4598,7 @@
     "docs/features/engineering-os-migration/11-test-strategy.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
     "docs/features/parallel-ai-pipeline/11-test-strategy.md",
     "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
     "docs/features/temporary-shareable-results/11-test-strategy.md",
@@ -4625,6 +4752,8 @@
     "docs/features/engineering-os-migration/06-technical-refinement.md",
     "docs/features/engineering-os-migration/07-technical-roadmap.md",
     "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
     "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
     "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
     "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
@@ -4679,6 +4808,7 @@
     "docs/features/engineering-os-migration/11-test-strategy.md",
     "docs/features/multi-provider-ai/11-test-strategy.md",
     "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
+    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
     "docs/features/parallel-ai-pipeline/11-test-strategy.md",
     "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
     "docs/features/temporary-shareable-results/11-test-strategy.md",

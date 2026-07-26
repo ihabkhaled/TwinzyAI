@@ -306,12 +306,12 @@
       "workspace": "twinzy"
     },
     {
-      "command": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" --exit-code 1 --severity HIGH,CRITICAL .",
+      "command": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results,.claude/worktrees,**/.claude/worktrees\" --exit-code 1 --severity HIGH,CRITICAL .",
       "name": "security:scan",
       "workspace": "twinzy"
     },
     {
-      "command": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" .",
+      "command": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results,.claude/worktrees,**/.claude/worktrees\" .",
       "name": "security:scan:full",
       "workspace": "twinzy"
     },

@@ -163,15 +163,15 @@ const skipReasonForStep = (
   image: AiImageInput | undefined,
   state: RealRunState,
 ): string | undefined => {
-  if (step === GeminiStep.Extraction && image === undefined) {
+  if (image === undefined && step === GeminiStep.Extraction) {
     return 'image step needs --photo=<path>';
   }
   if (step === GeminiStep.Generation && state.extraction === undefined) {
     return 'generation needs a valid extraction';
   }
   if (
-    step === GeminiStep.Judge &&
-    (state.extraction === undefined || state.generation === undefined)
+    (state.extraction === undefined || state.generation === undefined) &&
+    step === GeminiStep.Judge
   ) {
     return 'judge needs valid extraction + generation';
   }

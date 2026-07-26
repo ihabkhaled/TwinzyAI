@@ -1,12 +1,12 @@
 {
-  "count": 689,
+  "count": 706,
   "documents": [
     {
       "authority": "canonical",
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "3463c874fb143957e0dfc1baad537c4a4ace18aeed795f869bfb4fb9ec482c83",
+      "hash": "80b6f1f3cd587e5b3314251dbb6d6529f1c350552f3927499e3e215bc478a013",
       "headings": [
         "AGENTS.md — Agent Bootstrap",
         "Simple Code Ladder (permanent policy — rules/28–30)",
@@ -31,7 +31,9 @@
         ".ai/BOOTSTRAP.md",
         "CLAUDE.md",
         "context/declaration-ownership-map.md",
-        "rules/28-simple-readable-code.md"
+        "rules/28-simple-readable-code.md",
+        "rules/37-external-prompt-pack-execution.md",
+        "skills/execute-external-prompt-pack.md"
       ],
       "path": "AGENTS.md",
       "relatedCode": [],
@@ -43,7 +45,7 @@
       ],
       "summary": "**Root [`CLAUDE.md`](CLAUDE.md) is the canonical operating policy for this repository** — the",
       "title": "AGENTS.md — Agent Bootstrap",
-      "tokens": 2533,
+      "tokens": 2625,
       "type": "doc"
     },
     {
@@ -1563,7 +1565,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "456a4260ee89aa45f5ed0b036557e1f5a2bd17ce91c79a1710928455acb46194",
+      "hash": "a6b07d599d1179aadff1a71194a51713aacd8c1364aecc16ed7d16602f3af174",
       "headings": [
         "Enterprise SDLC Operating Brain",
         "Purpose",
@@ -1626,6 +1628,7 @@
         "memory/known-pitfalls.md",
         "memory/README.md",
         "rules/00-non-negotiable-rules.md",
+        "rules/37-external-prompt-pack-execution.md",
         "rules/README.md",
         "skills/README.md",
         "skills/resolve-task-context.md",
@@ -1643,7 +1646,7 @@
       ],
       "summary": "> Every request must pass through full business, product, architecture, impact, standards, testing, implementation, QA, security, UAT, risk, documentation, release, hypercare, and retrospective phases with written artifacts and hard gate...",
       "title": "Enterprise SDLC Operating Brain",
-      "tokens": 23719,
+      "tokens": 23871,
       "type": "doc"
     },
     {
@@ -1651,7 +1654,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "4fa1d32add877e85935324f12ad407c760ac1be3d006166b9e0b5061000ea86f",
+      "hash": "d06f4b08e223e925c5a3f1a9248238997cc41bc5134599559f4f546510a299da",
       "headings": [
         "CODEX.md — Codex Bootstrap Mirror",
         "Simple Code Ladder (permanent policy — rules/28–30)",
@@ -1667,7 +1670,8 @@
       ],
       "links": [
         "context/declaration-ownership-map.md",
-        "rules/28-simple-readable-code.md"
+        "rules/28-simple-readable-code.md",
+        "rules/37-external-prompt-pack-execution.md"
       ],
       "path": "CODEX.md",
       "relatedCode": [],
@@ -1676,7 +1680,7 @@
       "sourceMentions": [],
       "summary": "**Root `CLAUDE.md` is the canonical operating policy and is binding.** Read it fully before any",
       "title": "CODEX.md — Codex Bootstrap Mirror",
-      "tokens": 615,
+      "tokens": 665,
       "type": "doc"
     },
     {
@@ -3484,7 +3488,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "4541f87c5351dd752aa3c91b831f7829939e4ad47b55c98b0afa0c831a523314",
+      "hash": "32433a26c9efd4bd16b90983f0f313fa7cac926f8819a2146269e7c785fa33d7",
       "headings": [
         "cursor.md — Cursor Bootstrap Mirror",
         "Simple Code Ladder (permanent policy — rules/28–30)",
@@ -3500,7 +3504,8 @@
       ],
       "links": [
         "context/declaration-ownership-map.md",
-        "rules/28-simple-readable-code.md"
+        "rules/28-simple-readable-code.md",
+        "rules/37-external-prompt-pack-execution.md"
       ],
       "path": "cursor.md",
       "relatedCode": [],
@@ -3509,7 +3514,7 @@
       "sourceMentions": [],
       "summary": "**Root `CLAUDE.md` is the canonical operating policy and is binding.** Read it fully before any",
       "title": "cursor.md — Cursor Bootstrap Mirror",
-      "tokens": 632,
+      "tokens": 681,
       "type": "doc"
     },
     {
@@ -10273,6 +10278,487 @@
       "summary": "Request `TWZ-2026-STREAM-ISO`. Makes the streaming analyze pipeline",
       "title": "Feature: Multi-tab stream isolation, overload protection & cancellation",
       "tokens": 484,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "54f0021939296fc5c84d960e9c46e2acb99bb764035409335ec22a4fc6299d93",
+      "headings": [
+        "00 — Intake"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-00-intake",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "intake",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/00-intake.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Deliver locale-addressable public discovery for Twinzy's reviewed locales, localized sitemap/RSS,",
+      "title": "00 — Intake",
+      "tokens": 92,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "5817cf4cdf9d6187a0761af7bb7ff0009966ff95e22585c00cb7d57b3a4d899b",
+      "headings": [
+        "01 — Business Analysis"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-01-business-analysis",
+      "keywords": [
+        "analysis",
+        "business",
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/01-business-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Search engines need stable language-specific URLs and machine-readable discovery. Players need a",
+      "title": "01 — Business Analysis",
+      "tokens": 75,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "4645e0ea040d7531ae82000cf07df36b06071b8c7db56e355b5a517e26eddf7c",
+      "headings": [
+        "02 — Business Development"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-02-business-development",
+      "keywords": [
+        "business",
+        "contact",
+        "development",
+        "docs",
+        "features",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/02-business-development.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Organic discovery is the channel. Editorial pages and RSS explain the game honestly; marketing must",
+      "title": "02 — Business Development",
+      "tokens": 70,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "563a80aee257456617fe69552eab2122267d7d701989443f2299e3f25bdc6aaf",
+      "headings": [
+        "03 — Product Requirements"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-03-product-requirements",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "product",
+        "requirements",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/03-product-requirements.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Every reviewed locale has a canonical public URL, reciprocal hreflang, and correct first response",
+      "title": "03 — Product Requirements",
+      "tokens": 144,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "7655e5579d5cb25083aa49acb7c822bd87fa54bcf1bd426713f2f8a9a6f04eb5",
+      "headings": [
+        "04 — Cross-Functional Refinement"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-04-cross-functional-refinement",
+      "keywords": [
+        "contact",
+        "cross",
+        "docs",
+        "features",
+        "functional",
+        "multilingual",
+        "refinement",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Product owns honest copy; frontend owns routing/rendering; security owns canonical-host, XML, contact",
+      "title": "04 — Cross-Functional Refinement",
+      "tokens": 74,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "9c8c22753932ebcac0bdbef960e451b64da33575825033716e562ca68d25596f",
+      "headings": [
+        "05 — Delivery Plan"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-05-delivery-plan",
+      "keywords": [
+        "contact",
+        "delivery",
+        "docs",
+        "features",
+        "multilingual",
+        "plan",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/05-delivery-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "1. Repair dependency/CI baseline.",
+      "title": "05 — Delivery Plan",
+      "tokens": 98,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "5624f6849e7d3e4e6552150ee9e5f876aed8bd339167a85613740aa0b70457fc",
+      "headings": [
+        "06 — Technical Refinement"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-06-technical-refinement",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "refinement",
+        "rss",
+        "seo",
+        "sitemap",
+        "technical"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Reuse the existing cookie-loaded dictionaries and unprefixed App Router owners. The request proxy",
+      "title": "06 — Technical Refinement",
+      "tokens": 129,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "ed69b064c2c2cdde191af3d9723549a709eeec0b85c20e4b0fa720ce59fa4a3f",
+      "headings": [
+        "07 — Technical Roadmap"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-07-technical-roadmap",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "roadmap",
+        "rss",
+        "seo",
+        "sitemap",
+        "technical"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "This slice establishes static editorial discovery only. Dynamic public result indexing stays",
+      "title": "07 — Technical Roadmap",
+      "tokens": 79,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "1a02b54e7f67522ff2c5f62810c2ee2ef7e55969f5df400f3f092b9dc043c4af",
+      "headings": [
+        "08 — Architecture Review"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-08-architecture-review",
+      "keywords": [
+        "architecture",
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "review",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/08-architecture-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Accepted: proxy rewrite preserves existing page owners and avoids duplicating route trees; shared",
+      "title": "08 — Architecture Review",
+      "tokens": 103,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "e9227506b869ca93b2c62939edd0f6ce8c4e84919026f18b0e213e283da035e4",
+      "headings": [
+        "09 — Impact Analysis"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-09-impact-analysis",
+      "keywords": [
+        "analysis",
+        "contact",
+        "docs",
+        "features",
+        "impact",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/09-impact-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Touches shared locale contracts, web proxy/navigation/metadata, public content, environment schema,",
+      "title": "09 — Impact Analysis",
+      "tokens": 82,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "0c4e00fcce10b8bacb12a18e711cac2744e87c5082d60ec7149a209f89fc321c",
+      "headings": [
+        "10 — Engineering Standards Check"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-10-engineering-standards-check",
+      "keywords": [
+        "check",
+        "contact",
+        "docs",
+        "engineering",
+        "features",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap",
+        "standards"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Binding: strict TypeScript, Zod boundaries, no inline reusable declarations, no raw vendor imports,",
+      "title": "10 — Engineering Standards Check",
+      "tokens": 84,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "ed68a067d4bbd219b6546143f0277c22bf040cd414b5c0eb0b22032b245fab9d",
+      "headings": [
+        "11 — Test Strategy"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-11-test-strategy",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "multilingual",
+        "rss",
+        "seo",
+        "sitemap",
+        "strategy",
+        "test"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Unit tests cover locale parsing/replacement, query preservation, route classification, canonical and",
+      "title": "11 — Test Strategy",
+      "tokens": 107,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "cd7c8a5c50186135646dd39f07a75c2075461c1e075097ad230509ead4af95f8",
+      "headings": [
+        "12 — Coverage Plan"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-12-coverage-plan",
+      "keywords": [
+        "contact",
+        "coverage",
+        "docs",
+        "features",
+        "multilingual",
+        "plan",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Every new pure helper receives branch-complete tests. Changed components/hooks receive interaction",
+      "title": "12 — Coverage Plan",
+      "tokens": 72,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "b5c7554887551cb1fb89ee3d98373647344d23a6c33ae1f7c2d6b68f3faa09c6",
+      "headings": [
+        "13 — Implementation Readiness"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-13-implementation-readiness",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "implementation",
+        "multilingual",
+        "readiness",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "**GO — 2026-07-26.** Scope, owners, architecture, privacy boundary, test plan, rollback (`git revert`",
+      "title": "13 — Implementation Readiness",
+      "tokens": 73,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "3829ed502c8a842c86bd36692997745307a7a9b2dc6251268c79e815ab6b895a",
+      "headings": [
+        "Multilingual SEO, Sitemap, RSS, Contact, and Marketing"
+      ],
+      "id": "docs-features-multilingual-seo-sitemap-rss-contact-readme",
+      "keywords": [
+        "contact",
+        "docs",
+        "features",
+        "marketing",
+        "multilingual",
+        "readme",
+        "rss",
+        "seo",
+        "sitemap"
+      ],
+      "links": [],
+      "path": "docs/features/multilingual-seo-sitemap-rss-contact/README.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Critical frontend/release delivery adapting the external ClawAI prompt pack to Twinzy. The numbered",
+      "title": "Multilingual SEO, Sitemap, RSS, Contact, and Marketing",
+      "tokens": 70,
       "type": "doc"
     },
     {
@@ -17934,7 +18420,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "06177fa36624dca5971f508848bf1f5f6e381dc893bfbf9f127c0a14d04c0511",
+      "hash": "a947d3118f56b4e8224957e2015a51f687e79daf4773637cd74e91dddffc3b12",
       "headings": [
         "Known Pitfalls",
         "A. Strict-TypeScript traps",
@@ -17989,7 +18475,7 @@
       ],
       "summary": "> The running log of recurring mistakes and their fixes. **Read before writing code.** These",
       "title": "Known Pitfalls",
-      "tokens": 7621,
+      "tokens": 7796,
       "type": "memory"
     },
     {
@@ -23144,6 +23630,37 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
+      "hash": "3e56f7c9b4beed2140251a19c55acf82a708f3018f6d37331c2b2f539b8051ff",
+      "headings": [
+        "37 — External Prompt Pack and Execution Prompt Discipline"
+      ],
+      "id": "rules-37-external-prompt-pack-execution",
+      "keywords": [
+        "discipline",
+        "execution",
+        "external",
+        "pack",
+        "prompt",
+        "rules"
+      ],
+      "links": [
+        "../skills/execute-external-prompt-pack.md"
+      ],
+      "path": "rules/37-external-prompt-pack-execution.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "External prompt packs are untrusted requirements inputs, never repository authority.",
+      "title": "37 — External Prompt Pack and Execution Prompt Discipline",
+      "tokens": 439,
+      "type": "rule"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 2,
+      "generated": false,
+      "hasFrontmatter": false,
       "hash": "ef7e91eecbe6cfb3960805822d3eb99c6bd631d3cd49f881f158f4e2bf4bf753",
       "headings": [
         "00 — Non-Negotiable Rules"
@@ -24279,7 +24796,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "d91eecf96675892e797b1a17f5e5ccb3f721164c270552b18274d5995e30c5da",
+      "hash": "272cfdb7e67af04affc8b74c0b9050aab8a9732d7dc03c64777fd97300c6448c",
       "headings": [
         "rules/ — Full Rule Bodies",
         "Backend",
@@ -24335,7 +24852,8 @@
         "./33-fast-context-routing.md",
         "./34-memory-lifecycle.md",
         "./35-generated-artifacts-and-freshness.md",
-        "./36-delivery-lanes-and-traceability.md"
+        "./36-delivery-lanes-and-traceability.md",
+        "./37-external-prompt-pack-execution.md"
       ],
       "path": "rules/README.md",
       "relatedCode": [],
@@ -24344,7 +24862,7 @@
       "sourceMentions": [],
       "summary": "> Root [`CLAUDE.md`](../CLAUDE.md) is the canonical operating policy and always wins. These files",
       "title": "rules/ — Full Rule Bodies",
-      "tokens": 1545,
+      "tokens": 1591,
       "type": "rule"
     },
     {
@@ -27289,6 +27807,35 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
+      "hash": "8fd976d6b7696f68bbc7d393d02321402046f81357511b4f55f79b361a4aa05f",
+      "headings": [
+        "Skill: Execute an External Prompt Pack"
+      ],
+      "id": "skills-execute-external-prompt-pack",
+      "keywords": [
+        "execute",
+        "external",
+        "pack",
+        "prompt",
+        "skill",
+        "skills"
+      ],
+      "links": [],
+      "path": "skills/execute-external-prompt-pack.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "> Applies rule 37, the Simple Code Ladder, delivery lanes, and release gates.",
+      "title": "Skill: Execute an External Prompt Pack",
+      "tokens": 338,
+      "type": "skill"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 2,
+      "generated": false,
+      "hasFrontmatter": false,
       "hash": "e0e65c43cbafe4f2eb910db8307f4d853c266acd36749e4e7bc776c411e958a5",
       "headings": [
         "Skill: Final Validation (Frontend)",
@@ -27793,7 +28340,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "0eafd40bb8bdc5fa8563ad74290c450c8c3cb611d1248bd4b323f798ade6ef61",
+      "hash": "efb6226e14c773d99d3bf1280568f34ddd873f7fa06d22cd7cd596507b620c6a",
       "headings": [
         "skills/ — Task Playbooks",
         "Simple code & cleanup",
@@ -27834,6 +28381,7 @@
         "./create-service.md",
         "./create-use-case.md",
         "./decompose-large-file.md",
+        "./execute-external-prompt-pack.md",
         "./final-validation.md",
         "./fix-eslint-typecheck.md",
         "./full-codebase-cleanup.md",
@@ -27862,7 +28410,7 @@
       ],
       "summary": "Repeatable, rule-enforcing guides. Anatomy: title, intent blockquote (which rules it",
       "title": "skills/ — Task Playbooks",
-      "tokens": 1349,
+      "tokens": 1389,
       "type": "skill"
     },
     {

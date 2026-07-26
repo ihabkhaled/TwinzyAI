@@ -15,6 +15,7 @@ Every skill ends the same way:
 - [full-codebase-cleanup.md](./full-codebase-cleanup.md) — repo-wide sweep orchestration, gates green per slice.
 - [cleanup-without-weakening-safety.md](./cleanup-without-weakening-safety.md) — refactoring the privacy/AI-safety/upload surfaces behavior-identically.
 - [prepare-agent-mirrors.md](./prepare-agent-mirrors.md) — keep every agent entrypoint compact and aligned.
+- [execute-external-prompt-pack.md](./execute-external-prompt-pack.md) — repository-first applicability, implementation, gates, and authorized push discipline.
 
 ## Backend
 

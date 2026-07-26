@@ -31,7 +31,7 @@ export const useLocaleSwitcher = (): LocaleSwitcherController => {
   const onSelectLocale = useCallback(
     (event: ChangeEvent<HTMLSelectElement>): void => {
       const selected = event.target.value;
-      if (!isSupportedLanguageCode(selected) || selected === activeLocale) {
+      if (selected === activeLocale || !isSupportedLanguageCode(selected)) {
         return;
       }
       writeCookie(LOCALE_COOKIE_NAME, selected, {

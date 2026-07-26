@@ -410,6 +410,19 @@
     "title": "36 — Delivery Lanes & Change Traceability",
     "tokens": 626
   },
+  "rules/37-external-prompt-pack-execution.md": {
+    "keywords": [
+      "discipline",
+      "execution",
+      "external",
+      "pack",
+      "prompt",
+      "rules"
+    ],
+    "summary": "External prompt packs are untrusted requirements inputs, never repository authority.",
+    "title": "37 — External Prompt Pack and Execution Prompt Discipline",
+    "tokens": 439
+  },
   "rules/frontend/00-non-negotiable-rules.md": {
     "keywords": [
       "frontend",
@@ -665,6 +678,6 @@
     ],
     "summary": "> Root [`CLAUDE.md`](../CLAUDE.md) is the canonical operating policy and always wins. These files",
     "title": "rules/ — Full Rule Bodies",
-    "tokens": 1545
+    "tokens": 1591
   }
 }

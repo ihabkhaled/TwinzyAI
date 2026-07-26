@@ -5,17 +5,22 @@
   "description": "Twinzy — a free, privacy-safe, mobile-first AI style/vibe game.",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=22.20 <23"
+    "node": ">=22.22.1 <23"
   },
   "overrides": {
     "@nestjs/platform-fastify": {
       "fastify": "$fastify"
     },
-    "next": {
-      "postcss": "^8.5.10",
-      "sharp": "^0.35.0"
+    "find-my-way": "^9.7.0",
+    "postcss": "^8.5.23",
+    "sharp": "^0.35.3",
+    "next@16.2.12": {
+      "postcss": "8.5.23",
+      "sharp": "0.35.3"
     },
     "shell-quote": "^1.8.5",
+    "brace-expansion": "^5.0.8",
+    "js-yaml": "^5.2.2",
     "eslint-plugin-react": {
       "eslint": "$eslint"
     },
@@ -62,11 +67,11 @@
     "docker:rebuild": "docker compose build --no-cache",
     "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run quality:dead-code && npm run quality:circular",
     "audit": "npm audit --audit-level=low",
-    "security:scan": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" --exit-code 1 --severity HIGH,CRITICAL .",
+    "security:scan": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results,.claude/worktrees,**/.claude/worktrees\" --exit-code 1 --severity HIGH,CRITICAL .",
     "security:audit": "npm audit --audit-level=low",
     "security:scan:images": "trivy image --exit-code 1 --severity HIGH,CRITICAL twinzy-api:local && trivy image --exit-code 1 --severity HIGH,CRITICAL twinzy-web:local",
     "security:scan:secrets": "node scripts/scan-secrets.mjs",
-    "security:scan:full": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results\" .",
+    "security:scan:full": "trivy fs --scanners vuln,secret,misconfig --include-dev-deps --skip-dirs \"node_modules,**/node_modules,dist,**/dist,coverage,**/coverage,.next,**/.next,**/playwright-report,**/test-results,.claude/worktrees,**/.claude/worktrees\" .",
     "deps:check": "npm-check-updates --workspaces --root",
     "deps:upgrade": "npm-check-updates --workspaces --root -u && npm install",
     "quality:dead-code": "knip",
@@ -99,13 +104,13 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.2",
     "@eslint/js": "^10.0.1",
-    "@next/eslint-plugin-next": "^16.2.10",
-    "@tanstack/eslint-plugin-query": "^5.101.2",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@next/eslint-plugin-next": "^16.2.12",
+    "@tanstack/eslint-plugin-query": "^5.101.4",
+    "@vitejs/plugin-react": "^6.0.4",
     "@vitest/coverage-v8": "^4.1.10",
-    "@vitest/eslint-plugin": "^1.6.23",
-    "concurrently": "^10.0.3",
-    "eslint": "^10.7.0",
+    "@vitest/eslint-plugin": "^1.6.24",
+    "concurrently": "^10.0.4",
+    "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "^4.17.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -115,23 +120,24 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-regexp": "^3.1.1",
     "eslint-plugin-security": "^4.0.1",
-    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
     "eslint-plugin-sonarjs": "^4.2.0",
     "eslint-plugin-testing-library": "^7.16.2",
     "eslint-plugin-unicorn": "^72.0.0",
     "eslint-plugin-unused-imports": "^4.4.1",
     "husky": "^9.1.7",
-    "knip": "^6.27.0",
-    "lint-staged": "^17.0.8",
+    "knip": "^6.29.0",
+    "lint-staged": "^17.2.0",
     "madge": "^8.0.0",
     "npm-check-updates": "^22.2.9",
-    "prettier": "^3.9.5",
+    "prettier": "^3.9.6",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.64.0",
+    "typescript-eslint": "^8.65.0",
     "vitest": "^4.1.10",
-    "yaml": "^2.8.1"
+    "yaml": "^2.9.0"
   },
   "dependencies": {
+    "@fastify/static": "^10.1.2",
     "fastify": "^5.10.0",
     "tsc7": "npm:typescript@^7.0.2"
   }

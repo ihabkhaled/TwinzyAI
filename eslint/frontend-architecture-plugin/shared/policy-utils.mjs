@@ -46,7 +46,7 @@ export function classifySourcePath(sourcePath) {
 
   if (moduleName) {
     const rest = path.slice(`src/modules/${moduleName}/`.length);
-    const [firstSegment] = rest.split("/");
+    const [firstSegment] = rest.split("/", 1);
     const knownLayers = new Set([
       "api",
       "gateway",

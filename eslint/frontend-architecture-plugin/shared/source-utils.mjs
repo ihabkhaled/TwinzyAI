@@ -166,12 +166,12 @@ export function getPackageName(importPath) {
   const specifier = String(importPath);
 
   if (specifier.startsWith("@")) {
-    const [scope, name] = specifier.split("/");
+    const [scope, name] = specifier.split("/", 2);
 
     return name ? `${scope}/${name}` : specifier;
   }
 
-  const [name] = specifier.split("/");
+  const [name] = specifier.split("/", 1);
 
   return name ?? specifier;
 }

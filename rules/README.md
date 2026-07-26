@@ -39,6 +39,7 @@
 | 34 | [34-memory-lifecycle.md](./34-memory-lifecycle.md) | Dated/evidenced memories; hot-memory working set; promotion and supersession |
 | 35 | [35-generated-artifacts-and-freshness.md](./35-generated-artifacts-and-freshness.md) | .ai/ never hand-edited; declared inputs; deterministic; hash-triggered staleness |
 | 36 | [36-delivery-lanes-and-traceability.md](./36-delivery-lanes-and-traceability.md) | Fast/standard/critical lanes scale weight never existence; recorded-scope traceability |
+| 37 | [37-external-prompt-pack-execution.md](./37-external-prompt-pack-execution.md) | Adapt external prompt packs only after repository-first audit; gated immediate-push protocol |
 
 ## Frontend
 

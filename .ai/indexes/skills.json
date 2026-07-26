@@ -430,6 +430,19 @@
     "title": "Skill: Decompose a Large File",
     "tokens": 237
   },
+  "skills/execute-external-prompt-pack.md": {
+    "keywords": [
+      "execute",
+      "external",
+      "pack",
+      "prompt",
+      "skill",
+      "skills"
+    ],
+    "summary": "> Applies rule 37, the Simple Code Ladder, delivery lanes, and release gates.",
+    "title": "Skill: Execute an External Prompt Pack",
+    "tokens": 338
+  },
   "skills/final-validation-frontend.md": {
     "keywords": [
       "final",
@@ -611,7 +624,7 @@
     ],
     "summary": "Repeatable, rule-enforcing guides. Anatomy: title, intent blockquote (which rules it",
     "title": "skills/ — Task Playbooks",
-    "tokens": 1349
+    "tokens": 1389
   },
   "skills/refactor-feature.md": {
     "keywords": [

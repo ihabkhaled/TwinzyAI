@@ -565,3 +565,13 @@
   preferences.
 - **Fix:** every theme-dependent rendered attribute and icon must use the same `hasHydrated` gate.
   Keep provisional server/client output identical, then expose the resolved state after hydration.
+
+### M4. Foreign prompt packs can silently import the wrong product architecture
+
+- **Symptom:** a broad execution pack requests auth, databases, public chats, locales, or services
+  that Twinzy does not own, while relevant SEO/content work is mixed into the same checklist.
+- **Cause:** treating the pack as authority instead of a requirements input.
+- **Fix (2026-07-26):** follow rule 37: repository bootstrap/resolver first, full-pack read,
+  applicability matrix, explicit exclusions, phases `00`–`13`, current-owner reuse, full gates, and
+  no commit/push unless explicitly authorized. With immediate direct-push authorization, stop after
+  each commit until its push and remote gates succeed.

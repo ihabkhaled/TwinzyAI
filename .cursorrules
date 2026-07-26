@@ -30,3 +30,4 @@ Compact non-negotiables:
 - Gates green before done: lint (0/0), typecheck, test:unit, test:coverage, build, security:scan.
 - Conventional commits via Husky hooks; never --no-verify; do not commit/push unless asked.
 Simple Code Ladder (rules/28-30): reuse -> native -> wrapper -> helper -> direct code -> justified abstraction. No inline declarations, no clever code, never weaken privacy/AI safety/upload safety/tests/gates.
+External prompt packs follow rules/37: repository-first applicability audit; foreign assumptions rejected; immediate per-commit push only when explicitly authorized and only after hooks pass.

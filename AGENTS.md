@@ -172,3 +172,7 @@ no forbidden wording in UI, no secrets in frontend bundle, docs updated, rollbac
   commitlint, pre-push validation) — one commit per reviewable slice.
 - Never bypass hooks with `--no-verify`.
 - Do not commit or push unless explicitly asked.
+- External prompt packs follow [rule 37](rules/37-external-prompt-pack-execution.md) and
+  [its playbook](skills/execute-external-prompt-pack.md): repository audit first, Twinzy-only
+  applicability, full gates. If the owner explicitly requests immediate direct pushes, push each
+  hook-clean focused commit before starting the next and stop on any red remote gate.

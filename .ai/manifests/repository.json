@@ -63,7 +63,7 @@
           "name": "runRealBenchmark"
         }
       ],
-      "hash": "b38194342965f98c612aa639c2873e10d6d12d4122c4adf5633e30b0c6987dfb",
+      "hash": "67232bcbd78aecc3d143fbdc8c3cc0cb00c1ae7d723e8883f513459a005a24bb",
       "imports": [
         "../config/ai-route.types",
         "../config/gemini-step.constants",
@@ -9049,7 +9049,7 @@
           "name": "SharePageContainer"
         }
       ],
-      "hash": "734604e5234ac00af87cd4b137e72b73296286bd6e83fc39ccf858f4406ffd9f",
+      "hash": "3d26ce01f6aa3afa1f13e3adba321744248e09d296a6f3d885e4b683b29a0ec1",
       "imports": [
         "../components/countdown-timer.component",
         "../components/share-state-message.component",
@@ -9865,7 +9865,7 @@
           "name": "useResultTranslation"
         }
       ],
-      "hash": "56530f6b54f2d41ed6ae35e1e72fbd7b56292d7d80ef1d37146427b21d841b47",
+      "hash": "137ba0a59d96a1e45f97ada50f0b137b6736743fd1fa6bac07dc4e3ac9804f2b",
       "imports": [
         "../model/game.constants",
         "../model/game.types",
@@ -11500,7 +11500,7 @@
           "name": "useLocaleSwitcher"
         }
       ],
-      "hash": "1afe72c45f5feb651d1639c1038b89aa75276b0c29aabe6cb1f2a588d901f868",
+      "hash": "bf97de6735bf07e9c2e23f59d9ac5671661c99843cb52965f91437c19fcea40b",
       "imports": [
         "../types/ui-preferences.types",
         "@/packages/i18n",

@@ -40,11 +40,11 @@ export const useResultTranslation = (
 
   useEffect(() => {
     if (
-      displayResult === undefined ||
       isPending ||
-      !isSupportedLanguageCode(rawLocale) ||
+      displayResult === undefined ||
+      rawLocale === failedLanguage ||
       rawLocale === displayResult.languageCode ||
-      rawLocale === failedLanguage
+      !isSupportedLanguageCode(rawLocale)
     ) {
       return;
     }

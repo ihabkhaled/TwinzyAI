@@ -89,7 +89,7 @@ export const SharePageContainer = ({ shareId }: SharePageProps): ReactElement =>
       />
     );
   }
-  if (phase === SharePagePhase.Expired || result === undefined) {
+  if (result === undefined || phase === SharePagePhase.Expired) {
     return (
       <ShareStateMessage
         title={t('share.expiredTitle')}

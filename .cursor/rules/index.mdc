@@ -16,3 +16,4 @@ Rule files here: 00-canonical-policy, 10-sdlc-and-artifacts, 30-devops-release-a
 file-upload-security, testing, eslint, pitfalls.
 
 - Simple Code Ladder is permanent policy: rules/28-simple-readable-code.md, rules/29-reuse-before-creating.md, rules/30-refactor-discipline.md; ownership answers in context/declaration-ownership-map.md.
+- External prompt packs: rules/37-external-prompt-pack-execution.md and skills/execute-external-prompt-pack.md; audit repository first, adapt only applicable scope, and honor explicitly authorized immediate-push sequencing.
