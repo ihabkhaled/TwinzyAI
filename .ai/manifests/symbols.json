@@ -1,5 +1,5 @@
 {
-  "count": 1571,
+  "count": 1572,
   "symbols": [
     {
       "kind": "const",
@@ -4276,6 +4276,13 @@
       "layer": "shared",
       "module": "web:shared",
       "name": "headerContactLabelClass",
+      "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "headerContactLinkClass",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
     {

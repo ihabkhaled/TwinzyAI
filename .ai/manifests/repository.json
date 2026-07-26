@@ -7956,7 +7956,7 @@
           "name": "viewport"
         }
       ],
-      "hash": "fc3720035665c6b5ace0aa199f05aa24c4da8847f1248758abf6cc3cf6332df8",
+      "hash": "61875fc83d3bb928f97d6a0fc637b0955197c0ef419b74d2ee04445e51c560a0",
       "imports": [
         "./layout.variants",
         "./providers",
@@ -15082,6 +15082,10 @@
         },
         {
           "kind": "const",
+          "name": "headerContactLinkClass"
+        },
+        {
+          "kind": "const",
           "name": "headerDonateLabelClass"
         },
         {
@@ -15097,11 +15101,11 @@
           "name": "headerLocaleSelectClass"
         }
       ],
-      "hash": "e320c8470a117a6a1f65b107fc5e28a52aaff0ecf8b39d140c08d859222f5842",
+      "hash": "3bf0d269c21a8972e82921c8431a569987218d6f076200d5240884d3227b650b",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 37,
+      "loc": 40,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
@@ -15112,7 +15116,7 @@
           "name": "ContactNavLink"
         }
       ],
-      "hash": "cdfd5e18c0a0e38eb0cb8520f1bd095e6bba5fbc3b00ceccc9c5ddff59438ee1",
+      "hash": "89fd245699f28742fdd9aef862c6904cfb63a8fd1cdbfc921c076400076b75aa",
       "imports": [
         "../types/shared-component.types",
         "./app-header.variants",
@@ -15122,7 +15126,7 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 20,
+      "loc": 17,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/layout/contact-nav-link.component.tsx"
     },

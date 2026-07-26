@@ -110,7 +110,7 @@ const RootLayout = async ({ children }: RootLayoutProps): Promise<ReactNode> => 
             <SkipLink targetHref="#main-content" label={t('nav.skipToContent')} />
             <AppHeader brandLabel={t('app.name')}>
               <HomeLink label={t('nav.home')} />
-              <ContactNavLink href="/contact" label={t('about.contactTitle')} />
+              <ContactNavLink href="/contact" label={t('nav.contactUs')} />
               {donateUrl === undefined ? null : (
                 <DonateNavLink href={donateUrl} label={t('nav.donate')} />
               )}

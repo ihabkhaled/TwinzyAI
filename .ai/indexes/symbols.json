@@ -1680,6 +1680,9 @@
   "headerContactLabelClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
+  "headerContactLinkClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
   "headerDonateLabelClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
