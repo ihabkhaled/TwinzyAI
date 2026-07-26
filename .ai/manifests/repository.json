@@ -11890,17 +11890,18 @@
           "name": "useLocaleSwitcher"
         }
       ],
-      "hash": "bf97de6735bf07e9c2e23f59d9ac5671661c99843cb52965f91437c19fcea40b",
+      "hash": "2f117036da9fcb30969ceb958992a4b45f402d57e0581b4f20155fdbcff32f6a",
       "imports": [
         "../types/ui-preferences.types",
         "@/packages/i18n",
         "@/packages/navigation",
         "@/packages/storage",
+        "@/shared/helpers/locale-route.helper",
         "react"
       ],
       "isTest": false,
       "layer": "hooks",
-      "loc": 47,
+      "loc": 53,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts"
     },
@@ -12148,7 +12149,7 @@
     },
     {
       "exports": [],
-      "hash": "d515a042901d8b4d2c9e2763b71d3cf58d85ddefefca7d13b2a31cc53230880b",
+      "hash": "f4cf652fe29bc315a5adc168e0b69c0bb767648b5bddce97d1b32b92c77d6d1d",
       "imports": [
         "../hooks/useLocaleSwitcher.hook",
         "@/packages/i18n",
@@ -12160,7 +12161,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 90,
+      "loc": 111,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts"
     },
@@ -15700,7 +15701,7 @@
     },
     {
       "exports": [],
-      "hash": "028b093d2db72dea71b04f9d446e157cb138b1cb9c07952c4f1f5071dcd2ba30",
+      "hash": "7674abd1bd77bc346b8f2056adba5600f70fcba29680a74cc76d59262ee487ed",
       "imports": [
         "../constants/route-paths.constants",
         "./locale-route.helper",
@@ -15708,7 +15709,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 42,
+      "loc": 50,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts"
     },
@@ -15733,9 +15734,13 @@
         {
           "kind": "const",
           "name": "parseLocalizedPath"
+        },
+        {
+          "kind": "const",
+          "name": "replaceLocalizedPathLocale"
         }
       ],
-      "hash": "8b2ae2d72f333a83292eaa64cd8a62b589e86b3b8dc32c064bd48e4fe5d19df4",
+      "hash": "9902d6b43c6d6e3652ffad84d7a8bcde6417f3c2eaf0078658d89b0637c9c8da",
       "imports": [
         "../constants/route-paths.constants",
         "@/packages/i18n",
@@ -15743,7 +15748,7 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 61,
+      "loc": 73,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },

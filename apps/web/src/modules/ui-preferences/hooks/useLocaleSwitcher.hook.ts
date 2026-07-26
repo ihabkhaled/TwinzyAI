@@ -13,6 +13,7 @@ import {
 } from '@/packages/i18n';
 import { useAppNavigation } from '@/packages/navigation';
 import { writeCookie } from '@/packages/storage';
+import { replaceLocalizedPathLocale } from '@/shared/helpers/locale-route.helper';
 
 import type { LocaleSwitcherController } from '../types/ui-preferences.types';
 
@@ -37,7 +38,12 @@ export const useLocaleSwitcher = (): LocaleSwitcherController => {
       writeCookie(LOCALE_COOKIE_NAME, selected, {
         maxAgeSeconds: LOCALE_COOKIE_MAX_AGE_SECONDS,
       });
-      navigation.refresh();
+      const localizedPath = replaceLocalizedPathLocale(navigation.pathname, selected);
+      if (localizedPath === undefined) {
+        navigation.refresh();
+      } else {
+        navigation.replace(localizedPath);
+      }
     },
     [activeLocale, navigation],
   );

@@ -48,6 +48,18 @@ export const parseLocalizedPath = (
   return { locale: candidate, internalPath };
 };
 
+/** Replace an existing supported locale prefix while retaining the page owner path. */
+export const replaceLocalizedPathLocale = (
+  pathname: string,
+  locale: LanguageCodeValue,
+): Route | undefined => {
+  const localized = parseLocalizedPath(pathname);
+  if (localized === undefined || !isPublicPagePath(localized.internalPath)) {
+    return undefined;
+  }
+  return buildLocalizedPath(locale, localized.internalPath);
+};
+
 /** True only for routes that receive a canonical locale prefix. */
 export const isPublicPagePath = (pathname: string): pathname is Route =>
   PUBLIC_ROUTE_PATHS.has(pathname);

@@ -3021,6 +3021,9 @@
     "apps/web/src/packages/paypal/index.ts",
     "apps/web/src/packages/paypal/paypal-sdk.ts"
   ],
+  "replaceLocalizedPathLocale": [
+    "apps/web/src/shared/helpers/locale-route.helper.ts"
+  ],
   "requestCameraStream": [
     "apps/web/src/packages/camera/camera-stream.ts",
     "apps/web/src/packages/camera/index.ts"

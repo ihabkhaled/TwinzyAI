@@ -1,5 +1,5 @@
 {
-  "count": 1565,
+  "count": 1566,
   "symbols": [
     {
       "kind": "const",
@@ -7630,6 +7630,13 @@
       "module": "web:pkg-paypal",
       "name": "renderPayPalButtons",
       "path": "apps/web/src/packages/paypal/paypal-sdk.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "replaceLocalizedPathLocale",
+      "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },
     {
       "kind": "const",

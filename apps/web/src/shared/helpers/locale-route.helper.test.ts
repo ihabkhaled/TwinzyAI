@@ -8,6 +8,7 @@ import {
   isMachinePath,
   isPublicPagePath,
   parseLocalizedPath,
+  replaceLocalizedPathLocale,
 } from './locale-route.helper';
 
 describe('locale route helpers', () => {
@@ -27,6 +28,13 @@ describe('locale route helpers', () => {
     });
     expect(parseLocalizedPath('/en/')).toStrictEqual({ locale: 'en', internalPath: '/' });
     expect(parseLocalizedPath('/xx/privacy')).toBeUndefined();
+  });
+
+  it('replaces locale prefixes only for localized editorial pages', () => {
+    expect(replaceLocalizedPathLocale('/en/about', 'fr')).toBe('/fr/about');
+    expect(replaceLocalizedPathLocale('/en', 'ar')).toBe('/ar');
+    expect(replaceLocalizedPathLocale('/game', 'fr')).toBeUndefined();
+    expect(replaceLocalizedPathLocale('/en/game', 'fr')).toBeUndefined();
   });
 
   it('classifies public and machine paths', () => {

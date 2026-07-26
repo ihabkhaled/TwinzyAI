@@ -22,6 +22,7 @@ vi.mock('@/packages/storage', async (importActual) => ({
 }));
 
 const refresh = vi.fn();
+const replace = vi.fn();
 
 const selectEvent = (value: string): ChangeEvent<HTMLSelectElement> =>
   ({ target: { value } }) as ChangeEvent<HTMLSelectElement>;
@@ -31,12 +32,13 @@ beforeEach(() => {
   vi.mocked(navigationPackage.useAppNavigation).mockReturnValue({
     pathname: '/',
     push: vi.fn(),
-    replace: vi.fn(),
+    replace,
     back: vi.fn(),
     refresh,
   });
   vi.mocked(storagePackage.writeCookie).mockReset();
   refresh.mockReset();
+  replace.mockReset();
 });
 
 afterEach(() => {
@@ -63,6 +65,25 @@ describe('useLocaleSwitcher', () => {
       expect.objectContaining({ maxAgeSeconds: i18nPackage.LOCALE_COOKIE_MAX_AGE_SECONDS }),
     );
     expect(refresh).toHaveBeenCalledTimes(1);
+    expect(replace).not.toHaveBeenCalled();
+  });
+
+  it('navigates to the selected prefix on a localized editorial page', () => {
+    vi.mocked(navigationPackage.useAppNavigation).mockReturnValue({
+      pathname: '/en/about',
+      push: vi.fn(),
+      replace,
+      back: vi.fn(),
+      refresh,
+    });
+    const { result } = renderHook(() => useLocaleSwitcher());
+
+    act(() => {
+      result.current.onSelectLocale(selectEvent('fr'));
+    });
+
+    expect(replace).toHaveBeenCalledWith('/fr/about');
+    expect(refresh).not.toHaveBeenCalled();
   });
 
   it('ignores selecting the already-active locale', () => {
