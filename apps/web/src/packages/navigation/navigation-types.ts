@@ -5,6 +5,7 @@ export interface AppNavigation {
   pathname: string;
   push: (href: Route) => void;
   replace: (href: Route) => void;
+  reloadAt: (href: Route) => void;
   back: () => void;
   refresh: () => void;
 }

@@ -23,6 +23,7 @@ vi.mock('@/packages/storage', async (importActual) => ({
 
 const refresh = vi.fn();
 const replace = vi.fn();
+const reloadAt = vi.fn();
 
 const selectEvent = (value: string): ChangeEvent<HTMLSelectElement> =>
   ({ target: { value } }) as ChangeEvent<HTMLSelectElement>;
@@ -33,12 +34,14 @@ beforeEach(() => {
     pathname: '/',
     push: vi.fn(),
     replace,
+    reloadAt,
     back: vi.fn(),
     refresh,
   });
   vi.mocked(storagePackage.writeCookie).mockReset();
   refresh.mockReset();
   replace.mockReset();
+  reloadAt.mockReset();
 });
 
 afterEach(() => {
@@ -73,6 +76,7 @@ describe('useLocaleSwitcher', () => {
       pathname: '/en/about',
       push: vi.fn(),
       replace,
+      reloadAt,
       back: vi.fn(),
       refresh,
     });
@@ -82,7 +86,8 @@ describe('useLocaleSwitcher', () => {
       result.current.onSelectLocale(selectEvent('fr'));
     });
 
-    expect(replace).toHaveBeenCalledWith('/fr/about');
+    expect(reloadAt).toHaveBeenCalledWith('/fr/about');
+    expect(replace).not.toHaveBeenCalled();
     expect(refresh).not.toHaveBeenCalled();
   });
 

@@ -42,7 +42,7 @@ export const useLocaleSwitcher = (): LocaleSwitcherController => {
       if (localizedPath === undefined) {
         navigation.refresh();
       } else {
-        navigation.replace(localizedPath);
+        navigation.reloadAt(localizedPath);
       }
     },
     [activeLocale, navigation],

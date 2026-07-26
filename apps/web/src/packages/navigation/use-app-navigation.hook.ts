@@ -3,6 +3,8 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
+import { getSafeWindow } from '@/packages/browser';
+
 import type { AppNavigation } from './navigation-types';
 
 /** Memoized, typed access to the App Router: current path and imperative actions. */
@@ -18,6 +20,9 @@ export const useAppNavigation = (): AppNavigation => {
       },
       replace: (href): void => {
         router.replace(href);
+      },
+      reloadAt: (href): void => {
+        getSafeWindow()?.location.assign(href);
       },
       back: (): void => {
         router.back();

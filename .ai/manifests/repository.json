@@ -11890,7 +11890,7 @@
           "name": "useLocaleSwitcher"
         }
       ],
-      "hash": "2f117036da9fcb30969ceb958992a4b45f402d57e0581b4f20155fdbcff32f6a",
+      "hash": "3fb642a3029782ff0c342e4ef668d9a173b5500fe5b8ac78887468dfa9c645f8",
       "imports": [
         "../types/ui-preferences.types",
         "@/packages/i18n",
@@ -12149,7 +12149,7 @@
     },
     {
       "exports": [],
-      "hash": "f4cf652fe29bc315a5adc168e0b69c0bb767648b5bddce97d1b32b92c77d6d1d",
+      "hash": "18a239269d80b02cb4a163c95c0400bef9760823b2d41a46d87eab1a8a1c5416",
       "imports": [
         "../hooks/useLocaleSwitcher.hook",
         "@/packages/i18n",
@@ -12161,7 +12161,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 111,
+      "loc": 116,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts"
     },
@@ -13345,13 +13345,13 @@
           "name": "AppNavigation"
         }
       ],
-      "hash": "dded7e92c2584a9ca5a482ba91cd4c76026f63f1247d188cea196f1f29750ae8",
+      "hash": "b95a0631d1bdc7171ca1f06d07dcd3b193643f85eb998cfe0cd75e73897207f4",
       "imports": [
         "next"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 11,
+      "loc": 12,
       "module": "web:pkg-navigation",
       "path": "apps/web/src/packages/navigation/navigation-types.ts"
     },
@@ -13362,15 +13362,16 @@
           "name": "useAppNavigation"
         }
       ],
-      "hash": "66365d4ccf5c2d4d7476ef3d8cb0ff683b5c329fc865c2e9aeaad8b95b8d9a13",
+      "hash": "d1b2e94fe72042ec9a2ffca66bd9acc5c853d3f971f4144765042d61d37e69f6",
       "imports": [
         "./navigation-types",
+        "@/packages/browser",
         "next/navigation",
         "react"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 32,
+      "loc": 37,
       "module": "web:pkg-navigation",
       "path": "apps/web/src/packages/navigation/use-app-navigation.hook.ts"
     },
