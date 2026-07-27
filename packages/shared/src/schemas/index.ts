@@ -1,3 +1,4 @@
+export * from './advanced-matching.schema';
 export * from './candidates.schema';
 export * from './contact.schemas';
 export * from './game-result.schema';

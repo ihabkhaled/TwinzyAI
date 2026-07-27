@@ -11,7 +11,11 @@ import type { ErrorMessageKey } from '@/shared/errors/error-keys.constants';
 import type { CameraViewModel } from './camera.types';
 import type { GamePhaseValue } from './game.enums';
 import type { PaymentViewModel } from './payment.types';
+import type { PublicFigureView } from './public-figure.types';
+import type { ResultLabels } from './result.types';
 import type { ShareModalViewModel } from './share-modal.types';
+
+export type { ResultLabels } from './result.types';
 
 /** Live mid-pipeline trait progress: the count + strongest written signals. */
 export interface TraitsProgress {
@@ -67,6 +71,7 @@ export interface UncertaintyGroupView {
 
 /** One final match prepared for display (labels already translated). */
 export interface ResultView {
+  entityId?: string;
   name: string;
   rank: number;
   scorePercent: number;
@@ -79,6 +84,7 @@ export interface ResultView {
   secondaryMatchingTraits: string[];
   weakOrUncertainTraits: string[];
   mismatchWarnings: string[];
+  publicFigure?: PublicFigureView;
 }
 
 /** The mapped view model the UI renders — never the raw backend DTO. */
@@ -312,34 +318,6 @@ interface CameraLabels {
   cancelButton: string;
   switchButton: string;
   mirrorButton: string;
-}
-
-/** Translated copy for the results view (dynamic values come from the DTO). */
-export interface ResultLabels {
-  title: string;
-  compactSummaryTitle: string;
-  detailedTraitsTitle: string;
-  imageQualityTitle: string;
-  uncertaintyTitle: string;
-  scoreLabel: string;
-  reasonLabel: string;
-  matchingTraitsLabel: string;
-  weakTraitsLabel: string;
-  mismatchLabel: string;
-  /** Locale-correct separator when joining trait lists ("، " in Arabic). */
-  listSeparator: string;
-  rankLabel: string;
-  fallbackTitle: string;
-  retryButton: string;
-  shareButton: string;
-  /** Voluntary PayPal support-link text (never implies payment is required). */
-  donateLabel: string;
-  /** Explains what the percentage score represents. */
-  scoreExplanation: string;
-  /** Explains why some traits are marked as uncertain. */
-  uncertaintyExplanation: string;
-  /** Explains why mismatch warnings appear. */
-  mismatchExplanation: string;
 }
 
 /** All static copy the game screen needs, resolved once per render. */

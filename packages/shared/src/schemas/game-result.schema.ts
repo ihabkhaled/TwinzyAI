@@ -24,6 +24,10 @@ import { CONFIDENCE_LEVEL_VALUES } from '../enums/confidence.enum';
 import { PUBLIC_CATEGORY_VALUES } from '../enums/public-category.enum';
 import { VERDICT_VALUES } from '../enums/verdict.enum';
 
+import {
+  PublicFigureEnrichmentSchema,
+  PublicFigureEntityIdSchema,
+} from './advanced-matching.schema';
 import { JudgeSafetyCheckSchema, TraitReferenceSchema } from './judge.schema';
 import { LanguageCodeSchema } from './language.schema';
 import { TraitsSchema } from './traits.schema';
@@ -40,6 +44,7 @@ export const FinalResultSafetyCheckSchema = z.strictObject(JudgeSafetyCheckSchem
  * conservative score, and localized reasoning detail.
  */
 export const FinalResultItemSchema = z.strictObject({
+  entityId: PublicFigureEntityIdSchema.optional(),
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   rank: z.number().int().min(1).max(MAX_RESULT_COUNT),
   finalStyleVibeFitScore: z.number().int().min(MIN_SCORE).max(MAX_SCORE),
@@ -54,6 +59,7 @@ export const FinalResultItemSchema = z.strictObject({
   mismatchWarnings: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   judgeNotes: z.string().trim().min(1).max(MAX_JUDGE_NOTES_LENGTH),
   safetyCheck: FinalResultSafetyCheckSchema,
+  publicFigure: PublicFigureEnrichmentSchema.optional(),
 });
 
 /**

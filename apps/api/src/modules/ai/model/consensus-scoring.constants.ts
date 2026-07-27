@@ -1,0 +1,20 @@
+export const CONSENSUS_SCORING_WEIGHTS = {
+  stable: 0.45,
+  mutable: 0.35,
+  expression: 0.1,
+  confidence: 0.05,
+} as const;
+
+export const CONSENSUS_MAX_AGREEMENT_BONUS = 5;
+export const CONSENSUS_MAX_RETRIEVAL_BONUS = 5;
+export const CONSENSUS_MAX_CROSS_LANE_BONUS = 5;
+export const CONSENSUS_CONTRADICTION_PENALTY_WEIGHT = 0.2;
+export const CONSENSUS_UNCERTAINTY_PENALTY_WEIGHT = 0.15;
+export const CONSENSUS_UNSUPPORTED_CLAIM_PENALTY = 2;
+export const CONSENSUS_QUALITY_CAP_PENALTY = 3;
+export const CONSENSUS_MIN_REPORTS = 2;
+export const CONSENSUS_MAX_SCORE = 100;
+export const CONSENSUS_MIN_SCORE = 0;
+export const CONSENSUS_ENTITY_ID_PATTERN = /^Q[1-9]\d{0,18}$/u;
+export const CONSENSUS_EVEN_DIVISOR = 2;
+export const CONSENSUS_AGREEMENT_SPREAD_DIVISOR = 10;

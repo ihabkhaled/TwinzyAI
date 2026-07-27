@@ -16,4 +16,10 @@ export const buildMatchingEvidence = (extraction: TraitExtractionResponse): Matc
   visualArchetypeHints: extraction.visualArchetypeHints,
   imageQualityCaps: extraction.imageQualityCaps,
   candidateSearchHints: extraction.candidateSearchHints,
+  ...(extraction.matchingProfile !== undefined && {
+    matchingProfile: extraction.matchingProfile,
+  }),
+  ...(extraction.counterfactualProfiles !== undefined && {
+    counterfactualProfiles: extraction.counterfactualProfiles,
+  }),
 });

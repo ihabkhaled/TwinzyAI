@@ -1,6 +1,94 @@
 {
   "configs": [
     {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ADVANCED_MATCHING_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_CROSS_CRITIQUE_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_CRITIQUE_PARTICIPANTS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_FINALIZER",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_GENERATION_PARTICIPANTS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_JUDGE_PARTICIPANTS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "10",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "25",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_MAX_COMBINED_CANDIDATES",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "2",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "30000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_ENSEMBLE_STEP_TIMEOUT_MS",
+      "readBy": []
+    },
+    {
       "description": "Global ceiling on concurrent generation provider calls across ALL analyses (1..16). Bounds fan-out so many simultaneous analyses cannot burst the quota.",
       "example": "2",
       "inEnvExample": true,
@@ -57,6 +145,14 @@
       "readBy": []
     },
     {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_PUBLIC_FIGURE_CATALOG_ENABLED",
+      "readBy": []
+    },
+    {
       "description": "--- Multi-provider AI routing (all optional; see docs/provider-routing.md) --- Each step may carry a cross-provider route chain of comma-separated `provider:model` tokens (bare model = gemini:<model>). An explicit route REPLACES the step's GEMINI_* chain; empty = Gemini-only behavior above. Known providers: gemini, openai, deepseek, qwen, kimi, glm. Example: AI_ROUTE_TRANSLATION=deepseek:deepseek-v4-flash,gemini-3.1-flash-lite",
       "example": "",
       "inEnvExample": true,
@@ -86,6 +182,14 @@
       "inEnvExample": true,
       "isPublic": false,
       "name": "AI_ROUTE_TRANSLATION",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "AI_SECOND_RETRIEVAL_PASS_ENABLED",
       "readBy": []
     },
     {
@@ -577,6 +681,16 @@
       ]
     },
     {
+      "description": "Internal Next.js build mirror; WEB_PUBLIC_FIGURE_MODAL_ENABLED remains authoritative.",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": true,
+      "name": "NEXT_PUBLIC_PUBLIC_FIGURE_MODAL_ENABLED",
+      "readBy": [
+        "apps/web/src/packages/env/public-env.ts"
+      ]
+    },
+    {
       "description": "Public origin of the deployed site (sitemap, robots, metadataBase). Leave blank locally to use the http://localhost:3000 default.",
       "example": "",
       "inEnvExample": true,
@@ -702,6 +816,46 @@
     },
     {
       "description": "",
+      "example": "1000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PUBLIC_FIGURE_CACHE_MAX_ITEMS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "86400",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PUBLIC_FIGURE_CACHE_TTL_SECONDS",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PUBLIC_FIGURE_ENRICHMENT_ENABLED",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "250000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PUBLIC_FIGURE_MAX_RESPONSE_BYTES",
+      "readBy": []
+    },
+    {
+      "description": "",
+      "example": "5000",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "PUBLIC_FIGURE_REQUEST_TIMEOUT_MS",
+      "readBy": []
+    },
+    {
+      "description": "",
       "example": "",
       "inEnvExample": true,
       "isPublic": false,
@@ -797,8 +951,16 @@
       "isPublic": false,
       "name": "WEB_PORT",
       "readBy": []
+    },
+    {
+      "description": "",
+      "example": "false",
+      "inEnvExample": true,
+      "isPublic": false,
+      "name": "WEB_PUBLIC_FIGURE_MODAL_ENABLED",
+      "readBy": []
     }
   ],
-  "count": 97,
+  "count": 117,
   "undocumented": []
 }

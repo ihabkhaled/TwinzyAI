@@ -10,4 +10,5 @@ export interface CandidateGenerationLane {
   /** Stable id for logging/observability, e.g. `lane-1-strongest`. */
   readonly id: string;
   readonly focus: CandidateGenerationFocusValue;
+  readonly suggestedSearchTags?: readonly string[];
 }

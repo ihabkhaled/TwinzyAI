@@ -4,7 +4,10 @@ import { GAME_PROMPT_VERSION } from '../constants/app.constants';
 import {
   MAX_CHOSEN_REASON_LENGTH,
   MAX_FALLBACK_MESSAGE_LENGTH,
+  MAX_MATCHING_ID_LENGTH,
   MAX_NAME_LENGTH,
+  MAX_PARTICIPANT_EVIDENCE_ITEMS,
+  MAX_PUBLIC_FIGURE_METADATA_ITEMS,
   MAX_REASON_LENGTH,
   MAX_TRAIT_ARRAY_ITEMS,
   MAX_TRAIT_REFERENCE_LENGTH,
@@ -21,6 +24,7 @@ import { CONFIDENCE_LEVEL_VALUES, ConfidenceLevel } from '../enums/confidence.en
 import { POPULARITY_LEVEL_VALUES, PopularityLevel } from '../enums/popularity.enum';
 import { PUBLIC_CATEGORY_VALUES, PublicCategory } from '../enums/public-category.enum';
 
+import { PublicFigureEntityIdSchema } from './advanced-matching.schema';
 import { LanguageCodeSchema } from './language.schema';
 
 /** Short localized trait-reference text used across candidate detail arrays. */
@@ -44,6 +48,7 @@ export const CandidateSafetyCheckSchema = z.object({
  * field is additionally safety-filtered server-side.
  */
 export const CandidateSchema = z.object({
+  entityId: PublicFigureEntityIdSchema.optional(),
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   publicCategory: z.enum(PUBLIC_CATEGORY_VALUES).catch(PublicCategory.Other),
   countryOrRegion: z.string().trim().min(1).max(MAX_NAME_LENGTH),
@@ -57,6 +62,24 @@ export const CandidateSchema = z.object({
   majorMismatchRisks: z.array(traitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   whyThisCandidateWasChosen: z.string().trim().min(1).max(MAX_CHOSEN_REASON_LENGTH),
   scoreExplanation: z.string().trim().min(1).max(MAX_CHOSEN_REASON_LENGTH),
+  supportedSignalIds: z
+    .array(z.string().trim().min(1).max(MAX_MATCHING_ID_LENGTH))
+    .max(MAX_PARTICIPANT_EVIDENCE_ITEMS)
+    .optional(),
+  contradictedSignalIds: z
+    .array(z.string().trim().min(1).max(MAX_MATCHING_ID_LENGTH))
+    .max(MAX_PARTICIPANT_EVIDENCE_ITEMS)
+    .optional(),
+  stableEvidenceScore: z.number().min(MIN_SCORE).max(MAX_SCORE).optional(),
+  mutableStyleScore: z.number().min(MIN_SCORE).max(MAX_SCORE).optional(),
+  presentationScore: z.number().min(MIN_SCORE).max(MAX_SCORE).optional(),
+  evidenceCoverage: z.number().min(MIN_SCORE).max(MAX_SCORE).optional(),
+  retrievalScore: z.number().optional(),
+  retrievalLaneIds: z
+    .array(z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH))
+    .max(MAX_PUBLIC_FIGURE_METADATA_ITEMS)
+    .optional(),
+  stableEvidenceCoverage: z.number().int().nonnegative().optional(),
   safetyCheck: CandidateSafetyCheckSchema,
 });
 

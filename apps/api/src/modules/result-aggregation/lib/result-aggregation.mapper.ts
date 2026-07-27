@@ -16,6 +16,7 @@ import {
  * 1-based rank from its zero-based position in the ordered list.
  */
 export const toFinalResultItem = (result: JudgedResult, index: number): FinalResultItem => ({
+  ...(result.entityId !== undefined && { entityId: result.entityId }),
   name: result.name,
   rank: index + 1,
   finalStyleVibeFitScore: result.finalStyleVibeFitScore,

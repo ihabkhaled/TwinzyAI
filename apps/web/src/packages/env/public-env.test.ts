@@ -12,6 +12,7 @@ describe('publicEnvSchema', () => {
       paymentPriceValue: '0.50',
       paymentPriceCurrency: 'USD',
       siteBaseUrl: 'http://localhost:3000',
+      publicFigureModalEnabled: false,
     });
   });
 
@@ -24,6 +25,7 @@ describe('publicEnvSchema', () => {
       paymentPriceValue: '0.50',
       paymentPriceCurrency: 'USD',
       siteBaseUrl: 'http://localhost:3000',
+      publicFigureModalEnabled: false,
     });
   });
 

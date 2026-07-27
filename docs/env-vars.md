@@ -13,6 +13,26 @@
 | GEMINI_STREAM_IDLE_TIMEOUT_MS | api | 60000 | maximum inter-chunk idle time |
 | AI_MAX_RESPONSE_BYTES | api | 500000 | maximum raw response accepted from any AI provider |
 | AI_PARALLEL_PIPELINE_ENABLED | api | false | Release A parallel candidate-recall fan-out; off = single unchanged generation call |
+| AI_ADVANCED_MATCHING_ENABLED | api | false | Master switch for the verified-catalog advanced matching path |
+| AI_PUBLIC_FIGURE_CATALOG_ENABLED | api | false | Enables text-only retrieval from the reviewed public-figure catalog |
+| AI_ENSEMBLE_ENABLED | api | false | Enables bounded multi-provider text-only council execution |
+| AI_CROSS_CRITIQUE_ENABLED | api | false | Enables structured text-only cross-critique |
+| AI_SECOND_RETRIEVAL_PASS_ENABLED | api | false | Allows at most one critique-requested retrieval retry |
+| PUBLIC_FIGURE_ENRICHMENT_ENABLED | api | false | Enables verified metadata enrichment after final matching |
+| WEB_PUBLIC_FIGURE_MODAL_ENABLED | web | false | Enables the additive public-figure details UI |
+| NEXT_PUBLIC_PUBLIC_FIGURE_MODAL_ENABLED | web (internal mirror) | derived | Build-time public mirror populated from `WEB_PUBLIC_FIGURE_MODAL_ENABLED`; do not configure separately |
+| AI_ENSEMBLE_GENERATION_PARTICIPANTS | api | empty | Comma-separated `provider:model` ranking participants |
+| AI_ENSEMBLE_JUDGE_PARTICIPANTS | api | empty | Comma-separated `provider:model` judge participants |
+| AI_ENSEMBLE_CRITIQUE_PARTICIPANTS | api | empty | Comma-separated `provider:model` critique participants |
+| AI_ENSEMBLE_FINALIZER | api | empty | Single `provider:model` localized explanation finalizer |
+| AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS | api | 2 | Minimum successful council participants |
+| AI_ENSEMBLE_STEP_TIMEOUT_MS | api | 30000 | Per-participant council timeout |
+| AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL | api | 10 | Per-participant ranking result cap |
+| AI_ENSEMBLE_MAX_COMBINED_CANDIDATES | api | 25 | Merged candidate-pool cap |
+| PUBLIC_FIGURE_CACHE_TTL_SECONDS | api | 86400 | Verified metadata cache TTL |
+| PUBLIC_FIGURE_CACHE_MAX_ITEMS | api | 1000 | Verified metadata cache capacity |
+| PUBLIC_FIGURE_REQUEST_TIMEOUT_MS | api | 5000 | Remote metadata request timeout |
+| PUBLIC_FIGURE_MAX_RESPONSE_BYTES | api | 250000 | Remote metadata response byte cap |
 | AI_GENERATION_LANES | api | 2 | recall lanes to fan out (1–6); 2 = strongest + diverse |
 | AI_GENERATION_CONCURRENCY | api | 2 | global cap on concurrent generation calls across all analyses (1–16) |
 | AI_JUDGE_CONCURRENCY | api | 1 | global cap on concurrent judge calls (1–16); provisions the Release B tournament gate |

@@ -94,6 +94,39 @@
     },
     {
       "kind": "zod-schema",
+      "module": "api:public-figures",
+      "name": "CommonsImageInfoSchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:public-figures",
+      "name": "WikidataEntitySchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:public-figures",
+      "name": "WikipediaSummarySchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
       "module": "web:game",
       "name": "FinalGameResultSchema",
       "path": "apps/web/src/modules/game/schemas/game.schema.ts",
@@ -132,6 +165,318 @@
         "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
         "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
         "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "CandidateCritiqueSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ConsensusCandidate",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ConsensusCandidateSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "MatchingCounterfactualProfiles",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "MatchingCounterfactualProfilesSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "MatchingSignal",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "MatchingSignalSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ModelCandidateRanking",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ModelCandidateRankingSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ModelCrossCritique",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ModelCrossCritiqueSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ModelJudgeReport",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ModelJudgeReportSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PublicFigureEnrichment",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PublicFigureEnrichmentSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PublicFigureEntityIdSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PublicFigureImage",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PublicFigureImageSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PublicFigureLookProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "PublicFigureProfile",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PublicFigureProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "PublicFigureSourceReferenceSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "QualitativeMatchingProfile",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "QualitativeMatchingProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
       ]
     },
     {
@@ -522,6 +867,46 @@
     {
       "kind": "schema-file-export",
       "module": "shared",
+      "name": "ConsensusFinalExplanation",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ConsensusFinalExplanationSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "ConsensusFinalizerResponse",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "ConsensusFinalizerResponseSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
       "name": "JudgedResult",
       "path": "packages/shared/src/schemas/judge.schema.ts",
       "usedBy": [
@@ -533,6 +918,26 @@
       "kind": "zod-schema",
       "module": "shared",
       "name": "JudgedResultSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "schema-file-export",
+      "module": "shared",
+      "name": "JudgeEvidenceAssessment",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "shared",
+      "name": "JudgeEvidenceAssessmentSchema",
       "path": "packages/shared/src/schemas/judge.schema.ts",
       "usedBy": [
         "packages/shared/src/schemas/game-result.schema.ts",
@@ -954,5 +1359,5 @@
       ]
     }
   ],
-  "count": 98
+  "count": 131
 }

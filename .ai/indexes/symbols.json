@@ -5,6 +5,9 @@
   "AcceptedStreamMessageSchema": [
     "packages/shared/src/schemas/game-stream.schema.ts"
   ],
+  "AccessibleDialogInput": [
+    "apps/web/src/modules/game/model/public-figure-modal.types.ts"
+  ],
   "accordionChevronVariants": [
     "apps/web/src/packages/ui-primitives/accordion.variants.ts"
   ],
@@ -43,6 +46,30 @@
   ],
   "AdsenseScriptProps": [
     "apps/web/src/packages/adsense/adsense.types.ts"
+  ],
+  "ADVANCED_MATCHING_SYNTHETIC_OBSERVATIONS": [
+    "apps/api/src/benchmark/advanced-matching-benchmark-fixtures.ts"
+  ],
+  "AdvancedCandidateCouncilService": [
+    "apps/api/src/modules/ai/application/advanced-candidate-council.service.ts"
+  ],
+  "AdvancedJudgeCouncilService": [
+    "apps/api/src/modules/ai/application/advanced-judge-council.service.ts"
+  ],
+  "AdvancedMatchingBenchmarkMetrics": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.types.ts"
+  ],
+  "AdvancedMatchingBenchmarkObservation": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.types.ts"
+  ],
+  "AdvancedMatchingConfig": [
+    "apps/api/src/config/advanced-matching-config.types.ts"
+  ],
+  "advancedMatchingEnvShape": [
+    "apps/api/src/config/advanced-matching-env.schema.ts"
+  ],
+  "AdvancedStyleMatchEnhancementService": [
+    "apps/api/src/modules/game/application/advanced-style-match-enhancement.service.ts"
   ],
   "aggregateEntryMetrics": [
     "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
@@ -336,6 +363,12 @@
   "AppLoggerPort": [
     "apps/api/src/core/logger/logger.port.ts"
   ],
+  "applyBackendConsensusScores": [
+    "apps/api/src/modules/ai/lib/judge-consensus.mapper.ts"
+  ],
+  "applyConsensusExplanations": [
+    "apps/api/src/modules/ai/lib/consensus-finalizer.mapper.ts"
+  ],
   "AppMessages": [
     "apps/web/src/packages/i18n/intl-messages-provider.tsx"
   ],
@@ -376,11 +409,20 @@
   "assembleGameViewModel": [
     "apps/web/src/modules/game/helpers/game-view-model.assembler.ts"
   ],
+  "assertAllowedPublicFigureUrl": [
+    "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts"
+  ],
+  "assertLocalizedContentLanguage": [
+    "apps/api/src/modules/ai/lib/response-content-language.guard.ts"
+  ],
   "assertNever": [
     "apps/web/src/shared/utils/assert-never.util.ts"
   ],
   "assertResponseLanguage": [
     "apps/api/src/modules/ai/lib/response-language.guard.ts"
+  ],
+  "attachCatalogEvidence": [
+    "apps/api/src/modules/ai/lib/catalog-candidate.mapper.ts"
   ],
   "attachExternalAbort": [
     "apps/api/src/modules/ai/lib/abort-bridge.util.ts"
@@ -392,8 +434,17 @@
   "BASE64_RUN_PATTERN": [
     "apps/api/src/modules/privacy/model/privacy.constants.ts"
   ],
+  "BENCHMARK_P50_RANK": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+  ],
+  "BENCHMARK_P95_RANK": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+  ],
   "BENCHMARK_PERCENT_SCALE": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BENCHMARK_RECALL_LIMIT": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
   ],
   "BENCHMARK_SCORE_PRECISION": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
@@ -403,6 +454,12 @@
   ],
   "BENCHMARK_SPEED_CEILING_MS": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
+  ],
+  "BENCHMARK_TOP_FIVE_LIMIT": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+  ],
+  "BENCHMARK_TOP_TEN_LIMIT": [
+    "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
   ],
   "BenchmarkCliOptions": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
@@ -470,6 +527,9 @@
   "buildGatewayPath": [
     "apps/web/src/shared/api/api-routes.constants.ts"
   ],
+  "buildGoogleSearchUrl": [
+    "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts"
+  ],
   "buildIndexedTestId": [
     "apps/web/src/shared/testing/test-id.helper.ts"
   ],
@@ -494,6 +554,9 @@
   ],
   "buildMatchingEvidence": [
     "apps/api/src/modules/ai/lib/matching-evidence.util.ts"
+  ],
+  "buildNormalizedMatchingProfile": [
+    "apps/api/src/modules/ai/lib/matching-profile.builder.ts"
   ],
   "buildPageTitle": [
     "apps/web/src/shared/helpers/page-title.helper.ts"
@@ -588,6 +651,12 @@
   "buttonVariants": [
     "apps/web/src/packages/ui-primitives/button.variants.ts"
   ],
+  "calculateAdvancedMatchingBenchmarkMetrics": [
+    "apps/api/src/benchmark/lib/advanced-matching-benchmark-metrics.util.ts"
+  ],
+  "calculateConsensusScore": [
+    "apps/api/src/modules/ai/lib/consensus-scoring.util.ts"
+  ],
   "CAMERA_ERROR_MESSAGE_KEY": [
     "apps/web/src/modules/game/model/game.constants.ts"
   ],
@@ -660,6 +729,9 @@
   ],
   "CANDIDATE_GENERATION_LANE_ORDER": [
     "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "CandidateCritiqueSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
   ],
   "CandidateGenerationFocus": [
     "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
@@ -823,14 +895,35 @@
   "cn": [
     "apps/web/src/packages/ui-primitives/cn.ts"
   ],
+  "collectCandidateLanguageExclusions": [
+    "apps/api/src/modules/ai/lib/response-language-values.util.ts"
+  ],
+  "collectCandidateLocalizedValues": [
+    "apps/api/src/modules/ai/lib/response-language-values.util.ts"
+  ],
   "collectExtractionTextValues": [
     "apps/api/src/modules/ai/lib/trait-text.util.ts"
+  ],
+  "collectJudgedLanguageExclusions": [
+    "apps/api/src/modules/ai/lib/response-language-values.util.ts"
+  ],
+  "collectJudgedLocalizedValues": [
+    "apps/api/src/modules/ai/lib/response-language-values.util.ts"
   ],
   "collectStringValues": [
     "apps/api/src/modules/share-results/lib/share-result-safety.util.ts"
   ],
   "collectTraitTextValues": [
     "apps/api/src/modules/ai/lib/trait-text.util.ts"
+  ],
+  "COMMONS_API_ORIGIN": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "COMMONS_API_PATH": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "CommonsImageInfoSchema": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
   ],
   "composeErrorMessage": [
     "apps/web/src/modules/game/helpers/game-display.helper.ts"
@@ -877,6 +970,78 @@
   ],
   "configureValidation": [
     "apps/api/src/bootstrap/configure-validation.ts"
+  ],
+  "CONSENSUS_AGREEMENT_SPREAD_DIVISOR": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_CONTRADICTION_PENALTY_WEIGHT": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_ENTITY_ID_PATTERN": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_EVEN_DIVISOR": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_MAX_AGREEMENT_BONUS": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_MAX_CROSS_LANE_BONUS": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_MAX_RETRIEVAL_BONUS": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_MAX_SCORE": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_MIN_REPORTS": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_MIN_SCORE": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_QUALITY_CAP_PENALTY": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_SCORING_WEIGHTS": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_UNCERTAINTY_PENALTY_WEIGHT": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "CONSENSUS_UNSUPPORTED_CLAIM_PENALTY": [
+    "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+  ],
+  "ConsensusCandidate": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ConsensusCandidateSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ConsensusFinalExplanation": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "ConsensusFinalExplanationSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "ConsensusFinalizerResponse": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "ConsensusFinalizerResponseSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "ConsensusFinalizerService": [
+    "apps/api/src/modules/ai/application/consensus-finalizer.service.ts"
+  ],
+  "ConsensusScoringInput": [
+    "apps/api/src/modules/ai/model/consensus-scoring.types.ts"
+  ],
+  "ConsensusScoringResult": [
+    "apps/api/src/modules/ai/model/consensus-scoring.types.ts"
+  ],
+  "ConsensusScoringService": [
+    "apps/api/src/modules/ai/application/consensus-scoring.service.ts"
   ],
   "CONSENT_FIELD_NAME": [
     "apps/web/src/modules/game/model/game.constants.ts"
@@ -1054,6 +1219,12 @@
   "CORS_MAX_AGE_SECONDS": [
     "apps/api/src/bootstrap/bootstrap.constants.ts"
   ],
+  "COUNCIL_MEDIAN_DIVISOR": [
+    "apps/api/src/modules/ai/model/multi-model-council.constants.ts"
+  ],
+  "CouncilParticipantTask": [
+    "apps/api/src/modules/ai/model/multi-model-council.types.ts"
+  ],
   "COUNTDOWN_PAD_WIDTH": [
     "apps/web/src/modules/game/model/share.constants.ts"
   ],
@@ -1156,10 +1327,28 @@
     "apps/api/src/core/validation/index.ts",
     "apps/api/src/core/validation/zod-validation.pipe.ts"
   ],
+  "CrossCritiqueInput": [
+    "apps/api/src/modules/ai/model/cross-critique.types.ts"
+  ],
+  "CrossCritiqueService": [
+    "apps/api/src/modules/ai/application/cross-critique.service.ts"
+  ],
   "DARK_COLOR_SCHEME_QUERY": [
     "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
   ],
   "DEFAULT_AI_CALLS_PER_ANALYSIS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_ENSEMBLE_MAX_COMBINED_CANDIDATES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_AI_ENSEMBLE_STEP_TIMEOUT_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "DEFAULT_AI_GENERATION_CONCURRENCY": [
@@ -1238,6 +1427,18 @@
   "DEFAULT_PAYMOB_CURRENCY": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "DEFAULT_PUBLIC_FIGURE_CACHE_MAX_ITEMS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_PUBLIC_FIGURE_CACHE_TTL_SECONDS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_PUBLIC_FIGURE_MAX_RESPONSE_BYTES": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "DEFAULT_PUBLIC_FIGURE_REQUEST_TIMEOUT_MS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
   "DEFAULT_RATE_LIMIT_MAX": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -1283,6 +1484,9 @@
   ],
   "DEV_LOG_TRANSPORT": [
     "apps/api/src/core/logger/logger.constants.ts"
+  ],
+  "DIALOG_FOCUSABLE_SELECTOR": [
+    "apps/web/src/modules/game/model/public-figure-modal.constants.ts"
   ],
   "DonateLink": [
     "apps/web/src/modules/game/containers/donate-link.container.tsx"
@@ -1387,6 +1591,9 @@
   "FAQ_QUESTION_NUMBERS": [
     "apps/web/src/shared/constants/content-pages.constants.ts"
   ],
+  "fetchBoundedJson": [
+    "apps/api/src/modules/public-figures/lib/bounded-json-fetch.util.ts"
+  ],
   "fetchSharedResult": [
     "apps/web/src/modules/game/services/share.service.ts"
   ],
@@ -1431,6 +1638,9 @@
   ],
   "flattenZodIssues": [
     "apps/api/src/core/validation/zod-issue.mapper.ts"
+  ],
+  "focusFirstDialogControl": [
+    "apps/web/src/modules/game/helpers/dialog-focus.helper.ts"
   ],
   "FooterNavLink": [
     "apps/web/src/shared/components/layout/footer-nav-link.component.tsx"
@@ -1643,6 +1853,9 @@
   "getLocaleDirection": [
     "apps/web/src/packages/i18n/index.ts",
     "apps/web/src/packages/i18n/locale.constants.ts"
+  ],
+  "GetPublicFigureDetailsUseCase": [
+    "apps/api/src/modules/public-figures/application/get-public-figure-details.use-case.ts"
   ],
   "getRootAttribute": [
     "apps/web/src/packages/browser/dom-attributes.ts",
@@ -1870,6 +2083,9 @@
     "apps/web/src/packages/paypal/index.ts",
     "apps/web/src/packages/paypal/paypal-sdk.ts"
   ],
+  "isPublicFigureModalEnabled": [
+    "apps/web/src/packages/env/public-env.ts"
+  ],
   "isPublicPagePath": [
     "apps/web/src/shared/helpers/locale-route.helper.ts"
   ],
@@ -1945,6 +2161,12 @@
     "packages/shared/src/schemas/judge.schema.ts"
   ],
   "JudgedResultSchema": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "JudgeEvidenceAssessment": [
+    "packages/shared/src/schemas/judge.schema.ts"
+  ],
+  "JudgeEvidenceAssessmentSchema": [
     "packages/shared/src/schemas/judge.schema.ts"
   ],
   "JudgeSafetyCheckSchema": [
@@ -2087,8 +2309,47 @@
     "apps/web/src/packages/browser/browser-environment.ts",
     "apps/web/src/packages/browser/index.ts"
   ],
+  "MATCHING_SIGNAL_CONFIDENCE_VALUES": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MATCHING_SIGNAL_MODIFIER_VALUES": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MATCHING_SIGNAL_VISIBILITY_VALUES": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MatchingCounterfactualProfiles": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "MatchingCounterfactualProfilesSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
   "MatchingEvidence": [
     "apps/api/src/modules/ai/model/matching-evidence.types.ts"
+  ],
+  "MatchingSignal": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "MatchingSignalConfidence": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MatchingSignalConfidenceValue": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MatchingSignalModifier": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MatchingSignalModifierValue": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MatchingSignalSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "MatchingSignalVisibility": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
+  ],
+  "MatchingSignalVisibilityValue": [
+    "packages/shared/src/enums/matching-signal.enum.ts"
   ],
   "MAX_ACTIVE_ANALYSES_PER_IP_LIMIT": [
     "apps/api/src/config/env-bounds.constants.ts"
@@ -2097,6 +2358,9 @@
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MAX_AI_CALLS_PER_ANALYSIS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_AI_ENSEMBLE_PARTICIPANTS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MAX_AI_GENERATION_LANES": [
@@ -2120,6 +2384,12 @@
   "MAX_ARCHETYPE_LENGTH": [
     "packages/shared/src/constants/response-bounds.constants.ts"
   ],
+  "MAX_BIOGRAPHY_SUMMARY_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_CANDIDATE_CRITIQUES": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
   "MAX_CANDIDATE_POOL": [
     "packages/shared/src/constants/trait.constants.ts"
   ],
@@ -2131,6 +2401,9 @@
   ],
   "MAX_COMPACT_TRAIT_SUMMARY": [
     "packages/shared/src/constants/trait-category.constants.ts"
+  ],
+  "MAX_CRITIQUE_SCORE_ADJUSTMENT": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
   ],
   "MAX_DISCLAIMER_LENGTH": [
     "packages/shared/src/constants/response-bounds.constants.ts"
@@ -2180,14 +2453,50 @@
   "MAX_JUDGE_NOTES_LENGTH": [
     "packages/shared/src/constants/response-bounds.constants.ts"
   ],
+  "MAX_LOCALE_KEY_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_LOCALIZED_NAME_ITEMS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
   "MAX_LOGGED_LENGTH": [
     "apps/api/src/modules/privacy/model/privacy.constants.ts"
+  ],
+  "MAX_MATCHING_ID_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_MATCHING_SCORE": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_MATCHING_SIGNALS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_MUTABLE_MATCHING_SIGNALS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
   ],
   "MAX_NAME_LENGTH": [
     "packages/shared/src/constants/response-bounds.constants.ts"
   ],
+  "MAX_PARTICIPANT_EVIDENCE_ITEMS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
   "MAX_PORT_NUMBER": [
     "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_PRESENTATION_MATCHING_SIGNALS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_PUBLIC_FIGURE_CACHE_MAX_ITEMS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_PUBLIC_FIGURE_CACHE_TTL_SECONDS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MAX_PUBLIC_FIGURE_METADATA_ITEMS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MAX_PUBLIC_FIGURE_SOURCE_ITEMS": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
   ],
   "MAX_QUEUE_SIZE": [
     "apps/api/src/config/env-bounds.constants.ts"
@@ -2252,8 +2561,15 @@
   "mergeCandidatePools": [
     "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
   ],
+  "mergeCouncilCandidates": [
+    "apps/api/src/modules/ai/lib/candidate-council-merge.util.ts"
+  ],
+  "mergeCouncilJudgeResponses": [
+    "apps/api/src/modules/ai/lib/judge-council-merge.util.ts"
+  ],
   "MILLISECONDS_PER_SECOND": [
     "apps/api/src/modules/payments/model/payment.constants.ts",
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts",
     "apps/api/src/modules/share-results/model/share-result.constants.ts"
   ],
   "MIME_TYPE_BY_EXTENSION": [
@@ -2261,6 +2577,9 @@
     "packages/shared/src/constants/upload.constants.ts"
   ],
   "MIN_AI_CALLS_PER_ANALYSIS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_AI_ENSEMBLE_PARTICIPANTS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MIN_AI_GENERATION_LANES": [
@@ -2278,11 +2597,17 @@
   "MIN_ANALYSIS_TIMEOUT_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "MIN_ARABIC_CONTENT_RATIO": [
+    "apps/api/src/modules/ai/model/ai-safety.constants.ts"
+  ],
   "MIN_CANDIDATE_POOL": [
     "packages/shared/src/constants/trait.constants.ts"
   ],
   "MIN_CONCURRENCY_LIMIT": [
     "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_CRITIQUE_SCORE_ADJUSTMENT": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
   ],
   "MIN_DISPLAY_SCORE": [
     "packages/shared/src/constants/trait.constants.ts"
@@ -2305,7 +2630,19 @@
   "MIN_IMAGE_SIZE_BYTES": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "MIN_LOCALE_KEY_LENGTH": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
+  "MIN_MATCHING_SCORE": [
+    "packages/shared/src/constants/response-bounds.constants.ts"
+  ],
   "MIN_PORT_NUMBER": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_PUBLIC_FIGURE_CACHE_MAX_ITEMS": [
+    "apps/api/src/config/env-bounds.constants.ts"
+  ],
+  "MIN_PUBLIC_FIGURE_CACHE_TTL_SECONDS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
   "MIN_QUEUE_SIZE": [
@@ -2338,6 +2675,9 @@
   "MINOR_UNITS_PER_MAJOR": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
+  "mirrorPublicFigureModalEnv": [
+    "apps/web/src/packages/env/public-env-mirror.ts"
+  ],
   "MOCK_LATENCY_BASE_MS": [
     "apps/api/src/benchmark/model/benchmark.types.ts"
   ],
@@ -2365,8 +2705,35 @@
   "ModelCall": [
     "apps/api/src/modules/ai/model/gemini.types.ts"
   ],
+  "ModelCandidateRanking": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ModelCandidateRankingSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ModelCrossCritique": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ModelCrossCritiqueSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ModelJudgeReport": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "ModelJudgeReportSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
   "MoonIcon": [
     "apps/web/src/packages/icons/index.ts"
+  ],
+  "MultiModelCouncilInput": [
+    "apps/api/src/modules/ai/model/multi-model-council.types.ts"
+  ],
+  "MultiModelCouncilResult": [
+    "apps/api/src/modules/ai/model/multi-model-council.types.ts"
+  ],
+  "MultiModelCouncilService": [
+    "apps/api/src/modules/ai/application/multi-model-council.service.ts"
   ],
   "MULTIPART_FILE_TOO_LARGE_ERROR_CODE": [
     "apps/api/src/core/http/multipart.constants.ts"
@@ -2958,6 +3325,42 @@
   "PUBLIC_CATEGORY_VALUES": [
     "packages/shared/src/enums/public-category.enum.ts"
   ],
+  "PUBLIC_FIGURE_ALLOWED_HOST_SUFFIXES": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_BIOGRAPHY_SENTENCE_LIMIT": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_CONTRADICTION_WEIGHT": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_GOOGLE_SEARCH_ORIGIN": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_GOOGLE_SEARCH_PATH": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_MAX_SOURCE_CONFIDENCE": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_MODAL_TITLE_ID": [
+    "apps/web/src/modules/game/model/public-figure-modal.constants.ts"
+  ],
+  "PUBLIC_FIGURE_MUTABLE_MATCH_WEIGHT": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_REGION_BY_LANGUAGE": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_RETRIEVAL_LIMIT": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PUBLIC_FIGURE_SOURCE_VALUES": [
+    "packages/shared/src/enums/public-figure-source.enum.ts"
+  ],
+  "PUBLIC_FIGURE_STABLE_MATCH_WEIGHT": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
   "PublicCategory": [
     "packages/shared/src/enums/public-category.enum.ts"
   ],
@@ -2973,6 +3376,138 @@
   ],
   "publicEnvSchema": [
     "apps/web/src/packages/env/public-env.ts"
+  ],
+  "PublicFigureCacheEntry": [
+    "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+  ],
+  "PublicFigureCatalogRepository": [
+    "apps/api/src/modules/public-figures/infrastructure/public-figure-catalog.repository.ts"
+  ],
+  "PublicFigureController": [
+    "apps/api/src/modules/public-figures/api/public-figure.controller.ts"
+  ],
+  "PublicFigureEnrichment": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureEnrichmentGatewayService": [
+    "apps/api/src/modules/public-figures/application/public-figure-enrichment-gateway.service.ts"
+  ],
+  "PublicFigureEnrichmentSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureEnrichmentService": [
+    "apps/api/src/modules/public-figures/application/public-figure-enrichment.service.ts",
+    "apps/api/src/modules/public-figures/index.ts"
+  ],
+  "PublicFigureEntityIdSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureEntityResolutionService": [
+    "apps/api/src/modules/public-figures/application/public-figure-entity-resolution.service.ts"
+  ],
+  "PublicFigureImage": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureImageSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureImageView": [
+    "apps/web/src/modules/game/model/public-figure.types.ts"
+  ],
+  "PublicFigureLookProfileSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureMetadataCache": [
+    "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+  ],
+  "PublicFigureMetadataCacheRepository": [
+    "apps/api/src/modules/public-figures/infrastructure/public-figure-metadata-cache.repository.ts"
+  ],
+  "PublicFigureModal": [
+    "apps/web/src/modules/game/components/public-figure-modal.component.tsx"
+  ],
+  "publicFigureModalBackdropClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "publicFigureModalCardClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "PublicFigureModalContainer": [
+    "apps/web/src/modules/game/containers/public-figure-modal.container.tsx"
+  ],
+  "PublicFigureModalContainerProps": [
+    "apps/web/src/modules/game/model/public-figure-modal.types.ts"
+  ],
+  "PublicFigureModalContent": [
+    "apps/web/src/modules/game/components/public-figure-modal-content.component.tsx"
+  ],
+  "publicFigureModalHeaderClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "publicFigureModalImageClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "publicFigureModalLinkClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "publicFigureModalLinksClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "PublicFigureModalProps": [
+    "apps/web/src/modules/game/model/public-figure-modal.types.ts"
+  ],
+  "publicFigureModalTextClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "publicFigureModalTitleClass": [
+    "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+  ],
+  "PublicFigureProfile": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureProfileSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureRemoteEnrichment": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+  ],
+  "PublicFigureRetrievalEvidence": [
+    "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+  ],
+  "PublicFigureRetrievalLane": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PublicFigureRetrievalLaneValue": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "PublicFigureRetrievalResult": [
+    "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+  ],
+  "PublicFigureRetrievalService": [
+    "apps/api/src/modules/public-figures/application/public-figure-retrieval.service.ts",
+    "apps/api/src/modules/public-figures/index.ts"
+  ],
+  "PublicFiguresModule": [
+    "apps/api/src/modules/public-figures/index.ts",
+    "apps/api/src/modules/public-figures/public-figures.module.ts"
+  ],
+  "PublicFigureSource": [
+    "packages/shared/src/enums/public-figure-source.enum.ts"
+  ],
+  "PublicFigureSourceReferenceSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "PublicFigureSourceValue": [
+    "packages/shared/src/enums/public-figure-source.enum.ts"
+  ],
+  "PublicFigureView": [
+    "apps/web/src/modules/game/model/public-figure.types.ts"
+  ],
+  "QualitativeMatchingProfile": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
+  ],
+  "QualitativeMatchingProfileSchema": [
+    "packages/shared/src/schemas/advanced-matching.schema.ts"
   ],
   "QueuedAnalysisWaiter": [
     "apps/api/src/core/streaming/concurrency-limiter.types.ts"
@@ -3169,6 +3704,12 @@
   "ResultCard": [
     "apps/web/src/modules/game/components/result-card.component.tsx"
   ],
+  "ResultCardEvidence": [
+    "apps/web/src/modules/game/components/result-card-evidence.component.tsx"
+  ],
+  "ResultCardEvidenceProps": [
+    "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
   "ResultCardProps": [
     "apps/web/src/modules/game/model/game-component.types.ts"
   ],
@@ -3210,7 +3751,7 @@
     "apps/web/src/modules/game/components/result-card.variants.ts"
   ],
   "ResultLabels": [
-    "apps/web/src/modules/game/model/game.types.ts"
+    "apps/web/src/modules/game/model/result.types.ts"
   ],
   "ResultList": [
     "apps/web/src/modules/game/components/result-list.component.tsx"
@@ -3259,6 +3800,9 @@
   ],
   "ResultSummaryProps": [
     "apps/web/src/modules/game/model/game-component.types.ts"
+  ],
+  "resultThumbnailClass": [
+    "apps/web/src/modules/game/components/result-card.variants.ts"
   ],
   "resultTitleClass": [
     "apps/web/src/modules/game/components/result-card.variants.ts"
@@ -3315,6 +3859,9 @@
   "RssMessageShape": [
     "apps/web/src/shared/components/types/route-handler.types.ts"
   ],
+  "runCouncilParticipants": [
+    "apps/api/src/modules/ai/lib/multi-model-council.util.ts"
+  ],
   "runMockBenchmark": [
     "apps/api/src/benchmark/benchmark-runner.ts"
   ],
@@ -3342,6 +3889,15 @@
   ],
   "SchemaParseIssue": [
     "apps/web/src/packages/zod/parse-schema.ts"
+  ],
+  "scorePublicFigureProfile": [
+    "apps/api/src/modules/public-figures/lib/public-figure-search.util.ts"
+  ],
+  "SECOND_RETRIEVAL_LANE_ID": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+  ],
+  "SECOND_RETRIEVAL_TAG_PATTERN": [
+    "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
   ],
   "SECONDS_PER_MINUTE": [
     "apps/web/src/modules/game/model/share.constants.ts"
@@ -3888,6 +4444,9 @@
     "apps/api/src/core/errors/index.ts",
     "apps/api/src/core/errors/too-many-requests.error.ts"
   ],
+  "toRetrievalEvidence": [
+    "apps/api/src/modules/public-figures/lib/public-figure-search.util.ts"
+  ],
   "toStreamErrorMessage": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
@@ -4029,6 +4588,9 @@
   "TranslationViewModelInput": [
     "apps/web/src/modules/game/model/game.types.ts"
   ],
+  "trapDialogTabKey": [
+    "apps/web/src/modules/game/helpers/dialog-focus.helper.ts"
+  ],
   "UI_PREFERENCE_DOM_ATTRIBUTES": [
     "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts"
   ],
@@ -4159,6 +4721,9 @@
   ],
   "UploadViewModelInput": [
     "apps/web/src/modules/game/model/game.types.ts"
+  ],
+  "useAccessibleDialog": [
+    "apps/web/src/modules/game/hooks/useAccessibleDialog.hook.ts"
   ],
   "useAnalyzeGameMutation": [
     "apps/web/src/modules/game/queries/game.mutations.ts"
@@ -4310,6 +4875,9 @@
   "VerdictValue": [
     "packages/shared/src/enums/verdict.enum.ts"
   ],
+  "VERIFIED_PUBLIC_FIGURE_CATALOG": [
+    "apps/api/src/modules/public-figures/model/verified-public-figure-catalog.constants.ts"
+  ],
   "viewport": [
     "apps/web/src/app/layout.tsx"
   ],
@@ -4387,6 +4955,39 @@
   ],
   "WEBP_VP8X_WIDTH_OFFSET": [
     "apps/api/src/modules/file-security/model/image-format.constants.ts"
+  ],
+  "WIKIDATA_ENTITY_DATA_ORIGIN": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "WIKIDATA_ENTITY_DATA_PATH_PREFIX": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "WikidataAdapter": [
+    "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts"
+  ],
+  "WikidataEntitySchema": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
+  ],
+  "WikidataLocalizedValues": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+  ],
+  "WikidataPublicFigureMetadata": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+  ],
+  "WikimediaCommonsAdapter": [
+    "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts"
+  ],
+  "WIKIPEDIA_SUMMARY_PATH_PREFIX": [
+    "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+  ],
+  "WikipediaAdapter": [
+    "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+  ],
+  "WikipediaPublicFigureMetadata": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+  ],
+  "WikipediaSummarySchema": [
+    "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
   ],
   "wipeUploadedImageBuffer": [
     "apps/api/src/modules/file-security/index.ts",

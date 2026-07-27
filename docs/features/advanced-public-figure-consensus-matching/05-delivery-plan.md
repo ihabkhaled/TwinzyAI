@@ -11,7 +11,7 @@
 
 ## Branch and review
 
-Branch: `agent/advanced-public-figure-consensus-matching`. Focused conventional commits; hooks are never bypassed. Push after complete local validation, open a ready-for-review PR, and repair all local/GitHub gate failures.
+Branch: `agent/advanced-public-figure-consensus-matching`. Focused conventional commits; hooks are never bypassed. Commit, push, or open a PR only when the repository owner explicitly requests it after complete local validation.
 
 ## Dependencies and blockers
 
@@ -20,4 +20,3 @@ No implementation blocker. Production activation is blocked until catalog review
 ## Rollout and rollback
 
 Seven flag-controlled phases follow the supplied order. Immediate rollback is environment-only by disabling advanced matching, catalog, ensemble, critique, second pass, enrichment, and modal flags.
-

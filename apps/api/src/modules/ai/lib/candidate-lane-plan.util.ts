@@ -28,4 +28,8 @@ export const buildCandidateGenerationLanes = (count: number): CandidateGeneratio
  * stays byte-for-byte unchanged; only a lane call appends this section.
  */
 export const buildLaneFocusSection = (lane: CandidateGenerationLane): string =>
-  `\n\n${LANE_FOCUS_SECTION_HEADING}\n\n${LANE_FOCUS_DIRECTIVE[lane.focus]}\n\n${LANE_FOCUS_SAFETY_REMINDER}\n`;
+  `\n\n${LANE_FOCUS_SECTION_HEADING}\n\n${LANE_FOCUS_DIRECTIVE[lane.focus]}\n\n${
+    lane.suggestedSearchTags === undefined
+      ? ''
+      : `Validated coverage tags: ${JSON.stringify(lane.suggestedSearchTags)}\n\n`
+  }${LANE_FOCUS_SAFETY_REMINDER}\n`;

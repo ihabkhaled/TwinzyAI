@@ -7,7 +7,12 @@ import { GeminiStep } from '../../../config/gemini-step.constants';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { buildCandidateGenerationLanes } from '../lib/candidate-lane-plan.util';
 import { mergeCandidatePools } from '../lib/candidate-merge.util';
-import { RESERVED_NON_GENERATION_CALLS } from '../model/candidate-lane.constants';
+import {
+  CandidateGenerationFocus,
+  RESERVED_NON_GENERATION_CALLS,
+  SECOND_RETRIEVAL_LANE_ID,
+  SECOND_RETRIEVAL_TAG_PATTERN,
+} from '../model/candidate-lane.constants';
 import type { CandidateGenerationLane } from '../model/candidate-lane.types';
 import type { CandidateRecallInput } from '../model/candidate-recall.types';
 
@@ -39,11 +44,13 @@ export class CandidateRecallService {
 
   public recall(input: CandidateRecallInput): Promise<Candidate[]> {
     if (!this.config.aiParallelPipelineEnabled) {
+      const lane = this.secondPassLane(input);
       return this.candidateGeneration.generateCandidates(
         input.extraction,
         input.languageCode,
         input.resultCount,
         input.signal,
+        lane,
       );
     }
     return this.fanOut(input);
@@ -83,6 +90,7 @@ export class CandidateRecallService {
     input: CandidateRecallInput,
     lane: CandidateGenerationLane,
   ): Promise<Candidate[]> {
+    const generationLane = this.withValidatedTags(lane, input.suggestedSearchTags);
     return this.gate.run(
       GeminiStep.Generation,
       () =>
@@ -91,10 +99,35 @@ export class CandidateRecallService {
           input.languageCode,
           input.resultCount,
           input.signal,
-          lane,
+          generationLane,
         ),
       { signal: input.signal, timeoutMs: this.config.aiParallelQueueTimeoutMs },
     );
+  }
+
+  private secondPassLane(input: CandidateRecallInput): CandidateGenerationLane | undefined {
+    if (input.suggestedSearchTags === undefined) {
+      return undefined;
+    }
+    return {
+      id: SECOND_RETRIEVAL_LANE_ID,
+      focus: CandidateGenerationFocus.Wildcard,
+      suggestedSearchTags: this.validatedTags(input.suggestedSearchTags),
+    };
+  }
+
+  private validatedTags(tags: readonly string[]): string[] {
+    return tags.filter((tag) => SECOND_RETRIEVAL_TAG_PATTERN.test(tag));
+  }
+
+  private withValidatedTags(
+    lane: CandidateGenerationLane,
+    tags: readonly string[] | undefined,
+  ): CandidateGenerationLane {
+    return {
+      ...lane,
+      ...(tags !== undefined && { suggestedSearchTags: this.validatedTags(tags) }),
+    };
   }
 
   /** Keep successful lane pools; log each failure by type only (never detail). */

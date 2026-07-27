@@ -6,6 +6,7 @@ import {
   MAX_FALLBACK_MESSAGE_LENGTH,
   MAX_JUDGE_NOTES_LENGTH,
   MAX_NAME_LENGTH,
+  MAX_PUBLIC_FIGURE_METADATA_ITEMS,
   MAX_REASON_LENGTH,
   MAX_REMOVED_REASON_LENGTH,
   MAX_TRAIT_ARRAY_ITEMS,
@@ -22,6 +23,7 @@ import { CONFIDENCE_LEVEL_VALUES, ConfidenceLevel } from '../enums/confidence.en
 import { PUBLIC_CATEGORY_VALUES, PublicCategory } from '../enums/public-category.enum';
 import { Verdict, VERDICT_VALUES } from '../enums/verdict.enum';
 
+import { ModelJudgeReportSchema, PublicFigureEntityIdSchema } from './advanced-matching.schema';
 import { LanguageCodeSchema } from './language.schema';
 
 /** Short localized trait-reference text used across judged detail arrays. */
@@ -40,11 +42,18 @@ export const JudgeSafetyCheckSchema = z.object({
   meetsMinimumEvidence: z.boolean(),
 });
 
+export const JudgeEvidenceAssessmentSchema = ModelJudgeReportSchema.omit({
+  participantId: true,
+  entityId: true,
+  shouldKeep: true,
+});
+
 /**
  * One strictly-judged final candidate: rescored, verdict-banded, localized
  * reasoning, and the judge's explicit display decision.
  */
 export const JudgedResultSchema = z.object({
+  entityId: PublicFigureEntityIdSchema.optional(),
   name: z.string().trim().min(1).max(MAX_NAME_LENGTH),
   rank: z.preprocess(normalizeRank, z.number().int().min(MIN_RESULT_COUNT).max(MAX_RESULT_COUNT)),
   finalStyleVibeFitScore: z.number().int().min(MIN_SCORE).max(MAX_SCORE),
@@ -59,6 +68,7 @@ export const JudgedResultSchema = z.object({
   mismatchWarnings: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
   judgeNotes: z.string().trim().min(1).max(MAX_JUDGE_NOTES_LENGTH),
   shouldDisplay: z.boolean(),
+  evidenceAssessment: JudgeEvidenceAssessmentSchema.optional(),
   safetyCheck: JudgeSafetyCheckSchema,
 });
 
@@ -90,12 +100,32 @@ export const CandidateJudgeResponseSchema = z
     removedCandidates: z.array(RemovedCandidateSchema).max(MAX_CANDIDATE_POOL),
     fallbackMessage: z.string().max(MAX_FALLBACK_MESSAGE_LENGTH),
     disclaimer: z.string().max(MAX_DISCLAIMER_LENGTH).catch(''),
+    requiresSecondRetrievalPass: z.boolean().optional(),
+    suggestedSearchTags: z
+      .array(z.string().trim().min(1).max(MAX_TRAIT_REFERENCE_LENGTH))
+      .max(MAX_PUBLIC_FIGURE_METADATA_ITEMS)
+      .optional(),
   })
   .refine((response) => response.results.length > 0 || response.fallbackMessage.length > 0, {
     message: 'fallbackMessage is required when results are empty',
     path: ['fallbackMessage'],
   });
 
+export const ConsensusFinalExplanationSchema = z.strictObject({
+  entityId: PublicFigureEntityIdSchema,
+  finalReason: z.string().trim().min(1).max(MAX_REASON_LENGTH),
+  mismatchWarnings: z.array(TraitReferenceSchema).max(MAX_TRAIT_ARRAY_ITEMS),
+  judgeNotes: z.string().trim().min(1).max(MAX_JUDGE_NOTES_LENGTH),
+});
+
+export const ConsensusFinalizerResponseSchema = z.strictObject({
+  languageCode: LanguageCodeSchema,
+  explanations: z.array(ConsensusFinalExplanationSchema).max(MAX_RESULT_COUNT),
+});
+
 export type JudgedResult = z.infer<typeof JudgedResultSchema>;
+export type JudgeEvidenceAssessment = z.infer<typeof JudgeEvidenceAssessmentSchema>;
 export type RemovedCandidate = z.infer<typeof RemovedCandidateSchema>;
 export type CandidateJudgeResponse = z.infer<typeof CandidateJudgeResponseSchema>;
+export type ConsensusFinalExplanation = z.infer<typeof ConsensusFinalExplanationSchema>;
+export type ConsensusFinalizerResponse = z.infer<typeof ConsensusFinalizerResponseSchema>;

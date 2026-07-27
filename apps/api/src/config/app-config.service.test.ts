@@ -178,3 +178,38 @@ describe('AppConfigService parallel AI pipeline getters', () => {
     expect(config.aiParallelQueueTimeoutMs).toBe(15_000);
   });
 });
+
+describe('AppConfigService advanced matching getters', () => {
+  it('returns feature flags and parsed environment-configured participants', () => {
+    const config = buildTypedService({
+      AI_ADVANCED_MATCHING_ENABLED: true,
+      AI_PUBLIC_FIGURE_CATALOG_ENABLED: true,
+      AI_ENSEMBLE_ENABLED: true,
+      AI_CROSS_CRITIQUE_ENABLED: true,
+      AI_SECOND_RETRIEVAL_PASS_ENABLED: true,
+      PUBLIC_FIGURE_ENRICHMENT_ENABLED: true,
+      AI_ENSEMBLE_GENERATION_PARTICIPANTS: 'gemini:configured-gemini,openai:configured-gpt',
+      AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS: 2,
+      AI_ENSEMBLE_STEP_TIMEOUT_MS: 30_000,
+      AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL: 10,
+      AI_ENSEMBLE_MAX_COMBINED_CANDIDATES: 25,
+      PUBLIC_FIGURE_CACHE_TTL_SECONDS: 86_400,
+      PUBLIC_FIGURE_CACHE_MAX_ITEMS: 1000,
+      PUBLIC_FIGURE_REQUEST_TIMEOUT_MS: 5000,
+      PUBLIC_FIGURE_MAX_RESPONSE_BYTES: 250_000,
+    });
+
+    expect(config.advancedMatching.enabled).toBe(true);
+    expect(config.advancedMatching.catalogEnabled).toBe(true);
+    expect(config.advancedMatching.ensembleEnabled).toBe(true);
+    expect(config.advancedMatching.crossCritiqueEnabled).toBe(true);
+    expect(config.advancedMatching.secondRetrievalPassEnabled).toBe(true);
+    expect(config.advancedMatching.enrichmentEnabled).toBe(true);
+    expect(config.advancedMatching.generationParticipants).toEqual([
+      { provider: 'gemini', model: 'configured-gemini' },
+      { provider: 'openai', model: 'configured-gpt' },
+    ]);
+    expect(config.advancedMatching.minSuccessfulParticipants).toBe(2);
+    expect(config.advancedMatching.cacheMaxItems).toBe(1000);
+  });
+});

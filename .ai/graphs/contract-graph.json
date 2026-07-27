@@ -73,6 +73,33 @@
       ]
     },
     {
+      "name": "CommonsImageInfoSchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+      ]
+    },
+    {
+      "name": "WikidataEntitySchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+      ]
+    },
+    {
+      "name": "WikipediaSummarySchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+        "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+      ]
+    },
+    {
       "name": "FinalGameResultSchema",
       "path": "apps/web/src/modules/game/schemas/game.schema.ts",
       "usedBy": [
@@ -104,6 +131,270 @@
         "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
         "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
         "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+      ]
+    },
+    {
+      "name": "CandidateCritiqueSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ConsensusCandidate",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ConsensusCandidateSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "MatchingCounterfactualProfiles",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "MatchingCounterfactualProfilesSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "MatchingSignal",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "MatchingSignalSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ModelCandidateRanking",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ModelCandidateRankingSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ModelCrossCritique",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ModelCrossCritiqueSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ModelJudgeReport",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "ModelJudgeReportSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureEnrichment",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureEnrichmentSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureEntityIdSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureImage",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureImageSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureLookProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureProfile",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "PublicFigureSourceReferenceSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "QualitativeMatchingProfile",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
+      ]
+    },
+    {
+      "name": "QualitativeMatchingProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/candidates.schema.ts",
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts",
+        "packages/shared/src/schemas/judge.schema.ts",
+        "packages/shared/src/schemas/traits.schema.ts"
       ]
     },
     {
@@ -416,6 +707,38 @@
       ]
     },
     {
+      "name": "ConsensusFinalExplanation",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ConsensusFinalExplanationSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ConsensusFinalizerResponse",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "ConsensusFinalizerResponseSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
       "name": "JudgedResult",
       "path": "packages/shared/src/schemas/judge.schema.ts",
       "usedBy": [
@@ -425,6 +748,22 @@
     },
     {
       "name": "JudgedResultSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "JudgeEvidenceAssessment",
+      "path": "packages/shared/src/schemas/judge.schema.ts",
+      "usedBy": [
+        "packages/shared/src/schemas/game-result.schema.ts",
+        "packages/shared/src/schemas/index.ts"
+      ]
+    },
+    {
+      "name": "JudgeEvidenceAssessmentSchema",
       "path": "packages/shared/src/schemas/judge.schema.ts",
       "usedBy": [
         "packages/shared/src/schemas/game-result.schema.ts",

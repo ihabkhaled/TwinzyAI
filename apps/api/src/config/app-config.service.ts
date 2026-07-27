@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+import type { AdvancedMatchingConfig } from './advanced-matching-config.types';
 import {
   AiProvider,
   type AiProviderValue,
@@ -219,6 +220,41 @@ export class AppConfigService {
    */
   public get aiParallelPipelineEnabled(): boolean {
     return this.configService.get('AI_PARALLEL_PIPELINE_ENABLED', { infer: true });
+  }
+
+  public get advancedMatching(): AdvancedMatchingConfig {
+    const participants = (key: keyof ParsedEnv): readonly AiRouteEntry[] =>
+      parseAiRouteList(String(this.configService.get(key, { infer: true })), key);
+    return {
+      enabled: this.configService.get('AI_ADVANCED_MATCHING_ENABLED', { infer: true }),
+      catalogEnabled: this.configService.get('AI_PUBLIC_FIGURE_CATALOG_ENABLED', { infer: true }),
+      ensembleEnabled: this.configService.get('AI_ENSEMBLE_ENABLED', { infer: true }),
+      crossCritiqueEnabled: this.configService.get('AI_CROSS_CRITIQUE_ENABLED', { infer: true }),
+      secondRetrievalPassEnabled: this.configService.get('AI_SECOND_RETRIEVAL_PASS_ENABLED', {
+        infer: true,
+      }),
+      enrichmentEnabled: this.configService.get('PUBLIC_FIGURE_ENRICHMENT_ENABLED', {
+        infer: true,
+      }),
+      generationParticipants: participants('AI_ENSEMBLE_GENERATION_PARTICIPANTS'),
+      judgeParticipants: participants('AI_ENSEMBLE_JUDGE_PARTICIPANTS'),
+      critiqueParticipants: participants('AI_ENSEMBLE_CRITIQUE_PARTICIPANTS'),
+      finalizer: participants('AI_ENSEMBLE_FINALIZER')[0],
+      minSuccessfulParticipants: this.configService.get('AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS', {
+        infer: true,
+      }),
+      stepTimeoutMs: this.configService.get('AI_ENSEMBLE_STEP_TIMEOUT_MS', { infer: true }),
+      maxCandidatesPerModel: this.configService.get('AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL', {
+        infer: true,
+      }),
+      maxCombinedCandidates: this.configService.get('AI_ENSEMBLE_MAX_COMBINED_CANDIDATES', {
+        infer: true,
+      }),
+      cacheTtlSeconds: this.configService.get('PUBLIC_FIGURE_CACHE_TTL_SECONDS', { infer: true }),
+      cacheMaxItems: this.configService.get('PUBLIC_FIGURE_CACHE_MAX_ITEMS', { infer: true }),
+      requestTimeoutMs: this.configService.get('PUBLIC_FIGURE_REQUEST_TIMEOUT_MS', { infer: true }),
+      maxResponseBytes: this.configService.get('PUBLIC_FIGURE_MAX_RESPONSE_BYTES', { infer: true }),
+    };
   }
 
   /** Number of text-only candidate-recall lanes to fan out (parallel mode). */

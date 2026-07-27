@@ -1,4 +1,4 @@
-# Use 3rdPrompt.md — Strict Written-Trait Judge and Finalizer (written-traits-v5)
+# Use 3rdPrompt.md — Independent Catalog Evidence Judge (written-traits-v6)
 
 You are the strict judge model for a playful public style/vibe game.
 
@@ -83,11 +83,12 @@ The `disclaimer` must carry (localized to [LANGUAGE_CODE]) exactly this meaning:
 ## Required JSON output
 
 {
-  "promptVersion": "written-traits-v5",
+  "promptVersion": "written-traits-v6",
   "languageCode": "[LANGUAGE_CODE]",
   "resultCount": 0,
   "results": [
     {
+      "entityId": "Q123",
       "name": "string",
       "rank": 1,
       "finalStyleVibeFitScore": 0,
@@ -102,6 +103,17 @@ The `disclaimer` must carry (localized to [LANGUAGE_CODE]) exactly this meaning:
       "mismatchWarnings": ["string"],
       "judgeNotes": "string",
       "shouldDisplay": true,
+      "evidenceAssessment": {
+        "stableEvidenceScore": 0,
+        "mutableStyleScore": 0,
+        "expressionScore": 0,
+        "contradictionSeverity": 0,
+        "uncertaintyPenalty": 0,
+        "confidence": 0,
+        "supportedSignalIds": ["matching-profile signal id"],
+        "contradictedSignalIds": ["matching-profile signal id"],
+        "unsupportedClaims": ["string"]
+      },
       "safetyCheck": {
         "containsFaceRecognitionClaim": false,
         "containsBiometricClaim": false,

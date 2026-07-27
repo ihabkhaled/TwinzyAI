@@ -55,3 +55,5 @@ export const LANE_FOCUS_SAFETY_REMINDER =
  * how many generation lanes the per-analysis budget can afford.
  */
 export const RESERVED_NON_GENERATION_CALLS = 2;
+export const SECOND_RETRIEVAL_LANE_ID = 'second-retrieval-pass';
+export const SECOND_RETRIEVAL_TAG_PATTERN = /^[\p{L}\p{N}\s-]{1,80}$/u;

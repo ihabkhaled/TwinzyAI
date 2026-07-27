@@ -14,7 +14,7 @@ Task type: `configuration-change` · Lane: **standard** · Load after `.ai/BOOTS
 
 ## Must-read docs
 
-- docs/env-vars.md — | Var | Side | Default | Notes | (~862 tokens)
+- docs/env-vars.md — | Var | Side | Default | Notes | (~1366 tokens)
 - rules/25-configuration-and-environment.md — > All configuration is typed, zod-validated at startup, and read through `@nestjs/config` behind **`AppConfigService` — the only injectable config surface**. `process.env` never appears outside `config/` and `bootstrap/` (ESLint-enforced... (~1512 tokens)
 
 ## Rules

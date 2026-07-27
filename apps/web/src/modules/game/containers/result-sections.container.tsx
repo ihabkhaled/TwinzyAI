@@ -1,5 +1,9 @@
-import type { ReactElement } from 'react';
+'use client';
+// client-boundary-reason: owns the selected public-figure details dialog.
 
+import { type ReactElement, useState } from 'react';
+
+import { isPublicFigureModalEnabled } from '@/packages/env/public-env';
 import { Stack } from '@/packages/ui-primitives';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 import { buildIndexedTestId } from '@/shared/testing/test-id.helper';
@@ -7,15 +11,20 @@ import { buildIndexedTestId } from '@/shared/testing/test-id.helper';
 import { ResultCard } from '../components/result-card.component';
 import { ResultDisclaimer } from '../components/result-disclaimer.component';
 import { ResultList } from '../components/result-list.component';
-import type { GameResultView, ResultLabels } from '../model/game.types';
+import type { GameResultView, ResultLabels, ResultView } from '../model/game.types';
 import type { ResultSectionsProps } from '../model/game-component.types';
 
 import { ImageQuality } from './image-quality.container';
+import { PublicFigureModalContainer } from './public-figure-modal.container';
 import { ResultSummary } from './result-summary.container';
 import { TraitDetails } from './trait-details.container';
 
 /** The ranked style/vibe match cards (or the localized no-match fallback). */
-const renderResultList = (view: GameResultView, labels: ResultLabels): ReactElement => (
+const renderResultList = (
+  view: GameResultView,
+  labels: ResultLabels,
+  onOpenDetails: (result: ResultView) => void,
+): ReactElement => (
   <ResultList
     title={view.resultCountTitle}
     fallbackTitle={labels.fallbackTitle}
@@ -25,9 +34,13 @@ const renderResultList = (view: GameResultView, labels: ResultLabels): ReactElem
   >
     {view.results.map((result) => (
       <ResultCard
-        key={result.rank}
+        key={result.entityId ?? result.rank}
         result={result}
         labels={labels}
+        showDetails={isPublicFigureModalEnabled() && result.publicFigure !== undefined}
+        onOpenDetails={() => {
+          onOpenDetails(result);
+        }}
         testId={buildIndexedTestId(TEST_IDS.resultCard, result.rank)}
       />
     ))}
@@ -45,22 +58,36 @@ export const ResultSections = ({
   labels,
   traitCountLabel,
   explanation,
-}: ResultSectionsProps): ReactElement => (
-  <Stack gap="md">
-    <ResultSummary
-      title={labels.compactSummaryTitle}
-      traitCountLabel={traitCountLabel}
-      summary={view.compactTraitSummary}
-    />
-    <TraitDetails title={labels.detailedTraitsTitle} categories={view.categories} />
-    <ImageQuality
-      title={labels.imageQualityTitle}
-      uncertaintyTitle={labels.uncertaintyTitle}
-      fields={view.imageQuality}
-      uncertainty={view.uncertainty}
-    />
-    {explanation}
-    {renderResultList(view, labels)}
-    <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
-  </Stack>
-);
+}: ResultSectionsProps): ReactElement => {
+  const [selectedResult, setSelectedResult] = useState<ResultView>();
+  return (
+    <>
+      <Stack gap="md">
+        <ResultSummary
+          title={labels.compactSummaryTitle}
+          traitCountLabel={traitCountLabel}
+          summary={view.compactTraitSummary}
+        />
+        <TraitDetails title={labels.detailedTraitsTitle} categories={view.categories} />
+        <ImageQuality
+          title={labels.imageQualityTitle}
+          uncertaintyTitle={labels.uncertaintyTitle}
+          fields={view.imageQuality}
+          uncertainty={view.uncertainty}
+        />
+        {explanation}
+        {renderResultList(view, labels, setSelectedResult)}
+        <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
+      </Stack>
+      {selectedResult?.publicFigure === undefined ? null : (
+        <PublicFigureModalContainer
+          publicFigure={selectedResult.publicFigure}
+          labels={labels}
+          onClose={() => {
+            setSelectedResult(undefined);
+          }}
+        />
+      )}
+    </>
+  );
+};

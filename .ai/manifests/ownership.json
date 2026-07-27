@@ -1,5 +1,5 @@
 {
-  "count": 42,
+  "count": 43,
   "modules": [
     {
       "docs": [
@@ -8,7 +8,7 @@
         "docs/provider-routing.md",
         "rules/14-ai-safety.md"
       ],
-      "fileCount": 61,
+      "fileCount": 92,
       "lane": "standard",
       "layers": [
         "adapters",
@@ -28,7 +28,7 @@
       "docs": [
         "docs/ai-benchmarking.md"
       ],
-      "fileCount": 8,
+      "fileCount": 13,
       "lane": "standard",
       "layers": [
         "benchmark"
@@ -60,7 +60,7 @@
         "docs/env-vars.md",
         "rules/25-configuration-and-environment.md"
       ],
-      "fileCount": 17,
+      "fileCount": 19,
       "lane": "critical",
       "layers": [
         "config"
@@ -131,7 +131,7 @@
         "structure/flows/analyze-flow.md",
         "docs/backend-architecture.md"
       ],
-      "fileCount": 28,
+      "fileCount": 30,
       "lane": "standard",
       "layers": [
         "api",
@@ -206,6 +206,25 @@
       "root": "apps"
     },
     {
+      "docs": [],
+      "fileCount": 27,
+      "lane": null,
+      "layers": [
+        "adapters",
+        "api",
+        "application",
+        "infrastructure",
+        "lib",
+        "model",
+        "root",
+        "tests"
+      ],
+      "module": "api:public-figures",
+      "owner": "unassigned",
+      "responsibility": "",
+      "root": "apps"
+    },
+    {
       "docs": [
         "structure/modules/api-result-aggregation.md"
       ],
@@ -261,7 +280,7 @@
         "docs/testing-strategy.md",
         "rules/09-testing-coverage.md"
       ],
-      "fileCount": 12,
+      "fileCount": 13,
       "lane": "standard",
       "layers": [
         "tests"
@@ -276,7 +295,7 @@
         "structure/modules/shared.md",
         "docs/ai-safety.md"
       ],
-      "fileCount": 40,
+      "fileCount": 43,
       "lane": "standard",
       "layers": [
         "constants",
@@ -326,7 +345,7 @@
         "structure/flows/analyze-flow.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 148,
+      "fileCount": 161,
       "lane": "standard",
       "layers": [
         "components",
@@ -407,7 +426,7 @@
         "structure/configuration-map.md",
         "docs/env-vars.md"
       ],
-      "fileCount": 3,
+      "fileCount": 5,
       "lane": "standard",
       "layers": [
         "packages"
@@ -415,7 +434,7 @@
       "module": "web:pkg-env",
       "owner": "repository owner",
       "responsibility": "Zod-validated publicEnv - the only sanctioned client process.env reader (apiBaseUrl, paypal ids, display-only price).",
-      "root": "apps/web"
+      "root": "apps"
     },
     {
       "docs": [
@@ -679,6 +698,7 @@
   ],
   "unmappedModules": [
     "api:contact",
+    "api:public-figures",
     "api:root",
     "web:pkg-adsense",
     "web:pkg-paymob",
