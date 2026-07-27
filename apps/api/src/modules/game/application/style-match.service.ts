@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Optional } from '@nestjs/common';
 
 import type {
   Candidate,
@@ -12,6 +12,8 @@ import { AppLogger } from '../../../core/logger';
 import { CandidateJudgeService, CandidateRecallService } from '../../ai';
 import { ResultAggregationService } from '../../result-aggregation';
 import type { StyleMatchInput } from '../model/game-stream.types';
+
+import { AdvancedStyleMatchEnhancementService } from './advanced-style-match-enhancement.service';
 
 const LOG_CONTEXT = 'StyleMatch';
 
@@ -28,6 +30,8 @@ export class StyleMatchService {
     private readonly candidateJudge: CandidateJudgeService,
     private readonly resultAggregation: ResultAggregationService,
     private readonly logger: AppLogger,
+    @Optional()
+    private readonly advancedEnhancement?: AdvancedStyleMatchEnhancementService,
   ) {
     this.logger.setContext(LOG_CONTEXT);
   }
@@ -40,10 +44,25 @@ export class StyleMatchService {
       this.reportStage(progress, GameStreamStage.Aggregating);
       return this.resultAggregation.buildFallback(extraction, languageCode, resultCount);
     }
+    return this.matchCandidates(input, candidates);
+  }
 
-    const judged = await this.judgeCandidates(input, candidates);
-    this.reportStage(progress, GameStreamStage.Aggregating);
-    return this.resultAggregation.aggregate(extraction, judged, languageCode, resultCount);
+  private async matchCandidates(
+    input: StyleMatchInput,
+    candidates: readonly Candidate[],
+  ): Promise<FinalGameResult> {
+    const firstJudgment = await this.judgeCandidates(input, candidates);
+    const judged =
+      (await this.advancedEnhancement?.retryIfRequested(input, candidates, firstJudgment)) ??
+      firstJudgment;
+    this.reportStage(input.progress, GameStreamStage.Aggregating);
+    const result = this.resultAggregation.aggregate(
+      input.extraction,
+      judged,
+      input.languageCode,
+      input.resultCount,
+    );
+    return (await this.advancedEnhancement?.enrich(result)) ?? result;
   }
 
   /**

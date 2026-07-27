@@ -49,6 +49,12 @@
       "path": "/payments/paymob/intention"
     },
     {
+      "file": "apps/api/src/modules/public-figures/api/public-figure.controller.ts",
+      "handler": "details",
+      "method": "GET",
+      "path": "/public-figures/:entityId"
+    },
+    {
       "file": "apps/api/src/modules/share-results/api/share-results.controller.ts",
       "handler": "create",
       "method": "POST",
@@ -67,7 +73,7 @@
       "path": "/share-results/:shareId"
     }
   ],
-  "apiCount": 11,
+  "apiCount": 12,
   "web": [
     {
       "file": "apps/web/src/app/layout.tsx",

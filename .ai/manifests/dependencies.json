@@ -1,12 +1,12 @@
 {
   "moduleEdges": [
     {
-      "count": 21,
+      "count": 27,
       "from": "api:ai",
       "to": "api:config"
     },
     {
-      "count": 22,
+      "count": 23,
       "from": "api:ai",
       "to": "api:core"
     },
@@ -16,7 +16,12 @@
       "to": "api:privacy"
     },
     {
-      "count": 18,
+      "count": 3,
+      "from": "api:ai",
+      "to": "api:public-figures"
+    },
+    {
+      "count": 33,
       "from": "api:ai",
       "to": "shared"
     },
@@ -71,7 +76,7 @@
       "to": "shared"
     },
     {
-      "count": 1,
+      "count": 2,
       "from": "api:config",
       "to": "shared"
     },
@@ -116,12 +121,12 @@
       "to": "shared"
     },
     {
-      "count": 5,
+      "count": 6,
       "from": "api:game",
       "to": "api:ai"
     },
     {
-      "count": 1,
+      "count": 2,
       "from": "api:game",
       "to": "api:config"
     },
@@ -148,10 +153,15 @@
     {
       "count": 2,
       "from": "api:game",
+      "to": "api:public-figures"
+    },
+    {
+      "count": 2,
+      "from": "api:game",
       "to": "api:result-aggregation"
     },
     {
-      "count": 14,
+      "count": 15,
       "from": "api:game",
       "to": "shared"
     },
@@ -178,6 +188,21 @@
     {
       "count": 6,
       "from": "api:payments",
+      "to": "shared"
+    },
+    {
+      "count": 5,
+      "from": "api:public-figures",
+      "to": "api:config"
+    },
+    {
+      "count": 2,
+      "from": "api:public-figures",
+      "to": "api:core"
+    },
+    {
+      "count": 15,
+      "from": "api:public-figures",
       "to": "shared"
     },
     {

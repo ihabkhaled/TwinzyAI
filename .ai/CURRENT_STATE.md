@@ -6,12 +6,12 @@
 
 | Fact | Value |
 | --- | --- |
-| Source files scanned | 746 |
-| Source modules | 42 |
-| API endpoints | 11 |
+| Source files scanned | 832 |
+| Source modules | 43 |
+| API endpoints | 12 |
 | Web routes | 15 |
-| Test files | 185 |
-| Canonical documents | 709 |
+| Test files | 207 |
+| Canonical documents | 732 |
 | Open contradiction-registry entries | 3 |
 | Stale items at last analysis | 0 |
 | Broken links at last analysis | 9 |
@@ -19,6 +19,7 @@
 ## Active feature folders (docs/features/)
 
 - advanced-global-traits-v2
+- advanced-public-figure-consensus-matching
 - ai-knowledge-os
 - engineering-os-migration
 - multi-provider-ai

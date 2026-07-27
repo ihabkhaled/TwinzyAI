@@ -4,5 +4,7 @@
   "translate-result-prompt.md": "apps/api/src/modules/ai/prompts/translate-result-prompt.md",
   "use-1st-prompt.md": "apps/api/src/modules/ai/prompts/use-1st-prompt.md",
   "use-2nd-prompt.md": "apps/api/src/modules/ai/prompts/use-2nd-prompt.md",
-  "use-3rd-prompt.md": "apps/api/src/modules/ai/prompts/use-3rd-prompt.md"
+  "use-3rd-prompt.md": "apps/api/src/modules/ai/prompts/use-3rd-prompt.md",
+  "use-4th-critique-prompt.md": "apps/api/src/modules/ai/prompts/use-4th-critique-prompt.md",
+  "use-5th-consensus-finalizer-prompt.md": "apps/api/src/modules/ai/prompts/use-5th-consensus-finalizer-prompt.md"
 }

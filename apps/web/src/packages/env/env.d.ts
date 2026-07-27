@@ -20,5 +20,6 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY?: string;
     readonly NEXT_PUBLIC_ADSENSE_CLIENT_ID?: string;
     readonly NEXT_PUBLIC_SITE_BASE_URL?: string;
+    readonly NEXT_PUBLIC_PUBLIC_FIGURE_MODAL_ENABLED?: string;
   }
 }

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { advancedMatchingEnvShape } from './advanced-matching-env.schema';
 import { contactEnvShape, validateContactEnv } from './contact-env.schema';
 import {
   DEFAULT_AI_CALLS_PER_ANALYSIS,
@@ -233,6 +234,7 @@ const EnvSchema = z
     // widens the image boundary. AI_JUDGE_CONCURRENCY provisions the judge
     // gate for the Release B judge tournament.
     AI_PARALLEL_PIPELINE_ENABLED: booleanFromString,
+    ...advancedMatchingEnvShape,
     AI_GENERATION_LANES: z.coerce
       .number()
       .int()

@@ -121,6 +121,26 @@ describe('CandidateRecallService (parallel mode)', () => {
 
     expect(harness.adapter.textCalls).toHaveLength(1);
   });
+
+  it('adds only validated critique search tags to every bounded lane', async () => {
+    const harness = buildHarness();
+    harness.adapter.queueTextResponse(buildCandidatesJson());
+    harness.adapter.queueTextResponse(buildCandidatesJson());
+
+    await harness.service.recall({
+      extraction,
+      languageCode: 'en',
+      resultCount: DEFAULT_RESULT_COUNT,
+      suggestedSearchTags: ['soft oval', '<script>alert(1)</script>'],
+    });
+
+    expect(harness.adapter.textCalls).toHaveLength(2);
+    expect(
+      harness.adapter.textCalls.every(
+        (prompt) => prompt.includes('soft oval') && !prompt.includes('<script>'),
+      ),
+    ).toBe(true);
+  });
 });
 
 describe('CandidateRecallService (single-call mode, flag off)', () => {
@@ -136,5 +156,21 @@ describe('CandidateRecallService (single-call mode, flag off)', () => {
     expect(harness.adapter.imageCalls).toHaveLength(0);
     expect(harness.adapter.textCalls[0]).not.toContain('Lane focus');
     expect(merged.map((candidate) => candidate.name)).toEqual(['Only Star']);
+  });
+
+  it('uses a validated second-pass lane when critique supplied search tags', async () => {
+    const harness = buildHarness({ aiParallelPipelineEnabled: false });
+    harness.adapter.queueTextResponse(buildCandidatesJson());
+
+    await harness.service.recall({
+      extraction,
+      languageCode: 'en',
+      resultCount: DEFAULT_RESULT_COUNT,
+      suggestedSearchTags: ['balanced proportions', 'https://attacker.example'],
+    });
+
+    expect(harness.adapter.textCalls[0]).toContain('STYLE/ARCHETYPE');
+    expect(harness.adapter.textCalls[0]).toContain('balanced proportions');
+    expect(harness.adapter.textCalls[0]).not.toContain('attacker.example');
   });
 });

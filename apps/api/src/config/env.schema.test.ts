@@ -74,3 +74,34 @@ describe('validateEnv parallel AI pipeline', () => {
     );
   });
 });
+
+describe('validateEnv advanced public-figure matching', () => {
+  it('defaults every advanced path off and bounds external metadata settings', () => {
+    const env = validateEnv({});
+
+    expect(env.AI_ADVANCED_MATCHING_ENABLED).toBe(false);
+    expect(env.AI_PUBLIC_FIGURE_CATALOG_ENABLED).toBe(false);
+    expect(env.AI_ENSEMBLE_ENABLED).toBe(false);
+    expect(env.AI_CROSS_CRITIQUE_ENABLED).toBe(false);
+    expect(env.AI_SECOND_RETRIEVAL_PASS_ENABLED).toBe(false);
+    expect(env.PUBLIC_FIGURE_ENRICHMENT_ENABLED).toBe(false);
+    expect(env.AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS).toBe(2);
+    expect(env.PUBLIC_FIGURE_CACHE_TTL_SECONDS).toBe(86_400);
+    expect(env.PUBLIC_FIGURE_CACHE_MAX_ITEMS).toBe(1000);
+  });
+
+  it('parses configured participant lists and rejects an invalid minimum', () => {
+    const env = validateEnv({
+      AI_ENSEMBLE_ENABLED: 'true',
+      AI_ENSEMBLE_GENERATION_PARTICIPANTS:
+        'gemini:configured-gemini,openai:configured-gpt,deepseek:configured-deepseek',
+      AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS: '3',
+    });
+
+    expect(env.AI_ENSEMBLE_ENABLED).toBe(true);
+    expect(env.AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS).toBe(3);
+    expect(() => validateEnv({ AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS: '0' })).toThrow(
+      /Invalid environment configuration/u,
+    );
+  });
+});

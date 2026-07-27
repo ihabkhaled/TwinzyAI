@@ -1,4 +1,10 @@
-import type { FinalGameResult, FinalResultItem, TraitCategoryKey, Traits } from '@twinzy/shared';
+import type {
+  FinalGameResult,
+  FinalResultItem,
+  PublicFigureEnrichment,
+  TraitCategoryKey,
+  Traits,
+} from '@twinzy/shared';
 import { TRAIT_CATEGORY_FIELDS, UNCERTAINTY_NOTE_FIELDS } from '@twinzy/shared';
 
 import {
@@ -19,6 +25,7 @@ import type {
   TranslateMessage,
   UncertaintyGroupView,
 } from '../model/game.types';
+import type { PublicFigureImageView, PublicFigureView } from '../model/public-figure.types';
 
 /** Shape one category's fields into translated, display-ready rows (in order). */
 const toCategoryFields = (
@@ -52,8 +59,37 @@ const toUncertaintyGroups = (traits: Traits, translate: TranslateMessage): Uncer
     notes: [...traits.uncertaintyNotes[field]],
   })).filter((group) => group.notes.length > 0);
 
+const toPublicFigureImageView = (
+  source: NonNullable<PublicFigureEnrichment['image']>,
+): PublicFigureImageView => ({
+  thumbnailUrl: source.thumbnailUrl,
+  fullUrl: source.fullUrl,
+  alt: source.alt,
+  sourcePageUrl: source.sourcePageUrl,
+  ...(source.author !== undefined && { author: source.author }),
+  ...(source.credit !== undefined && { credit: source.credit }),
+  ...(source.licenseName !== undefined && { licenseName: source.licenseName }),
+  ...(source.licenseUrl !== undefined && { licenseUrl: source.licenseUrl }),
+});
+
+const toPublicFigureView = (source: PublicFigureEnrichment): PublicFigureView => ({
+  entityId: source.entityId,
+  canonicalName: source.canonicalName,
+  occupations: [...source.occupations],
+  googleSearchUrl: source.googleSearchUrl,
+  ...(source.localizedName !== undefined && { localizedName: source.localizedName }),
+  ...(source.description !== undefined && { description: source.description }),
+  ...(source.biographySummary !== undefined && {
+    biographySummary: source.biographySummary,
+  }),
+  ...(source.countryOrRegion !== undefined && { countryOrRegion: source.countryOrRegion }),
+  ...(source.wikipediaUrl !== undefined && { wikipediaUrl: source.wikipediaUrl }),
+  ...(source.image !== undefined && { image: toPublicFigureImageView(source.image) }),
+});
+
 /** Shape one backend match into its translated, display-ready view. */
 const toResultView = (item: FinalResultItem, translate: TranslateMessage): ResultView => ({
+  ...(item.entityId !== undefined && { entityId: item.entityId }),
   name: item.name,
   rank: item.rank,
   scorePercent: item.finalStyleVibeFitScore,
@@ -66,6 +102,9 @@ const toResultView = (item: FinalResultItem, translate: TranslateMessage): Resul
   secondaryMatchingTraits: item.secondaryMatchingTraits,
   weakOrUncertainTraits: item.weakOrUncertainTraits,
   mismatchWarnings: item.mismatchWarnings,
+  ...(item.publicFigure !== undefined && {
+    publicFigure: toPublicFigureView(item.publicFigure),
+  }),
 });
 
 /**

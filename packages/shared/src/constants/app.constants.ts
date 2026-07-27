@@ -53,7 +53,7 @@ export const PAYMENTS_PAYMOB_INTENTION_PATH = `${API_BASE_PATH}/payments/paymob/
  * mismatch fails schema validation, so a stale model/template pairing can
  * never silently serve the old contract.
  */
-export const GAME_PROMPT_VERSION = 'written-traits-v5';
+export const GAME_PROMPT_VERSION = 'written-traits-v6';
 
 /**
  * Server-enforced localized safety disclaimer. The model's own disclaimer

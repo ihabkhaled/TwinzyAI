@@ -5,10 +5,12 @@ import { AiModule } from '../ai';
 import { FileSecurityModule } from '../file-security';
 import { PaymentsModule } from '../payments';
 import { PrivacyModule } from '../privacy';
+import { PublicFiguresModule } from '../public-figures';
 import { ResultAggregationModule } from '../result-aggregation';
 
 import { GameController } from './api/game.controller';
 import { GameStreamPresenter } from './api/game-stream.presenter';
+import { AdvancedStyleMatchEnhancementService } from './application/advanced-style-match-enhancement.service';
 import { AnalyzeGameUseCase } from './application/analyze-game.use-case';
 import { AnalyzeGameStreamUseCase } from './application/analyze-game-stream.use-case';
 import { CancelAnalysisUseCase } from './application/cancel-analysis.use-case';
@@ -21,6 +23,7 @@ import { TranslateResultUseCase } from './application/translate-result.use-case'
     AiModule,
     FileSecurityModule,
     PaymentsModule,
+    PublicFiguresModule,
     ResultAggregationModule,
     PrivacyModule,
   ],
@@ -28,6 +31,7 @@ import { TranslateResultUseCase } from './application/translate-result.use-case'
   providers: [
     AnalyzeGameUseCase,
     AnalyzeGameStreamUseCase,
+    AdvancedStyleMatchEnhancementService,
     TranslateResultUseCase,
     CancelAnalysisUseCase,
     StyleMatchService,

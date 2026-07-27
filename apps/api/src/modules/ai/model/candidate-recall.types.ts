@@ -10,4 +10,5 @@ export interface CandidateRecallInput {
   readonly languageCode: LanguageCodeValue;
   readonly resultCount: number;
   readonly signal?: AbortSignal | undefined;
+  readonly suggestedSearchTags?: readonly string[];
 }

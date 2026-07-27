@@ -61,6 +61,48 @@ export const MAX_IMAGE_QUALITY_CAPS = 5;
 /** Maximum candidate-search hints in a trait extraction response. */
 export const MAX_CANDIDATE_SEARCH_HINTS = 10;
 
+/** Maximum bounded qualitative signals in one matching-profile lane. */
+export const MAX_MATCHING_SIGNALS = 20;
+
+/** Maximum mutable styling signals accepted from extraction. */
+export const MAX_MUTABLE_MATCHING_SIGNALS = 12;
+
+/** Maximum expression/presentation signals accepted from extraction. */
+export const MAX_PRESENTATION_MATCHING_SIGNALS = 8;
+
+/** Maximum machine-readable matching signal/entity/source identifier length. */
+export const MAX_MATCHING_ID_LENGTH = 120;
+
+/** Maximum source references or signature looks on one catalog profile. */
+export const MAX_PUBLIC_FIGURE_SOURCE_ITEMS = 12;
+
+/** Maximum aliases, tags, categories, and occupations on public-figure data. */
+export const MAX_PUBLIC_FIGURE_METADATA_ITEMS = 30;
+
+/** Maximum localized-name entries accepted on a catalog profile. */
+export const MAX_LOCALIZED_NAME_ITEMS = 20;
+
+/** Maximum verified biography text returned to the client. */
+export const MAX_BIOGRAPHY_SUMMARY_LENGTH = 1200;
+
+/** Maximum participant evidence items in ranking, judge, and critique reports. */
+export const MAX_PARTICIPANT_EVIDENCE_ITEMS = 30;
+
+/** Maximum candidate critiques in one participant critique response. */
+export const MAX_CANDIDATE_CRITIQUES = 25;
+
+/** Inclusive normalized score bounds used by advanced matching reports. */
+export const MIN_MATCHING_SCORE = 0;
+export const MAX_MATCHING_SCORE = 100;
+
+/** Inclusive locale-key length accepted in localized-name maps. */
+export const MIN_LOCALE_KEY_LENGTH = 2;
+export const MAX_LOCALE_KEY_LENGTH = 12;
+
+/** Inclusive backend-approved critique adjustment bounds. */
+export const MIN_CRITIQUE_SCORE_ADJUSTMENT = -100;
+export const MAX_CRITIQUE_SCORE_ADJUSTMENT = 100;
+
 /** JSON.stringify indentation used for prompt payloads. */
 export const PROMPT_JSON_INDENT = 2;
 

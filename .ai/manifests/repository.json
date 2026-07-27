@@ -1,5 +1,5 @@
 {
-  "count": 746,
+  "count": 832,
   "files": [
     {
       "exports": [
@@ -26,6 +26,23 @@
       "loc": 32,
       "module": "api:root",
       "path": "apps/api/src/app.module.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ADVANCED_MATCHING_SYNTHETIC_OBSERVATIONS"
+        }
+      ],
+      "hash": "b9b330b80b831602e812abc51cedbb09508a99fe161676bc55583e8a3fc3df60",
+      "imports": [
+        "./model/advanced-matching-benchmark.types"
+      ],
+      "isTest": false,
+      "layer": "benchmark",
+      "loc": 34,
+      "module": "api:benchmark",
+      "path": "apps/api/src/benchmark/advanced-matching-benchmark-fixtures.ts"
     },
     {
       "exports": [
@@ -153,6 +170,24 @@
       "exports": [
         {
           "kind": "const",
+          "name": "calculateAdvancedMatchingBenchmarkMetrics"
+        }
+      ],
+      "hash": "b4c3eac2fec4af200d9ad3d04566920cc2166b162126ab4ffeae03d2a1b06c52",
+      "imports": [
+        "../model/advanced-matching-benchmark.constants",
+        "../model/advanced-matching-benchmark.types"
+      ],
+      "isTest": false,
+      "layer": "benchmark",
+      "loc": 136,
+      "module": "api:benchmark",
+      "path": "apps/api/src/benchmark/lib/advanced-matching-benchmark-metrics.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "aggregateEntryMetrics"
         },
         {
@@ -183,6 +218,56 @@
       "loc": 143,
       "module": "api:benchmark",
       "path": "apps/api/src/benchmark/lib/benchmark-metrics.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "BENCHMARK_P50_RANK"
+        },
+        {
+          "kind": "const",
+          "name": "BENCHMARK_P95_RANK"
+        },
+        {
+          "kind": "const",
+          "name": "BENCHMARK_RECALL_LIMIT"
+        },
+        {
+          "kind": "const",
+          "name": "BENCHMARK_TOP_FIVE_LIMIT"
+        },
+        {
+          "kind": "const",
+          "name": "BENCHMARK_TOP_TEN_LIMIT"
+        }
+      ],
+      "hash": "7db452b6ad8f4aa7e292232a8172739c5f5ad9109833cf2f070854e668013744",
+      "imports": [],
+      "isTest": false,
+      "layer": "benchmark",
+      "loc": 6,
+      "module": "api:benchmark",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "AdvancedMatchingBenchmarkMetrics"
+        },
+        {
+          "kind": "interface",
+          "name": "AdvancedMatchingBenchmarkObservation"
+        }
+      ],
+      "hash": "e001c093f35a1ddf0fd5e9c2157217bca72444b855dc4381542ce3667b9018f1",
+      "imports": [],
+      "isTest": false,
+      "layer": "benchmark",
+      "loc": 42,
+      "module": "api:benchmark",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.types.ts"
     },
     {
       "exports": [
@@ -266,6 +351,21 @@
       "loc": 89,
       "module": "api:benchmark",
       "path": "apps/api/src/benchmark/model/benchmark.types.ts"
+    },
+    {
+      "exports": [],
+      "hash": "c1ba690b72be41883f021ba4925ff7f13d5eed620feeb7a6e4404f21e64f1050",
+      "imports": [
+        "../advanced-matching-benchmark-fixtures",
+        "../lib/advanced-matching-benchmark-metrics.util",
+        "../model/advanced-matching-benchmark.types",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "benchmark",
+      "loc": 95,
+      "module": "api:benchmark",
+      "path": "apps/api/src/benchmark/tests/advanced-matching-benchmark.test.ts"
     },
     {
       "exports": [],
@@ -579,6 +679,42 @@
     {
       "exports": [
         {
+          "kind": "interface",
+          "name": "AdvancedMatchingConfig"
+        }
+      ],
+      "hash": "4b198b57510c2b134b6bacc060ccd3fe0360be7471561a899e62eeffbe094288",
+      "imports": [
+        "./ai-route.types"
+      ],
+      "isTest": false,
+      "layer": "config",
+      "loc": 23,
+      "module": "api:config",
+      "path": "apps/api/src/config/advanced-matching-config.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "advancedMatchingEnvShape"
+        }
+      ],
+      "hash": "f9c1a8460837c8919ae9bfd112dc26b5c0511b6417f9fc7a3ef6216a76430fb0",
+      "imports": [
+        "./env-bounds.constants",
+        "@twinzy/shared",
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "config",
+      "loc": 91,
+      "module": "api:config",
+      "path": "apps/api/src/config/advanced-matching-env.schema.ts"
+    },
+    {
+      "exports": [
+        {
           "kind": "const",
           "name": "AI_PROVIDER_VALUES"
         },
@@ -695,7 +831,7 @@
     },
     {
       "exports": [],
-      "hash": "9ded046df2cf20658baa065ceeb356b714745d217ec1221fbd038f89310ae717",
+      "hash": "d0fac7bd318107dabfaae7cfaeb262e337a0be31b0549431d1a07421b92a40e3",
       "imports": [
         "./ai-route.constants",
         "./app-config.service",
@@ -706,7 +842,7 @@
       ],
       "isTest": true,
       "layer": "config",
-      "loc": 181,
+      "loc": 216,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.test.ts"
     },
@@ -717,8 +853,9 @@
           "name": "AppConfigService"
         }
       ],
-      "hash": "e8bf7257a640c3e6f297e4ede0fe3c9a681a5a708311a77b173108e4e3a2df6a",
+      "hash": "4fe0ef95c590f55d484d260047caa18e18913121f33b30fb9d0f7df1f725d97e",
       "imports": [
+        "./advanced-matching-config.types",
         "./ai-provider.constants",
         "./ai-route.types",
         "./ai-route.util",
@@ -731,7 +868,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 381,
+      "loc": 417,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.ts"
     },
@@ -798,6 +935,22 @@
         {
           "kind": "const",
           "name": "DEFAULT_AI_CALLS_PER_ANALYSIS"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_ENSEMBLE_MAX_COMBINED_CANDIDATES"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_AI_ENSEMBLE_STEP_TIMEOUT_MS"
         },
         {
           "kind": "const",
@@ -881,6 +1034,22 @@
         },
         {
           "kind": "const",
+          "name": "DEFAULT_PUBLIC_FIGURE_CACHE_MAX_ITEMS"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_PUBLIC_FIGURE_CACHE_TTL_SECONDS"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_PUBLIC_FIGURE_MAX_RESPONSE_BYTES"
+        },
+        {
+          "kind": "const",
+          "name": "DEFAULT_PUBLIC_FIGURE_REQUEST_TIMEOUT_MS"
+        },
+        {
+          "kind": "const",
           "name": "DEFAULT_RATE_LIMIT_MAX"
         },
         {
@@ -929,6 +1098,10 @@
         },
         {
           "kind": "const",
+          "name": "MAX_AI_ENSEMBLE_PARTICIPANTS"
+        },
+        {
+          "kind": "const",
           "name": "MAX_AI_GENERATION_LANES"
         },
         {
@@ -973,6 +1146,14 @@
         },
         {
           "kind": "const",
+          "name": "MAX_PUBLIC_FIGURE_CACHE_MAX_ITEMS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_PUBLIC_FIGURE_CACHE_TTL_SECONDS"
+        },
+        {
+          "kind": "const",
           "name": "MAX_QUEUE_SIZE"
         },
         {
@@ -1002,6 +1183,10 @@
         {
           "kind": "const",
           "name": "MIN_AI_CALLS_PER_ANALYSIS"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_AI_ENSEMBLE_PARTICIPANTS"
         },
         {
           "kind": "const",
@@ -1049,6 +1234,14 @@
         },
         {
           "kind": "const",
+          "name": "MIN_PUBLIC_FIGURE_CACHE_MAX_ITEMS"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_PUBLIC_FIGURE_CACHE_TTL_SECONDS"
+        },
+        {
+          "kind": "const",
           "name": "MIN_QUEUE_SIZE"
         },
         {
@@ -1088,19 +1281,19 @@
           "name": "PAYMOB_INTEGRATION_ID_PATTERN"
         }
       ],
-      "hash": "5993a40b2703b2e3d35e0e7dc1ff58236409cb74918864feb30359e55dc530f1",
+      "hash": "b2f4ac097e89af2a653399da110aa6b108f6e3ee92d0e1f77528e1a5021b4291",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 142,
+      "loc": 157,
       "module": "api:config",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
       "exports": [],
-      "hash": "de87c0243858fa5ba17bbcd7502a57ed14bfa722ba23250cf5cf17dd050e53fe",
+      "hash": "69643cc7972d0052016dc19c32706e12bf068c3bd1cea721d384a8d62c681404",
       "imports": [
         "./env.schema",
         "@twinzy/shared",
@@ -1108,7 +1301,7 @@
       ],
       "isTest": true,
       "layer": "config",
-      "loc": 77,
+      "loc": 108,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.test.ts"
     },
@@ -1131,8 +1324,9 @@
           "name": "validateEnv"
         }
       ],
-      "hash": "d1c0af0b1e53fa581532ab1ba5b3706d99396755aca7f9f96db130de207424d4",
+      "hash": "1d03270f792055bc3b5af150f04244a929aca03cb5fdb431223f1c5bfc10e19e",
       "imports": [
+        "./advanced-matching-env.schema",
         "./contact-env.schema",
         "./env-bounds.constants",
         "./payment-env.schema",
@@ -1141,7 +1335,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 388,
+      "loc": 390,
       "module": "api:config",
       "path": "apps/api/src/config/env.schema.ts"
     },
@@ -2836,18 +3030,25 @@
           "name": "AiModule"
         }
       ],
-      "hash": "87d78aabac1ceb9c38563a6a9c2676e063a1326242bc7e1d6fbed2658d9caa0c",
+      "hash": "4af045677f439bf014bc9a5910093fc24b3c4e8a7894dc3bdc3999bdd8e1fe6b",
       "imports": [
         "../privacy",
+        "../public-figures",
         "./adapters/ai-router.service",
         "./adapters/ai-shadow.service",
         "./adapters/gemini.adapter",
         "./adapters/provider-registry.service",
+        "./application/advanced-candidate-council.service",
+        "./application/advanced-judge-council.service",
         "./application/ai-safety.service",
         "./application/ai-step-concurrency.gate",
         "./application/candidate-generation.service",
         "./application/candidate-judge.service",
         "./application/candidate-recall.service",
+        "./application/consensus-finalizer.service",
+        "./application/consensus-scoring.service",
+        "./application/cross-critique.service",
+        "./application/multi-model-council.service",
         "./application/result-translation.service",
         "./application/trait-extraction.service",
         "./infrastructure/prompt-template.repository",
@@ -2856,9 +3057,58 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 52,
+      "loc": 68,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/ai.module.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "AdvancedCandidateCouncilService"
+        }
+      ],
+      "hash": "4f7cb39b67be99474fbb0b247c2474611ea9aa1fd98d5abd870de62772da81a3",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../public-figures",
+        "../lib/catalog-candidate.mapper",
+        "../model/multi-model-council.types",
+        "./multi-model-council.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 64,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/advanced-candidate-council.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "AdvancedJudgeCouncilService"
+        }
+      ],
+      "hash": "fdd83052cae7717f9c905c79644d298fd2354426a641112a5669a92f98096768",
+      "imports": [
+        "../../../config/app-config.service",
+        "../lib/judge-consensus.mapper",
+        "../model/judge-input.types",
+        "../model/multi-model-council.types",
+        "./consensus-finalizer.service",
+        "./consensus-scoring.service",
+        "./cross-critique.service",
+        "./multi-model-council.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 65,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/advanced-judge-council.service.ts"
     },
     {
       "exports": [
@@ -2909,26 +3159,30 @@
           "name": "CandidateGenerationService"
         }
       ],
-      "hash": "dfe070f9d7ee61ee0c5686f7832429853a27a9514dc68b75b8d274cc1be41504",
+      "hash": "e5f5588977c8764c0d1169e05b30beeac9594e84196dacd7255bfbb6c320cd77",
       "imports": [
         "../../../config/gemini-step.constants",
         "../../../core/logger/app-logger.service",
         "../infrastructure/prompt-template.repository",
+        "../lib/candidate-council-merge.util",
         "../lib/candidate-lane-plan.util",
         "../lib/json-response.util",
         "../lib/matching-evidence.util",
+        "../lib/response-content-language.guard",
+        "../lib/response-language-values.util",
         "../lib/response-language.guard",
         "../model/ai-provider-adapter.types",
         "../model/candidate-lane.types",
         "../model/prompt-version.constants",
         "../model/region-hint.constants",
+        "./advanced-candidate-council.service",
         "./ai-safety.service",
         "@nestjs/common",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 103,
+      "loc": 169,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/candidate-generation.service.ts"
     },
@@ -2939,24 +3193,28 @@
           "name": "CandidateJudgeService"
         }
       ],
-      "hash": "691403b0cfa122f665d06aa0f0172dd4d7a1b390f55932960b1e37199ab6364b",
+      "hash": "0d8417d2916b72562e7891cea5e48f527ee2f2f7a575ccd280e8a4e54eadabb4",
       "imports": [
         "../../../config/gemini-step.constants",
         "../../../core/logger/app-logger.service",
         "../infrastructure/prompt-template.repository",
         "../lib/json-response.util",
+        "../lib/judge-council-merge.util",
         "../lib/matching-evidence.util",
+        "../lib/response-content-language.guard",
+        "../lib/response-language-values.util",
         "../lib/response-language.guard",
         "../model/ai-provider-adapter.types",
         "../model/judge-input.types",
         "../model/prompt-version.constants",
+        "./advanced-judge-council.service",
         "./ai-safety.service",
         "@nestjs/common",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 75,
+      "loc": 173,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/candidate-judge.service.ts"
     },
@@ -2967,7 +3225,7 @@
           "name": "CandidateRecallService"
         }
       ],
-      "hash": "4abe20f7cc1cba87325333c32e48413a79a7c48e4f9c26b2a4440f1a2cf29675",
+      "hash": "b6726f8e1468000df1413aac94796f691af7d1b0357918d3cfe3bf3f0b03db43",
       "imports": [
         "../../../config/app-config.service",
         "../../../config/gemini-step.constants",
@@ -2984,9 +3242,100 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 117,
+      "loc": 150,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/candidate-recall.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "ConsensusFinalizerService"
+        }
+      ],
+      "hash": "150ee7c3dcaa121c94399fcf22b715e2f3f93d7929de48b7fc36d8eb46d64e61",
+      "imports": [
+        "../../../config/app-config.service",
+        "../infrastructure/prompt-template.repository",
+        "../lib/consensus-finalizer.mapper",
+        "../lib/json-response.util",
+        "../model/judge-input.types",
+        "../model/prompt-version.constants",
+        "./multi-model-council.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 79,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/consensus-finalizer.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "ConsensusScoringService"
+        }
+      ],
+      "hash": "3543f6e7a8ee08986a19a1321c7d550d0e1396a60ce6f4ca9cf75ee2ed4bb446",
+      "imports": [
+        "../lib/consensus-scoring.util",
+        "../model/consensus-scoring.constants",
+        "../model/consensus-scoring.types",
+        "@nestjs/common"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 25,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/consensus-scoring.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "CrossCritiqueService"
+        }
+      ],
+      "hash": "0893f2aa37cbd4a7318d79cd8c0792cdbce6a1f122b71b28c5ff193e6a8d7b43",
+      "imports": [
+        "../../../config/app-config.service",
+        "../infrastructure/prompt-template.repository",
+        "../lib/json-response.util",
+        "../lib/matching-evidence.util",
+        "../model/cross-critique.types",
+        "../model/prompt-version.constants",
+        "./multi-model-council.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 58,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/cross-critique.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "MultiModelCouncilService"
+        }
+      ],
+      "hash": "9317a837a2758da746ee65dc4974a76eb37d0bec6cbf547582e951766a44ac06",
+      "imports": [
+        "../../../config/ai-route.types",
+        "../adapters/provider-registry.service",
+        "../lib/multi-model-council.util",
+        "../model/multi-model-council.types",
+        "@nestjs/common"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 44,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/application/multi-model-council.service.ts"
     },
     {
       "exports": [
@@ -3047,16 +3396,20 @@
     },
     {
       "exports": [],
-      "hash": "98fecd3b66e7022eb812e4878c76e3ffd033d002cd7cbc38399be917f412493e",
+      "hash": "f26f7f2cb67f8e6e95dc982b5d7656eeea4f7eefc8bcf2132998556aeae8023c",
       "imports": [
         "./ai.module",
         "./application/ai-safety.service",
         "./application/candidate-generation.service",
         "./application/candidate-judge.service",
         "./application/candidate-recall.service",
+        "./application/consensus-scoring.service",
+        "./application/cross-critique.service",
+        "./application/multi-model-council.service",
         "./application/result-translation.service",
         "./application/trait-extraction.service",
         "./infrastructure/prompt-template.repository",
+        "./lib/candidate-merge.util",
         "./lib/image-input.util",
         "./lib/matching-evidence.util",
         "./model/ai-provider-adapter.types",
@@ -3066,7 +3419,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 15,
+      "loc": 19,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/index.ts"
     },
@@ -3131,6 +3484,24 @@
       "exports": [
         {
           "kind": "const",
+          "name": "mergeCouncilCandidates"
+        }
+      ],
+      "hash": "3e96538a04acc247288bd06defa56cbafb39af3963d7687f559e29d20e8e7ca2",
+      "imports": [
+        "../model/multi-model-council.constants",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 49,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/candidate-council-merge.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "buildCandidateGenerationLanes"
         },
         {
@@ -3138,14 +3509,14 @@
           "name": "buildLaneFocusSection"
         }
       ],
-      "hash": "d86d8ab5a85aa85c6b52cb0d0aa1ffe29847b10262a911fae0b5b10ae3037371",
+      "hash": "3a5de4b71f430fb22afb29c5e04b88178a5fdd6d5eba576ebb395eb30b3ecda3",
       "imports": [
         "../model/candidate-lane.constants",
         "../model/candidate-lane.types"
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 32,
+      "loc": 36,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts"
     },
@@ -3169,6 +3540,60 @@
       "loc": 54,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/candidate-merge.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "attachCatalogEvidence"
+        }
+      ],
+      "hash": "b909982aa7df3b967e74133276ff21fc75e3132d98be7d7161c38b3939fbdf11",
+      "imports": [
+        "../../public-figures",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 25,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/catalog-candidate.mapper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "applyConsensusExplanations"
+        }
+      ],
+      "hash": "143a6d1aa42ee3855cbb9f288a6e17672bde482f8fa7aa18292080c541ee5c67",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 26,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/consensus-finalizer.mapper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "calculateConsensusScore"
+        }
+      ],
+      "hash": "9f17e1e3578b5a3275ea8d97e9226ae41fd2fc89b5ad1bfb80a75f6ee531f3db",
+      "imports": [
+        "../model/consensus-scoring.constants",
+        "../model/consensus-scoring.types",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 78,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/consensus-scoring.util.ts"
     },
     {
       "exports": [
@@ -3258,19 +3683,91 @@
       "exports": [
         {
           "kind": "const",
+          "name": "applyBackendConsensusScores"
+        }
+      ],
+      "hash": "017d06bdc4580ab7ac06aabb6ac10107a00610fc67af955c75b40a6ee53134eb",
+      "imports": [
+        "../application/consensus-scoring.service",
+        "../model/consensus-scoring.constants",
+        "../model/judge-input.types",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 73,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/judge-consensus.mapper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "mergeCouncilJudgeResponses"
+        }
+      ],
+      "hash": "5b1078d3308a38ed91c6f3af8974a697b671bfd8b9aa5270c63ab9060ce93c5e",
+      "imports": [
+        "../model/multi-model-council.constants",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 56,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/judge-council-merge.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "buildMatchingEvidence"
         }
       ],
-      "hash": "40b969137bbcbbce445d285333818a4030a822b736aea40f3657ec6617ae01c2",
+      "hash": "ba74e20f990f2ce8b3e86ca1b336eccef0696d7e5cda80184b18b73e7a2cfa55",
       "imports": [
         "../model/matching-evidence.types",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 20,
+      "loc": 26,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/matching-evidence.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildNormalizedMatchingProfile"
+        }
+      ],
+      "hash": "4d1f77402d0b0d00f65add6e04b2b4c56bc453fd23215604197e27bb93814287",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 71,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/matching-profile.builder.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "runCouncilParticipants"
+        }
+      ],
+      "hash": "599b5b24318ea86f5b94312dc4a97c9498a62bdf49a9dd93ac454705d770d24a",
+      "imports": [
+        "../model/multi-model-council.types"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 21,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/multi-model-council.util.ts"
     },
     {
       "exports": [
@@ -3297,6 +3794,55 @@
       "loc": 59,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/provider-error.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "assertLocalizedContentLanguage"
+        }
+      ],
+      "hash": "ec387e1d527ecd47abb865914189e3aed240f046e5d4fa7cf2d712608fb1db59",
+      "imports": [
+        "../../../core/errors",
+        "../model/ai-safety.constants",
+        "../model/gemini.constants",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 38,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/response-content-language.guard.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "collectCandidateLanguageExclusions"
+        },
+        {
+          "kind": "const",
+          "name": "collectCandidateLocalizedValues"
+        },
+        {
+          "kind": "const",
+          "name": "collectJudgedLanguageExclusions"
+        },
+        {
+          "kind": "const",
+          "name": "collectJudgedLocalizedValues"
+        }
+      ],
+      "hash": "75d85011cc47f0141c4bb1dcdc4afdd85909daabd7a1523e28bb1c6c101dc51a",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 43,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/response-language-values.util.ts"
     },
     {
       "exports": [
@@ -3423,15 +3969,19 @@
         {
           "kind": "const",
           "name": "ALL_FORBIDDEN_PHRASES"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_ARABIC_CONTENT_RATIO"
         }
       ],
-      "hash": "967305822f5402fa5f967c0164a62d52029c216a54075ee98e637d11ca7fbe35",
+      "hash": "e6b0b6b61201da33136e9fbf43cb1460974aecbbd9445e56f2cd8dc3fa69f788",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 11,
+      "loc": 13,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/ai-safety.constants.ts"
     },
@@ -3464,13 +4014,21 @@
         {
           "kind": "const",
           "name": "RESERVED_NON_GENERATION_CALLS"
+        },
+        {
+          "kind": "const",
+          "name": "SECOND_RETRIEVAL_LANE_ID"
+        },
+        {
+          "kind": "const",
+          "name": "SECOND_RETRIEVAL_TAG_PATTERN"
         }
       ],
-      "hash": "800dd716e72fff4fa5b87a7e282520382835fedd7778da2ff69cab19c548fd44",
+      "hash": "7fcdb3f65fd70363dfd5767f4a6c5a5f2fac16ee4369c1720b6c4010d5bc7a03",
       "imports": [],
       "isTest": false,
       "layer": "model",
-      "loc": 58,
+      "loc": 60,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
     },
@@ -3481,13 +4039,13 @@
           "name": "CandidateGenerationLane"
         }
       ],
-      "hash": "84655634fbe4ec06b8ba73872d6be4d1e3cc7e2d84a6273712003ab041cf5954",
+      "hash": "7b9d13b2aa25ab6233d99bb837b6faca9705ed94400ea5ea6a2500c8c71c3aa3",
       "imports": [
         "./candidate-lane.constants"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 14,
+      "loc": 15,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/candidate-lane.types.ts"
     },
@@ -3498,7 +4056,112 @@
           "name": "CandidateRecallInput"
         }
       ],
-      "hash": "852de6b69ece666aecc81e9d000e6766ca928ec93c0bed624f86be562e5fa8c6",
+      "hash": "5233d424869e9477b678ec168d45d4750dc91a8e42e16804b0dd0c411fd7ff1a",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 15,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/candidate-recall.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "CONSENSUS_AGREEMENT_SPREAD_DIVISOR"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_CONTRADICTION_PENALTY_WEIGHT"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_ENTITY_ID_PATTERN"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_EVEN_DIVISOR"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_MAX_AGREEMENT_BONUS"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_MAX_CROSS_LANE_BONUS"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_MAX_RETRIEVAL_BONUS"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_MAX_SCORE"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_MIN_REPORTS"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_MIN_SCORE"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_QUALITY_CAP_PENALTY"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_SCORING_WEIGHTS"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_UNCERTAINTY_PENALTY_WEIGHT"
+        },
+        {
+          "kind": "const",
+          "name": "CONSENSUS_UNSUPPORTED_CLAIM_PENALTY"
+        }
+      ],
+      "hash": "12709305f3d599266befdbe3504bde928c8f86d7b18426c9ff466dc91c2268a6",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 21,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "ConsensusScoringInput"
+        },
+        {
+          "kind": "type",
+          "name": "ConsensusScoringResult"
+        }
+      ],
+      "hash": "947d0b1cb452396cb3672380d047accbfaacc6c23405db083c5fd11ac782097a",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 12,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "CrossCritiqueInput"
+        }
+      ],
+      "hash": "e2686f123e66bb0b15138768e8f09fc9863202fa348c9ea8c631ae909ae77d81",
       "imports": [
         "@twinzy/shared"
       ],
@@ -3506,7 +4169,7 @@
       "layer": "model",
       "loc": 14,
       "module": "api:ai",
-      "path": "apps/api/src/modules/ai/model/candidate-recall.types.ts"
+      "path": "apps/api/src/modules/ai/model/cross-critique.types.ts"
     },
     {
       "exports": [
@@ -3594,15 +4257,55 @@
           "name": "MatchingEvidence"
         }
       ],
-      "hash": "787f68b9b34da9f3c2619c4a6bcc8a32b9b819d1faf0978cf438e71f6f6bcb2c",
+      "hash": "9e52e15b4dcdfe0845cf1f573a9e3a2bb7004ec70afe7942db6505e1fd4f89f5",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 21,
+      "loc": 23,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/matching-evidence.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "COUNCIL_MEDIAN_DIVISOR"
+        }
+      ],
+      "hash": "7b2b2b04869b1bdcb7f3ea341188e04135082e43c45a4e9b7168f5e7a1da5456",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 2,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/multi-model-council.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "CouncilParticipantTask"
+        },
+        {
+          "kind": "interface",
+          "name": "MultiModelCouncilInput"
+        },
+        {
+          "kind": "interface",
+          "name": "MultiModelCouncilResult"
+        }
+      ],
+      "hash": "8c8837f8a9ebb6dd58b8f1832e43fd47c2ed0ee8f670a62c767b577b5a9edcc1",
+      "imports": [
+        "../../../config/ai-route.types"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 19,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/multi-model-council.types.ts"
     },
     {
       "exports": [
@@ -3673,11 +4376,11 @@
           "name": "REQUIRED_PLACEHOLDERS"
         }
       ],
-      "hash": "5dd3715860ed346fbc7f81dedd03fe95c4aead09d354ba3d45ef5b3290b71122",
+      "hash": "565be7dcd55a4ec708b09a671232433867dd3372d7b6c9ca33fbb969d49c59da",
       "imports": [],
       "isTest": false,
       "layer": "model",
-      "loc": 49,
+      "loc": 66,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/prompt-version.constants.ts"
     },
@@ -3716,6 +4419,54 @@
       "loc": 24,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/model/region-hint.constants.ts"
+    },
+    {
+      "exports": [],
+      "hash": "00c7278ef1cad6cb5a0bbbaf0c3cd41a09d65e50684d22f8ca0d2bc01576f82d",
+      "imports": [
+        "../../../config/advanced-matching-config.types",
+        "../../../config/ai-provider.constants",
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../../../tests/fixtures/stubs",
+        "../../public-figures",
+        "../application/advanced-candidate-council.service",
+        "../application/advanced-judge-council.service",
+        "../application/consensus-finalizer.service",
+        "../application/consensus-scoring.service",
+        "../application/cross-critique.service",
+        "../application/multi-model-council.service",
+        "../infrastructure/prompt-template.repository",
+        "../model/judge-input.types",
+        "../model/multi-model-council.types",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 328,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "096ec77007f8af8e2e4b2d753b326f9fa792b5d8f71e50eb1ca43452560e8373",
+      "imports": [
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../../../tests/fixtures/stubs",
+        "../application/advanced-candidate-council.service",
+        "../application/advanced-judge-council.service",
+        "../application/ai-safety.service",
+        "../application/candidate-generation.service",
+        "../application/candidate-judge.service",
+        "../infrastructure/prompt-template.repository",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 209,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts"
     },
     {
       "exports": [],
@@ -3821,6 +4572,20 @@
     },
     {
       "exports": [],
+      "hash": "8b65e5343d34adfa5f190a16e1ce55f48cb7c1eb8f3d0fed3187631c0e42265a",
+      "imports": [
+        "../lib/candidate-council-merge.util",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 72,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/candidate-council-merge.util.test.ts"
+    },
+    {
+      "exports": [],
       "hash": "5c32b445c4a40fb24de44891459aab3afa1986ff5972e1cfcd8acb8ee888fc7c",
       "imports": [
         "../lib/candidate-lane-plan.util",
@@ -3849,7 +4614,7 @@
     },
     {
       "exports": [],
-      "hash": "2d9fac8bd49d1fca2b91a05bc7e639c5e508e61a5c2906755160812c719d6eb9",
+      "hash": "b6d9430ca5c3febbf7f9ba34d743512fea58f64ec965a18ca5c238f69b4fe0f2",
       "imports": [
         "../../../config/app-config.service",
         "../../../tests/fixtures/fake-ai-adapter",
@@ -3864,9 +4629,42 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 141,
+      "loc": 177,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "7b38a7211cd0bd861fa37c1ca771685bbc022ff29848d3dea60ab6808fc0b979",
+      "imports": [
+        "../../../config/ai-provider.constants",
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../../../tests/fixtures/stubs",
+        "../application/consensus-finalizer.service",
+        "../application/multi-model-council.service",
+        "../infrastructure/prompt-template.repository",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 154,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "d08f69f9acd1ad97ed3f00a6c1a806110f9ef6af9990f779601ce4b088308be6",
+      "imports": [
+        "../application/consensus-scoring.service",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 98,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/consensus-scoring.service.test.ts"
     },
     {
       "exports": [],
@@ -3922,6 +4720,70 @@
       "loc": 23,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/json-shape.util.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "a0371065c1e6174d978efc76b59dcd268ce5366037c6841c3c725a21b517fe06",
+      "imports": [
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../application/consensus-scoring.service",
+        "../lib/judge-consensus.mapper",
+        "../lib/judge-council-merge.util",
+        "../model/judge-input.types",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 92,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "117d85a6d4a4bfc463567d5244f47f92dc4653570321cffe035c0f175b0d94dd",
+      "imports": [
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../lib/judge-council-merge.util",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 68,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/judge-council-merge.util.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "4749f94d58223b99680028183b8c8d1434895bf6cde8e960eab6cac23a1056d5",
+      "imports": [
+        "../lib/matching-profile.builder",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 90,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/matching-profile.builder.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "3c9cbefe879e63d229a6375ac7eed5c46c2f2517200477685049e713f4a657e3",
+      "imports": [
+        "../../../config/ai-provider.constants",
+        "../../../config/ai-route.types",
+        "../adapters/provider-registry.service",
+        "../application/multi-model-council.service",
+        "../model/ai-provider-adapter.types",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 92,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts"
     },
     {
       "exports": [],
@@ -3985,6 +4847,19 @@
       "loc": 100,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/provider-registry.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "38256fa7770fdc2d10cabcc247b54bee1809b2c4f764350b2bf605e03ca310c9",
+      "imports": [
+        "../lib/response-content-language.guard",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 41,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts"
     },
     {
       "exports": [],
@@ -4836,6 +5711,28 @@
       "exports": [
         {
           "kind": "class",
+          "name": "AdvancedStyleMatchEnhancementService"
+        }
+      ],
+      "hash": "f0f757c041b49b6537bb4c43fa2332e33b50775101ba1df712d810ad32e943fd",
+      "imports": [
+        "../../../config/app-config.service",
+        "../../ai",
+        "../../public-figures",
+        "../model/game-stream.types",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 79,
+      "module": "api:game",
+      "path": "apps/api/src/modules/game/application/advanced-style-match-enhancement.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
           "name": "AnalyzeGameStreamUseCase"
         }
       ],
@@ -4910,18 +5807,19 @@
           "name": "StyleMatchService"
         }
       ],
-      "hash": "e0214e2c7085c2216999eb7e346b4f5892a7198882da7d1ee5695fb82eb26ca9",
+      "hash": "f0c456e38de7c39962d1fd563af076b4bc80d9fe42e2a1eefc379ae5a57bf1a3",
       "imports": [
         "../../../core/logger",
         "../../ai",
         "../../result-aggregation",
         "../model/game-stream.types",
+        "./advanced-style-match-enhancement.service",
         "@nestjs/common",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 83,
+      "loc": 102,
       "module": "api:game",
       "path": "apps/api/src/modules/game/application/style-match.service.ts"
     },
@@ -4951,16 +5849,18 @@
           "name": "GameModule"
         }
       ],
-      "hash": "b3cd32ebd0db49855d43bd36f8f85dd136eb1ce7c7632f6d51ba81193b9dbdb5",
+      "hash": "ec7458fe1458212573478989789e69e10535f68fa99727a12cf2d9ec54fcad09",
       "imports": [
         "../../core/streaming",
         "../ai",
         "../file-security",
         "../payments",
         "../privacy",
+        "../public-figures",
         "../result-aggregation",
         "./api/game-stream.presenter",
         "./api/game.controller",
+        "./application/advanced-style-match-enhancement.service",
         "./application/analyze-game-stream.use-case",
         "./application/analyze-game.use-case",
         "./application/cancel-analysis.use-case",
@@ -4970,7 +5870,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 38,
+      "loc": 42,
       "module": "api:game",
       "path": "apps/api/src/modules/game/game.module.ts"
     },
@@ -5263,6 +6163,25 @@
       "loc": 12,
       "module": "api:game",
       "path": "apps/api/src/modules/game/model/game.messages.ts"
+    },
+    {
+      "exports": [],
+      "hash": "112195194ce4592517ed6e509a87e06ae46ee2f543d2186b783231703f4738ef",
+      "imports": [
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../../../tests/fixtures/stubs",
+        "../../ai",
+        "../../public-figures",
+        "../application/advanced-style-match-enhancement.service",
+        "../model/game-stream.types",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 162,
+      "module": "api:game",
+      "path": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts"
     },
     {
       "exports": [],
@@ -6100,6 +7019,635 @@
       "exports": [
         {
           "kind": "class",
+          "name": "WikidataAdapter"
+        }
+      ],
+      "hash": "01666099ef9aa11bc178b39eb3909fe25498d0174c40bc95d5d20d204ba7266d",
+      "imports": [
+        "../../../config/app-config.service",
+        "../lib/bounded-json-fetch.util",
+        "../model/public-figure-remote.schemas",
+        "../model/public-figure-remote.types",
+        "../model/public-figure.constants",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "adapters",
+      "loc": 61,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "WikimediaCommonsAdapter"
+        }
+      ],
+      "hash": "69f746145127e35a6b1bc9967e3d3674cb6dcbd0e12d980817693997aca1c979",
+      "imports": [
+        "../../../config/app-config.service",
+        "../lib/bounded-json-fetch.util",
+        "../lib/public-figure-url.util",
+        "../model/public-figure-remote.schemas",
+        "../model/public-figure.constants",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "adapters",
+      "loc": 64,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "WikipediaAdapter"
+        }
+      ],
+      "hash": "bbc779d15113721b32267a38d46359b954e48b1993b410b2884fc74cc01a6464",
+      "imports": [
+        "../../../config/app-config.service",
+        "../lib/bounded-json-fetch.util",
+        "../model/public-figure-remote.schemas",
+        "../model/public-figure-remote.types",
+        "../model/public-figure.constants",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "adapters",
+      "loc": 47,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureController"
+        }
+      ],
+      "hash": "8cd1518c33153e2792c446d527456f635b5d6d58858055ea79bdd31e13e11e36",
+      "imports": [
+        "../../../core/openapi",
+        "../../../core/validation",
+        "../application/get-public-figure-details.use-case",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "api",
+      "loc": 24,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/api/public-figure.controller.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "GetPublicFigureDetailsUseCase"
+        }
+      ],
+      "hash": "dc9503313cd8ff69f11e40a996867b77a990cc67bee98f3213629ad3be322d31",
+      "imports": [
+        "./public-figure-enrichment.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 22,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/application/get-public-figure-details.use-case.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureEnrichmentGatewayService"
+        }
+      ],
+      "hash": "945ebb294e23f938f9d8d1c7c6cfa583c92c0b0bd69a3bf93bc33deeb693c0a1",
+      "imports": [
+        "../adapters/wikidata.adapter",
+        "../adapters/wikimedia-commons.adapter",
+        "../adapters/wikipedia.adapter",
+        "../model/public-figure-remote.types",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 100,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-enrichment-gateway.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureEnrichmentService"
+        }
+      ],
+      "hash": "6c0b124c7431ff68d3d7a19e9842e0d7651e34ebe35d0d51306b62ea5c289f45",
+      "imports": [
+        "../../../config/app-config.service",
+        "../infrastructure/public-figure-catalog.repository",
+        "../infrastructure/public-figure-metadata-cache.repository",
+        "../lib/public-figure-url.util",
+        "../model/public-figure-remote.types",
+        "./public-figure-enrichment-gateway.service",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 80,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-enrichment.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureEntityResolutionService"
+        }
+      ],
+      "hash": "6c452eb7cbf55d2bc9abe615974ff2bdf28cb450ea9bb8b50f73548a2171eb28",
+      "imports": [
+        "../infrastructure/public-figure-catalog.repository",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 19,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-entity-resolution.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureRetrievalService"
+        }
+      ],
+      "hash": "1e8a3bf6d0c9878e51aaa31b3ee3a199a63c8ae0a21f61e257df9363720e0ca8",
+      "imports": [
+        "../infrastructure/public-figure-catalog.repository",
+        "../lib/public-figure-search.util",
+        "../model/public-figure.constants",
+        "../model/public-figure.types",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "application",
+      "loc": 30,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-retrieval.service.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "re-export",
+          "name": "PublicFigureEnrichmentService"
+        },
+        {
+          "kind": "re-export",
+          "name": "PublicFigureRetrievalService"
+        },
+        {
+          "kind": "re-export",
+          "name": "PublicFiguresModule"
+        }
+      ],
+      "hash": "711f97dfe705555b930cf0aff5e9d5abd89a42b555b965141885a98e6cd95452",
+      "imports": [
+        "./application/public-figure-enrichment.service",
+        "./application/public-figure-retrieval.service",
+        "./public-figures.module"
+      ],
+      "isTest": false,
+      "layer": "root",
+      "loc": 4,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/index.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureCatalogRepository"
+        }
+      ],
+      "hash": "75b5ef8cdefe7f81b540a4950cf21556f6a0a015568924cedefb3e58f069379d",
+      "imports": [
+        "../model/verified-public-figure-catalog.constants",
+        "@nestjs/common",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "infrastructure",
+      "loc": 32,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/infrastructure/public-figure-catalog.repository.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFigureMetadataCacheRepository"
+        }
+      ],
+      "hash": "ebc47634891711579df734086f3e29e8c45fcaa7038733d7ba469e0150a80cd7",
+      "imports": [
+        "../model/public-figure.constants",
+        "../model/public-figure.types",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "infrastructure",
+      "loc": 51,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/infrastructure/public-figure-metadata-cache.repository.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "fetchBoundedJson"
+        }
+      ],
+      "hash": "785eab4dc1e571d8e81637a81aa17a901a7fe5efb54064f47eb3f66b7e1f699c",
+      "imports": [
+        "./public-figure-url.util",
+        "node:util"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 36,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/lib/bounded-json-fetch.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "scorePublicFigureProfile"
+        },
+        {
+          "kind": "const",
+          "name": "toRetrievalEvidence"
+        }
+      ],
+      "hash": "abf9e6c0fff3ef328aede9ecdf5d8097a7b5938d513e611f72fe17042c39f593",
+      "imports": [
+        "../model/public-figure.constants",
+        "../model/public-figure.types",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 97,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/lib/public-figure-search.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "assertAllowedPublicFigureUrl"
+        },
+        {
+          "kind": "const",
+          "name": "buildGoogleSearchUrl"
+        }
+      ],
+      "hash": "4f4c230e1df7c4e9a766a1b4604a396758b3fbe2d37376287935297ed14a65a3",
+      "imports": [
+        "../model/public-figure.constants"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 28,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "CommonsImageInfoSchema"
+        },
+        {
+          "kind": "const",
+          "name": "WikidataEntitySchema"
+        },
+        {
+          "kind": "const",
+          "name": "WikipediaSummarySchema"
+        }
+      ],
+      "hash": "54661da56fcafa718241129c29c973df1c1e53b0705b6925e56116e313a7592d",
+      "imports": [
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 45,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "PublicFigureRemoteEnrichment"
+        },
+        {
+          "kind": "type",
+          "name": "WikidataLocalizedValues"
+        },
+        {
+          "kind": "interface",
+          "name": "WikidataPublicFigureMetadata"
+        },
+        {
+          "kind": "interface",
+          "name": "WikipediaPublicFigureMetadata"
+        }
+      ],
+      "hash": "94ed0fbbb3c67c8f6a1cec091fab28d2c2dc6480dda94ecbbdf2281c73bf6ad8",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 26,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "COMMONS_API_ORIGIN"
+        },
+        {
+          "kind": "const",
+          "name": "COMMONS_API_PATH"
+        },
+        {
+          "kind": "const",
+          "name": "MILLISECONDS_PER_SECOND"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_ALLOWED_HOST_SUFFIXES"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_BIOGRAPHY_SENTENCE_LIMIT"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_CONTRADICTION_WEIGHT"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_GOOGLE_SEARCH_ORIGIN"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_GOOGLE_SEARCH_PATH"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_MAX_SOURCE_CONFIDENCE"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_MUTABLE_MATCH_WEIGHT"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_REGION_BY_LANGUAGE"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_RETRIEVAL_LIMIT"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_STABLE_MATCH_WEIGHT"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureRetrievalLane"
+        },
+        {
+          "kind": "type",
+          "name": "PublicFigureRetrievalLaneValue"
+        },
+        {
+          "kind": "const",
+          "name": "WIKIDATA_ENTITY_DATA_ORIGIN"
+        },
+        {
+          "kind": "const",
+          "name": "WIKIDATA_ENTITY_DATA_PATH_PREFIX"
+        },
+        {
+          "kind": "const",
+          "name": "WIKIPEDIA_SUMMARY_PATH_PREFIX"
+        }
+      ],
+      "hash": "a6cdd864b9889aa1039fc99581cfd250488a7300ebb97243f353bd6137adc217",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 40,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "PublicFigureCacheEntry"
+        },
+        {
+          "kind": "interface",
+          "name": "PublicFigureMetadataCache"
+        },
+        {
+          "kind": "interface",
+          "name": "PublicFigureRetrievalEvidence"
+        },
+        {
+          "kind": "interface",
+          "name": "PublicFigureRetrievalResult"
+        }
+      ],
+      "hash": "ac136c94efd40dafe1b177b1406dc5a822dd7623c89625757e0005628ed12cc1",
+      "imports": [
+        "./public-figure.constants",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 38,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "VERIFIED_PUBLIC_FIGURE_CATALOG"
+        }
+      ],
+      "hash": "baa136cf4c217f718e8580f5dcd85bda5d577202380f684be5d3bc6ef7a9ba8c",
+      "imports": [
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 172,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/model/verified-public-figure-catalog.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
+          "name": "PublicFiguresModule"
+        }
+      ],
+      "hash": "714a185b3372f92a4f7108140104b41a288a16257f80d8abc79fcfb8bde0be94",
+      "imports": [
+        "../../config/app-config.service",
+        "./adapters/wikidata.adapter",
+        "./adapters/wikimedia-commons.adapter",
+        "./adapters/wikipedia.adapter",
+        "./api/public-figure.controller",
+        "./application/get-public-figure-details.use-case",
+        "./application/public-figure-enrichment-gateway.service",
+        "./application/public-figure-enrichment.service",
+        "./application/public-figure-entity-resolution.service",
+        "./application/public-figure-retrieval.service",
+        "./infrastructure/public-figure-catalog.repository",
+        "./infrastructure/public-figure-metadata-cache.repository",
+        "@nestjs/common"
+      ],
+      "isTest": false,
+      "layer": "root",
+      "loc": 43,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/public-figures.module.ts"
+    },
+    {
+      "exports": [],
+      "hash": "edf2a12d781af30fcf7fc55b5ee133a1edbcb593df57db2fa55715f83215a893",
+      "imports": [
+        "../lib/bounded-json-fetch.util",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 97,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/tests/bounded-json-fetch.util.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "83e741cd99c4e4a2b5c0a7323fba4f0cef1a6394cfb1509e450e3914c02e2ac5",
+      "imports": [
+        "../infrastructure/public-figure-metadata-cache.repository",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 37,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/tests/public-figure-cache.repository.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "de8f774988992fb2c1fc521eafe9ef32ca086651dd27ee680e462df403db282f",
+      "imports": [
+        "../adapters/wikidata.adapter",
+        "../adapters/wikimedia-commons.adapter",
+        "../adapters/wikipedia.adapter",
+        "../application/public-figure-enrichment-gateway.service",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 112,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/tests/public-figure-enrichment-gateway.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "01aced98cfcf6d838c831aa7e21e05b6ca669c7bb193187f00f337b7c6f2a35b",
+      "imports": [
+        "../../../tests/fixtures/stubs",
+        "../application/get-public-figure-details.use-case",
+        "../application/public-figure-enrichment-gateway.service",
+        "../application/public-figure-enrichment.service",
+        "../application/public-figure-entity-resolution.service",
+        "../infrastructure/public-figure-catalog.repository",
+        "../infrastructure/public-figure-metadata-cache.repository",
+        "@nestjs/common",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 140,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "2230522020981a3e4e26356e1344d5abcb3d0aaf4d3a11550f2a4f5f514eff39",
+      "imports": [
+        "../application/public-figure-retrieval.service",
+        "../infrastructure/public-figure-catalog.repository",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 176,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/tests/public-figure-retrieval.service.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "a7d6b5dc1854ae1bf928a3523d0450fc59a767d6e4d9cee9b2e26d9349d8c1a9",
+      "imports": [
+        "../lib/public-figure-url.util",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 24,
+      "module": "api:public-figures",
+      "path": "apps/api/src/modules/public-figures/tests/public-figure-url.util.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "class",
           "name": "ResultAggregationService"
         }
       ],
@@ -6176,13 +7724,13 @@
           "name": "toFinalResultItem"
         }
       ],
-      "hash": "369996cc7b33e912dfe24293f87c094d89a3076e29c9a93f694d722878829ffe",
+      "hash": "a654ad75c2af27b80b948cb2167b40bd90c503414931c7b68db7767dc717765b",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 77,
+      "loc": 78,
       "module": "api:result-aggregation",
       "path": "apps/api/src/modules/result-aggregation/lib/result-aggregation.mapper.ts"
     },
@@ -6867,7 +8415,7 @@
           "name": "RecordedImageCall"
         }
       ],
-      "hash": "234c1c8a78807f690b672bcadebfd33876b3b94054f009bb5d522bce3d32ada8",
+      "hash": "864918b8b2bac912cdbed96c00cc104e4038f44bd8edd4f28146f0452f4449d3",
       "imports": [
         "../../config/gemini-step.constants",
         "../../modules/ai/model/ai-provider-adapter.types",
@@ -6876,7 +8424,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 276,
+      "loc": 287,
       "module": "api:tests",
       "path": "apps/api/src/tests/fixtures/fake-ai-adapter.ts"
     },
@@ -6932,7 +8480,7 @@
           "name": "buildConfigStub"
         }
       ],
-      "hash": "97cb030acde0fa7d47bfc99e9006c85e675b076c9ed59a5860d2f656f2595b90",
+      "hash": "547badf006e1c08ebb785eb8291574ca7a7d087ba33fbce898e71dbe53001623",
       "imports": [
         "../../config/ai-provider.constants",
         "../../config/ai-route.types",
@@ -6944,7 +8492,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 134,
+      "loc": 154,
       "module": "api:tests",
       "path": "apps/api/src/tests/fixtures/stubs.ts"
     },
@@ -7109,6 +8657,29 @@
       "loc": 46,
       "module": "api:tests",
       "path": "apps/api/src/tests/health.integration.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "568002500c2e6d517c6209f11ecb660978182d140572026417f87f67d0bd1f92",
+      "imports": [
+        "../app.module",
+        "../bootstrap/create-test-app",
+        "../modules/ai",
+        "../modules/file-security/adapters/clamav.adapter",
+        "../modules/public-figures",
+        "./fixtures/fake-ai-adapter",
+        "./fixtures/stubs",
+        "@nestjs/common",
+        "@nestjs/testing",
+        "node:http",
+        "supertest",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 66,
+      "module": "api:tests",
+      "path": "apps/api/src/tests/public-figures.integration.test.ts"
     },
     {
       "exports": [],
@@ -7297,7 +8868,7 @@
     },
     {
       "exports": [],
-      "hash": "7eaea6711aea4735b81eb536c7521164c5490be36396703f9f6a7f8bc3e764bb",
+      "hash": "a415e58b8fb43cadc261c793091a3e4980a8bff8c09132c791e49b51d5cf4420",
       "imports": [
         "../src/shared/constants/test-ids.constants",
         "../src/shared/testing/test-id.helper",
@@ -7306,7 +8877,7 @@
       ],
       "isTest": true,
       "layer": "root",
-      "loc": 40,
+      "loc": 42,
       "module": "web:e2e",
       "path": "apps/web/e2e/game-translate.spec.ts"
     },
@@ -8557,20 +10128,127 @@
     {
       "exports": [
         {
-          "kind": "function",
-          "name": "ResultCard"
+          "kind": "const",
+          "name": "PublicFigureModalContent"
         }
       ],
-      "hash": "bc4da0dd28471b1fb49d596da2a687d1cec8e5bf3205e4e1c60a9e2bf658582c",
+      "hash": "1f75b6e1eee04dde2ef2a16b929d7c75b9ffd1523d1e3f5aa56518175d7611cf",
       "imports": [
-        "../model/game-component.types",
-        "./result-card.variants",
+        "../model/public-figure-modal.types",
+        "./public-figure-modal.variants",
+        "@/packages/image",
         "@/packages/ui-primitives",
         "react"
       ],
       "isTest": false,
       "layer": "components",
-      "loc": 74,
+      "loc": 71,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/public-figure-modal-content.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "PublicFigureModal"
+        }
+      ],
+      "hash": "8978c6d1f5f4252976cc1636e45c6cf1be2a0ab11eed1fac5b0668b60f35415a",
+      "imports": [
+        "../model/public-figure-modal.constants",
+        "../model/public-figure-modal.types",
+        "./public-figure-modal-content.component",
+        "./public-figure-modal.variants",
+        "@/packages/ui-primitives",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "components",
+      "loc": 45,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "publicFigureModalBackdropClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalCardClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalHeaderClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalImageClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalLinkClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalLinksClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalTextClass"
+        },
+        {
+          "kind": "const",
+          "name": "publicFigureModalTitleClass"
+        }
+      ],
+      "hash": "eed9659c1627e6042ffed719e41a3e51552ca96fcff3ef735da092ea273eb8f9",
+      "imports": [],
+      "isTest": false,
+      "layer": "components",
+      "loc": 12,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ResultCardEvidence"
+        }
+      ],
+      "hash": "1b6d22569057553c31410bad9de51e5fcafca57732c27972ee5258400d556e90",
+      "imports": [
+        "../model/game-component.types",
+        "./result-card.variants",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "components",
+      "loc": 42,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/result-card-evidence.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "ResultCard"
+        }
+      ],
+      "hash": "18594434b742256c5a84ba5e6736a6088bb2b643bd535051349e2043a96349d0",
+      "imports": [
+        "../model/game-component.types",
+        "./result-card-evidence.component",
+        "./result-card.variants",
+        "@/packages/image",
+        "@/packages/ui-primitives",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "components",
+      "loc": 70,
       "module": "web:game",
       "path": "apps/web/src/modules/game/components/result-card.component.tsx"
     },
@@ -8618,6 +10296,10 @@
         },
         {
           "kind": "const",
+          "name": "resultThumbnailClass"
+        },
+        {
+          "kind": "const",
           "name": "resultTitleClass"
         },
         {
@@ -8629,11 +10311,11 @@
           "name": "resultWeakClass"
         }
       ],
-      "hash": "cddfe05f7ff7a53b48da4000ea818e03b4cf2f670aeae88e67e53c10d9b2016c",
+      "hash": "0a1292066e21c40ab493432a9673134023bcc6fdb42d1f78e704607610b70a7c",
       "imports": [],
       "isTest": false,
       "layer": "components",
-      "loc": 29,
+      "loc": 31,
       "module": "web:game",
       "path": "apps/web/src/modules/game/components/result-card.variants.ts"
     },
@@ -9350,10 +11032,30 @@
       "exports": [
         {
           "kind": "const",
+          "name": "PublicFigureModalContainer"
+        }
+      ],
+      "hash": "5896a3a2b0d8f71ddfa65673e494a3894810b24bbdba3cf1bb2b82c51a9f8672",
+      "imports": [
+        "../components/public-figure-modal.component",
+        "../hooks/useAccessibleDialog.hook",
+        "../model/public-figure-modal.types",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "containers",
+      "loc": 17,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/containers/public-figure-modal.container.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "ResultSections"
         }
       ],
-      "hash": "cd89914f4427ccf0cd277bae31e486e8d5b486795bdc874ef4d3ee692beb3fb4",
+      "hash": "5e9e8ca8fa6ce0edcaf8af90c92673ad13bc787cd6270cf4c46955e3a195b69d",
       "imports": [
         "../components/result-card.component",
         "../components/result-disclaimer.component",
@@ -9361,8 +11063,10 @@
         "../model/game-component.types",
         "../model/game.types",
         "./image-quality.container",
+        "./public-figure-modal.container",
         "./result-summary.container",
         "./trait-details.container",
+        "@/packages/env/public-env",
         "@/packages/ui-primitives",
         "@/shared/constants/test-ids.constants",
         "@/shared/testing/test-id.helper",
@@ -9370,7 +11074,7 @@
       ],
       "isTest": false,
       "layer": "containers",
-      "loc": 67,
+      "loc": 94,
       "module": "web:game",
       "path": "apps/web/src/modules/game/containers/result-sections.container.tsx"
     },
@@ -9729,6 +11433,29 @@
       "exports": [
         {
           "kind": "const",
+          "name": "focusFirstDialogControl"
+        },
+        {
+          "kind": "const",
+          "name": "trapDialogTabKey"
+        }
+      ],
+      "hash": "6548e058db91ba17ac544ba2f11004b2836c8bd11777bff7e29276412bf991f7",
+      "imports": [
+        "../model/public-figure-modal.constants",
+        "@/packages/browser",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "helpers",
+      "loc": 33,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/helpers/dialog-focus.helper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "buildGameScreenLabels"
         },
         {
@@ -9788,7 +11515,7 @@
           "name": "translateOptionalKey"
         }
       ],
-      "hash": "16e5ce9fb1608346cb25df31fb7aa444d640077624ef6c7300f42e79fe177ad9",
+      "hash": "8bd17e5dd9de6701f94da94c3807e3f5cdaeeaa1b5e6d754dbd8b0d32ff9c82d",
       "imports": [
         "../model/game.constants",
         "../model/game.enums",
@@ -9798,7 +11525,7 @@
       ],
       "isTest": false,
       "layer": "helpers",
-      "loc": 216,
+      "loc": 224,
       "module": "web:game",
       "path": "apps/web/src/modules/game/helpers/game-display.helper.ts"
     },
@@ -10048,6 +11775,27 @@
       "loc": 27,
       "module": "web:game",
       "path": "apps/web/src/modules/game/helpers/stream-identity.helper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "useAccessibleDialog"
+        }
+      ],
+      "hash": "a71886fce0d352a13974f9fec2b703bbf8f4d19c2120e52857b130a9d4e2e5a4",
+      "imports": [
+        "../helpers/dialog-focus.helper",
+        "../model/public-figure-modal.types",
+        "@/packages/browser",
+        "@/shared/hooks/useEscapeKey.hook",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "hooks",
+      "loc": 33,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/hooks/useAccessibleDialog.hook.ts"
     },
     {
       "exports": [
@@ -10434,15 +12182,16 @@
           "name": "mapFinalResultToView"
         }
       ],
-      "hash": "71bdfba697a9b97f2a8cb61d7f6fb3fa7d8d07363022afc033f5b19ddd8388d5",
+      "hash": "4b94578934bdab7469916a529bbd6a5405083c18c64381fdd9511f5304d88d70",
       "imports": [
         "../helpers/game-display.helper",
         "../model/game.types",
+        "../model/public-figure.types",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "mappers",
-      "loc": 96,
+      "loc": 135,
       "module": "web:game",
       "path": "apps/web/src/modules/game/mappers/game.mapper.ts"
     },
@@ -10519,6 +12268,10 @@
           "name": "ProcessingCardProps"
         },
         {
+          "kind": "type",
+          "name": "ResultCardEvidenceProps"
+        },
+        {
           "kind": "interface",
           "name": "ResultCardProps"
         },
@@ -10571,14 +12324,14 @@
           "name": "UploadConsentProps"
         }
       ],
-      "hash": "f0208435a527e708c3c7863ac3ce21fd82a80fd72af1bc5373a585751baa78d9",
+      "hash": "ea502634b43267917860bd1207208e8f7642a30cca8a420094b61bb866bc6a38",
       "imports": [
         "./game.types",
         "react"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 233,
+      "loc": 237,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/game-component.types.ts"
     },
@@ -10806,10 +12559,6 @@
         },
         {
           "kind": "interface",
-          "name": "ResultLabels"
-        },
-        {
-          "kind": "interface",
           "name": "ResultTranslationController"
         },
         {
@@ -10889,18 +12638,20 @@
           "name": "UploadViewModelInput"
         }
       ],
-      "hash": "9f373aeaee927af5215b1ee7be0f318a73993e4a448e91228f462b701afb71e4",
+      "hash": "a3307cbab27b759c78d8196bc5d7676b7c5d7b1feef98d93aeeb6999eea1eb9b",
       "imports": [
         "./camera.types",
         "./game.enums",
         "./payment.types",
+        "./public-figure.types",
+        "./result.types",
         "./share-modal.types",
         "@/shared/errors/error-keys.constants",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 421,
+      "loc": 399,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/game.types.ts"
     },
@@ -10974,6 +12725,86 @@
       "loc": 59,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/payment.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "DIALOG_FOCUSABLE_SELECTOR"
+        },
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_MODAL_TITLE_ID"
+        }
+      ],
+      "hash": "99104f167cf48ae34be763e3ca6d99ec838d690cd9eb5da1bc3ff9004d312dc5",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 11,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "AccessibleDialogInput"
+        },
+        {
+          "kind": "type",
+          "name": "PublicFigureModalContainerProps"
+        },
+        {
+          "kind": "interface",
+          "name": "PublicFigureModalProps"
+        }
+      ],
+      "hash": "3731d58deaecc049a60a42bd05b2aa340c5c746617c6a4e58547938b92014f7e",
+      "imports": [
+        "./public-figure.types",
+        "./result.types",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "model",
+      "loc": 19,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "PublicFigureImageView"
+        },
+        {
+          "kind": "interface",
+          "name": "PublicFigureView"
+        }
+      ],
+      "hash": "3e32411bbe2578fa71cd31683cb5c6f8bdb2bc7dce95bff74034aac1d7152ca1",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 24,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/model/public-figure.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "ResultLabels"
+        }
+      ],
+      "hash": "d3ab3aa23f50af02b07b8b5ae28f17df3e214a081852e1c976b1990bfb7d0340",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 31,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/model/result.types.ts"
     },
     {
       "exports": [
@@ -11601,6 +13432,37 @@
       "loc": 159,
       "module": "web:game",
       "path": "apps/web/src/modules/game/test/payment-step.container.test.tsx"
+    },
+    {
+      "exports": [],
+      "hash": "2f57ffdf81d2985ea1ef79ace775ca4a19592d9bcb654c7f36fc461828c04ff5",
+      "imports": [
+        "../containers/public-figure-modal.container",
+        "../helpers/game-display.helper",
+        "../model/public-figure.types",
+        "@testing-library/react",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "test",
+      "loc": 41,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/test/public-figure-modal.container.test.tsx"
+    },
+    {
+      "exports": [],
+      "hash": "adb715654a53e20206477dcc4ac7e28ccb322cc1adc0ee13d59d48b40015b071",
+      "imports": [
+        "../components/result-card.component",
+        "../model/game.types",
+        "@testing-library/react",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "test",
+      "loc": 72,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/test/result-card.component.test.tsx"
     },
     {
       "exports": [],
@@ -12852,14 +14714,42 @@
     },
     {
       "exports": [],
-      "hash": "5dbeb953e6e056e861d66ed03468b1948354664866b4a1dcd37cb52f6fc939a0",
+      "hash": "1c7b7019890b87527ad1dff0b4d6ac21d625af72e325998a36fe363803b12e2b",
+      "imports": [
+        "./public-env-mirror",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "packages",
+      "loc": 28,
+      "module": "web:pkg-env",
+      "path": "apps/web/src/packages/env/public-env-mirror.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "mirrorPublicFigureModalEnv"
+        }
+      ],
+      "hash": "090ea29c10ccbd080afc3098e233eda25d26c9b5f2d563b0f91c1c4e6a12b817",
+      "imports": [],
+      "isTest": false,
+      "layer": "packages",
+      "loc": 9,
+      "module": "web:pkg-env",
+      "path": "apps/web/src/packages/env/public-env-mirror.ts"
+    },
+    {
+      "exports": [],
+      "hash": "bd297e603f524694148b174e4db6a113544c16d22003b0c25734f40ac8f214ce",
       "imports": [
         "./public-env",
         "vitest"
       ],
       "isTest": true,
       "layer": "packages",
-      "loc": 93,
+      "loc": 95,
       "module": "web:pkg-env",
       "path": "apps/web/src/packages/env/public-env.test.ts"
     },
@@ -12868,6 +14758,10 @@
         {
           "kind": "const",
           "name": "isDevRuntime"
+        },
+        {
+          "kind": "const",
+          "name": "isPublicFigureModalEnabled"
         },
         {
           "kind": "const",
@@ -12890,13 +14784,13 @@
           "name": "publicEnvSchema"
         }
       ],
-      "hash": "9b5e259855996d1111f0b3bfbf217e0d0d61fa44cbaf8e50082712dd40f878e3",
+      "hash": "cc17c3d10886181ffb7682364269fda2c6df24d356319f22741e7f88ca5890c7",
       "imports": [
         "@/packages/zod"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 103,
+      "loc": 110,
       "module": "web:pkg-env",
       "path": "apps/web/src/packages/env/public-env.ts"
     },
@@ -16483,7 +18377,7 @@
           "name": "RESULT_DISCLAIMER_BY_LANGUAGE"
         }
       ],
-      "hash": "dc9f05fdc01d7bbdae91b364e67d90988da9f34e7e283aeef7be82913aab4ab9",
+      "hash": "aa757f65e015d070d77d0f98ee3ee2d4a0de15aa62fab540f5e47d940e8c4d15",
       "imports": [
         "./language.constants"
       ],
@@ -16628,11 +18522,23 @@
         },
         {
           "kind": "const",
+          "name": "MAX_BIOGRAPHY_SUMMARY_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_CANDIDATE_CRITIQUES"
+        },
+        {
+          "kind": "const",
           "name": "MAX_CANDIDATE_SEARCH_HINTS"
         },
         {
           "kind": "const",
           "name": "MAX_CHOSEN_REASON_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_CRITIQUE_SCORE_ADJUSTMENT"
         },
         {
           "kind": "const",
@@ -16676,7 +18582,47 @@
         },
         {
           "kind": "const",
+          "name": "MAX_LOCALE_KEY_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_LOCALIZED_NAME_ITEMS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_MATCHING_ID_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_MATCHING_SCORE"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_MATCHING_SIGNALS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_MUTABLE_MATCHING_SIGNALS"
+        },
+        {
+          "kind": "const",
           "name": "MAX_NAME_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_PARTICIPANT_EVIDENCE_ITEMS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_PRESENTATION_MATCHING_SIGNALS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_PUBLIC_FIGURE_METADATA_ITEMS"
+        },
+        {
+          "kind": "const",
+          "name": "MAX_PUBLIC_FIGURE_SOURCE_ITEMS"
         },
         {
           "kind": "const",
@@ -16716,18 +18662,30 @@
         },
         {
           "kind": "const",
+          "name": "MIN_CRITIQUE_SCORE_ADJUSTMENT"
+        },
+        {
+          "kind": "const",
           "name": "MIN_HTTP_STATUS_CODE"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_LOCALE_KEY_LENGTH"
+        },
+        {
+          "kind": "const",
+          "name": "MIN_MATCHING_SCORE"
         },
         {
           "kind": "const",
           "name": "PROMPT_JSON_INDENT"
         }
       ],
-      "hash": "dbf645c4108285a9252caea688bd386c6fd4969fb7f08655233619383b62e8a2",
+      "hash": "755569f16c8bca21a01eb7f1a861466c136f4c587a1f191f1bed2f4d2163531a",
       "imports": [],
       "isTest": false,
       "layer": "constants",
-      "loc": 93,
+      "loc": 135,
       "module": "shared",
       "path": "packages/shared/src/constants/response-bounds.constants.ts"
     },
@@ -17033,20 +18991,69 @@
     },
     {
       "exports": [],
-      "hash": "ef95d4e32b8f88fd991bcd4bea73d36fd3aaa29429da613d0b873b50a17a7167",
+      "hash": "8197aa0296d2706f2d2486557b00efcc76f4ea6aa7ed8ac635a9b3707592a17a",
       "imports": [
         "./confidence.enum",
         "./game-stream.enum",
+        "./matching-signal.enum",
         "./popularity.enum",
         "./public-category.enum",
+        "./public-figure-source.enum",
         "./stream-status.enum",
         "./verdict.enum"
       ],
       "isTest": false,
       "layer": "enums",
-      "loc": 7,
+      "loc": 9,
       "module": "shared",
       "path": "packages/shared/src/enums/index.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "MATCHING_SIGNAL_CONFIDENCE_VALUES"
+        },
+        {
+          "kind": "const",
+          "name": "MATCHING_SIGNAL_MODIFIER_VALUES"
+        },
+        {
+          "kind": "const",
+          "name": "MATCHING_SIGNAL_VISIBILITY_VALUES"
+        },
+        {
+          "kind": "const",
+          "name": "MatchingSignalConfidence"
+        },
+        {
+          "kind": "type",
+          "name": "MatchingSignalConfidenceValue"
+        },
+        {
+          "kind": "const",
+          "name": "MatchingSignalModifier"
+        },
+        {
+          "kind": "type",
+          "name": "MatchingSignalModifierValue"
+        },
+        {
+          "kind": "const",
+          "name": "MatchingSignalVisibility"
+        },
+        {
+          "kind": "type",
+          "name": "MatchingSignalVisibilityValue"
+        }
+      ],
+      "hash": "e4aa85bd51fa6bdfc7661951bb5c3b44be18c35202a5b2edd5d01fcc0c359b58",
+      "imports": [],
+      "isTest": false,
+      "layer": "enums",
+      "loc": 38,
+      "module": "shared",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
     },
     {
       "exports": [
@@ -17093,6 +19100,29 @@
       "loc": 20,
       "module": "shared",
       "path": "packages/shared/src/enums/public-category.enum.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "PUBLIC_FIGURE_SOURCE_VALUES"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureSource"
+        },
+        {
+          "kind": "type",
+          "name": "PublicFigureSourceValue"
+        }
+      ],
+      "hash": "704b55edd1f114a2f4a073f93023d7b07203fee6e1813ad5ce0f2315caf20162",
+      "imports": [],
+      "isTest": false,
+      "layer": "enums",
+      "loc": 11,
+      "module": "shared",
+      "path": "packages/shared/src/enums/public-figure-source.enum.ts"
     },
     {
       "exports": [
@@ -17167,6 +19197,118 @@
     {
       "exports": [
         {
+          "kind": "const",
+          "name": "CandidateCritiqueSchema"
+        },
+        {
+          "kind": "type",
+          "name": "ConsensusCandidate"
+        },
+        {
+          "kind": "const",
+          "name": "ConsensusCandidateSchema"
+        },
+        {
+          "kind": "type",
+          "name": "MatchingCounterfactualProfiles"
+        },
+        {
+          "kind": "const",
+          "name": "MatchingCounterfactualProfilesSchema"
+        },
+        {
+          "kind": "type",
+          "name": "MatchingSignal"
+        },
+        {
+          "kind": "const",
+          "name": "MatchingSignalSchema"
+        },
+        {
+          "kind": "type",
+          "name": "ModelCandidateRanking"
+        },
+        {
+          "kind": "const",
+          "name": "ModelCandidateRankingSchema"
+        },
+        {
+          "kind": "type",
+          "name": "ModelCrossCritique"
+        },
+        {
+          "kind": "const",
+          "name": "ModelCrossCritiqueSchema"
+        },
+        {
+          "kind": "type",
+          "name": "ModelJudgeReport"
+        },
+        {
+          "kind": "const",
+          "name": "ModelJudgeReportSchema"
+        },
+        {
+          "kind": "type",
+          "name": "PublicFigureEnrichment"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureEnrichmentSchema"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureEntityIdSchema"
+        },
+        {
+          "kind": "type",
+          "name": "PublicFigureImage"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureImageSchema"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureLookProfileSchema"
+        },
+        {
+          "kind": "type",
+          "name": "PublicFigureProfile"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureProfileSchema"
+        },
+        {
+          "kind": "const",
+          "name": "PublicFigureSourceReferenceSchema"
+        },
+        {
+          "kind": "type",
+          "name": "QualitativeMatchingProfile"
+        },
+        {
+          "kind": "const",
+          "name": "QualitativeMatchingProfileSchema"
+        }
+      ],
+      "hash": "66de65f54fdb8ac1ccb822fc3761cef20c1b4e9be8c6d03ac3a132736c46196d",
+      "imports": [
+        "../constants/response-bounds.constants",
+        "../enums/matching-signal.enum",
+        "../enums/public-figure-source.enum",
+        "zod"
+      ],
+      "isTest": false,
+      "layer": "schemas",
+      "loc": 197,
+      "module": "shared",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "exports": [
+        {
           "kind": "type",
           "name": "Candidate"
         },
@@ -17187,7 +19329,7 @@
           "name": "CandidateSchema"
         }
       ],
-      "hash": "194098a462a87d2a646ffce869b0024b59bb51cc945826dc813eee3ba05127e2",
+      "hash": "d7bdfa29b0a16cf68f35a97c70ece633e22b2db4edcd773698a9e5526fb515a0",
       "imports": [
         "../constants/app.constants",
         "../constants/response-bounds.constants",
@@ -17195,12 +19337,13 @@
         "../enums/confidence.enum",
         "../enums/popularity.enum",
         "../enums/public-category.enum",
+        "./advanced-matching.schema",
         "./language.schema",
         "zod"
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 92,
+      "loc": 115,
       "module": "shared",
       "path": "packages/shared/src/schemas/candidates.schema.ts"
     },
@@ -17262,7 +19405,7 @@
           "name": "FinalResultSafetyCheckSchema"
         }
       ],
-      "hash": "11e7e204523b95cfb575054a47e87d86b106744d299e6ab0a8d9d93681e70627",
+      "hash": "22540a9f596515c002dd51d08699fdbe002a13e8d44c3659f1721170332d5b3a",
       "imports": [
         "../constants/app.constants",
         "../constants/response-bounds.constants",
@@ -17271,6 +19414,7 @@
         "../enums/confidence.enum",
         "../enums/public-category.enum",
         "../enums/verdict.enum",
+        "./advanced-matching.schema",
         "./judge.schema",
         "./language.schema",
         "./traits.schema",
@@ -17278,7 +19422,7 @@
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 96,
+      "loc": 102,
       "module": "shared",
       "path": "packages/shared/src/schemas/game-result.schema.ts"
     },
@@ -17412,8 +19556,9 @@
     },
     {
       "exports": [],
-      "hash": "0d71049eb7c093b676bcc1b874cb4cb157f6d3a1f22eb55f183bbe84d506746b",
+      "hash": "f9dfa27f02dd286b5b31a6c9aaf1026f892852e8a9c0cff3a835f6a9bd794d46",
       "imports": [
+        "./advanced-matching.schema",
         "./candidates.schema",
         "./contact.schemas",
         "./game-result.schema",
@@ -17429,7 +19574,7 @@
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 13,
+      "loc": 14,
       "module": "shared",
       "path": "packages/shared/src/schemas/index.ts"
     },
@@ -17445,11 +19590,35 @@
         },
         {
           "kind": "type",
+          "name": "ConsensusFinalExplanation"
+        },
+        {
+          "kind": "const",
+          "name": "ConsensusFinalExplanationSchema"
+        },
+        {
+          "kind": "type",
+          "name": "ConsensusFinalizerResponse"
+        },
+        {
+          "kind": "const",
+          "name": "ConsensusFinalizerResponseSchema"
+        },
+        {
+          "kind": "type",
           "name": "JudgedResult"
         },
         {
           "kind": "const",
           "name": "JudgedResultSchema"
+        },
+        {
+          "kind": "type",
+          "name": "JudgeEvidenceAssessment"
+        },
+        {
+          "kind": "const",
+          "name": "JudgeEvidenceAssessmentSchema"
         },
         {
           "kind": "const",
@@ -17468,7 +19637,7 @@
           "name": "TraitReferenceSchema"
         }
       ],
-      "hash": "44687e51f5dfd32a98042ff0786cdc03486fe5e6f668ea89c6f92400d327698d",
+      "hash": "16644966b16994eb1635aeccea2b9ca9c0bbe5d55e3ede3367694baa35e69aa7",
       "imports": [
         "../constants/app.constants",
         "../constants/response-bounds.constants",
@@ -17476,12 +19645,13 @@
         "../enums/confidence.enum",
         "../enums/public-category.enum",
         "../enums/verdict.enum",
+        "./advanced-matching.schema",
         "./language.schema",
         "zod"
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 102,
+      "loc": 132,
       "module": "shared",
       "path": "packages/shared/src/schemas/judge.schema.ts"
     },
@@ -17689,19 +19859,20 @@
           "name": "UncertaintyNotesSchema"
         }
       ],
-      "hash": "c5d3ca8c62b8f6f3b5d5d01147d9ab4bf13b168c781f2e87dfb807b62ca0ea6b",
+      "hash": "893a9a3757158962c2e77e01106b28f17aec3f65e58c7d649e80c7043d999a98",
       "imports": [
         "../constants/app.constants",
         "../constants/response-bounds.constants",
         "../constants/trait-category.constants",
         "../constants/trait.constants",
         "../utils/trait-count.util",
+        "./advanced-matching.schema",
         "./language.schema",
         "zod"
       ],
       "isTest": false,
       "layer": "schemas",
-      "loc": 149,
+      "loc": 155,
       "module": "shared",
       "path": "packages/shared/src/schemas/traits.schema.ts"
     },

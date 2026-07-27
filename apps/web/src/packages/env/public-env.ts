@@ -74,6 +74,10 @@ export const publicEnvSchema = z.object({
   // metadataBase, so crawler-facing URLs are absolute and correct per env.
   // Empty means unset (the local default), so a blank template line never crashes.
   siteBaseUrl: z.preprocess(emptyToUndefined, z.url().default('http://localhost:3000')),
+  publicFigureModalEnabled: z
+    .enum(['true', 'false'])
+    .default('false')
+    .transform((value) => value === 'true'),
 });
 
 export type PublicEnv = z.output<typeof publicEnvSchema>;
@@ -90,9 +94,12 @@ export const publicEnv: PublicEnv = parseSchema(
     paymentPriceCurrency: process.env.NEXT_PUBLIC_PAYMENT_PRICE_CURRENCY,
     adsenseClientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
     siteBaseUrl: process.env.NEXT_PUBLIC_SITE_BASE_URL,
+    publicFigureModalEnabled: process.env.NEXT_PUBLIC_PUBLIC_FIGURE_MODAL_ENABLED,
   },
   'public environment',
 );
+
+export const isPublicFigureModalEnabled = (): boolean => publicEnv.publicFigureModalEnabled;
 
 /**
  * True when running under the  server (React Refresh, eval'd

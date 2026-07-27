@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
+import { mirrorPublicFigureModalEnv } from './src/packages/env/public-env-mirror';
+
 const withNextIntl = createNextIntlPlugin('./src/packages/i18n/request.ts');
 
 const SECURITY_HEADERS = [
@@ -28,12 +30,15 @@ const loadRootPublicEnv = (): void => {
     return;
   }
   for (const line of raw.split(/\r?\n/)) {
-    const match = /^(NEXT_PUBLIC_[A-Z0-9_]+)=(.*)$/.exec(line.trim());
+    const match = /^(NEXT_PUBLIC_[A-Z0-9_]+|WEB_PUBLIC_FIGURE_MODAL_ENABLED)=(.*)$/.exec(
+      line.trim(),
+    );
     const key = match?.[1];
     if (key !== undefined && process.env[key] === undefined) {
       process.env[key] = match?.[2] ?? '';
     }
   }
+  mirrorPublicFigureModalEnv(process.env);
 };
 
 /** Built via a function so the root-env load runs before any process.env read. */

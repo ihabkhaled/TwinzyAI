@@ -1,5 +1,5 @@
 {
-  "count": 2522,
+  "count": 2750,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -119,6 +119,12 @@
       "from": "api:ai",
       "label": "generated",
       "to": "api:privacy",
+      "type": "imports"
+    },
+    {
+      "from": "api:ai",
+      "label": "generated",
+      "to": "api:public-figures",
       "type": "imports"
     },
     {
@@ -280,6 +286,12 @@
     {
       "from": "api:game",
       "label": "generated",
+      "to": "api:public-figures",
+      "type": "imports"
+    },
+    {
+      "from": "api:game",
+      "label": "generated",
       "to": "api:result-aggregation",
       "type": "imports"
     },
@@ -315,6 +327,24 @@
     },
     {
       "from": "api:payments",
+      "label": "generated",
+      "to": "shared",
+      "type": "imports"
+    },
+    {
+      "from": "api:public-figures",
+      "label": "generated",
+      "to": "api:config",
+      "type": "imports"
+    },
+    {
+      "from": "api:public-figures",
+      "label": "generated",
+      "to": "api:core",
+      "type": "imports"
+    },
+    {
+      "from": "api:public-figures",
       "label": "generated",
       "to": "shared",
       "type": "imports"
@@ -402,6 +432,24 @@
       "label": "generated",
       "to": "shared",
       "type": "imports"
+    },
+    {
+      "from": "apps/api/src/benchmark/tests/advanced-matching-benchmark.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/benchmark/advanced-matching-benchmark-fixtures.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/benchmark/tests/advanced-matching-benchmark.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/benchmark/lib/advanced-matching-benchmark-metrics.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/benchmark/tests/advanced-matching-benchmark.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/benchmark/model/advanced-matching-benchmark.types.ts",
+      "type": "covers"
     },
     {
       "from": "apps/api/src/benchmark/tests/benchmark.test.ts",
@@ -680,6 +728,138 @@
       "type": "covers"
     },
     {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/advanced-matching-config.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/ai-provider.constants.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/advanced-candidate-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/advanced-judge-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/consensus-finalizer.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/consensus-scoring.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/cross-critique.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/multi-model-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/model/judge-input.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/model/multi-model-council.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/advanced-candidate-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/advanced-judge-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/ai-safety.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/candidate-generation.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/candidate-judge.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
       "label": "generated",
       "to": "apps/api/src/core/errors/index.ts",
@@ -854,6 +1034,12 @@
       "type": "covers"
     },
     {
+      "from": "apps/api/src/modules/ai/tests/candidate-council-merge.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/candidate-council-merge.util.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/ai/lib/candidate-lane-plan.util.ts",
@@ -920,6 +1106,48 @@
       "type": "covers"
     },
     {
+      "from": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/ai-provider.constants.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/consensus-finalizer.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/multi-model-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/consensus-scoring.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/consensus-scoring.service.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/ai/lib/forbidden-wording.guard.ts",
@@ -953,6 +1181,84 @@
       "from": "apps/api/src/modules/ai/tests/json-shape.util.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/ai/lib/json-shape.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/consensus-scoring.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/judge-consensus.mapper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/judge-council-merge.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/model/judge-input.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-council-merge.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/judge-council-merge.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/judge-council-merge.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/matching-profile.builder.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/matching-profile.builder.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/ai-provider.constants.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/config/ai-route.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/adapters/provider-registry.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/application/multi-model-council.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
       "type": "covers"
     },
     {
@@ -1031,6 +1337,12 @@
       "from": "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "label": "generated",
       "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/response-content-language.guard.ts",
       "type": "covers"
     },
     {
@@ -1230,6 +1542,42 @@
       "label": "generated",
       "to": "apps/api/src/modules/game/api/dto/analyze-request.dto.ts#AnalyzeRequestBodySchema",
       "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/game/application/advanced-style-match-enhancement.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/game/model/game-stream.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
     },
     {
       "from": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
@@ -1601,6 +1949,156 @@
       "from": "apps/api/src/modules/privacy/tests/log-redaction.service.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/privacy/application/log-redaction.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#CommonsImageInfoSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#WikidataEntitySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#WikipediaSummarySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#CommonsImageInfoSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#WikidataEntitySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#WikipediaSummarySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#CommonsImageInfoSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#WikidataEntitySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts#WikipediaSummarySchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/bounded-json-fetch.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/lib/bounded-json-fetch.util.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-cache.repository.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/infrastructure/public-figure-metadata-cache.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment-gateway.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment-gateway.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment-gateway.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment-gateway.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/application/public-figure-enrichment-gateway.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/application/get-public-figure-details.use-case.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/application/public-figure-enrichment-gateway.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/application/public-figure-enrichment.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/application/public-figure-entity-resolution.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/infrastructure/public-figure-catalog.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/infrastructure/public-figure-metadata-cache.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-retrieval.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/application/public-figure-retrieval.service.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-retrieval.service.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/infrastructure/public-figure-catalog.repository.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/public-figures/tests/public-figure-url.util.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts",
       "type": "covers"
     },
     {
@@ -2117,6 +2615,48 @@
       "from": "apps/api/src/tests/health.integration.test.ts",
       "label": "generated",
       "to": "apps/api/src/bootstrap/create-test-app.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/app.module.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/bootstrap/create-test-app.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/file-security/adapters/clamav.adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/public-figures/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/tests/public-figures.integration.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/stubs.ts",
       "type": "covers"
     },
     {
@@ -2702,6 +3242,36 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/modules/game/test/public-figure-modal.container.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/game/containers/public-figure-modal.container.tsx",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/modules/game/test/public-figure-modal.container.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/game/helpers/game-display.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/modules/game/test/public-figure-modal.container.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/game/model/public-figure.types.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/modules/game/test/result-card.component.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/game/components/result-card.component.tsx",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/modules/game/test/result-card.component.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/game/model/game.types.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/modules/game/test/result-count-select.component.test.tsx",
       "label": "generated",
       "to": "apps/web/src/modules/game/components/result-count-select.component.tsx",
@@ -3065,6 +3635,12 @@
       "from": "apps/web/src/packages/camera/capture-frame.test.ts",
       "label": "generated",
       "to": "apps/web/src/packages/camera/capture-frame.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/packages/env/public-env-mirror.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/packages/env/public-env-mirror.ts",
       "type": "covers"
     },
     {
@@ -9886,6 +10462,150 @@
     {
       "from": "packages/shared/src/schemas/candidates.schema.ts",
       "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#CandidateCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidate",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidateSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfiles",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfilesSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignal",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignalSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRanking",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRankingSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritique",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReport",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReportSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichmentSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEntityIdSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImage",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImageSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureLookProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureSourceReferenceSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/candidates.schema.ts",
+      "label": "generated",
       "to": "packages/shared/src/schemas/language.schema.ts#LanguageCodeSchema",
       "type": "uses-contract"
     },
@@ -9910,6 +10630,150 @@
     {
       "from": "packages/shared/src/schemas/game-result.schema.ts",
       "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#CandidateCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidate",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidateSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfiles",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfilesSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignal",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignalSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRanking",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRankingSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritique",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReport",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReportSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichmentSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEntityIdSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImage",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImageSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureLookProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureSourceReferenceSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
       "to": "packages/shared/src/schemas/judge.schema.ts#CandidateJudgeResponse",
       "type": "uses-contract"
     },
@@ -9922,6 +10786,30 @@
     {
       "from": "packages/shared/src/schemas/game-result.schema.ts",
       "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalExplanation",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalExplanationSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalizerResponse",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalizerResponseSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
       "to": "packages/shared/src/schemas/judge.schema.ts#JudgedResult",
       "type": "uses-contract"
     },
@@ -9929,6 +10817,18 @@
       "from": "packages/shared/src/schemas/game-result.schema.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/judge.schema.ts#JudgedResultSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#JudgeEvidenceAssessment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/game-result.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#JudgeEvidenceAssessmentSchema",
       "type": "uses-contract"
     },
     {
@@ -10037,6 +10937,150 @@
       "from": "packages/shared/src/schemas/game-stream.schema.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/game-result.schema.ts#FinalResultSafetyCheckSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#CandidateCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidate",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidateSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfiles",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfilesSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignal",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignalSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRanking",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRankingSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritique",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReport",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReportSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichmentSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEntityIdSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImage",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImageSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureLookProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureSourceReferenceSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfileSchema",
       "type": "uses-contract"
     },
     {
@@ -10270,6 +11314,30 @@
     {
       "from": "packages/shared/src/schemas/index.ts",
       "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalExplanation",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalExplanationSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalizerResponse",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#ConsensusFinalizerResponseSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
       "to": "packages/shared/src/schemas/judge.schema.ts#JudgedResult",
       "type": "uses-contract"
     },
@@ -10277,6 +11345,18 @@
       "from": "packages/shared/src/schemas/index.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/judge.schema.ts#JudgedResultSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#JudgeEvidenceAssessment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/index.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/judge.schema.ts#JudgeEvidenceAssessmentSchema",
       "type": "uses-contract"
     },
     {
@@ -10546,6 +11626,150 @@
     {
       "from": "packages/shared/src/schemas/judge.schema.ts",
       "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#CandidateCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidate",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidateSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfiles",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfilesSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignal",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignalSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRanking",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRankingSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritique",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReport",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReportSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichmentSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEntityIdSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImage",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImageSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureLookProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureSourceReferenceSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/judge.schema.ts",
+      "label": "generated",
       "to": "packages/shared/src/schemas/language.schema.ts#LanguageCodeSchema",
       "type": "uses-contract"
     },
@@ -10715,6 +11939,150 @@
       "from": "packages/shared/src/schemas/share-result.schema.ts",
       "label": "generated",
       "to": "packages/shared/src/schemas/language.schema.ts#LanguageCodeSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#CandidateCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidate",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ConsensusCandidateSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfiles",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingCounterfactualProfilesSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignal",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#MatchingSignalSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRanking",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCandidateRankingSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritique",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelCrossCritiqueSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReport",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#ModelJudgeReportSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichment",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEnrichmentSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureEntityIdSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImage",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureImageSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureLookProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureProfileSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#PublicFigureSourceReferenceSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfile",
+      "type": "uses-contract"
+    },
+    {
+      "from": "packages/shared/src/schemas/traits.schema.ts",
+      "label": "generated",
+      "to": "packages/shared/src/schemas/advanced-matching.schema.ts#QualitativeMatchingProfileSchema",
       "type": "uses-contract"
     },
     {

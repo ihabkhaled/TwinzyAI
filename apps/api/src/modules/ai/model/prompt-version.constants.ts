@@ -5,6 +5,8 @@ export const PromptKey = {
   TraitExtraction: 'trait-extraction',
   CandidateGeneration: 'candidate-generation',
   CandidateJudge: 'candidate-judge',
+  CrossCritique: 'cross-critique',
+  ConsensusFinalizer: 'consensus-finalizer',
   TranslateResult: 'translate-result',
 } as const;
 
@@ -14,6 +16,8 @@ export const PROMPT_FILES: Record<PromptKeyValue, string> = {
   [PromptKey.TraitExtraction]: 'use-1st-prompt.md',
   [PromptKey.CandidateGeneration]: 'use-2nd-prompt.md',
   [PromptKey.CandidateJudge]: 'use-3rd-prompt.md',
+  [PromptKey.CrossCritique]: 'use-4th-critique-prompt.md',
+  [PromptKey.ConsensusFinalizer]: 'use-5th-consensus-finalizer-prompt.md',
   [PromptKey.TranslateResult]: 'translate-result-prompt.md',
 };
 
@@ -25,6 +29,8 @@ export const PromptPlaceholder = {
   TargetLanguageCode: '[TARGET_LANGUAGE_CODE]',
   ResultCount: '[RESULT_COUNT]',
   RegionHint: '[REGION_HINT]',
+  CouncilJson: '[COUNCIL_JSON]',
+  ConsensusJson: '[CONSENSUS_JSON]',
 } as const;
 
 export type PromptPlaceholderValue = (typeof PromptPlaceholder)[keyof typeof PromptPlaceholder];
@@ -43,6 +49,17 @@ export const REQUIRED_PLACEHOLDERS: Record<PromptKeyValue, readonly PromptPlaceh
     PromptPlaceholder.CandidatesJson,
     PromptPlaceholder.LanguageCode,
     PromptPlaceholder.ResultCount,
+  ],
+  [PromptKey.CrossCritique]: [
+    PromptPlaceholder.TraitsJson,
+    PromptPlaceholder.CandidatesJson,
+    PromptPlaceholder.CouncilJson,
+    PromptPlaceholder.LanguageCode,
+  ],
+  [PromptKey.ConsensusFinalizer]: [
+    PromptPlaceholder.ConsensusJson,
+    PromptPlaceholder.CandidatesJson,
+    PromptPlaceholder.LanguageCode,
   ],
   [PromptKey.TranslateResult]: [PromptPlaceholder.ResultJson, PromptPlaceholder.TargetLanguageCode],
 };

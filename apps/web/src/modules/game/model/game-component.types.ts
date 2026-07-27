@@ -126,8 +126,12 @@ export interface ResultListProps {
 export interface ResultCardProps {
   result: ResultView;
   labels: ResultLabels;
+  showDetails: boolean;
+  onOpenDetails: () => void;
   testId?: string;
 }
+
+export type ResultCardEvidenceProps = Pick<ResultCardProps, 'result' | 'labels'>;
 
 /** Props for the voluntary PayPal donate link (label already translated). */
 export interface DonateLinkProps {

@@ -17,4 +17,6 @@ export type MatchingEvidence = Pick<
   | 'visualArchetypeHints'
   | 'imageQualityCaps'
   | 'candidateSearchHints'
+  | 'matchingProfile'
+  | 'counterfactualProfiles'
 >;

@@ -350,6 +350,29 @@ You must not infer private or sensitive attributes.
       "why": "string"
     }
   ],
+  "matchingProfile": {
+    "stableVisibleStructure": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": ["eyewear | facialHair | hairstyle | clothing | accessories | angle | lighting"]
+      }
+    ],
+    "mutableStyleSignals": [],
+    "expressionAndPresentation": [],
+    "occludedOrUncertainSignals": [],
+    "contradictionsToAvoid": [],
+    "accessoryAgnosticSignals": [],
+    "imageQualityCaps": ["string"]
+  },
+  "counterfactualProfiles": {
+    "withoutEyewear": [],
+    "withoutFacialHair": [],
+    "withoutMutableStyling": []
+  },
   "safetyCheck": {
     "containsIdentityClaim": false,
     "containsCelebrityComparison": false,
@@ -382,6 +405,8 @@ You must not infer private or sensitive attributes.
 - `visualArchetypeHints`: non-identifying, style-focused visual archetype descriptions. Example: "angular jawline with short dark hair and thick eyebrows". Never name or compare to a real person.
 - `imageQualityCaps`: one to three honest caps. `quality` must be one of `clear`, `moderate`, `low`, `very-low`. `impact` explains how that quality limits score confidence.
 - `candidateSearchHints`: archetype search directions for the candidate generator. Example: "archetype": "actors with defined jawlines and dark wavy hair", "why": "the visible jawline and hair texture support this direction".
+- `matchingProfile`: return 12–20 deduplicated stable qualitative structure signals, 6–12 mutable-style signals, 3–8 expression/presentation signals, every material occlusion, contradictions to avoid, and only directly supported accessory-agnostic signals. Occluded structure is low-confidence and weight 0–2. Never invent hidden structure.
+- `counterfactualProfiles`: text-only evidence views. Remove the influence of eyewear, facial hair, or mutable styling without claiming what hidden anatomy looks like. Occluded signals remain uncertain.
 
 ## Final reminder
 

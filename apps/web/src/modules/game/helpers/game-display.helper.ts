@@ -200,6 +200,14 @@ export const buildGameScreenLabels = (translate: TranslateMessage): GameScreenLa
     scoreExplanation: translate('result.scoreExplanation'),
     uncertaintyExplanation: translate('result.uncertaintyExplanation'),
     mismatchExplanation: translate('result.mismatchExplanation'),
+    detailsButton: translate('result.detailsButton'),
+    detailsTitle: translate('result.detailsTitle'),
+    detailsClose: translate('result.detailsClose'),
+    biographyLabel: translate('result.biographyLabel'),
+    occupationsLabel: translate('result.occupationsLabel'),
+    wikipediaLink: translate('result.wikipediaLink'),
+    googleSearchLink: translate('result.googleSearchLink'),
+    imageAttributionLabel: translate('result.imageAttributionLabel'),
   },
 });
 

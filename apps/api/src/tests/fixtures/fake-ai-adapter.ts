@@ -223,6 +223,17 @@ export const buildJudgedResultPayload = (
   mismatchWarnings: [],
   judgeNotes: 'Score kept conservative because several traits were unclear.',
   shouldDisplay: true,
+  evidenceAssessment: {
+    stableEvidenceScore: 80,
+    mutableStyleScore: 60,
+    expressionScore: 70,
+    contradictionSeverity: 0,
+    uncertaintyPenalty: 0,
+    confidence: 80,
+    supportedSignalIds: ['overallFace.overallFaceShape'],
+    contradictedSignalIds: [],
+    unsupportedClaims: [],
+  },
   safetyCheck: buildJudgeSafetyCheckPayload(),
   ...overrides,
 });

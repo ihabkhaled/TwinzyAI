@@ -24,6 +24,10 @@ import {
 } from '../constants/trait-category.constants';
 import { countPopulatedTraitFields } from '../utils/trait-count.util';
 
+import {
+  MatchingCounterfactualProfilesSchema,
+  QualitativeMatchingProfileSchema,
+} from './advanced-matching.schema';
 import { LanguageCodeSchema } from './language.schema';
 
 /** One localized trait observation (or the localized equivalent of "unclear"). */
@@ -131,6 +135,8 @@ export const TraitExtractionResponseSchema = z
       .max(MAX_VISUAL_ARCHETYPE_HINTS),
     imageQualityCaps: z.array(imageQualityCapSchema).max(MAX_IMAGE_QUALITY_CAPS),
     candidateSearchHints: z.array(candidateSearchHintSchema).max(MAX_CANDIDATE_SEARCH_HINTS),
+    matchingProfile: QualitativeMatchingProfileSchema.optional(),
+    counterfactualProfiles: MatchingCounterfactualProfilesSchema.optional(),
     safetyCheck: TraitSafetyCheckSchema,
   })
   // traitCount is a DERIVED value: overwrite the model's self-report with the

@@ -1,5 +1,5 @@
 {
-  "count": 1574,
+  "count": 1777,
   "symbols": [
     {
       "kind": "const",
@@ -14,6 +14,13 @@
       "module": "shared",
       "name": "AcceptedStreamMessageSchema",
       "path": "packages/shared/src/schemas/game-stream.schema.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "AccessibleDialogInput",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.types.ts"
     },
     {
       "kind": "const",
@@ -119,6 +126,62 @@
       "module": "web:pkg-adsense",
       "name": "AdsenseScriptProps",
       "path": "apps/web/src/packages/adsense/adsense.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "ADVANCED_MATCHING_SYNTHETIC_OBSERVATIONS",
+      "path": "apps/api/src/benchmark/advanced-matching-benchmark-fixtures.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "AdvancedCandidateCouncilService",
+      "path": "apps/api/src/modules/ai/application/advanced-candidate-council.service.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "AdvancedJudgeCouncilService",
+      "path": "apps/api/src/modules/ai/application/advanced-judge-council.service.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "AdvancedMatchingBenchmarkMetrics",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "AdvancedMatchingBenchmarkObservation",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "config",
+      "module": "api:config",
+      "name": "AdvancedMatchingConfig",
+      "path": "apps/api/src/config/advanced-matching-config.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "advancedMatchingEnvShape",
+      "path": "apps/api/src/config/advanced-matching-env.schema.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:game",
+      "name": "AdvancedStyleMatchEnhancementService",
+      "path": "apps/api/src/modules/game/application/advanced-style-match-enhancement.service.ts"
     },
     {
       "kind": "const",
@@ -863,6 +926,20 @@
       "path": "apps/api/src/core/logger/logger.port.ts"
     },
     {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "applyBackendConsensusScores",
+      "path": "apps/api/src/modules/ai/lib/judge-consensus.mapper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "applyConsensusExplanations",
+      "path": "apps/api/src/modules/ai/lib/consensus-finalizer.mapper.ts"
+    },
+    {
       "kind": "type",
       "layer": "packages",
       "module": "web:pkg-i18n",
@@ -975,6 +1052,20 @@
       "path": "apps/web/src/modules/game/helpers/game-view-model.assembler.ts"
     },
     {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:public-figures",
+      "name": "assertAllowedPublicFigureUrl",
+      "path": "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "assertLocalizedContentLanguage",
+      "path": "apps/api/src/modules/ai/lib/response-content-language.guard.ts"
+    },
+    {
       "kind": "function",
       "layer": "shared",
       "module": "web:shared",
@@ -987,6 +1078,13 @@
       "module": "api:ai",
       "name": "assertResponseLanguage",
       "path": "apps/api/src/modules/ai/lib/response-language.guard.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "attachCatalogEvidence",
+      "path": "apps/api/src/modules/ai/lib/catalog-candidate.mapper.ts"
     },
     {
       "kind": "const",
@@ -1020,8 +1118,29 @@
       "kind": "const",
       "layer": "benchmark",
       "module": "api:benchmark",
+      "name": "BENCHMARK_P50_RANK",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "BENCHMARK_P95_RANK",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
       "name": "BENCHMARK_PERCENT_SCALE",
       "path": "apps/api/src/benchmark/model/benchmark.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "BENCHMARK_RECALL_LIMIT",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
     },
     {
       "kind": "const",
@@ -1043,6 +1162,20 @@
       "module": "api:benchmark",
       "name": "BENCHMARK_SPEED_CEILING_MS",
       "path": "apps/api/src/benchmark/model/benchmark.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "BENCHMARK_TOP_FIVE_LIMIT",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "BENCHMARK_TOP_TEN_LIMIT",
+      "path": "apps/api/src/benchmark/model/advanced-matching-benchmark.constants.ts"
     },
     {
       "kind": "interface",
@@ -1199,6 +1332,13 @@
       "path": "apps/web/src/shared/api/api-routes.constants.ts"
     },
     {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:public-figures",
+      "name": "buildGoogleSearchUrl",
+      "path": "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts"
+    },
+    {
       "kind": "function",
       "layer": "shared",
       "module": "web:shared",
@@ -1260,6 +1400,13 @@
       "module": "api:ai",
       "name": "buildMatchingEvidence",
       "path": "apps/api/src/modules/ai/lib/matching-evidence.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "buildNormalizedMatchingProfile",
+      "path": "apps/api/src/modules/ai/lib/matching-profile.builder.ts"
     },
     {
       "kind": "function",
@@ -1494,6 +1641,20 @@
     },
     {
       "kind": "const",
+      "layer": "benchmark",
+      "module": "api:benchmark",
+      "name": "calculateAdvancedMatchingBenchmarkMetrics",
+      "path": "apps/api/src/benchmark/lib/advanced-matching-benchmark-metrics.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "calculateConsensusScore",
+      "path": "apps/api/src/modules/ai/lib/consensus-scoring.util.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "web:game",
       "name": "CAMERA_ERROR_MESSAGE_KEY",
@@ -1666,6 +1827,13 @@
       "module": "api:ai",
       "name": "CANDIDATE_GENERATION_LANE_ORDER",
       "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "CandidateCritiqueSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
     },
     {
       "kind": "const",
@@ -2077,8 +2245,36 @@
       "kind": "const",
       "layer": "lib",
       "module": "api:ai",
+      "name": "collectCandidateLanguageExclusions",
+      "path": "apps/api/src/modules/ai/lib/response-language-values.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "collectCandidateLocalizedValues",
+      "path": "apps/api/src/modules/ai/lib/response-language-values.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
       "name": "collectExtractionTextValues",
       "path": "apps/api/src/modules/ai/lib/trait-text.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "collectJudgedLanguageExclusions",
+      "path": "apps/api/src/modules/ai/lib/response-language-values.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "collectJudgedLocalizedValues",
+      "path": "apps/api/src/modules/ai/lib/response-language-values.util.ts"
     },
     {
       "kind": "const",
@@ -2093,6 +2289,27 @@
       "module": "api:ai",
       "name": "collectTraitTextValues",
       "path": "apps/api/src/modules/ai/lib/trait-text.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "COMMONS_API_ORIGIN",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "COMMONS_API_PATH",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "CommonsImageInfoSchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
     },
     {
       "kind": "const",
@@ -2205,6 +2422,174 @@
       "module": "api:bootstrap",
       "name": "configureValidation",
       "path": "apps/api/src/bootstrap/configure-validation.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_AGREEMENT_SPREAD_DIVISOR",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_CONTRADICTION_PENALTY_WEIGHT",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_ENTITY_ID_PATTERN",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_EVEN_DIVISOR",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_MAX_AGREEMENT_BONUS",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_MAX_CROSS_LANE_BONUS",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_MAX_RETRIEVAL_BONUS",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_MAX_SCORE",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_MIN_REPORTS",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_MIN_SCORE",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_QUALITY_CAP_PENALTY",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_SCORING_WEIGHTS",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_UNCERTAINTY_PENALTY_WEIGHT",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CONSENSUS_UNSUPPORTED_CLAIM_PENALTY",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.constants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ConsensusCandidate",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ConsensusCandidateSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ConsensusFinalExplanation",
+      "path": "packages/shared/src/schemas/judge.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ConsensusFinalExplanationSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ConsensusFinalizerResponse",
+      "path": "packages/shared/src/schemas/judge.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ConsensusFinalizerResponseSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "ConsensusFinalizerService",
+      "path": "apps/api/src/modules/ai/application/consensus-finalizer.service.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "ConsensusScoringInput",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.types.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "ConsensusScoringResult",
+      "path": "apps/api/src/modules/ai/model/consensus-scoring.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "ConsensusScoringService",
+      "path": "apps/api/src/modules/ai/application/consensus-scoring.service.ts"
     },
     {
       "kind": "re-export",
@@ -2629,6 +3014,20 @@
     {
       "kind": "const",
       "layer": "model",
+      "module": "api:ai",
+      "name": "COUNCIL_MEDIAN_DIVISOR",
+      "path": "apps/api/src/modules/ai/model/multi-model-council.constants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CouncilParticipantTask",
+      "path": "apps/api/src/modules/ai/model/multi-model-council.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
       "module": "web:game",
       "name": "COUNTDOWN_PAD_WIDTH",
       "path": "apps/web/src/modules/game/model/share.constants.ts"
@@ -2879,6 +3278,20 @@
       "path": "apps/api/src/core/validation/zod-validation.pipe.ts"
     },
     {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "CrossCritiqueInput",
+      "path": "apps/api/src/modules/ai/model/cross-critique.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "CrossCritiqueService",
+      "path": "apps/api/src/modules/ai/application/cross-critique.service.ts"
+    },
+    {
       "kind": "const",
       "layer": "model",
       "module": "web:ui-preferences",
@@ -2890,6 +3303,34 @@
       "layer": "config",
       "module": "api:config",
       "name": "DEFAULT_AI_CALLS_PER_ANALYSIS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_ENSEMBLE_MAX_CANDIDATES_PER_MODEL",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_ENSEMBLE_MAX_COMBINED_CANDIDATES",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_ENSEMBLE_MIN_SUCCESSFUL_PARTICIPANTS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_AI_ENSEMBLE_STEP_TIMEOUT_MS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
@@ -3092,6 +3533,34 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "DEFAULT_PUBLIC_FIGURE_CACHE_MAX_ITEMS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_PUBLIC_FIGURE_CACHE_TTL_SECONDS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_PUBLIC_FIGURE_MAX_RESPONSE_BYTES",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "DEFAULT_PUBLIC_FIGURE_REQUEST_TIMEOUT_MS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "DEFAULT_RATE_LIMIT_MAX",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -3199,6 +3668,13 @@
       "module": "api:core",
       "name": "DEV_LOG_TRANSPORT",
       "path": "apps/api/src/core/logger/logger.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "web:game",
+      "name": "DIALOG_FOCUSABLE_SELECTOR",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.constants.ts"
     },
     {
       "kind": "const",
@@ -3461,6 +3937,13 @@
     },
     {
       "kind": "const",
+      "layer": "lib",
+      "module": "api:public-figures",
+      "name": "fetchBoundedJson",
+      "path": "apps/api/src/modules/public-figures/lib/bounded-json-fetch.util.ts"
+    },
+    {
+      "kind": "const",
       "layer": "services",
       "module": "web:game",
       "name": "fetchSharedResult",
@@ -3577,6 +4060,13 @@
       "module": "api:core",
       "name": "flattenZodIssues",
       "path": "apps/api/src/core/validation/zod-issue.mapper.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "helpers",
+      "module": "web:game",
+      "name": "focusFirstDialogControl",
+      "path": "apps/web/src/modules/game/helpers/dialog-focus.helper.ts"
     },
     {
       "kind": "function",
@@ -4165,6 +4655,13 @@
       "module": "web:pkg-i18n",
       "name": "getLocaleDirection",
       "path": "apps/web/src/packages/i18n/locale.constants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:public-figures",
+      "name": "GetPublicFigureDetailsUseCase",
+      "path": "apps/api/src/modules/public-figures/application/get-public-figure-details.use-case.ts"
     },
     {
       "kind": "function",
@@ -4770,6 +5267,13 @@
     },
     {
       "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-env",
+      "name": "isPublicFigureModalEnabled",
+      "path": "apps/web/src/packages/env/public-env.ts"
+    },
+    {
+      "kind": "const",
       "layer": "shared",
       "module": "web:shared",
       "name": "isPublicPagePath",
@@ -4955,6 +5459,20 @@
       "layer": "schemas",
       "module": "shared",
       "name": "JudgedResultSchema",
+      "path": "packages/shared/src/schemas/judge.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "JudgeEvidenceAssessment",
+      "path": "packages/shared/src/schemas/judge.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "JudgeEvidenceAssessmentSchema",
       "path": "packages/shared/src/schemas/judge.schema.ts"
     },
     {
@@ -5336,11 +5854,102 @@
       "path": "apps/web/src/packages/browser/index.ts"
     },
     {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MATCHING_SIGNAL_CONFIDENCE_VALUES",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MATCHING_SIGNAL_MODIFIER_VALUES",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MATCHING_SIGNAL_VISIBILITY_VALUES",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "MatchingCounterfactualProfiles",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "MatchingCounterfactualProfilesSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
       "kind": "type",
       "layer": "model",
       "module": "api:ai",
       "name": "MatchingEvidence",
       "path": "apps/api/src/modules/ai/model/matching-evidence.types.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "MatchingSignal",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MatchingSignalConfidence",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MatchingSignalConfidenceValue",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MatchingSignalModifier",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MatchingSignalModifierValue",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "MatchingSignalSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MatchingSignalVisibility",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "enums",
+      "module": "shared",
+      "name": "MatchingSignalVisibilityValue",
+      "path": "packages/shared/src/enums/matching-signal.enum.ts"
     },
     {
       "kind": "const",
@@ -5361,6 +5970,13 @@
       "layer": "config",
       "module": "api:config",
       "name": "MAX_AI_CALLS_PER_ANALYSIS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_AI_ENSEMBLE_PARTICIPANTS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
@@ -5416,6 +6032,20 @@
       "kind": "const",
       "layer": "constants",
       "module": "shared",
+      "name": "MAX_BIOGRAPHY_SUMMARY_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_CANDIDATE_CRITIQUES",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
       "name": "MAX_CANDIDATE_POOL",
       "path": "packages/shared/src/constants/trait.constants.ts"
     },
@@ -5439,6 +6069,13 @@
       "module": "shared",
       "name": "MAX_COMPACT_TRAIT_SUMMARY",
       "path": "packages/shared/src/constants/trait-category.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_CRITIQUE_SCORE_ADJUSTMENT",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -5554,10 +6191,52 @@
     },
     {
       "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_LOCALE_KEY_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_LOCALIZED_NAME_ITEMS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "api:privacy",
       "name": "MAX_LOGGED_LENGTH",
       "path": "apps/api/src/modules/privacy/model/privacy.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_MATCHING_ID_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_MATCHING_SCORE",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_MATCHING_SIGNALS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_MUTABLE_MATCHING_SIGNALS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -5568,10 +6247,52 @@
     },
     {
       "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_PARTICIPANT_EVIDENCE_ITEMS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "config",
       "module": "api:config",
       "name": "MAX_PORT_NUMBER",
       "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_PRESENTATION_MATCHING_SIGNALS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_PUBLIC_FIGURE_CACHE_MAX_ITEMS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MAX_PUBLIC_FIGURE_CACHE_TTL_SECONDS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_PUBLIC_FIGURE_METADATA_ITEMS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MAX_PUBLIC_FIGURE_SOURCE_ITEMS",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -5722,10 +6443,31 @@
     },
     {
       "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "mergeCouncilCandidates",
+      "path": "apps/api/src/modules/ai/lib/candidate-council-merge.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "mergeCouncilJudgeResponses",
+      "path": "apps/api/src/modules/ai/lib/judge-council-merge.util.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "api:payments",
       "name": "MILLISECONDS_PER_SECOND",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "MILLISECONDS_PER_SECOND",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
     },
     {
       "kind": "const",
@@ -5753,6 +6495,13 @@
       "layer": "config",
       "module": "api:config",
       "name": "MIN_AI_CALLS_PER_ANALYSIS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MIN_AI_ENSEMBLE_PARTICIPANTS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
@@ -5792,6 +6541,13 @@
     },
     {
       "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "MIN_ARABIC_CONTENT_RATIO",
+      "path": "apps/api/src/modules/ai/model/ai-safety.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "constants",
       "module": "shared",
       "name": "MIN_CANDIDATE_POOL",
@@ -5803,6 +6559,13 @@
       "module": "api:config",
       "name": "MIN_CONCURRENCY_LIMIT",
       "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MIN_CRITIQUE_SCORE_ADJUSTMENT",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
     },
     {
       "kind": "const",
@@ -5855,9 +6618,37 @@
     },
     {
       "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MIN_LOCALE_KEY_LENGTH",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "constants",
+      "module": "shared",
+      "name": "MIN_MATCHING_SCORE",
+      "path": "packages/shared/src/constants/response-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "config",
       "module": "api:config",
       "name": "MIN_PORT_NUMBER",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MIN_PUBLIC_FIGURE_CACHE_MAX_ITEMS",
+      "path": "apps/api/src/config/env-bounds.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "MIN_PUBLIC_FIGURE_CACHE_TTL_SECONDS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
     {
@@ -5932,6 +6723,13 @@
     },
     {
       "kind": "const",
+      "layer": "packages",
+      "module": "web:pkg-env",
+      "name": "mirrorPublicFigureModalEnv",
+      "path": "apps/web/src/packages/env/public-env-mirror.ts"
+    },
+    {
+      "kind": "const",
       "layer": "benchmark",
       "module": "api:benchmark",
       "name": "MOCK_LATENCY_BASE_MS",
@@ -5994,11 +6792,74 @@
       "path": "apps/api/src/modules/ai/model/gemini.types.ts"
     },
     {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ModelCandidateRanking",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ModelCandidateRankingSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ModelCrossCritique",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ModelCrossCritiqueSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ModelJudgeReport",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "ModelJudgeReportSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-icons",
       "name": "MoonIcon",
       "path": "apps/web/src/packages/icons/index.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "MultiModelCouncilInput",
+      "path": "apps/api/src/modules/ai/model/multi-model-council.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "MultiModelCouncilResult",
+      "path": "apps/api/src/modules/ai/model/multi-model-council.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:ai",
+      "name": "MultiModelCouncilService",
+      "path": "apps/api/src/modules/ai/application/multi-model-council.service.ts"
     },
     {
       "kind": "const",
@@ -7458,6 +8319,90 @@
     },
     {
       "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_ALLOWED_HOST_SUFFIXES",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_BIOGRAPHY_SENTENCE_LIMIT",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_CONTRADICTION_WEIGHT",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_GOOGLE_SEARCH_ORIGIN",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_GOOGLE_SEARCH_PATH",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_MAX_SOURCE_CONFIDENCE",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PUBLIC_FIGURE_MODAL_TITLE_ID",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_MUTABLE_MATCH_WEIGHT",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_REGION_BY_LANGUAGE",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_RETRIEVAL_LIMIT",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "PUBLIC_FIGURE_SOURCE_VALUES",
+      "path": "packages/shared/src/enums/public-figure-source.enum.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PUBLIC_FIGURE_STABLE_MATCH_WEIGHT",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "enums",
       "module": "shared",
       "name": "PublicCategory",
@@ -7497,6 +8442,328 @@
       "module": "web:pkg-env",
       "name": "publicEnvSchema",
       "path": "apps/web/src/packages/env/public-env.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureCacheEntry",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "infrastructure",
+      "module": "api:public-figures",
+      "name": "PublicFigureCatalogRepository",
+      "path": "apps/api/src/modules/public-figures/infrastructure/public-figure-catalog.repository.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "api",
+      "module": "api:public-figures",
+      "name": "PublicFigureController",
+      "path": "apps/api/src/modules/public-figures/api/public-figure.controller.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureEnrichment",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:public-figures",
+      "name": "PublicFigureEnrichmentGatewayService",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-enrichment-gateway.service.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureEnrichmentSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:public-figures",
+      "name": "PublicFigureEnrichmentService",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-enrichment.service.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "root",
+      "module": "api:public-figures",
+      "name": "PublicFigureEnrichmentService",
+      "path": "apps/api/src/modules/public-figures/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureEntityIdSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:public-figures",
+      "name": "PublicFigureEntityResolutionService",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-entity-resolution.service.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureImage",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureImageSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PublicFigureImageView",
+      "path": "apps/web/src/modules/game/model/public-figure.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureLookProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureMetadataCache",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "infrastructure",
+      "module": "api:public-figures",
+      "name": "PublicFigureMetadataCacheRepository",
+      "path": "apps/api/src/modules/public-figures/infrastructure/public-figure-metadata-cache.repository.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "PublicFigureModal",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalBackdropClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalCardClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "containers",
+      "module": "web:game",
+      "name": "PublicFigureModalContainer",
+      "path": "apps/web/src/modules/game/containers/public-figure-modal.container.tsx"
+    },
+    {
+      "kind": "type",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PublicFigureModalContainerProps",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "PublicFigureModalContent",
+      "path": "apps/web/src/modules/game/components/public-figure-modal-content.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalHeaderClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalImageClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalLinkClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalLinksClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PublicFigureModalProps",
+      "path": "apps/web/src/modules/game/model/public-figure-modal.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalTextClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "publicFigureModalTitleClass",
+      "path": "apps/web/src/modules/game/components/public-figure-modal.variants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureProfile",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureRemoteEnrichment",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureRetrievalEvidence",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureRetrievalLane",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureRetrievalLaneValue",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "PublicFigureRetrievalResult",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "application",
+      "module": "api:public-figures",
+      "name": "PublicFigureRetrievalService",
+      "path": "apps/api/src/modules/public-figures/application/public-figure-retrieval.service.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "root",
+      "module": "api:public-figures",
+      "name": "PublicFigureRetrievalService",
+      "path": "apps/api/src/modules/public-figures/index.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "root",
+      "module": "api:public-figures",
+      "name": "PublicFiguresModule",
+      "path": "apps/api/src/modules/public-figures/index.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "root",
+      "module": "api:public-figures",
+      "name": "PublicFiguresModule",
+      "path": "apps/api/src/modules/public-figures/public-figures.module.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "enums",
+      "module": "shared",
+      "name": "PublicFigureSource",
+      "path": "packages/shared/src/enums/public-figure-source.enum.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "PublicFigureSourceReferenceSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "enums",
+      "module": "shared",
+      "name": "PublicFigureSourceValue",
+      "path": "packages/shared/src/enums/public-figure-source.enum.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "PublicFigureView",
+      "path": "apps/web/src/modules/game/model/public-figure.types.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "QualitativeMatchingProfile",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "schemas",
+      "module": "shared",
+      "name": "QualitativeMatchingProfileSchema",
+      "path": "packages/shared/src/schemas/advanced-matching.schema.ts"
     },
     {
       "kind": "interface",
@@ -7989,11 +9256,25 @@
       "path": "apps/web/src/modules/game/components/result-card.variants.ts"
     },
     {
-      "kind": "function",
+      "kind": "const",
       "layer": "components",
       "module": "web:game",
       "name": "ResultCard",
       "path": "apps/web/src/modules/game/components/result-card.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "ResultCardEvidence",
+      "path": "apps/web/src/modules/game/components/result-card-evidence.component.tsx"
+    },
+    {
+      "kind": "type",
+      "layer": "model",
+      "module": "web:game",
+      "name": "ResultCardEvidenceProps",
+      "path": "apps/web/src/modules/game/model/game-component.types.ts"
     },
     {
       "kind": "interface",
@@ -8098,7 +9379,7 @@
       "layer": "model",
       "module": "web:game",
       "name": "ResultLabels",
-      "path": "apps/web/src/modules/game/model/game.types.ts"
+      "path": "apps/web/src/modules/game/model/result.types.ts"
     },
     {
       "kind": "function",
@@ -8211,6 +9492,13 @@
       "module": "web:game",
       "name": "ResultSummaryProps",
       "path": "apps/web/src/modules/game/model/game-component.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "resultThumbnailClass",
+      "path": "apps/web/src/modules/game/components/result-card.variants.ts"
     },
     {
       "kind": "const",
@@ -8347,6 +9635,13 @@
     },
     {
       "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "runCouncilParticipants",
+      "path": "apps/api/src/modules/ai/lib/multi-model-council.util.ts"
+    },
+    {
+      "kind": "const",
       "layer": "benchmark",
       "module": "api:benchmark",
       "name": "runMockBenchmark",
@@ -8414,6 +9709,27 @@
       "module": "web:pkg-zod",
       "name": "SchemaParseIssue",
       "path": "apps/web/src/packages/zod/parse-schema.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:public-figures",
+      "name": "scorePublicFigureProfile",
+      "path": "apps/api/src/modules/public-figures/lib/public-figure-search.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "SECOND_RETRIEVAL_LANE_ID",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "SECOND_RETRIEVAL_TAG_PATTERN",
+      "path": "apps/api/src/modules/ai/model/candidate-lane.constants.ts"
     },
     {
       "kind": "const",
@@ -9769,6 +11085,13 @@
     {
       "kind": "const",
       "layer": "lib",
+      "module": "api:public-figures",
+      "name": "toRetrievalEvidence",
+      "path": "apps/api/src/modules/public-figures/lib/public-figure-search.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "lib",
       "module": "api:game",
       "name": "toStreamErrorMessage",
       "path": "apps/api/src/modules/game/lib/game-stream.ts"
@@ -10097,6 +11420,13 @@
     },
     {
       "kind": "const",
+      "layer": "helpers",
+      "module": "web:game",
+      "name": "trapDialogTabKey",
+      "path": "apps/web/src/modules/game/helpers/dialog-focus.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "model",
       "module": "web:ui-preferences",
       "name": "UI_PREFERENCE_DOM_ATTRIBUTES",
@@ -10409,6 +11739,13 @@
       "module": "web:game",
       "name": "UploadViewModelInput",
       "path": "apps/web/src/modules/game/model/game.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "hooks",
+      "module": "web:game",
+      "name": "useAccessibleDialog",
+      "path": "apps/web/src/modules/game/hooks/useAccessibleDialog.hook.ts"
     },
     {
       "kind": "const",
@@ -10790,6 +12127,13 @@
     },
     {
       "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "VERIFIED_PUBLIC_FIGURE_CATALOG",
+      "path": "apps/api/src/modules/public-figures/model/verified-public-figure-catalog.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "app",
       "module": "web:app",
       "name": "viewport",
@@ -10969,6 +12313,83 @@
       "module": "api:file-security",
       "name": "WEBP_VP8X_WIDTH_OFFSET",
       "path": "apps/api/src/modules/file-security/model/image-format.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WIKIDATA_ENTITY_DATA_ORIGIN",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WIKIDATA_ENTITY_DATA_PATH_PREFIX",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "adapters",
+      "module": "api:public-figures",
+      "name": "WikidataAdapter",
+      "path": "apps/api/src/modules/public-figures/adapters/wikidata.adapter.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WikidataEntitySchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WikidataLocalizedValues",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WikidataPublicFigureMetadata",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "adapters",
+      "module": "api:public-figures",
+      "name": "WikimediaCommonsAdapter",
+      "path": "apps/api/src/modules/public-figures/adapters/wikimedia-commons.adapter.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WIKIPEDIA_SUMMARY_PATH_PREFIX",
+      "path": "apps/api/src/modules/public-figures/model/public-figure.constants.ts"
+    },
+    {
+      "kind": "class",
+      "layer": "adapters",
+      "module": "api:public-figures",
+      "name": "WikipediaAdapter",
+      "path": "apps/api/src/modules/public-figures/adapters/wikipedia.adapter.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WikipediaPublicFigureMetadata",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:public-figures",
+      "name": "WikipediaSummarySchema",
+      "path": "apps/api/src/modules/public-figures/model/public-figure-remote.schemas.ts"
     },
     {
       "kind": "re-export",

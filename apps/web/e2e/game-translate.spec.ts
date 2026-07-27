@@ -33,7 +33,9 @@ test.describe('result translation', () => {
 
     const firstCard = page.getByTestId(buildIndexedTestId(TEST_IDS.resultCard, 1));
     await expect(firstCard).toBeVisible();
-    await expect(firstCard.getByText('Match #1')).toBeVisible();
+    await expect(firstCard.getByText('تطابق', { exact: true })).toBeVisible();
+    await expect(firstCard.getByText('#1', { exact: true })).toBeVisible();
+    await expect(firstCard.getByText('Sample Star 1')).toBeVisible();
     await expect(firstCard.getByText('90%')).toBeVisible();
   });
 });

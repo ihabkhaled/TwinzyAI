@@ -1,5 +1,5 @@
 {
-  "count": 6,
+  "count": 8,
   "prompts": [
     {
       "kind": "prompt-infrastructure",
@@ -30,6 +30,16 @@
       "kind": "prompt-template",
       "name": "use-3rd-prompt.md",
       "path": "apps/api/src/modules/ai/prompts/use-3rd-prompt.md"
+    },
+    {
+      "kind": "prompt-template",
+      "name": "use-4th-critique-prompt.md",
+      "path": "apps/api/src/modules/ai/prompts/use-4th-critique-prompt.md"
+    },
+    {
+      "kind": "prompt-template",
+      "name": "use-5th-consensus-finalizer-prompt.md",
+      "path": "apps/api/src/modules/ai/prompts/use-5th-consensus-finalizer-prompt.md"
     }
   ]
 }

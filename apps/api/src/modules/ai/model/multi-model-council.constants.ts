@@ -1,0 +1,1 @@
+export const COUNCIL_MEDIAN_DIVISOR = 2;

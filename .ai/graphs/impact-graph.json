@@ -8,6 +8,7 @@
       "api:config",
       "api:core",
       "api:privacy",
+      "api:public-figures",
       "shared"
     ],
     "docs": [
@@ -91,24 +92,35 @@
       "support/provider-outage-messaging.md"
     ],
     "tests": [
+      "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
       "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
       "apps/api/src/modules/ai/tests/ai-response-sanitizer.test.ts",
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
+      "apps/api/src/modules/ai/tests/candidate-council-merge.util.test.ts",
       "apps/api/src/modules/ai/tests/candidate-lane-plan.util.test.ts",
       "apps/api/src/modules/ai/tests/candidate-merge.util.test.ts",
       "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "apps/api/src/modules/ai/tests/consensus-scoring.service.test.ts",
       "apps/api/src/modules/ai/tests/forbidden-wording.guard.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
       "apps/api/src/modules/ai/tests/json-response.util.test.ts",
       "apps/api/src/modules/ai/tests/json-shape.util.test.ts",
+      "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "apps/api/src/modules/ai/tests/judge-council-merge.util.test.ts",
+      "apps/api/src/modules/ai/tests/matching-profile.builder.test.ts",
+      "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
       "apps/api/src/modules/ai/tests/openai-compat.adapter.test.ts",
       "apps/api/src/modules/ai/tests/prompt-template.repository.test.ts",
       "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
+      "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
       "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
+      "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
       "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
       "apps/api/src/modules/game/tests/style-match.service.test.ts",
       "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
@@ -118,6 +130,7 @@
       "apps/api/src/tests/game-cancel-body-limit.integration.test.ts",
       "apps/api/src/tests/game-stream-isolation.integration.test.ts",
       "apps/api/src/tests/game-translate-result.integration.test.ts",
+      "apps/api/src/tests/public-figures.integration.test.ts",
       "apps/api/src/tests/share-results.integration.test.ts",
       "apps/api/src/tests/swagger-boot.integration.test.ts"
     ]
@@ -144,6 +157,7 @@
       "runbooks/ai-schema-failures.md"
     ],
     "tests": [
+      "apps/api/src/benchmark/tests/advanced-matching-benchmark.test.ts",
       "apps/api/src/benchmark/tests/benchmark.test.ts"
     ]
   },
@@ -201,6 +215,7 @@
       "apps/api/src/tests/game-stream-isolation.integration.test.ts",
       "apps/api/src/tests/game-translate-result.integration.test.ts",
       "apps/api/src/tests/health.integration.test.ts",
+      "apps/api/src/tests/public-figures.integration.test.ts",
       "apps/api/src/tests/share-results.integration.test.ts",
       "apps/api/src/tests/swagger-boot.integration.test.ts"
     ]
@@ -215,6 +230,7 @@
       "api:file-security",
       "api:game",
       "api:payments",
+      "api:public-figures",
       "api:root",
       "api:share-results"
     ],
@@ -302,9 +318,12 @@
       "apps/api/src/config/ai-route.util.test.ts",
       "apps/api/src/config/app-config.service.test.ts",
       "apps/api/src/config/env.schema.test.ts",
+      "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
       "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
+      "apps/api/src/modules/ai/tests/multi-model-council.service.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "apps/api/src/modules/contact/tests/contact.test.ts",
       "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
@@ -338,6 +357,7 @@
       "api:game",
       "api:health",
       "api:payments",
+      "api:public-figures",
       "api:result-aggregation",
       "api:root",
       "api:share-results"
@@ -497,6 +517,7 @@
       "apps/api/src/tests/game-cancel-body-limit.integration.test.ts",
       "apps/api/src/tests/game-stream-isolation.integration.test.ts",
       "apps/api/src/tests/game-translate-result.integration.test.ts",
+      "apps/api/src/tests/public-figures.integration.test.ts",
       "apps/api/src/tests/share-results.integration.test.ts",
       "apps/api/src/tests/swagger-boot.integration.test.ts"
     ]
@@ -513,6 +534,7 @@
       "api:file-security",
       "api:payments",
       "api:privacy",
+      "api:public-figures",
       "api:result-aggregation",
       "shared"
     ],
@@ -588,6 +610,7 @@
     ],
     "tests": [
       "apps/api/src/modules/game/lib/request-result-count.test.ts",
+      "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
       "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
       "apps/api/src/modules/game/tests/cancel-analysis.use-case.test.ts",
       "apps/api/src/modules/game/tests/consent.test.ts",
@@ -707,6 +730,29 @@
       "apps/api/src/modules/privacy/tests/log-redaction.service.test.ts"
     ]
   },
+  "api:public-figures": {
+    "consumers": [
+      "api:ai",
+      "api:game"
+    ],
+    "dependsOn": [
+      "api:config",
+      "api:core",
+      "shared"
+    ],
+    "docs": [],
+    "tests": [
+      "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
+      "apps/api/src/modules/public-figures/tests/bounded-json-fetch.util.test.ts",
+      "apps/api/src/modules/public-figures/tests/public-figure-cache.repository.test.ts",
+      "apps/api/src/modules/public-figures/tests/public-figure-enrichment-gateway.service.test.ts",
+      "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
+      "apps/api/src/modules/public-figures/tests/public-figure-retrieval.service.test.ts",
+      "apps/api/src/modules/public-figures/tests/public-figure-url.util.test.ts",
+      "apps/api/src/tests/public-figures.integration.test.ts"
+    ]
+  },
   "api:result-aggregation": {
     "consumers": [
       "api:game"
@@ -788,6 +834,7 @@
       "apps/api/src/tests/game-stream-isolation.integration.test.ts",
       "apps/api/src/tests/game-translate-result.integration.test.ts",
       "apps/api/src/tests/health.integration.test.ts",
+      "apps/api/src/tests/public-figures.integration.test.ts",
       "apps/api/src/tests/share-results.integration.test.ts",
       "apps/api/src/tests/swagger-boot.integration.test.ts"
     ]
@@ -877,13 +924,18 @@
       "apps/api/src/core/streaming/tests/concurrency-limiter.service.test.ts",
       "apps/api/src/core/streaming/tests/stream-registry.service.test.ts",
       "apps/api/src/core/validation/tests/validation-exception.factory.test.ts",
+      "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
+      "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
       "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
       "apps/api/src/modules/ai/tests/ai-router.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-safety.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-shadow.service.test.ts",
       "apps/api/src/modules/ai/tests/ai-step-concurrency.gate.test.ts",
       "apps/api/src/modules/ai/tests/candidate-recall.service.test.ts",
+      "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
       "apps/api/src/modules/ai/tests/gemini.adapter.test.ts",
+      "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
+      "apps/api/src/modules/ai/tests/judge-council-merge.util.test.ts",
       "apps/api/src/modules/ai/tests/openai-compat.adapter.test.ts",
       "apps/api/src/modules/ai/tests/prompt-template.repository.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
@@ -894,12 +946,14 @@
       "apps/api/src/modules/file-security/tests/magic-byte-validation.service.test.ts",
       "apps/api/src/modules/file-security/tests/upload-buffer-cleanup.util.test.ts",
       "apps/api/src/modules/file-security/tests/virus-scan.service.test.ts",
+      "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
       "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
       "apps/api/src/modules/game/tests/cancel-analysis.use-case.test.ts",
       "apps/api/src/modules/game/tests/game-stream.presenter.test.ts",
       "apps/api/src/modules/game/tests/style-match.service.test.ts",
       "apps/api/src/modules/payments/tests/payment-gate.service.test.ts",
       "apps/api/src/modules/payments/tests/paypal.adapter.test.ts",
+      "apps/api/src/modules/public-figures/tests/public-figure-enrichment.service.test.ts",
       "apps/api/src/modules/result-aggregation/tests/result-aggregation.helpers.test.ts",
       "apps/api/src/modules/result-aggregation/tests/result-aggregation.mapper.test.ts",
       "apps/api/src/modules/result-aggregation/tests/result-aggregation.service.test.ts",
@@ -912,6 +966,7 @@
       "apps/api/src/tests/game-cancel-body-limit.integration.test.ts",
       "apps/api/src/tests/game-stream-isolation.integration.test.ts",
       "apps/api/src/tests/game-translate-result.integration.test.ts",
+      "apps/api/src/tests/public-figures.integration.test.ts",
       "apps/api/src/tests/share-results.integration.test.ts",
       "apps/api/src/tests/swagger-boot.integration.test.ts"
     ]
@@ -984,6 +1039,7 @@
       "api:game",
       "api:health",
       "api:payments",
+      "api:public-figures",
       "api:result-aggregation",
       "api:share-results",
       "web:app",
@@ -1243,6 +1299,8 @@
       "apps/web/src/modules/game/test/game.service.test.ts",
       "apps/web/src/modules/game/test/payment-price.helper.test.ts",
       "apps/web/src/modules/game/test/payment-step.container.test.tsx",
+      "apps/web/src/modules/game/test/public-figure-modal.container.test.tsx",
+      "apps/web/src/modules/game/test/result-card.component.test.tsx",
       "apps/web/src/modules/game/test/result-count-select.component.test.tsx",
       "apps/web/src/modules/game/test/share-modal.container.test.tsx",
       "apps/web/src/modules/game/test/share-page.container.test.tsx",
@@ -1322,6 +1380,7 @@
       "support/product-behavior-guide.md"
     ],
     "tests": [
+      "apps/web/src/packages/env/public-env-mirror.test.ts",
       "apps/web/src/packages/env/public-env.test.ts"
     ]
   },

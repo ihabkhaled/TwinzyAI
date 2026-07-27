@@ -8,3 +8,5 @@ export const ALL_FORBIDDEN_PHRASES: readonly string[] = [
   ...FORBIDDEN_RESULT_PHRASES,
   ...FORBIDDEN_SENSITIVE_TOPICS,
 ];
+
+export const MIN_ARABIC_CONTENT_RATIO = 0.6;
