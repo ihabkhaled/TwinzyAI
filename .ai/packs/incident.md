@@ -20,7 +20,7 @@ Task type: `incident` · Lane: **critical** · Load after `.ai/BOOTSTRAP.md`.
 ## Rules
 
 - rules/22-observability-logging.md — > How Twinzy stays diagnosable without ever leaking what it exists to protect: the **AppLogger port only** (never `console.*`), structured logs at correct levels, a request id flowing through every line, and redaction that treats image d... (~1429 tokens)
-- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~577 tokens)
+- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~716 tokens)
 
 ## Skills
 

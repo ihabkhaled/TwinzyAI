@@ -12,11 +12,13 @@
 6. `npm run test:coverage` — 95/90/95/95 floor holds ([09-testing-coverage.md](./09-testing-coverage.md))
 7. `npm run build` — shared, api, web all compile clean
 8. `npm run security:scan` — **trivy gate**: HIGH/CRITICAL vulnerabilities, secrets, or misconfig fail the release (`security:scan:full` for the informational sweep); `npm run audit` clean of actionable findings
-9. **Docker smoke:** `npm run docker:rebuild` → `npm run docker:up` — web and api containers healthy, `/health` answering, one full mocked analyze flow exercised against the containers → `npm run docker:down`
-10. **Release smoke test** executed per [runbooks/release-smoke-test-template.md](../runbooks/release-smoke-test-template.md) and the completed run recorded
-11. Manual QA checklist ([docs/manual-qa-checklist.md](../docs/manual-qa-checklist.md))
-12. Security review reports current (docs/*-review-report.md)
-13. **Release notes written in [release-notes/](../release-notes/README.md)** from the template — every release ships with notes covering behavior changes, new env vars, and any migration/rollback steps (rollback path per [runbooks/rollback-template.md](../runbooks/rollback-template.md))
+9. **Knowledge gate:** after final formatting, run `npm run knowledge:build`, commit every generated `.ai/` update, then pass `git diff --exit-code -- .ai`, `npm run knowledge:validate`, and `npm run knowledge:benchmark`
+10. **Final-revision lint recheck:** `npm run lint` must still be 0 errors / 0 warnings after all hook, formatter, and generated-artifact mutations
+11. **Docker smoke:** `npm run docker:rebuild` → `npm run docker:up` — web and api containers healthy, `/health` answering, one full mocked analyze flow exercised against the containers → `npm run docker:down`
+12. **Release smoke test** executed per [runbooks/release-smoke-test-template.md](../runbooks/release-smoke-test-template.md) and the completed run recorded
+13. Manual QA checklist ([docs/manual-qa-checklist.md](../docs/manual-qa-checklist.md))
+14. Security review reports current (docs/*-review-report.md)
+15. **Release notes written in [release-notes/](../release-notes/README.md)** from the template — every release ships with notes covering behavior changes, new env vars, and any migration/rollback steps (rollback path per [runbooks/rollback-template.md](../runbooks/rollback-template.md))
 
 ## Release invariants
 
@@ -25,5 +27,6 @@
 - Privacy invariants re-verified on the built artifacts: nothing image-shaped in logs during the smoke run; no persistence anywhere
 - Coverage not lowered, thresholds not edited, no skipped/focused tests in main
 - Husky hooks intact (pre-commit, commit-msg/commitlint, pre-push); `--no-verify` never used in the release history
+- The exact pushed revision is green in both remote `Gate - Lint` and `Gate - Knowledge`; a red push gate blocks completion and any later delivery slice until replaced by a green revision
 
 A red step stops the release. Report it with the command, the failing output, and the fix plan — then restart the gate from step 1 after the fix.

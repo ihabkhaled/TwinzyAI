@@ -38,5 +38,7 @@ Precedence: `CLAUDE.md` > `.cursor/rules/*.mdc` > `AGENTS.md` > `CODEX.md` / `cu
 ## Quality gates (all green before "done")
 
 ```bash
-npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan
+npm run lint && npm run typecheck && npm run test:unit && npm run test:coverage && npm run build && npm run security:scan && npm run knowledge:build && npm run knowledge:validate && npm run knowledge:benchmark
 ```
+
+Final-push invariant: `npm run lint` and the full Knowledge gate must pass on the exact final formatted revision; hook changes restart both, generated `.ai/` drift blocks push, and a red remote gate blocks completion and later slices.

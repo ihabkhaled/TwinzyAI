@@ -20,7 +20,7 @@ Task type: `architecture-change` · Lane: **critical** · Load after `.ai/BOOTST
 
 ## Rules
 
-- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3708 tokens)
+- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3780 tokens)
 - rules/16-backend-architecture.md — > The canonical anatomy of `apps/api`. This file applies [`/context/architecture-map.md`](../context/architecture-map.md) to Twinzy and implements rules 16–23 of [00-non-negotiable-rules.md](./00-non-negotiable-rules.md). If anything her... (~1603 tokens)
 - rules/10-library-modularization.md — > Every external library that touches product behavior is owned by **exactly one adapter/module**. Business code depends on *our* interface — never the vendor SDK. Swapping a vendor touches one folder. Implements rules 30 and 39 of [00-n... (~1544 tokens)
 

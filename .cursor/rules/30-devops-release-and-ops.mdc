@@ -22,3 +22,5 @@ Treat infrastructure, deployment, pipeline, runtime, and operational work as pro
 - Docker must come up and down cleanly (`npm run docker:up` / `docker:down`); containers run
   non-root with no persistent upload volumes.
 - Hypercare and retrospective are mandatory parts of delivery, not optional cleanup.
+
+Final-push invariant: `npm run lint` and the full Knowledge gate must pass on the exact final formatted revision; hook changes restart both, generated `.ai/` drift blocks push, and a red remote gate blocks completion and later slices.

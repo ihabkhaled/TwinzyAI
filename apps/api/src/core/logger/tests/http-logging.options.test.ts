@@ -53,6 +53,7 @@ describe('buildPinoHttpOptions', () => {
         },
         remoteAddress: '198.51.100.24',
         remotePort: 43_210,
+        query: { _vercel_share: 'share-secret' },
       },
     });
 
@@ -64,6 +65,7 @@ describe('buildPinoHttpOptions', () => {
     expect(output).not.toContain('203.0.113.42');
     expect(output).not.toContain('198.51.100.24');
     expect(output).not.toContain('43210');
+    expect(output).not.toContain('share-secret');
   });
 
   it('attaches the pretty transport only in development', () => {

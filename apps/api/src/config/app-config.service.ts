@@ -10,9 +10,8 @@ import {
   type OpenAiCompatCredential,
   type OpenAiCompatProviderValue,
 } from './ai-provider.constants';
-import { MAX_AI_MODEL_ATTEMPTS } from './ai-route.constants';
 import type { AiRouteEntry } from './ai-route.types';
-import { parseAiRouteList } from './ai-route.util';
+import { buildBoundedModelChain, parseAiRouteList } from './ai-route.util';
 import type { ContactEmailConfig } from './contact-config.types';
 import type { LogLevelValue, NodeEnvironment, ParsedEnv } from './env.schema';
 import {
@@ -111,9 +110,7 @@ export class AppConfigService {
    * three attempts.
    */
   public get geminiModelChain(): readonly string[] {
-    return [...new Set([this.geminiModel, ...this.geminiFallbackModels])]
-      .filter((model) => model.length > 0)
-      .slice(0, MAX_AI_MODEL_ATTEMPTS);
+    return buildBoundedModelChain([this.geminiModel, ...this.geminiFallbackModels]);
   }
 
   /**
@@ -132,9 +129,7 @@ export class AppConfigService {
     const keys = GEMINI_STEP_ENV_KEYS[step];
     const primary: string = this.configService.get(keys.model, { infer: true });
     const fallbacks = this.toList(this.configService.get(keys.fallbacks, { infer: true }));
-    const chain = [...new Set([primary, ...fallbacks])]
-      .filter((model) => model.length > 0)
-      .slice(0, MAX_AI_MODEL_ATTEMPTS);
+    const chain = buildBoundedModelChain([primary, ...fallbacks]);
     return chain.length > 0 ? chain : this.geminiModelChain;
   }
 

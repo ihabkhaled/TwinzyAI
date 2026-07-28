@@ -19,7 +19,7 @@ Task type: `rollback` · Lane: **critical** · Load after `.ai/BOOTSTRAP.md`.
 
 ## Rules
 
-- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~577 tokens)
+- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~716 tokens)
 
 ## Skills
 

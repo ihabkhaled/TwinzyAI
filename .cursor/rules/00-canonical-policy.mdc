@@ -24,3 +24,5 @@ applies.
 Whenever a new permanent rule, workflow, quality gate, architecture constraint, testing
 expectation, release rule, or operational rule is discovered, update `CLAUDE.md` first, then keep
 all mirror files aligned in the same delivery stream.
+
+Final-push invariant: `npm run lint` and the full Knowledge gate must pass on the exact final formatted revision; hook changes restart both, generated `.ai/` drift blocks push, and a red remote gate blocks completion and later slices.

@@ -85,9 +85,14 @@ npm run test:unit
 npm run test:coverage  # touched modules per file: 95 statements / 90 branches / 95 functions / 95 lines
 npm run build
 npm run security:scan
+npm run knowledge:build
+npm run knowledge:validate
+npm run knowledge:benchmark
 ```
 
 All must pass. Never weaken a rule, skip a test, or loosen tsconfig/eslint to get green.
+
+Final-push invariant: `npm run lint` and the full Knowledge gate must pass on the exact final formatted revision; hook changes restart both, generated `.ai/` drift blocks push, and a red remote gate blocks completion and later slices.
 
 ## Architecture map
 

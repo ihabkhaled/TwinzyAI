@@ -1,5 +1,5 @@
 {
-  "count": 1783,
+  "count": 1784,
   "symbols": [
     {
       "kind": "const",
@@ -1246,6 +1246,13 @@
       "module": "web:game",
       "name": "buildAnalyzeFormData",
       "path": "apps/web/src/modules/game/gateway/game-form-data.builder.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
+      "name": "buildBoundedModelChain",
+      "path": "apps/api/src/config/ai-route.util.ts"
     },
     {
       "kind": "const",

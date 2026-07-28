@@ -11,6 +11,9 @@
 | PATD-007 | Removing advanced profile output would silently disable catalog-aware matching | High | Restored `matchingProfile` and `counterfactualProfiles`; the extraction prompt regression now fails if either disappears |
 | PATD-008 | A production route resolved seven model entries, making one invalid extraction slow and expensive | High | Capped every resolved step route at the first three usable provider/model attempts |
 | PATD-009 | Paymob preparation represented money already moved, but the new holder did not mark it refundable until result finalization | Critical | Mark Paymob captures refundable immediately after verification; added JSON and streaming extraction-failure regressions |
+| PATD-010 | Vercel runtime logs serialized query parameters separately from the redacted URL, exposing deployment-share tokens | Critical | Redact the complete parsed query object and assert a sentinel share token never reaches log output |
+| PATD-011 | The pushed revision failed remote Lint because the commit formatter expanded `app-config.service.ts` to 301 lines after local lint had run | High | Extract route-chain normalization into its existing config utility owner and require final-revision lint after every hook/formatter mutation |
+| PATD-012 | The pushed revision failed remote Knowledge because its committed `.ai/` stale-item snapshot did not match a deterministic CI rebuild | High | Rebuild and commit `.ai/` after final authored-file formatting; require drift validation and block later slices on any red remote gate |
 
 ## Residual risks
 

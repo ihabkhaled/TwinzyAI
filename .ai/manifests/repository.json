@@ -814,6 +814,10 @@
       "exports": [
         {
           "kind": "const",
+          "name": "buildBoundedModelChain"
+        },
+        {
+          "kind": "const",
           "name": "parseAiRouteList"
         },
         {
@@ -821,7 +825,7 @@
           "name": "parseAiRouteToken"
         }
       ],
-      "hash": "ce0577a09685020afddd0ce37b2bbd9faed82b6fcaf7693ced0b983fe10f5ea8",
+      "hash": "c9e6292ae0f2d7be77a0ac6df8726e3e12acc6e0e60c8d83bdd28496e91583f4",
       "imports": [
         "./ai-provider.constants",
         "./ai-route.constants",
@@ -829,7 +833,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 54,
+      "loc": 58,
       "module": "api:config",
       "path": "apps/api/src/config/ai-route.util.ts"
     },
@@ -857,11 +861,10 @@
           "name": "AppConfigService"
         }
       ],
-      "hash": "35eda267c129cdd31f0cb1775fd3145882652dba7b9662bf0b95913c03d3d4d7",
+      "hash": "7746f90de8f03fe2b759d00486d8e83e18b324797471ebf0e7bf50143f0fb6fe",
       "imports": [
         "./advanced-matching-config.types",
         "./ai-provider.constants",
-        "./ai-route.constants",
         "./ai-route.types",
         "./ai-route.util",
         "./contact-config.types",
@@ -873,7 +876,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 422,
+      "loc": 417,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.ts"
     },
@@ -2375,11 +2378,11 @@
           "name": "REDACT_PATHS"
         }
       ],
-      "hash": "fe0aefe17f53bd649c21d19dd28bbc15119f508d14be17821c67f6dbcda2c0e0",
+      "hash": "020f6cfe30aebfe661043921665beffceda48466460f18e5a55e18bfdcee9495",
       "imports": [],
       "isTest": false,
       "layer": "core",
-      "loc": 33,
+      "loc": 34,
       "module": "api:core",
       "path": "apps/api/src/core/logger/logger.constants.ts"
     },
@@ -2440,7 +2443,7 @@
     },
     {
       "exports": [],
-      "hash": "db49cf31e6b4b397d9dd14848de3c174e2efeea2cf4241d7881985438fe155d6",
+      "hash": "1f6e52770ea40f32d83c94b8fbb542e25ba27d0a32d2de9fa992988a3969205d",
       "imports": [
         "../../../tests/fixtures/stubs",
         "../http-logging.options",
@@ -2451,7 +2454,7 @@
       ],
       "isTest": true,
       "layer": "core",
-      "loc": 89,
+      "loc": 91,
       "module": "api:core",
       "path": "apps/api/src/core/logger/tests/http-logging.options.test.ts"
     },

@@ -16,11 +16,11 @@ Task type: `knowledge-change` · Lane: **standard** · Load after `.ai/BOOTSTRAP
 ## Must-read docs
 
 - knowledge/README.md — Owner's manual for the knowledge plane — what is authored here, what is compiled into .ai/, and the commands that connect them. (~1091 tokens)
-- rules/31-knowledge-management.md — The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change. (~778 tokens)
+- rules/31-knowledge-management.md — The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change. (~841 tokens)
 
 ## Rules
 
-- rules/31-knowledge-management.md — The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change. (~778 tokens)
+- rules/31-knowledge-management.md — The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change. (~841 tokens)
 
 ## Skills
 

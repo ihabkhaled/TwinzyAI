@@ -491,6 +491,9 @@
   "buildAnalyzeFormData": [
     "apps/web/src/modules/game/gateway/game-form-data.builder.ts"
   ],
+  "buildBoundedModelChain": [
+    "apps/api/src/config/ai-route.util.ts"
+  ],
   "buildBrokenResponseText": [
     "apps/api/src/benchmark/benchmark-fixtures.ts"
   ],

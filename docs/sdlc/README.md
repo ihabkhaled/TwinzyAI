@@ -34,9 +34,16 @@ npm run test:unit
 npm run test:coverage   # statements/branches/functions/lines >= 95/90/95/95
 npm run build
 npm run security:scan   # trivy — 0 HIGH/CRITICAL findings
+npm run knowledge:build
+npm run knowledge:validate
+npm run knowledge:benchmark
 ```
 
-Husky enforces pre-commit, commit-msg (conventional commits), and pre-push hooks. Never bypass them with `--no-verify`.
+Format the final authored files before the Knowledge rebuild, commit all generated `.ai/`
+updates, and require `git diff --exit-code -- .ai` to stay clean. Re-run Lint and Knowledge if a
+hook or formatter mutates the tree. Husky enforces pre-commit, commit-msg (conventional commits),
+and pre-push hooks. Never bypass them with `--no-verify`; any red remote push gate blocks
+completion and later delivery slices.
 
 ## Related folders
 

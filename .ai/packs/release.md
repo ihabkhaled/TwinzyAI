@@ -15,12 +15,12 @@ Task type: `release` · Lane: **critical** · Load after `.ai/BOOTSTRAP.md`.
 ## Must-read docs
 
 - docs/release-checklist.md — 1. npm run validate (lint + typecheck + coverage + build) green. (~185 tokens)
-- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~577 tokens)
-- docs/sdlc/release-checklist.md — This checklist is the minimum release gate for any deployment of Twinzy that matters to players, operators, or the project sponsor. It pairs with [`rules/24-release-gate.md`](../../rules/24-release-gate.md) and the runbooks in [`runbooks... (~971 tokens)
+- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~716 tokens)
+- docs/sdlc/release-checklist.md — This checklist is the minimum release gate for any deployment of Twinzy that matters to players, operators, or the project sponsor. It pairs with [`rules/24-release-gate.md`](../../rules/24-release-gate.md) and the runbooks in [`runbooks... (~1107 tokens)
 
 ## Rules
 
-- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~577 tokens)
+- rules/24-release-gate.md — > The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook. (~716 tokens)
 - rules/frontend/19-release-gates.md — A release candidate is a commit on `main` with every gate green. Gates are executable — each maps to an (~1093 tokens)
 
 ## Skills

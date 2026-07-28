@@ -18,8 +18,9 @@ then performs the single-use idempotent capture.
 ### Fixed: secret and client-address disclosure in application logs — Critical
 
 Pino HTTP logs formerly included all inbound Vercel headers, including security tokens/signatures,
-and remote client addresses. The complete inbound header object plus remote address/port are now
-redacted. Behavioral tests assert supplied sentinel credentials and addresses never appear.
+remote client addresses, and separately parsed query parameters. The complete inbound header and
+query objects plus remote address/port are now redacted. Behavioral tests assert supplied sentinel
+credentials, query tokens, and addresses never appear.
 
 ### Fixed: silent SSE delivery rejection — High
 

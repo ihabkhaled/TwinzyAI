@@ -8,8 +8,9 @@ export const REDACT_PATHS: readonly string[] = [
   'req.headers',
   'req.remoteAddress',
   'req.remotePort',
-  // URLs can carry bearer-like temporary share ids and query values.
+  // URLs and parsed query objects can carry bearer-like temporary values.
   'req.url',
+  'req.query',
   'req.body.password',
   'req.body.token',
   'req.body.secret',

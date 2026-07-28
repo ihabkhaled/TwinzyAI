@@ -12,7 +12,9 @@ This checklist is the minimum release gate for any deployment of Twinzy that mat
 - [ ] Security review completed (`19-security-review.md`)
 - [ ] UAT or business sign-off completed when applicable
 - [ ] Client approval captured when required
-- [ ] All automated gates green: `npm run lint` (0/0) · `npm run typecheck` · `npm run test:unit` · `npm run test:coverage` (≥ 95/90/95/95) · `npm run build` · `npm run security:scan` (trivy, 0 HIGH/CRITICAL)
+- [ ] All automated gates green: `npm run lint` (0/0) · `npm run typecheck` · `npm run test:unit` · `npm run test:coverage` (≥ 95/90/95/95) · `npm run build` · `npm run security:scan` (trivy, 0 HIGH/CRITICAL) · `npm run knowledge:build` · `npm run knowledge:validate` · `npm run knowledge:benchmark`
+- [ ] Final authored files were formatted before the Knowledge rebuild; every generated `.ai/` update is committed and `git diff --exit-code -- .ai` is clean
+- [ ] Lint and Knowledge were rerun after the last hook/formatter mutation and the exact pushed revision is green in remote `Gate - Lint` and `Gate - Knowledge`
 - [ ] Rollout plan documented
 - [ ] Rollback plan documented and technically feasible (`git revert` of the release slice + redeploy — see [`runbooks/rollback-template.md`](../../runbooks/rollback-template.md); there are no DB migrations to unwind)
 - [ ] Smoke tests prepared ([`runbooks/release-smoke-test.md`](../../runbooks/release-smoke-test.md))
@@ -64,6 +66,8 @@ Release must stop when:
 - open defects are not explicitly accepted
 - support ownership is unclear
 - any automated gate is red or was silenced
+- the generated `.ai/` plane drifts after a deterministic rebuild
+- the exact pushed revision has a red remote Lint or Knowledge gate
 
 ## Hypercare Handoff
 

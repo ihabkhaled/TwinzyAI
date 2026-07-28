@@ -6,7 +6,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "80b6f1f3cd587e5b3314251dbb6d6529f1c350552f3927499e3e215bc478a013",
+      "hash": "f9cd3da2c9c93ff79be75f2977a13825f4bb7bf906d242080507e7c4246b3fc7",
       "headings": [
         "AGENTS.md — Agent Bootstrap",
         "Simple Code Ladder (permanent policy — rules/28–30)",
@@ -45,7 +45,7 @@
       ],
       "summary": "**Root [`CLAUDE.md`](CLAUDE.md) is the canonical operating policy for this repository** — the",
       "title": "AGENTS.md — Agent Bootstrap",
-      "tokens": 2625,
+      "tokens": 2703,
       "type": "doc"
     },
     {
@@ -1192,7 +1192,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "6ed1c1fc6e15ac5e78dae2e9ff1e07a20bb66ccef25926ce33e9cdd67c4da3ea",
+      "hash": "9a7a4e1635dafe2becc207d749ba15afd0bc13b6a522c5710e18458a551e35b8",
       "headings": [
         "TwinzyAI — Anthropic Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -1228,7 +1228,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Anthropic Agent Entrypoint",
-      "tokens": 640,
+      "tokens": 699,
       "type": "doc"
     },
     {
@@ -1600,7 +1600,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "a6b07d599d1179aadff1a71194a51713aacd8c1364aecc16ed7d16602f3af174",
+      "hash": "536c327c64135dbe037cb88f4abe9729e6b4939e87f76473c5104c0a2604ee1d",
       "headings": [
         "Enterprise SDLC Operating Brain",
         "Purpose",
@@ -1681,7 +1681,7 @@
       ],
       "summary": "> Every request must pass through full business, product, architecture, impact, standards, testing, implementation, QA, security, UAT, risk, documentation, release, hypercare, and retrospective phases with written artifacts and hard gate...",
       "title": "Enterprise SDLC Operating Brain",
-      "tokens": 23871,
+      "tokens": 24072,
       "type": "doc"
     },
     {
@@ -1689,7 +1689,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "d06f4b08e223e925c5a3f1a9248238997cc41bc5134599559f4f546510a299da",
+      "hash": "b14e2b8add0d978c65af3e20bf02ea94a55822529ad682897c8a94eb7a5d202e",
       "headings": [
         "CODEX.md — Codex Bootstrap Mirror",
         "Simple Code Ladder (permanent policy — rules/28–30)",
@@ -1715,7 +1715,7 @@
       "sourceMentions": [],
       "summary": "**Root `CLAUDE.md` is the canonical operating policy and is binding.** Read it fully before any",
       "title": "CODEX.md — Codex Bootstrap Mirror",
-      "tokens": 665,
+      "tokens": 746,
       "type": "doc"
     },
     {
@@ -3523,7 +3523,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "32433a26c9efd4bd16b90983f0f313fa7cac926f8819a2146269e7c785fa33d7",
+      "hash": "889a778b3ebb63f0003c018690384c7917509491b9d12ab67b4cca3eee3131a6",
       "headings": [
         "cursor.md — Cursor Bootstrap Mirror",
         "Simple Code Ladder (permanent policy — rules/28–30)",
@@ -3549,7 +3549,7 @@
       "sourceMentions": [],
       "summary": "**Root `CLAUDE.md` is the canonical operating policy and is binding.** Read it fully before any",
       "title": "cursor.md — Cursor Bootstrap Mirror",
-      "tokens": 681,
+      "tokens": 762,
       "type": "doc"
     },
     {
@@ -3557,7 +3557,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "cd4314eff4e22032135fff4b27a7cc31da40d3786b5ce9555cb3963f9113e512",
+      "hash": "2328b8da33652aecc4478f015ce8956912ff8403dada3efd6dcccdf6571e91ae",
       "headings": [
         "TwinzyAI — Deepseek Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -3593,7 +3593,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Deepseek Agent Entrypoint",
-      "tokens": 640,
+      "tokens": 699,
       "type": "doc"
     },
     {
@@ -12042,7 +12042,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "a7c250462baf67ff6ff5589c5a4200cf117c54c3667068e22fee65dbc7137a7e",
+      "hash": "39f183b3e141f83cfbeb6b6c800ff79300cb275ca09ae31c52933114ada691b6",
       "headings": [
         "15 — Development Validation Report",
         "Root-cause evidence",
@@ -12071,7 +12071,7 @@
       "sourceMentions": [],
       "summary": "Date: 2026-07-28",
       "title": "15 — Development Validation Report",
-      "tokens": 747,
+      "tokens": 962,
       "type": "doc"
     },
     {
@@ -12079,7 +12079,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "09386ad26e143857cd37409ceb31973922f4661450e349e46fd554fd16ee836b",
+      "hash": "d56c5efc8d2b6b46d618693dd5e7a36e8e27b1bb84875c66b365c23112c21a03",
       "headings": [
         "16 — Development Bug Log",
         "Residual risks"
@@ -12105,7 +12105,7 @@
       "sourceMentions": [],
       "summary": "| ID | Finding | Severity | Resolution |",
       "title": "16 — Development Bug Log",
-      "tokens": 605,
+      "tokens": 814,
       "type": "doc"
     },
     {
@@ -16482,7 +16482,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "468647e4f194d230fb5eb0cf19b5a61e30b304bf7f626342ceead2a19512fca3",
+      "hash": "4dd31f7f6b054de95b765520e162c0056539d3e06f4ad5a5fb429466b73b9cac",
       "headings": [
         "SDLC Baselines — Twinzy",
         "Contents",
@@ -16524,7 +16524,7 @@
       "sourceMentions": [],
       "summary": "These documents are the permanent delivery baselines for the Twinzy repository. They define the standing rules that every request-specific feature folder under `docs/features/` must inherit and follow.",
       "title": "SDLC Baselines — Twinzy",
-      "tokens": 711,
+      "tokens": 804,
       "type": "doc"
     },
     {
@@ -16532,7 +16532,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "d5b7cc5aa7f66791f910c2e9fb351b09e5e09faf58eda9f3e75546f3aef2c47c",
+      "hash": "e38ed8327e0eb025f0beb5e3dafb4227e5960fcf59917e8aa9289e9b2e1af1b4",
       "headings": [
         "Release Checklist — Twinzy",
         "Purpose",
@@ -16570,7 +16570,7 @@
       "sourceMentions": [],
       "summary": "This checklist is the minimum release gate for any deployment of Twinzy that matters to players, operators, or the project sponsor. It pairs with [`rules/24-release-gate.md`](../../rules/24-release-gate.md) and the runbooks in [`runbooks...",
       "title": "Release Checklist — Twinzy",
-      "tokens": 971,
+      "tokens": 1107,
       "type": "doc"
     },
     {
@@ -16693,7 +16693,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "8ce0c23031bf27975cb4968afecd4d7d4786038a3d6bcd2095ceab448db13e40",
+      "hash": "7fbb5b1f0af5913fbb5348cb0779a174df045a09cc30c673c40d3391ddbe6593",
       "headings": [
         "Security Review Report — Paid Analysis Transactional Delivery",
         "Outcome",
@@ -16720,7 +16720,7 @@
       "sourceMentions": [],
       "summary": "Date: 2026-07-28",
       "title": "Security Review Report — Paid Analysis Transactional Delivery",
-      "tokens": 814,
+      "tokens": 829,
       "type": "doc"
     },
     {
@@ -17900,7 +17900,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "5bd02312dd3c740b72407a5c04e09627246cc78e513a2970cb62987c55b9c18d",
+      "hash": "89122d89a9f1d29c7d8b1de85992bd3739448f917b36f0e26bdb2e54c1f14eda",
       "headings": [
         "TwinzyAI — Gemini Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -17936,7 +17936,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Gemini Agent Entrypoint",
-      "tokens": 639,
+      "tokens": 698,
       "type": "doc"
     },
     {
@@ -17944,7 +17944,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "dcc6d00d6396b1a397532d67fb5b57a1c44609b951f3f5c7f5657f9e0f21ff91",
+      "hash": "d1b192f95875df0815b3510a0758afce373c930bf2ee9fa8297154171649d51a",
       "headings": [
         "TwinzyAI — Glm Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -17980,7 +17980,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Glm Agent Entrypoint",
-      "tokens": 638,
+      "tokens": 697,
       "type": "doc"
     },
     {
@@ -18199,7 +18199,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "1f296a2fd54200fbcff5a9a752045e9d495bce4e43ce6a7750e82a563fb4b76b",
+      "hash": "68b3d950bb0113002c522064aab670c6837707e48b36cedab9546878ffe86d6f",
       "headings": [
         "TwinzyAI — Kimi Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -18235,7 +18235,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Kimi Agent Entrypoint",
-      "tokens": 639,
+      "tokens": 698,
       "type": "doc"
     },
     {
@@ -18243,7 +18243,7 @@
       "contextTier": 0,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "8992ffdde7e50b33094e48962894acaf2a90674fd75a290ba151a18ce80970fd",
+      "hash": "c29f3127d353b8ede15413bf33faf7a29d2eebe75b3ee21a522d73e010c3152f",
       "headings": [
         "TwinzyAI — Agent Bootstrap",
         "Non-negotiable invariants (verified in code; violating any is an automatic stop)",
@@ -18273,7 +18273,7 @@
       ],
       "summary": "Authored body of the agent bootstrap; the compiler injects open critical contradictions and enforces the 1,500-token budget.",
       "title": "Bootstrap source (compiled into .ai/BOOTSTRAP.md)",
-      "tokens": 1353,
+      "tokens": 1406,
       "type": "knowledge-definition"
     },
     {
@@ -20388,7 +20388,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "c5b6e8e269fae4e9a8a2e07bc46e25e0fb936dfd5b472c255e9fce252949cce1",
+      "hash": "887f9bc574f26cebb9fee37f84056fb1ddef70dae221630cfe48902f9ab036e1",
       "headings": [
         "TwinzyAI — Mistral Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -20424,7 +20424,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Mistral Agent Entrypoint",
-      "tokens": 639,
+      "tokens": 698,
       "type": "doc"
     },
     {
@@ -20432,7 +20432,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "a65d790859502c2c73fc113933a3167b73171573e28cc59c20267c279400f6c6",
+      "hash": "e1d8387a8677f6cd614b29c6551005b6037d0c87dc82399ea3f882b8bbfc1420",
       "headings": [
         "TwinzyAI — Openai Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -20468,7 +20468,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Openai Agent Entrypoint",
-      "tokens": 639,
+      "tokens": 698,
       "type": "doc"
     },
     {
@@ -23317,7 +23317,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "ea2e58c8fd3c737f2ddf90029a5ff384740ea11aef5dd2c0a33575cead29c52f",
+      "hash": "b643da57866969e69915128480f487b65334820507d1f26e4edee31a8214b047",
       "headings": [
         "TwinzyAI — Qwen Agent Entrypoint",
         "Before writing code, run the TwinzyAI Simple Code Ladder",
@@ -23353,7 +23353,7 @@
       "sourceMentions": [],
       "summary": "Compact bootstrap. The canonical sources win — read them before writing code.",
       "title": "TwinzyAI — Qwen Agent Entrypoint",
-      "tokens": 639,
+      "tokens": 698,
       "type": "doc"
     },
     {
@@ -23611,7 +23611,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "67721f1f146aee725290eabf0f013ad4fa213caa057f1fecfcb10bc7e0a9ad63",
+      "hash": "dd7f0510cdc96ef4c139b2e4de7f5557736fec26e12daec3120981b3696e073f",
       "headings": [
         "00 — The Non-Negotiable Rules",
         "Type safety (1–9)",
@@ -23656,7 +23656,7 @@
       ],
       "summary": "> These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m...",
       "title": "00 — The Non-Negotiable Rules",
-      "tokens": 3708,
+      "tokens": 3780,
       "type": "rule"
     },
     {
@@ -24625,7 +24625,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "fd19d26e29a2447d31c200c79d508a00acf5ae55e1eef719017113560b8b67dc",
+      "hash": "5daa0787f5ff2ec93cc59917555f20d76f84d6b8ca35c6797b636da0b9bf66c1",
       "headings": [
         "24 — Release Gate",
         "The gate sequence",
@@ -24652,7 +24652,7 @@
       "sourceMentions": [],
       "summary": "> The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook.",
       "title": "24 — Release Gate",
-      "tokens": 577,
+      "tokens": 716,
       "type": "rule"
     },
     {
@@ -24896,7 +24896,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "1f0bb7b217a43911fbeff68915895fe366618b7861fcc7d314b36e5616810061",
+      "hash": "e260f5dda9a9299658aa0c47a0ddec6e9174a943ca7da01596537b60772ef505",
       "headings": [
         "31 — Knowledge Management"
       ],
@@ -24927,7 +24927,7 @@
       "sourceMentions": [],
       "summary": "The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change.",
       "title": "31 — Knowledge Management (planes, ownership, authority)",
-      "tokens": 778,
+      "tokens": 841,
       "type": "rule"
     },
     {
@@ -26727,7 +26727,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "d6398d22f3569739cbcc10776a3c45d40b46d0a1f1c28d5fcd9644f182dd81b2",
+      "hash": "a87e18c96159231cc0bf0a98ffe2186169aa639552e961d039ef84ec57df5734",
       "headings": [
         "Runbook — Deployment",
         "Prerequisites (hard gates — none skippable)",
@@ -26772,7 +26772,7 @@
       "sourceMentions": [],
       "summary": "The gated deployment procedure — prerequisites, gates, Compose deploy, smoke test, and rollback readiness; records that no production deployment has been executed yet.",
       "title": "Runbook — Deployment",
-      "tokens": 931,
+      "tokens": 1026,
       "type": "runbook"
     },
     {

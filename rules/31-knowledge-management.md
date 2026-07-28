@@ -38,8 +38,10 @@ readWhen: creating, moving, or retiring any documentation or knowledge definitio
    silent merge.
 4. **Knowledge changes rebuild in the same commit.** Any change to `knowledge/` or to a
    canonical doc that feeds a compiled artifact ships with a fresh `npm run knowledge:build`
-   and green `npm run knowledge:validate`. CI and pre-push verify drift; a stale `.ai/` is a
-   broken build.
+   plus green `npm run knowledge:validate` and `npm run knowledge:benchmark`. Run final
+   formatting first, rebuild second, commit every generated `.ai/` update, and prove
+   `git diff --exit-code -- .ai` on the final revision. CI and pre-push verify drift; a stale
+   `.ai/` or red remote Knowledge gate is a broken build that blocks later delivery slices.
 5. **New task categories are complete or absent.** Adding a task type means the routing-map
    entry, a pack in `knowledge/packs.yaml`, vocabulary terms, and a golden task in
    `knowledge/golden/tasks.yaml`, together.

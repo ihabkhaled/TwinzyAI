@@ -5,7 +5,7 @@
       "knowledge/context-budget-policy.yaml",
       "knowledge/contradiction-checks.yaml"
     ],
-    "inputsHash": "ff513b3a05d4360b4914d93f4ac5d381199a462203f8ddbb37881bf8cf201ce8"
+    "inputsHash": "fa51ef3e68a0f2a49de036a5ddc32cb4487cf8d1323d77a9a37f40911e7e516a"
   },
   ".ai/CURRENT_STATE.md": {
     "inputs": [
@@ -231,7 +231,7 @@
       "support/upload-troubleshooting.md",
       "support/user-visible-error-guide.md"
     ],
-    "inputsHash": "a34f5f4e081e1e6658e3238ffeefaf3877ed6965fd6f9caf0d82ca9454af1a22"
+    "inputsHash": "8cef555846b34e2b1eda4d5d4aae46852efc9cc3f5ab65ef6bbdd8b5a074defe"
   },
   ".ai/generated/orphans.json": {
     "inputs": [
@@ -1068,7 +1068,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "646b5cc9ced74e472a605f39823bcfc2f96f1564d11f17a521b37439fafd184d"
+    "inputsHash": "49fc083de468e7b12aa2c98e39e23741a5ae0e08c499787dd825228c8da0982b"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
@@ -1945,7 +1945,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "a8301e53be6a13220721d35ab3a7dcd7011061dc377c089a9e9b03d7b16fa1a5"
+    "inputsHash": "dd65a2d45d26d65364ade2cd976370e0512230b53094494695f305379288a6ee"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2795,7 +2795,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "28c5259693c748ed6eb5b781e5a89487553f2adfbcea1cdb8f9562dd69d838f1"
+    "inputsHash": "3bcc1da373f4adf72141ae792bf8caf13538b05c92648cdb3603c8683dbaf396"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -3658,7 +3658,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "28c5259693c748ed6eb5b781e5a89487553f2adfbcea1cdb8f9562dd69d838f1"
+    "inputsHash": "3bcc1da373f4adf72141ae792bf8caf13538b05c92648cdb3603c8683dbaf396"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -4495,7 +4495,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "28c5259693c748ed6eb5b781e5a89487553f2adfbcea1cdb8f9562dd69d838f1"
+    "inputsHash": "3bcc1da373f4adf72141ae792bf8caf13538b05c92648cdb3603c8683dbaf396"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

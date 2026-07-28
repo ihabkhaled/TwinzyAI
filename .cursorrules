@@ -31,3 +31,4 @@ Compact non-negotiables:
 - Conventional commits via Husky hooks; never --no-verify; do not commit/push unless asked.
 Simple Code Ladder (rules/28-30): reuse -> native -> wrapper -> helper -> direct code -> justified abstraction. No inline declarations, no clever code, never weaken privacy/AI safety/upload safety/tests/gates.
 External prompt packs follow rules/37: repository-first applicability audit; foreign assumptions rejected; immediate per-commit push only when explicitly authorized and only after hooks pass.
+Final-push invariant: `npm run lint` and the full Knowledge gate must pass on the exact final formatted revision; hook changes restart both, generated `.ai/` drift blocks push, and a red remote gate blocks completion and later slices.

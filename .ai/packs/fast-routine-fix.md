@@ -18,7 +18,7 @@ Task type: `routine-fix` · Lane: **fast** · Load after `.ai/BOOTSTRAP.md`.
 
 ## Rules
 
-- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3708 tokens)
+- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3780 tokens)
 - rules/28-simple-readable-code.md — > The best TwinzyAI code is the code the next developer understands immediately. Code is written once and read hundreds of times — by juniors, seniors, QA, security/privacy reviewers, and AI coding agents. Optimize for the reader under p... (~859 tokens)
 
 ## Skills

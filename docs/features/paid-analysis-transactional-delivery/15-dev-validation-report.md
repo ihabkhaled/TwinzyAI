@@ -24,6 +24,7 @@ Branch: `main` release candidate
 - A closed SSE sink makes the use-case emitter fail, activating post-capture compensation.
 - Paid JSON and SSE extraction failures assert zero PayPal captures.
 - Whole request headers and remote address/port are behaviorally proven redacted.
+- Parsed query parameters are also redacted because Vercel serializes them separately from the URL.
 - Prompt 1 now uses `written-traits-v6` and retains the advanced `matchingProfile` and
   `counterfactualProfiles` output. A regression test locks all three together.
 - Every pipeline step now attempts at most the first three usable provider/model entries. Disabled
@@ -35,6 +36,8 @@ Branch: `main` release candidate
 ## Gate evidence
 
 - `npm run lint`: pass, 0 errors / 0 warnings.
+- `npm run format:check`: pass after normalizing the already-tracked advanced-matching source
+  set that the remote Lint workflow would otherwise reject.
 - `npm run typecheck`: pass.
 - `npm run test:unit`: pass, 181 files / 1,180 tests.
 - `npm run test:integration`: pass, 10 files / 56 tests.
@@ -44,12 +47,20 @@ Branch: `main` release candidate
 - `npm run security:scan`: pass; zero high/critical vulnerabilities, secrets, or Docker
   misconfigurations reported.
 - `npm run security:scan:secrets`: pass; no plaintext secrets detected.
+- `npm run knowledge:build`: pass; generated `.ai/` plane rebuilt after final formatting with
+  zero stale items.
+- `npm run knowledge:validate`: pass; generated plane matches its inputs.
+- `npm run knowledge:benchmark`: pass, 21/21 golden tasks.
 - `CI=true npm run test:e2e:ci`: pass, 78 desktop, accessibility, and mobile tests.
 - `npm run test:ai`: pass, 90 files / 581 tests.
 - `npm run ai:benchmark -- --mode=mock --samples=5`: pass; every pipeline step selected the valid
   mock model with score 0.998.
 - Focused payment/game verification: pass, 4 files / 68 tests.
 - `git diff --check`: pass.
+- Remote push-gate audit for commit `01ed373`: `Gate - Lint` identified the formatter-expanded
+  301-line config service; `Gate - Knowledge` identified stale generated `.ai/` state. Both root
+  causes are corrected in the follow-up revision, and permanent final-revision gate rules now
+  require Lint and Knowledge to be rerun after hook/formatter mutations.
 
 ## Release status
 

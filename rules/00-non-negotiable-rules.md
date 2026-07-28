@@ -65,7 +65,7 @@
 38. **Observability is part of the change.** Structured logs on pipeline milestones with request-id correlation; identifiers, never payloads. (rules/22)
 39. **No new integration or dependency without an owning adapter + docs + config wiring** in the same change. (rules/10)
 40. **No behavior change without tests AND docs in the same change.** Tests are written first. (rules/09)
-41. **Never bypass hooks** (`--no-verify` is banned; Husky runs pre-commit, commit-msg, pre-push). Gates before "done": `npm run lint` · `npm run typecheck` · `npm run test:unit` · `npm run test:coverage` · `npm run build` · `npm run security:scan`. (rules/24)
+41. **Never bypass hooks** (`--no-verify` is banned; Husky runs pre-commit, commit-msg, pre-push). Gates before "done": `npm run lint` · `npm run typecheck` · `npm run test:unit` · `npm run test:coverage` · `npm run build` · `npm run security:scan` · `npm run knowledge:build` · `npm run knowledge:validate` · `npm run knowledge:benchmark`. Lint and Knowledge must pass on the exact final formatted revision; a hook mutation restarts them, generated `.ai/` drift blocks the push, and any red remote gate blocks later slices. (rules/24, rules/31)
 
 ## Twinzy product constraints (42–47)
 

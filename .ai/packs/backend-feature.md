@@ -20,7 +20,7 @@ Task type: `backend-feature` · Lane: **standard** · Load after `.ai/BOOTSTRAP.
 
 ## Rules
 
-- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3708 tokens)
+- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3780 tokens)
 - rules/16-backend-architecture.md — > The canonical anatomy of `apps/api`. This file applies [`/context/architecture-map.md`](../context/architecture-map.md) to Twinzy and implements rules 16–23 of [00-non-negotiable-rules.md](./00-non-negotiable-rules.md). If anything her... (~1603 tokens)
 - rules/18-routes-controllers.md — > Controllers are the **transport adapter**: they translate HTTP ⇄ application calls and contain **zero business logic**. One delegation per method, mechanically enforced by `architecture/controller-no-logic`. Implements rule 16 of [00-n... (~1369 tokens)
 - rules/19-services-application-layer.md — > A service owns **one focused capability** and stays small: guard preconditions → delegate → return a typed result. It never parses HTTP, never holds utility logic, never reads `process.env`, never orchestrates multi-service pipelines (... (~1277 tokens)

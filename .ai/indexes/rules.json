@@ -7,7 +7,7 @@
     ],
     "summary": "> These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m...",
     "title": "00 — The Non-Negotiable Rules",
-    "tokens": 3708
+    "tokens": 3780
   },
   "rules/01-architecture.md": {
     "keywords": [
@@ -261,7 +261,7 @@
     ],
     "summary": "> The final go/no-go. Everything below must pass, in order, before any release. Never mark skipped tests as passed. Never release with a weakened rule. Never bypass a hook.",
     "title": "24 — Release Gate",
-    "tokens": 577
+    "tokens": 716
   },
   "rules/25-configuration-and-environment.md": {
     "keywords": [
@@ -343,7 +343,7 @@
     ],
     "summary": "The three knowledge planes, one-fact-one-owner, authority precedence, and the obligation to keep the compiled plane in sync with every knowledge change.",
     "title": "31 — Knowledge Management (planes, ownership, authority)",
-    "tokens": 778
+    "tokens": 841
   },
   "rules/32-documentation-quality.md": {
     "keywords": [

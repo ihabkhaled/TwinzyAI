@@ -1,9 +1,13 @@
 import { AI_PROVIDER_VALUES, AiProvider, type AiProviderValue } from './ai-provider.constants';
-import { MAX_AI_ROUTE_ENTRIES } from './ai-route.constants';
+import { MAX_AI_MODEL_ATTEMPTS, MAX_AI_ROUTE_ENTRIES } from './ai-route.constants';
 import { type AiRouteEntry, routeEntryKey } from './ai-route.types';
 
 const isKnownProvider = (value: string): value is AiProviderValue =>
   (AI_PROVIDER_VALUES as readonly string[]).includes(value);
+
+/** De-duplicate and cap an ordered provider model chain. */
+export const buildBoundedModelChain = (models: readonly string[]): string[] =>
+  [...new Set(models)].filter((model) => model.length > 0).slice(0, MAX_AI_MODEL_ATTEMPTS);
 
 /**
  * Parse one route token. `provider:model` selects a provider explicitly; a

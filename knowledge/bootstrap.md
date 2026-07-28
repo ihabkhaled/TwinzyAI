@@ -72,7 +72,10 @@ matches. It never says who the user is.
 4. Plan (objective, owner, files, contracts, steps, tests, risks, docs delta, rollback), then
    implement. Expand context only when evidence demands it.
 5. Gates before "done": `npm run lint` · `typecheck` · `test:coverage` (≥95% touched) ·
-   `build`; update canonical docs + `npm run knowledge:build` if knowledge inputs changed.
+   `build`; after final formatting, rebuild canonical-doc changes with
+   `npm run knowledge:build`, prove no `.ai/` drift, then pass `knowledge:validate` and
+   `knowledge:benchmark`. A hook mutation restarts final Lint and Knowledge checks; a red remote
+   push gate blocks completion and later slices.
 
 ## Authority
 

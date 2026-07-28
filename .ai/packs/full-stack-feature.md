@@ -19,7 +19,7 @@ Task type: `full-stack-feature` · Lane: **standard** · Load after `.ai/BOOTSTR
 
 ## Rules
 
-- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3708 tokens)
+- rules/00-non-negotiable-rules.md — > These rules are enforced by [`tsconfig.base.json`](../tsconfig.base.json), [`eslint.config.mjs`](../eslint.config.mjs) (including the custom `architecture/*` plugin in [`/eslint`](../eslint)), Husky hooks, and code review. They are **m... (~3780 tokens)
 - rules/05-types-enums-constants.md — > The zero-inline policy in depth. Every type, enum-map, and reusable constant lives in its own dedicated file; every domain value is an as-const member, never a raw string literal. **The TypeScript `enum` keyword is banned repo-wide** —... (~2326 tokens)
 - rules/21-dto-validation.md — > Validate **every** boundary with a zod schema before anything reaches the application layer. **Zod is the validation vendor; `class-validator` and `class-transformer` are forbidden repo-wide.** DTO schemas live in `api/dto/` backed by ... (~1556 tokens)
 
