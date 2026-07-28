@@ -1,13 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import type { LanguageCodeValue, TraitExtractionResponse } from '@twinzy/shared';
-import { countPopulatedTraitFields, isRecord, TraitExtractionResponseSchema } from '@twinzy/shared';
+import { TraitExtractionResponseSchema } from '@twinzy/shared';
 
 import { GeminiStep } from '../../../config/gemini-step.constants';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { PromptTemplateRepository } from '../infrastructure/prompt-template.repository';
 import { buildSchemaValidator, parseAiJsonResponse } from '../lib/json-response.util';
+import { buildNormalizedMatchingProfile } from '../lib/matching-profile.builder';
 import { assertResponseLanguage } from '../lib/response-language.guard';
+import { normalizeTraitExtractionInput } from '../lib/trait-extraction-input.normalizer';
 import { collectExtractionTextValues } from '../lib/trait-text.util';
 import type { AiProviderAdapter } from '../model/ai-provider-adapter.types';
 import { AI_PROVIDER_ADAPTER } from '../model/ai-provider-adapter.types';
@@ -41,19 +43,31 @@ export class TraitExtractionService {
     languageCode: LanguageCodeValue,
     signal?: AbortSignal,
   ): Promise<TraitExtractionResponse> {
-    const prompt = this.promptTemplate.buildPrompt(PromptKey.TraitExtraction, {
-      [PromptPlaceholder.LanguageCode]: languageCode,
-    });
-    const rawText = await this.aiProvider.generateFromImageStream(prompt, image, {
-      signal,
-      validate: buildSchemaValidator(TraitExtractionResponseSchema),
-      step: GeminiStep.Extraction,
-    });
-    const response = this.parseResponse(rawText);
+    const rawText = await this.generateResponse(image, languageCode, signal);
+    const response = this.normalizeMatchingProfile(this.parseResponse(rawText));
     assertResponseLanguage(response.languageCode, languageCode);
     this.aiSafety.assertTraitTextSafe(collectExtractionTextValues(response));
     this.logger.info(`Extracted ${response.traitCount} visible trait(s)`);
     return response;
+  }
+
+  private generateResponse(
+    image: AiImageInput,
+    languageCode: LanguageCodeValue,
+    signal?: AbortSignal,
+  ): Promise<string> {
+    const prompt = this.promptTemplate.buildPrompt(PromptKey.TraitExtraction, {
+      [PromptPlaceholder.LanguageCode]: languageCode,
+    });
+    return this.aiProvider.generateFromImageStream(prompt, image, {
+      signal,
+      validate: buildSchemaValidator(
+        TraitExtractionResponseSchema,
+        (value) => normalizeTraitExtractionInput(value).value,
+        (response) => this.aiSafety.validateTraitText(collectExtractionTextValues(response)),
+      ),
+      step: GeminiStep.Extraction,
+    });
   }
 
   private parseResponse(rawText: string): TraitExtractionResponse {
@@ -63,11 +77,26 @@ export class TraitExtractionService {
       (issues) => {
         this.logger.warn(`Trait response schema mismatch: ${issues}`);
       },
-      (parsed) => {
-        if (!isRecord(parsed) || !isRecord(parsed['traits'])) return parsed;
-        const traits = parsed['traits'];
-        return { ...parsed, traitCount: countPopulatedTraitFields(traits) };
-      },
+      (parsed) => this.normalizeProviderInput(parsed),
     );
+  }
+
+  private normalizeProviderInput(parsed: unknown): unknown {
+    const normalized = normalizeTraitExtractionInput(parsed);
+    if (normalized.normalizedSignalCount > 0) {
+      this.logger.warn(
+        `Normalized ${normalized.normalizedSignalCount} shorthand matching signal(s)`,
+      );
+    }
+    return normalized.value;
+  }
+
+  private normalizeMatchingProfile(response: TraitExtractionResponse): TraitExtractionResponse {
+    return response.matchingProfile === undefined
+      ? response
+      : {
+          ...response,
+          matchingProfile: buildNormalizedMatchingProfile(response.matchingProfile),
+        };
   }
 }

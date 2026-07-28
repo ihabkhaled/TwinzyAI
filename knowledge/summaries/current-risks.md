@@ -47,7 +47,6 @@ Rule: the recorded owner decision wins; canonical files must be updated first, m
 ## 5. Stale docs and code comments (verified drift; code is correct unless noted)
 
 - `docs/product-overview.md` (15 traits / 4 matches / "no payments"), `docs/architecture.md` (`MAX_FINAL_RESULTS=5`), `docs/agent-product-map.md` ("up to 4", "no upsells"), `docs/agent-code-map.md` (`game.manager.ts`, `features/game`), `docs/release-checklist.md` item 9 — all lag the 221-field / 1–10-results / payments-module reality.
-- `TEST_CASES.md` cites promptVersion `advanced-global-traits-v3`; shipped literal is `written-traits-v5`.
 - Code comments: `env.schema.ts` phantom "vision declarations" block; `result-aggregation.service.ts` "caps at 5"; `matching-evidence.types.ts` "alongside the photo".
 - Knowledge folders: `context/codebase-navigation.md` + `memory/library-boundaries.md` describe the obsolete `features/`+`lib/` frontend anatomy; `memory/database-decisions.md`/`memory/project-architecture.md` claim "infrastructure/ folders stay empty" (two repositories exist); `memory/ai-context-map.md` claims AGENTS.md is canonical (CLAUDE.md is); `context/frontend/glossary.md` permits "documented" inline eslint-disable (contradicts the absolute ban — the ban wins); `memory/frontend/security-decisions.md` claims a Trivy LOW floor (actual gate is HIGH/CRITICAL); `memory/README.md` index is missing newer files.
 - `packages/shared/dist/` is partially stale (compiled artifacts with no src counterpart) — rebuild before trusting; `npm run build:shared` before lint/tests.

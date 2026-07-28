@@ -8,7 +8,7 @@
         "docs/provider-routing.md",
         "rules/14-ai-safety.md"
       ],
-      "fileCount": 92,
+      "fileCount": 95,
       "lane": "standard",
       "layers": [
         "adapters",

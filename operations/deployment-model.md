@@ -40,7 +40,7 @@ stage with a Docker `HEALTHCHECK` (30s interval, 5s timeout, 15s start period, 3
 
 | Image | Build | Runtime artifact | Healthcheck target |
 | --- | --- | --- | --- |
-| `twinzy-api:local` | deps → build → prod-deps → runner ([Dockerfile.api](../Dockerfile.api)) | `apps/api/dist` + production `node_modules` | `http://127.0.0.1:4000/api/v1/health` |
+| `twinzy-api:local` | deps → build → prod-deps → runner ([Dockerfile.api](../Dockerfile.api)) | `apps/api/dist` + root and API-workspace production `node_modules` | `http://127.0.0.1:4000/api/v1/health` |
 | `twinzy-web:local` | deps → build (Next standalone) → runner ([Dockerfile.web](../Dockerfile.web)) | `.next/standalone` server | `http://127.0.0.1:3000/` |
 
 `NEXT_PUBLIC_API_BASE_URL` is a **build arg** for the web image — changing the API origin

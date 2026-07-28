@@ -10,7 +10,7 @@ See rules/14-ai-safety.md for the normative rules. Implementation summary:
 - Every response is Zod-validated with bounded shapes: the 221-field advanced grouped visible
   trait taxonomy (built from `trait-category.constants.ts`), bounded arrays and strings, a
   candidate pool capped at 25, requested final results bounded to 1–10, and the
-  `promptVersion` literal `written-traits-v5`.
+  `promptVersion` literal `written-traits-v6`.
 - A schema/prompt lock-step unit test asserts every taxonomy field appears in the Prompt 1
   template, so the prompt and the Zod schema can never drift apart.
 - Every response must echo the requested `languageCode` (en/ar) — a schema field plus an

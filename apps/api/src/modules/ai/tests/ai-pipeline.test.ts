@@ -120,6 +120,16 @@ describe('TraitExtractionService', () => {
     expect(prompt).toContain(`"promptVersion": "${GAME_PROMPT_VERSION}"`);
     expect(prompt).toContain('"matchingProfile"');
     expect(prompt).toContain('"counterfactualProfiles"');
+    expect(prompt).toMatch(/"mutableStyleSignals": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"expressionAndPresentation": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"occludedOrUncertainSignals": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"contradictionsToAvoid": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"accessoryAgnosticSignals": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"withoutEyewear": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"withoutFacialHair": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).toMatch(/"withoutMutableStyling": \[\s*\{\s*"id": "string"/u);
+    expect(prompt).not.toContain('"eyewear | facialHair | hairstyle');
+    expect(prompt).toContain('Never write prohibited safety terms in any JSON value');
   });
 
   it('rejects invalid JSON from the provider', async () => {
@@ -179,7 +189,70 @@ describe('TraitExtractionService', () => {
     if (overallFace !== undefined) {
       overallFace['overallFaceShape'] = 'we identified this famous actor';
     }
-    adapter.queueImageResponse(JSON.stringify(payload));
+    const unsafeResponse = JSON.stringify(payload);
+    adapter.queueImageResponse(unsafeResponse);
+
+    await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseUnsafe);
+    expect(adapter.imageCalls[0]?.validate?.(unsafeResponse)).toMatchObject({
+      ok: false,
+      reason: 'forbidden wording: we identified',
+    });
+  });
+
+  it('recovers string shorthand in enhanced profiles before strict validation', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(
+      buildTraitExtractionJson({
+        matchingProfile: {
+          stableVisibleStructure: [],
+          mutableStyleSignals: ['dark rectangular eyewear'],
+          expressionAndPresentation: ['warm direct smile'],
+          occludedOrUncertainSignals: [],
+          contradictionsToAvoid: [],
+          accessoryAgnosticSignals: [],
+          imageQualityCaps: [],
+        },
+        counterfactualProfiles: {
+          withoutEyewear: ['eye-area structure remains uncertain'],
+          withoutFacialHair: [],
+          withoutMutableStyling: [],
+        },
+      }),
+    );
+
+    const result = await traitExtraction.extractTraits(image, 'en');
+
+    expect(result.matchingProfile?.mutableStyleSignals[0]).toMatchObject({
+      value: 'dark rectangular eyewear',
+      confidence: 'low',
+      visibility: 'uncertain',
+    });
+    expect(result.counterfactualProfiles?.withoutEyewear[0]).toMatchObject({
+      value: 'eye-area structure remains uncertain',
+      weight: 1,
+    });
+  });
+
+  it('safety-scans enhanced matching-profile text', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(
+      buildTraitExtractionJson({
+        matchingProfile: {
+          stableVisibleStructure: ['we identified this famous actor'],
+          mutableStyleSignals: [],
+          expressionAndPresentation: [],
+          occludedOrUncertainSignals: [],
+          contradictionsToAvoid: [],
+          accessoryAgnosticSignals: [],
+          imageQualityCaps: [],
+        },
+        counterfactualProfiles: {
+          withoutEyewear: [],
+          withoutFacialHair: [],
+          withoutMutableStyling: [],
+        },
+      }),
+    );
 
     await expectRejection(traitExtraction.extractTraits(image, 'en'), ErrorCode.AiResponseUnsafe);
   });

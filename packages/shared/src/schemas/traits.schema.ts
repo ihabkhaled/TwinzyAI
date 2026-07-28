@@ -69,7 +69,7 @@ const uncertaintyNotesShape = Object.fromEntries(
 export const UncertaintyNotesSchema = z.object(uncertaintyNotesShape);
 
 /**
- * The written-traits-v5 nested trait payload: all 16 categories (221 named
+ * The written-traits-v6 nested trait payload: all 16 categories (221 named
  * fields, every populated value localized text) plus the uncertainty-notes
  * block. Each category is required, but individual fields are tolerant (see
  * `optionalTraitValue`): a model that omits/nulls a few of 221 fields yields a

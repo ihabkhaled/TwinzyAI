@@ -61,7 +61,7 @@ terms:
     see: domain/invariants.md
   - term: prompt version
     definition: >-
-      written-traits-v5; the contract version every AI response must echo as a
+      written-traits-v6; the contract version every AI response must echo as a
       Zod literal.
     ownedBy: packages/shared/src/constants/app.constants.ts
     see: domain/invariants.md

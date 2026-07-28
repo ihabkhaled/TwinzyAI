@@ -87,4 +87,15 @@ describe('buildSchemaValidator', () => {
   it('rejects text that is not JSON at all with a JSON reason', () => {
     expect(isValid('definitely not json')).toEqual({ ok: false, reason: 'not valid JSON' });
   });
+
+  it('applies the same optional normalization before model-chain validation', () => {
+    const normalize = vi.fn((parsed: unknown) => ({
+      ...(parsed as Record<string, unknown>),
+      count: Number((parsed as { count: string }).count),
+    }));
+    const validatesNormalized = buildSchemaValidator(TestSchema, normalize);
+
+    expect(validatesNormalized('{"value":"hi","count":"7"}')).toEqual({ ok: true });
+    expect(normalize).toHaveBeenCalledOnce();
+  });
 });

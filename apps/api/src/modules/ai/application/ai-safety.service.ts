@@ -5,6 +5,7 @@ import type { Candidate, JudgedResult } from '@twinzy/shared';
 import { ERROR_MESSAGE_KEY_BY_CODE, ErrorCode, IntegrationError } from '../../../core/errors';
 import { AppLogger } from '../../../core/logger/app-logger.service';
 import { containsForbiddenWording, findForbiddenPhrase } from '../lib/forbidden-wording.guard';
+import type { AiValidationResult } from '../model/ai-provider-adapter.types';
 import { AI_UNSAFE_RESPONSE_MESSAGE } from '../model/gemini.constants';
 
 const LOG_CONTEXT = 'AiSafety';
@@ -22,18 +23,28 @@ export class AiSafetyService {
   }
 
   public assertTraitTextSafe(values: readonly string[]): void {
+    const validation = this.validateTraitText(values);
+    if (!validation.ok) {
+      const matched = validation.reason?.replace('forbidden wording: ', '') ?? 'unknown';
+      this.logger.warn(`Trait response rejected (matched: ${matched})`);
+      throw new IntegrationError(
+        AI_UNSAFE_RESPONSE_MESSAGE,
+        ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseUnsafe],
+        ErrorCode.AiResponseUnsafe,
+      );
+    }
+  }
+
+  public validateTraitText(values: readonly string[]): AiValidationResult {
     for (const value of values) {
       if (containsForbiddenWording(value)) {
-        this.logger.warn(
-          `Trait response rejected (matched: ${findForbiddenPhrase(value) ?? 'unknown'})`,
-        );
-        throw new IntegrationError(
-          AI_UNSAFE_RESPONSE_MESSAGE,
-          ERROR_MESSAGE_KEY_BY_CODE[ErrorCode.AiResponseUnsafe],
-          ErrorCode.AiResponseUnsafe,
-        );
+        return {
+          ok: false,
+          reason: `forbidden wording: ${findForbiddenPhrase(value) ?? 'unknown'}`,
+        };
       }
     }
+    return { ok: true };
   }
 
   public filterCandidates(candidates: readonly Candidate[]): Candidate[] {

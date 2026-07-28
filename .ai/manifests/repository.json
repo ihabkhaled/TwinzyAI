@@ -1,5 +1,5 @@
 {
-  "count": 832,
+  "count": 835,
   "files": [
     {
       "exports": [
@@ -3127,18 +3127,19 @@
           "name": "AiSafetyService"
         }
       ],
-      "hash": "617b4457d5191608124f8b0b72f3d407ffef59b11fa5d969d8ffdf6fafd45057",
+      "hash": "8c002f88f28765daa47192b7ce07fb341ae62b163f9505810229d7cc3cb3b63d",
       "imports": [
         "../../../core/errors",
         "../../../core/logger/app-logger.service",
         "../lib/forbidden-wording.guard",
+        "../model/ai-provider-adapter.types",
         "../model/gemini.constants",
         "@nestjs/common",
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 87,
+      "loc": 98,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/ai-safety.service.ts"
     },
@@ -3383,13 +3384,15 @@
           "name": "TraitExtractionService"
         }
       ],
-      "hash": "57217539f68fa29e6bf105c4f1321ad7bbc270c425912300af59518347e09df7",
+      "hash": "ea13ab1f6d7a88d58f0fcd075245dcc8e472a5dad55e619fd3752e09ca811d02",
       "imports": [
         "../../../config/gemini-step.constants",
         "../../../core/logger/app-logger.service",
         "../infrastructure/prompt-template.repository",
         "../lib/json-response.util",
+        "../lib/matching-profile.builder",
         "../lib/response-language.guard",
+        "../lib/trait-extraction-input.normalizer",
         "../lib/trait-text.util",
         "../model/ai-provider-adapter.types",
         "../model/gemini.types",
@@ -3400,7 +3403,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 74,
+      "loc": 103,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/application/trait-extraction.service.ts"
     },
@@ -3658,7 +3661,7 @@
           "name": "parseAiJsonResponse"
         }
       ],
-      "hash": "79c2295705ac225cc74da247fb84386bab3912378b47b16eeb29e847fab8b2ed",
+      "hash": "ed6fa64cbaab85cbe6d5e2bd2a9a7f5cdec69cf5fa1a5d3497604de59e08bcbb",
       "imports": [
         "../../../core/errors",
         "../model/ai-provider-adapter.types",
@@ -3668,7 +3671,7 @@
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 99,
+      "loc": 107,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/json-response.util.ts"
     },
@@ -3877,6 +3880,24 @@
       "exports": [
         {
           "kind": "const",
+          "name": "normalizeTraitExtractionInput"
+        }
+      ],
+      "hash": "bcf27dc9e81337b0be39cb4e495584c41e901bd60ddd1a9e27d2d824d62c84d9",
+      "imports": [
+        "../model/trait-extraction-normalization.types",
+        "@twinzy/shared"
+      ],
+      "isTest": false,
+      "layer": "lib",
+      "loc": 105,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "collectExtractionTextValues"
         },
         {
@@ -3884,13 +3905,13 @@
           "name": "collectTraitTextValues"
         }
       ],
-      "hash": "8e0fd736cd5d133c2856c2598a0a3d86b6f518ef6bacf7449d5d7168cd564f39",
+      "hash": "baced90a0f35af628b74776b969727431a1066381d431391880bb1b036da68b3",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "lib",
-      "loc": 39,
+      "loc": 76,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/lib/trait-text.util.ts"
     },
@@ -4431,6 +4452,21 @@
       "path": "apps/api/src/modules/ai/model/region-hint.constants.ts"
     },
     {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "TraitExtractionNormalizationResult"
+        }
+      ],
+      "hash": "b97faf73d8eb83a833fe9699570e10dc5f7fec224f00872b30140599bfc43f45",
+      "imports": [],
+      "isTest": false,
+      "layer": "model",
+      "loc": 5,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts"
+    },
+    {
       "exports": [],
       "hash": "00c7278ef1cad6cb5a0bbbaf0c3cd41a09d65e50684d22f8ca0d2bc01576f82d",
       "imports": [
@@ -4480,7 +4516,7 @@
     },
     {
       "exports": [],
-      "hash": "baf9b22d6ff81ec7be84c4406e7d68c8c807341653c7d2506f98d5452a64755a",
+      "hash": "e4ca474f03526f60d58167a3a1ef6ec9e03bd52740ab449e68b343d81d67c6f0",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/fake-ai-adapter",
@@ -4498,7 +4534,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 406,
+      "loc": 479,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/ai-pipeline.test.ts"
     },
@@ -4706,7 +4742,7 @@
     },
     {
       "exports": [],
-      "hash": "2e33690f64629b1b2a04ff4faf5542ced080185f5590cbb7122148dfd217c8e5",
+      "hash": "72fb66795e155dc92e259bcff7545d981de6ec1e6a00f37909a862bd3cc0f0df",
       "imports": [
         "../lib/json-response.util",
         "vitest",
@@ -4714,7 +4750,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 91,
+      "loc": 102,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/json-response.util.test.ts"
     },
@@ -4873,7 +4909,22 @@
     },
     {
       "exports": [],
-      "hash": "eed9f1185994414f7ffdc1d2001530eb8feb93020948731d1f8384aef6d16de5",
+      "hash": "2abf2dbb4d6b0d9539083792d5c6e9a777ae8659345f3e62d529f5a6b77bc5bc",
+      "imports": [
+        "../../../tests/fixtures/fake-ai-adapter",
+        "../lib/trait-extraction-input.normalizer",
+        "@twinzy/shared",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "tests",
+      "loc": 128,
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts"
+    },
+    {
+      "exports": [],
+      "hash": "11700fb6137dae9d7edf5a9204bc6a83025897c5e3ee168651bd8f5444b0115e",
       "imports": [
         "../../../tests/fixtures/fake-ai-adapter",
         "../lib/trait-text.util",
@@ -4881,7 +4932,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 49,
+      "loc": 106,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/trait-text.util.test.ts"
     },
@@ -8404,6 +8455,10 @@
         },
         {
           "kind": "const",
+          "name": "buildCounterfactualProfilesPayload"
+        },
+        {
+          "kind": "const",
           "name": "buildFinalGameResultPayload"
         },
         {
@@ -8417,6 +8472,14 @@
         {
           "kind": "const",
           "name": "buildJudgeSafetyCheckPayload"
+        },
+        {
+          "kind": "const",
+          "name": "buildMatchingProfilePayload"
+        },
+        {
+          "kind": "const",
+          "name": "buildMatchingSignalPayload"
         },
         {
           "kind": "const",
@@ -8447,7 +8510,7 @@
           "name": "RecordedImageCall"
         }
       ],
-      "hash": "864918b8b2bac912cdbed96c00cc104e4038f44bd8edd4f28146f0452f4449d3",
+      "hash": "efd2184cb39370f8c3094b58fd2eb4a93cc3012e84e2f3746146cdb482d04600",
       "imports": [
         "../../config/gemini-step.constants",
         "../../modules/ai/model/ai-provider-adapter.types",
@@ -8456,7 +8519,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 287,
+      "loc": 332,
       "module": "api:tests",
       "path": "apps/api/src/tests/fixtures/fake-ai-adapter.ts"
     },
@@ -8555,7 +8618,7 @@
     },
     {
       "exports": [],
-      "hash": "d853cf6dc66cfbb30fa4701e258459968b37ab9f53b7ac9e220fc45d0d324f71",
+      "hash": "85fafa8058e3531adb070e077078eddc7fefc67bc511770becfad2b860595b2c",
       "imports": [
         "../app.module",
         "../bootstrap/create-test-app",
@@ -8573,7 +8636,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 178,
+      "loc": 212,
       "module": "api:tests",
       "path": "apps/api/src/tests/game-analyze-stream.integration.test.ts"
     },
@@ -19891,7 +19954,7 @@
           "name": "UncertaintyNotesSchema"
         }
       ],
-      "hash": "893a9a3757158962c2e77e01106b28f17aec3f65e58c7d649e80c7043d999a98",
+      "hash": "11fa3a405670ced48bb5b82a0be680dc2ea6d3b23bd28dc1e3de4a62e168abe0",
       "imports": [
         "../constants/app.constants",
         "../constants/response-bounds.constants",

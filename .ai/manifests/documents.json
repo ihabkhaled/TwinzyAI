@@ -1,5 +1,5 @@
 {
-  "count": 750,
+  "count": 782,
   "documents": [
     {
       "authority": "canonical",
@@ -2536,7 +2536,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "c5e45f40b88032f472b57a4fbfb4296b1d758e9d5abaf4509528c7e4099eec8d",
+      "hash": "8e656c28181934b55e5659be6e7d1b35712d00d31f01365cdcb3560f888ce388",
       "headings": [
         "Prompt I/O Contract",
         "Placeholders and output schemas per prompt",
@@ -2552,7 +2552,7 @@
         "judge",
         "translation",
         "schema",
-        "written-traits-v5"
+        "written-traits-v6"
       ],
       "links": [
         "../../docs/ai-safety.md",
@@ -2588,7 +2588,7 @@
       ],
       "summary": "The placeholder contract of each of the four prompt templates (REQUIRED_PLACEHOLDERS) and the zod schema every prompt's output must validate against.",
       "title": "Prompt I/O Contract",
-      "tokens": 1058,
+      "tokens": 1122,
       "type": "contract"
     },
     {
@@ -2596,7 +2596,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "993de3330cc3ad9af13980a04129371f9eb96c730ecfb276816b45ad4a2eda8f",
+      "hash": "297aa7abb1cfd57acd85f7cee8c2e2490ba3687b05f4d04ac788ac9bf024d3e6",
       "headings": [
         "AI Provider Port and Routing Contract",
         "The port: `AiProviderAdapter`",
@@ -2666,7 +2666,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "284056eb4753bc7544f25f7bb539109a408dfd4fc01f6817f0abfa9a7f26651a",
+      "hash": "0ecd80c28f989b43501510541ece308cac929d0beee110584eacc68d4ff82dec",
       "headings": [
         "Game Analyze Endpoints Contract",
         "POST /api/v1/game/analyze — multipart",
@@ -3453,7 +3453,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "007fb7f0dd38ffb5f06beed57b2392e7af02c58e7f785ba39e329c38fda9e9e4",
+      "hash": "038c503bb3daed4367909726256d78df41cd94c0097d6383a9e6973c1f52fc14",
       "headings": [
         "contracts/ — Canonical Contract Surfaces",
         "Contract areas",
@@ -3778,7 +3778,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "2b31be08e958b4ab3342368c62aa3a0e9a8db0c4394fb0ac2f0f6325a0eed757",
+      "hash": "43cadb941ee66b2472c0367d385ea7bb631b4a63b8036c0485a521d0d72003dd",
       "headings": [
         "AI Safety"
       ],
@@ -4662,7 +4662,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "2d5402ffce131aadf42f956390fa12fe5ca69533ff6738da8b51a99315d78fd3",
+      "hash": "f31e387e32e889f75d926a0f3700525bdde1553dfe30eda427a07829d1e3a2bc",
       "headings": [
         "AI Prompt Catalog",
         "The four prompts",
@@ -4713,7 +4713,7 @@
       ],
       "summary": "The four prompt files, their PromptKey, required placeholders, output schema, and shared safety constraints.",
       "title": "AI Prompt Catalog",
-      "tokens": 1306,
+      "tokens": 1382,
       "type": "doc"
     },
     {
@@ -5220,7 +5220,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "924b82bad1d42283cd05631e78b0acf99be838cda58b48db742924bef68b0a68",
+      "hash": "99a755dba0a07b5bf4e694353f4d6380ee2ba4ee75d04b523c7fe0973c42d388",
       "headings": [
         "AI Schema Contracts",
         "Per-step schemas",
@@ -5283,7 +5283,7 @@
       ],
       "summary": "The per-step Zod schemas every AI response must pass, plus the streaming per-model validator that burns a fallback hop instead of the request.",
       "title": "AI Schema Contracts",
-      "tokens": 1121,
+      "tokens": 1120,
       "type": "doc"
     },
     {
@@ -5348,7 +5348,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "c21ae6caf0c94801e0b85dc55673b8a26e13070ebcacd4fc267c97e84240ff7b",
+      "hash": "576f37ba7f6865de07303774c46e89117ba3d9d00eff0ce572a49e4917e798eb",
       "headings": [
         "AI System Overview",
         "Cross-cutting guarantees (each owned elsewhere)"
@@ -8241,6 +8241,1023 @@
       "summary": "This folder is the master template for any request in the Twinzy repository. Copy it to `docs/features/<feature-slug>/` and keep the numbering and filenames exactly the same.",
       "title": "Feature Template Usage",
       "tokens": 551,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "dfb33a28b5f0ab05c01c74a611c661f43e9997de6f5562651f19cfc76482c633",
+      "headings": [
+        "TWZ-AI-2026-07-28 — Advanced Extraction Provider-Shape Recovery",
+        "Scope",
+        "Evidence"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-00-intake",
+      "keywords": [
+        "2026",
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "intake",
+        "provider",
+        "recovery",
+        "shape",
+        "twz"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Type: production bug / AI contract hotfix",
+      "title": "TWZ-AI-2026-07-28 — Advanced Extraction Provider-Shape Recovery",
+      "tokens": 274,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "ff6ba143ee81bfd1c541abe8dd4842808db8af05c5cfc09bed7eda3880ffc477",
+      "headings": [
+        "Business Analysis"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-01-business-analysis",
+      "keywords": [
+        "advanced",
+        "analysis",
+        "business",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/01-business-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Players can approve a payment and wait through three provider attempts, but receive no game result",
+      "title": "Business Analysis",
+      "tokens": 158,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "6f7561bf978dac9f3af4f72819aa7b5442c317522a448b788de33831ddd6dfab",
+      "headings": [
+        "Business Development"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-02-business-development",
+      "keywords": [
+        "advanced",
+        "business",
+        "development",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "This is reliability restoration, not monetization expansion. It protects paid-result trust and",
+      "title": "Business Development",
+      "tokens": 78,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "642fb6153bfec186d049d97648e5891195e9394180be8f4e272d95b9d837bdea",
+      "headings": [
+        "Product Requirements",
+        "Acceptance criteria",
+        "Non-goals"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-03-product-requirements",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "product",
+        "provider",
+        "recovery",
+        "requirements",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/03-product-requirements.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "1. Enhanced `matchingProfile` and `counterfactualProfiles` remain in Prompt 1 and downstream",
+      "title": "Product Requirements",
+      "tokens": 254,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "6fd156eb41f452f59abe2341d5cbaa6f4bba56c31724cef14ec434a700d58bcf",
+      "headings": [
+        "Cross-Functional Refinement"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-04-cross-functional-refinement",
+      "keywords": [
+        "advanced",
+        "cross",
+        "docs",
+        "extraction",
+        "features",
+        "functional",
+        "provider",
+        "recovery",
+        "refinement",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Product: enhanced matching must be restored, not removed.",
+      "title": "Cross-Functional Refinement",
+      "tokens": 169,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "5d8738df0748d71a2fad67456b588b23e177cc757dbec0c87706484c085dc51e",
+      "headings": [
+        "Delivery Plan"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-05-delivery-plan",
+      "keywords": [
+        "advanced",
+        "delivery",
+        "docs",
+        "extraction",
+        "features",
+        "plan",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/05-delivery-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "1. Lock the production string-array response as a failing schema/pipeline regression.",
+      "title": "Delivery Plan",
+      "tokens": 164,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "e09c2add1b937b504c9b2b3d5e041cbc8ae8aeddf704ce17a462ac05d5fd8f6d",
+      "headings": [
+        "Technical Refinement",
+        "Root cause",
+        "Chosen approach",
+        "Rejected"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-06-technical-refinement",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "refinement",
+        "shape",
+        "technical"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/06-technical-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Prompt 1 showed one structured example only for `stableVisibleStructure`, left the remaining",
+      "title": "Technical Refinement",
+      "tokens": 351,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "0a7eed36c3571310941a793752086851902f9f4751d9131f2a46b19a5ecdd453",
+      "headings": [
+        "Technical Roadmap"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-07-technical-roadmap",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "roadmap",
+        "shape",
+        "technical"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/07-technical-roadmap.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "This hotfix is one reviewable slice on `main`: tests and incident artifacts, provider-boundary",
+      "title": "Technical Roadmap",
+      "tokens": 98,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "f567520dfcbde81f2e5aee69c9f06255beea8f83c84f7618386cdfef25f9bd4c",
+      "headings": [
+        "Architecture Review"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-08-architecture-review",
+      "keywords": [
+        "advanced",
+        "architecture",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "review",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/08-architecture-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "The change stays inside the existing boundary:",
+      "title": "Architecture Review",
+      "tokens": 143,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "44c78e5004e10308f83de8dcd8271a179c8e06cbf03575d1a86e398524035605",
+      "headings": [
+        "Impact Analysis"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-09-impact-analysis",
+      "keywords": [
+        "advanced",
+        "analysis",
+        "docs",
+        "extraction",
+        "features",
+        "impact",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/09-impact-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Backend AI: prompt, provider validation normalization, final parse, safety-text collection.",
+      "title": "Impact Analysis",
+      "tokens": 169,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "e2af8c4ad71169301da86a06938521535bc00af3e3b69d465b354a9f8276ee9e",
+      "headings": [
+        "Engineering Standards Check"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-10-engineering-standards-check",
+      "keywords": [
+        "advanced",
+        "check",
+        "docs",
+        "engineering",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape",
+        "standards"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/10-engineering-standards-check.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Tests precede implementation and reproduce the live array-element mismatch.",
+      "title": "Engineering Standards Check",
+      "tokens": 157,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "a01f29cd62fecc96acdb2f3c9b24efbbfdca14688fc930d3cd1d8ea7e2c46693",
+      "headings": [
+        "Test Strategy",
+        "Red regressions",
+        "Regression layers"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-11-test-strategy",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape",
+        "strategy",
+        "test"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/11-test-strategy.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Prompt contract: every matching/counterfactual array shows structured signal objects; modifiers",
+      "title": "Test Strategy",
+      "tokens": 207,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "a93171a66ec90f97ed33553a1652a30d73b80f7e1818e8fd6409f024e6b7ce62",
+      "headings": [
+        "Coverage Plan"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-12-coverage-plan",
+      "keywords": [
+        "advanced",
+        "coverage",
+        "docs",
+        "extraction",
+        "features",
+        "plan",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/12-coverage-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Touched AI normalizer, JSON validation integration, trait extraction, trait text collection,",
+      "title": "Coverage Plan",
+      "tokens": 106,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "b18c5c8d002e156566ad007307f599e8d57b40c2fa422c130b011e0168f51003",
+      "headings": [
+        "Implementation Readiness"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-13-implementation-readiness",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "implementation",
+        "provider",
+        "readiness",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/13-implementation-readiness.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Production request and exact failing field paths are correlated.",
+      "title": "Implementation Readiness",
+      "tokens": 202,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "52055744be18cee19abafeb688bb7ad06e9941d494c278744f89c739bb47a257",
+      "headings": [
+        "15 - Developer Validation Report",
+        "Validation Summary",
+        "Functional And Operational Coverage",
+        "Acceptance Criteria"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-15-dev-validation-report",
+      "keywords": [
+        "advanced",
+        "dev",
+        "developer",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "report",
+        "shape",
+        "validation"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/15-dev-validation-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Area | Result | Evidence |",
+      "title": "15 - Developer Validation Report",
+      "tokens": 866,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "190cf8c0cda86efa7302b03b66df8fa88614fbfab671797440236b3a819b5621",
+      "headings": [
+        "16 - Internal Bug Log"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-16-dev-bug-log",
+      "keywords": [
+        "advanced",
+        "bug",
+        "dev",
+        "docs",
+        "extraction",
+        "features",
+        "internal",
+        "log",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Bug ID | Summary | Severity | Status | Re-test result |",
+      "title": "16 - Internal Bug Log",
+      "tokens": 328,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "2ca1f8a8129b81183290362a8aad54392f91f620901c8ce286f03dd20b0a5c76",
+      "headings": [
+        "17 - QA Report",
+        "Scope"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-17-qa-report",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "report",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/17-qa-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "The automated QA suites exercise the API through the real Nest/Fastify multipart and SSE",
+      "title": "17 - QA Report",
+      "tokens": 244,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "086fd2f72c9b96584d13f4e576f93e32ac689f661711038b0970a3390478640e",
+      "headings": [
+        "18 - QA Defect Cycle Log"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-18-defect-cycle-log",
+      "keywords": [
+        "advanced",
+        "cycle",
+        "defect",
+        "docs",
+        "extraction",
+        "features",
+        "log",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/18-defect-cycle-log.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Defect ID | Fix status | Re-test status | Regression status |",
+      "title": "18 - QA Defect Cycle Log",
+      "tokens": 140,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "2eca9016c37e535d95d20c7bd0e11249ba898b3e76f45958ccd74b295d0867fe",
+      "headings": [
+        "19 - Pentest Report"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-19-pentest-report",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "pentest",
+        "provider",
+        "recovery",
+        "report",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/19-pentest-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "No new route, role, persistence layer, or externally controllable field was introduced. Dynamic",
+      "title": "19 - Pentest Report",
+      "tokens": 185,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "d04939b2854b4a059f919e29caa300db0f861ad318d80fe24db315b12bb4ef90",
+      "headings": [
+        "19 - Security Review",
+        "Review"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-19-security-review",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "review",
+        "security",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/19-security-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- [x] Consent, upload validation order, rate limiting, Helmet, and CORS are unchanged.",
+      "title": "19 - Security Review",
+      "tokens": 230,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "8e38891b5249521b76e611176f569d4aefbfd4ad43f563909410f47c32632e28",
+      "headings": [
+        "19 - Threat Model",
+        "Scope And Assets"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-19-threat-model",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "model",
+        "provider",
+        "recovery",
+        "shape",
+        "threat"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/19-threat-model.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "The changed boundary is untrusted Gemini JSON entering the extraction pipeline. Protected assets",
+      "title": "19 - Threat Model",
+      "tokens": 409,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "b091bfb55b931f670036e740aec0ac704160415deddcbbddd46864c34651fdb1",
+      "headings": [
+        "20 - UAT Report"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-20-uat-report",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "report",
+        "shape",
+        "uat"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/20-uat-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "The owner requested a direct backend, payment-off trial that preserves the enhanced updates.",
+      "title": "20 - UAT Report",
+      "tokens": 284,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "5995cb0181cb9401426f7772d0799b70fe4a7506f26ebe9b7ad0c675d32e9d30",
+      "headings": [
+        "21 - Client Approval"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-21-client-approval",
+      "keywords": [
+        "advanced",
+        "approval",
+        "client",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/21-client-approval.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Approval required: yes",
+      "title": "21 - Client Approval",
+      "tokens": 192,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "753ead4b491b4c0cf55f808a67a757b9f00c8c129a972c4ba8b7cd088327683e",
+      "headings": [
+        "22 - Go / No-Go"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-22-go-no-go",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/22-go-no-go.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Area | Status | Notes |",
+      "title": "22 - Go / No-Go",
+      "tokens": 275,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "61fe6af379639121f6d0dce8772794d74892dd3d236b70e5d533bcbebab5b7c5",
+      "headings": [
+        "23 - Documentation Changelog"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-23-documentation-changelog",
+      "keywords": [
+        "advanced",
+        "changelog",
+        "docs",
+        "documentation",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/23-documentation-changelog.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Area | Change |",
+      "title": "23 - Documentation Changelog",
+      "tokens": 233,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "624f948a290b26c94c26054d98303be9d88a518aba2e4b58f3813a83d87fbf84",
+      "headings": [
+        "24 - Risk / Compliance / Ops Review"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-24-risk-compliance-ops",
+      "keywords": [
+        "advanced",
+        "compliance",
+        "docs",
+        "extraction",
+        "features",
+        "ops",
+        "provider",
+        "recovery",
+        "review",
+        "risk",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/24-risk-compliance-ops.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "| Area | Status | Notes |",
+      "title": "24 - Risk / Compliance / Ops Review",
+      "tokens": 216,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "fd930917c06a399178746f477ba3ea309b999bab5f29e430f349156769fc4b28",
+      "headings": [
+        "25 - Release Report"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-25-release-report",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "release",
+        "report",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/25-release-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Release is pending. The intended rollout is one hook-clean conventional commit pushed directly to",
+      "title": "25 - Release Report",
+      "tokens": 137,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "5af284b478c71954eae81f7b75a43f22d72b8b47e1766b76f008b74c5b959fd7",
+      "headings": [
+        "26 - Hypercare Report"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-26-hypercare-report",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "hypercare",
+        "provider",
+        "recovery",
+        "report",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/26-hypercare-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Hypercare begins when the Vercel production deployment is ready. Initial monitoring will inspect",
+      "title": "26 - Hypercare Report",
+      "tokens": 100,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "9debbd1eda4a4a89c250c2ac73737f673fc3fd5efc731867cf75ef1844fa53f7",
+      "headings": [
+        "27 - Postmortem",
+        "Incident",
+        "Confirmed Root Cause",
+        "Timeline",
+        "Corrective Actions"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-27-postmortem",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "postmortem",
+        "provider",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/27-postmortem.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- ID: `TWZ-AI-2026-07-28`",
+      "title": "27 - Postmortem",
+      "tokens": 513,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "7191e8e88d8030f9781cfa25921b8d47cebbbfb998e33135d1145bf6efc89ca6",
+      "headings": [
+        "27 - Retrospective",
+        "Learning",
+        "Permanent Improvement"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-27-retrospective",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "recovery",
+        "retrospective",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/27-retrospective.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Strict schemas correctly stopped malformed enhanced evidence, but prompt examples must specify",
+      "title": "27 - Retrospective",
+      "tokens": 213,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "a26bc8b5c3e339517fd6726f15d453107242d7b4d8d4fd36b24a31b3355c1e97",
+      "headings": [
+        "Advanced Extraction Provider-Shape Recovery"
+      ],
+      "id": "docs-features-advanced-extraction-provider-shape-recovery-readme",
+      "keywords": [
+        "advanced",
+        "docs",
+        "extraction",
+        "features",
+        "provider",
+        "readme",
+        "recovery",
+        "shape"
+      ],
+      "links": [],
+      "path": "docs/features/advanced-extraction-provider-shape-recovery/README.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Critical production hotfix record for `TWZ-AI-2026-07-28`.",
+      "title": "Advanced Extraction Provider-Shape Recovery",
+      "tokens": 123,
       "type": "doc"
     },
     {
@@ -17218,7 +18235,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "6e95b2bb52cb87e4e4f0106ce7bea856aab02ed7f170f4cef6af50cb610a221b",
+      "hash": "e6428db834e4224557fa6d5ae90a91675df315e7bb697e0f41876597387425f1",
       "headings": [
         "Domain Invariants — Enforced, With Code Citations",
         "1. Result counts are bounded",
@@ -17763,7 +18780,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "e5ae80414d8ade57d1be88ebeb3a8831b7f366d0181540063270d450c5b6f83a",
+      "hash": "c066efaa80ea49faca84638cf23fbf3cd204755d9d8f0cf63f043a26e6b5db53",
       "headings": [
         "Trait Taxonomy — 16 Categories, 221 Visible-Trait Fields",
         "Categories and field counts",
@@ -17822,7 +18839,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "2dae8cb28b8be96deeb5a4eb8f0a794f096af99018848cba6fe80cbc0e5a336c",
+      "hash": "2d51e52f648d69eaaa45ed52920ea0fcbf4dad1e82104659a682cb58051e85c4",
       "headings": [
         "Ubiquitous Language — Twinzy Domain Terms",
         "Core pipeline terms",
@@ -18361,7 +19378,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "ad001770b3478f519e17ef44bbedb3396e4cd563b085160f1ca85b52252fa169",
+      "hash": "60512aa0716982ed0888b91bddbc608cebae15eeef184a81dc69b5d46cca33ef",
       "headings": [
         "AI Pipeline Summary — Steps, Providers, Routing, Safety, Prompts, Env Knobs",
         "Steps and the image boundary",
@@ -18594,7 +19611,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "33b3e9966da678200ad8c1d38f11656d8adda471533b713eafbd948d7133c086",
+      "hash": "2f40b0ca0195f2c64aac85ac979f71d0794611f5cfb26477baf8cf3351d67d2a",
       "headings": [
         "Current Risks Summary — Open Conditions, Debt, Staleness, Exposure",
         "1. Paywall LIVE conditions — OPEN (highest-visibility gate)",
@@ -18638,7 +19655,7 @@
       ],
       "summary": "Routing digest of open risk — paywall LIVE conditions, SDLC artifact debt, the stale-mirror/copy cleanup backlog, provider-outage exposure, and every recorded doc/code drift.",
       "title": "Current Risks Summary — Open Conditions, Debt, Staleness, Exposure",
-      "tokens": 1724,
+      "tokens": 1697,
       "type": "summary"
     },
     {
@@ -18646,7 +19663,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "bae40107ab957add9a24a91ee646eacc220b41725f32946874501cf09718fc5c",
+      "hash": "698a4dda079e5b7c36d3f5272afae4ae9f81cd125aae14f013b9d5f68c88bda2",
       "headings": [
         "Domain Summary — Pipeline, Entities, Invariants, Limits",
         "Pipeline stages (steps in `apps/api/src/config/gemini-step.constants.ts`; only `extraction` may carry the image)",
@@ -19049,7 +20066,7 @@
       "contextTier": 1,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "c9388dde3fbc9dc15715aef2d3e45af5a726b2c80ca2fdd63632075b2d9e57f1",
+      "hash": "52ffa0511b467c74905e34a48e63009943a5f9f15b9c5cfca0147ae7aaf1103f",
       "headings": [
         "Testing Summary — Projects, E2E, Coverage, Commands, Fixtures",
         "Vitest projects (root `vitest.config.mts`)",
@@ -19102,7 +20119,7 @@
       ],
       "summary": "Routing digest of the test system — Vitest multi-project layout, Playwright e2e, the 95/90/95/95 coverage gate, canonical commands, and where fixtures live.",
       "title": "Testing Summary — Projects, E2E, Coverage, Commands, Fixtures",
-      "tokens": 1339,
+      "tokens": 1290,
       "type": "summary"
     },
     {
@@ -19256,7 +20273,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "cd97db634c24987fcb0971208a9e8af880f71dce5bf320618a18bd74466fe93d",
+      "hash": "9012a84bcff897782b46a4eb7a959270fb1cf1886618ca2efda715dca4cc216b",
       "headings": [
         "AI Safety Decisions"
       ],
@@ -19906,7 +20923,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "a947d3118f56b4e8224957e2015a51f687e79daf4773637cd74e91dddffc3b12",
+      "hash": "7cac20b799af26578bd1900583ae5692fb7f994a4363104d3ab33aceb47580fb",
       "headings": [
         "Known Pitfalls",
         "A. Strict-TypeScript traps",
@@ -19961,7 +20978,7 @@
       ],
       "summary": "> The running log of recurring mistakes and their fixes. **Read before writing code.** These",
       "title": "Known Pitfalls",
-      "tokens": 7796,
+      "tokens": 8218,
       "type": "memory"
     },
     {
@@ -20603,7 +21620,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "01e151e09ab4226013dfd0a2bd20d1e4c3bdba2680a6fff2f1684b7dd4de7add",
+      "hash": "8fd5a804d42edd9441c171a8fb373337023caa86edbc7f741101ff395f59005e",
       "headings": [
         "Deployment Model",
         "Production-shaped stack — `docker-compose.yml`",
@@ -20657,7 +21674,7 @@
       ],
       "summary": "How the Twinzy stack is built and deployed — Docker Compose, multi-stage non-root images, healthchecks, and the no-volumes/no-database posture.",
       "title": "Deployment Model",
-      "tokens": 994,
+      "tokens": 1000,
       "type": "operations"
     },
     {
@@ -23155,7 +24172,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "96d6c429e1debe0933cdd1d4a25bbe0b1aff1fad2844a0e4bca89e49b43f870e",
+      "hash": "102f8a9a0e0dea9c94682fefd44ee952dfb003c29207b090d90251cdcdf6d045",
       "headings": [
         "Technical Debt Register",
         "Register rules"
@@ -23176,7 +24193,6 @@
         "../apps/api/src/config/gemini-step.constants.ts",
         "../docs/agent-code-map.md",
         "../docs/agent-product-map.md",
-        "../docs/ai-safety.md",
         "../docs/architecture.md",
         "../docs/backend-architecture.md",
         "../docs/features/multi-provider-ai/00-intake.md",
@@ -23189,7 +24205,6 @@
         "../docs/release-checklist.md",
         "../knowledge/freshness-policy.yaml",
         "../README.md",
-        "../TEST_CASES.md",
         "risk-register.md"
       ],
       "path": "quality/technical-debt-register.md",
@@ -23208,7 +24223,7 @@
       ],
       "summary": "The recorded, owner-visible technical debt — stale legacy docs, the paywall artifact and webhook gaps, pending en+ar copy revision, and small code-level staleness.",
       "title": "Technical Debt Register",
-      "tokens": 1238,
+      "tokens": 1137,
       "type": "quality"
     },
     {
@@ -23470,6 +24485,45 @@
       "summary": "**Audience:** operators, contributors, and AI coding agents. **Player-visible changes:** none by",
       "title": "Release Notes — Parallel AI Pipeline, Release A (2026-07-12)",
       "tokens": 759,
+      "type": "release-note"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 4,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "61ce6cd562c0f6930612b764d5978bb55b6aae7e33ff533fb40548b2e1194f91",
+      "headings": [
+        "Advanced Extraction Provider-Shape Recovery — 2026-07-28",
+        "Summary",
+        "Included Changes",
+        "Player Impact",
+        "Operator Impact",
+        "Known Limitations",
+        "Rollout Notes"
+      ],
+      "id": "release-notes-2026-07-28-advanced-extraction-provider-shape-recovery",
+      "keywords": [
+        "2026",
+        "advanced",
+        "extraction",
+        "notes",
+        "provider",
+        "recovery",
+        "release",
+        "shape"
+      ],
+      "links": [
+        "../docs/features/advanced-extraction-provider-shape-recovery/"
+      ],
+      "path": "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Twinzy's enhanced v6 written-trait flow now tolerates the bounded string shorthand observed from",
+      "title": "Advanced Extraction Provider-Shape Recovery — 2026-07-28",
+      "tokens": 568,
       "type": "release-note"
     },
     {
@@ -31293,7 +32347,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": true,
-      "hash": "69f9b377fb56def1418d82da1653daa262c132369eeee5a98f9b42a2bfd69840",
+      "hash": "fa4815323d167d7ead32260edff06260fc8a2074354a9f79f9469eda23d47345",
       "headings": [
         "Module — `packages/shared` (`@twinzy/shared`)",
         "Public surface",
@@ -32883,11 +33937,11 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "6a436d13d0da50c780e087219c4d2b39f458e1b90f3f46c8be87f1863bc749d8",
+      "hash": "863394effbbc9b42ffd111b6afef417d6a4250095b304e52e224afa03403fc53",
       "headings": [
         "TEST_CASES.md — Behavioral Test Matrix",
         "File security (api-unit / api-integration)",
-        "Shared contracts — advanced-global-traits-v3 (shared-unit)",
+        "Shared contracts — written-traits-v6 (shared-unit)",
         "AI pipeline (api-unit)",
         "Translate result (api-integration) — `POST /api/v1/game/translate-result`",
         "Architecture (eslint)",
@@ -32915,7 +33969,7 @@
       "sourceMentions": [],
       "summary": "Living checklist of behaviors under test. Every case maps to at least one automated test.",
       "title": "TEST_CASES.md — Behavioral Test Matrix",
-      "tokens": 2784,
+      "tokens": 2788,
       "type": "doc"
     },
     {

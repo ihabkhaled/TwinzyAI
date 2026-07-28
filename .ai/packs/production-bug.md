@@ -14,7 +14,7 @@ Task type: `production-bug` · Lane: **standard** · Load after `.ai/BOOTSTRAP.m
 
 ## Must-read docs
 
-- memory/known-pitfalls.md — > The running log of recurring mistakes and their fixes. **Read before writing code.** These (~7796 tokens)
+- memory/known-pitfalls.md — > The running log of recurring mistakes and their fixes. **Read before writing code.** These (~8218 tokens)
 - docs/architecture.md — npm-workspaces monorepo: (~1486 tokens)
 
 ## Rules

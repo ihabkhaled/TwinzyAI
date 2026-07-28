@@ -59,7 +59,7 @@ it needs a recorded owner decision first (see `CLAUDE.md`, Twinzy Product Constr
 
 ## 4. Prompt/contract version is a literal
 
-- `GAME_PROMPT_VERSION = 'written-traits-v5'`
+- `GAME_PROMPT_VERSION = 'written-traits-v6'`
   (`packages/shared/src/constants/app.constants.ts`) is a `z.literal` in the extraction,
   generation, judge, and final-result schemas — a stale prompt/schema pairing fails
   validation instead of shipping drifted output.

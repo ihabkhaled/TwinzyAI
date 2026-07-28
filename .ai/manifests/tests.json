@@ -1,5 +1,5 @@
 {
-  "count": 207,
+  "count": 208,
   "tests": [
     {
       "kind": "unit",
@@ -459,6 +459,15 @@
       "path": "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
       "targets": [
         "apps/api/src/modules/ai/lib/response-content-language.guard.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "api:ai",
+      "path": "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
+      "targets": [
+        "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts",
+        "apps/api/src/tests/fixtures/fake-ai-adapter.ts"
       ]
     },
     {

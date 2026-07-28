@@ -24,7 +24,7 @@ it can reach a provider. The registry of keys, files, and placeholders is
 [`model/prompt-version.constants.ts`](../../apps/api/src/modules/ai/model/prompt-version.constants.ts)
 (`PromptKey`, `PROMPT_FILES`, `PromptPlaceholder`, `REQUIRED_PLACEHOLDERS`).
 
-Contract version: `GAME_PROMPT_VERSION = 'written-traits-v5'`
+Contract version: `GAME_PROMPT_VERSION = 'written-traits-v6'`
 (`packages/shared/src/constants/app.constants.ts:49`) — a Zod literal in every response schema, so
 prompts and schemas move in lock-step (test:
 `apps/api/src/modules/ai/tests/ai-pipeline.test.ts:94`, which lists every taxonomy field in the
@@ -44,7 +44,11 @@ prompt template).
 - **Prompt 1 (extraction)**: image + prompt → 16-category/221-field localized trait JSON plus
   matching aggregates (`compactTraitSummary` 20–35, `highSignalTraitTokens` 5–15,
   `weightedTraitEvidence` weights 1–10, `visualArchetypeHints`, `imageQualityCaps`
-  clear/moderate/low/very-low, `candidateSearchHints`) and an all-false `safetyCheck`. Explicitly
+  clear/moderate/low/very-low, `candidateSearchHints`, a structured qualitative
+  `matchingProfile`, and structured counterfactual profiles) and an all-false `safetyCheck`.
+  Every enhanced signal array uses the same six-field object contract; the provider boundary
+  conservatively normalizes only the bounded bare-string shorthand observed in production before
+  strict schema validation. Explicitly
   forbids identity/celebrity/face-recognition/biometric claims and
   age/ethnicity/personality/health/attractiveness/income guesses.
 - **Prompt 2 (generation)**: written evidence → candidate pool sized `[RESULT_COUNT]`..25

@@ -38,6 +38,7 @@ You must not infer private or sensitive attributes.
 - Return valid JSON only. No text before or after the JSON.
 - Return exactly the JSON shape below with every listed field present.
 - Do not output placeholders; replace every string value with the visible observation or the localized "unclear".
+- Never write prohibited safety terms in any JSON value, even to deny or disclaim them. In particular, do not repeat the words "biometric", "identity matching", "face recognition", or similar policy language; express only the visible observation.
 - `traitCount` must equal the number of trait fields you actually filled with a real observation (not "unclear"), excluding safetyCheck and uncertaintyNotes.
 - `compactTraitSummary` must contain the 20–35 strongest, most useful, non-sensitive trait observations as short localized phrases.
 - `highSignalTraitTokens` must list the 5–15 strongest single-word or short-phrase signals that are most useful for public-figure style/vibe matching.
@@ -358,20 +359,92 @@ You must not infer private or sensitive attributes.
         "confidence": "low | medium | high",
         "weight": 0,
         "visibility": "visible | partial | occluded | uncertain",
-        "affectedBy": ["eyewear | facialHair | hairstyle | clothing | accessories | angle | lighting"]
+        "affectedBy": ["eyewear"]
       }
     ],
-    "mutableStyleSignals": [],
-    "expressionAndPresentation": [],
-    "occludedOrUncertainSignals": [],
-    "contradictionsToAvoid": [],
-    "accessoryAgnosticSignals": [],
+    "mutableStyleSignals": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": ["hairstyle"]
+      }
+    ],
+    "expressionAndPresentation": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": ["angle"]
+      }
+    ],
+    "occludedOrUncertainSignals": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": ["lighting"]
+      }
+    ],
+    "contradictionsToAvoid": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": []
+      }
+    ],
+    "accessoryAgnosticSignals": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": []
+      }
+    ],
     "imageQualityCaps": ["string"]
   },
   "counterfactualProfiles": {
-    "withoutEyewear": [],
-    "withoutFacialHair": [],
-    "withoutMutableStyling": []
+    "withoutEyewear": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": []
+      }
+    ],
+    "withoutFacialHair": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": []
+      }
+    ],
+    "withoutMutableStyling": [
+      {
+        "id": "string",
+        "value": "string",
+        "confidence": "low | medium | high",
+        "weight": 0,
+        "visibility": "visible | partial | occluded | uncertain",
+        "affectedBy": []
+      }
+    ]
   },
   "safetyCheck": {
     "containsIdentityClaim": false,
@@ -405,8 +478,8 @@ You must not infer private or sensitive attributes.
 - `visualArchetypeHints`: non-identifying, style-focused visual archetype descriptions. Example: "angular jawline with short dark hair and thick eyebrows". Never name or compare to a real person.
 - `imageQualityCaps`: one to three honest caps. `quality` must be one of `clear`, `moderate`, `low`, `very-low`. `impact` explains how that quality limits score confidence.
 - `candidateSearchHints`: archetype search directions for the candidate generator. Example: "archetype": "actors with defined jawlines and dark wavy hair", "why": "the visible jawline and hair texture support this direction".
-- `matchingProfile`: return 12–20 deduplicated stable qualitative structure signals, 6–12 mutable-style signals, 3–8 expression/presentation signals, every material occlusion, contradictions to avoid, and only directly supported accessory-agnostic signals. Occluded structure is low-confidence and weight 0–2. Never invent hidden structure.
-- `counterfactualProfiles`: text-only evidence views. Remove the influence of eyewear, facial hair, or mutable styling without claiming what hidden anatomy looks like. Occluded signals remain uncertain.
+- `matchingProfile`: return 12–20 deduplicated stable qualitative structure signals, 6–12 mutable-style signals, 3–8 expression/presentation signals, every material occlusion, contradictions to avoid, and only directly supported accessory-agnostic signals. Every item in every signal array MUST be an object with exactly `id`, `value`, `confidence`, `weight`, `visibility`, and `affectedBy`; never return a bare string. Each `affectedBy` item must be one individual token from `eyewear`, `facialHair`, `hairstyle`, `clothing`, `accessories`, `angle`, or `lighting`; never join choices with `|`. Occluded structure is low-confidence and weight 0–2. Never invent hidden structure.
+- `counterfactualProfiles`: text-only evidence views. Every item in every counterfactual array MUST use the same six-field signal object; never return a bare string. Remove the influence of eyewear, facial hair, or mutable styling without claiming what hidden anatomy looks like. Occluded signals remain uncertain.
 
 ## Final reminder
 

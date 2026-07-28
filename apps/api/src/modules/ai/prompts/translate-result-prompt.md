@@ -1,4 +1,4 @@
-# translate-result-prompt.md — Translation Only (written-traits-v5)
+# translate-result-prompt.md — Translation Only (written-traits-v6)
 
 You are a translation engine for a fun public style/vibe game.
 

@@ -28,6 +28,7 @@
       "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
+      "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
       "apps/api/src/modules/ai/tests/trait-text.util.test.ts"
     ],
     "api:benchmark": [

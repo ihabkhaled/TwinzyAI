@@ -84,7 +84,11 @@ export const parseAiJsonResponse = <TSchema extends z.ZodType>(
  * the adapter can log WHY a model's output was rejected before falling through
  * to the next model.
  */
-export const buildSchemaValidator = (schema: z.ZodType): AiContentValidator => {
+export const buildSchemaValidator = <TSchema extends z.ZodType>(
+  schema: TSchema,
+  normalize?: (parsed: unknown) => unknown,
+  validate?: (parsed: z.infer<TSchema>) => AiValidationResult,
+): AiContentValidator => {
   return (text: string): AiValidationResult => {
     let parsed: unknown;
     try {
@@ -92,7 +96,11 @@ export const buildSchemaValidator = (schema: z.ZodType): AiContentValidator => {
     } catch {
       return { ok: false, reason: 'not valid JSON' };
     }
-    const result = schema.safeParse(parsed);
-    return result.success ? { ok: true } : { ok: false, reason: summarizeIssues(result.error) };
+    const normalized = normalize === undefined ? parsed : normalize(parsed);
+    const result = schema.safeParse(normalized);
+    if (!result.success) {
+      return { ok: false, reason: summarizeIssues(result.error) };
+    }
+    return validate?.(result.data) ?? { ok: true };
   };
 };

@@ -2795,6 +2795,9 @@
   "normalizeToHttpError": [
     "apps/web/src/packages/axios/http-error.ts"
   ],
+  "normalizeTraitExtractionInput": [
+    "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts"
+  ],
   "NotFoundError": [
     "apps/api/src/core/errors/index.ts",
     "apps/api/src/core/errors/not-found.error.ts"
@@ -4497,6 +4500,9 @@
   ],
   "traitDetailsTitleClass": [
     "apps/web/src/modules/game/containers/trait-details.variants.ts"
+  ],
+  "TraitExtractionNormalizationResult": [
+    "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts"
   ],
   "TraitExtractionResponse": [
     "packages/shared/src/schemas/traits.schema.ts"

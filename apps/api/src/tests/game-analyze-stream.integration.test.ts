@@ -157,6 +157,40 @@ describe('POST /api/v1/game/analyze/stream (integration)', () => {
     }
   });
 
+  it('completes the direct free-mode game when Gemini uses production string shorthand', async () => {
+    adapter.queueImageResponse(
+      buildTraitExtractionJson({
+        matchingProfile: {
+          stableVisibleStructure: [],
+          mutableStyleSignals: ['dark rectangular eyewear'],
+          expressionAndPresentation: ['warm direct smile'],
+          occludedOrUncertainSignals: [],
+          contradictionsToAvoid: [],
+          accessoryAgnosticSignals: [],
+          imageQualityCaps: [],
+        },
+        counterfactualProfiles: {
+          withoutEyewear: ['eye-area structure remains uncertain'],
+          withoutFacialHair: ['jaw structure remains uncertain'],
+          withoutMutableStyling: ['stable face structure remains'],
+        },
+      }),
+    );
+    adapter.queueTextResponse(buildCandidatesJson());
+    adapter.queueTextResponse(buildJudgeJson());
+
+    const response = await postImage(true).expect(200);
+    const messages = parseStream(response.text);
+
+    expect(messages.at(-1)?.event).toBe(GameStreamEvent.Result);
+    expect(adapter.imageCalls.map((call) => call.step)).toEqual(['extraction']);
+    expect(adapter.textSteps).toEqual(['generation', 'judge']);
+    expect(adapter.textCalls[0]).toContain('"matchingProfile"');
+    expect(adapter.textCalls[0]).toContain('"counterfactualProfiles"');
+    expect(adapter.textCalls[0]).toContain('"dark rectangular eyewear"');
+    expect(adapter.textCalls[0]).toContain('"confidence": "low"');
+  });
+
   it('rejects before streaming or buffering when consent is missing', async () => {
     const response = await postImage(false).expect(400);
 

@@ -38,7 +38,7 @@ hop instead of the request.
 
 Steps are enumerated in `apps/api/src/config/gemini-step.constants.ts` (`GeminiStep`:
 extraction, generation, judge, translation). Every response is zod-validated against the
-step's shared schema and pinned to `promptVersion: 'written-traits-v5'`:
+step's shared schema and pinned to `promptVersion: 'written-traits-v6'`:
 
 | Step | Image? | Response schema (`packages/shared/src/schemas/`) |
 | --- | --- | --- |

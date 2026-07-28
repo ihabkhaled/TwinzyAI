@@ -1,4 +1,10 @@
-import type { TraitExtractionResponse, Traits } from '@twinzy/shared';
+import type {
+  MatchingCounterfactualProfiles,
+  MatchingSignal,
+  QualitativeMatchingProfile,
+  TraitExtractionResponse,
+  Traits,
+} from '@twinzy/shared';
 
 /**
  * Bound to the shared Traits shape: if the schema ever renames the notes
@@ -26,6 +32,35 @@ export const collectTraitTextValues = (traits: Traits): string[] => {
   return values;
 };
 
+const collectSignalTextValues = (signals: readonly MatchingSignal[]): string[] =>
+  signals.flatMap((signal) => [signal.id, signal.value]);
+
+const collectMatchingProfileTextValues = (
+  profile: QualitativeMatchingProfile | undefined,
+): string[] =>
+  profile === undefined
+    ? []
+    : [
+        ...collectSignalTextValues(profile.stableVisibleStructure),
+        ...collectSignalTextValues(profile.mutableStyleSignals),
+        ...collectSignalTextValues(profile.expressionAndPresentation),
+        ...collectSignalTextValues(profile.occludedOrUncertainSignals),
+        ...collectSignalTextValues(profile.contradictionsToAvoid),
+        ...collectSignalTextValues(profile.accessoryAgnosticSignals),
+        ...profile.imageQualityCaps,
+      ];
+
+const collectCounterfactualTextValues = (
+  profiles: MatchingCounterfactualProfiles | undefined,
+): string[] =>
+  profiles === undefined
+    ? []
+    : [
+        ...collectSignalTextValues(profiles.withoutEyewear),
+        ...collectSignalTextValues(profiles.withoutFacialHair),
+        ...collectSignalTextValues(profiles.withoutMutableStyling),
+      ];
+
 /** Every free-text leaf forwarded from extraction into downstream matching. */
 export const collectExtractionTextValues = (response: TraitExtractionResponse): string[] => [
   ...collectTraitTextValues(response.traits),
@@ -35,4 +70,6 @@ export const collectExtractionTextValues = (response: TraitExtractionResponse): 
   ...response.visualArchetypeHints,
   ...response.imageQualityCaps.flatMap((cap) => [cap.quality, cap.impact]),
   ...response.candidateSearchHints.flatMap((hint) => [hint.archetype, hint.why]),
+  ...collectMatchingProfileTextValues(response.matchingProfile),
+  ...collectCounterfactualTextValues(response.counterfactualProfiles),
 ];

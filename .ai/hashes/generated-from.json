@@ -231,7 +231,7 @@
       "support/upload-troubleshooting.md",
       "support/user-visible-error-guide.md"
     ],
-    "inputsHash": "8cef555846b34e2b1eda4d5d4aae46852efc9cc3f5ab65ef6bbdd8b5a074defe"
+    "inputsHash": "043bf2f967f9e12169ff92c89f77905ae891bc34ba8cd588c80891d5d2c333ea"
   },
   ".ai/generated/orphans.json": {
     "inputs": [
@@ -302,7 +302,7 @@
       "packages/shared/src/schemas/traits.schema.ts",
       "packages/shared/src/schemas/translate-result.schema.ts"
     ],
-    "inputsHash": "40c913b0a3a16a9e4314a1a5c74c4decb46df3f4ee705dfbd60a872d83f100f1"
+    "inputsHash": "8240910868e316c07185708798afbd61f9105a2bf624ded9b25e555e32a13f84"
   },
   ".ai/manifests/dependencies.json": {
     "inputs": [
@@ -486,6 +486,37 @@
       "docs/features/_template/27-postmortem.md",
       "docs/features/_template/27-retrospective.md",
       "docs/features/_template/README.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/01-business-analysis.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/03-product-requirements.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/05-delivery-plan.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/06-technical-refinement.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/07-technical-roadmap.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/08-architecture-review.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/09-impact-analysis.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/10-engineering-standards-check.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/11-test-strategy.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/12-coverage-plan.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/13-implementation-readiness.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/15-dev-validation-report.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/17-qa-report.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/18-defect-cycle-log.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/19-pentest-report.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/19-security-review.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/19-threat-model.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/20-uat-report.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/21-client-approval.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/22-go-no-go.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/23-documentation-changelog.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/24-risk-compliance-ops.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/25-release-report.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/26-hypercare-report.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/27-postmortem.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/27-retrospective.md",
+      "docs/features/advanced-extraction-provider-shape-recovery/README.md",
       "docs/features/advanced-global-traits-v2/00-intake.md",
       "docs/features/advanced-global-traits-v2/01-business-analysis.md",
       "docs/features/advanced-global-traits-v2/02-business-development.md",
@@ -837,6 +868,7 @@
       "README.md",
       "release-notes/2026-07-12-ai-knowledge-os.md",
       "release-notes/2026-07-12-parallel-ai-pipeline.md",
+      "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md",
       "release-notes/README.md",
       "release-notes/release-notes-template.md",
       "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -1068,7 +1100,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "49fc083de468e7b12aa2c98e39e23741a5ae0e08c499787dd825228c8da0982b"
+    "inputsHash": "c3a1091f4a24232067237920f80071222f1b38090f60c121f40307e103c40532"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
@@ -1268,6 +1300,7 @@
       "apps/api/src/modules/ai/lib/response-content-language.guard.ts",
       "apps/api/src/modules/ai/lib/response-language-values.util.ts",
       "apps/api/src/modules/ai/lib/response-language.guard.ts",
+      "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts",
       "apps/api/src/modules/ai/lib/trait-text.util.ts",
       "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
@@ -1290,6 +1323,7 @@
       "apps/api/src/modules/ai/model/prompt-version.constants.ts",
       "apps/api/src/modules/ai/model/provider-error.enums.ts",
       "apps/api/src/modules/ai/model/region-hint.constants.ts",
+      "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts",
       "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
       "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
       "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
@@ -1317,6 +1351,7 @@
       "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
+      "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
       "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
       "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts",
       "apps/api/src/modules/contact/api/contact.controller.ts",
@@ -1945,7 +1980,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "dd65a2d45d26d65364ade2cd976370e0512230b53094494695f305379288a6ee"
+    "inputsHash": "48ae83215211d45f62e4a51230eb5c8dc7014fba04c95c951c6fd1e418436ea3"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -1958,7 +1993,7 @@
       "apps/api/src/modules/ai/prompts/use-4th-critique-prompt.md",
       "apps/api/src/modules/ai/prompts/use-5th-consensus-finalizer-prompt.md"
     ],
-    "inputsHash": "52e3a2f3152664d1485b652d2360bfd54d9010a93562e5c59868265d91e05141"
+    "inputsHash": "32b35401f323108ad5c4a0768122e16aeb9c5b10a3c7c341259e5fce8c8ae4e8"
   },
   ".ai/manifests/repository.json": {
     "inputs": [
@@ -2119,6 +2154,7 @@
       "apps/api/src/modules/ai/lib/response-content-language.guard.ts",
       "apps/api/src/modules/ai/lib/response-language-values.util.ts",
       "apps/api/src/modules/ai/lib/response-language.guard.ts",
+      "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts",
       "apps/api/src/modules/ai/lib/trait-text.util.ts",
       "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
@@ -2141,6 +2177,7 @@
       "apps/api/src/modules/ai/model/prompt-version.constants.ts",
       "apps/api/src/modules/ai/model/provider-error.enums.ts",
       "apps/api/src/modules/ai/model/region-hint.constants.ts",
+      "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts",
       "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
       "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
       "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
@@ -2168,6 +2205,7 @@
       "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
+      "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
       "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
       "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts",
       "apps/api/src/modules/contact/api/contact.controller.ts",
@@ -2795,7 +2833,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "3bcc1da373f4adf72141ae792bf8caf13538b05c92648cdb3603c8683dbaf396"
+    "inputsHash": "6e42c40208491ccf8f94fb84646a0c79b8e411156f85a57d913e2f397ad18e3a"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2982,6 +3020,7 @@
       "apps/api/src/modules/ai/lib/response-content-language.guard.ts",
       "apps/api/src/modules/ai/lib/response-language-values.util.ts",
       "apps/api/src/modules/ai/lib/response-language.guard.ts",
+      "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts",
       "apps/api/src/modules/ai/lib/trait-text.util.ts",
       "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
@@ -3004,6 +3043,7 @@
       "apps/api/src/modules/ai/model/prompt-version.constants.ts",
       "apps/api/src/modules/ai/model/provider-error.enums.ts",
       "apps/api/src/modules/ai/model/region-hint.constants.ts",
+      "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts",
       "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
       "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
       "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
@@ -3031,6 +3071,7 @@
       "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
+      "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
       "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
       "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts",
       "apps/api/src/modules/contact/api/contact.controller.ts",
@@ -3658,7 +3699,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "3bcc1da373f4adf72141ae792bf8caf13538b05c92648cdb3603c8683dbaf396"
+    "inputsHash": "6e42c40208491ccf8f94fb84646a0c79b8e411156f85a57d913e2f397ad18e3a"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -3819,6 +3860,7 @@
       "apps/api/src/modules/ai/lib/response-content-language.guard.ts",
       "apps/api/src/modules/ai/lib/response-language-values.util.ts",
       "apps/api/src/modules/ai/lib/response-language.guard.ts",
+      "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts",
       "apps/api/src/modules/ai/lib/trait-text.util.ts",
       "apps/api/src/modules/ai/model/ai-provider-adapter.types.ts",
       "apps/api/src/modules/ai/model/ai-router.constants.ts",
@@ -3841,6 +3883,7 @@
       "apps/api/src/modules/ai/model/prompt-version.constants.ts",
       "apps/api/src/modules/ai/model/provider-error.enums.ts",
       "apps/api/src/modules/ai/model/region-hint.constants.ts",
+      "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts",
       "apps/api/src/modules/ai/tests/advanced-council-services.test.ts",
       "apps/api/src/modules/ai/tests/advanced-pipeline-council.test.ts",
       "apps/api/src/modules/ai/tests/ai-pipeline.test.ts",
@@ -3868,6 +3911,7 @@
       "apps/api/src/modules/ai/tests/provider-error.util.test.ts",
       "apps/api/src/modules/ai/tests/provider-registry.service.test.ts",
       "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
+      "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
       "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
       "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts",
       "apps/api/src/modules/contact/api/contact.controller.ts",
@@ -4495,7 +4539,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "3bcc1da373f4adf72141ae792bf8caf13538b05c92648cdb3603c8683dbaf396"
+    "inputsHash": "6e42c40208491ccf8f94fb84646a0c79b8e411156f85a57d913e2f397ad18e3a"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [
@@ -4717,7 +4761,7 @@
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/ai-pipeline.md"
     ],
-    "inputsHash": "e68e71298e8a1a8461efed0aadb61047ad01eaaf15bfa0ab213117e9c0a0fa73"
+    "inputsHash": "81fbb3207e6d8d2ca727b64a610737704e4bcfb5e37fb4213f49e3d921364552"
   },
   ".ai/summaries/architecture.md": {
     "inputs": [
@@ -4745,14 +4789,14 @@
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/current-risks.md"
     ],
-    "inputsHash": "3e6f35e9adb01ddf169b412d7d67100c88a1210669479f5913f70c9e484af062"
+    "inputsHash": "6b26aa99a7f82ffd51f6a1ef0bbea01c8f066db634410a2d61fc6d5a1e9e4d9c"
   },
   ".ai/summaries/domain.md": {
     "inputs": [
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/domain.md"
     ],
-    "inputsHash": "f83c55680475636ce66c109feda5b90a93f40136fd7c35e4fa9a42588cfc0aef"
+    "inputsHash": "62378bd3eaa375496c263d0355820bd2b702ed4f28903fd0cf17668309a3739b"
   },
   ".ai/summaries/frontend.md": {
     "inputs": [
@@ -4801,6 +4845,6 @@
       "knowledge/context-budget-policy.yaml",
       "knowledge/summaries/testing.md"
     ],
-    "inputsHash": "9a6101526395717044239ae4fb2490c310d84a29671c9bdecf444766e12dcc8a"
+    "inputsHash": "b26ed29800342b34ded232a46244dbf86fcf33e5e4d0f9515453f35fa35c392f"
   }
 }

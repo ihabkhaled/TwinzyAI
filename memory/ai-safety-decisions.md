@@ -30,7 +30,7 @@ Rule: [/rules/14-ai-safety.md](../rules/14-ai-safety.md). Privacy invariants:
   ([backend-stack.md](./backend-stack.md)).
 - Responses failing schema or safety checks are rejected (AI_RESPONSE_INVALID/UNSAFE); we do not
   silently "fix" unsafe model output beyond dropping offending candidates. Response schemas are
-  bounded zod 4 schemas, promptVersion is the literal `written-traits-v5`, and the
+  bounded zod 4 schemas, promptVersion is the literal `written-traits-v6`, and the
   forbidden-wording safety filter runs over every free-text
   leaf (all trait values, summary entries, and candidate/judge/translation text fields).
 - **Language echo is asserted**: every prompt receives [LANGUAGE_CODE] (en|ar) and every response

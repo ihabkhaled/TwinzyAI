@@ -67,6 +67,6 @@ language switch: 4. Translation (text-only) — existing result JSON → same-sh
 The pipeline is exposed via `POST /api/v1/game/analyze[/stream]`, `cancel`, and
 `translate-result` (`apps/api/src/modules/game/api/game.controller.ts`); the streaming variant
 emits an SSE progress contract described in [pipeline.md](pipeline.md) §Streaming. The prompt
-contract version is `written-traits-v5`
+contract version is `written-traits-v6`
 (`packages/shared/src/constants/app.constants.ts:49`), asserted as a Zod literal in every
 response schema.

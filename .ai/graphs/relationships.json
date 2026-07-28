@@ -1,5 +1,5 @@
 {
-  "count": 2753,
+  "count": 2755,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -1343,6 +1343,18 @@
       "from": "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/ai/lib/response-content-language.guard.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/tests/fixtures/fake-ai-adapter.ts",
       "type": "covers"
     },
     {

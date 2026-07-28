@@ -19,7 +19,7 @@ readWhen: You are changing an AI response shape, a shared schema, or the per-mod
 Every AI response is parsed against a strict shared Zod schema before any use (CLAUDE.md Twinzy
 constraint #7). Schemas live in `packages/shared/src/schemas/` so backend, frontend, tests, and
 the benchmark harness share one contract. All carry the `promptVersion` literal
-`'written-traits-v5'` (`packages/shared/src/constants/app.constants.ts:49`).
+`'written-traits-v6'` (`packages/shared/src/constants/app.constants.ts`).
 
 ## Per-step schemas
 

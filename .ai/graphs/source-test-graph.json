@@ -327,6 +327,9 @@
   "apps/api/src/modules/ai/lib/response-content-language.guard.ts": [
     "apps/api/src/modules/ai/tests/response-content-language.guard.test.ts"
   ],
+  "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts": [
+    "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts"
+  ],
   "apps/api/src/modules/ai/lib/trait-text.util.ts": [
     "apps/api/src/modules/ai/tests/trait-text.util.test.ts"
   ],
@@ -602,6 +605,7 @@
     "apps/api/src/modules/ai/tests/consensus-finalizer.service.test.ts",
     "apps/api/src/modules/ai/tests/judge-consensus.mapper.test.ts",
     "apps/api/src/modules/ai/tests/judge-council-merge.util.test.ts",
+    "apps/api/src/modules/ai/tests/trait-extraction-input.normalizer.test.ts",
     "apps/api/src/modules/ai/tests/trait-text.util.test.ts",
     "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts",
     "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",

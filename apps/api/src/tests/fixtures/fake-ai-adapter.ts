@@ -11,6 +11,7 @@ import {
 import type { GeminiStepValue } from '../../config/gemini-step.constants';
 import type {
   AiCallOptions,
+  AiContentValidator,
   AiProviderAdapter,
   AiStreamChunkListener,
   AiStreamOptions,
@@ -21,6 +22,7 @@ export interface RecordedImageCall {
   prompt: string;
   image: AiImageInput;
   step?: GeminiStepValue | undefined;
+  validate?: AiContentValidator | undefined;
 }
 
 /**
@@ -54,7 +56,7 @@ export class FakeAiAdapter implements AiProviderAdapter {
     image: AiImageInput,
     options?: AiCallOptions,
   ): Promise<string> {
-    this.imageCalls.push({ prompt, image, step: options?.step });
+    this.imageCalls.push({ prompt, image, step: options?.step, validate: options?.validate });
     return this.dequeue(this.imageResponses);
   }
 
@@ -69,7 +71,7 @@ export class FakeAiAdapter implements AiProviderAdapter {
     image: AiImageInput,
     options?: AiStreamOptions,
   ): Promise<string> {
-    this.imageCalls.push({ prompt, image, step: options?.step });
+    this.imageCalls.push({ prompt, image, step: options?.step, validate: options?.validate });
     options?.signal?.throwIfAborted();
     return this.streamDequeue(this.imageResponses, options?.onChunk);
   }
@@ -122,7 +124,48 @@ export const buildSafetyCheckPayload = (): Record<string, boolean> => ({
   containsBiometricClaim: false,
 });
 
-/** Full valid Prompt 1 response (written-traits-v5). */
+export const buildMatchingSignalPayload = (
+  overrides: Partial<Record<string, unknown>> = {},
+): Record<string, unknown> => ({
+  id: 'overallFace.overallFaceShape',
+  value: 'soft oval face structure',
+  confidence: 'high',
+  weight: 8,
+  visibility: 'visible',
+  affectedBy: [],
+  ...overrides,
+});
+
+export const buildMatchingProfilePayload = (): Record<string, unknown> => ({
+  stableVisibleStructure: [buildMatchingSignalPayload()],
+  mutableStyleSignals: [
+    buildMatchingSignalPayload({
+      id: 'hair.hairstyle',
+      value: 'wavy dark hairstyle',
+      affectedBy: ['hairstyle'],
+    }),
+  ],
+  expressionAndPresentation: [
+    buildMatchingSignalPayload({
+      id: 'expressionAndPose.facialExpression',
+      value: 'warm direct smile',
+      weight: 6,
+      affectedBy: ['angle'],
+    }),
+  ],
+  occludedOrUncertainSignals: [],
+  contradictionsToAvoid: [],
+  accessoryAgnosticSignals: [buildMatchingSignalPayload()],
+  imageQualityCaps: [],
+});
+
+export const buildCounterfactualProfilesPayload = (): Record<string, unknown> => ({
+  withoutEyewear: [buildMatchingSignalPayload()],
+  withoutFacialHair: [buildMatchingSignalPayload()],
+  withoutMutableStyling: [buildMatchingSignalPayload()],
+});
+
+/** Full valid Prompt 1 response (written-traits-v6), including enhanced profiles. */
 export const buildTraitExtractionPayload = (
   overrides: Partial<Record<string, unknown>> = {},
 ): Record<string, unknown> => ({
@@ -145,6 +188,8 @@ export const buildTraitExtractionPayload = (
       why: 'The hair texture and face shape are strong signals.',
     },
   ],
+  matchingProfile: buildMatchingProfilePayload(),
+  counterfactualProfiles: buildCounterfactualProfilesPayload(),
   safetyCheck: buildSafetyCheckPayload(),
   ...overrides,
 });

@@ -37,7 +37,7 @@ The web client builds exactly this body in
 `apps/web/src/modules/game/gateway/game-form-data.builder.ts`.
 
 **Response 200** — `FinalGameResultSchema` (`packages/shared/src/schemas/game-result.schema.ts`),
-a strict object: `promptVersion` (literal `written-traits-v5`), `languageCode`, `resultCount`
+a strict object: `promptVersion` (literal `written-traits-v6`), `languageCode`, `resultCount`
 (1–10), `traitCount` (0–221), `traits`, `compactTraitSummary`, `results` (≤ resultCount, each
 with name/rank/score/verdict/safetyCheck), `fallbackMessage` (required when `results` is
 empty), `disclaimer` (server-owned, see `RESULT_DISCLAIMER_BY_LANGUAGE` in

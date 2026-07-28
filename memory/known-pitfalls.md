@@ -501,6 +501,21 @@
   siblings from the same cleanup (express `helmet`/`multer`/`@nestjs/platform-express`) stayed
   removed — the lesson is "prove it, boot included," not "never remove deps".
 
+### K6. Empty-array prompt examples and incomplete fixtures hide provider shape drift
+
+- **Symptom:** every extraction model returns content, but all configured models fail strict
+  validation on `matchingProfile.*[n]` or `counterfactualProfiles.*[n]`; candidate generation and
+  judge never execute.
+- **Cause:** Prompt 1 showed the six-field signal object for only one array, left sibling and
+  counterfactual arrays empty, and called counterfactuals "text-only evidence views." Gemini
+  reasonably emitted bare strings. The canonical "full" fake extraction also omitted both
+  enhanced sections, so the complete API tests never exercised them.
+- **Fix (2026-07-28):** every signal array now shows the exact object element contract. The
+  provider boundary maps only non-empty, bounded string shorthand to low-confidence structured
+  signals before the same strict Zod validation; unsupported shapes still fail. Canonical fixtures
+  include enhanced profiles, their text is safety-scanned, and the free-mode multipart/SSE
+  regression must reach extraction → generation → judge → aggregation.
+
 ---
 
 ## L. Feature-discovered traps (temporary-shareable-results)
@@ -575,3 +590,12 @@
   applicability matrix, explicit exclusions, phases `00`–`13`, current-owner reuse, full gates, and
   no commit/push unless explicitly authorized. With immediate direct-push authorization, stop after
   each commit until its push and remote gates succeed.
+
+### M5. npm workspace runtime images need workspace-local production dependencies
+
+- **Symptom:** the API Docker image builds successfully but restarts with
+  `Cannot find module '@fastify/cookie'` (or another direct API dependency).
+- **Cause:** `npm ci --omit=dev` may place workspace-owned packages under
+  `apps/api/node_modules`; copying only root `node_modules` into the runtime stage omits them.
+- **Fix:** copy both root and `apps/api/node_modules` from the production-dependency stage, then
+  require an immutable-container health smoke after every dependency or Dockerfile change.

@@ -26,7 +26,7 @@ Orchestration: `apps/api/src/modules/game/application/analyze-game{,-stream}.use
 
 ## Invariants
 
-- Prompt contract version `GAME_PROMPT_VERSION = 'written-traits-v5'` is a `z.literal` in every AI response schema (`packages/shared/src/constants/app.constants.ts`); a stale prompt/model pairing fails validation. Lock-step test: `apps/api/src/modules/ai/tests/ai-pipeline.test.ts`.
+- Prompt contract version `GAME_PROMPT_VERSION = 'written-traits-v6'` is a `z.literal` in every AI response schema (`packages/shared/src/constants/app.constants.ts`); a stale prompt/model pairing fails validation. Lock-step test: `apps/api/src/modules/ai/tests/ai-pipeline.test.ts`.
 - All `safetyCheck` flags are `z.literal(false)` — any `true` fails Zod outright.
 - Response `languageCode` must echo the request (`lib/response-language.guard.ts`); analyze normalizes unknown languages to default, translate rejects (`packages/shared/src/constants/language.constants.ts`).
 - Disclaimer + no-match fallback are server constants `RESULT_DISCLAIMER_BY_LANGUAGE` / `NO_MATCH_FALLBACK_BY_LANGUAGE` (`app.constants.ts`) — model text never trusted.

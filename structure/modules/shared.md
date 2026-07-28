@@ -29,7 +29,7 @@ to `dist/` and is published to the workspaces as `dist/index.js`.
 
 | Area | Highlights |
 | --- | --- |
-| `constants/app.constants.ts` | `API_BASE_PATH` + every API route constant; `GAME_PROMPT_VERSION = 'written-traits-v5'`; server-owned localized `RESULT_DISCLAIMER_BY_LANGUAGE` and `NO_MATCH_FALLBACK_BY_LANGUAGE` (en/ar) |
+| `constants/app.constants.ts` | `API_BASE_PATH` + every API route constant; `GAME_PROMPT_VERSION = 'written-traits-v6'`; server-owned localized `RESULT_DISCLAIMER_BY_LANGUAGE` and `NO_MATCH_FALLBACK_BY_LANGUAGE` (en/ar) |
 | `constants/error-code.constants.ts` | The frozen `ErrorCode` catalog — 24 machine-readable codes; **add-only, never rename/remove** |
 | `constants/safety.constants.ts` | `FORBIDDEN_RESULT_PHRASES` + `FORBIDDEN_SENSITIVE_TOPICS` (33 bilingual entries each) — single source for backend rejection/sanitization and frontend never-renders tests ([docs/ai-safety.md](../../docs/ai-safety.md)) |
 | `constants/trait-category.constants.ts` | The advanced-global-traits-v2 taxonomy: `TRAIT_CATEGORY_FIELDS` — 16 categories, 221 named fields; consumed by the schema builder, prompt template, fixtures, and i18n keys |

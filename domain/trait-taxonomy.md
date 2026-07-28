@@ -78,5 +78,5 @@ bounds in `packages/shared/src/constants/response-bounds.constants.ts`.
 
 Adding/renaming/removing a field is a **contract change**: the schema, the extraction prompt,
 the lock-step test, the shared fixtures, and the i18n labels all derive from
-`TRAIT_CATEGORY_FIELDS`, and the prompt version (`written-traits-v5`,
+`TRAIT_CATEGORY_FIELDS`, and the prompt version (`written-traits-v6`,
 `packages/shared/src/constants/app.constants.ts`) exists to version exactly this pairing.

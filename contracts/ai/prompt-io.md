@@ -6,7 +6,7 @@ authority: canonical
 status: current
 owner: repository owner
 summary: The placeholder contract of each of the four prompt templates (REQUIRED_PLACEHOLDERS) and the zod schema every prompt's output must validate against.
-keywords: [prompt, placeholders, templates, traits, candidates, judge, translation, schema, written-traits-v5]
+keywords: [prompt, placeholders, templates, traits, candidates, judge, translation, schema, written-traits-v6]
 contextTier: 2
 relatedCode: [apps/api/src/modules/ai/model/prompt-version.constants.ts, apps/api/src/modules/ai/infrastructure/prompt-template.repository.ts, packages/shared/src/constants/app.constants.ts]
 relatedTests: [apps/api/src/modules/ai/tests/prompt-template.repository.test.ts, apps/api/src/modules/ai/tests/ai-pipeline.test.ts]
@@ -48,7 +48,7 @@ Placeholder inputs:
 
 ## Output invariants (schema-enforced)
 
-- `promptVersion` is a `z.literal('written-traits-v5')`
+- `promptVersion` is a `z.literal('written-traits-v6')`
   (`GAME_PROMPT_VERSION`, `packages/shared/src/constants/app.constants.ts`) in every schema —
   a stale model/template pairing fails validation.
 - Every schema carries literal-`false` `safetyCheck` booleans (a model self-reporting `true`
@@ -57,6 +57,9 @@ Placeholder inputs:
 - Derived counts are never trusted: `traitCount` is overwritten by
   `countPopulatedTraitFields` and `candidateCount` by the candidates transform (see the
   schema files).
+- The extraction adapter boundary conservatively maps only non-empty, bounded bare-string entries
+  observed in known enhanced signal arrays into low-confidence structured signals, then applies the
+  same strict schema. Other malformed values remain invalid.
 - Judge/final results: `results` ≤ resultCount and `fallbackMessage` required when `results`
   is empty (refines in `judge.schema.ts` / `game-result.schema.ts`).
 - Disclaimer and no-match fallback are always replaced with the server-owned localized

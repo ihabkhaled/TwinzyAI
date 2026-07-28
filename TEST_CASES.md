@@ -27,22 +27,22 @@ Living checklist of behaviors under test. Every case maps to at least one automa
 | 15 | Image never persisted | no fs writes |
 | 16 | Image never logged | log output contains no image bytes |
 
-## Shared contracts — advanced-global-traits-v3 (shared-unit)
+## Shared contracts — written-traits-v6 (shared-unit)
 
 | # | Case | Expectation |
 | --- | --- | --- |
 | 17 | Trait taxonomy size | 16 nested categories, 221 named trait fields (asserted ≥100) |
-| 18 | `promptVersion` literal | anything but `advanced-global-traits-v3` rejected |
+| 18 | `promptVersion` literal | anything but `written-traits-v6` rejected |
 | 19 | `languageCode` | `en`/`ar` accepted; unknown code or missing field rejected |
 | 20 | Missing trait category | rejected (strict schema) |
-| 21 | Missing single category field | rejected |
-| 22 | Extra field smuggled into a category | rejected (`strictObject`) |
+| 21 | Missing single category field | tolerated and omitted |
+| 22 | Extra field smuggled into a category | stripped |
 | 23 | Trait value over 300 chars | rejected |
 | 24 | `compactTraitSummary` bounds | 1–35 entries; 36th rejected |
 | 25 | `uncertaintyNotes` bounds | 4 fixed lists, each ≤10 entries; 11th rejected |
-| 26 | `traitCount` matches populated fields | rejected when count ≠ actual fields |
+| 26 | `traitCount` matches populated fields | model count overwritten by authoritative derived count |
 | 27 | `candidateCount` consistency | count ≠ candidates list length rejected |
-| 28 | Candidate pool bounds | empty list and >20 candidates rejected |
+| 28 | Candidate pool bounds | empty list and >25 candidates rejected |
 | 29 | `resultCount` bounds | 1–10 accepted; 0 and 11 rejected |
 | 30 | Judge results bound | up to 10 accepted; 11th rejected; results must not exceed `resultCount` |
 | 31 | `removedCandidates` bound | ≤20; 21st rejected; missing disclaimer rejected |
@@ -61,7 +61,7 @@ Living checklist of behaviors under test. Every case maps to at least one automa
 | 37 | Unsafe judge response | rejected/sanitized (unsafe judged results dropped) |
 | 38 | Candidate prompt receives no image | adapter called text-only (traits + summary embedded as text) |
 | 39 | Judge prompt receives no image | adapter called text-only |
-| 40 | Full advanced taxonomy required | missing category/field or smuggled extra field rejected |
+| 40 | Full advanced taxonomy required | missing category rejected; individual missing/extra fields are tolerated/stripped |
 | 41 | Prompt–taxonomy lock-step | every taxonomy field appears in the Prompt 1 template |
 | 42 | Requested `languageCode` injected | language placeholder replaced in the prompt |
 | 43 | Wrong-language response | rejected |
@@ -85,7 +85,7 @@ Living checklist of behaviors under test. Every case maps to at least one automa
 | 56 | Server disclaimer enforced | localized fixed disclaimer overwrites model text |
 | 57 | Unsupported target language / unknown keys | strict 400 |
 | 58 | Result payload off-contract | strict 400 |
-| 59 | Prompt version echoed | `advanced-global-traits-v3` on the translated payload |
+| 59 | Prompt version echoed | `written-traits-v6` on the translated payload |
 | 60 | Result count preserved | `resultCount` unchanged on the translated payload |
 
 ## Architecture (eslint)

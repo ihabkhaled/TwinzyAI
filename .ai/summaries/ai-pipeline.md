@@ -22,7 +22,7 @@ Four env-routable steps — extraction, generation, judge, translation (`GeminiS
 
 ## Prompts (`apps/api/src/modules/ai/prompts/`, loaded by `infrastructure/prompt-template.repository.ts`)
 
-`use-1st-prompt.md` (extraction, `[LANGUAGE_CODE]`), `use-2nd-prompt.md` (generation, `[TRAITS_JSON] [LANGUAGE_CODE] [RESULT_COUNT] [REGION_HINT]`), `use-3rd-prompt.md` (judge — owns score calibration), `translate-result-prompt.md`. The repository validates required placeholders, replaces via split/join (no regex injection), and rejects any prompt still containing a known placeholder. Registry: `model/prompt-version.constants.ts`. Contract version `written-traits-v5` is a `z.literal` in every response schema; lock-step drift test at `modules/ai/tests/ai-pipeline.test.ts`.
+`use-1st-prompt.md` (extraction, `[LANGUAGE_CODE]`), `use-2nd-prompt.md` (generation, `[TRAITS_JSON] [LANGUAGE_CODE] [RESULT_COUNT] [REGION_HINT]`), `use-3rd-prompt.md` (judge — owns score calibration), `translate-result-prompt.md`. The repository validates required placeholders, replaces via split/join (no regex injection), and rejects any prompt still containing a known placeholder. Registry: `model/prompt-version.constants.ts`. Contract version `written-traits-v6` is a `z.literal` in every response schema; lock-step drift test at `modules/ai/tests/ai-pipeline.test.ts`.
 
 ## Safety chain (layered; owner: `docs/ai-safety.md` + `rules/14-ai-safety.md`)
 

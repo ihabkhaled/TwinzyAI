@@ -1,11 +1,13 @@
 {
   "2026": [
+    "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
     "docs/features/advanced-public-figure-consensus-matching/00-intake.md",
     "docs/features/multi-provider-ai/02-provider-research.md",
     "docs/superpowers/plans/2026-07-27-advanced-public-figure-consensus-matching.md",
     "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md",
     "release-notes/2026-07-12-ai-knowledge-os.md",
-    "release-notes/2026-07-12-parallel-ai-pipeline.md"
+    "release-notes/2026-07-12-parallel-ai-pipeline.md",
+    "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md"
   ],
   "<5-12 lowercase routing keywords>": [
     "knowledge/templates/canonical-doc.md"
@@ -242,6 +244,7 @@
   ],
   "approval": [
     "docs/features/_template/21-client-approval.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/21-client-approval.md",
     "docs/features/simple-readable-code-operating-system-implementation/21-client-approval.md",
     "quality/code-review-standard.md",
     "quality/release-readiness.md",
@@ -490,6 +493,7 @@
   ],
   "bug": [
     "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
     "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
     "docs/features/advanced-public-figure-consensus-matching/16-dev-bug-log.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
@@ -510,6 +514,8 @@
     "docs/features/_template-frontend/01-business-analysis.md",
     "docs/features/_template/01-business-analysis.md",
     "docs/features/_template/02-business-development.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/01-business-analysis.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
     "docs/features/advanced-global-traits-v2/01-business-analysis.md",
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/advanced-public-figure-consensus-matching/01-business-analysis.md",
@@ -650,6 +656,7 @@
   ],
   "changelog": [
     "docs/features/_template/23-documentation-changelog.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/23-documentation-changelog.md",
     "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
     "docs/features/advanced-public-figure-consensus-matching/23-documentation-changelog.md",
     "docs/features/ai-knowledge-os/23-documentation-changelog.md",
@@ -665,6 +672,7 @@
   ],
   "check": [
     "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/10-engineering-standards-check.md",
     "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
     "docs/features/advanced-public-figure-consensus-matching/10-engineering-standards-check.md",
     "docs/features/engineering-os-migration/10-engineering-standards-check.md",
@@ -743,6 +751,7 @@
     "docs/eslint/no-server-only-import-in-client.md",
     "docs/eslint/require-client-component-reason.md",
     "docs/features/_template/21-client-approval.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/21-client-approval.md",
     "docs/features/simple-readable-code-operating-system-implementation/21-client-approval.md"
   ],
   "clipboard": [
@@ -797,6 +806,7 @@
   ],
   "compliance": [
     "docs/features/_template/24-risk-compliance-ops.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/24-risk-compliance-ops.md",
     "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md"
   ],
   "component": [
@@ -1026,6 +1036,7 @@
   "coverage": [
     "docs/ai/regression-evaluation.md",
     "docs/features/_template/12-coverage-plan.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/12-coverage-plan.md",
     "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
     "docs/features/advanced-public-figure-consensus-matching/12-coverage-plan.md",
     "docs/features/ai-knowledge-os/11-test-strategy.md",
@@ -1085,6 +1096,7 @@
   "cross": [
     "docs/eslint/no-cross-module-deep-imports.md",
     "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/advanced-public-figure-consensus-matching/04-cross-functional-refinement.md",
     "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
@@ -1123,6 +1135,7 @@
   ],
   "cycle": [
     "docs/features/_template/18-defect-cycle-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/18-defect-cycle-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/18-defect-cycle-log.md"
   ],
   "dark-mode": [
@@ -1207,6 +1220,7 @@
   ],
   "defect": [
     "docs/features/_template/18-defect-cycle-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/18-defect-cycle-log.md",
     "docs/features/simple-readable-code-operating-system-implementation/18-defect-cycle-log.md"
   ],
   "deferred": [
@@ -1258,6 +1272,8 @@
     "docs/docker-local-dev.md",
     "docs/features/_template/15-dev-validation-report.md",
     "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/15-dev-validation-report.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
     "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
     "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
     "docs/features/advanced-public-figure-consensus-matching/15-dev-validation-report.md",
@@ -1278,6 +1294,7 @@
   ],
   "developer": [
     "docs/features/_template/15-dev-validation-report.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/15-dev-validation-report.md",
     "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/15-dev-validation-report.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
@@ -1290,6 +1307,7 @@
   "development": [
     "docs/docker-local-dev.md",
     "docs/features/_template/02-business-development.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/advanced-public-figure-consensus-matching/02-business-development.md",
     "docs/features/advanced-public-figure-consensus-matching/15-dev-validation-report.md",
@@ -1349,6 +1367,7 @@
   ],
   "documentation": [
     "docs/features/_template/23-documentation-changelog.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/23-documentation-changelog.md",
     "docs/features/advanced-global-traits-v2/23-documentation-changelog.md",
     "docs/features/advanced-public-figure-consensus-matching/23-documentation-changelog.md",
     "docs/features/ai-knowledge-os/23-documentation-changelog.md",
@@ -1463,33 +1482,6 @@
     "agents/backend-test-engineer.md",
     "agents/frontend-test-engineer.md",
     "agents/reliability-engineer.md"
-  ],
-  "engineering": [
-    "architecture/adrs/adr-001-strict-engineering-os.md",
-    "docs/features/_template/10-engineering-standards-check.md",
-    "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
-    "docs/features/advanced-public-figure-consensus-matching/10-engineering-standards-check.md",
-    "docs/features/engineering-os-migration/00-intake.md",
-    "docs/features/engineering-os-migration/01-business-analysis.md",
-    "docs/features/engineering-os-migration/02-business-development.md",
-    "docs/features/engineering-os-migration/03-product-requirements.md",
-    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
-    "docs/features/engineering-os-migration/05-delivery-plan.md",
-    "docs/features/engineering-os-migration/06-technical-refinement.md",
-    "docs/features/engineering-os-migration/07-technical-roadmap.md",
-    "docs/features/engineering-os-migration/08-architecture-review.md",
-    "docs/features/engineering-os-migration/09-impact-analysis.md",
-    "docs/features/engineering-os-migration/10-engineering-standards-check.md",
-    "docs/features/engineering-os-migration/11-test-strategy.md",
-    "docs/features/engineering-os-migration/12-coverage-plan.md",
-    "docs/features/engineering-os-migration/13-implementation-readiness.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/10-engineering-standards-check.md",
-    "docs/features/paid-analysis-transactional-delivery/10-engineering-standards-check.md",
-    "docs/features/simple-readable-code-operating-system-implementation/10-engineering-standards-check.md",
-    "docs/features/temporary-shareable-results/10-engineering-standards-check.md",
-    "docs/features/twinzy-hardening-v3/10-engineering-standards-check.md",
-    "docs/sdlc/engineering-standards.md",
-    "testing/README.md"
   ],
   "english": [
     "docs/ai/forbidden-wording.md"
@@ -1713,17 +1705,6 @@
   "extract": [
     "skills/simplify-existing-code.md"
   ],
-  "extraction": [
-    "docs/ai/image-lifecycle.md",
-    "docs/ai/pipeline.md",
-    "docs/ai/prompt-catalog.md",
-    "docs/ai/system-overview.md",
-    "docs/ai/written-traits-only-boundary.md",
-    "domain/entities.md",
-    "domain/trait-taxonomy.md",
-    "structure/flows/analyze-flow.md",
-    "structure/modules/api-ai.md"
-  ],
   "extraction-only": [
     "domain/image-lifecycle.md"
   ],
@@ -1923,6 +1904,7 @@
   ],
   "functional": [
     "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/advanced-public-figure-consensus-matching/04-cross-functional-refinement.md",
     "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
@@ -2175,6 +2157,7 @@
   "hypercare": [
     "docs/features/_template-frontend/12-hypercare.md",
     "docs/features/_template/26-hypercare-report.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/26-hypercare-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/26-hypercare-report.md",
     "runbooks/hypercare.md",
     "support/known-issues-template.md",
@@ -2240,6 +2223,7 @@
   "impact": [
     "docs/features/_template/02-business-development.md",
     "docs/features/_template/09-impact-analysis.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/09-impact-analysis.md",
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
     "docs/features/advanced-public-figure-consensus-matching/09-impact-analysis.md",
@@ -2322,6 +2306,7 @@
   "intake": [
     "docs/features/_template-frontend/00-intake.md",
     "docs/features/_template/00-intake.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
     "docs/features/advanced-global-traits-v2/00-intake.md",
     "docs/features/advanced-public-figure-consensus-matching/00-intake.md",
     "docs/features/ai-knowledge-os/00-intake.md",
@@ -2351,6 +2336,7 @@
   ],
   "internal": [
     "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
     "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
     "docs/features/temporary-shareable-results/16-dev-bug-log.md"
   ],
@@ -2601,6 +2587,8 @@
   "log": [
     "docs/features/_template/16-dev-bug-log.md",
     "docs/features/_template/18-defect-cycle-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/18-defect-cycle-log.md",
     "docs/features/advanced-global-traits-v2/16-dev-bug-log.md",
     "docs/features/advanced-public-figure-consensus-matching/16-dev-bug-log.md",
     "docs/features/multi-tab-stream-isolation/16-dev-bug-log.md",
@@ -2801,6 +2789,7 @@
   "model": [
     "docs/ai/model-change-checklist.md",
     "docs/features/_template/19-threat-model.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/19-threat-model.md",
     "docs/features/advanced-public-figure-consensus-matching/19-threat-model.md",
     "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
     "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
@@ -2983,6 +2972,7 @@
   "notes": [
     "release-notes/2026-07-12-ai-knowledge-os.md",
     "release-notes/2026-07-12-parallel-ai-pipeline.md",
+    "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md",
     "release-notes/README.md",
     "release-notes/release-notes-template.md",
     "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -3046,6 +3036,7 @@
   ],
   "ops": [
     "docs/features/_template/24-risk-compliance-ops.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/24-risk-compliance-ops.md",
     "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md"
   ],
   "orchestration": [
@@ -3244,6 +3235,7 @@
   ],
   "pentest": [
     "docs/features/_template/19-pentest-report.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/19-pentest-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/19-pentest-report.md"
   ],
   "performance": [
@@ -3385,6 +3377,7 @@
   ],
   "postmortem": [
     "docs/features/_template/27-postmortem.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/27-postmortem.md",
     "docs/features/paid-analysis-transactional-delivery/27-postmortem.md",
     "incidents/README.md",
     "incidents/templates/postmortem.md",
@@ -3464,6 +3457,7 @@
     "docs/agent-product-map.md",
     "docs/features/_template-frontend/02-product-requirements.md",
     "docs/features/_template/03-product-requirements.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/03-product-requirements.md",
     "docs/features/advanced-global-traits-v2/03-product-requirements.md",
     "docs/features/advanced-public-figure-consensus-matching/03-product-requirements.md",
     "docs/features/ai-knowledge-os/03-product-requirements.md",
@@ -3519,24 +3513,6 @@
   ],
   "protection": [
     "docs/features/multi-tab-stream-isolation/README.md"
-  ],
-  "provider": [
-    "contracts/ai/README.md",
-    "docs/ai/incident-response.md",
-    "docs/ai/provider-change-checklist.md",
-    "docs/features/multi-provider-ai/00-intake.md",
-    "docs/features/multi-provider-ai/02-provider-research.md",
-    "docs/features/multi-provider-ai/08-architecture-review.md",
-    "docs/features/multi-provider-ai/09-impact-analysis.md",
-    "docs/features/multi-provider-ai/11-test-strategy.md",
-    "docs/features/multi-provider-ai/13-implementation-readiness.md",
-    "docs/provider-routing.md",
-    "runbooks/ai-provider-outage.md",
-    "runbooks/latency.md",
-    "runbooks/provider-outage.md",
-    "skills/add-ai-provider.md",
-    "structure/modules/api-ai.md",
-    "support/provider-outage-messaging.md"
   ],
   "provider outage": [
     "knowledge/summaries/current-risks.md"
@@ -3654,6 +3630,7 @@
     "docs/agent-readiness.md",
     "docs/features/_template-frontend/11-release-readiness.md",
     "docs/features/_template/13-implementation-readiness.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/13-implementation-readiness.md",
     "docs/features/advanced-global-traits-v2/13-implementation-readiness.md",
     "docs/features/advanced-public-figure-consensus-matching/13-implementation-readiness.md",
     "docs/features/ai-knowledge-os/13-implementation-readiness.md",
@@ -3675,33 +3652,6 @@
     "support/release-support-checklist.md",
     "support/simple-readable-code-operating-system-implementation.md",
     "support/support-readiness-template.md"
-  ],
-  "readme": [
-    "agents/README.md",
-    "architecture/adrs/README.md",
-    "context/frontend/README.md",
-    "context/README.md",
-    "docs/eslint/README.md",
-    "docs/exceptions/README.md",
-    "docs/features/_template-frontend/README.md",
-    "docs/features/_template/README.md",
-    "docs/features/multi-tab-stream-isolation/README.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/README.md",
-    "docs/features/parallel-ai-pipeline/README.md",
-    "docs/features/README.md",
-    "docs/README.md",
-    "docs/sdlc/README.md",
-    "knowledge/templates/ai-readme.md",
-    "memory/frontend/README.md",
-    "memory/README.md",
-    "README.md",
-    "release-notes/README.md",
-    "rules/frontend/README.md",
-    "rules/README.md",
-    "skills/README-frontend.md",
-    "skills/README.md",
-    "testing/frontend/README.md",
-    "testing/README.md"
   ],
   "ready": [
     "context/reference-patterns.md",
@@ -3762,6 +3712,8 @@
     "docs/features/_template-frontend/04-technical-refinement.md",
     "docs/features/_template/04-cross-functional-refinement.md",
     "docs/features/_template/06-technical-refinement.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/06-technical-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
     "docs/features/advanced-public-figure-consensus-matching/04-cross-functional-refinement.md",
@@ -3815,33 +3767,6 @@
     "docs/ai/safety-filters.md",
     "support/upload-troubleshooting.md"
   ],
-  "release": [
-    "agents/backend-release-gatekeeper.md",
-    "agents/frontend-release-gatekeeper.md",
-    "architecture/adrs/adr-004-parallel-ai-pipeline.md",
-    "docs/features/_template-frontend/11-release-readiness.md",
-    "docs/features/_template/25-release-report.md",
-    "docs/features/parallel-ai-pipeline/README.md",
-    "docs/features/simple-readable-code-operating-system-implementation/25-release-report.md",
-    "docs/release-checklist.md",
-    "docs/sdlc/release-checklist.md",
-    "memory/release-checklist.md",
-    "quality/release-readiness.md",
-    "release-notes/2026-07-12-ai-knowledge-os.md",
-    "release-notes/2026-07-12-parallel-ai-pipeline.md",
-    "release-notes/README.md",
-    "release-notes/release-notes-template.md",
-    "release-notes/simple-readable-code-operating-system-implementation.md",
-    "release-notes/twinzy-hardening-v3.md",
-    "rules/24-release-gate.md",
-    "rules/frontend/19-release-gates.md",
-    "runbooks/deployment.md",
-    "runbooks/release-smoke-test-template.md",
-    "runbooks/release-smoke-test.md",
-    "runbooks/rollback-template.md",
-    "support/known-issues-template.md",
-    "support/release-support-checklist.md"
-  ],
   "reliability": [
     "agents/reliability-engineer.md",
     "memory/reliability-patterns.md",
@@ -3889,6 +3814,7 @@
   "requirements": [
     "docs/features/_template-frontend/02-product-requirements.md",
     "docs/features/_template/03-product-requirements.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/03-product-requirements.md",
     "docs/features/advanced-global-traits-v2/03-product-requirements.md",
     "docs/features/advanced-public-figure-consensus-matching/03-product-requirements.md",
     "docs/features/ai-knowledge-os/03-product-requirements.md",
@@ -3988,6 +3914,7 @@
   "retrospective": [
     "docs/features/_template-frontend/13-retrospective.md",
     "docs/features/_template/27-retrospective.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/27-retrospective.md",
     "docs/features/simple-readable-code-operating-system-implementation/27-retrospective.md",
     "runbooks/hotfix.md"
   ],
@@ -4024,6 +3951,7 @@
   ],
   "risk": [
     "docs/features/_template/24-risk-compliance-ops.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/24-risk-compliance-ops.md",
     "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md",
     "docs/sdlc/risk-baseline.md",
     "quality/README.md",
@@ -4035,6 +3963,7 @@
   ],
   "roadmap": [
     "docs/features/_template/07-technical-roadmap.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/07-technical-roadmap.md",
     "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
     "docs/features/advanced-public-figure-consensus-matching/07-technical-roadmap.md",
     "docs/features/engineering-os-migration/07-technical-roadmap.md",
@@ -4308,6 +4237,7 @@
     "docs/ai/prompt-injection-threat-model.md",
     "docs/features/_template-frontend/08-security-review.md",
     "docs/features/_template/19-security-review.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/19-security-review.md",
     "docs/features/parallel-ai-pipeline/19-security-review.md",
     "docs/features/simple-readable-code-operating-system-implementation/19-security-review.md",
     "docs/features/twinzy-hardening-v3/19-security-review.md",
@@ -4392,9 +4322,6 @@
     "docs/ai/shadow-routing.md",
     "knowledge/summaries/ai-pipeline.md",
     "operations/AI-cost-budget.md"
-  ],
-  "shape": [
-    "docs/ai/output-validation.md"
   ],
   "share": [
     "contracts/api/share-results.md",
@@ -4641,6 +4568,7 @@
   ],
   "standards": [
     "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/10-engineering-standards-check.md",
     "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
     "docs/features/advanced-public-figure-consensus-matching/10-engineering-standards-check.md",
     "docs/features/engineering-os-migration/10-engineering-standards-check.md",
@@ -4688,6 +4616,7 @@
   "strategy": [
     "docs/features/_template-frontend/06-test-strategy.md",
     "docs/features/_template/11-test-strategy.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/11-test-strategy.md",
     "docs/features/advanced-global-traits-v2/11-test-strategy.md",
     "docs/features/advanced-public-figure-consensus-matching/11-test-strategy.md",
     "docs/features/ai-knowledge-os/11-test-strategy.md",
@@ -4848,6 +4777,8 @@
     "docs/features/_template-frontend/04-technical-refinement.md",
     "docs/features/_template/06-technical-refinement.md",
     "docs/features/_template/07-technical-roadmap.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/06-technical-refinement.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/07-technical-roadmap.md",
     "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
     "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
     "docs/features/advanced-public-figure-consensus-matching/06-technical-refinement.md",
@@ -4903,33 +4834,6 @@
     "product/README.md",
     "product/terminology.md"
   ],
-  "test": [
-    "agents/backend-test-engineer.md",
-    "agents/frontend-test-engineer.md",
-    "docs/features/_template-frontend/06-test-strategy.md",
-    "docs/features/_template/11-test-strategy.md",
-    "docs/features/advanced-global-traits-v2/11-test-strategy.md",
-    "docs/features/advanced-public-figure-consensus-matching/11-test-strategy.md",
-    "docs/features/ai-knowledge-os/11-test-strategy.md",
-    "docs/features/engineering-os-migration/11-test-strategy.md",
-    "docs/features/multi-provider-ai/11-test-strategy.md",
-    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/11-test-strategy.md",
-    "docs/features/paid-analysis-transactional-delivery/11-test-strategy.md",
-    "docs/features/parallel-ai-pipeline/11-test-strategy.md",
-    "docs/features/simple-readable-code-operating-system-implementation/11-test-strategy.md",
-    "docs/features/temporary-shareable-results/11-test-strategy.md",
-    "docs/features/twinzy-hardening-v3/11-test-strategy.md",
-    "runbooks/release-smoke-test.md",
-    "TEST_CASES.md",
-    "test-cases/business/business-test-case-template.md",
-    "test-cases/e2e/e2e-test-case-template.md",
-    "test-cases/integration/integration-test-case-template.md",
-    "test-cases/security/security-test-case-template.md",
-    "test-cases/unit/unit-test-case-template.md",
-    "testing/frontend/test-data-and-fixtures.md",
-    "testing/test-data-and-fixtures.md"
-  ],
   "test-counts": [
     "quality/quality-metrics.md"
   ],
@@ -4962,6 +4866,7 @@
   ],
   "threat": [
     "docs/features/_template/19-threat-model.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/19-threat-model.md",
     "docs/features/advanced-public-figure-consensus-matching/19-threat-model.md",
     "docs/features/paypal-donations-and-paid-results/19-threat-model-paywall.md",
     "docs/features/paypal-donations-and-paid-results/19-threat-model.md",
@@ -5145,6 +5050,7 @@
     "contracts/frontend-backend/shared-schemas.md"
   ],
   "twz": [
+    "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
     "docs/features/advanced-public-figure-consensus-matching/00-intake.md"
   ],
   "typecheck": [
@@ -5169,6 +5075,7 @@
   ],
   "uat": [
     "docs/features/_template/20-uat-report.md",
+    "docs/features/advanced-extraction-provider-shape-recovery/20-uat-report.md",
     "docs/features/simple-readable-code-operating-system-implementation/20-uat-report.md",
     "docs/features/visual-similarity-pivot/20-uat-report.md",
     "docs/sdlc/uat-baseline.md"
@@ -5460,7 +5367,7 @@
     "skills/write-unit-tests.md",
     "skills/write-visual-tests.md"
   ],
-  "written-traits-v5": [
+  "written-traits-v6": [
     "contracts/ai/prompt-io.md"
   ],
   "xxx": [

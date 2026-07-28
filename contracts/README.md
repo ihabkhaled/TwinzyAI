@@ -57,7 +57,7 @@ Grounded in doc comments and tests inside the owning files:
    `{statusCode, errorCode, message}` triple without breaking existing clients
    (`apps/api/src/core/errors/error.types.ts`). See
    [`api/error-envelope.md`](api/error-envelope.md).
-3. **AI responses are version-pinned.** `GAME_PROMPT_VERSION = 'written-traits-v5'`
+3. **AI responses are version-pinned.** `GAME_PROMPT_VERSION = 'written-traits-v6'`
    (`packages/shared/src/constants/app.constants.ts`) is a `z.literal` in every AI response
    schema, so a stale model/template pairing fails validation instead of drifting silently.
 4. **Route paths are single-sourced.** Path constants live in

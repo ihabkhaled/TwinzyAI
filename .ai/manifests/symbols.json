@@ -1,5 +1,5 @@
 {
-  "count": 1784,
+  "count": 1786,
   "symbols": [
     {
       "kind": "const",
@@ -7002,6 +7002,13 @@
       "path": "apps/web/src/packages/axios/http-error.ts"
     },
     {
+      "kind": "const",
+      "layer": "lib",
+      "module": "api:ai",
+      "name": "normalizeTraitExtractionInput",
+      "path": "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "core",
       "module": "api:core",
@@ -11207,6 +11214,13 @@
       "module": "web:game",
       "name": "traitDetailsTitleClass",
       "path": "apps/web/src/modules/game/containers/trait-details.variants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:ai",
+      "name": "TraitExtractionNormalizationResult",
+      "path": "apps/api/src/modules/ai/model/trait-extraction-normalization.types.ts"
     },
     {
       "kind": "type",

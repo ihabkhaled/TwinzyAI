@@ -45,4 +45,61 @@ describe('trait-text util', () => {
       ]),
     );
   });
+
+  it('collects every enhanced matching-profile and counterfactual text leaf', () => {
+    const extraction = buildTraitExtraction();
+    extraction.matchingProfile = {
+      stableVisibleStructure: [
+        {
+          id: 'face.shape',
+          value: 'stable profile value',
+          confidence: 'high',
+          weight: 8,
+          visibility: 'visible',
+          affectedBy: [],
+        },
+      ],
+      mutableStyleSignals: [],
+      expressionAndPresentation: [],
+      occludedOrUncertainSignals: [],
+      contradictionsToAvoid: [],
+      accessoryAgnosticSignals: [],
+      imageQualityCaps: ['matching quality cap'],
+    };
+    extraction.counterfactualProfiles = {
+      withoutEyewear: [
+        {
+          id: 'eyes.structure',
+          value: 'counterfactual value',
+          confidence: 'low',
+          weight: 1,
+          visibility: 'uncertain',
+          affectedBy: [],
+        },
+      ],
+      withoutFacialHair: [],
+      withoutMutableStyling: [],
+    };
+
+    expect(collectExtractionTextValues(extraction)).toEqual(
+      expect.arrayContaining([
+        'face.shape',
+        'stable profile value',
+        'matching quality cap',
+        'eyes.structure',
+        'counterfactual value',
+      ]),
+    );
+  });
+
+  it('supports legacy extraction responses without optional enhanced profiles', () => {
+    const extraction = buildTraitExtraction();
+    extraction.matchingProfile = undefined;
+    extraction.counterfactualProfiles = undefined;
+
+    const values = collectExtractionTextValues(extraction);
+
+    expect(values).toContain('clear oval face');
+    expect(values).not.toContain('soft oval face structure');
+  });
 });

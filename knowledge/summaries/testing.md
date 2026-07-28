@@ -50,10 +50,10 @@ Projects: `chromium`, `a11y` (`*.a11y.spec.ts`, @axe-core/playwright — any vio
 ## Fixtures — where they live
 
 - Backend: `apps/api/src/tests/fixtures/` — `fake-ai-adapter.ts` (queued responses; records per-step calls to PROVE the image never reaches text-only steps), `image-fixtures.ts` (byte-level minimal JPEG/PNG/WebP + corrupt builders), `stubs.ts` (logger/ClamAV/full AppConfigService double with paywall off).
-- Shared: `packages/shared/tests/fixtures/advanced-fixtures.ts` — deterministic written-traits-v5 builders generated from `TRAIT_CATEGORY_FIELDS` (taxonomy change updates every test).
+- Shared: `packages/shared/tests/fixtures/advanced-fixtures.ts` — deterministic written-traits-v6 builders generated from `TRAIT_CATEGORY_FIELDS` (taxonomy change updates every test).
 - Web: `apps/web/src/modules/game/test/game-fixtures.ts`, `apps/web/src/tests/helpers/render-with-providers.tsx` (fresh QueryClient + English i18n).
 - Unit test location convention: backend `modules/<module>/tests/`; web module tests in `modules/<feature>/test/`.
 
 ## Behavior matrix and standards
 
-`TEST_CASES.md` (root) is the living behavior matrix — every numbered case maps to at least one automated test (file-security cases 1–16, shared contract cases). Standards corpus: `testing/` (8 backend docs) + `testing/frontend/` (9 docs). Note: `TEST_CASES.md` references promptVersion `advanced-global-traits-v3` while the shipped literal is `written-traits-v5` — a recorded staleness signal (`knowledge/summaries/current-risks.md`).
+`TEST_CASES.md` (root) is the living behavior matrix — every numbered case maps to at least one automated test (file-security cases 1–16, shared contract cases). Standards corpus: `testing/` (8 backend docs) + `testing/frontend/` (9 docs).
