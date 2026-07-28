@@ -10,6 +10,7 @@ import {
   type OpenAiCompatCredential,
   type OpenAiCompatProviderValue,
 } from './ai-provider.constants';
+import { MAX_AI_MODEL_ATTEMPTS } from './ai-route.constants';
 import type { AiRouteEntry } from './ai-route.types';
 import { parseAiRouteList } from './ai-route.util';
 import type { ContactEmailConfig } from './contact-config.types';
@@ -106,12 +107,13 @@ export class AppConfigService {
 
   /**
    * The ordered model chain the adapter tries: the primary model first, then
-   * each configured fallback, de-duplicated and empty entries removed.
+   * configured fallbacks, de-duplicated, empty entries removed, and capped at
+   * three attempts.
    */
   public get geminiModelChain(): readonly string[] {
-    return [...new Set([this.geminiModel, ...this.geminiFallbackModels])].filter(
-      (model) => model.length > 0,
-    );
+    return [...new Set([this.geminiModel, ...this.geminiFallbackModels])]
+      .filter((model) => model.length > 0)
+      .slice(0, MAX_AI_MODEL_ATTEMPTS);
   }
 
   /**
@@ -120,7 +122,8 @@ export class AppConfigService {
    * step with both vars empty — or no step at all — uses the global chain.
    * Explicit by design: per-step values fully replace the global chain rather
    * than being merged with it, so operators can e.g. keep lite models out of
-   * the extraction chain entirely.
+   * the extraction chain entirely. The resulting chain is capped at three
+   * attempts.
    */
   public geminiModelChainFor(step?: GeminiStepValue): readonly string[] {
     if (step === undefined) {
@@ -129,7 +132,9 @@ export class AppConfigService {
     const keys = GEMINI_STEP_ENV_KEYS[step];
     const primary: string = this.configService.get(keys.model, { infer: true });
     const fallbacks = this.toList(this.configService.get(keys.fallbacks, { infer: true }));
-    const chain = [...new Set([primary, ...fallbacks])].filter((model) => model.length > 0);
+    const chain = [...new Set([primary, ...fallbacks])]
+      .filter((model) => model.length > 0)
+      .slice(0, MAX_AI_MODEL_ATTEMPTS);
     return chain.length > 0 ? chain : this.geminiModelChain;
   }
 

@@ -16,8 +16,8 @@ type StyleMatchStageListener = (stage: GameStreamStageValue) => void;
 /**
  * Everything one streaming analyze run threads through its private steps,
  * bundled so the pipeline methods stay within the parameter budget. The
- * `payment` holder is mutated in place when a capture succeeds so the outer
- * refund-on-failure handler can see it.
+ * `payment` holder tracks preparation and is mutated when final capture
+ * succeeds so the outer refund-on-failure handler can compensate it.
  */
 export interface StreamAnalysisContext {
   readonly file: UploadedImageFile | undefined;

@@ -22,6 +22,7 @@ Step service ──(AI_PROVIDER_ADAPTER port)──▶ AiRouterService
 ```
 
 - **Route chains**: `AI_ROUTE_<STEP>` = comma-separated `provider:model` tokens. A bare model id means `gemini:<model>` (legacy compatible). An explicit route **replaces** the step's `GEMINI_*` chain; empty falls back to the `GEMINI_MODEL_<STEP>`/global chain mapped to gemini entries.
+- **Three-attempt bound**: after disabled or image-incompatible providers are filtered out, only the first three usable provider/model entries may be attempted for one pipeline step. Exhaustion returns the existing 429/502 error envelope instead of continuing through a longer configured list.
 - **Enablement**: a provider is enabled iff its API key env var is non-empty (`<PROVIDER>_API_KEY`). Remove the key to disable — that is the rollback lever.
 - **Fail-closed image rule**: extraction is the only photo-carrying step and always dispatches through Gemini. Generation, judging, translation, shadow calls, sharing, and display are text-only by contract. Other providers cannot be configured to receive a photo.
 - **Fallback semantics**: a hop advances on `AI_RATE_LIMITED`, `AI_PROVIDER_UNAVAILABLE`, `AI_TIMEOUT`, `AI_RESPONSE_INVALID` (schema-rejected content). Client cancellations and unexpected errors propagate immediately. Chain exhaustion → 429 if any hop was rate-limited, else 502 — identical envelopes to today.

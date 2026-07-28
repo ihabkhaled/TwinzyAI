@@ -11,9 +11,9 @@
 | API endpoints | 12 |
 | Web routes | 15 |
 | Test files | 207 |
-| Canonical documents | 732 |
+| Canonical documents | 750 |
 | Open contradiction-registry entries | 3 |
-| Stale items at last analysis | 0 |
+| Stale items at last analysis | 3 |
 | Broken links at last analysis | 9 |
 
 ## Active feature folders (docs/features/)
@@ -25,6 +25,7 @@
 - multi-provider-ai
 - multi-tab-stream-isolation
 - multilingual-seo-sitemap-rss-contact
+- paid-analysis-transactional-delivery
 - parallel-ai-pipeline
 - paypal-donations-and-paid-results
 - simple-readable-code-operating-system-and-codebase-refactor

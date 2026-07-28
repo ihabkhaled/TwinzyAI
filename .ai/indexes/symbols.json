@@ -2366,6 +2366,9 @@
   "MAX_AI_GENERATION_LANES": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
+  "MAX_AI_MODEL_ATTEMPTS": [
+    "apps/api/src/config/ai-route.constants.ts"
+  ],
   "MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS": [
     "apps/api/src/config/env-bounds.constants.ts"
   ],
@@ -2953,6 +2956,9 @@
   "paymentLoaderClass": [
     "apps/web/src/modules/game/containers/payment-step.variants.ts"
   ],
+  "PaymentPreparationRecord": [
+    "apps/api/src/modules/payments/model/payment.types.ts"
+  ],
   "PaymentPrice": [
     "apps/api/src/config/payment.constants.ts"
   ],
@@ -3119,6 +3125,9 @@
   "PAYPAL_ENV_VALUES": [
     "apps/api/src/config/payment.constants.ts"
   ],
+  "PAYPAL_INTENT_CAPTURE": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
   "PAYPAL_ME_BASE_URL": [
     "apps/web/src/shared/constants/donate.constants.ts"
   ],
@@ -3147,6 +3156,9 @@
   "PAYPAL_SDK_SCRIPT_ID": [
     "apps/web/src/packages/paypal/paypal.constants.ts"
   ],
+  "PAYPAL_STATUS_APPROVED": [
+    "apps/api/src/modules/payments/model/payment.constants.ts"
+  ],
   "PAYPAL_STATUS_COMPLETED": [
     "apps/api/src/modules/payments/model/payment.constants.ts"
   ],
@@ -3155,6 +3167,9 @@
   ],
   "PaypalAdapter": [
     "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+  ],
+  "PaypalApprovedOrderResponseSchema": [
+    "apps/api/src/modules/payments/model/paypal.schemas.ts"
   ],
   "PayPalButtonsConfig": [
     "apps/web/src/packages/paypal/paypal-sdk.types.ts"
@@ -3197,6 +3212,9 @@
   ],
   "PaypalOrderIdSchema": [
     "packages/shared/src/schemas/payment.schema.ts"
+  ],
+  "PaypalPreparedPayment": [
+    "apps/api/src/modules/payments/model/payment.types.ts"
   ],
   "PaypalTokenResponseSchema": [
     "apps/api/src/modules/payments/model/paypal.schemas.ts"

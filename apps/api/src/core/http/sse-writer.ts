@@ -34,11 +34,12 @@ export class SseWriter {
     raw.writeHead(SSE_OK_STATUS, { ...SSE_HEADERS, ...extraHeaders });
   }
 
-  public event(eventName: string, data: unknown): void {
+  public event(eventName: string, data: unknown): boolean {
     if (!this.canWrite()) {
-      return;
+      return false;
     }
     this.raw.write(`event: ${eventName}\ndata: ${JSON.stringify(data)}\n\n`);
+    return true;
   }
 
   /** SSE comment line — ignored by clients, used purely as a keep-alive ping. */
@@ -50,7 +51,10 @@ export class SseWriter {
   }
 
   public onClose(listener: () => void): void {
-    this.raw.on('close', listener);
+    this.raw.on('close', () => {
+      this.open = false;
+      listener();
+    });
   }
 
   public close(): void {

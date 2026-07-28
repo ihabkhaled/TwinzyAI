@@ -28,18 +28,32 @@ const PAYMOB_CAPTURE: PaymobCaptureRecord = {
   amountCents: 4900,
 };
 
+const PREPARED_PAYPAL = {
+  gateway: PaymentGateway.Paypal,
+  orderId: 'ORDER123',
+  expectedRequestId: 'req-1',
+} as const;
+
 const buildPaypalFake = (): {
   adapter: PaypalAdapter;
   captureOrder: ReturnType<typeof vi.fn>;
+  verifyApprovedOrder: ReturnType<typeof vi.fn>;
   refundCapture: ReturnType<typeof vi.fn>;
   createOrder: ReturnType<typeof vi.fn>;
 } => {
   const createOrder = vi.fn(() => Promise.resolve('ORDER123'));
   const captureOrder = vi.fn(() => Promise.resolve(CAPTURE));
+  const verifyApprovedOrder = vi.fn(() => Promise.resolve(PREPARED_PAYPAL));
   const refundCapture = vi.fn(() => Promise.resolve());
   return {
-    adapter: { createOrder, captureOrder, refundCapture } as unknown as PaypalAdapter,
+    adapter: {
+      createOrder,
+      captureOrder,
+      verifyApprovedOrder,
+      refundCapture,
+    } as unknown as PaypalAdapter,
     captureOrder,
+    verifyApprovedOrder,
     refundCapture,
     createOrder,
   };
@@ -101,10 +115,14 @@ const buildGate = (
 };
 
 describe('PaymentGateService with the paywall OFF (free game)', () => {
-  it('captures nothing and never talks to PayPal', async () => {
+  it('prepares and finalizes nothing and never talks to PayPal', async () => {
     const { gate, paypal } = buildGate(false);
 
-    await expect(gate.captureForAnalysis({}, 'req-1')).resolves.toBeUndefined();
+    const prepared = await gate.prepareForAnalysis({}, 'req-1');
+
+    expect(gate.refundableCaptureFor(prepared)).toBeUndefined();
+    await expect(gate.finalizeForDelivery(prepared)).resolves.toBeUndefined();
+    expect(paypal.verifyApprovedOrder).not.toHaveBeenCalled();
     expect(paypal.captureOrder).not.toHaveBeenCalled();
   });
 
@@ -130,7 +148,7 @@ describe('PaymentGateService with the paywall ON', () => {
   it('requires an order id: a request without one is a 402 PAYMENT_REQUIRED', async () => {
     const { gate, paypal } = buildGate(true);
 
-    await expect(gate.captureForAnalysis({}, 'req-1')).rejects.toMatchObject({
+    await expect(gate.prepareForAnalysis({}, 'req-1')).rejects.toMatchObject({
       errorCode: ErrorCode.PaymentRequired,
       status: 402,
     });
@@ -141,16 +159,22 @@ describe('PaymentGateService with the paywall ON', () => {
     const { gate, paypal } = buildGate(true);
 
     await expect(
-      gate.captureForAnalysis({ paypalOrderId: '../evil?x=1' }, 'req-1'),
+      gate.prepareForAnalysis({ paypalOrderId: '../evil?x=1' }, 'req-1'),
     ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentOrderInvalid });
     expect(paypal.captureOrder).not.toHaveBeenCalled();
   });
 
-  it('captures the order bound to this request id', async () => {
+  it('verifies the approved order before analysis and captures only at finalization', async () => {
     const { gate, paypal } = buildGate(true);
 
-    const record = await gate.captureForAnalysis({ paypalOrderId: 'ORDER123' }, 'req-1');
+    const prepared = await gate.prepareForAnalysis({ paypalOrderId: 'ORDER123' }, 'req-1');
 
+    expect(prepared).toStrictEqual(PREPARED_PAYPAL);
+    expect(gate.refundableCaptureFor(prepared)).toBeUndefined();
+    expect(paypal.verifyApprovedOrder).toHaveBeenCalledWith('ORDER123', 'req-1');
+    expect(paypal.captureOrder).not.toHaveBeenCalled();
+
+    const record = await gate.finalizeForDelivery(prepared);
     expect(record).toStrictEqual(CAPTURE);
     expect(paypal.captureOrder).toHaveBeenCalledWith('ORDER123', 'req-1');
   });
@@ -182,12 +206,13 @@ describe('PaymentGateService with Paymob ON', () => {
   it('verifies the Paymob order bound to the request id, never PayPal', async () => {
     const { gate, paypal, paymob } = buildGate(false, true);
 
-    const record = await gate.captureForAnalysis(
+    const prepared = await gate.prepareForAnalysis(
       { paymentGateway: 'paymob', paymobOrderId: '568000', paymobTransactionId: '987' },
       'req-1',
     );
 
-    expect(record).toStrictEqual(PAYMOB_CAPTURE);
+    expect(gate.refundableCaptureFor(prepared)).toStrictEqual(PAYMOB_CAPTURE);
+    await expect(gate.finalizeForDelivery(prepared)).resolves.toStrictEqual(PAYMOB_CAPTURE);
     expect(paymob.verifyPayment).toHaveBeenCalledWith('req-1', 568_000, 987);
     expect(paypal.captureOrder).not.toHaveBeenCalled();
   });
@@ -196,7 +221,7 @@ describe('PaymentGateService with Paymob ON', () => {
     const { gate, paymob } = buildGate(false, true);
 
     await expect(
-      gate.captureForAnalysis({ paymentGateway: 'paymob', paymobOrderId: '568000' }),
+      gate.prepareForAnalysis({ paymentGateway: 'paymob', paymobOrderId: '568000' }),
     ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentRequired });
     expect(paymob.verifyPayment).not.toHaveBeenCalled();
   });
@@ -205,7 +230,7 @@ describe('PaymentGateService with Paymob ON', () => {
     const { gate, paymob } = buildGate(false, true);
 
     await expect(
-      gate.captureForAnalysis({ paymentGateway: 'paymob' }, 'req-1'),
+      gate.prepareForAnalysis({ paymentGateway: 'paymob' }, 'req-1'),
     ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentRequired });
     expect(paymob.verifyPayment).not.toHaveBeenCalled();
   });
@@ -214,7 +239,7 @@ describe('PaymentGateService with Paymob ON', () => {
     const { gate, paymob } = buildGate(false, true);
 
     await expect(
-      gate.captureForAnalysis({ paymentGateway: 'paymob', paymobOrderId: 'not-a-number' }, 'req-1'),
+      gate.prepareForAnalysis({ paymentGateway: 'paymob', paymobOrderId: 'not-a-number' }, 'req-1'),
     ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentOrderInvalid });
     expect(paymob.verifyPayment).not.toHaveBeenCalled();
   });
@@ -222,7 +247,7 @@ describe('PaymentGateService with Paymob ON', () => {
   it('verifies with an undefined transaction id when the redirect did not relay one', async () => {
     const { gate, paymob } = buildGate(false, true);
 
-    await gate.captureForAnalysis({ paymentGateway: 'paymob', paymobOrderId: '568000' }, 'req-1');
+    await gate.prepareForAnalysis({ paymentGateway: 'paymob', paymobOrderId: '568000' }, 'req-1');
 
     expect(paymob.verifyPayment).toHaveBeenCalledWith('req-1', 568_000, undefined);
   });
@@ -266,7 +291,7 @@ describe('PaymentGateService with Paymob ON', () => {
     const { gate, paymob } = buildGate(true, false);
 
     await expect(
-      gate.captureForAnalysis({ paymentGateway: 'paymob' }, 'req-1'),
+      gate.prepareForAnalysis({ paymentGateway: 'paymob' }, 'req-1'),
     ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentOrderInvalid });
     expect(paymob.verifyPayment).not.toHaveBeenCalled();
   });
@@ -275,7 +300,7 @@ describe('PaymentGateService with Paymob ON', () => {
     const { gate, paypal } = buildGate(false, true);
 
     await expect(
-      gate.captureForAnalysis({ paypalOrderId: 'ORDER123' }, 'req-1'),
+      gate.prepareForAnalysis({ paypalOrderId: 'ORDER123' }, 'req-1'),
     ).rejects.toMatchObject({ errorCode: ErrorCode.PaymentOrderInvalid });
     expect(paypal.captureOrder).not.toHaveBeenCalled();
   });

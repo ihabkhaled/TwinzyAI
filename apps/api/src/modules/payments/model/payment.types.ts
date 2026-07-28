@@ -9,6 +9,13 @@ interface PaypalCaptureRecord {
   readonly captureId: string;
 }
 
+/** A PayPal order proven ready for capture, without money having moved yet. */
+export interface PaypalPreparedPayment {
+  readonly gateway: 'paypal';
+  readonly orderId: string;
+  readonly expectedRequestId: string | undefined;
+}
+
 export interface PaymobCaptureRecord {
   readonly gateway: 'paymob';
   readonly orderId: number;
@@ -18,6 +25,7 @@ export interface PaymobCaptureRecord {
 }
 
 export type PaymentCaptureRecord = PaypalCaptureRecord | PaymobCaptureRecord;
+export type PaymentPreparationRecord = PaypalPreparedPayment | PaymobCaptureRecord;
 
 /** What a freshly-created Paymob intention hands back to the client for checkout. */
 export interface PaymobIntention {
@@ -29,10 +37,11 @@ export interface PaymobIntention {
 }
 
 /**
- * Mutable per-run payment slot threaded through the analyze pipeline so the
- * refund-on-failure handler can see a capture made deeper in the flow.
- * `undefined` = paywall off or capture not reached.
+ * Mutable per-run payment slots threaded through the analyze pipeline.
+ * Preparation proves eligibility; capture is populated only when money moves,
+ * so refund-on-failure never compensates an approved-but-uncaptured order.
  */
 export interface PaymentHolder {
+  prepared: PaymentPreparationRecord | undefined;
   capture: PaymentCaptureRecord | undefined;
 }

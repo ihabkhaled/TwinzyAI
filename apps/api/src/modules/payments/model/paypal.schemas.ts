@@ -16,6 +16,23 @@ export const PaypalCreateOrderResponseSchema = z.looseObject({
   status: z.string().min(1),
 });
 
+const orderAmountSchema = z.looseObject({
+  currency_code: z.string().min(1),
+  value: z.string().min(1),
+});
+
+const approvedPurchaseUnitSchema = z.looseObject({
+  amount: orderAmountSchema,
+  custom_id: z.string().optional(),
+});
+
+export const PaypalApprovedOrderResponseSchema = z.looseObject({
+  id: z.string().min(1),
+  intent: z.string().min(1),
+  status: z.string().min(1),
+  purchase_units: z.array(approvedPurchaseUnitSchema).min(1),
+});
+
 const captureAmountSchema = z.looseObject({
   currency_code: z.string().min(1),
   value: z.string().min(1),

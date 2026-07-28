@@ -121,10 +121,13 @@ export class GameStreamPresenter {
           if (message.event === GameStreamEvent.Stage) {
             lastStage = message.stage;
           }
-          sse.event(
+          const emitted = sse.event(
             message.event,
             stampStreamFrame(message, { ...envelope, status: statusForStreamEvent(message.event) }),
           );
+          if (!emitted) {
+            throw new Error('SSE stream is closed');
+          }
         },
         ids.requestId,
         controller.signal,

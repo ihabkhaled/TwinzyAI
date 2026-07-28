@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_RESULT_COUNT, FinalGameResultSchema, TRAIT_CATEGORY_FIELDS } from '@twinzy/shared';
+import {
+  DEFAULT_RESULT_COUNT,
+  FinalGameResultSchema,
+  GAME_PROMPT_VERSION,
+  TRAIT_CATEGORY_FIELDS,
+} from '@twinzy/shared';
 
 import {
   AppError,
@@ -103,6 +108,18 @@ describe('TraitExtractionService', () => {
         expect(prompt).toContain(`"${field}"`);
       }
     }
+  });
+
+  it('sends the active advanced extraction contract to the model', async () => {
+    const { adapter, traitExtraction } = buildPipeline();
+    adapter.queueImageResponse(buildTraitExtractionJson());
+
+    await traitExtraction.extractTraits(image, 'en');
+
+    const prompt = adapter.imageCalls[0]?.prompt ?? '';
+    expect(prompt).toContain(`"promptVersion": "${GAME_PROMPT_VERSION}"`);
+    expect(prompt).toContain('"matchingProfile"');
+    expect(prompt).toContain('"counterfactualProfiles"');
   });
 
   it('rejects invalid JSON from the provider', async () => {

@@ -38,6 +38,13 @@
       ]
     },
     {
+      "name": "PaypalApprovedOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
       "name": "PaypalCaptureOrderResponseSchema",
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "usedBy": [

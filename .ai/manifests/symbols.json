@@ -1,5 +1,5 @@
 {
-  "count": 1777,
+  "count": 1783,
   "symbols": [
     {
       "kind": "const",
@@ -5990,6 +5990,13 @@
       "kind": "const",
       "layer": "config",
       "module": "api:config",
+      "name": "MAX_AI_MODEL_ATTEMPTS",
+      "path": "apps/api/src/config/ai-route.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "config",
+      "module": "api:config",
       "name": "MAX_AI_PARALLEL_QUEUE_TIMEOUT_MS",
       "path": "apps/api/src/config/env-bounds.constants.ts"
     },
@@ -7408,6 +7415,13 @@
       "path": "apps/web/src/modules/game/containers/payment-step.variants.ts"
     },
     {
+      "kind": "type",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaymentPreparationRecord",
+      "path": "apps/api/src/modules/payments/model/payment.types.ts"
+    },
+    {
       "kind": "interface",
       "layer": "config",
       "module": "api:config",
@@ -7815,6 +7829,13 @@
     },
     {
       "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PAYPAL_INTENT_CAPTURE",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "shared",
       "module": "web:shared",
       "name": "PAYPAL_ME_BASE_URL",
@@ -7887,6 +7908,13 @@
       "kind": "const",
       "layer": "model",
       "module": "api:payments",
+      "name": "PAYPAL_STATUS_APPROVED",
+      "path": "apps/api/src/modules/payments/model/payment.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
       "name": "PAYPAL_STATUS_COMPLETED",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
@@ -7903,6 +7931,13 @@
       "module": "api:payments",
       "name": "PaypalAdapter",
       "path": "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaypalApprovedOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts"
     },
     {
       "kind": "interface",
@@ -8001,6 +8036,13 @@
       "module": "shared",
       "name": "PaypalOrderIdSchema",
       "path": "packages/shared/src/schemas/payment.schema.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "api:payments",
+      "name": "PaypalPreparedPayment",
+      "path": "apps/api/src/modules/payments/model/payment.types.ts"
     },
     {
       "kind": "const",

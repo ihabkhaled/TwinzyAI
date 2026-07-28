@@ -18,17 +18,21 @@ import {
   PAYMENT_ORDER_INVALID_MESSAGE,
   PAYMENT_REQUIRED_MESSAGE,
 } from '../model/payment.constants';
-import type { PaymentCaptureRecord } from '../model/payment.types';
+import type {
+  PaymentCaptureRecord,
+  PaymentPreparationRecord,
+  PaymobCaptureRecord,
+  PaypalPreparedPayment,
+} from '../model/payment.types';
 
 const LOG_CONTEXT = 'PaymentGate';
 
 /**
- * The paid-analysis gate across both providers. With the paywall OFF (no
- * credentials) every method is a no-op and the game behaves exactly as the free
- * product. With it ON, an analysis runs only once the payment is proven at the
- * provider — PayPal by capturing the approved order, Paymob by a server-side
- * transaction inquiry bound to the request id — and a paid-but-undelivered run
- * is refunded at the provider it was charged on. No local ledger is kept.
+ * The paid-analysis gate across both providers. With the paywall OFF every
+ * method is a no-op. With it ON, preparation proves payment eligibility:
+ * PayPal stays approved-but-uncaptured while Paymob verifies an existing paid
+ * transaction. Finalization captures PayPal only after the result exists.
+ * Undelivered finalized payments are compensated; no local ledger is kept.
  */
 @Injectable()
 export class PaymentGateService {
@@ -76,20 +80,39 @@ export class PaymentGateService {
   }
 
   /**
-   * Prove payment for one analyze request. Returns undefined when the paywall is
-   * off; otherwise routes to the gateway the client used and throws a typed 402
-   * when payment is missing or the provider rejects it.
+   * Prove payment eligibility for one request. PayPal preparation does not move
+   * money; Paymob verifies the hosted checkout transaction that already did.
    */
-  public async captureForAnalysis(
+  public async prepareForAnalysis(
     body: unknown,
     expectedRequestId?: string,
-  ): Promise<PaymentCaptureRecord | undefined> {
+  ): Promise<PaymentPreparationRecord | undefined> {
     if (!this.config.isPaywallEnabled) {
       return undefined;
     }
     return resolvePaymentGateway(body) === PaymentGateway.Paymob
-      ? this.capturePaymob(body, expectedRequestId)
-      : this.capturePaypal(body, expectedRequestId);
+      ? this.preparePaymob(body, expectedRequestId)
+      : this.preparePaypal(body, expectedRequestId);
+  }
+
+  /** Move PayPal money only after the complete result exists; Paymob was paid at preparation. */
+  public finalizeForDelivery(
+    prepared: PaymentPreparationRecord | undefined,
+  ): Promise<PaymentCaptureRecord | undefined> {
+    if (prepared === undefined || prepared.gateway === PaymentGateway.Paymob) {
+      return Promise.resolve(prepared);
+    }
+    return this.paypal.captureOrder(prepared.orderId, prepared.expectedRequestId);
+  }
+
+  /**
+   * Paymob has already moved money when preparation succeeds, so it must be
+   * refundable throughout analysis. PayPal remains uncaptured until finalization.
+   */
+  public refundableCaptureFor(
+    prepared: PaymentPreparationRecord | undefined,
+  ): PaymentCaptureRecord | undefined {
+    return prepared?.gateway === PaymentGateway.Paymob ? prepared : undefined;
   }
 
   /**
@@ -117,10 +140,10 @@ export class PaymentGateService {
     }
   }
 
-  private async capturePaymob(
+  private async preparePaymob(
     body: unknown,
     expectedRequestId?: string,
-  ): Promise<PaymentCaptureRecord> {
+  ): Promise<PaymobCaptureRecord> {
     if (!this.config.isPaymobEnabled) {
       throw buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
     }
@@ -137,10 +160,10 @@ export class PaymentGateService {
     return this.paymob.verifyPayment(expectedRequestId, orderId, resolvePaymobTransactionId(body));
   }
 
-  private async capturePaypal(
+  private async preparePaypal(
     body: unknown,
     expectedRequestId?: string,
-  ): Promise<PaymentCaptureRecord> {
+  ): Promise<PaypalPreparedPayment> {
     if (!this.config.isPaypalEnabled) {
       throw buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
     }
@@ -151,7 +174,7 @@ export class PaymentGateService {
     if (orderId === null) {
       throw buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
     }
-    return this.paypal.captureOrder(orderId, expectedRequestId);
+    return this.paypal.verifyApprovedOrder(orderId, expectedRequestId);
   }
 
   private refundCapture(capture: PaymentCaptureRecord): Promise<void> {

@@ -18,11 +18,11 @@ import { StyleMatchService } from './style-match.service';
 /**
  * Owns the analyze sequence and its safety guarantees:
  * 1. consent + full file-security chain (fail-closed, ordered)
- * 2. payment capture when the paywall is configured (single-use at PayPal;
- *    an undelivered run after capture is refunded)
+ * 2. payment proof when the paywall is configured
  * 3. trait extraction — the ONLY provider step that receives the photo
  * 4. the source buffer is zero-filled immediately after extraction
  * 5. text-only candidate generation, judging, and aggregation
+ * 6. PayPal capture only after the complete result exists
  */
 @Injectable()
 export class AnalyzeGameUseCase {
@@ -40,14 +40,16 @@ export class AnalyzeGameUseCase {
   ): Promise<FinalGameResult> {
     const languageCode = resolveRequestLanguage(body);
     const resultCount = resolveRequestResultCount(body);
-    const payment: PaymentHolder = { capture: undefined };
+    const payment: PaymentHolder = { prepared: undefined, capture: undefined };
     try {
       const extraction = await this.extractTraitsAndDestroyImage(file, body, payment, languageCode);
-      return await this.styleMatch.matchFromTraits({
+      const result = await this.styleMatch.matchFromTraits({
         extraction,
         languageCode,
         resultCount,
       });
+      payment.capture = await this.paymentGate.finalizeForDelivery(payment.prepared);
+      return result;
     } catch (error: unknown) {
       await this.paymentGate.refundOnFailure(payment.capture, error);
       throw error;
@@ -57,7 +59,7 @@ export class AnalyzeGameUseCase {
   /**
    * Bounds the image lifetime to validation + extraction. The source bytes are
    * wiped on success and every failure path before text-only matching starts.
-   * Payment captures AFTER the cheap local file checks and BEFORE the AI call.
+   * Payment is proven after local file checks, but PayPal remains uncaptured.
    */
   private async extractTraitsAndDestroyImage(
     file: UploadedImageFile | undefined,
@@ -67,7 +69,8 @@ export class AnalyzeGameUseCase {
   ): Promise<TraitExtractionResponse> {
     try {
       const safeFile = await this.fileSecurity.assertSafeImage(file, isConsentGiven(body));
-      payment.capture = await this.paymentGate.captureForAnalysis(body);
+      payment.prepared = await this.paymentGate.prepareForAnalysis(body);
+      payment.capture = this.paymentGate.refundableCaptureFor(payment.prepared);
       return await this.traitExtraction.extractTraits(buildAiImageInput(safeFile), languageCode);
     } finally {
       this.cleanup.wipe(file);

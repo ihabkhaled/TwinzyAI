@@ -24,12 +24,17 @@ import {
 import { buildJpegBuffer, buildUploadFile } from '../../../tests/fixtures/image-fixtures';
 import type { AppLoggerStub } from '../../../tests/fixtures/stubs';
 import { buildAppLoggerStub, buildConfigStub } from '../../../tests/fixtures/stubs';
+import type { TraitExtractionService } from '../../ai';
 import { AI_PROVIDER_ADAPTER, AiModule } from '../../ai';
+import type { FileSecurityService, TemporaryFileCleanupService } from '../../file-security';
 import { FileSecurityModule } from '../../file-security';
+import type { PaymentGateService } from '../../payments';
 import { PaymentsModule } from '../../payments';
+import type { PaymobCaptureRecord } from '../../payments/model/payment.types';
 import { PrivacyModule } from '../../privacy';
 import { ResultAggregationModule } from '../../result-aggregation';
 import { AnalyzeGameUseCase } from '../application/analyze-game.use-case';
+import { AnalyzeGameStreamUseCase } from '../application/analyze-game-stream.use-case';
 import { StyleMatchService } from '../application/style-match.service';
 
 vi.mock('node:fs', { spy: true });
@@ -114,6 +119,61 @@ describe('AnalyzeGameUseCase.analyze', () => {
     await expect(useCase.analyze(file, { consent: 'true' })).rejects.toBeInstanceOf(Error);
 
     expect(file.buffer.every((byte) => byte === 0)).toBe(true);
+  });
+
+  it.each([
+    ['JSON', false],
+    ['streaming', true],
+  ])('refunds an already-paid Paymob run when %s extraction fails', async (_label, streaming) => {
+    const file = buildUploadFile();
+    const failure = new Error('provider exploded');
+    const capture: PaymobCaptureRecord = {
+      gateway: 'paymob',
+      orderId: 568_000,
+      transactionId: 987,
+      amountCents: 2500,
+    };
+    const paymentGate = {
+      prepareForAnalysis: vi.fn().mockResolvedValue(capture),
+      refundableCaptureFor: vi.fn().mockReturnValue(capture),
+      finalizeForDelivery: vi.fn(),
+      refundOnFailure: vi.fn().mockResolvedValue(undefined),
+    } as unknown as PaymentGateService;
+    const fileSecurity = {
+      assertSafeImage: vi.fn().mockResolvedValue(file),
+    } as unknown as FileSecurityService;
+    const cleanup = {
+      wipe: vi.fn(),
+    } as unknown as TemporaryFileCleanupService;
+    const traitExtraction = {
+      extractTraits: vi.fn().mockRejectedValue(failure),
+    } as unknown as TraitExtractionService;
+    const styleMatch = {} as StyleMatchService;
+
+    const execution = streaming
+      ? new AnalyzeGameStreamUseCase(
+          fileSecurity,
+          cleanup,
+          traitExtraction,
+          styleMatch,
+          paymentGate,
+        ).analyze(
+          file,
+          { consent: 'true', paymentGateway: 'paymob' },
+          vi.fn(),
+          '3b241101-e2bb-4255-8caf-4136c566a962',
+        )
+      : new AnalyzeGameUseCase(
+          fileSecurity,
+          cleanup,
+          traitExtraction,
+          styleMatch,
+          paymentGate,
+        ).analyze(file, { consent: 'true', paymentGateway: 'paymob' });
+
+    await expect(execution).rejects.toBe(failure);
+    expect(paymentGate.refundOnFailure).toHaveBeenCalledWith(capture, failure);
+    expect(paymentGate.finalizeForDelivery).not.toHaveBeenCalled();
   });
 
   it('keeps the image destroyed when the later text-only judge step fails', async () => {

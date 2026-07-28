@@ -302,7 +302,7 @@
       "packages/shared/src/schemas/traits.schema.ts",
       "packages/shared/src/schemas/translate-result.schema.ts"
     ],
-    "inputsHash": "b349bf5f59e5342c90bebf50bf667787a13e0d71749c85cd666fa5f5b25f83b4"
+    "inputsHash": "40c913b0a3a16a9e4314a1a5c74c4decb46df3f4ee705dfbd60a872d83f100f1"
   },
   ".ai/manifests/dependencies.json": {
     "inputs": [
@@ -580,6 +580,24 @@
       "docs/features/multilingual-seo-sitemap-rss-contact/15-code-review.md",
       "docs/features/multilingual-seo-sitemap-rss-contact/22-go-no-go.md",
       "docs/features/multilingual-seo-sitemap-rss-contact/README.md",
+      "docs/features/paid-analysis-transactional-delivery/00-intake.md",
+      "docs/features/paid-analysis-transactional-delivery/01-business-analysis.md",
+      "docs/features/paid-analysis-transactional-delivery/02-business-development.md",
+      "docs/features/paid-analysis-transactional-delivery/03-product-requirements.md",
+      "docs/features/paid-analysis-transactional-delivery/04-cross-functional-refinement.md",
+      "docs/features/paid-analysis-transactional-delivery/05-delivery-plan.md",
+      "docs/features/paid-analysis-transactional-delivery/06-technical-refinement.md",
+      "docs/features/paid-analysis-transactional-delivery/07-technical-roadmap.md",
+      "docs/features/paid-analysis-transactional-delivery/08-architecture-review.md",
+      "docs/features/paid-analysis-transactional-delivery/09-impact-analysis.md",
+      "docs/features/paid-analysis-transactional-delivery/10-engineering-standards-check.md",
+      "docs/features/paid-analysis-transactional-delivery/11-test-strategy.md",
+      "docs/features/paid-analysis-transactional-delivery/12-coverage-plan.md",
+      "docs/features/paid-analysis-transactional-delivery/13-implementation-readiness.md",
+      "docs/features/paid-analysis-transactional-delivery/15-dev-validation-report.md",
+      "docs/features/paid-analysis-transactional-delivery/16-dev-bug-log.md",
+      "docs/features/paid-analysis-transactional-delivery/23-documentation-changelog.md",
+      "docs/features/paid-analysis-transactional-delivery/27-postmortem.md",
       "docs/features/parallel-ai-pipeline/00-intake.md",
       "docs/features/parallel-ai-pipeline/03-product-requirements.md",
       "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
@@ -1050,7 +1068,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "79e5855989282cec0cc4e0a9f606f40f550bed8821a3eb40d24860205c076f29"
+    "inputsHash": "646b5cc9ced74e472a605f39823bcfc2f96f1564d11f17a521b37439fafd184d"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
@@ -1927,7 +1945,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "32e5750b8facddc7bad46d89485cf4bb23119983acd6d85c8063e9f529bb7c61"
+    "inputsHash": "a8301e53be6a13220721d35ab3a7dcd7011061dc377c089a9e9b03d7b16fa1a5"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -1940,7 +1958,7 @@
       "apps/api/src/modules/ai/prompts/use-4th-critique-prompt.md",
       "apps/api/src/modules/ai/prompts/use-5th-consensus-finalizer-prompt.md"
     ],
-    "inputsHash": "eeee2281ec1b11cc488cb71c982bc17e6677b2708dace70ed8b514ed418a1dd5"
+    "inputsHash": "52e3a2f3152664d1485b652d2360bfd54d9010a93562e5c59868265d91e05141"
   },
   ".ai/manifests/repository.json": {
     "inputs": [
@@ -2777,7 +2795,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "2b8e61b9304d08a9cbd79a0a8dedd00ed4ac0a031002d340a473eb20d1543c23"
+    "inputsHash": "28c5259693c748ed6eb5b781e5a89487553f2adfbcea1cdb8f9562dd69d838f1"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -3640,7 +3658,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "2b8e61b9304d08a9cbd79a0a8dedd00ed4ac0a031002d340a473eb20d1543c23"
+    "inputsHash": "28c5259693c748ed6eb5b781e5a89487553f2adfbcea1cdb8f9562dd69d838f1"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -4477,7 +4495,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "2b8e61b9304d08a9cbd79a0a8dedd00ed4ac0a031002d340a473eb20d1543c23"
+    "inputsHash": "28c5259693c748ed6eb5b781e5a89487553f2adfbcea1cdb8f9562dd69d838f1"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

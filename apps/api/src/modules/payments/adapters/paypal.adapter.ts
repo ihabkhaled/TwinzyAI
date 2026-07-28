@@ -17,15 +17,18 @@ import {
   PAYMENT_ORDER_INVALID_MESSAGE,
   PAYMENT_UNAVAILABLE_MESSAGE,
   PAYPAL_CAPTURES_PATH,
+  PAYPAL_INTENT_CAPTURE,
   PAYPAL_OAUTH_TOKEN_PATH,
   PAYPAL_ORDERS_PATH,
   PAYPAL_PAYMENT_FAILED_ISSUES,
   PAYPAL_REQUEST_TIMEOUT_MS,
+  PAYPAL_STATUS_APPROVED,
   PAYPAL_STATUS_COMPLETED,
   PAYPAL_TOKEN_EXPIRY_MARGIN_SECONDS,
 } from '../model/payment.constants';
-import type { PaymentCaptureRecord } from '../model/payment.types';
+import type { PaymentCaptureRecord, PaypalPreparedPayment } from '../model/payment.types';
 import {
+  PaypalApprovedOrderResponseSchema,
   PaypalCaptureOrderResponseSchema,
   PaypalCreateOrderResponseSchema,
   type PaypalErrorResponse,
@@ -122,6 +125,27 @@ export class PaypalAdapter {
     return this.verifyCapture(parsed.data, orderId, expectedRequestId);
   }
 
+  /**
+   * Prove that an order is approved and bound to this run without capturing it.
+   * This keeps money stationary while the failure-prone AI pipeline runs.
+   */
+  public async verifyApprovedOrder(
+    orderId: string,
+    expectedRequestId?: string,
+  ): Promise<PaypalPreparedPayment> {
+    const path = `${PAYPAL_ORDERS_PATH}/${encodeURIComponent(orderId)}`;
+    const response = await this.get(path);
+    if (!response.ok) {
+      throw await this.mapPaypalFailure(response, 'verify-order');
+    }
+    const parsed = PaypalApprovedOrderResponseSchema.safeParse(await this.readJson(response));
+    if (!parsed.success) {
+      throw this.unavailable('verify-order returned an unexpected body');
+    }
+    this.assertApprovedOrder(parsed.data, expectedRequestId);
+    return { gateway: PaymentGateway.Paypal, orderId, expectedRequestId };
+  }
+
   /** Best-effort refund of a capture whose analysis was never delivered. */
   public async refundCapture(captureId: string): Promise<void> {
     const path = `${PAYPAL_CAPTURES_PATH}/${encodeURIComponent(captureId)}/refund`;
@@ -154,6 +178,23 @@ export class PaypalAdapter {
     return { gateway: PaymentGateway.Paypal, orderId, captureId: capture.id };
   }
 
+  private assertApprovedOrder(
+    payload: ReturnType<typeof PaypalApprovedOrderResponseSchema.parse>,
+    expectedRequestId?: string,
+  ): void {
+    const price = this.config.paymentPrice;
+    const purchaseUnit = payload.purchase_units[0];
+    const isVerified =
+      payload.status === PAYPAL_STATUS_APPROVED &&
+      payload.intent === PAYPAL_INTENT_CAPTURE &&
+      purchaseUnit?.amount.value === price.value &&
+      purchaseUnit.amount.currency_code === price.currencyCode &&
+      (expectedRequestId === undefined || purchaseUnit.custom_id === expectedRequestId);
+    if (!isVerified) {
+      throw this.captureRejected('approved order status/intent/amount/binding mismatch');
+    }
+  }
+
   private captureRejected(reason: string): Error {
     this.logger.warn(`Capture verification failed (${reason})`);
     return buildPaymentError(ErrorCode.PaymentOrderInvalid, PAYMENT_ORDER_INVALID_MESSAGE);
@@ -170,6 +211,14 @@ export class PaypalAdapter {
         'paypal-request-id': idempotencyKey,
       },
       body,
+    });
+  }
+
+  private async get(path: string): Promise<Response> {
+    const token = await this.getAccessToken();
+    return this.boundedFetch(path, {
+      method: 'GET',
+      headers: { authorization: `Bearer ${token}` },
     });
   }
 

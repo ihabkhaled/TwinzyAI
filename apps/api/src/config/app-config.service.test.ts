@@ -25,6 +25,15 @@ describe('AppConfigService.geminiModelChainFor', () => {
     expect(config.geminiModelChainFor()).toEqual(['global-primary', 'global-fb-1', 'global-fb-2']);
   });
 
+  it('caps the global Gemini chain at three model attempts', () => {
+    const config = buildService({
+      GEMINI_MODEL: 'primary',
+      GEMINI_FALLBACK_MODELS: 'fallback-1,fallback-2,fallback-3,fallback-4',
+    });
+
+    expect(config.geminiModelChainFor()).toEqual(['primary', 'fallback-1', 'fallback-2']);
+  });
+
   it('returns the global chain for a step with no per-step configuration', () => {
     const config = buildService(BASE_ENV);
     expect(config.geminiModelChainFor(GeminiStep.Extraction)).toEqual([
@@ -46,6 +55,20 @@ describe('AppConfigService.geminiModelChainFor', () => {
       'cheap-fast',
       'cheap-fb-1',
       'cheap-fb-2',
+    ]);
+  });
+
+  it('caps a configured per-step Gemini chain at three model attempts', () => {
+    const config = buildService({
+      ...BASE_ENV,
+      GEMINI_MODEL_EXTRACTION: 'vision-primary',
+      GEMINI_FALLBACK_MODELS_EXTRACTION: 'vision-1,vision-2,vision-3,vision-4',
+    });
+
+    expect(config.geminiModelChainFor(GeminiStep.Extraction)).toEqual([
+      'vision-primary',
+      'vision-1',
+      'vision-2',
     ]);
   });
 

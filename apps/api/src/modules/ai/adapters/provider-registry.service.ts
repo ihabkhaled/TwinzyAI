@@ -6,6 +6,7 @@ import {
   type AiProviderValue,
   OPENAI_COMPAT_PROVIDER_VALUES,
 } from '../../../config/ai-provider.constants';
+import { MAX_AI_MODEL_ATTEMPTS } from '../../../config/ai-route.constants';
 import { type AiRouteEntry, routeEntryKey } from '../../../config/ai-route.types';
 import { AppConfigService } from '../../../config/app-config.service';
 import {
@@ -66,7 +67,8 @@ export class ProviderRegistryService implements OnModuleInit {
   /**
    * Route entries for a step that are actually dispatchable right now:
    * provider enabled, and vision-capable when the call carries the photo.
-   * Calls without a step ride the global Gemini chain (legacy behavior).
+   * Calls without a step ride the global Gemini chain (legacy behavior). At
+   * most the first three usable entries are returned.
    */
   public usableEntriesFor(
     step: GeminiStepValue | undefined,
@@ -76,11 +78,13 @@ export class ProviderRegistryService implements OnModuleInit {
       step === undefined
         ? this.config.geminiModelChainFor().map((model) => ({ provider: AiProvider.Gemini, model }))
         : this.config.aiRouteFor(step);
-    return resolved.filter(
-      (entry) =>
-        this.config.isProviderEnabled(entry.provider) &&
-        (!carriesImage || entry.provider === AiProvider.Gemini),
-    );
+    return resolved
+      .filter(
+        (entry) =>
+          this.config.isProviderEnabled(entry.provider) &&
+          (!carriesImage || entry.provider === AiProvider.Gemini),
+      )
+      .slice(0, MAX_AI_MODEL_ATTEMPTS);
   }
 
   /**

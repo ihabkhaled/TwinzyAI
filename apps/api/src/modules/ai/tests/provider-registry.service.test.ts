@@ -52,6 +52,30 @@ describe('ProviderRegistryService', () => {
     ]);
   });
 
+  it('returns at most the first three usable route entries', async () => {
+    const registry = buildRegistry(
+      buildConfigStub({
+        enabledProviders: ['gemini', 'qwen'],
+        aiStepRoutes: {
+          judge: [
+            { provider: 'gemini', model: 'model-1' },
+            { provider: 'openai', model: 'disabled-model' },
+            { provider: 'qwen', model: 'model-2' },
+            { provider: 'gemini', model: 'model-3' },
+            { provider: 'qwen', model: 'model-4' },
+          ],
+        },
+      }),
+    );
+    await registry.onModuleInit();
+
+    expect(registry.usableEntriesFor('judge', false)).toEqual([
+      { provider: 'gemini', model: 'model-1' },
+      { provider: 'qwen', model: 'model-2' },
+      { provider: 'gemini', model: 'model-3' },
+    ]);
+  });
+
   it('boot fails fast when an EXPLICIT route keeps zero usable entries', async () => {
     const registry = buildRegistry(
       buildConfigStub({

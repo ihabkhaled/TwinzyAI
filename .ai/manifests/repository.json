@@ -761,14 +761,18 @@
       "exports": [
         {
           "kind": "const",
+          "name": "MAX_AI_MODEL_ATTEMPTS"
+        },
+        {
+          "kind": "const",
           "name": "MAX_AI_ROUTE_ENTRIES"
         }
       ],
-      "hash": "02a5893331e29c923dbf45a07fb72c82ae5a34a6cdd0596f357f9db1714f2a58",
+      "hash": "fcdcabc5b6e71ca8da1f3baf9cbad7077907035057f4eebc93a2678626a0c266",
       "imports": [],
       "isTest": false,
       "layer": "config",
-      "loc": 3,
+      "loc": 6,
       "module": "api:config",
       "path": "apps/api/src/config/ai-route.constants.ts"
     },
@@ -831,7 +835,7 @@
     },
     {
       "exports": [],
-      "hash": "d0fac7bd318107dabfaae7cfaeb262e337a0be31b0549431d1a07421b92a40e3",
+      "hash": "4626ae6aa33738bd9ffb3cce9f7d39834ebdfef208fa67a328c2e26791d24f7b",
       "imports": [
         "./ai-route.constants",
         "./app-config.service",
@@ -842,7 +846,7 @@
       ],
       "isTest": true,
       "layer": "config",
-      "loc": 216,
+      "loc": 239,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.test.ts"
     },
@@ -853,10 +857,11 @@
           "name": "AppConfigService"
         }
       ],
-      "hash": "4fe0ef95c590f55d484d260047caa18e18913121f33b30fb9d0f7df1f725d97e",
+      "hash": "35eda267c129cdd31f0cb1775fd3145882652dba7b9662bf0b95913c03d3d4d7",
       "imports": [
         "./advanced-matching-config.types",
         "./ai-provider.constants",
+        "./ai-route.constants",
         "./ai-route.types",
         "./ai-route.util",
         "./contact-config.types",
@@ -868,7 +873,7 @@
       ],
       "isTest": false,
       "layer": "config",
-      "loc": 417,
+      "loc": 422,
       "module": "api:config",
       "path": "apps/api/src/config/app-config.service.ts"
     },
@@ -2134,13 +2139,13 @@
           "name": "SseWriter"
         }
       ],
-      "hash": "2e2f512bcf48395dfab45d3e150d6f61ad4768403ce79a48b7ed8e3351aebc81",
+      "hash": "05591e2ba2d93d03c4bb90fc94cf199f4ad2c61d73297a33e2891c221ca79dcc",
       "imports": [
         "./sse.types"
       ],
       "isTest": false,
       "layer": "core",
-      "loc": 70,
+      "loc": 74,
       "module": "api:core",
       "path": "apps/api/src/core/http/sse-writer.ts"
     },
@@ -2221,7 +2226,7 @@
     },
     {
       "exports": [],
-      "hash": "ceb73a5dde8c1850f503d0e5630c2b7b93cdaad0c9ada0cd1c62ad2930f7cc50",
+      "hash": "4c99aeba4bb0285946474badd72fa275929d6dd273acc965c2729a5af9aad9fd",
       "imports": [
         "../sse-writer",
         "../sse.types",
@@ -2229,7 +2234,7 @@
       ],
       "isTest": true,
       "layer": "core",
-      "loc": 104,
+      "loc": 105,
       "module": "api:core",
       "path": "apps/api/src/core/http/tests/sse-writer.test.ts"
     },
@@ -2370,11 +2375,11 @@
           "name": "REDACT_PATHS"
         }
       ],
-      "hash": "98dea9ee75954bc5b368f2b79e2a8b09c904aebaaae5239beaf3e250e2871fcf",
+      "hash": "fe0aefe17f53bd649c21d19dd28bbc15119f508d14be17821c67f6dbcda2c0e0",
       "imports": [],
       "isTest": false,
       "layer": "core",
-      "loc": 30,
+      "loc": 33,
       "module": "api:core",
       "path": "apps/api/src/core/logger/logger.constants.ts"
     },
@@ -2435,17 +2440,18 @@
     },
     {
       "exports": [],
-      "hash": "dde43bedf714e3ec2e82d7b53adc241ccac192f1f6649b6e3e5fc3b08c224b1d",
+      "hash": "db49cf31e6b4b397d9dd14848de3c174e2efeea2cf4241d7881985438fe155d6",
       "imports": [
         "../../../tests/fixtures/stubs",
         "../http-logging.options",
         "../logger.constants",
         "node:http",
+        "pino",
         "vitest"
       ],
       "isTest": true,
       "layer": "core",
-      "loc": 52,
+      "loc": 89,
       "module": "api:core",
       "path": "apps/api/src/core/logger/tests/http-logging.options.test.ts"
     },
@@ -3004,9 +3010,10 @@
           "name": "ProviderRegistryService"
         }
       ],
-      "hash": "09e900550b9e99947ac633dd856a4735ff4b0bdbe46b22169ea2eea248e35f86",
+      "hash": "940b3252fc5b7295cfeae73b8cf9a0458bab716cac397b64d97e79c4c44aa268",
       "imports": [
         "../../../config/ai-provider.constants",
+        "../../../config/ai-route.constants",
         "../../../config/ai-route.types",
         "../../../config/app-config.service",
         "../../../config/gemini-step.constants",
@@ -3019,7 +3026,7 @@
       ],
       "isTest": false,
       "layer": "adapters",
-      "loc": 113,
+      "loc": 117,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/adapters/provider-registry.service.ts"
     },
@@ -4470,7 +4477,7 @@
     },
     {
       "exports": [],
-      "hash": "ef4022dd19e9a454574ee9a63e2592bedf14ac93a80fa1059316a2d8848eb737",
+      "hash": "baf9b22d6ff81ec7be84c4406e7d68c8c807341653c7d2506f98d5452a64755a",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/fake-ai-adapter",
@@ -4488,7 +4495,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 389,
+      "loc": 406,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/ai-pipeline.test.ts"
     },
@@ -4833,7 +4840,7 @@
     },
     {
       "exports": [],
-      "hash": "882693b18296ca5845a9e90c71ce722ea0909d1a2d3b824e6051ebca92f2de51",
+      "hash": "aeda7dbbcebae52215b804ff39030b96d1797d5901eea36927dc021a1c4c2b08",
       "imports": [
         "../../../config/app-config.service",
         "../../../tests/fixtures/stubs",
@@ -4844,7 +4851,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 100,
+      "loc": 124,
       "module": "api:ai",
       "path": "apps/api/src/modules/ai/tests/provider-registry.service.test.ts"
     },
@@ -5652,7 +5659,7 @@
           "name": "GameStreamPresenter"
         }
       ],
-      "hash": "54c70a70c59e5967cdbc148b3ff4fb073544fe7d82e2355ddcaa334824651a54",
+      "hash": "e60cbbac29990ea3c0d7651d2f16081d23a11a329f7a2ad8a5519e7b756acf67",
       "imports": [
         "../../../config/app-config.service",
         "../../../core/http/sse-writer",
@@ -5670,7 +5677,7 @@
       ],
       "isTest": false,
       "layer": "api",
-      "loc": 172,
+      "loc": 175,
       "module": "api:game",
       "path": "apps/api/src/modules/game/api/game-stream.presenter.ts"
     },
@@ -5736,7 +5743,7 @@
           "name": "AnalyzeGameStreamUseCase"
         }
       ],
-      "hash": "f94421c52fa23a58f9c34831d5c8fe8ff698f9cba85cb847febdcae38d5a2e7c",
+      "hash": "0aa63fa11327ee6d3ab54599071d047021e587dbf5fd17f611e695c302f91838",
       "imports": [
         "../../ai",
         "../../file-security",
@@ -5752,7 +5759,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 123,
+      "loc": 126,
       "module": "api:game",
       "path": "apps/api/src/modules/game/application/analyze-game-stream.use-case.ts"
     },
@@ -5763,7 +5770,7 @@
           "name": "AnalyzeGameUseCase"
         }
       ],
-      "hash": "09f8fad716f8a09dbe184e303e10fbd5ec9b982f26df744d41dcdbaee5efa4b8",
+      "hash": "91a423f9c70f30f8117e645dd67cdf7720eeca6f4c603ddbc50a844d1f452c1b",
       "imports": [
         "../../ai",
         "../../file-security",
@@ -5777,7 +5784,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 77,
+      "loc": 80,
       "module": "api:game",
       "path": "apps/api/src/modules/game/application/analyze-game.use-case.ts"
     },
@@ -6061,7 +6068,7 @@
           "name": "StyleMatchInput"
         }
       ],
-      "hash": "e15efb38501fadb08e1685431b8905fb601e366e996e0665d70ee694db2b2ae3",
+      "hash": "7deaf4089e07cdbc19efbec4ecf6d2b257e9d81f75bc389f9f2edd5213a85eba",
       "imports": [
         "../../../core/http/sse.types",
         "../../../core/http/stream-meta.types",
@@ -6185,7 +6192,7 @@
     },
     {
       "exports": [],
-      "hash": "8f318d28d80c072f26ba3d6221c784a90d53b0340f1c3b88c91320c39a01e8bc",
+      "hash": "0da73d4a56e5ad48277e33ca968360c3a1e0bc5b7011e9646563b0670b51438b",
       "imports": [
         "../../../config/app-config.service",
         "../../../config/config.module",
@@ -6197,8 +6204,10 @@
         "../../ai",
         "../../file-security",
         "../../payments",
+        "../../payments/model/payment.types",
         "../../privacy",
         "../../result-aggregation",
+        "../application/analyze-game-stream.use-case",
         "../application/analyze-game.use-case",
         "../application/style-match.service",
         "@nestjs/testing",
@@ -6208,7 +6217,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 229,
+      "loc": 289,
       "module": "api:game",
       "path": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts"
     },
@@ -6483,7 +6492,7 @@
           "name": "PaypalAdapter"
         }
       ],
-      "hash": "a61c27b87bbe50c4648346e5cbc55d5ac255723d82ac2f2527856cd6d1af8028",
+      "hash": "62e7e8eb7820634495f314afc5f9dd20d11ba504604b9615b63c60be21d274ae",
       "imports": [
         "../../../config/app-config.service",
         "../../../config/payment.constants",
@@ -6497,7 +6506,7 @@
       ],
       "isTest": false,
       "layer": "adapters",
-      "loc": 266,
+      "loc": 315,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
     },
@@ -6530,7 +6539,7 @@
           "name": "PaymentGateService"
         }
       ],
-      "hash": "7633686483dd80ea6c7aade78749cd995163c464dcd20e735638a4c019b20737",
+      "hash": "bd50c21c163e980b3825e2b6acfa91870c2d6d6b550f16e9ec7fc2ba61f557a9",
       "imports": [
         "../../../config/app-config.service",
         "../../../core/errors",
@@ -6545,7 +6554,7 @@
       ],
       "isTest": false,
       "layer": "application",
-      "loc": 163,
+      "loc": 186,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/application/payment-gate.service.ts"
     },
@@ -6715,6 +6724,10 @@
         },
         {
           "kind": "const",
+          "name": "PAYPAL_INTENT_CAPTURE"
+        },
+        {
+          "kind": "const",
           "name": "PAYPAL_OAUTH_TOKEN_PATH"
         },
         {
@@ -6735,6 +6748,10 @@
         },
         {
           "kind": "const",
+          "name": "PAYPAL_STATUS_APPROVED"
+        },
+        {
+          "kind": "const",
           "name": "PAYPAL_STATUS_COMPLETED"
         },
         {
@@ -6742,13 +6759,13 @@
           "name": "PAYPAL_TOKEN_EXPIRY_MARGIN_SECONDS"
         }
       ],
-      "hash": "26e55201f0ab52b30b48460dbe532d79971c057cc00dcd09d6e209189ba38dc7",
+      "hash": "935487ada4ee1c86bf6928b7f100857c3e5011c9c03bb3aacc36c2116775aec9",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 129,
+      "loc": 133,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/payment.constants.ts"
     },
@@ -6763,19 +6780,27 @@
           "name": "PaymentHolder"
         },
         {
+          "kind": "type",
+          "name": "PaymentPreparationRecord"
+        },
+        {
           "kind": "interface",
           "name": "PaymobCaptureRecord"
         },
         {
           "kind": "interface",
           "name": "PaymobIntention"
+        },
+        {
+          "kind": "interface",
+          "name": "PaypalPreparedPayment"
         }
       ],
-      "hash": "dc9dab6d0b991edd4941834848ea69d06a7da90c7f16ce4376176671c409bfdc",
+      "hash": "f39e0aeeab5e54103c0c3d3e42b85432adef3440ddd8dfcefa658bb028ecc7a8",
       "imports": [],
       "isTest": false,
       "layer": "model",
-      "loc": 39,
+      "loc": 48,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/payment.types.ts"
     },
@@ -6808,6 +6833,10 @@
       "exports": [
         {
           "kind": "const",
+          "name": "PaypalApprovedOrderResponseSchema"
+        },
+        {
+          "kind": "const",
           "name": "PaypalCaptureOrderResponseSchema"
         },
         {
@@ -6827,13 +6856,13 @@
           "name": "PaypalTokenResponseSchema"
         }
       ],
-      "hash": "a064d3529568f77accd82c70bcdd10567e8e862c8516259d77a0cbc8a2910d1d",
+      "hash": "cae57f60e38be16d5abc9b4d788b3160b6e75f868e90cb87bd79ae7d5c71ab18",
       "imports": [
         "zod"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 63,
+      "loc": 80,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts"
     },
@@ -6861,7 +6890,7 @@
     },
     {
       "exports": [],
-      "hash": "ade071b83746f2ae066b7e180e5bdd158f0a48f2e761ad61c2aef1c43bd8bb7c",
+      "hash": "b975c57bcc4f308224add616b8aaf16eedc8d94ca50d0114b9079c176377b556",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/stubs",
@@ -6875,13 +6904,13 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 331,
+      "loc": 356,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/tests/payment-gate.service.test.ts"
     },
     {
       "exports": [],
-      "hash": "3427e8aad2dda0510aabe276e83c7b76038449c4cdea0ab61daee31951efe8c8",
+      "hash": "276158d78ef5093147a0a09faba94a5d5b82c4a05f58baca4ca47887853d72da",
       "imports": [
         "../../../core/errors",
         "../../../tests/fixtures/stubs",
@@ -6890,7 +6919,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 218,
+      "loc": 304,
       "module": "api:payments",
       "path": "apps/api/src/modules/payments/tests/paypal.adapter.test.ts"
     },
@@ -8498,7 +8527,7 @@
     },
     {
       "exports": [],
-      "hash": "1359713ca4dbbc1c95664b60dfbb5a522eecc9c50351bb02590d7516bf75fbeb",
+      "hash": "1aed5bc19c674855d2642e04e0949d9b2fcf17c82e40409a04706ddfbbbd5722",
       "imports": [
         "../app.module",
         "../bootstrap/create-test-app",
@@ -8517,7 +8546,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 155,
+      "loc": 197,
       "module": "api:tests",
       "path": "apps/api/src/tests/game-analyze-paywall.integration.test.ts"
     },

@@ -3,8 +3,11 @@
  * new sensitive header or body field is introduced.
  */
 export const REDACT_PATHS: readonly string[] = [
-  'req.headers.authorization',
-  'req.headers.cookie',
+  // Proxies inject credentials, signatures, cookies, and client addresses.
+  // Inbound header values are not needed for application diagnostics.
+  'req.headers',
+  'req.remoteAddress',
+  'req.remotePort',
   // URLs can carry bearer-like temporary share ids and query values.
   'req.url',
   'req.body.password',

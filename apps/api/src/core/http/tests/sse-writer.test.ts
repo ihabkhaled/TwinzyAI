@@ -68,24 +68,24 @@ describe('SseWriter', () => {
     expect(raw.chunks).toContain(': keep-alive\n\n');
   });
 
-  it('never writes after close and ends the stream once', () => {
+  it('rejects an event after close and ends the stream once', () => {
     const raw = buildRawStub();
     const writer = new SseWriter(raw);
 
     writer.close();
     writer.close();
-    writer.event('result', { event: 'result' });
+    expect(writer.event('result', { event: 'result' })).toBe(false);
 
     expect(raw.writableEnded).toBe(true);
     expect(raw.chunks).toHaveLength(0);
   });
 
-  it('does not write once the socket has already ended (client disconnect)', () => {
+  it('rejects an event once the socket has already ended (client disconnect)', () => {
     const raw = buildRawStub();
     const writer = new SseWriter(raw);
     raw.writableEnded = true;
 
-    writer.event('stage', { event: 'stage' });
+    expect(writer.event('stage', { event: 'stage' })).toBe(false);
 
     expect(raw.chunks).toHaveLength(0);
   });
@@ -99,5 +99,6 @@ describe('SseWriter', () => {
     raw.closeListener?.();
 
     expect(onClose).toHaveBeenCalledTimes(1);
+    expect(writer.event('result', { event: 'result' })).toBe(false);
   });
 });

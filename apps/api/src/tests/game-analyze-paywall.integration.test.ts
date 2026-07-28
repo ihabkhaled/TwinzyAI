@@ -9,6 +9,9 @@ import {
   ErrorCode,
   FinalGameResultSchema,
   GAME_ANALYZE_PATH,
+  GAME_ANALYZE_STREAM_PATH,
+  GameStreamEvent,
+  GameStreamMessageSchema,
   PAYMENTS_ORDERS_PATH,
 } from '@twinzy/shared';
 
@@ -49,6 +52,9 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
   let app: INestApplication;
   let adapter: FakeAiAdapter;
   const captureOrder = vi.fn(() => Promise.resolve(CAPTURE));
+  const verifyApprovedOrder = vi.fn((orderId: string, expectedRequestId?: string) =>
+    Promise.resolve({ gateway: 'paypal', orderId, expectedRequestId }),
+  );
   const refundCapture = vi.fn(() => Promise.resolve());
   const createOrder = vi.fn(() => Promise.resolve(ORDER_ID));
 
@@ -61,7 +67,7 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
       .overrideProvider(ClamAvAdapter)
       .useValue(buildCleanClamAvStub())
       .overrideProvider(PaypalAdapter)
-      .useValue({ captureOrder, refundCapture, createOrder })
+      .useValue({ captureOrder, verifyApprovedOrder, refundCapture, createOrder })
       .compile();
 
     app = await createTestApp(moduleRef);
@@ -72,6 +78,7 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
     adapter.textCalls.length = 0;
     adapter.textSteps.length = 0;
     captureOrder.mockClear();
+    verifyApprovedOrder.mockClear();
     refundCapture.mockClear();
     createOrder.mockClear();
   });
@@ -85,6 +92,17 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
 
   const postAnalyze = (fields: Record<string, string>): request.Test => {
     let req = request(server()).post(GAME_ANALYZE_PATH);
+    for (const [key, value] of Object.entries(fields)) {
+      req = req.field(key, value);
+    }
+    return req.attach('image', buildJpegBuffer(), {
+      filename: 'photo.jpg',
+      contentType: 'image/jpeg',
+    });
+  };
+
+  const postStream = (fields: Record<string, string>): request.Test => {
+    let req = request(server()).post(GAME_ANALYZE_STREAM_PATH);
     for (const [key, value] of Object.entries(fields)) {
       req = req.field(key, value);
     }
@@ -108,6 +126,7 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
     const response = await postAnalyze({ consent: 'true' }).expect(402);
 
     expect(response.body).toMatchObject({ errorCode: ErrorCode.PaymentRequired });
+    expect(verifyApprovedOrder).not.toHaveBeenCalled();
     expect(captureOrder).not.toHaveBeenCalled();
     expect(adapter.imageCalls).toHaveLength(0);
   });
@@ -119,6 +138,7 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
     }).expect(402);
 
     expect(response.body).toMatchObject({ errorCode: ErrorCode.PaymentOrderInvalid });
+    expect(verifyApprovedOrder).not.toHaveBeenCalled();
     expect(captureOrder).not.toHaveBeenCalled();
     expect(adapter.imageCalls).toHaveLength(0);
   });
@@ -132,17 +152,39 @@ describe('POST /api/v1/game/analyze with the paywall enabled (integration)', () 
 
     expect(captureOrder).toHaveBeenCalledTimes(1);
     expect(captureOrder).toHaveBeenCalledWith(ORDER_ID, undefined);
+    expect(verifyApprovedOrder).toHaveBeenCalledWith(ORDER_ID, undefined);
     expect(refundCapture).not.toHaveBeenCalled();
     expect(FinalGameResultSchema.safeParse(response.body).success).toBe(true);
   });
 
-  it('REFUNDS a captured payment when the pipeline fails after capture', async () => {
+  it('does not capture when the non-stream pipeline fails before a result exists', async () => {
     adapter.queueImageResponse(new Error('extraction exploded'));
 
     await postAnalyze({ consent: 'true', paypalOrderId: ORDER_ID }).expect(500);
 
-    expect(captureOrder).toHaveBeenCalledTimes(1);
-    expect(refundCapture).toHaveBeenCalledWith('CAP-INTEGRATION-1');
+    expect(verifyApprovedOrder).toHaveBeenCalledTimes(1);
+    expect(captureOrder).not.toHaveBeenCalled();
+    expect(refundCapture).not.toHaveBeenCalled();
+  });
+
+  it('does not capture when paid streaming trait extraction fails', async () => {
+    adapter.queueImageResponse(new Error('extraction exploded'));
+
+    const response = await postStream({
+      consent: 'true',
+      paypalOrderId: ORDER_ID,
+      requestId: '3b241101-e2bb-4255-8caf-4136c566a962',
+    }).expect(200);
+
+    const messages = response.text
+      .split('\n\n')
+      .map((frame) => frame.split('\n').find((line) => line.startsWith('data:')))
+      .filter((line): line is string => line !== undefined)
+      .map((line) => GameStreamMessageSchema.parse(JSON.parse(line.slice('data:'.length).trim())));
+    expect(messages.at(-1)?.event).toBe(GameStreamEvent.Error);
+    expect(verifyApprovedOrder).toHaveBeenCalledTimes(1);
+    expect(captureOrder).not.toHaveBeenCalled();
+    expect(refundCapture).not.toHaveBeenCalled();
   });
 
   it('never captures for a request that fails consent (payment untouched)', async () => {

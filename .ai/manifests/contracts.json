@@ -50,6 +50,15 @@
     {
       "kind": "zod-schema",
       "module": "api:payments",
+      "name": "PaypalApprovedOrderResponseSchema",
+      "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
+      "usedBy": [
+        "apps/api/src/modules/payments/adapters/paypal.adapter.ts"
+      ]
+    },
+    {
+      "kind": "zod-schema",
+      "module": "api:payments",
       "name": "PaypalCaptureOrderResponseSchema",
       "path": "apps/api/src/modules/payments/model/paypal.schemas.ts",
       "usedBy": [
@@ -1359,5 +1368,5 @@
       ]
     }
   ],
-  "count": 131
+  "count": 132
 }

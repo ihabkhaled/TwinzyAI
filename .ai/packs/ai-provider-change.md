@@ -15,7 +15,7 @@ Task type: `ai-provider-change` · Lane: **critical** · Load after `.ai/BOOTSTR
 
 ## Must-read docs
 
-- docs/provider-routing.md — TwinzyAI routes each AI pipeline step (trait **extraction**, candidate **generation**, **judge**, result **translation**) through a provider-agnostic router, so every step can run on the provider/model that fits its difficulty — with cro... (~1253 tokens)
+- docs/provider-routing.md — TwinzyAI routes each AI pipeline step (trait **extraction**, candidate **generation**, **judge**, result **translation**) through a provider-agnostic router, so every step can run on the provider/model that fits its difficulty — with cro... (~1327 tokens)
 - docs/ai-benchmarking.md — `npm run ai:benchmark` measures provider/model candidates per pipeline step with the SAME validators production uses (step Zod schemas + forbidden-wording scan), and writes a markdown + JSON report under `benchmark-results/run-<mode>-<ti... (~502 tokens)
 - context/ai-context.md — Pipeline (backend only; the frontend never calls an AI provider): (~400 tokens)
 

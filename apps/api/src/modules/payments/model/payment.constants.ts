@@ -36,7 +36,11 @@ export const PAYPAL_ORDER_ID_PATTERN = /^[A-Z0-9-]{8,64}$/;
 
 export { PAYMENT_ORDER_FIELD_NAME } from '@twinzy/shared';
 
-/** Order/capture statuses the gate accepts as "money actually moved". */
+/** Order state accepted before the expensive pipeline starts. */
+export const PAYPAL_STATUS_APPROVED = 'APPROVED';
+export const PAYPAL_INTENT_CAPTURE = 'CAPTURE';
+
+/** Order/capture status the gate accepts as "money actually moved". */
 export const PAYPAL_STATUS_COMPLETED = 'COMPLETED';
 
 /** PayPal issue codes, referenced by the payment-failed set below. */

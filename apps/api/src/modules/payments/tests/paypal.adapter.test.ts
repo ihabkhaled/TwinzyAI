@@ -36,6 +36,19 @@ const captureBody = (overrides: Record<string, unknown> = {}): Record<string, un
   ],
 });
 
+const approvedOrderBody = (overrides: Record<string, unknown> = {}): Record<string, unknown> => ({
+  id: 'ORDER123',
+  intent: 'CAPTURE',
+  status: 'APPROVED',
+  purchase_units: [
+    {
+      amount: { currency_code: 'USD', value: '0.50' },
+      custom_id: 'req-1',
+    },
+  ],
+  ...overrides,
+});
+
 /** fetch mock answering the OAuth call first, then the given API responses. */
 const stubPaypalFetch = (...apiResponses: Response[]): ReturnType<typeof vi.fn> => {
   const queue = [...apiResponses];
@@ -152,6 +165,79 @@ describe('PaypalAdapter.captureOrder', () => {
     stubPaypalFetch(Response.json({}, { status: 404 }));
 
     await expect(buildAdapter().captureOrder('NOPE12345', 'req-1')).rejects.toMatchObject({
+      errorCode: ErrorCode.PaymentOrderInvalid,
+    });
+  });
+});
+
+describe('PaypalAdapter.verifyApprovedOrder', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('GETs and returns an approved order without moving money', async () => {
+    const fetchMock = stubPaypalFetch(Response.json(approvedOrderBody(), { status: 200 }));
+
+    const prepared = await buildAdapter().verifyApprovedOrder('ORDER123', 'req-1');
+
+    expect(prepared).toStrictEqual({
+      gateway: 'paypal',
+      orderId: 'ORDER123',
+      expectedRequestId: 'req-1',
+    });
+    const orderCall = callEndingWith(fetchMock, '/v2/checkout/orders/ORDER123');
+    expect(orderCall?.[1].method).toBe('GET');
+    expect(callEndingWith(fetchMock, '/capture')).toBeUndefined();
+  });
+
+  it.each([
+    ['an order that is not approved', { status: 'CREATED' }],
+    ['a non-capture intent', { intent: 'AUTHORIZE' }],
+    [
+      'a tampered amount',
+      {
+        purchase_units: [
+          {
+            amount: { currency_code: 'USD', value: '0.01' },
+            custom_id: 'req-1',
+          },
+        ],
+      },
+    ],
+    [
+      'a wrong currency',
+      {
+        purchase_units: [
+          {
+            amount: { currency_code: 'EUR', value: '0.50' },
+            custom_id: 'req-1',
+          },
+        ],
+      },
+    ],
+    [
+      'a foreign request binding',
+      {
+        purchase_units: [
+          {
+            amount: { currency_code: 'USD', value: '0.50' },
+            custom_id: 'foreign-request',
+          },
+        ],
+      },
+    ],
+  ])('rejects %s before analysis', async (_label, overrides) => {
+    stubPaypalFetch(Response.json(approvedOrderBody(overrides), { status: 200 }));
+
+    await expect(buildAdapter().verifyApprovedOrder('ORDER123', 'req-1')).rejects.toMatchObject({
+      errorCode: ErrorCode.PaymentOrderInvalid,
+    });
+  });
+
+  it('maps a missing order to PAYMENT_ORDER_INVALID', async () => {
+    stubPaypalFetch(Response.json({}, { status: 404 }));
+
+    await expect(buildAdapter().verifyApprovedOrder('ORDER123', 'req-1')).rejects.toMatchObject({
       errorCode: ErrorCode.PaymentOrderInvalid,
     });
   });

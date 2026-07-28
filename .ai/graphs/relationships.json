@@ -1,5 +1,5 @@
 {
-  "count": 2750,
+  "count": 2753,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -1618,6 +1618,12 @@
     {
       "from": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
       "label": "generated",
+      "to": "apps/api/src/modules/game/application/analyze-game-stream.use-case.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
+      "label": "generated",
       "to": "apps/api/src/modules/game/application/analyze-game.use-case.ts",
       "type": "covers"
     },
@@ -1631,6 +1637,12 @@
       "from": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
       "label": "generated",
       "to": "apps/api/src/modules/payments/index.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/model/payment.types.ts",
       "type": "covers"
     },
     {
@@ -1841,6 +1853,12 @@
       "from": "apps/api/src/modules/payments/adapters/paymob.adapter.ts",
       "label": "generated",
       "to": "apps/api/src/modules/payments/model/paymob.schemas.ts#PaymobOrderSchema",
+      "type": "uses-contract"
+    },
+    {
+      "from": "apps/api/src/modules/payments/adapters/paypal.adapter.ts",
+      "label": "generated",
+      "to": "apps/api/src/modules/payments/model/paypal.schemas.ts#PaypalApprovedOrderResponseSchema",
       "type": "uses-contract"
     },
     {

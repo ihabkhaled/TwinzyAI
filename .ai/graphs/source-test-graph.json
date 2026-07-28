@@ -416,6 +416,7 @@
     "apps/api/src/modules/game/tests/advanced-style-match-enhancement.service.test.ts"
   ],
   "apps/api/src/modules/game/application/analyze-game-stream.use-case.ts": [
+    "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
     "apps/api/src/modules/game/tests/game-stream.presenter.test.ts"
   ],
   "apps/api/src/modules/game/application/analyze-game.use-case.ts": [
@@ -478,6 +479,7 @@
     "apps/api/src/modules/payments/tests/payment-gate.service.test.ts"
   ],
   "apps/api/src/modules/payments/model/payment.types.ts": [
+    "apps/api/src/modules/game/tests/analyze-game.use-case.test.ts",
     "apps/api/src/modules/payments/tests/payment-gate.service.test.ts"
   ],
   "apps/api/src/modules/privacy/application/log-redaction.service.ts": [
