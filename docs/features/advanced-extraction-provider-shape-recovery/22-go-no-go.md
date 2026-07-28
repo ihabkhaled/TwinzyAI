@@ -10,8 +10,8 @@
 | Observability | green | Request correlation retained; new log contains count only |
 | Payment safety | green | No change to capture-after-result or compensation ordering |
 | Immutable/local release smoke | green | Healthy API/web images; live Gemini flow completed with payment off |
-| Remote CI and deployment | amber | Push and post-deploy checks are release-execution conditions |
+| Remote CI and deployment | green | All nine GitHub workflows passed; both Vercel deployments are ready |
 
-Final decision: **GO to push and deploy.** Completion remains blocked until the exact pushed
-revision has green GitHub Lint/Knowledge and all other checks plus ready Vercel deployments and
-healthy post-deploy logs.
+Final decision: **GO — released.** Commit `4105a92096f603f5271295cb2bd9937020091e76`
+passed every remote gate, both Vercel production deployments reached `READY`, the backend health
+endpoint returned 200, and the initial runtime-error query returned no clusters.

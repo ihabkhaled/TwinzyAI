@@ -23,6 +23,8 @@ reproduce the provider shape.
 | 2026-07-28 | Correlated request logs confirm all three models returned content but failed shape validation |
 | 2026-07-28 | Regression reproduced locally; prompt and bounded provider normalizer implemented |
 | 2026-07-28 | Direct mocked backend flow reaches extraction, generation, judge, aggregation, and result |
+| 2026-07-28 10:16 UTC | Hook-clean implementation commit pushed to `main` |
+| 2026-07-28 10:19 UTC | All GitHub gates green; both Vercel deployments ready; health and logs clean |
 
 ## Corrective Actions
 
@@ -36,7 +38,7 @@ reproduce the provider shape.
 | Add direct payment-off multipart/SSE regression | complete |
 | Record the fixture/prompt pitfall in durable memory | complete |
 | Copy API-workspace production dependencies into the runtime image | complete |
-| Complete local gates, push gates, deployment, and hypercare | in progress |
+| Complete local gates, push gates, deployment, and hypercare | complete |
 
 No enhanced feature was removed, no schema was loosened, and no production payment bypass was
 introduced.

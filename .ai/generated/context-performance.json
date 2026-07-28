@@ -2,12 +2,12 @@
   "docCountMax": 6,
   "failures": [],
   "missingQuestionSources": [],
-  "p50Ms": 9.96,
-  "p95Ms": 11.71,
+  "p50Ms": 3.81,
+  "p95Ms": 4.15,
   "results": [
     {
       "docCount": 6,
-      "elapsedMs": 11.15,
+      "elapsedMs": 4.15,
       "failures": [],
       "id": "backend-endpoint",
       "taskType": "backend-feature",
@@ -15,7 +15,7 @@
     },
     {
       "docCount": 6,
-      "elapsedMs": 11.66,
+      "elapsedMs": 3.86,
       "failures": [],
       "id": "frontend-component",
       "taskType": "frontend-feature",
@@ -23,7 +23,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 11.71,
+      "elapsedMs": 3.61,
       "failures": [],
       "id": "bug-fix",
       "taskType": "routine-fix",
@@ -31,7 +31,7 @@
     },
     {
       "docCount": 4,
-      "elapsedMs": 10.66,
+      "elapsedMs": 3.57,
       "failures": [],
       "id": "refactor",
       "taskType": "refactor",
@@ -39,7 +39,7 @@
     },
     {
       "docCount": 2,
-      "elapsedMs": 8.85,
+      "elapsedMs": 3.71,
       "failures": [],
       "id": "config-addition",
       "taskType": "configuration-change",
@@ -47,7 +47,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 9.52,
+      "elapsedMs": 3.78,
       "failures": [],
       "id": "error-addition",
       "taskType": "upload-security-change",
@@ -55,7 +55,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 9.35,
+      "elapsedMs": 3.7,
       "failures": [],
       "id": "prompt-change",
       "taskType": "ai-prompt-change",
@@ -63,7 +63,7 @@
     },
     {
       "docCount": 6,
-      "elapsedMs": 11.66,
+      "elapsedMs": 3.46,
       "failures": [],
       "id": "provider-change",
       "taskType": "ai-provider-change",
@@ -71,7 +71,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 13.74,
+      "elapsedMs": 3.86,
       "failures": [],
       "id": "upload-security",
       "taskType": "upload-security-change",
@@ -79,7 +79,7 @@
     },
     {
       "docCount": 5,
-      "elapsedMs": 8.81,
+      "elapsedMs": 3.76,
       "failures": [],
       "id": "privacy-change",
       "taskType": "privacy-change",
@@ -87,7 +87,7 @@
     },
     {
       "docCount": 5,
-      "elapsedMs": 8.81,
+      "elapsedMs": 3.74,
       "failures": [],
       "id": "payments-guard",
       "taskType": "payments-change",
@@ -95,7 +95,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 10.94,
+      "elapsedMs": 3.88,
       "failures": [],
       "id": "sse-change",
       "taskType": "reliability-change",
@@ -103,7 +103,7 @@
     },
     {
       "docCount": 2,
-      "elapsedMs": 7.86,
+      "elapsedMs": 3.9,
       "failures": [],
       "id": "localization",
       "taskType": "localization-change",
@@ -111,7 +111,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 9.96,
+      "elapsedMs": 3.73,
       "failures": [],
       "id": "test-addition",
       "taskType": "testing-change",
@@ -119,7 +119,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 8.3,
+      "elapsedMs": 3.84,
       "failures": [],
       "id": "performance-issue",
       "taskType": "performance-change",
@@ -127,7 +127,7 @@
     },
     {
       "docCount": 4,
-      "elapsedMs": 10.11,
+      "elapsedMs": 4.06,
       "failures": [],
       "id": "production-incident",
       "taskType": "incident",
@@ -135,7 +135,7 @@
     },
     {
       "docCount": 4,
-      "elapsedMs": 10.83,
+      "elapsedMs": 3.91,
       "failures": [],
       "id": "release-prep",
       "taskType": "release",
@@ -143,7 +143,7 @@
     },
     {
       "docCount": 3,
-      "elapsedMs": 8.86,
+      "elapsedMs": 4.18,
       "failures": [],
       "id": "rollback-run",
       "taskType": "rollback",
@@ -151,7 +151,7 @@
     },
     {
       "docCount": 4,
-      "elapsedMs": 8.45,
+      "elapsedMs": 3.81,
       "failures": [],
       "id": "dependency-upgrade",
       "taskType": "dependency-change",
@@ -159,7 +159,7 @@
     },
     {
       "docCount": 2,
-      "elapsedMs": 10.26,
+      "elapsedMs": 3.82,
       "failures": [],
       "id": "a11y-audit",
       "taskType": "accessibility-change",
@@ -167,7 +167,7 @@
     },
     {
       "docCount": 2,
-      "elapsedMs": 9.76,
+      "elapsedMs": 3.79,
       "failures": [],
       "id": "knowledge-edit",
       "taskType": "knowledge-change",

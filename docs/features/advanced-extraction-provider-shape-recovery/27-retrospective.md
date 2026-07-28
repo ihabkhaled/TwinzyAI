@@ -13,5 +13,5 @@
 ## Permanent Improvement
 
 The prompt, fixtures, safety leaf collection, contracts, test catalog, and
-`memory/known-pitfalls.md` now encode these lessons. No open action remains beyond final release
-and hypercare evidence.
+`memory/known-pitfalls.md` now encode these lessons. Release and initial hypercare evidence are
+closed; normal production monitoring continues.
