@@ -36,7 +36,7 @@
   "devDependencies": {
     "@nestjs/testing": "^11.1.28",
     "@swc/core": "^1.15.46",
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.1.2",
     "@types/nodemailer": "^7.0.12",
     "@types/supertest": "^7.2.1",
     "pino-pretty": "^13.1.3",
