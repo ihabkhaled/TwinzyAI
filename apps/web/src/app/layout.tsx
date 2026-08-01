@@ -22,6 +22,7 @@ import { DonateNavLink } from '@/shared/components/layout/donate-nav-link.compon
 import { FooterNavLink } from '@/shared/components/layout/footer-nav-link.component';
 import { HomeLink } from '@/shared/components/layout/home-link.component';
 import { SkipLink } from '@/shared/components/primitives/skip-link.component';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { OG_LOCALE_BY_LANGUAGE } from '@/shared/constants/seo.constants';
 import { THEME_PALETTE } from '@/shared/constants/theme-palette.constants';
 import { interFont } from '@/shared/fonts/app-fonts';
@@ -30,6 +31,7 @@ import { resolveDonateUrl } from '@/shared/helpers/donate-link.helper';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
 import { readThemeAttribute } from '@/shared/helpers/read-theme-cookie.helper';
 import { buildFooterNavLinks } from '@/shared/helpers/site-nav.helper';
+import { buildSocialMetadata } from '@/shared/helpers/social-metadata.helper';
 import { NONCE_HEADER_NAME, PATHNAME_HEADER_NAME } from '@/shared/security/security.constants';
 
 import { bodyClassName } from './layout.variants';
@@ -60,14 +62,13 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: '/icons/icon.svg',
     },
-    openGraph: {
-      type: 'website',
+    ...buildSocialMetadata({
+      title: buildPageTitle(t('tagline')),
+      description: t('subtitle'),
       siteName: t('name'),
-      locale: OG_LOCALE_BY_LANGUAGE[locale],
-    },
-    twitter: {
-      card: 'summary',
-    },
+      ogLocale: OG_LOCALE_BY_LANGUAGE[locale],
+      path: ROUTE_PATHS.home,
+    }),
   };
 }
 
