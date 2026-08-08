@@ -48,7 +48,11 @@ const buildNextConfig = (): NextConfig => {
   return {
     reactStrictMode: true,
     poweredByHeader: false,
-    output: 'standalone',
+    // Vercel's own builder packages serverless functions itself and does not
+    // need (or fully support, with Turbopack) Next's standalone output mode —
+    // only the self-hosted Docker build (Dockerfile.web) reads
+    // `.next/standalone`. `VERCEL` is set automatically by Vercel's platform.
+    ...(process.env['VERCEL'] === undefined && { output: 'standalone' as const }),
     typedRoutes: true,
     // E2E runs (NEXT_PUBLIC_APP_ENV=test) disable the dev overlay indicator:
     // its <nextjs-portal> sits bottom-left and intercepts taps on mobile

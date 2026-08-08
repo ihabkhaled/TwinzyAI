@@ -3,4 +3,5 @@
  * inside this package.
  */
 
+export { notFound } from './not-found';
 export { useAppNavigation } from './use-app-navigation.hook';

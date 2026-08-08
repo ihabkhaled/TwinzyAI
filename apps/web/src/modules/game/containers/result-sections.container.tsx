@@ -10,6 +10,7 @@ import { buildIndexedTestId } from '@/shared/testing/test-id.helper';
 
 import { ResultCard } from '../components/result-card.component';
 import { ResultDisclaimer } from '../components/result-disclaimer.component';
+import { ResultImproveTips } from '../components/result-improve-tips.component';
 import { ResultList } from '../components/result-list.component';
 import type { GameResultView, ResultLabels, ResultView } from '../model/game.types';
 import type { ResultSectionsProps } from '../model/game-component.types';
@@ -77,6 +78,12 @@ export const ResultSections = ({
         />
         {explanation}
         {renderResultList(view, labels, setSelectedResult)}
+        <ResultImproveTips
+          title={labels.improveResultsTitle}
+          body={labels.improveResultsBody}
+          linkLabel={labels.improveResultsLinkLabel}
+          testId={TEST_IDS.resultImproveTips}
+        />
         <ResultDisclaimer disclaimer={view.disclaimer} testId={TEST_IDS.disclaimer} />
       </Stack>
       {selectedResult?.publicFigure === undefined ? null : (

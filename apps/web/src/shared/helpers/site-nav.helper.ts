@@ -14,6 +14,7 @@ export const buildFooterNavLinks = (translate: TranslateLabel): readonly NavLink
   { href: ROUTE_PATHS.game, label: translate('nav.game') },
   { href: ROUTE_PATHS.about, label: translate('nav.about') },
   { href: ROUTE_PATHS.howItWorks, label: translate('nav.howItWorks') },
+  { href: ROUTE_PATHS.guides, label: translate('nav.guides') },
   { href: ROUTE_PATHS.aiSafety, label: translate('nav.aiSafety') },
   { href: ROUTE_PATHS.faq, label: translate('nav.faq') },
   { href: ROUTE_PATHS.contact, label: translate('about.contactTitle') },
@@ -33,6 +34,7 @@ export const buildContentPageLinks = (
   const links: readonly NavLinkItem[] = [
     { href: ROUTE_PATHS.about, label: translate('nav.about') },
     { href: ROUTE_PATHS.howItWorks, label: translate('nav.howItWorks') },
+    { href: ROUTE_PATHS.guides, label: translate('nav.guides') },
     { href: ROUTE_PATHS.aiSafety, label: translate('nav.aiSafety') },
     { href: ROUTE_PATHS.faq, label: translate('nav.faq') },
     { href: ROUTE_PATHS.contact, label: translate('about.contactTitle') },

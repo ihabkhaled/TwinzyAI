@@ -7,11 +7,14 @@ import {
   type LanguageCodeValue,
 } from '@/packages/i18n';
 
+import { buildGuidePath, GUIDE_SLUGS } from '../constants/guides.constants';
 import { ROUTE_PATHS } from '../constants/route-paths.constants';
 
 const PUBLIC_ROUTE_PATHS = new Set<string>(
   Object.values(ROUTE_PATHS).filter((path) => path !== ROUTE_PATHS.game),
 );
+/** Guide detail pages are dynamic, so they are listed separately from the static `ROUTE_PATHS`. */
+const GUIDE_DETAIL_PATHS = new Set<string>(GUIDE_SLUGS.map((slug) => buildGuidePath(slug)));
 const MACHINE_PATH_PREFIXES = ['/sitemaps/', '/_next/', '/api/'] as const;
 const XML_FILE_SUFFIX = '.xml';
 
@@ -81,7 +84,7 @@ export const replaceLocalizedPathLocale = (
 
 /** True only for routes that receive a canonical locale prefix. */
 export const isPublicPagePath = (pathname: string): pathname is Route =>
-  PUBLIC_ROUTE_PATHS.has(pathname);
+  PUBLIC_ROUTE_PATHS.has(pathname) || GUIDE_DETAIL_PATHS.has(pathname);
 
 /** Machine endpoints keep their stable, explicitly localized route shape. */
 export const isMachinePath = (pathname: string): boolean =>

@@ -4,8 +4,7 @@ import type { ReactElement } from 'react';
 import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 
 import {
   contentBodyClass,
@@ -19,12 +18,12 @@ import { ContactFormContainer } from './contact-form.container';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('about');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.contact);
-  return {
-    title: buildPageTitle(t('contactTitle')),
+
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.contact,
+    title: t('contactTitle'),
     description: t('contactBody1'),
-    alternates,
-  };
+  });
 }
 
 /** Privacy-safe contact form: SMTP delivery without Twinzy persistence. */

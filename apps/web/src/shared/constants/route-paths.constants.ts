@@ -17,4 +17,5 @@ export const ROUTE_PATHS = {
   aiSafety: '/ai-safety' as Route,
   faq: '/faq' as Route,
   contact: '/contact' as Route,
+  guides: '/guides' as Route,
 } as const;

@@ -6,8 +6,7 @@ import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ContentLinkItem } from '@/shared/components/content/content-link-item.component';
 import { ContentLinks } from '@/shared/components/content/content-links.component';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import {
@@ -19,14 +18,8 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('help');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.help);
 
-  return {
-    title: buildPageTitle(t('title')),
-    description: t('a1'),
-    alternates,
-    openGraph: { title: t('title'), description: t('a1'), url: alternates.canonical },
-  };
+  return buildContentPageMetadata({ path: ROUTE_PATHS.help, title: t('title'), description: t('a1') });
 }
 
 const HelpPage = async (): Promise<ReactElement> => {

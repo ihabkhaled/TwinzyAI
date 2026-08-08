@@ -8,8 +8,7 @@ import { ContentLinks } from '@/shared/components/content/content-links.componen
 import { JsonLdScript } from '@/shared/components/seo/json-ld.container';
 import { FAQ_QUESTION_NUMBERS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 import { buildFaqPageJsonLd, serializeJsonLd } from '@/shared/helpers/structured-data.helper';
 
@@ -23,18 +22,12 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('faq');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.faq);
 
-  return {
-    title: buildPageTitle(t('metaTitle')),
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.faq,
+    title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates,
-    openGraph: {
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      url: alternates.canonical,
-    },
-  };
+  });
 }
 
 /** The questions players actually ask, answered honestly and in full. */

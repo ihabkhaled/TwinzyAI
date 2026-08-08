@@ -45,3 +45,6 @@ docs/features/multi-provider-ai/benchmarks/
 # committed generated artifacts (rebuilt by npm run knowledge:build)
 .ai/local/*
 !.ai/local/.gitkeep
+
+.vercel
+.env*

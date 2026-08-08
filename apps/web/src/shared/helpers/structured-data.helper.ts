@@ -50,3 +50,24 @@ export const buildFaqPageJsonLd = (
     acceptedAnswer: { '@type': 'Answer', text: answer },
   })),
 });
+
+/**
+ * The BreadcrumbList descriptor for a guide detail page: `[label, path]` pairs
+ * from the homepage down to the current page, in order.
+ */
+export const buildBreadcrumbListJsonLd = (
+  siteBaseUrl: string,
+  crumbs: readonly (readonly [string, string])[],
+): Record<string, unknown> => {
+  const base = normalizeBaseUrl(siteBaseUrl);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map(([name, path], index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name,
+      item: `${base}${path}`,
+    })),
+  };
+};

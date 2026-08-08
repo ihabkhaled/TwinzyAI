@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildBreadcrumbListJsonLd,
   buildFaqPageJsonLd,
   buildWebApplicationJsonLd,
   serializeJsonLd,
@@ -54,6 +55,33 @@ describe('buildFaqPageJsonLd', () => {
         '@type': 'Question',
         name: 'Is my photo stored?',
         acceptedAnswer: { '@type': 'Answer', text: 'Never.' },
+      },
+    ]);
+  });
+});
+
+describe('buildBreadcrumbListJsonLd', () => {
+  it('numbers each crumb in order and resolves absolute URLs', () => {
+    const jsonLd = buildBreadcrumbListJsonLd('https://twinzy.example/', [
+      ['Home', '/'],
+      ['Guides', '/guides'],
+      ['Choosing your best photo', '/guides/best-photo'],
+    ]);
+
+    expect(jsonLd['@type']).toBe('BreadcrumbList');
+    expect(jsonLd['itemListElement']).toStrictEqual([
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://twinzy.example/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Guides',
+        item: 'https://twinzy.example/guides',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Choosing your best photo',
+        item: 'https://twinzy.example/guides/best-photo',
       },
     ]);
   });

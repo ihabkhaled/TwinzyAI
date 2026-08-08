@@ -9,9 +9,13 @@ import { ContentLinkItem } from '@/shared/components/content/content-link-item.c
 import { ContentLinks } from '@/shared/components/content/content-links.component';
 import { JsonLdScript } from '@/shared/components/seo/json-ld.container';
 import { HOME_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
+import {
+  buildGuidePath,
+  GUIDE_NAMESPACE_BY_SLUG,
+  HOME_FEATURED_GUIDE_SLUGS,
+} from '@/shared/constants/guides.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 import {
   buildWebApplicationJsonLd,
@@ -24,21 +28,17 @@ import {
   contentSectionTitleClass,
   homeSectionsClass,
 } from './content.variants';
+import { GuideCard } from './guides/guide-card.component';
+import { guidesGridClass } from './guides/guides.variants';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('home');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.home);
 
-  return {
-    title: buildPageTitle(t('metaTitle')),
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.home,
+    title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates,
-    openGraph: {
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      url: alternates.canonical,
-    },
-  };
+  });
 }
 
 /**
@@ -71,6 +71,23 @@ const HomePage = async (): Promise<ReactElement> => {
             <p className={contentBodyClass}>{t(`home.${key}Body2`)}</p>
           </section>
         ))}
+        <section className={contentSectionClass}>
+          <h2 className={contentSectionTitleClass}>{t('home.guidesTeaserTitle')}</h2>
+          <p className={contentBodyClass}>{t('home.guidesTeaserIntro')}</p>
+          <div className={guidesGridClass}>
+            {HOME_FEATURED_GUIDE_SLUGS.map((slug) => {
+              const namespace = GUIDE_NAMESPACE_BY_SLUG[slug];
+              return (
+                <GuideCard
+                  key={slug}
+                  href={buildGuidePath(slug)}
+                  title={t(`guides.${namespace}.navTitle`)}
+                  teaser={t(`guides.${namespace}.navTeaser`)}
+                />
+              );
+            })}
+          </div>
+        </section>
         <ContentLinks title={t('home.learnMoreTitle')}>
           {buildContentPageLinks((key) => t(key)).map((link) => (
             <ContentLinkItem key={link.href} href={link.href} label={link.label} />

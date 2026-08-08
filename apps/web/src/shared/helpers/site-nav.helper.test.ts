@@ -13,6 +13,7 @@ describe('buildFooterNavLinks', () => {
       '/game',
       '/about',
       '/how-it-works',
+      '/guides',
       '/ai-safety',
       '/faq',
       '/contact',
@@ -25,6 +26,7 @@ describe('buildFooterNavLinks', () => {
       'nav.game',
       'nav.about',
       'nav.howItWorks',
+      'nav.guides',
       'nav.aiSafety',
       'nav.faq',
       'about.contactTitle',
@@ -49,6 +51,7 @@ describe('buildContentPageLinks', () => {
     expect(hrefs).toStrictEqual([
       '/about',
       '/how-it-works',
+      '/guides',
       '/ai-safety',
       '/faq',
       '/contact',
@@ -62,6 +65,6 @@ describe('buildContentPageLinks', () => {
     const hrefs = buildContentPageLinks(echoTranslate, '/faq').map((link) => link.href);
 
     expect(hrefs).not.toContain('/faq');
-    expect(hrefs).toHaveLength(7);
+    expect(hrefs).toHaveLength(8);
   });
 });

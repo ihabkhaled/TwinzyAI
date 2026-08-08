@@ -200,6 +200,14 @@ export interface ResultDisclaimerProps {
   testId?: string;
 }
 
+/** Props for the "how to get a better result" note and its guide link. */
+export interface ResultImproveTipsProps {
+  title: string;
+  body: string;
+  linkLabel: string;
+  testId?: string;
+}
+
 /** Props for the share button with its transient "copied" feedback. */
 export interface ShareButtonProps {
   label: string;

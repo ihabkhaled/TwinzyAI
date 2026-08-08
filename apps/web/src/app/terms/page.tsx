@@ -6,22 +6,19 @@ import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ContentLinkItem } from '@/shared/components/content/content-link-item.component';
 import { ContentLinks } from '@/shared/components/content/content-links.component';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import { contentListClass, contentTitleClass } from '../content.variants';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('terms');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.terms);
 
-  return {
-    title: buildPageTitle(t('title')),
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.terms,
+    title: t('title'),
     description: t('noSeriousUse'),
-    alternates,
-    openGraph: { title: t('title'), description: t('noSeriousUse'), url: alternates.canonical },
-  };
+  });
 }
 
 const TermsPage = async (): Promise<ReactElement> => {

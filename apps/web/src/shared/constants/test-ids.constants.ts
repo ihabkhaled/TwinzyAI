@@ -18,6 +18,7 @@ export const TEST_IDS = {
   cancelProcessing: 'cancel-processing',
   resultList: 'result-list',
   resultExplanation: 'result-explanation',
+  resultImproveTips: 'result-improve-tips',
   compactSummary: 'compact-summary',
   traitCount: 'trait-count',
   traitDetails: 'trait-details',

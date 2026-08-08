@@ -7,8 +7,7 @@ import { ContentLinkItem } from '@/shared/components/content/content-link-item.c
 import { ContentLinks } from '@/shared/components/content/content-links.component';
 import { HOW_IT_WORKS_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import {
@@ -21,18 +20,12 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('howItWorks');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.howItWorks);
 
-  return {
-    title: buildPageTitle(t('metaTitle')),
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.howItWorks,
+    title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates,
-    openGraph: {
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      url: alternates.canonical,
-    },
-  };
+  });
 }
 
 /** Every step of a round, in order, including what happens to the photo. */

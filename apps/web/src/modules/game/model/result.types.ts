@@ -19,6 +19,9 @@ export interface ResultLabels {
   scoreExplanation: string;
   uncertaintyExplanation: string;
   mismatchExplanation: string;
+  improveResultsTitle: string;
+  improveResultsBody: string;
+  improveResultsLinkLabel: string;
   detailsButton: string;
   detailsTitle: string;
   detailsClose: string;

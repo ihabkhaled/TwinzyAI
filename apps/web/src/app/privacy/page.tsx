@@ -9,8 +9,7 @@ import { ContentLinks } from '@/shared/components/content/content-links.componen
 import { PRIVACY_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
-import { buildPageTitle } from '@/shared/helpers/page-title.helper';
-import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
+import { buildContentPageMetadata } from '@/shared/helpers/content-page-metadata.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import {
@@ -24,14 +23,12 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('privacy');
-  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.privacy);
 
-  return {
-    title: buildPageTitle(t('title')),
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.privacy,
+    title: t('title'),
     description: t('metaDescription'),
-    alternates,
-    openGraph: { title: t('title'), description: t('metaDescription'), url: alternates.canonical },
-  };
+  });
 }
 
 /**

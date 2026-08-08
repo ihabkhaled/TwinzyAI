@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { LANGUAGE_CODES } from '@/packages/i18n';
+import { buildGuidePath, GUIDE_SLUGS } from '@/shared/constants/guides.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 
 import { buildLocalizedAlternates } from './locale-route.helper';
@@ -10,16 +11,23 @@ const BASE = 'https://twinzy.example';
 const LAST_MODIFIED = new Date('2026-07-18T00:00:00.000Z');
 
 describe('buildSitemapEntries', () => {
-  it('lists every first-class route in every supported language', () => {
+  it('lists every first-class route and every guide in every supported language', () => {
     const urls = buildSitemapEntries(BASE, LAST_MODIFIED).map((entry) => entry.url);
-    const expectedUrls = LANGUAGE_CODES.flatMap((locale) =>
+    const expectedRouteUrls = LANGUAGE_CODES.flatMap((locale) =>
       Object.values(ROUTE_PATHS).map(
         (path) => `${BASE}${buildLocalizedAlternates(locale, path).canonical}`,
       ),
     );
+    const expectedGuideUrls = LANGUAGE_CODES.flatMap((locale) =>
+      GUIDE_SLUGS.map(
+        (slug) => `${BASE}${buildLocalizedAlternates(locale, buildGuidePath(slug)).canonical}`,
+      ),
+    );
 
-    expect(urls).toStrictEqual(expectedUrls);
-    expect(urls).toHaveLength(LANGUAGE_CODES.length * Object.keys(ROUTE_PATHS).length);
+    expect(urls).toStrictEqual([...expectedRouteUrls, ...expectedGuideUrls]);
+    expect(urls).toHaveLength(
+      LANGUAGE_CODES.length * (Object.keys(ROUTE_PATHS).length + GUIDE_SLUGS.length),
+    );
   });
 
   it('adds a complete hreflang cluster to every localized URL', () => {
@@ -50,6 +58,7 @@ describe('buildSitemapEntries', () => {
     expect(byUrl.get(`${BASE}/`)).toBe(1);
     expect(byUrl.get(`${BASE}/en/game`)).toBeCloseTo(0.9);
     expect(byUrl.get(`${BASE}/en/about`)).toBeCloseTo(0.7);
+    expect(byUrl.get(`${BASE}/en/guides/best-photo`)).toBeCloseTo(0.7);
   });
 
   it('stamps the provided lastModified on every entry', () => {
