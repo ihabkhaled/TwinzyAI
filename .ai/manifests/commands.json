@@ -36,7 +36,7 @@
       "workspace": "@twinzy/web"
     },
     {
-      "command": "npm --prefix ../.. run build:shared && next build",
+      "command": "npm --prefix ../.. run build:shared && next build --turbopack",
       "name": "build:turbo",
       "workspace": "@twinzy/web"
     },

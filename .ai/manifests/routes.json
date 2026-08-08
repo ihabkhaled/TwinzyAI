@@ -116,6 +116,16 @@
       "path": "/game"
     },
     {
+      "file": "apps/web/src/app/guides/page.tsx",
+      "kind": "page",
+      "path": "/guides"
+    },
+    {
+      "file": "apps/web/src/app/guides/[slug]/page.tsx",
+      "kind": "page",
+      "path": "/guides/[slug]"
+    },
+    {
       "file": "apps/web/src/app/help/page.tsx",
       "kind": "page",
       "path": "/help"
@@ -151,5 +161,5 @@
       "path": "/terms"
     }
   ],
-  "webCount": 15
+  "webCount": 17
 }

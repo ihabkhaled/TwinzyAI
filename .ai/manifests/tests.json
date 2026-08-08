@@ -1,5 +1,5 @@
 {
-  "count": 212,
+  "count": 214,
   "tests": [
     {
       "kind": "unit",
@@ -1835,6 +1835,14 @@
     {
       "kind": "unit",
       "module": "web:shared",
+      "path": "apps/web/src/shared/constants/guides.constants.test.ts",
+      "targets": [
+        "apps/web/src/shared/constants/guides.constants.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
       "path": "apps/web/src/shared/errors/app-error.test.ts",
       "targets": [
         "apps/web/src/shared/errors/app-error.ts",
@@ -1855,6 +1863,14 @@
       "path": "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts",
       "targets": [
         "apps/web/src/shared/helpers/ad-eligibility.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/content-page-metadata.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/helpers/content-page-metadata.helper.ts"
       ]
     },
     {

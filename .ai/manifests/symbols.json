@@ -1,5 +1,5 @@
 {
-  "count": 1798,
+  "count": 1821,
   "symbols": [
     {
       "kind": "const",
@@ -1263,6 +1263,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildBreadcrumbListJsonLd",
+      "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "benchmark",
       "module": "api:benchmark",
       "name": "buildBrokenResponseText",
@@ -1302,6 +1309,13 @@
       "module": "web:shared",
       "name": "buildContentPageLinks",
       "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildContentPageMetadata",
+      "path": "apps/web/src/shared/helpers/content-page-metadata.helper.ts"
     },
     {
       "kind": "const",
@@ -1358,6 +1372,13 @@
       "module": "api:public-figures",
       "name": "buildGoogleSearchUrl",
       "path": "apps/api/src/modules/public-figures/lib/public-figure-url.util.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildGuidePath",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
     },
     {
       "kind": "function",
@@ -4556,6 +4577,20 @@
       "layer": "app",
       "module": "web:app",
       "name": "generateMetadata",
+      "path": "apps/web/src/app/guides/[slug]/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
+      "path": "apps/web/src/app/guides/page.tsx"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateMetadata",
       "path": "apps/web/src/app/help/page.tsx"
     },
     {
@@ -4620,6 +4655,13 @@
       "module": "api:share-results",
       "name": "generateShareId",
       "path": "apps/api/src/modules/share-results/lib/share-id.util.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "generateStaticParams",
+      "path": "apps/web/src/app/guides/[slug]/page.tsx"
     },
     {
       "kind": "const",
@@ -4805,6 +4847,69 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "GUIDE_NAMESPACE_BY_SLUG",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "GUIDE_SECTION_KEYS",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "GUIDE_SLUGS",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "GUIDE_TIP_NUMBERS",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "app",
+      "module": "web:app",
+      "name": "GuideCard",
+      "path": "apps/web/src/app/guides/guide-card.component.tsx"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "guideCardLinkClass",
+      "path": "apps/web/src/app/guides/guides.variants.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "app",
+      "module": "web:app",
+      "name": "GuideCardProps",
+      "path": "apps/web/src/app/guides/guide-card.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "guidesGridClass",
+      "path": "apps/web/src/app/guides/guides.variants.ts"
+    },
+    {
+      "kind": "type",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "GuideSlug",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
+    },
+    {
+      "kind": "const",
       "layer": "lib",
       "module": "api:ai",
       "name": "hasSameJsonShape",
@@ -4914,6 +5019,13 @@
       "module": "web:pkg-icons",
       "name": "HeartIcon",
       "path": "apps/web/src/packages/icons/index.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "HOME_FEATURED_GUIDE_SLUGS",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
     },
     {
       "kind": "const",
@@ -5243,6 +5355,13 @@
       "module": "api:result-aggregation",
       "name": "isDisplayableResult",
       "path": "apps/api/src/modules/result-aggregation/lib/result-aggregation.helpers.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "isGuideSlug",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
     },
     {
       "kind": "function",
@@ -7042,6 +7161,20 @@
       "module": "api:ai",
       "name": "normalizeTraitExtractionInput",
       "path": "apps/api/src/modules/ai/lib/trait-extraction-input.normalizer.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-navigation",
+      "name": "notFound",
+      "path": "apps/web/src/packages/navigation/index.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "packages",
+      "module": "web:pkg-navigation",
+      "name": "notFound",
+      "path": "apps/web/src/packages/navigation/not-found.ts"
     },
     {
       "kind": "re-export",
@@ -9025,6 +9158,13 @@
       "path": "apps/api/src/modules/ai/model/region-hint.constants.ts"
     },
     {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "RELATED_GUIDE_SLUGS",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
+    },
+    {
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-paymob",
@@ -9499,6 +9639,27 @@
       "module": "web:game",
       "name": "resultHeaderClass",
       "path": "apps/web/src/modules/game/components/result-card.variants.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "components",
+      "module": "web:game",
+      "name": "ResultImproveTips",
+      "path": "apps/web/src/modules/game/components/result-improve-tips.component.tsx"
+    },
+    {
+      "kind": "interface",
+      "layer": "model",
+      "module": "web:game",
+      "name": "ResultImproveTipsProps",
+      "path": "apps/web/src/modules/game/model/game-component.types.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "components",
+      "module": "web:game",
+      "name": "resultImproveTipsTitleClass",
+      "path": "apps/web/src/modules/game/components/result-improve-tips.variants.ts"
     },
     {
       "kind": "interface",

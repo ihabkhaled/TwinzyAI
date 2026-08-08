@@ -315,7 +315,7 @@
         "structure/repository-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 33,
+      "fileCount": 38,
       "lane": "standard",
       "layers": [
         "app"
@@ -345,7 +345,7 @@
         "structure/flows/analyze-flow.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 161,
+      "fileCount": 163,
       "lane": "standard",
       "layers": [
         "components",
@@ -511,7 +511,7 @@
       "docs": [
         "docs/library-wrapping.md"
       ],
-      "fileCount": 3,
+      "fileCount": 4,
       "lane": "standard",
       "layers": [
         "packages"
@@ -519,7 +519,7 @@
       "module": "web:pkg-navigation",
       "owner": "repository owner",
       "responsibility": "useAppNavigation - typed wrapper over next/navigation.",
-      "root": "apps/web"
+      "root": "apps"
     },
     {
       "docs": [],
@@ -651,7 +651,7 @@
         "structure/layer-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 85,
+      "fileCount": 89,
       "lane": "standard",
       "layers": [
         "shared"

@@ -1,5 +1,5 @@
 {
-  "count": 844,
+  "count": 856,
   "files": [
     {
       "exports": [
@@ -9194,7 +9194,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "2f34e4354a31f087f1a8f57ea08f217cd97ae80b90331e9e6540e4de0a22ec6e",
+      "hash": "de5e32d94437b37333be8ff12109ce12d8b9dc03e59c9bef34ff3b422acf5ac9",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9203,15 +9203,14 @@
         "@/shared/components/content/content-links.component",
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 65,
+      "loc": 58,
       "module": "web:app",
       "path": "apps/web/src/app/about/page.tsx"
     },
@@ -9222,7 +9221,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "eaa7c67074b596fe67e7971b57a1111f6b8d3990182a80bc0927edb4a06513ac",
+      "hash": "a5b761ca83eb0dcf79fbe35baddcc50bf060e677ad1ff0277588655ea4983b50",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9231,15 +9230,14 @@
         "@/shared/components/content/content-links.component",
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 65,
+      "loc": 58,
       "module": "web:app",
       "path": "apps/web/src/app/ai-safety/page.tsx"
     },
@@ -9375,21 +9373,20 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "55818d41744c654a2aa6b9605c1a12f46fbb8e0d7dd793ecdcfc8150e01d0f0c",
+      "hash": "fd25a5425bea3f10279033b309e9e101c634ac256f1726241ead9adb3a22073d",
       "imports": [
         "../content.variants",
         "./contact-form.container",
         "@/packages/i18n",
         "@/packages/ui-primitives",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 50,
+      "loc": 49,
       "module": "web:app",
       "path": "apps/web/src/app/contact/page.tsx"
     },
@@ -9506,7 +9503,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "2b326a8ce5cf848295995cce58a2fec37a2cd94d0681bbd87649c652aaae522d",
+      "hash": "9306329dec15831781e19d7fe43da84759f2bfc54365f35d45b7416c21f3298a",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9516,8 +9513,7 @@
         "@/shared/components/seo/json-ld.container",
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "@/shared/helpers/structured-data.helper",
         "next",
@@ -9525,7 +9521,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 72,
+      "loc": 65,
       "module": "web:app",
       "path": "apps/web/src/app/faq/page.tsx"
     },
@@ -9570,9 +9566,129 @@
         {
           "kind": "function",
           "name": "generateMetadata"
+        },
+        {
+          "kind": "function",
+          "name": "generateStaticParams"
         }
       ],
-      "hash": "1bcb079be807329ea4a0841fe10f4bf198162d5bb0a9e99a9a0289d26531cf48",
+      "hash": "94ffffb2f9a5e535e190d293bc4ca125162241759d7e46affa5db93271a2f0ba",
+      "imports": [
+        "../../content.variants",
+        "@/packages/env",
+        "@/packages/i18n",
+        "@/packages/navigation",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/components/seo/json-ld.container",
+        "@/shared/constants/guides.constants",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/content-page-metadata.helper",
+        "@/shared/helpers/structured-data.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 119,
+      "module": "web:app",
+      "path": "apps/web/src/app/guides/[slug]/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "GuideCard"
+        }
+      ],
+      "hash": "e05d781ec175abe5c882050d37172a58ade49ddccc2a245d67cefc5185d58549",
+      "imports": [
+        "./guide-card.types",
+        "./guides.variants",
+        "@/packages/link",
+        "@/packages/ui-primitives",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 20,
+      "module": "web:app",
+      "path": "apps/web/src/app/guides/guide-card.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "GuideCardProps"
+        }
+      ],
+      "hash": "fd03df62807d47804d7fd1c6729d0ef5f79b2f806420c40ec1f8419940432087",
+      "imports": [
+        "next"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 9,
+      "module": "web:app",
+      "path": "apps/web/src/app/guides/guide-card.types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "guideCardLinkClass"
+        },
+        {
+          "kind": "const",
+          "name": "guidesGridClass"
+        }
+      ],
+      "hash": "e276166f15db3ceed72ea066c0389eb9f7fb20131fd304453095ccf602a2e603",
+      "imports": [],
+      "isTest": false,
+      "layer": "app",
+      "loc": 6,
+      "module": "web:app",
+      "path": "apps/web/src/app/guides/guides.variants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "4995441b8f19019aa9bff49f13d0c0a9c296614941fec17c75de28541bd856a5",
+      "imports": [
+        "../content.variants",
+        "./guide-card.component",
+        "./guides.variants",
+        "@/packages/i18n",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
+        "@/shared/constants/guides.constants",
+        "@/shared/constants/route-paths.constants",
+        "@/shared/helpers/content-page-metadata.helper",
+        "@/shared/helpers/site-nav.helper",
+        "next",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 68,
+      "module": "web:app",
+      "path": "apps/web/src/app/guides/page.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "generateMetadata"
+        }
+      ],
+      "hash": "f326f6efce5f09218a0681886454d39505ca2cac5e188c087eecc431c15c7883",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9580,15 +9696,14 @@
         "@/shared/components/content/content-link-item.component",
         "@/shared/components/content/content-links.component",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 72,
+      "loc": 65,
       "module": "web:app",
       "path": "apps/web/src/app/help/page.tsx"
     },
@@ -9599,7 +9714,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "b1a3af2a7940d65225f619105f112dbd5b9426c7ea5ae7bb4d87884393ada6d1",
+      "hash": "ad367ad50ad431356a44eaa81e1895d187c0452de79bdf379fa04f7f8fbf06a5",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9608,15 +9723,14 @@
         "@/shared/components/content/content-links.component",
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 65,
+      "loc": 58,
       "module": "web:app",
       "path": "apps/web/src/app/how-it-works/page.tsx"
     },
@@ -9758,9 +9872,11 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "844cb567ca5f8b1e666e4ad3911f496b0354d49dfdbffc6c2bde9b3aaf6ffe80",
+      "hash": "3343e8c7e9d7be503b2e1a3350a3eaa165c50eab4bf69d8ab51c2133048c0137",
       "imports": [
         "./content.variants",
+        "./guides/guide-card.component",
+        "./guides/guides.variants",
         "@/modules/game",
         "@/packages/env",
         "@/packages/i18n",
@@ -9769,9 +9885,9 @@
         "@/shared/components/content/content-links.component",
         "@/shared/components/seo/json-ld.container",
         "@/shared/constants/content-pages.constants",
+        "@/shared/constants/guides.constants",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "@/shared/helpers/structured-data.helper",
         "next",
@@ -9779,7 +9895,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 85,
+      "loc": 102,
       "module": "web:app",
       "path": "apps/web/src/app/page.tsx"
     },
@@ -9810,7 +9926,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "41cd32b1a57433a9c2d7964d93863173a805522a194fcd97425a71403162cc92",
+      "hash": "ac52596b7c05abe24796ad7ce5acdd12e9c88739b745458b61f5ce249d58eec9",
       "imports": [
         "../content.variants",
         "@/modules/game",
@@ -9821,15 +9937,14 @@
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/constants/test-ids.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 77,
+      "loc": 74,
       "module": "web:app",
       "path": "apps/web/src/app/privacy/page.tsx"
     },
@@ -9931,7 +10046,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "6cebaf3300139e547d4f733450365d1f4b30b97c2daa9f3f55ebf26aae378483",
+      "hash": "af42273819f4f48803bb5d5717265e7c82c0c187082247cfec90adde3a97fd09",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9939,15 +10054,14 @@
         "@/shared/components/content/content-link-item.component",
         "@/shared/components/content/content-links.component",
         "@/shared/constants/route-paths.constants",
-        "@/shared/helpers/page-title.helper",
-        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/content-page-metadata.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 52,
+      "loc": 49,
       "module": "web:app",
       "path": "apps/web/src/app/terms/page.tsx"
     },
@@ -10531,6 +10645,44 @@
       "loc": 4,
       "module": "web:game",
       "path": "apps/web/src/modules/game/components/result-disclaimer.variants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "ResultImproveTips"
+        }
+      ],
+      "hash": "b753151d8284323a21d8c160c6b48dd00981446fcd320ed15a3e7ec9a7357c23",
+      "imports": [
+        "../model/game-component.types",
+        "./result-improve-tips.variants",
+        "@/packages/link",
+        "@/packages/ui-primitives",
+        "@/shared/components/content/content-links.variants",
+        "@/shared/constants/guides.constants",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "components",
+      "loc": 36,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/result-improve-tips.component.tsx"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "resultImproveTipsTitleClass"
+        }
+      ],
+      "hash": "a3dfe081bf883ee596fa92c268896c476f69a9bdf867d5e4788f4ec0c0b3c10a",
+      "imports": [],
+      "isTest": false,
+      "layer": "components",
+      "loc": 3,
+      "module": "web:game",
+      "path": "apps/web/src/modules/game/components/result-improve-tips.variants.ts"
     },
     {
       "exports": [
@@ -11194,10 +11346,11 @@
           "name": "ResultSections"
         }
       ],
-      "hash": "5e9e8ca8fa6ce0edcaf8af90c92673ad13bc787cd6270cf4c46955e3a195b69d",
+      "hash": "d6861107f25d6880fe9d85ac2e81865517119d0ab262d972eb1975f9ea251f5e",
       "imports": [
         "../components/result-card.component",
         "../components/result-disclaimer.component",
+        "../components/result-improve-tips.component",
         "../components/result-list.component",
         "../model/game-component.types",
         "../model/game.types",
@@ -11213,7 +11366,7 @@
       ],
       "isTest": false,
       "layer": "containers",
-      "loc": 94,
+      "loc": 101,
       "module": "web:game",
       "path": "apps/web/src/modules/game/containers/result-sections.container.tsx"
     },
@@ -11654,7 +11807,7 @@
           "name": "translateOptionalKey"
         }
       ],
-      "hash": "8bd17e5dd9de6701f94da94c3807e3f5cdaeeaa1b5e6d754dbd8b0d32ff9c82d",
+      "hash": "95b8bd4da4696f8fcb5ac0ab0f0cca47ab1f00969c7f48ae7d456d0676f1dc07",
       "imports": [
         "../model/game.constants",
         "../model/game.enums",
@@ -11664,7 +11817,7 @@
       ],
       "isTest": false,
       "layer": "helpers",
-      "loc": 224,
+      "loc": 227,
       "module": "web:game",
       "path": "apps/web/src/modules/game/helpers/game-display.helper.ts"
     },
@@ -12424,6 +12577,10 @@
         },
         {
           "kind": "interface",
+          "name": "ResultImproveTipsProps"
+        },
+        {
+          "kind": "interface",
           "name": "ResultListProps"
         },
         {
@@ -12463,14 +12620,14 @@
           "name": "UploadConsentProps"
         }
       ],
-      "hash": "ea502634b43267917860bd1207208e8f7642a30cca8a420094b61bb866bc6a38",
+      "hash": "de8c02d01ba9171856a1fbd9f0d220577a3882891fbec11c2c959979603a785e",
       "imports": [
         "./game.types",
         "react"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 237,
+      "loc": 245,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/game-component.types.ts"
     },
@@ -12937,11 +13094,11 @@
           "name": "ResultLabels"
         }
       ],
-      "hash": "d3ab3aa23f50af02b07b8b5ae28f17df3e214a081852e1c976b1990bfb7d0340",
+      "hash": "2edf334a5a314c7595e0d483fdbb45ad8993729672d9ea6942fa4a4b3e62592c",
       "imports": [],
       "isTest": false,
       "layer": "model",
-      "loc": 31,
+      "loc": 34,
       "module": "web:game",
       "path": "apps/web/src/modules/game/model/result.types.ts"
     },
@@ -13590,7 +13747,7 @@
     },
     {
       "exports": [],
-      "hash": "adb715654a53e20206477dcc4ac7e28ccb322cc1adc0ee13d59d48b40015b071",
+      "hash": "90e13af4450236e0c7e0cbc19c02a1b1d6a54eaa579c7a9d3c43560255649d38",
       "imports": [
         "../components/result-card.component",
         "../model/game.types",
@@ -13599,7 +13756,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 72,
+      "loc": 75,
       "module": "web:game",
       "path": "apps/web/src/modules/game/test/result-card.component.test.tsx"
     },
@@ -15413,16 +15570,21 @@
       "exports": [
         {
           "kind": "re-export",
+          "name": "notFound"
+        },
+        {
+          "kind": "re-export",
           "name": "useAppNavigation"
         }
       ],
-      "hash": "1d899ac9aff12a03637c9b5abaf3723177c91c95a1db08da35f21bada8b23cd1",
+      "hash": "369eecdd3abbde4793c383d4dceafa2dc6c54dee812d3862ee7bd375cf478bbe",
       "imports": [
+        "./not-found",
         "./use-app-navigation.hook"
       ],
       "isTest": false,
       "layer": "packages",
-      "loc": 7,
+      "loc": 8,
       "module": "web:pkg-navigation",
       "path": "apps/web/src/packages/navigation/index.ts"
     },
@@ -15442,6 +15604,23 @@
       "loc": 12,
       "module": "web:pkg-navigation",
       "path": "apps/web/src/packages/navigation/navigation-types.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "re-export",
+          "name": "notFound"
+        }
+      ],
+      "hash": "c049e47b4bb88d80839ce045827b1addb7418c20668f4ff33a927361915fe45b",
+      "imports": [
+        "next/navigation"
+      ],
+      "isTest": false,
+      "layer": "packages",
+      "loc": 7,
+      "module": "web:pkg-navigation",
+      "path": "apps/web/src/packages/navigation/not-found.ts"
     },
     {
       "exports": [
@@ -17500,11 +17679,11 @@
           "name": "PRIVACY_SECTION_KEYS"
         }
       ],
-      "hash": "ab11f7b0e5f4425278575344190c5d2cf355714aa9531bc07b1451a6f87d0142",
+      "hash": "20d97e0947c5fff99896f376cae80ba8d6665f45f77e8f820ff07d729bdd1b5b",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 53,
+      "loc": 56,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/content-pages.constants.ts"
     },
@@ -17537,6 +17716,68 @@
       "loc": 13,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/fallback-copy.constants.ts"
+    },
+    {
+      "exports": [],
+      "hash": "d6b113148def0d68ea8b4b2cbc75395286c9953b4584330ded0befd26c137cb4",
+      "imports": [
+        "./guides.constants",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 49,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/constants/guides.constants.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildGuidePath"
+        },
+        {
+          "kind": "const",
+          "name": "GUIDE_NAMESPACE_BY_SLUG"
+        },
+        {
+          "kind": "const",
+          "name": "GUIDE_SECTION_KEYS"
+        },
+        {
+          "kind": "const",
+          "name": "GUIDE_SLUGS"
+        },
+        {
+          "kind": "const",
+          "name": "GUIDE_TIP_NUMBERS"
+        },
+        {
+          "kind": "type",
+          "name": "GuideSlug"
+        },
+        {
+          "kind": "const",
+          "name": "HOME_FEATURED_GUIDE_SLUGS"
+        },
+        {
+          "kind": "const",
+          "name": "isGuideSlug"
+        },
+        {
+          "kind": "const",
+          "name": "RELATED_GUIDE_SLUGS"
+        }
+      ],
+      "hash": "5f12c5e4769dc2b1b87568046b5dae4697b94c8c40557f68fc7eb0366602d036",
+      "imports": [
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 78,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/constants/guides.constants.ts"
     },
     {
       "exports": [
@@ -17579,13 +17820,13 @@
           "name": "ROUTE_PATHS"
         }
       ],
-      "hash": "54908176d28e7089f3c8d83d3174d8dc195a5b5bd96bcffbaa6ebd2463f58721",
+      "hash": "cd8896e0c74dc13035e0bf38198e794c41c3c4c307667205695dda9c6e2a520d",
       "imports": [
         "next"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 21,
+      "loc": 22,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/route-paths.constants.ts"
     },
@@ -17641,11 +17882,11 @@
           "name": "TEST_IDS"
         }
       ],
-      "hash": "6301dba460047784f32ec3d5a35fa569c8286da4ff66298699e24c0282241e50",
+      "hash": "895def3f55b6270a2275b6afefaedff29d0d4aaef178d90452d67b156eca78d5",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 61,
+      "loc": 62,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/test-ids.constants.ts"
     },
@@ -17844,6 +18085,43 @@
     },
     {
       "exports": [],
+      "hash": "e7446489e6fb7223add659bb7e99907c40768712ad26c40075e4718f39627712",
+      "imports": [
+        "./content-page-metadata.helper",
+        "@/packages/i18n",
+        "@/shared/constants/route-paths.constants",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 60,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/content-page-metadata.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "buildContentPageMetadata"
+        }
+      ],
+      "hash": "2a1bba0ceb3735e0a7794f9490596e4ecb1864bb4ff753d2847fd22e88625506",
+      "imports": [
+        "./page-title.helper",
+        "./server-locale-route.helper",
+        "./social-metadata.helper",
+        "@/packages/i18n",
+        "@/shared/constants/seo.constants",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 55,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/content-page-metadata.helper.ts"
+    },
+    {
+      "exports": [],
       "hash": "643c48771bba6d930ddbc08d60ce544304304947ca8816a490fc286c3cd07d80",
       "imports": [
         "./donate-link.helper",
@@ -17880,7 +18158,7 @@
     },
     {
       "exports": [],
-      "hash": "5c35c74acfe42fa887095b1663d7fd70d94a7b5d363924868145c28d9b8369b3",
+      "hash": "d89c51640fc9840cd861f81a965e6ef64b0069f33e13634b3bdc217203ee9b12",
       "imports": [
         "../constants/route-paths.constants",
         "./locale-route.helper",
@@ -17888,7 +18166,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 69,
+      "loc": 72,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts"
     },
@@ -17923,15 +18201,16 @@
           "name": "replaceLocalizedPathLocale"
         }
       ],
-      "hash": "c32399a7c5b5c3518434c0db52626a15e108a634bea513d34e2bda2db8b0ab4e",
+      "hash": "c1f41cf02c7dade7caedbfbb7063da01a4322a8485c078179c2c5dfb662b5d9d",
       "imports": [
+        "../constants/guides.constants",
         "../constants/route-paths.constants",
         "@/packages/i18n",
         "next"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 93,
+      "loc": 96,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },
@@ -18109,14 +18388,14 @@
     },
     {
       "exports": [],
-      "hash": "c6e7cc3440b516336343f9350bdda19013d4bf937ace5762dfcff1b8fb7ddeef",
+      "hash": "705bd2710fbb2d93737dc75a79f37d6843f21d7487b18d96d13c84534f7d1b0b",
       "imports": [
         "./site-nav.helper",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 68,
+      "loc": 71,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/site-nav.helper.test.ts"
     },
@@ -18131,30 +18410,31 @@
           "name": "buildFooterNavLinks"
         }
       ],
-      "hash": "ff06bf7ea72e38305c13f91bd650279c811f0dc8fa16c5fda140dafd4b31f141",
+      "hash": "422b4a76b7c175af17e239df6e7e98c24c1a4a6727c59d37d9d2687b2b25271f",
       "imports": [
         "@/shared/components/types/shared-component.types",
         "@/shared/constants/route-paths.constants"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 45,
+      "loc": 47,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/site-nav.helper.ts"
     },
     {
       "exports": [],
-      "hash": "7c92b99b1f7e1c30b264fc78b0a5fe61b273b2e7cdf6c3a5d3ca1ca6e848cb53",
+      "hash": "83d69fcaee2683d33d41c64d5105072e2b0b8501722c6c4e7f4aaba87ee777c2",
       "imports": [
         "./locale-route.helper",
         "./sitemap.helper",
         "@/packages/i18n",
+        "@/shared/constants/guides.constants",
         "@/shared/constants/route-paths.constants",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 68,
+      "loc": 77,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts"
     },
@@ -18165,17 +18445,18 @@
           "name": "buildSitemapEntries"
         }
       ],
-      "hash": "03230c3ece7ae76ffab42028d21290d8c35671950876bcb7c14de9ded31eae08",
+      "hash": "e9d3d6e76e19580986695f962376d6305d316397f2180bec3fb6bca0d006f531",
       "imports": [
         "./locale-route.helper",
         "@/packages/i18n",
+        "@/shared/constants/guides.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/constants/seo.constants",
         "next"
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 44,
+      "loc": 69,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
     },
@@ -18228,19 +18509,23 @@
     },
     {
       "exports": [],
-      "hash": "2fd6747ef277acf40360b965c96d8c0691a8baa22b3d9b8e36fd19bfa5e63f14",
+      "hash": "76b0a3a156445eec45234b95a87765c0e25a7ad58d2ad2c4c5328cd03ceec156",
       "imports": [
         "./structured-data.helper",
         "vitest"
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 61,
+      "loc": 89,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/structured-data.helper.test.ts"
     },
     {
       "exports": [
+        {
+          "kind": "const",
+          "name": "buildBreadcrumbListJsonLd"
+        },
         {
           "kind": "const",
           "name": "buildFaqPageJsonLd"
@@ -18254,11 +18539,11 @@
           "name": "serializeJsonLd"
         }
       ],
-      "hash": "009b9b2c8d279e5020fbc9b1ffc4d7793d46b57028b3a20fc21bf3568ceaa317",
+      "hash": "d60ffa147f464a8b039ea1f985f4e6fe04fe81c441346fce7f503ab1fea3d7dd",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 53,
+      "loc": 74,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/structured-data.helper.ts"
     },

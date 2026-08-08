@@ -1,5 +1,5 @@
 {
-  "count": 2775,
+  "count": 2777,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -3824,6 +3824,12 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/shared/constants/guides.constants.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/constants/guides.constants.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/shared/errors/app-error.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/errors/app-error.ts",
@@ -3845,6 +3851,12 @@
       "from": "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/ad-eligibility.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/content-page-metadata.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/content-page-metadata.helper.ts",
       "type": "covers"
     },
     {

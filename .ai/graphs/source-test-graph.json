@@ -1000,6 +1000,9 @@
   "apps/web/src/shared/components/layout/footer-nav-link.component.tsx": [
     "apps/web/src/shared/components/layout/app-footer.component.test.tsx"
   ],
+  "apps/web/src/shared/constants/guides.constants.ts": [
+    "apps/web/src/shared/constants/guides.constants.test.ts"
+  ],
   "apps/web/src/shared/constants/route-paths.constants.ts": [
     "apps/web/src/shared/helpers/locale-route.helper.test.ts"
   ],
@@ -1030,6 +1033,9 @@
   ],
   "apps/web/src/shared/helpers/ad-eligibility.helper.ts": [
     "apps/web/src/shared/helpers/ad-eligibility.helper.test.ts"
+  ],
+  "apps/web/src/shared/helpers/content-page-metadata.helper.ts": [
+    "apps/web/src/shared/helpers/content-page-metadata.helper.test.ts"
   ],
   "apps/web/src/shared/helpers/donate-link.helper.ts": [
     "apps/web/src/shared/helpers/donate-link.helper.test.ts"
