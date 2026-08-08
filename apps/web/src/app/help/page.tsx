@@ -19,7 +19,11 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('help');
 
-  return buildContentPageMetadata({ path: ROUTE_PATHS.help, title: t('title'), description: t('a1') });
+  return buildContentPageMetadata({
+    path: ROUTE_PATHS.help,
+    title: t('title'),
+    description: t('a1'),
+  });
 }
 
 const HelpPage = async (): Promise<ReactElement> => {

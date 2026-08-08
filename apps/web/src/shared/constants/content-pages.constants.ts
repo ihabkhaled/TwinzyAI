@@ -50,6 +50,4 @@ export const PRIVACY_SECTION_KEYS = [
 ] as const;
 
 /** FAQ entries map to `q<n>` / `a<n>` keys in the `faq` namespace. */
-export const FAQ_QUESTION_NUMBERS = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-] as const;
+export const FAQ_QUESTION_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] as const;
