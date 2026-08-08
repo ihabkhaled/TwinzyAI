@@ -9688,7 +9688,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "f326f6efce5f09218a0681886454d39505ca2cac5e188c087eecc431c15c7883",
+      "hash": "0d4aa1538c4838fa942bc082e05b6e0b7384cbc6e41dbea0807b652a2ac9fac6",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9703,7 +9703,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 65,
+      "loc": 69,
       "module": "web:app",
       "path": "apps/web/src/app/help/page.tsx"
     },
@@ -17679,11 +17679,11 @@
           "name": "PRIVACY_SECTION_KEYS"
         }
       ],
-      "hash": "20d97e0947c5fff99896f376cae80ba8d6665f45f77e8f820ff07d729bdd1b5b",
+      "hash": "b3b66fcea4d963347593cfc75615e25ad0b09c4fc802a3ab8bb63bc19b7639cf",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 56,
+      "loc": 54,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/content-pages.constants.ts"
     },
