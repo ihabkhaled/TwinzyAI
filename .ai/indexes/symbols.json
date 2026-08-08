@@ -193,6 +193,9 @@
   "AllowedImageMimeType": [
     "packages/shared/src/constants/upload.constants.ts"
   ],
+  "alt": [
+    "apps/web/src/app/opengraph-image.tsx"
+  ],
   "ANALYSIS_CANCELLED_MESSAGE": [
     "apps/api/src/modules/game/model/game.messages.ts"
   ],
@@ -515,6 +518,9 @@
   "buildContentSecurityPolicy": [
     "apps/web/src/shared/security/content-security-policy.ts"
   ],
+  "buildCurrentLocaleAlternates": [
+    "apps/web/src/shared/helpers/server-locale-route.helper.ts"
+  ],
   "buildDuplicateStreamMessage": [
     "apps/api/src/modules/game/lib/game-stream.ts"
   ],
@@ -612,6 +618,9 @@
   ],
   "buildSitemapIndexXml": [
     "apps/web/src/shared/helpers/seo-xml.helper.ts"
+  ],
+  "buildSocialMetadata": [
+    "apps/web/src/shared/helpers/social-metadata.helper.ts"
   ],
   "buildStreamCorsHeaders": [
     "apps/api/src/modules/game/lib/stream-cors.ts"
@@ -1205,6 +1214,9 @@
   ],
   "contentTitleClass": [
     "apps/web/src/app/content.variants.ts"
+  ],
+  "contentType": [
+    "apps/web/src/app/opengraph-image.tsx"
   ],
   "copyTextToClipboard": [
     "apps/web/src/packages/browser/browser-environment.ts",
@@ -1909,6 +1921,9 @@
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
   "headerIconLinkClass": [
+    "apps/web/src/shared/components/layout/app-header.variants.ts"
+  ],
+  "headerLocaleControlClass": [
     "apps/web/src/shared/components/layout/app-header.variants.ts"
   ],
   "headerLocaleSelectClass": [
@@ -2801,6 +2816,21 @@
   "NotFoundError": [
     "apps/api/src/core/errors/index.ts",
     "apps/api/src/core/errors/not-found.error.ts"
+  ],
+  "OG_IMAGE_CONTENT_TYPE": [
+    "apps/web/src/shared/constants/og-image.constants.ts"
+  ],
+  "OG_IMAGE_COPY": [
+    "apps/web/src/shared/constants/og-image.constants.ts"
+  ],
+  "OG_IMAGE_LOGO": [
+    "apps/web/src/shared/constants/og-image.constants.ts"
+  ],
+  "OG_IMAGE_SIZE": [
+    "apps/web/src/shared/constants/og-image.constants.ts"
+  ],
+  "OG_IMAGE_STYLES": [
+    "apps/web/src/shared/constants/og-image.constants.ts"
   ],
   "OG_LOCALE_BY_LANGUAGE": [
     "apps/web/src/shared/constants/seo.constants.ts"
@@ -4188,6 +4218,9 @@
   "SitemapDocumentOptions": [
     "apps/web/src/shared/components/types/seo.types.ts"
   ],
+  "size": [
+    "apps/web/src/app/opengraph-image.tsx"
+  ],
   "Skeleton": [
     "apps/web/src/packages/ui-primitives/index.ts",
     "apps/web/src/packages/ui-primitives/skeleton.tsx"
@@ -4221,6 +4254,9 @@
   ],
   "SmtpMailAdapter": [
     "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts"
+  ],
+  "SocialMetadataInput": [
+    "apps/web/src/shared/helpers/social-metadata.types.ts"
   ],
   "SparklesIcon": [
     "apps/web/src/packages/icons/index.ts"

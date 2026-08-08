@@ -315,7 +315,7 @@
         "structure/repository-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 32,
+      "fileCount": 33,
       "lane": "standard",
       "layers": [
         "app"
@@ -368,7 +368,7 @@
     },
     {
       "docs": [],
-      "fileCount": 4,
+      "fileCount": 5,
       "lane": null,
       "layers": [
         "packages"
@@ -651,7 +651,7 @@
         "structure/layer-map.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 79,
+      "fileCount": 85,
       "lane": "standard",
       "layers": [
         "shared"
@@ -678,7 +678,7 @@
         "structure/modules/web-ui-preferences.md",
         "docs/frontend-architecture.md"
       ],
-      "fileCount": 20,
+      "fileCount": 21,
       "lane": "standard",
       "layers": [
         "containers",

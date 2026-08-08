@@ -55,7 +55,15 @@ describe('useLocaleSwitcher', () => {
     expect(result.current.activeLocale).toBe('en');
   });
 
-  it('writes the locale cookie for the picked locale and refreshes the server tree', () => {
+  it('falls back to English when the runtime locale is unsupported', () => {
+    vi.mocked(i18nPackage.useAppLocale).mockReturnValue('unknown');
+
+    const { result } = renderHook(() => useLocaleSwitcher());
+
+    expect(result.current.activeLocale).toBe('en');
+  });
+
+  it('writes the locale cookie and exposes a busy state until full navigation', () => {
     const { result } = renderHook(() => useLocaleSwitcher());
 
     act(() => {
@@ -67,7 +75,9 @@ describe('useLocaleSwitcher', () => {
       'fr',
       expect.objectContaining({ maxAgeSeconds: i18nPackage.LOCALE_COOKIE_MAX_AGE_SECONDS }),
     );
-    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(result.current.isSwitchingLocale).toBe(true);
+    expect(reloadAt).toHaveBeenCalledWith('/fr');
+    expect(refresh).not.toHaveBeenCalled();
     expect(replace).not.toHaveBeenCalled();
   });
 
@@ -87,8 +97,28 @@ describe('useLocaleSwitcher', () => {
     });
 
     expect(reloadAt).toHaveBeenCalledWith('/fr/about');
+    expect(result.current.isSwitchingLocale).toBe(true);
     expect(replace).not.toHaveBeenCalled();
     expect(refresh).not.toHaveBeenCalled();
+  });
+
+  it('refreshes a non-editorial route so in-memory game state survives', () => {
+    vi.mocked(navigationPackage.useAppNavigation).mockReturnValue({
+      pathname: '/game',
+      push: vi.fn(),
+      replace,
+      reloadAt,
+      back: vi.fn(),
+      refresh,
+    });
+    const { result } = renderHook(() => useLocaleSwitcher());
+
+    act(() => {
+      result.current.onSelectLocale(selectEvent('ar'));
+    });
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(reloadAt).not.toHaveBeenCalled();
   });
 
   it('ignores selecting the already-active locale', () => {
@@ -100,6 +130,7 @@ describe('useLocaleSwitcher', () => {
 
     expect(storagePackage.writeCookie).not.toHaveBeenCalled();
     expect(refresh).not.toHaveBeenCalled();
+    expect(result.current.isSwitchingLocale).toBe(false);
   });
 
   it('ignores an unsupported locale value (fails closed)', () => {
@@ -111,5 +142,6 @@ describe('useLocaleSwitcher', () => {
 
     expect(storagePackage.writeCookie).not.toHaveBeenCalled();
     expect(refresh).not.toHaveBeenCalled();
+    expect(result.current.isSwitchingLocale).toBe(false);
   });
 });

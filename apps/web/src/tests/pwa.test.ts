@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { isRecord } from '@twinzy/shared';
 
 const manifestPath = path.resolve(import.meta.dirname, '../../public/manifest.webmanifest');
+const adsTextPath = path.resolve(import.meta.dirname, '../../public/ads.txt');
 
 describe('PWA manifest', () => {
   const manifest: unknown = JSON.parse(readFileSync(manifestPath, 'utf8'));
@@ -27,5 +28,13 @@ describe('PWA manifest', () => {
     expect(text).toContain('no face recognition');
     expect(text).not.toContain('identity match');
     expect(text).not.toContain('lookalike');
+  });
+});
+
+describe('AdSense authorized sellers file', () => {
+  it('contains exactly the approved publisher record and a terminal newline', () => {
+    expect(readFileSync(adsTextPath, 'utf8')).toBe(
+      'google.com, pub-2415314275784926, DIRECT, f08c47fec0942fa0\n',
+    );
   });
 });

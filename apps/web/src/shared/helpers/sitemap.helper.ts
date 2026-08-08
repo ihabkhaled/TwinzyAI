@@ -7,7 +7,7 @@ import {
   SITEMAP_PRIORITY_BY_PATH,
 } from '@/shared/constants/seo.constants';
 
-import { buildLocalizedPath } from './locale-route.helper';
+import { buildLocalizedAlternates } from './locale-route.helper';
 
 /** Strip one trailing slash so URL joins never produce `//`. */
 const normalizeBaseUrl = (baseUrl: string): string =>
@@ -22,22 +22,22 @@ export const buildSitemapEntries = (baseUrl: string, lastModified: Date): Metada
   const base = normalizeBaseUrl(baseUrl);
 
   return LANGUAGE_CODES.flatMap((locale) =>
-    Object.values(ROUTE_PATHS).map((path) => ({
-      url: `${base}${buildLocalizedPath(locale, path)}`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: SITEMAP_PRIORITY_BY_PATH[path] ?? DEFAULT_SITEMAP_PRIORITY,
-      alternates: {
-        languages: {
-          ...Object.fromEntries(
-            LANGUAGE_CODES.map((language) => [
+    Object.values(ROUTE_PATHS).map((path) => {
+      const localized = buildLocalizedAlternates(locale, path);
+      return {
+        url: `${base}${localized.canonical}`,
+        lastModified,
+        changeFrequency: 'monthly' as const,
+        priority: SITEMAP_PRIORITY_BY_PATH[path] ?? DEFAULT_SITEMAP_PRIORITY,
+        alternates: {
+          languages: Object.fromEntries(
+            Object.entries(localized.languages).map(([language, route]) => [
               language,
-              `${base}${buildLocalizedPath(language, path)}`,
+              `${base}${route}`,
             ]),
           ),
-          'x-default': `${base}${buildLocalizedPath('en', path)}`,
         },
-      },
-    })),
+      };
+    }),
   );
 };

@@ -599,3 +599,11 @@
   `apps/api/node_modules`; copying only root `node_modules` into the runtime stage omits them.
 - **Fix:** copy both root and `apps/api/node_modules` from the production-dependency stage, then
   require an immutable-container health smoke after every dependency or Dockerfile change.
+
+### M6. Locale switching must preserve client-only game state
+
+- **Symptom:** switching language from a completed game navigates successfully but the result disappears.
+- **Cause:** a full document reload clears the intentionally non-persisted in-memory result.
+- **Fix (2026-08-08):** locale-prefixed editorial pages may use full navigation, but non-editorial game
+  routes must write the locale cookie and call `router.refresh()` inside a React transition. Keep an E2E
+  translation test that proves the result remains visible and no image is re-uploaded.

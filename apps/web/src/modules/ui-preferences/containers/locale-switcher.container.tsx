@@ -4,7 +4,11 @@
 import type { ReactElement } from 'react';
 
 import { LANGUAGE_CODES, LANGUAGE_ENDONYMS, useAppTranslation } from '@/packages/i18n';
-import { headerLocaleSelectClass } from '@/shared/components/layout/app-header.variants';
+import { Spinner } from '@/packages/ui-primitives';
+import {
+  headerLocaleControlClass,
+  headerLocaleSelectClass,
+} from '@/shared/components/layout/app-header.variants';
 import { TEST_IDS } from '@/shared/constants/test-ids.constants';
 
 import { useLocaleSwitcher } from '../hooks/useLocaleSwitcher.hook';
@@ -16,21 +20,27 @@ import { useLocaleSwitcher } from '../hooks/useLocaleSwitcher.hook';
  */
 export const LocaleSwitcher = (): ReactElement => {
   const t = useAppTranslation();
-  const { activeLocale, onSelectLocale } = useLocaleSwitcher();
+  const { activeLocale, isSwitchingLocale, onSelectLocale } = useLocaleSwitcher();
 
   return (
-    <select
-      value={activeLocale}
-      onChange={onSelectLocale}
-      aria-label={t('app.localeSwitch')}
-      className={headerLocaleSelectClass}
-      data-testid={TEST_IDS.localeSwitch}
-    >
-      {LANGUAGE_CODES.map((code) => (
-        <option key={code} value={code}>
-          {LANGUAGE_ENDONYMS[code]}
-        </option>
-      ))}
-    </select>
+    <span className={headerLocaleControlClass}>
+      <select
+        value={activeLocale}
+        onChange={onSelectLocale}
+        aria-label={t('app.localeSwitch')}
+        className={headerLocaleSelectClass}
+        data-testid={TEST_IDS.localeSwitch}
+        disabled={isSwitchingLocale}
+      >
+        {LANGUAGE_CODES.map((code) => (
+          <option key={code} value={code}>
+            {LANGUAGE_ENDONYMS[code]}
+          </option>
+        ))}
+      </select>
+      {isSwitchingLocale ? (
+        <Spinner label={t('app.localeSwitch')} testId={TEST_IDS.localeSwitchLoader} />
+      ) : null}
+    </span>
   );
 };

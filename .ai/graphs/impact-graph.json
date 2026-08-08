@@ -1170,6 +1170,7 @@
       "docs/exceptions/README.md",
       "docs/features/temporary-shareable-results/12-coverage-plan.md",
       "docs/features/temporary-shareable-results/15-dev-validation-report.md",
+      "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
       "knowledge/summaries/frontend.md",
       "knowledge/summaries/support.md",
       "memory/frontend/accessibility-decisions.md",
@@ -1323,8 +1324,12 @@
   "web:pkg-adsense": {
     "consumers": [],
     "dependsOn": [],
-    "docs": [],
-    "tests": []
+    "docs": [
+      "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md"
+    ],
+    "tests": [
+      "apps/web/src/packages/adsense/adsense-script.test.tsx"
+    ]
   },
   "web:pkg-axios": {
     "consumers": [],
@@ -1538,6 +1543,7 @@
       "docs/eslint/no-direct-browser-api-outside-packages.md",
       "docs/eslint/no-process-env-outside-config.md",
       "docs/features/_template-frontend/08-security-review.md",
+      "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
       "knowledge/summaries/frontend.md",
       "knowledge/summaries/security.md",
       "memory/frontend/known-pitfalls.md",
@@ -1579,6 +1585,7 @@
       "docs/features/_template-frontend/04-technical-refinement.md",
       "docs/features/_template-frontend/08-security-review.md",
       "docs/features/_template-frontend/09-performance-review.md",
+      "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
       "knowledge/summaries/frontend.md",
       "knowledge/summaries/security.md",
       "product/accessibility-expectations.md",
@@ -1647,8 +1654,10 @@
       "apps/web/src/shared/helpers/read-theme-cookie.helper.test.ts",
       "apps/web/src/shared/helpers/robots.helper.test.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "apps/web/src/shared/helpers/xml-response.helper.test.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
@@ -1686,6 +1695,7 @@
     "consumers": [],
     "dependsOn": [],
     "docs": [
+      "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
       "product/accessibility-expectations.md",
       "product/localization-expectations.md",
       "rules/frontend/06-zustand.md",
@@ -1693,6 +1703,7 @@
       "skills/create-zustand-store.md"
     ],
     "tests": [
+      "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",

@@ -31,10 +31,19 @@ export const buildLocalizedAlternates = (
 } => {
   const languages: Record<string, Route> = {};
   for (const language of LANGUAGE_CODES) {
-    languages[language] = buildLocalizedPath(language, path);
+    languages[language] =
+      language === DEFAULT_LOCALE && path === ROUTE_PATHS.home
+        ? ROUTE_PATHS.home
+        : buildLocalizedPath(language, path);
   }
-  languages['x-default'] = buildLocalizedPath(DEFAULT_LOCALE, path);
-  return { canonical: buildLocalizedPath(locale, path), languages };
+  languages['x-default'] = languages[DEFAULT_LOCALE] ?? ROUTE_PATHS.home;
+  return {
+    canonical:
+      locale === DEFAULT_LOCALE && path === ROUTE_PATHS.home
+        ? ROUTE_PATHS.home
+        : buildLocalizedPath(locale, path),
+    languages,
+  };
 };
 
 /** Split a public URL into a supported locale and its internal owner path. */
@@ -76,6 +85,7 @@ export const isPublicPagePath = (pathname: string): pathname is Route =>
 
 /** Machine endpoints keep their stable, explicitly localized route shape. */
 export const isMachinePath = (pathname: string): boolean =>
+  pathname === '/ads.txt' ||
   pathname === '/robots.txt' ||
   pathname === '/sitemap.xml' ||
   pathname.endsWith('/feed.xml') ||

@@ -1,5 +1,5 @@
 {
-  "count": 2755,
+  "count": 2775,
   "relationships": [
     {
       "from": "AGENTS.md",
@@ -3512,6 +3512,18 @@
       "type": "uses-contract"
     },
     {
+      "from": "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "label": "generated",
       "to": "apps/web/src/modules/ui-preferences/containers/theme-toggle.container.tsx",
@@ -3612,6 +3624,12 @@
       "label": "generated",
       "to": "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts#uiPreferencesSnapshotSchema",
       "type": "uses-contract"
+    },
+    {
+      "from": "apps/web/src/packages/adsense/adsense-script.test.tsx",
+      "label": "generated",
+      "to": "apps/web/src/packages/adsense/adsense-script.tsx",
+      "type": "covers"
     },
     {
       "from": "apps/web/src/packages/axios/http-error.test.ts",
@@ -3872,6 +3890,12 @@
       "type": "covers"
     },
     {
+      "from": "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/server-locale-route.helper.ts",
+      "type": "covers"
+    },
+    {
       "from": "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/site-nav.helper.ts",
@@ -3887,6 +3911,18 @@
       "from": "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "label": "generated",
       "to": "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/social-metadata.helper.ts",
+      "type": "covers"
+    },
+    {
+      "from": "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "label": "generated",
+      "to": "apps/web/src/shared/helpers/social-metadata.types.ts",
       "type": "covers"
     },
     {
@@ -7631,6 +7667,90 @@
       "from": "docs/sdlc/security-baseline.md",
       "label": "inferred",
       "to": "packages/shared/src/constants/safety.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/app/help/page.tsx",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/app/page.tsx",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/app/terms/page.tsx",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/packages/adsense/adsense-script.test.tsx",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/proxy.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/proxy.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/shared/components/layout/app-header.variants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/shared/constants/test-ids.constants.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/shared/helpers/locale-route.helper.test.ts",
+      "type": "describes"
+    },
+    {
+      "from": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "label": "inferred",
+      "to": "apps/web/src/shared/helpers/locale-route.helper.ts",
       "type": "describes"
     },
     {

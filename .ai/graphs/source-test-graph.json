@@ -872,10 +872,14 @@
     "apps/web/src/modules/game/test/use-result-translation.hook.test.tsx",
     "apps/web/src/modules/game/test/use-share-create.hook.test.tsx"
   ],
+  "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx": [
+    "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx"
+  ],
   "apps/web/src/modules/ui-preferences/containers/theme-toggle.container.tsx": [
     "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx"
   ],
   "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts": [
+    "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
     "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts"
   ],
   "apps/web/src/modules/ui-preferences/hooks/useThemeToggle.hook.ts": [
@@ -902,6 +906,9 @@
   ],
   "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts": [
     "apps/web/src/modules/ui-preferences/test/ui-preferences.selectors.test.ts"
+  ],
+  "apps/web/src/packages/adsense/adsense-script.tsx": [
+    "apps/web/src/packages/adsense/adsense-script.test.tsx"
   ],
   "apps/web/src/packages/axios/http-error.ts": [
     "apps/web/src/packages/axios/http-error.test.ts",
@@ -1043,11 +1050,20 @@
   "apps/web/src/shared/helpers/seo-xml.helper.ts": [
     "apps/web/src/shared/helpers/seo-xml.helper.test.ts"
   ],
+  "apps/web/src/shared/helpers/server-locale-route.helper.ts": [
+    "apps/web/src/shared/helpers/server-locale-route.helper.test.ts"
+  ],
   "apps/web/src/shared/helpers/site-nav.helper.ts": [
     "apps/web/src/shared/helpers/site-nav.helper.test.ts"
   ],
   "apps/web/src/shared/helpers/sitemap.helper.ts": [
     "apps/web/src/shared/helpers/sitemap.helper.test.ts"
+  ],
+  "apps/web/src/shared/helpers/social-metadata.helper.ts": [
+    "apps/web/src/shared/helpers/social-metadata.helper.test.ts"
+  ],
+  "apps/web/src/shared/helpers/social-metadata.types.ts": [
+    "apps/web/src/shared/helpers/social-metadata.helper.test.ts"
   ],
   "apps/web/src/shared/helpers/structured-data.helper.ts": [
     "apps/web/src/shared/helpers/structured-data.helper.test.ts"

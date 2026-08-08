@@ -269,7 +269,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "69da30fcd4be4e919987f156debc006e92d27221400378437b62a901ab9616de"
+    "inputsHash": "cb1958f0f1f32c60c2dda695882361eaf4f90a7467c3dc8891ed265301ec2971"
   },
   ".ai/manifests/configs.json": {
     "inputs": [
@@ -313,7 +313,7 @@
       "packages/shared/package.json",
       "packages/tsconfig/package.json"
     ],
-    "inputsHash": "69da30fcd4be4e919987f156debc006e92d27221400378437b62a901ab9616de"
+    "inputsHash": "cb1958f0f1f32c60c2dda695882361eaf4f90a7467c3dc8891ed265301ec2971"
   },
   ".ai/manifests/documents.json": {
     "inputs": [
@@ -486,6 +486,24 @@
       "docs/features/_template/27-postmortem.md",
       "docs/features/_template/27-retrospective.md",
       "docs/features/_template/README.md",
+      "docs/features/adsense-readiness-root-locale/00-intake.md",
+      "docs/features/adsense-readiness-root-locale/01-business-analysis.md",
+      "docs/features/adsense-readiness-root-locale/02-business-development.md",
+      "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
+      "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
+      "docs/features/adsense-readiness-root-locale/05-delivery-plan.md",
+      "docs/features/adsense-readiness-root-locale/06-technical-refinement.md",
+      "docs/features/adsense-readiness-root-locale/07-technical-roadmap.md",
+      "docs/features/adsense-readiness-root-locale/08-architecture-review.md",
+      "docs/features/adsense-readiness-root-locale/09-impact-analysis.md",
+      "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
+      "docs/features/adsense-readiness-root-locale/11-test-strategy.md",
+      "docs/features/adsense-readiness-root-locale/12-coverage-plan.md",
+      "docs/features/adsense-readiness-root-locale/13-implementation-readiness.md",
+      "docs/features/adsense-readiness-root-locale/14-implementation.md",
+      "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
+      "docs/features/adsense-readiness-root-locale/19-security-review.md",
+      "docs/features/adsense-readiness-root-locale/22-go-no-go.md",
       "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
       "docs/features/advanced-extraction-provider-shape-recovery/01-business-analysis.md",
       "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
@@ -747,7 +765,9 @@
       "docs/security-threat-model.md",
       "docs/simple-readable-code.md",
       "docs/superpowers/plans/2026-07-27-advanced-public-figure-consensus-matching.md",
+      "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
       "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md",
+      "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
       "docs/testing-strategy.md",
       "domain/calculations.md",
       "domain/consent-model.md",
@@ -869,6 +889,7 @@
       "release-notes/2026-07-12-ai-knowledge-os.md",
       "release-notes/2026-07-12-parallel-ai-pipeline.md",
       "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md",
+      "release-notes/adsense-readiness-root-locale.md",
       "release-notes/README.md",
       "release-notes/release-notes-template.md",
       "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -1100,7 +1121,7 @@
       "testing/testing-strategy.md",
       "testing/unit-testing-standard.md"
     ],
-    "inputsHash": "744f043f2410d55cc89f3cc57083e8729cd3c9acdd9f46d56332e0b332a0df68"
+    "inputsHash": "c125daa5afa9fa9e0da35b413f103b8b4163bc64e4badbbdd9c7c210587925de"
   },
   ".ai/manifests/errors.json": {
     "inputs": [
@@ -1552,6 +1573,7 @@
       "apps/web/src/app/layout.variants.ts",
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
+      "apps/web/src/app/opengraph-image.tsx",
       "apps/web/src/app/page.tsx",
       "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
@@ -1733,6 +1755,7 @@
       "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts",
+      "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
@@ -1742,6 +1765,7 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.test.tsx",
       "apps/web/src/packages/adsense/adsense-script.tsx",
       "apps/web/src/packages/adsense/adsense.constants.ts",
       "apps/web/src/packages/adsense/adsense.types.ts",
@@ -1881,6 +1905,7 @@
       "apps/web/src/shared/constants/content-pages.constants.ts",
       "apps/web/src/shared/constants/donate.constants.ts",
       "apps/web/src/shared/constants/fallback-copy.constants.ts",
+      "apps/web/src/shared/constants/og-image.constants.ts",
       "apps/web/src/shared/constants/route-paths.constants.ts",
       "apps/web/src/shared/constants/seo.constants.ts",
       "apps/web/src/shared/constants/storage-keys.constants.ts",
@@ -1908,10 +1933,15 @@
       "apps/web/src/shared/helpers/robots.helper.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.types.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/helpers/xml-response.helper.test.ts",
@@ -1980,7 +2010,7 @@
       "packages/shared/src/utils/trait-count.util.ts",
       "structure/ownership-map.yaml"
     ],
-    "inputsHash": "48ae83215211d45f62e4a51230eb5c8dc7014fba04c95c951c6fd1e418436ea3"
+    "inputsHash": "a914258e5d334ac982d2f4f3af40b4944a3823a05aa8824876a99101c2d6583e"
   },
   ".ai/manifests/prompts.json": {
     "inputs": [
@@ -2406,6 +2436,7 @@
       "apps/web/src/app/layout.variants.ts",
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
+      "apps/web/src/app/opengraph-image.tsx",
       "apps/web/src/app/page.tsx",
       "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
@@ -2587,6 +2618,7 @@
       "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts",
+      "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
@@ -2596,6 +2628,7 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.test.tsx",
       "apps/web/src/packages/adsense/adsense-script.tsx",
       "apps/web/src/packages/adsense/adsense.constants.ts",
       "apps/web/src/packages/adsense/adsense.types.ts",
@@ -2735,6 +2768,7 @@
       "apps/web/src/shared/constants/content-pages.constants.ts",
       "apps/web/src/shared/constants/donate.constants.ts",
       "apps/web/src/shared/constants/fallback-copy.constants.ts",
+      "apps/web/src/shared/constants/og-image.constants.ts",
       "apps/web/src/shared/constants/route-paths.constants.ts",
       "apps/web/src/shared/constants/seo.constants.ts",
       "apps/web/src/shared/constants/storage-keys.constants.ts",
@@ -2762,10 +2796,15 @@
       "apps/web/src/shared/helpers/robots.helper.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.types.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/helpers/xml-response.helper.test.ts",
@@ -2833,7 +2872,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "6e42c40208491ccf8f94fb84646a0c79b8e411156f85a57d913e2f397ad18e3a"
+    "inputsHash": "d927f8db36329da319e1e99eea1693bb5c0c1062455ad52a79babec135ec92ff"
   },
   ".ai/manifests/routes.json": {
     "inputs": [
@@ -2859,7 +2898,7 @@
       "apps/web/src/app/sitemaps/[locale]/route.ts",
       "apps/web/src/app/terms/page.tsx"
     ],
-    "inputsHash": "7ec1aa3a2db1310b1d617f27f41277669c086ffd75024d364a4b2bfb1c07273f"
+    "inputsHash": "6f63999cde0c5aee0ae668080b5b165dbdcd9f242418603a1a2eec431b5aeca0"
   },
   ".ai/manifests/symbols.json": {
     "inputs": [
@@ -3272,6 +3311,7 @@
       "apps/web/src/app/layout.variants.ts",
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
+      "apps/web/src/app/opengraph-image.tsx",
       "apps/web/src/app/page.tsx",
       "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
@@ -3453,6 +3493,7 @@
       "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts",
+      "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
@@ -3462,6 +3503,7 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.test.tsx",
       "apps/web/src/packages/adsense/adsense-script.tsx",
       "apps/web/src/packages/adsense/adsense.constants.ts",
       "apps/web/src/packages/adsense/adsense.types.ts",
@@ -3601,6 +3643,7 @@
       "apps/web/src/shared/constants/content-pages.constants.ts",
       "apps/web/src/shared/constants/donate.constants.ts",
       "apps/web/src/shared/constants/fallback-copy.constants.ts",
+      "apps/web/src/shared/constants/og-image.constants.ts",
       "apps/web/src/shared/constants/route-paths.constants.ts",
       "apps/web/src/shared/constants/seo.constants.ts",
       "apps/web/src/shared/constants/storage-keys.constants.ts",
@@ -3628,10 +3671,15 @@
       "apps/web/src/shared/helpers/robots.helper.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.types.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/helpers/xml-response.helper.test.ts",
@@ -3699,7 +3747,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "6e42c40208491ccf8f94fb84646a0c79b8e411156f85a57d913e2f397ad18e3a"
+    "inputsHash": "d927f8db36329da319e1e99eea1693bb5c0c1062455ad52a79babec135ec92ff"
   },
   ".ai/manifests/tests.json": {
     "inputs": [
@@ -4112,6 +4160,7 @@
       "apps/web/src/app/layout.variants.ts",
       "apps/web/src/app/loading.tsx",
       "apps/web/src/app/not-found.tsx",
+      "apps/web/src/app/opengraph-image.tsx",
       "apps/web/src/app/page.tsx",
       "apps/web/src/app/paymob/return/page.tsx",
       "apps/web/src/app/privacy/page.tsx",
@@ -4293,6 +4342,7 @@
       "apps/web/src/modules/ui-preferences/schemas/ui-preferences.schema.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.selectors.ts",
       "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts",
+      "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",
@@ -4302,6 +4352,7 @@
       "apps/web/src/modules/ui-preferences/test/use-theme-toggle.hook.test.ts",
       "apps/web/src/modules/ui-preferences/test/use-ui-preferences-effects.hook.test.ts",
       "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+      "apps/web/src/packages/adsense/adsense-script.test.tsx",
       "apps/web/src/packages/adsense/adsense-script.tsx",
       "apps/web/src/packages/adsense/adsense.constants.ts",
       "apps/web/src/packages/adsense/adsense.types.ts",
@@ -4441,6 +4492,7 @@
       "apps/web/src/shared/constants/content-pages.constants.ts",
       "apps/web/src/shared/constants/donate.constants.ts",
       "apps/web/src/shared/constants/fallback-copy.constants.ts",
+      "apps/web/src/shared/constants/og-image.constants.ts",
       "apps/web/src/shared/constants/route-paths.constants.ts",
       "apps/web/src/shared/constants/seo.constants.ts",
       "apps/web/src/shared/constants/storage-keys.constants.ts",
@@ -4468,10 +4520,15 @@
       "apps/web/src/shared/helpers/robots.helper.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.ts",
+      "apps/web/src/shared/helpers/social-metadata.types.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.ts",
       "apps/web/src/shared/helpers/xml-response.helper.test.ts",
@@ -4539,7 +4596,7 @@
       "packages/shared/src/utils/index.ts",
       "packages/shared/src/utils/trait-count.util.ts"
     ],
-    "inputsHash": "6e42c40208491ccf8f94fb84646a0c79b8e411156f85a57d913e2f397ad18e3a"
+    "inputsHash": "d927f8db36329da319e1e99eea1693bb5c0c1062455ad52a79babec135ec92ff"
   },
   ".ai/packs/accessibility-change.md": {
     "inputs": [

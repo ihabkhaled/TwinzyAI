@@ -15,7 +15,7 @@ Task type: `incident` · Lane: **critical** · Load after `.ai/BOOTSTRAP.md`.
 ## Must-read docs
 
 - runbooks/README.md — Index of all operational runbooks for the Twinzy stack — development, deployment, incidents, providers, performance, and safety procedures. (~1173 tokens)
-- memory/known-pitfalls.md — > The running log of recurring mistakes and their fixes. **Read before writing code.** These (~8218 tokens)
+- memory/known-pitfalls.md — > The running log of recurring mistakes and their fixes. **Read before writing code.** These (~8357 tokens)
 
 ## Rules
 

@@ -2,7 +2,7 @@
 // client-boundary-reason: switches the active locale by writing the locale cookie, syncing writing direction in the client store, and refreshing the server tree.
 
 import type { ChangeEvent } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 
 import {
   DEFAULT_LOCALE,
@@ -13,7 +13,11 @@ import {
 } from '@/packages/i18n';
 import { useAppNavigation } from '@/packages/navigation';
 import { writeCookie } from '@/packages/storage';
-import { replaceLocalizedPathLocale } from '@/shared/helpers/locale-route.helper';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
+import {
+  buildLocalizedPath,
+  replaceLocalizedPathLocale,
+} from '@/shared/helpers/locale-route.helper';
 
 import type { LocaleSwitcherController } from '../types/ui-preferences.types';
 
@@ -28,6 +32,8 @@ export const useLocaleSwitcher = (): LocaleSwitcherController => {
   const rawLocale = useAppLocale();
   const activeLocale = isSupportedLanguageCode(rawLocale) ? rawLocale : DEFAULT_LOCALE;
   const navigation = useAppNavigation();
+  const [isReloading, setIsReloading] = useState(false);
+  const [isRefreshing, startRefreshTransition] = useTransition();
 
   const onSelectLocale = useCallback(
     (event: ChangeEvent<HTMLSelectElement>): void => {
@@ -38,15 +44,25 @@ export const useLocaleSwitcher = (): LocaleSwitcherController => {
       writeCookie(LOCALE_COOKIE_NAME, selected, {
         maxAgeSeconds: LOCALE_COOKIE_MAX_AGE_SECONDS,
       });
-      const localizedPath = replaceLocalizedPathLocale(navigation.pathname, selected);
+      const localizedPath =
+        navigation.pathname === ROUTE_PATHS.home
+          ? buildLocalizedPath(selected, ROUTE_PATHS.home)
+          : replaceLocalizedPathLocale(navigation.pathname, selected);
       if (localizedPath === undefined) {
-        navigation.refresh();
-      } else {
-        navigation.reloadAt(localizedPath);
+        startRefreshTransition(() => {
+          navigation.refresh();
+        });
+        return;
       }
+      setIsReloading(true);
+      navigation.reloadAt(localizedPath);
     },
     [activeLocale, navigation],
   );
 
-  return { activeLocale, onSelectLocale };
+  return {
+    activeLocale,
+    isSwitchingLocale: isReloading || isRefreshing,
+    onSelectLocale,
+  };
 };

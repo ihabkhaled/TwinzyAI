@@ -5,7 +5,7 @@ import type {
 } from '@/shared/components/types/seo.types';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 
-import { buildLocalizedPath } from './locale-route.helper';
+import { buildLocalizedAlternates, buildLocalizedPath } from './locale-route.helper';
 import { escapeXml } from './xml-response.helper';
 
 const normalizeBaseUrl = (baseUrl: string): string =>
@@ -40,15 +40,16 @@ export const buildLocaleSitemapXml = ({
   const base = normalizeBaseUrl(baseUrl);
   const urls = Object.values(ROUTE_PATHS)
     .map((path) => {
-      const location = `${base}${buildLocalizedPath(locale, path)}`;
-      const alternates = LANGUAGE_CODES.map(
-        (language) =>
-          `<xhtml:link rel="alternate" hreflang="${language}" href="${escapeXml(
-            `${base}${buildLocalizedPath(language, path)}`,
-          )}"/>`,
-      ).join('');
+      const localized = buildLocalizedAlternates(locale, path);
+      const location = `${base}${localized.canonical}`;
+      const alternates = LANGUAGE_CODES.map((language) => {
+        const route = localized.languages[language] ?? localized.canonical;
+        return `<xhtml:link rel="alternate" hreflang="${language}" href="${escapeXml(
+          `${base}${route}`,
+        )}"/>`;
+      }).join('');
       return `<url><loc>${escapeXml(location)}</loc><lastmod>${lastModified.toISOString()}</lastmod>${alternates}<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(
-        `${base}${buildLocalizedPath('en', path)}`,
+        `${base}${localized.languages['x-default'] ?? localized.canonical}`,
       )}"/></url>`;
     })
     .join('');

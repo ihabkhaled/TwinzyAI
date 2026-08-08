@@ -8,6 +8,7 @@ import { ContentLinks } from '@/shared/components/content/content-links.componen
 import { HOW_IT_WORKS_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
+import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import {
@@ -20,15 +21,16 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('howItWorks');
+  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.howItWorks);
 
   return {
     title: buildPageTitle(t('metaTitle')),
     description: t('metaDescription'),
-    alternates: { canonical: ROUTE_PATHS.howItWorks },
+    alternates,
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),
-      url: ROUTE_PATHS.howItWorks,
+      url: alternates.canonical,
     },
   };
 }

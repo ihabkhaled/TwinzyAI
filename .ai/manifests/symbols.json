@@ -1,5 +1,5 @@
 {
-  "count": 1786,
+  "count": 1798,
   "symbols": [
     {
       "kind": "const",
@@ -490,6 +490,13 @@
       "module": "shared",
       "name": "AllowedImageMimeType",
       "path": "packages/shared/src/constants/upload.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "alt",
+      "path": "apps/web/src/app/opengraph-image.tsx"
     },
     {
       "kind": "const",
@@ -1305,6 +1312,13 @@
     },
     {
       "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildCurrentLocaleAlternates",
+      "path": "apps/web/src/shared/helpers/server-locale-route.helper.ts"
+    },
+    {
+      "kind": "const",
       "layer": "lib",
       "module": "api:game",
       "name": "buildDuplicateStreamMessage",
@@ -1540,6 +1554,13 @@
       "module": "web:shared",
       "name": "buildSitemapIndexXml",
       "path": "apps/web/src/shared/helpers/seo-xml.helper.ts"
+    },
+    {
+      "kind": "function",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "buildSocialMetadata",
+      "path": "apps/web/src/shared/helpers/social-metadata.helper.ts"
     },
     {
       "kind": "const",
@@ -2975,6 +2996,13 @@
       "module": "web:app",
       "name": "contentTitleClass",
       "path": "apps/web/src/app/content.variants.ts"
+    },
+    {
+      "kind": "re-export",
+      "layer": "app",
+      "module": "web:app",
+      "name": "contentType",
+      "path": "apps/web/src/app/opengraph-image.tsx"
     },
     {
       "kind": "function",
@@ -4815,6 +4843,13 @@
       "layer": "shared",
       "module": "web:shared",
       "name": "headerIconLinkClass",
+      "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "headerLocaleControlClass",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
     {
@@ -7021,6 +7056,41 @@
       "module": "api:core",
       "name": "NotFoundError",
       "path": "apps/api/src/core/errors/not-found.error.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "OG_IMAGE_CONTENT_TYPE",
+      "path": "apps/web/src/shared/constants/og-image.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "OG_IMAGE_COPY",
+      "path": "apps/web/src/shared/constants/og-image.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "OG_IMAGE_LOGO",
+      "path": "apps/web/src/shared/constants/og-image.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "OG_IMAGE_SIZE",
+      "path": "apps/web/src/shared/constants/og-image.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "OG_IMAGE_STYLES",
+      "path": "apps/web/src/shared/constants/og-image.constants.ts"
     },
     {
       "kind": "const",
@@ -10425,6 +10495,13 @@
       "path": "apps/web/src/shared/components/types/seo.types.ts"
     },
     {
+      "kind": "const",
+      "layer": "app",
+      "module": "web:app",
+      "name": "size",
+      "path": "apps/web/src/app/opengraph-image.tsx"
+    },
+    {
       "kind": "re-export",
       "layer": "packages",
       "module": "web:pkg-ui-primitives",
@@ -10507,6 +10584,13 @@
       "module": "api:contact",
       "name": "SmtpMailAdapter",
       "path": "apps/api/src/modules/contact/adapters/smtp-mail.adapter.ts"
+    },
+    {
+      "kind": "interface",
+      "layer": "shared",
+      "module": "web:shared",
+      "name": "SocialMetadataInput",
+      "path": "apps/web/src/shared/helpers/social-metadata.types.ts"
     },
     {
       "kind": "re-export",

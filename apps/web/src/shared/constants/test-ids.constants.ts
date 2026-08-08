@@ -55,5 +55,6 @@ export const TEST_IDS = {
   skipLink: 'skip-link',
   homeLink: 'home-link',
   localeSwitch: 'locale-switch',
+  localeSwitchLoader: 'locale-switch-loader',
   themeToggle: 'theme-toggle',
 } as const;

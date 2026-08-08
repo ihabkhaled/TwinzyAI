@@ -1,5 +1,5 @@
 {
-  "count": 835,
+  "count": 844,
   "files": [
     {
       "exports": [
@@ -9194,7 +9194,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "b6243aab38b05d0c6f8713949c359ba8a6c01214ece0e30faa80c8dfd5b6cceb",
+      "hash": "2f34e4354a31f087f1a8f57ea08f217cd97ae80b90331e9e6540e4de0a22ec6e",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9204,13 +9204,14 @@
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 59,
+      "loc": 65,
       "module": "web:app",
       "path": "apps/web/src/app/about/page.tsx"
     },
@@ -9221,7 +9222,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "ad546cbab482ab5d1749b5080555930c1a5d3fa3f7043bb7f2c513d0dcee22f7",
+      "hash": "eaa7c67074b596fe67e7971b57a1111f6b8d3990182a80bc0927edb4a06513ac",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9231,13 +9232,14 @@
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 63,
+      "loc": 65,
       "module": "web:app",
       "path": "apps/web/src/app/ai-safety/page.tsx"
     },
@@ -9373,7 +9375,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "5fabc262a645904e00047e2d8a1ba7fcf89fcd9e8139957546aee045a6b14bb8",
+      "hash": "55818d41744c654a2aa6b9605c1a12f46fbb8e0d7dd793ecdcfc8150e01d0f0c",
       "imports": [
         "../content.variants",
         "./contact-form.container",
@@ -9381,12 +9383,13 @@
         "@/packages/ui-primitives",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 48,
+      "loc": 50,
       "module": "web:app",
       "path": "apps/web/src/app/contact/page.tsx"
     },
@@ -9503,7 +9506,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "e6e635f125d31aa4605a1c260f79343377e1bf35f8515728e9a74e2f79bf48de",
+      "hash": "2b326a8ce5cf848295995cce58a2fec37a2cd94d0681bbd87649c652aaae522d",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9514,6 +9517,7 @@
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "@/shared/helpers/site-nav.helper",
         "@/shared/helpers/structured-data.helper",
         "next",
@@ -9521,7 +9525,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 66,
+      "loc": 72,
       "module": "web:app",
       "path": "apps/web/src/app/faq/page.tsx"
     },
@@ -9568,19 +9572,23 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "0c1cfa640a015e94dde22d4f0ef7ec5ea0bdc2d8314a3f3e8cb0bf71c9587cc9",
+      "hash": "1bcb079be807329ea4a0841fe10f4bf198162d5bb0a9e99a9a0289d26531cf48",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
         "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 61,
+      "loc": 72,
       "module": "web:app",
       "path": "apps/web/src/app/help/page.tsx"
     },
@@ -9591,7 +9599,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "60f0a3be7665c0c355e074a233eec232a281b5ef5ddb4881bf4c8630f30a6b35",
+      "hash": "b1a3af2a7940d65225f619105f112dbd5b9426c7ea5ae7bb4d87884393ada6d1",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
@@ -9601,13 +9609,14 @@
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 63,
+      "loc": 65,
       "module": "web:app",
       "path": "apps/web/src/app/how-it-works/page.tsx"
     },
@@ -9622,7 +9631,7 @@
           "name": "viewport"
         }
       ],
-      "hash": "61875fc83d3bb928f97d6a0fc637b0955197c0ef419b74d2ee04445e51c560a0",
+      "hash": "452d8aae59216754ff60542c36f764c1d8936547d7d0fbe797bac9ecc44ad984",
       "imports": [
         "./layout.variants",
         "./providers",
@@ -9639,6 +9648,7 @@
         "@/shared/components/layout/footer-nav-link.component",
         "@/shared/components/layout/home-link.component",
         "@/shared/components/primitives/skip-link.component",
+        "@/shared/constants/route-paths.constants",
         "@/shared/constants/seo.constants",
         "@/shared/constants/theme-palette.constants",
         "@/shared/fonts/app-fonts",
@@ -9647,6 +9657,7 @@
         "@/shared/helpers/page-title.helper",
         "@/shared/helpers/read-theme-cookie.helper",
         "@/shared/helpers/site-nav.helper",
+        "@/shared/helpers/social-metadata.helper",
         "@/shared/security/security.constants",
         "next",
         "next/headers",
@@ -9654,7 +9665,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 135,
+      "loc": 136,
       "module": "web:app",
       "path": "apps/web/src/app/layout.tsx"
     },
@@ -9716,11 +9727,38 @@
     {
       "exports": [
         {
+          "kind": "const",
+          "name": "alt"
+        },
+        {
+          "kind": "re-export",
+          "name": "contentType"
+        },
+        {
+          "kind": "const",
+          "name": "size"
+        }
+      ],
+      "hash": "05d1962ac76b855d14d58cf6ffc8d04a5038718eaea098b64f01a986065d3a40",
+      "imports": [
+        "@/shared/constants/og-image.constants",
+        "@twinzy/shared",
+        "next/og"
+      ],
+      "isTest": false,
+      "layer": "app",
+      "loc": 64,
+      "module": "web:app",
+      "path": "apps/web/src/app/opengraph-image.tsx"
+    },
+    {
+      "exports": [
+        {
           "kind": "function",
           "name": "generateMetadata"
         }
       ],
-      "hash": "e6bac50b31ef7962f88ff95b2b9d2eca9d768305925c558f9a3e6edc1f8eca0f",
+      "hash": "844cb567ca5f8b1e666e4ad3911f496b0354d49dfdbffc6c2bde9b3aaf6ffe80",
       "imports": [
         "./content.variants",
         "@/modules/game",
@@ -9733,6 +9771,7 @@
         "@/shared/constants/content-pages.constants",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "@/shared/helpers/site-nav.helper",
         "@/shared/helpers/structured-data.helper",
         "next",
@@ -9740,7 +9779,7 @@
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 79,
+      "loc": 85,
       "module": "web:app",
       "path": "apps/web/src/app/page.tsx"
     },
@@ -9771,7 +9810,7 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "347a60866f0f313fc0ff0422e9c578f734c4ab1c04b21b602ad8b0a884bd4080",
+      "hash": "41cd32b1a57433a9c2d7964d93863173a805522a194fcd97425a71403162cc92",
       "imports": [
         "../content.variants",
         "@/modules/game",
@@ -9783,13 +9822,14 @@
         "@/shared/constants/route-paths.constants",
         "@/shared/constants/test-ids.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
         "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 75,
+      "loc": 77,
       "module": "web:app",
       "path": "apps/web/src/app/privacy/page.tsx"
     },
@@ -9891,19 +9931,23 @@
           "name": "generateMetadata"
         }
       ],
-      "hash": "8cdf6dde3b5b2481e05b5dc368194f8a366efcd62266a349c82793bb11db0e60",
+      "hash": "6cebaf3300139e547d4f733450365d1f4b30b97c2daa9f3f55ebf26aae378483",
       "imports": [
         "../content.variants",
         "@/packages/i18n",
         "@/packages/ui-primitives",
+        "@/shared/components/content/content-link-item.component",
+        "@/shared/components/content/content-links.component",
         "@/shared/constants/route-paths.constants",
         "@/shared/helpers/page-title.helper",
+        "@/shared/helpers/server-locale-route.helper",
+        "@/shared/helpers/site-nav.helper",
         "next",
         "react"
       ],
       "isTest": false,
       "layer": "app",
-      "loc": 41,
+      "loc": 52,
       "module": "web:app",
       "path": "apps/web/src/app/terms/page.tsx"
     },
@@ -13805,17 +13849,18 @@
           "name": "LocaleSwitcher"
         }
       ],
-      "hash": "b54bc5b4bc678d49bbc9b4f359cc1d413e4d9e795dbbdfb49eee2693ec824bab",
+      "hash": "544042899c9e0317ac78f09351939c307dc6c420da363540241ce37bf73b9bef",
       "imports": [
         "../hooks/useLocaleSwitcher.hook",
         "@/packages/i18n",
+        "@/packages/ui-primitives",
         "@/shared/components/layout/app-header.variants",
         "@/shared/constants/test-ids.constants",
         "react"
       ],
       "isTest": false,
       "layer": "containers",
-      "loc": 37,
+      "loc": 47,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx"
     },
@@ -13865,18 +13910,19 @@
           "name": "useLocaleSwitcher"
         }
       ],
-      "hash": "3fb642a3029782ff0c342e4ef668d9a173b5500fe5b8ac78887468dfa9c645f8",
+      "hash": "df331aa480debab4c68fb0aba149f179c44fd4cdcc6a685d53ee00426afff9ce",
       "imports": [
         "../types/ui-preferences.types",
         "@/packages/i18n",
         "@/packages/navigation",
         "@/packages/storage",
+        "@/shared/constants/route-paths.constants",
         "@/shared/helpers/locale-route.helper",
         "react"
       ],
       "isTest": false,
       "layer": "hooks",
-      "loc": 53,
+      "loc": 69,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts"
     },
@@ -14048,6 +14094,23 @@
     },
     {
       "exports": [],
+      "hash": "9df4769361a41898c41a3136e51a1ab3b9007307f94b8757f78ea97f6d9af92e",
+      "imports": [
+        "../containers/locale-switcher.container",
+        "../hooks/useLocaleSwitcher.hook",
+        "@/packages/i18n",
+        "@/shared/constants/test-ids.constants",
+        "@testing-library/react",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "test",
+      "loc": 46,
+      "module": "web:ui-preferences",
+      "path": "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx"
+    },
+    {
+      "exports": [],
       "hash": "a95fdf72bb8be3ec3ad669f3f2bedac78b9ae0e512a1c8c13182158b4d5baaa9",
       "imports": [
         "../containers/theme-toggle.container",
@@ -14124,7 +14187,7 @@
     },
     {
       "exports": [],
-      "hash": "18a239269d80b02cb4a163c95c0400bef9760823b2d41a46d87eab1a8a1c5416",
+      "hash": "65fa50d8cc53571324938ffb93486021beefac97f9d3c42b1ffcf94aab564e74",
       "imports": [
         "../hooks/useLocaleSwitcher.hook",
         "@/packages/i18n",
@@ -14136,7 +14199,7 @@
       ],
       "isTest": true,
       "layer": "test",
-      "loc": 116,
+      "loc": 148,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts"
     },
@@ -14195,7 +14258,7 @@
           "name": "UiPreferencesState"
         }
       ],
-      "hash": "680f0d3aec8563c5b5be1618a39b3ea6903dc8845407994a4fee65d394559465",
+      "hash": "58351676b84286f87887fa281cd9ff64f82bab1418b57a4723728bdcc7f8c4d1",
       "imports": [
         "../schemas/ui-preferences.schema",
         "@/packages/i18n",
@@ -14204,9 +14267,23 @@
       ],
       "isTest": false,
       "layer": "types",
-      "loc": 48,
+      "loc": 49,
       "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts"
+    },
+    {
+      "exports": [],
+      "hash": "b5bce7dee82986e051ba1a54b0ddcc484f2fc819343c8ce8a3216a9b3bea2a37",
+      "imports": [
+        "./adsense-script",
+        "react",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "packages",
+      "loc": 25,
+      "module": "web:pkg-adsense",
+      "path": "apps/web/src/packages/adsense/adsense-script.test.tsx"
     },
     {
       "exports": [
@@ -16768,7 +16845,7 @@
     },
     {
       "exports": [],
-      "hash": "5a48fe7ce158f08bf902a75182c50c4078f5600848a49e164d032dbee12e0318",
+      "hash": "bc10a5074d279dda2eea18a79a41c0d904110c0b4ac47a0f96de3f75fdfceb5a",
       "imports": [
         "./proxy",
         "next/server",
@@ -16776,7 +16853,7 @@
       ],
       "isTest": true,
       "layer": "root",
-      "loc": 19,
+      "loc": 37,
       "module": "web:root",
       "path": "apps/web/src/proxy.test.ts"
     },
@@ -16791,10 +16868,11 @@
           "name": "proxy"
         }
       ],
-      "hash": "b3c21d1c7c1e762e436227bb0cb51f40f8e2586f2267c8a93a5e489ea5972428",
+      "hash": "d6f48d0adad35f284a6bbd0cb2297a10ff3a180290c2e1b6debe86ce0be1b075",
       "imports": [
         "@/packages/env",
         "@/packages/i18n",
+        "@/shared/constants/route-paths.constants",
         "@/shared/helpers/locale-route.helper",
         "@/shared/security/content-security-policy",
         "@/shared/security/security.constants",
@@ -16802,7 +16880,7 @@
       ],
       "isTest": false,
       "layer": "root",
-      "loc": 79,
+      "loc": 89,
       "module": "web:root",
       "path": "apps/web/src/proxy.ts"
     },
@@ -17105,14 +17183,18 @@
         },
         {
           "kind": "const",
+          "name": "headerLocaleControlClass"
+        },
+        {
+          "kind": "const",
           "name": "headerLocaleSelectClass"
         }
       ],
-      "hash": "a622dfafdf88a168ae36dacc88203917c1a9383aa85ee500fecacff7a2c76e35",
+      "hash": "bd8b0ed3cc9bc1ad4c56a9d2a8953ee88ff3636da0a097ca195b2f2d19f4843a",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 43,
+      "loc": 45,
       "module": "web:shared",
       "path": "apps/web/src/shared/components/layout/app-header.variants.ts"
     },
@@ -17460,6 +17542,40 @@
       "exports": [
         {
           "kind": "const",
+          "name": "OG_IMAGE_CONTENT_TYPE"
+        },
+        {
+          "kind": "const",
+          "name": "OG_IMAGE_COPY"
+        },
+        {
+          "kind": "const",
+          "name": "OG_IMAGE_LOGO"
+        },
+        {
+          "kind": "const",
+          "name": "OG_IMAGE_SIZE"
+        },
+        {
+          "kind": "const",
+          "name": "OG_IMAGE_STYLES"
+        }
+      ],
+      "hash": "11bb5ec7da0a3529ed3764410d35674805b12b0e5e1e5d5e549731491a5793d1",
+      "imports": [
+        "./theme-palette.constants",
+        "react"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 82,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/constants/og-image.constants.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
           "name": "ROUTE_PATHS"
         }
       ],
@@ -17525,11 +17641,11 @@
           "name": "TEST_IDS"
         }
       ],
-      "hash": "81c3adc0741562789cc5bc49659598d55f62d060960c17316ee6a7cc7b7020d8",
+      "hash": "6301dba460047784f32ec3d5a35fa569c8286da4ff66298699e24c0282241e50",
       "imports": [],
       "isTest": false,
       "layer": "shared",
-      "loc": 60,
+      "loc": 61,
       "module": "web:shared",
       "path": "apps/web/src/shared/constants/test-ids.constants.ts"
     },
@@ -17764,7 +17880,7 @@
     },
     {
       "exports": [],
-      "hash": "5cbd6559dc4309fa054b4926aa78dd05c72a56ecc7c4924a74bd14d083e58ab5",
+      "hash": "5c35c74acfe42fa887095b1663d7fd70d94a7b5d363924868145c28d9b8369b3",
       "imports": [
         "../constants/route-paths.constants",
         "./locale-route.helper",
@@ -17772,7 +17888,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 58,
+      "loc": 69,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.test.ts"
     },
@@ -17807,7 +17923,7 @@
           "name": "replaceLocalizedPathLocale"
         }
       ],
-      "hash": "abb08dadbaf146b6bf03ac7fc2f60a852b7385a6e1c974382dd21d9d3e862099",
+      "hash": "c32399a7c5b5c3518434c0db52626a15e108a634bea513d34e2bda2db8b0ab4e",
       "imports": [
         "../constants/route-paths.constants",
         "@/packages/i18n",
@@ -17815,7 +17931,7 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 83,
+      "loc": 93,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/locale-route.helper.ts"
     },
@@ -17916,7 +18032,7 @@
     },
     {
       "exports": [],
-      "hash": "481ced1ce8c60cbe290e9f4c82d7a5714209943258e23b7c2cb0e896137f77cb",
+      "hash": "5a235ae6e7e44986fa3e2c0c9867565116a7882ae4a6223a3940736052a85483",
       "imports": [
         "./seo-xml.helper",
         "@/shared/components/types/seo.types",
@@ -17924,7 +18040,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 55,
+      "loc": 67,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/seo-xml.helper.test.ts"
     },
@@ -17943,7 +18059,7 @@
           "name": "buildSitemapIndexXml"
         }
       ],
-      "hash": "8f0819901afb90da8330ae76408d2aed41df309dca50603f3054700f210777af",
+      "hash": "a53c777c8c0699a9bb0473a4bc04459d3bb394e480d575a5076776ca3bd5e025",
       "imports": [
         "./locale-route.helper",
         "./xml-response.helper",
@@ -17953,9 +18069,43 @@
       ],
       "isTest": false,
       "layer": "shared",
-      "loc": 86,
+      "loc": 87,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/seo-xml.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "06afb32bf808b29d0e6c3e3ae105582640982c97befb77357b179ed3189ca774",
+      "imports": [
+        "./server-locale-route.helper",
+        "@/packages/i18n",
+        "@/shared/constants/route-paths.constants",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 36,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/server-locale-route.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "const",
+          "name": "buildCurrentLocaleAlternates"
+        }
+      ],
+      "hash": "4a615c863eecb8a26e4c85bfbfe10f4ba42f6e312a5d2f8d3c1cb98b737fd96b",
+      "imports": [
+        "./locale-route.helper",
+        "@/packages/i18n",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 16,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/server-locale-route.helper.ts"
     },
     {
       "exports": [],
@@ -17994,7 +18144,7 @@
     },
     {
       "exports": [],
-      "hash": "d3e2a419e4d6f92a8f46d50829ccb954ffc8270bad2274e6021e89c536e01c1f",
+      "hash": "7c92b99b1f7e1c30b264fc78b0a5fe61b273b2e7cdf6c3a5d3ca1ca6e848cb53",
       "imports": [
         "./locale-route.helper",
         "./sitemap.helper",
@@ -18004,7 +18154,7 @@
       ],
       "isTest": true,
       "layer": "shared",
-      "loc": 64,
+      "loc": 68,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.test.ts"
     },
@@ -18015,7 +18165,7 @@
           "name": "buildSitemapEntries"
         }
       ],
-      "hash": "4a1214ba7c6447a19b2db6036e5f62727997f5584d12b72f86359fa23b9c5062",
+      "hash": "03230c3ece7ae76ffab42028d21290d8c35671950876bcb7c14de9ded31eae08",
       "imports": [
         "./locale-route.helper",
         "@/packages/i18n",
@@ -18028,6 +18178,53 @@
       "loc": 44,
       "module": "web:shared",
       "path": "apps/web/src/shared/helpers/sitemap.helper.ts"
+    },
+    {
+      "exports": [],
+      "hash": "3f1646e0f2b4761a1b5a5bfcc8b8f9228d90453412506de17a67d822a65a11cc",
+      "imports": [
+        "./social-metadata.helper",
+        "./social-metadata.types",
+        "vitest"
+      ],
+      "isTest": true,
+      "layer": "shared",
+      "loc": 44,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/social-metadata.helper.test.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "function",
+          "name": "buildSocialMetadata"
+        }
+      ],
+      "hash": "23b369ce619cbff66132c9ddc58eb95b64ff04d06e12b28bd87ffb13d632d009",
+      "imports": [
+        "./social-metadata.types",
+        "next"
+      ],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 37,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/social-metadata.helper.ts"
+    },
+    {
+      "exports": [
+        {
+          "kind": "interface",
+          "name": "SocialMetadataInput"
+        }
+      ],
+      "hash": "0da488e7848ddb0d2be16bbce2ea95db2b0597ef485a2d6647b26eae7a310a2f",
+      "imports": [],
+      "isTest": false,
+      "layer": "shared",
+      "loc": 9,
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/social-metadata.types.ts"
     },
     {
       "exports": [],
@@ -18373,7 +18570,7 @@
     },
     {
       "exports": [],
-      "hash": "c100a8d89a7a455893c47769f35d259cdb519f5459c93524cd96adf42b9069f2",
+      "hash": "28d66442c00871c884b111454224f051ec7d7b75373a5ba6df7e04fc7a9fc444",
       "imports": [
         "@twinzy/shared",
         "node:fs",
@@ -18382,7 +18579,7 @@
       ],
       "isTest": true,
       "layer": "tests",
-      "loc": 32,
+      "loc": 41,
       "module": "web:tests",
       "path": "apps/web/src/tests/pwa.test.ts"
     },

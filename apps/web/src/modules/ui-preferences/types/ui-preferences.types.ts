@@ -43,5 +43,6 @@ export interface ThemeToggleController {
  */
 export interface LocaleSwitcherController {
   activeLocale: LanguageCodeValue;
+  isSwitchingLocale: boolean;
   onSelectLocale: (event: ChangeEvent<HTMLSelectElement>) => void;
 }

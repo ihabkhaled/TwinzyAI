@@ -22,6 +22,15 @@ describe('locale route helpers', () => {
     expect(alternates.languages['x-default']).toBe('/en/faq');
   });
 
+  it('uses the unprefixed root as the canonical English homepage alternate', () => {
+    const alternates = buildLocalizedAlternates('en', ROUTE_PATHS.home);
+
+    expect(alternates.canonical).toBe('/');
+    expect(alternates.languages['en']).toBe('/');
+    expect(alternates.languages['ar']).toBe('/ar');
+    expect(alternates.languages['x-default']).toBe('/');
+  });
+
   it('parses supported prefixes and rejects unknown ones', () => {
     expect(parseLocalizedPath('/ar/privacy')).toStrictEqual({
       locale: 'ar',
@@ -50,6 +59,8 @@ describe('locale route helpers', () => {
     expect(isPublicPagePath('/game')).toBe(false);
     expect(isPublicPagePath('/share/id')).toBe(false);
     expect(isMachinePath('/sitemap.xml')).toBe(true);
+    expect(isMachinePath('/ads.txt')).toBe(true);
+    expect(isMachinePath('/robots.txt')).toBe(true);
     expect(isMachinePath('/sitemaps/en.xml')).toBe(true);
     expect(isMachinePath('/en/feed.xml')).toBe(true);
     expect(isMachinePath('/about')).toBe(false);

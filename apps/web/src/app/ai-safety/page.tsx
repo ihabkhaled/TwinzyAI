@@ -8,6 +8,7 @@ import { ContentLinks } from '@/shared/components/content/content-links.componen
 import { AI_SAFETY_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
+import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 
 import {
@@ -20,15 +21,16 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('aiSafety');
+  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.aiSafety);
 
   return {
     title: buildPageTitle(t('metaTitle')),
     description: t('metaDescription'),
-    alternates: { canonical: ROUTE_PATHS.aiSafety },
+    alternates,
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),
-      url: ROUTE_PATHS.aiSafety,
+      url: alternates.canonical,
     },
   };
 }

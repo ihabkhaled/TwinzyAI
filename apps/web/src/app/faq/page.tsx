@@ -9,6 +9,7 @@ import { JsonLdScript } from '@/shared/components/seo/json-ld.container';
 import { FAQ_QUESTION_NUMBERS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
+import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 import { buildFaqPageJsonLd, serializeJsonLd } from '@/shared/helpers/structured-data.helper';
 
@@ -22,12 +23,17 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('faq');
+  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.faq);
 
   return {
     title: buildPageTitle(t('metaTitle')),
     description: t('metaDescription'),
-    alternates: { canonical: ROUTE_PATHS.faq },
-    openGraph: { title: t('metaTitle'), description: t('metaDescription'), url: ROUTE_PATHS.faq },
+    alternates,
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      url: alternates.canonical,
+    },
   };
 }
 

@@ -4,7 +4,9 @@
     "docs/features/advanced-public-figure-consensus-matching/00-intake.md",
     "docs/features/multi-provider-ai/02-provider-research.md",
     "docs/superpowers/plans/2026-07-27-advanced-public-figure-consensus-matching.md",
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
     "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
     "release-notes/2026-07-12-ai-knowledge-os.md",
     "release-notes/2026-07-12-parallel-ai-pipeline.md",
     "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md"
@@ -131,6 +133,29 @@
     "architecture/adrs/adr-template.md",
     "architecture/adrs/advanced-text-only-public-figure-matching.md",
     "architecture/adrs/README.md"
+  ],
+  "adsense": [
+    "docs/features/adsense-readiness-root-locale/00-intake.md",
+    "docs/features/adsense-readiness-root-locale/01-business-analysis.md",
+    "docs/features/adsense-readiness-root-locale/02-business-development.md",
+    "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
+    "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
+    "docs/features/adsense-readiness-root-locale/05-delivery-plan.md",
+    "docs/features/adsense-readiness-root-locale/06-technical-refinement.md",
+    "docs/features/adsense-readiness-root-locale/07-technical-roadmap.md",
+    "docs/features/adsense-readiness-root-locale/08-architecture-review.md",
+    "docs/features/adsense-readiness-root-locale/09-impact-analysis.md",
+    "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
+    "docs/features/adsense-readiness-root-locale/11-test-strategy.md",
+    "docs/features/adsense-readiness-root-locale/12-coverage-plan.md",
+    "docs/features/adsense-readiness-root-locale/13-implementation-readiness.md",
+    "docs/features/adsense-readiness-root-locale/14-implementation.md",
+    "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
+    "docs/features/adsense-readiness-root-locale/19-security-review.md",
+    "docs/features/adsense-readiness-root-locale/22-go-no-go.md",
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
+    "release-notes/adsense-readiness-root-locale.md"
   ],
   "agent entrypoint": [
     "knowledge/bootstrap.md"
@@ -514,6 +539,8 @@
     "docs/features/_template-frontend/01-business-analysis.md",
     "docs/features/_template/01-business-analysis.md",
     "docs/features/_template/02-business-development.md",
+    "docs/features/adsense-readiness-root-locale/01-business-analysis.md",
+    "docs/features/adsense-readiness-root-locale/02-business-development.md",
     "docs/features/advanced-extraction-provider-shape-recovery/01-business-analysis.md",
     "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
     "docs/features/advanced-global-traits-v2/01-business-analysis.md",
@@ -672,6 +699,7 @@
   ],
   "check": [
     "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
     "docs/features/advanced-extraction-provider-shape-recovery/10-engineering-standards-check.md",
     "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
     "docs/features/advanced-public-figure-consensus-matching/10-engineering-standards-check.md",
@@ -1033,33 +1061,6 @@
   "countdown": [
     "structure/flows/share-flow.md"
   ],
-  "coverage": [
-    "docs/ai/regression-evaluation.md",
-    "docs/features/_template/12-coverage-plan.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/12-coverage-plan.md",
-    "docs/features/advanced-global-traits-v2/12-coverage-plan.md",
-    "docs/features/advanced-public-figure-consensus-matching/12-coverage-plan.md",
-    "docs/features/ai-knowledge-os/11-test-strategy.md",
-    "docs/features/engineering-os-migration/12-coverage-plan.md",
-    "docs/features/multi-provider-ai/11-test-strategy.md",
-    "docs/features/multi-tab-stream-isolation/11-test-strategy.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/12-coverage-plan.md",
-    "docs/features/paid-analysis-transactional-delivery/12-coverage-plan.md",
-    "docs/features/parallel-ai-pipeline/12-coverage-plan.md",
-    "docs/features/simple-readable-code-operating-system-implementation/12-coverage-plan.md",
-    "docs/features/temporary-shareable-results/12-coverage-plan.md",
-    "docs/features/twinzy-hardening-v3/12-coverage-plan.md",
-    "knowledge/summaries/testing.md",
-    "quality/quality-metrics.md",
-    "quality/quality-model.md",
-    "quality/README.md",
-    "quality/test-review-standard.md",
-    "quality/waiver-register.md",
-    "rules/09-testing-coverage.md",
-    "rules/frontend/15-testing-and-coverage.md",
-    "testing/coverage-policy.md",
-    "testing/frontend/coverage-policy.md"
-  ],
   "cpu": [
     "runbooks/event-loop-lag.md"
   ],
@@ -1096,6 +1097,7 @@
   "cross": [
     "docs/eslint/no-cross-module-deep-imports.md",
     "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
     "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/advanced-public-figure-consensus-matching/04-cross-functional-refinement.md",
@@ -1256,6 +1258,7 @@
   "design": [
     "docs/eslint/no-inline-classname-outside-design-system.md",
     "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
     "memory/frontend/ui-design-system-decisions.md",
     "memory/ui-design-system-decisions.md"
   ],
@@ -1272,6 +1275,7 @@
     "docs/docker-local-dev.md",
     "docs/features/_template/15-dev-validation-report.md",
     "docs/features/_template/16-dev-bug-log.md",
+    "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
     "docs/features/advanced-extraction-provider-shape-recovery/15-dev-validation-report.md",
     "docs/features/advanced-extraction-provider-shape-recovery/16-dev-bug-log.md",
     "docs/features/advanced-global-traits-v2/15-dev-validation-report.md",
@@ -1307,6 +1311,8 @@
   "development": [
     "docs/docker-local-dev.md",
     "docs/features/_template/02-business-development.md",
+    "docs/features/adsense-readiness-root-locale/02-business-development.md",
+    "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
     "docs/features/advanced-extraction-provider-shape-recovery/02-business-development.md",
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/advanced-public-figure-consensus-matching/02-business-development.md",
@@ -1326,7 +1332,8 @@
     "runbooks/safe-diagnostics.md"
   ],
   "direct": [
-    "docs/eslint/no-direct-browser-api-outside-packages.md"
+    "docs/eslint/no-direct-browser-api-outside-packages.md",
+    "release-notes/adsense-readiness-root-locale.md"
   ],
   "discipline": [
     "rules/30-refactor-discipline.md",
@@ -1484,7 +1491,10 @@
     "agents/reliability-engineer.md"
   ],
   "english": [
-    "docs/ai/forbidden-wording.md"
+    "docs/ai/forbidden-wording.md",
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
+    "release-notes/adsense-readiness-root-locale.md"
   ],
   "enterprise": [
     "CLAUDE.md"
@@ -1904,6 +1914,7 @@
   ],
   "functional": [
     "docs/features/_template/04-cross-functional-refinement.md",
+    "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
     "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
     "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
     "docs/features/advanced-public-figure-consensus-matching/04-cross-functional-refinement.md",
@@ -2223,6 +2234,7 @@
   "impact": [
     "docs/features/_template/02-business-development.md",
     "docs/features/_template/09-impact-analysis.md",
+    "docs/features/adsense-readiness-root-locale/09-impact-analysis.md",
     "docs/features/advanced-extraction-provider-shape-recovery/09-impact-analysis.md",
     "docs/features/advanced-global-traits-v2/02-business-development.md",
     "docs/features/advanced-global-traits-v2/09-impact-analysis.md",
@@ -2306,6 +2318,7 @@
   "intake": [
     "docs/features/_template-frontend/00-intake.md",
     "docs/features/_template/00-intake.md",
+    "docs/features/adsense-readiness-root-locale/00-intake.md",
     "docs/features/advanced-extraction-provider-shape-recovery/00-intake.md",
     "docs/features/advanced-global-traits-v2/00-intake.md",
     "docs/features/advanced-public-figure-consensus-matching/00-intake.md",
@@ -2568,7 +2581,28 @@
     "runbooks/local-development.md"
   ],
   "locale": [
+    "docs/features/adsense-readiness-root-locale/00-intake.md",
+    "docs/features/adsense-readiness-root-locale/01-business-analysis.md",
+    "docs/features/adsense-readiness-root-locale/02-business-development.md",
+    "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
+    "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
+    "docs/features/adsense-readiness-root-locale/05-delivery-plan.md",
+    "docs/features/adsense-readiness-root-locale/06-technical-refinement.md",
+    "docs/features/adsense-readiness-root-locale/07-technical-roadmap.md",
+    "docs/features/adsense-readiness-root-locale/08-architecture-review.md",
+    "docs/features/adsense-readiness-root-locale/09-impact-analysis.md",
+    "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
+    "docs/features/adsense-readiness-root-locale/11-test-strategy.md",
+    "docs/features/adsense-readiness-root-locale/12-coverage-plan.md",
+    "docs/features/adsense-readiness-root-locale/13-implementation-readiness.md",
+    "docs/features/adsense-readiness-root-locale/14-implementation.md",
+    "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
+    "docs/features/adsense-readiness-root-locale/19-security-review.md",
+    "docs/features/adsense-readiness-root-locale/22-go-no-go.md",
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
     "product/localization-expectations.md",
+    "release-notes/adsense-readiness-root-locale.md",
     "structure/modules/web-ui-preferences.md",
     "support/localization-troubleshooting.md"
   ],
@@ -2973,6 +3007,7 @@
     "release-notes/2026-07-12-ai-knowledge-os.md",
     "release-notes/2026-07-12-parallel-ai-pipeline.md",
     "release-notes/2026-07-28-advanced-extraction-provider-shape-recovery.md",
+    "release-notes/adsense-readiness-root-locale.md",
     "release-notes/README.md",
     "release-notes/release-notes-template.md",
     "release-notes/simple-readable-code-operating-system-implementation.md",
@@ -3328,7 +3363,8 @@
     "rules/31-knowledge-management.md"
   ],
   "plans": [
-    "docs/superpowers/plans/2026-07-27-advanced-public-figure-consensus-matching.md"
+    "docs/superpowers/plans/2026-07-27-advanced-public-figure-consensus-matching.md",
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md"
   ],
   "play": [
     "product/user-journeys.md"
@@ -3457,6 +3493,7 @@
     "docs/agent-product-map.md",
     "docs/features/_template-frontend/02-product-requirements.md",
     "docs/features/_template/03-product-requirements.md",
+    "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
     "docs/features/advanced-extraction-provider-shape-recovery/03-product-requirements.md",
     "docs/features/advanced-global-traits-v2/03-product-requirements.md",
     "docs/features/advanced-public-figure-consensus-matching/03-product-requirements.md",
@@ -3626,33 +3663,6 @@
   "react": [
     "agents/react-performance-reviewer.md"
   ],
-  "readiness": [
-    "docs/agent-readiness.md",
-    "docs/features/_template-frontend/11-release-readiness.md",
-    "docs/features/_template/13-implementation-readiness.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/13-implementation-readiness.md",
-    "docs/features/advanced-global-traits-v2/13-implementation-readiness.md",
-    "docs/features/advanced-public-figure-consensus-matching/13-implementation-readiness.md",
-    "docs/features/ai-knowledge-os/13-implementation-readiness.md",
-    "docs/features/engineering-os-migration/13-implementation-readiness.md",
-    "docs/features/multi-provider-ai/13-implementation-readiness.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/13-implementation-readiness.md",
-    "docs/features/paid-analysis-transactional-delivery/13-implementation-readiness.md",
-    "docs/features/parallel-ai-pipeline/13-implementation-readiness.md",
-    "docs/features/simple-readable-code-operating-system-implementation/13-implementation-readiness.md",
-    "docs/features/simple-readable-code-operating-system-implementation/24-risk-compliance-ops.md",
-    "docs/features/temporary-shareable-results/13-implementation-readiness.md",
-    "docs/features/twinzy-hardening-v3/13-implementation-readiness.md",
-    "operations/health-checks.md",
-    "operations/readiness-checklist.md",
-    "operations/README.md",
-    "quality/definition-of-ready.md",
-    "quality/release-readiness.md",
-    "support/README.md",
-    "support/release-support-checklist.md",
-    "support/simple-readable-code-operating-system-implementation.md",
-    "support/support-readiness-template.md"
-  ],
   "ready": [
     "context/reference-patterns.md",
     "quality/definition-of-ready.md"
@@ -3707,32 +3717,6 @@
     "context/frontend/reference-patterns.md",
     "context/reference-patterns.md",
     "docs/sdlc/public-reference-points.md"
-  ],
-  "refinement": [
-    "docs/features/_template-frontend/04-technical-refinement.md",
-    "docs/features/_template/04-cross-functional-refinement.md",
-    "docs/features/_template/06-technical-refinement.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/04-cross-functional-refinement.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/06-technical-refinement.md",
-    "docs/features/advanced-global-traits-v2/04-cross-functional-refinement.md",
-    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
-    "docs/features/advanced-public-figure-consensus-matching/04-cross-functional-refinement.md",
-    "docs/features/advanced-public-figure-consensus-matching/06-technical-refinement.md",
-    "docs/features/engineering-os-migration/04-cross-functional-refinement.md",
-    "docs/features/engineering-os-migration/06-technical-refinement.md",
-    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/04-cross-functional-refinement.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
-    "docs/features/paid-analysis-transactional-delivery/04-cross-functional-refinement.md",
-    "docs/features/paid-analysis-transactional-delivery/06-technical-refinement.md",
-    "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
-    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
-    "docs/features/simple-readable-code-operating-system-implementation/04-cross-functional-refinement.md",
-    "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
-    "docs/features/temporary-shareable-results/04-cross-functional-refinement.md",
-    "docs/features/temporary-shareable-results/06-technical-refinement.md",
-    "docs/features/twinzy-hardening-v3/04-cross-functional-refinement.md",
-    "docs/features/twinzy-hardening-v3/06-technical-refinement.md"
   ],
   "refund": [
     "contracts/api/payments.md",
@@ -3814,6 +3798,7 @@
   "requirements": [
     "docs/features/_template-frontend/02-product-requirements.md",
     "docs/features/_template/03-product-requirements.md",
+    "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
     "docs/features/advanced-extraction-provider-shape-recovery/03-product-requirements.md",
     "docs/features/advanced-global-traits-v2/03-product-requirements.md",
     "docs/features/advanced-public-figure-consensus-matching/03-product-requirements.md",
@@ -3963,6 +3948,7 @@
   ],
   "roadmap": [
     "docs/features/_template/07-technical-roadmap.md",
+    "docs/features/adsense-readiness-root-locale/07-technical-roadmap.md",
     "docs/features/advanced-extraction-provider-shape-recovery/07-technical-roadmap.md",
     "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
     "docs/features/advanced-public-figure-consensus-matching/07-technical-roadmap.md",
@@ -3999,6 +3985,29 @@
   "rollout": [
     "docs/ai/model-change-checklist.md",
     "docs/ai/provider-change-checklist.md"
+  ],
+  "root": [
+    "docs/features/adsense-readiness-root-locale/00-intake.md",
+    "docs/features/adsense-readiness-root-locale/01-business-analysis.md",
+    "docs/features/adsense-readiness-root-locale/02-business-development.md",
+    "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
+    "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
+    "docs/features/adsense-readiness-root-locale/05-delivery-plan.md",
+    "docs/features/adsense-readiness-root-locale/06-technical-refinement.md",
+    "docs/features/adsense-readiness-root-locale/07-technical-roadmap.md",
+    "docs/features/adsense-readiness-root-locale/08-architecture-review.md",
+    "docs/features/adsense-readiness-root-locale/09-impact-analysis.md",
+    "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
+    "docs/features/adsense-readiness-root-locale/11-test-strategy.md",
+    "docs/features/adsense-readiness-root-locale/12-coverage-plan.md",
+    "docs/features/adsense-readiness-root-locale/13-implementation-readiness.md",
+    "docs/features/adsense-readiness-root-locale/14-implementation.md",
+    "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
+    "docs/features/adsense-readiness-root-locale/19-security-review.md",
+    "docs/features/adsense-readiness-root-locale/22-go-no-go.md",
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
+    "release-notes/adsense-readiness-root-locale.md"
   ],
   "root-cause": [
     "incidents/templates/postmortem.md"
@@ -4230,33 +4239,6 @@
   ],
   "secure": [
     "skills/secure-file-upload.md"
-  ],
-  "security": [
-    "agents/backend-security-reviewer.md",
-    "agents/frontend-security-reviewer.md",
-    "docs/ai/prompt-injection-threat-model.md",
-    "docs/features/_template-frontend/08-security-review.md",
-    "docs/features/_template/19-security-review.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/19-security-review.md",
-    "docs/features/parallel-ai-pipeline/19-security-review.md",
-    "docs/features/simple-readable-code-operating-system-implementation/19-security-review.md",
-    "docs/features/twinzy-hardening-v3/19-security-review.md",
-    "docs/file-upload-security-review-report.md",
-    "docs/file-upload-security.md",
-    "docs/sdlc/security-baseline.md",
-    "docs/security-review-report.md",
-    "docs/security-threat-model.md",
-    "knowledge/summaries/security.md",
-    "memory/frontend/security-decisions.md",
-    "memory/security-decisions.md",
-    "rules/06-security.md",
-    "rules/15-file-upload-security.md",
-    "rules/frontend/11-security.md",
-    "runbooks/security-incident.md",
-    "SECURITY.md",
-    "skills/security-review-frontend.md",
-    "skills/security-review.md",
-    "test-cases/security/security-test-case-template.md"
   ],
   "security-scan": [
     "quality/quality-model.md"
@@ -4497,7 +4479,8 @@
     "support/release-support-checklist.md"
   ],
   "specs": [
-    "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md"
+    "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md"
   ],
   "spend": [
     "docs/ai/cost-policy.md",
@@ -4568,6 +4551,7 @@
   ],
   "standards": [
     "docs/features/_template/10-engineering-standards-check.md",
+    "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
     "docs/features/advanced-extraction-provider-shape-recovery/10-engineering-standards-check.md",
     "docs/features/advanced-global-traits-v2/10-engineering-standards-check.md",
     "docs/features/advanced-public-figure-consensus-matching/10-engineering-standards-check.md",
@@ -4616,6 +4600,7 @@
   "strategy": [
     "docs/features/_template-frontend/06-test-strategy.md",
     "docs/features/_template/11-test-strategy.md",
+    "docs/features/adsense-readiness-root-locale/11-test-strategy.md",
     "docs/features/advanced-extraction-provider-shape-recovery/11-test-strategy.md",
     "docs/features/advanced-global-traits-v2/11-test-strategy.md",
     "docs/features/advanced-public-figure-consensus-matching/11-test-strategy.md",
@@ -4685,7 +4670,9 @@
   ],
   "superpowers": [
     "docs/superpowers/plans/2026-07-27-advanced-public-figure-consensus-matching.md",
-    "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md"
+    "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+    "docs/superpowers/specs/2026-07-27-advanced-public-figure-consensus-matching-design.md",
+    "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md"
   ],
   "superseded": [
     "rules/34-memory-lifecycle.md"
@@ -4772,32 +4759,6 @@
   ],
   "tdd": [
     "knowledge/summaries/testing.md"
-  ],
-  "technical": [
-    "docs/features/_template-frontend/04-technical-refinement.md",
-    "docs/features/_template/06-technical-refinement.md",
-    "docs/features/_template/07-technical-roadmap.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/06-technical-refinement.md",
-    "docs/features/advanced-extraction-provider-shape-recovery/07-technical-roadmap.md",
-    "docs/features/advanced-global-traits-v2/06-technical-refinement.md",
-    "docs/features/advanced-global-traits-v2/07-technical-roadmap.md",
-    "docs/features/advanced-public-figure-consensus-matching/06-technical-refinement.md",
-    "docs/features/advanced-public-figure-consensus-matching/07-technical-roadmap.md",
-    "docs/features/engineering-os-migration/06-technical-refinement.md",
-    "docs/features/engineering-os-migration/07-technical-roadmap.md",
-    "docs/features/multi-tab-stream-isolation/06-technical-refinement.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/06-technical-refinement.md",
-    "docs/features/multilingual-seo-sitemap-rss-contact/07-technical-roadmap.md",
-    "docs/features/paid-analysis-transactional-delivery/06-technical-refinement.md",
-    "docs/features/paid-analysis-transactional-delivery/07-technical-roadmap.md",
-    "docs/features/parallel-ai-pipeline/06-technical-refinement.md",
-    "docs/features/paypal-donations-and-paid-results/06-technical-refinement.md",
-    "docs/features/simple-readable-code-operating-system-implementation/06-technical-refinement.md",
-    "docs/features/simple-readable-code-operating-system-implementation/07-technical-roadmap.md",
-    "docs/features/temporary-shareable-results/06-technical-refinement.md",
-    "docs/features/temporary-shareable-results/07-technical-roadmap.md",
-    "docs/features/twinzy-hardening-v3/06-technical-refinement.md",
-    "docs/features/twinzy-hardening-v3/07-technical-roadmap.md"
   ],
   "technical-debt": [
     "quality/technical-debt-register.md"

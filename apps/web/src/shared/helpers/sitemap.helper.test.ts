@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { LANGUAGE_CODES } from '@/packages/i18n';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 
-import { buildLocalizedPath } from './locale-route.helper';
+import { buildLocalizedAlternates } from './locale-route.helper';
 import { buildSitemapEntries } from './sitemap.helper';
 
 const BASE = 'https://twinzy.example';
@@ -13,7 +13,9 @@ describe('buildSitemapEntries', () => {
   it('lists every first-class route in every supported language', () => {
     const urls = buildSitemapEntries(BASE, LAST_MODIFIED).map((entry) => entry.url);
     const expectedUrls = LANGUAGE_CODES.flatMap((locale) =>
-      Object.values(ROUTE_PATHS).map((path) => `${BASE}${buildLocalizedPath(locale, path)}`),
+      Object.values(ROUTE_PATHS).map(
+        (path) => `${BASE}${buildLocalizedAlternates(locale, path).canonical}`,
+      ),
     );
 
     expect(urls).toStrictEqual(expectedUrls);
@@ -28,7 +30,9 @@ describe('buildSitemapEntries', () => {
         LANGUAGE_CODES.length + 1,
       );
     }
-    expect(entries[0]?.alternates?.languages?.['x-default']).toBe(`${BASE}/en`);
+    expect(entries[0]?.url).toBe(`${BASE}/`);
+    expect(entries[0]?.alternates?.languages?.en).toBe(`${BASE}/`);
+    expect(entries[0]?.alternates?.languages?.['x-default']).toBe(`${BASE}/`);
   });
 
   it('never lists share or payment surfaces', () => {
@@ -43,7 +47,7 @@ describe('buildSitemapEntries', () => {
       buildSitemapEntries(BASE, LAST_MODIFIED).map((entry) => [entry.url, entry.priority]),
     );
 
-    expect(byUrl.get(`${BASE}/en`)).toBe(1);
+    expect(byUrl.get(`${BASE}/`)).toBe(1);
     expect(byUrl.get(`${BASE}/en/game`)).toBeCloseTo(0.9);
     expect(byUrl.get(`${BASE}/en/about`)).toBeCloseTo(0.7);
   });

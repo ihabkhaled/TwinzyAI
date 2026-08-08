@@ -5,6 +5,7 @@ import { getServerTranslations } from '@/packages/i18n';
 import { PageContainer, Stack } from '@/packages/ui-primitives';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
+import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
 
 import {
   contentBodyClass,
@@ -18,10 +19,11 @@ import { ContactFormContainer } from './contact-form.container';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('about');
+  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.contact);
   return {
     title: buildPageTitle(t('contactTitle')),
     description: t('contactBody1'),
-    alternates: { canonical: ROUTE_PATHS.contact },
+    alternates,
   };
 }
 

@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { isDevRuntime, publicEnv } from '@/packages/env';
 import { DEFAULT_LOCALE, LOCALE_COOKIE_NAME } from '@/packages/i18n';
+import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import {
   buildLocalizedPath,
   isMachinePath,
@@ -21,7 +22,8 @@ const PERMANENT_REDIRECT_STATUS = 308;
  * nonce) and the outgoing response.
  */
 export function proxy(request: NextRequest): NextResponse {
-  const machinePath = isMachinePath(request.nextUrl.pathname);
+  const pathname = request.nextUrl.pathname;
+  const machinePath = isMachinePath(pathname);
   const nonce = btoa(crypto.randomUUID());
   const contentSecurityPolicy = buildContentSecurityPolicy({
     nonce,
@@ -32,28 +34,35 @@ export function proxy(request: NextRequest): NextResponse {
   });
 
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set(PATHNAME_HEADER_NAME, request.nextUrl.pathname);
+  requestHeaders.set(PATHNAME_HEADER_NAME, pathname);
   if (!machinePath) {
     requestHeaders.set(NONCE_HEADER_NAME, nonce);
     requestHeaders.set(CSP_HEADER, contentSecurityPolicy);
   }
 
-  const localized = parseLocalizedPath(request.nextUrl.pathname);
+  const localized = parseLocalizedPath(pathname);
+  const requestLocale = pathname === ROUTE_PATHS.home ? DEFAULT_LOCALE : localized?.locale;
+  if (requestLocale !== undefined) {
+    const retainedCookies = (requestHeaders.get('cookie') ?? '')
+      .split(';')
+      .map((cookie) => cookie.trim())
+      .filter((cookie) => cookie !== '' && !cookie.startsWith(`${LOCALE_COOKIE_NAME}=`));
+    requestHeaders.set(
+      'cookie',
+      [...retainedCookies, `${LOCALE_COOKIE_NAME}=${requestLocale}`].join('; '),
+    );
+  }
   let response: NextResponse;
 
-  if (machinePath) {
+  if (machinePath || pathname === ROUTE_PATHS.home) {
     response = NextResponse.next({ request: { headers: requestHeaders } });
-  } else if (isPublicPagePath(request.nextUrl.pathname)) {
+  } else if (isPublicPagePath(pathname)) {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = buildLocalizedPath(DEFAULT_LOCALE, request.nextUrl.pathname);
+    redirectUrl.pathname = buildLocalizedPath(DEFAULT_LOCALE, pathname);
     response = NextResponse.redirect(redirectUrl, PERMANENT_REDIRECT_STATUS);
   } else if (localized !== undefined && isPublicPagePath(localized.internalPath)) {
     const rewriteUrl = request.nextUrl.clone();
     rewriteUrl.pathname = localized.internalPath;
-    requestHeaders.set(
-      'cookie',
-      `${requestHeaders.get('cookie') ?? ''}; ${LOCALE_COOKIE_NAME}=${localized.locale}`,
-    );
     response = NextResponse.rewrite(rewriteUrl, { request: { headers: requestHeaders } });
   } else {
     response = NextResponse.next({ request: { headers: requestHeaders } });
@@ -68,7 +77,8 @@ export function proxy(request: NextRequest): NextResponse {
 export const config = {
   matcher: [
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source:
+        '/((?!api|_next/static|_next/image|favicon.ico|ads[.]txt|robots[.]txt|sitemap[.]xml).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'purpose', value: 'prefetch' },

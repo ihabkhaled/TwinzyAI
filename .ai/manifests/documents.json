@@ -1,5 +1,5 @@
 {
-  "count": 782,
+  "count": 803,
   "documents": [
     {
       "authority": "canonical",
@@ -8241,6 +8241,566 @@
       "summary": "This folder is the master template for any request in the Twinzy repository. Copy it to `docs/features/<feature-slug>/` and keep the numbering and filenames exactly the same.",
       "title": "Feature Template Usage",
       "tokens": 551,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "c59d4b5011a80ac4571097e66b834f1e2b77422625c332c59ef24a4b4e693857",
+      "headings": [
+        "00 — Intake"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-00-intake",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "intake",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/00-intake.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- **Request:** Fix Google AdSense readiness, crawlability, low-value-content signals, root English routing, and locale-switch loading feedback.",
+      "title": "00 — Intake",
+      "tokens": 138,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "abe0da9639051e0f387361d5ceec341bc7b2df873076dbcaa9f4d6bfcdfcdfed",
+      "headings": [
+        "01 — Business Analysis"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-01-business-analysis",
+      "keywords": [
+        "adsense",
+        "analysis",
+        "business",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/01-business-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "AdSense review requires clear site ownership, crawlable policy/editorial content, coherent indexing,",
+      "title": "01 — Business Analysis",
+      "tokens": 77,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "0385ba0e80bc39c269337b17a50d49e602fb1c5164abdc4e39411e27e9624878",
+      "headings": [
+        "02 — Business Development"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-02-business-development",
+      "keywords": [
+        "adsense",
+        "business",
+        "development",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/02-business-development.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "The authorized AdSense publisher is `pub-2415314275784926`. This change adds no new ad formats,",
+      "title": "02 — Business Development",
+      "tokens": 75,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "c10e1c922755eef961a285c93df2f6edeef2fb55ba2be9a7af48695fb2a8b7bb",
+      "headings": [
+        "03 — Product Requirements"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-03-product-requirements",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "locale",
+        "product",
+        "readiness",
+        "requirements",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/03-product-requirements.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "1. Root English homepage returns 200 without redirect; explicit locale roots remain usable.",
+      "title": "03 — Product Requirements",
+      "tokens": 129,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "ca0a4db1ed73ca5bc793c0157485d40c891c56009b1482f897f474aa304ce49b",
+      "headings": [
+        "04 — Cross-Functional Refinement"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-04-cross-functional-refinement",
+      "keywords": [
+        "adsense",
+        "cross",
+        "docs",
+        "features",
+        "functional",
+        "locale",
+        "readiness",
+        "refinement",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/04-cross-functional-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- **Product/content:** preserve plain-language privacy and entertainment framing.",
+      "title": "04 — Cross-Functional Refinement",
+      "tokens": 116,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "c843e70eb7eaac19ef5a76f9a96aa4b90bce5fecaab7784ce5b38aff338981c2",
+      "headings": [
+        "05 — Delivery Plan"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-05-delivery-plan",
+      "keywords": [
+        "adsense",
+        "delivery",
+        "docs",
+        "features",
+        "locale",
+        "plan",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/05-delivery-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Tests-first slices: machine/root routing; canonical metadata and AdSense configuration; locale-switch",
+      "title": "05 — Delivery Plan",
+      "tokens": 68,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "1bfc8d65288ef30123f3edf5d89949fac250b26c9f26d1107b7473ef3897852a",
+      "headings": [
+        "06 — Technical Refinement"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-06-technical-refinement",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "refinement",
+        "root",
+        "technical"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/06-technical-refinement.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Reuse `proxy.ts`, locale-route helpers, the root metadata owner, the existing AdSense package, the",
+      "title": "06 — Technical Refinement",
+      "tokens": 81,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "9fef34f81624b9ace945c581ed086bb7f2cb873f03ef8e4e1e751ba5dd5ce845",
+      "headings": [
+        "07 — Technical Roadmap"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-07-technical-roadmap",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "roadmap",
+        "root",
+        "technical"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/07-technical-roadmap.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "1. Regression-lock machine endpoints and direct root English behavior.",
+      "title": "07 — Technical Roadmap",
+      "tokens": 92,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "82286c2ade4b70758c3f07e231a991aac6f18733b2d81f061c13a16fecf0df20",
+      "headings": [
+        "08 — Architecture Review"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-08-architecture-review",
+      "keywords": [
+        "adsense",
+        "architecture",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "review",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/08-architecture-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Approved within existing frontend boundaries: proxy owns request routing; helpers own pure URL rules;",
+      "title": "08 — Architecture Review",
+      "tokens": 85,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "c80c8f6c058f7979d92d5505a4c9f2b4fbfd672e059889221059848b16033c41",
+      "headings": [
+        "09 — Impact Analysis"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-09-impact-analysis",
+      "keywords": [
+        "adsense",
+        "analysis",
+        "docs",
+        "features",
+        "impact",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/09-impact-analysis.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Affected: frontend routing, presentation, localization navigation, public configuration, crawler",
+      "title": "09 — Impact Analysis",
+      "tokens": 109,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "a7185df1fceeda2dffefbb1502483c62472bee656f9428538ed7c37772a3f741",
+      "headings": [
+        "10 — Engineering Standards Check"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-10-engineering-standards-check",
+      "keywords": [
+        "adsense",
+        "check",
+        "docs",
+        "engineering",
+        "features",
+        "locale",
+        "readiness",
+        "root",
+        "standards"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/10-engineering-standards-check.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- Existing owners and native Next.js metadata/routing APIs are reused.",
+      "title": "10 — Engineering Standards Check",
+      "tokens": 95,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "f9c91707e4ab6f1750d5b71ffe218ddc86274146a811c97c677db6657fd7722a",
+      "headings": [
+        "11 — Test Strategy"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-11-test-strategy",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "root",
+        "strategy",
+        "test"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/11-test-strategy.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Unit tests cover pure route/alternate rules, proxy responses, hook transition state, component busy UI,",
+      "title": "11 — Test Strategy",
+      "tokens": 105,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "fe12a3d24ddf354e2638b7ccce2a86f41c715a0859cd8940dd02c20172f772a3",
+      "headings": [
+        "12 — Coverage Plan"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-12-coverage-plan",
+      "keywords": [
+        "adsense",
+        "coverage",
+        "docs",
+        "features",
+        "locale",
+        "plan",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/12-coverage-plan.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Every touched executable module must meet repository per-file thresholds. New route branches cover root,",
+      "title": "12 — Coverage Plan",
+      "tokens": 85,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "89d8cbf51f3bd12feaa001d474e7530dd5c40595f38596181bc8035a0649ff1f",
+      "headings": [
+        "13 — Implementation Readiness"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-13-implementation-readiness",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "implementation",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/13-implementation-readiness.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "**GO — 2026-08-08.** User approved the revised design and explicitly authorized implementation,",
+      "title": "13 — Implementation Readiness",
+      "tokens": 88,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "1ab3b4b0cf06f898c5a20ba048ec640725dcfdd1b73294172e606dda2bb49a53",
+      "headings": [
+        "14 — Implementation"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-14-implementation",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "implementation",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/14-implementation.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Implemented on 2026-08-08:",
+      "title": "14 — Implementation",
+      "tokens": 280,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "5e6712e7c28a254c0caef41b1c0040fc8118262a5eda04ca1a37007a2f8be835",
+      "headings": [
+        "15 — Development Validation Report",
+        "Root-cause evidence",
+        "Automated evidence",
+        "Production probes before deployment"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-15-dev-validation-report",
+      "keywords": [
+        "adsense",
+        "dev",
+        "development",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "report",
+        "root",
+        "validation"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/15-dev-validation-report.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "**Environment:** Windows workspace, 2026-08-08, operator Codex.",
+      "title": "15 — Development Validation Report",
+      "tokens": 579,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "db93b8ec2534bea3c651c96932e9df53dd572d86f13b7fb5949e53016c9371d3",
+      "headings": [
+        "19 — Security Review"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-19-security-review",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "review",
+        "root",
+        "security"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/19-security-review.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "No authentication, authorization, image, AI, payment, storage, or sensitive-data boundary changed.",
+      "title": "19 — Security Review",
+      "tokens": 117,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "89589ae032959841b463a994f87451ef16a752554b1c0f315bc76b56ea2e5a6e",
+      "headings": [
+        "22 — GO / NO-GO"
+      ],
+      "id": "docs-features-adsense-readiness-root-locale-22-go-no-go",
+      "keywords": [
+        "adsense",
+        "docs",
+        "features",
+        "locale",
+        "readiness",
+        "root"
+      ],
+      "links": [],
+      "path": "docs/features/adsense-readiness-root-locale/22-go-no-go.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "**Pending final GO.** Implementation and behavior tests are complete. GO requires the exact final",
+      "title": "22 — GO / NO-GO",
+      "tokens": 95,
       "type": "doc"
     },
     {
@@ -17849,6 +18409,57 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
+      "hash": "b2d847066f3f0f01b512a56827605c366d776bdfa01a42f074fbffcd343e0dee",
+      "headings": [
+        "AdSense Readiness and Root English Locale Implementation Plan",
+        "Global Constraints"
+      ],
+      "id": "docs-superpowers-plans-2026-08-08-adsense-readiness-root-locale",
+      "keywords": [
+        "2026",
+        "adsense",
+        "docs",
+        "english",
+        "implementation",
+        "locale",
+        "plan",
+        "plans",
+        "readiness",
+        "root",
+        "superpowers"
+      ],
+      "links": [],
+      "path": "docs/superpowers/plans/2026-08-08-adsense-readiness-root-locale.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [
+        "apps/web/src/app/help/page.tsx",
+        "apps/web/src/app/page.tsx",
+        "apps/web/src/app/terms/page.tsx",
+        "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx",
+        "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts",
+        "apps/web/src/modules/ui-preferences/test/use-locale-switcher.hook.test.ts",
+        "apps/web/src/modules/ui-preferences/types/ui-preferences.types.ts",
+        "apps/web/src/packages/adsense/adsense-script.test.tsx",
+        "apps/web/src/proxy.test.ts",
+        "apps/web/src/proxy.ts",
+        "apps/web/src/shared/components/layout/app-header.variants.ts",
+        "apps/web/src/shared/constants/test-ids.constants.ts",
+        "apps/web/src/shared/helpers/locale-route.helper.test.ts",
+        "apps/web/src/shared/helpers/locale-route.helper.ts",
+        "apps/web/vercel.json"
+      ],
+      "summary": "> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.",
+      "title": "AdSense Readiness and Root English Locale Implementation Plan",
+      "tokens": 1303,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
       "hash": "d4c65a69b52babe9d645cbbc2557bc4db5437d04ae7e7c55bc6de2d504966147",
       "headings": [
         "Advanced Public-Figure Consensus Matching Design"
@@ -17875,6 +18486,46 @@
       "summary": "The owner-supplied implementation specification is accepted as the target design and is refined by the critical-lane artifacts under `docs/features/advanced-public-figure-consensus-matching/`.",
       "title": "Advanced Public-Figure Consensus Matching Design",
       "tokens": 301,
+      "type": "doc"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 3,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "b732a128389d29450d0f314f31c22953e35393542730932f03f7d690edb1553e",
+      "headings": [
+        "AdSense Readiness and Root English Locale Design",
+        "Outcome",
+        "Routing and locale behavior",
+        "AdSense and crawler behavior",
+        "Language transition feedback",
+        "Content quality",
+        "Verification",
+        "Rollback"
+      ],
+      "id": "docs-superpowers-specs-2026-08-08-adsense-readiness-root-locale-design",
+      "keywords": [
+        "2026",
+        "adsense",
+        "design",
+        "docs",
+        "english",
+        "locale",
+        "readiness",
+        "root",
+        "specs",
+        "superpowers"
+      ],
+      "links": [],
+      "path": "docs/superpowers/specs/2026-08-08-adsense-readiness-root-locale-design.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "Twinzy's canonical production root renders English with HTTP 200 and no redirect. Explicit locale",
+      "title": "AdSense Readiness and Root English Locale Design",
+      "tokens": 723,
       "type": "doc"
     },
     {
@@ -20926,7 +21577,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "7cac20b799af26578bd1900583ae5692fb7f994a4363104d3ab33aceb47580fb",
+      "hash": "2dd6c6b7f71d9737d31bbe72b72128ae7d7b4234014a15636b9c9a28901c3c58",
       "headings": [
         "Known Pitfalls",
         "A. Strict-TypeScript traps",
@@ -20981,7 +21632,7 @@
       ],
       "summary": "> The running log of recurring mistakes and their fixes. **Read before writing code.** These",
       "title": "Known Pitfalls",
-      "tokens": 8218,
+      "tokens": 8357,
       "type": "memory"
     },
     {
@@ -24527,6 +25178,37 @@
       "summary": "Twinzy's enhanced v6 written-trait flow now tolerates the bounded string shorthand observed from",
       "title": "Advanced Extraction Provider-Shape Recovery — 2026-07-28",
       "tokens": 568,
+      "type": "release-note"
+    },
+    {
+      "authority": "canonical",
+      "contextTier": 4,
+      "generated": false,
+      "hasFrontmatter": false,
+      "hash": "33ada9c21de10ed77a69a400663b6d27083f648e40e3df3030b61a3850178493",
+      "headings": [
+        "AdSense readiness and direct English root"
+      ],
+      "id": "release-notes-adsense-readiness-root-locale",
+      "keywords": [
+        "adsense",
+        "direct",
+        "english",
+        "locale",
+        "notes",
+        "readiness",
+        "release",
+        "root"
+      ],
+      "links": [],
+      "path": "release-notes/adsense-readiness-root-locale.md",
+      "relatedCode": [],
+      "relatedDocs": [],
+      "relatedTests": [],
+      "sourceMentions": [],
+      "summary": "- The main Twinzy URL now opens the English homepage directly without redirecting to `/en`.",
+      "title": "AdSense readiness and direct English root",
+      "tokens": 133,
       "type": "release-note"
     },
     {

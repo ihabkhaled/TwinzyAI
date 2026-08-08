@@ -186,6 +186,9 @@
       "apps/web/src/modules/game/test/use-result-translation.hook.test.tsx",
       "apps/web/src/modules/game/test/use-share-create.hook.test.tsx"
     ],
+    "web:pkg-adsense": [
+      "apps/web/src/packages/adsense/adsense-script.test.tsx"
+    ],
     "web:pkg-axios": [
       "apps/web/src/packages/axios/http-error.test.ts",
       "apps/web/src/packages/axios/sse-parser.test.ts",
@@ -251,8 +254,10 @@
       "apps/web/src/shared/helpers/read-theme-cookie.helper.test.ts",
       "apps/web/src/shared/helpers/robots.helper.test.ts",
       "apps/web/src/shared/helpers/seo-xml.helper.test.ts",
+      "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
       "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "apps/web/src/shared/helpers/sitemap.helper.test.ts",
+      "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
       "apps/web/src/shared/helpers/structured-data.helper.test.ts",
       "apps/web/src/shared/helpers/xml-response.helper.test.ts",
       "apps/web/src/shared/hooks/shared-hooks.test.ts",
@@ -269,6 +274,7 @@
       "apps/web/src/tests/setup.ts"
     ],
     "web:ui-preferences": [
+      "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.constants.test.ts",
       "apps/web/src/modules/ui-preferences/test/ui-preferences.schema.test.ts",

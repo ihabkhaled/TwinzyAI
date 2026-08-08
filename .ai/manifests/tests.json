@@ -1,5 +1,5 @@
 {
-  "count": 208,
+  "count": 212,
   "tests": [
     {
       "kind": "unit",
@@ -1515,6 +1515,15 @@
     {
       "kind": "unit",
       "module": "web:ui-preferences",
+      "path": "apps/web/src/modules/ui-preferences/test/locale-switcher.container.test.tsx",
+      "targets": [
+        "apps/web/src/modules/ui-preferences/containers/locale-switcher.container.tsx",
+        "apps/web/src/modules/ui-preferences/hooks/useLocaleSwitcher.hook.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:ui-preferences",
       "path": "apps/web/src/modules/ui-preferences/test/theme-toggle.container.test.tsx",
       "targets": [
         "apps/web/src/modules/ui-preferences/containers/theme-toggle.container.tsx",
@@ -1579,6 +1588,14 @@
         "apps/web/src/modules/ui-preferences/hooks/useUiPreferencesEffects.hook.ts",
         "apps/web/src/modules/ui-preferences/model/ui-preferences.constants.ts",
         "apps/web/src/modules/ui-preferences/store/ui-preferences.store.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:pkg-adsense",
+      "path": "apps/web/src/packages/adsense/adsense-script.test.tsx",
+      "targets": [
+        "apps/web/src/packages/adsense/adsense-script.tsx"
       ]
     },
     {
@@ -1892,6 +1909,14 @@
     {
       "kind": "unit",
       "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/server-locale-route.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/helpers/server-locale-route.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
       "path": "apps/web/src/shared/helpers/site-nav.helper.test.ts",
       "targets": [
         "apps/web/src/shared/helpers/site-nav.helper.ts"
@@ -1904,6 +1929,15 @@
       "targets": [
         "apps/web/src/shared/helpers/locale-route.helper.ts",
         "apps/web/src/shared/helpers/sitemap.helper.ts"
+      ]
+    },
+    {
+      "kind": "unit",
+      "module": "web:shared",
+      "path": "apps/web/src/shared/helpers/social-metadata.helper.test.ts",
+      "targets": [
+        "apps/web/src/shared/helpers/social-metadata.helper.ts",
+        "apps/web/src/shared/helpers/social-metadata.types.ts"
       ]
     },
     {

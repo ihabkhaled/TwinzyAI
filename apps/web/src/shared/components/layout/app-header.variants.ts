@@ -40,3 +40,5 @@ export const headerDonateLabelClass = 'hidden sm:inline';
  */
 export const headerLocaleSelectClass =
   'h-9 max-w-24 cursor-pointer rounded-xl border border-border bg-background px-1.5 text-sm text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-w-32 sm:px-2';
+
+export const headerLocaleControlClass = 'inline-flex items-center gap-1';

@@ -11,6 +11,7 @@ import { JsonLdScript } from '@/shared/components/seo/json-ld.container';
 import { HOME_SECTION_KEYS } from '@/shared/constants/content-pages.constants';
 import { ROUTE_PATHS } from '@/shared/constants/route-paths.constants';
 import { buildPageTitle } from '@/shared/helpers/page-title.helper';
+import { buildCurrentLocaleAlternates } from '@/shared/helpers/server-locale-route.helper';
 import { buildContentPageLinks } from '@/shared/helpers/site-nav.helper';
 import {
   buildWebApplicationJsonLd,
@@ -26,12 +27,17 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getServerTranslations('home');
+  const alternates = await buildCurrentLocaleAlternates(ROUTE_PATHS.home);
 
   return {
     title: buildPageTitle(t('metaTitle')),
     description: t('metaDescription'),
-    alternates: { canonical: ROUTE_PATHS.home },
-    openGraph: { title: t('metaTitle'), description: t('metaDescription'), url: ROUTE_PATHS.home },
+    alternates,
+    openGraph: {
+      title: t('metaTitle'),
+      description: t('metaDescription'),
+      url: alternates.canonical,
+    },
   };
 }
 

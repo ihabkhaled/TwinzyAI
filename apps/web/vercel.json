@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "npm install --include=dev --prefix ../..",
-  "buildCommand": "NEXT_PUBLIC_APP_ENV=production NEXT_PUBLIC_API_BASE_URL=https://twinzy-ai-web-6jzq.vercel.app npm run build"
+  "buildCommand": "NEXT_PUBLIC_APP_ENV=production NEXT_PUBLIC_API_BASE_URL=https://twinzy-ai-web-6jzq.vercel.app NEXT_PUBLIC_SITE_BASE_URL=https://twinzy-ai-web.vercel.app NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-2415314275784926 npm run build"
 }

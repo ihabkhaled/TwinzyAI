@@ -38,6 +38,18 @@ describe('SEO XML builders', () => {
     expect(xml).not.toContain('/share/');
   });
 
+  it('uses the unprefixed canonical root in the English homepage sitemap', () => {
+    const xml = buildLocaleSitemapXml({
+      baseUrl: BASE_URL,
+      locale: 'en',
+      lastModified: new Date('2026-08-08T00:00:00.000Z'),
+    });
+
+    expect(xml).toContain('<loc>https://twinzy.example/</loc>');
+    expect(xml).toContain('hreflang="en" href="https://twinzy.example/"');
+    expect(xml).toContain('hreflang="x-default" href="https://twinzy.example/"');
+  });
+
   it('builds an escaped, editorial-only RSS feed', () => {
     const xml = buildRssXml({
       baseUrl: BASE_URL,
