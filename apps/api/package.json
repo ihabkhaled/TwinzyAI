@@ -17,10 +17,10 @@
     "@fastify/static": "^10.1.2",
     "@google/genai": "^2.15.0",
     "@nestjs/cli": "^11.0.24",
-    "@nestjs/common": "^11.1.28",
+    "@nestjs/common": "^11.1.29",
     "@nestjs/config": "^4.0.4",
-    "@nestjs/core": "^11.1.28",
-    "@nestjs/platform-fastify": "^11.1.28",
+    "@nestjs/core": "^11.1.29",
+    "@nestjs/platform-fastify": "^11.1.29",
     "@nestjs/swagger": "^11.4.6",
     "@nestjs/throttler": "^6.5.0",
     "@twinzy/shared": "*",
@@ -34,7 +34,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@nestjs/testing": "^11.1.28",
+    "@nestjs/testing": "^11.1.29",
     "@swc/core": "^1.15.47",
     "@types/node": "^26.1.2",
     "@types/nodemailer": "^8.0.1",
