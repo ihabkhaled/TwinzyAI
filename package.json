@@ -136,7 +136,7 @@
     "yaml": "^2.9.0"
   },
   "dependencies": {
-    "fastify": "^5.11.2",
+    "fastify": "^5.12.1",
     "tsc7": "npm:typescript@^7.0.2"
   }
 }
