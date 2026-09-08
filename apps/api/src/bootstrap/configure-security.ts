@@ -5,7 +5,10 @@ import type { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fa
 import type { RouteOptions } from 'fastify';
 
 import { AppConfigService } from '../config/app-config.service';
-import { UPLOAD_HARD_CAP_BYTES, UPLOAD_MAX_FILES } from '../modules/game/model/game.constants';
+import {
+  UPLOAD_HARD_CAP_BYTES,
+  UPLOAD_TRANSPORT_MAX_FILES,
+} from '../modules/game/model/game.constants';
 
 import { CORS_ALLOWED_METHODS, CORS_MAX_AGE_SECONDS } from './bootstrap.constants';
 import { jsonRouteBodyLimitFor } from './json-route-body-limit.util';
@@ -25,7 +28,7 @@ export const configureSecurity = async (app: NestFastifyApplication): Promise<vo
     attachFieldsToBody: false,
     limits: {
       fileSize: UPLOAD_HARD_CAP_BYTES,
-      files: UPLOAD_MAX_FILES,
+      files: UPLOAD_TRANSPORT_MAX_FILES,
     },
   });
 

@@ -1,5 +1,5 @@
 {
-  "count": 1821,
+  "count": 1822,
   "symbols": [
     {
       "kind": "const",
@@ -11907,6 +11907,13 @@
       "module": "shared",
       "name": "UPLOAD_TRANSPORT_HARD_CAP_BYTES",
       "path": "packages/shared/src/constants/upload.constants.ts"
+    },
+    {
+      "kind": "const",
+      "layer": "model",
+      "module": "api:game",
+      "name": "UPLOAD_TRANSPORT_MAX_FILES",
+      "path": "apps/api/src/modules/game/model/game.constants.ts"
     },
     {
       "kind": "function",

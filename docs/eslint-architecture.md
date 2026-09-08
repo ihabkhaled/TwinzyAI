@@ -84,6 +84,9 @@ rules agree.
   script is never reachable from HTTP or untrusted request data.
 - unicorn/prevent-abbreviations OFF — wholesale renames (props/env/params) harm readability.
 - unicorn/no-null OFF — React/DOM APIs use null. unicorn/prefer-top-level-await OFF — CJS api.
+- unicorn/single-line-block-comment-style OFF (rule added in unicorn v73) - it rewrites
+  every one-line JSDoc into a three-line block without the leading star, 792 hits across
+  every layer, and the one-line form is this repo house style for short doc comments.
 - import-x/no-unresolved not enabled — TypeScript owns module resolution.
 - sonarjs cognitive-complexity raised to 15; duplicate-string threshold 5.
 - max-lines raised to 600 for test files (includes the `*.test.mjs` lint-rule suites) —

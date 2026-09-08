@@ -4788,6 +4788,9 @@
   "UPLOAD_TRANSPORT_HARD_CAP_BYTES": [
     "packages/shared/src/constants/upload.constants.ts"
   ],
+  "UPLOAD_TRANSPORT_MAX_FILES": [
+    "apps/api/src/modules/game/model/game.constants.ts"
+  ],
   "UploadCard": [
     "apps/web/src/modules/game/components/upload-card.component.tsx"
   ],

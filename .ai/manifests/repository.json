@@ -492,7 +492,7 @@
           "name": "configureSecurity"
         }
       ],
-      "hash": "b05ec0aee50121467e76732ae4847dd9e7bc287c2e87cce6374760ed78135e4f",
+      "hash": "7344045eb73be2f1c79462ae53157a51ff00f7da31cdd22208f65ef739f2c4c7",
       "imports": [
         "../config/app-config.service",
         "../modules/game/model/game.constants",
@@ -506,7 +506,7 @@
       ],
       "isTest": false,
       "layer": "bootstrap",
-      "loc": 56,
+      "loc": 59,
       "module": "api:bootstrap",
       "path": "apps/api/src/bootstrap/configure-security.ts"
     },
@@ -2047,7 +2047,7 @@
           "name": "parseMultipartUpload"
         }
       ],
-      "hash": "f9892ddb33426201b2d443e4485b8b02fcc5972739194ac8c960787b17ecc94b",
+      "hash": "3b4fd55944864d8f0b0d552ddb1f6640966e560aab4ca03bd18590f5d2f894ed",
       "imports": [
         "../errors/error-code.constants",
         "../errors/error.constants",
@@ -2059,7 +2059,7 @@
       ],
       "isTest": false,
       "layer": "core",
-      "loc": 157,
+      "loc": 181,
       "module": "api:core",
       "path": "apps/api/src/core/http/multipart-upload.parser.ts"
     },
@@ -6186,15 +6186,19 @@
         {
           "kind": "const",
           "name": "UPLOAD_MAX_FILES"
+        },
+        {
+          "kind": "const",
+          "name": "UPLOAD_TRANSPORT_MAX_FILES"
         }
       ],
-      "hash": "16066af6e75f5045fbc24488f3af9043710df055fa9f83e4e77c50cab1edb886",
+      "hash": "a234da2e9944597d7a80ef9c43ef6c9514f86ec57a9a7bae151946aa0779eb06",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 53,
+      "loc": 69,
       "module": "api:game",
       "path": "apps/api/src/modules/game/model/game.constants.ts"
     },

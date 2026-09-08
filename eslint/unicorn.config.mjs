@@ -16,6 +16,10 @@ import unicorn from "eslint-plugin-unicorn";
  * - no-non-function-verb-prefix: Nest use-case DI fields are named after their
  *   class (createXUseCase) and *Label props carry verb-shaped copy keys —
  *   naming is owned by the repo naming rules
+ * - single-line-block-comment-style (new in v73): would rewrite every
+ *   one-line JSDoc block into a three-line one that drops the leading
+ *   star prefix — 792 hits, pure churn, and it fights the one-line JSDoc
+ *   convention used across every layer of this repo
  * - isolated-functions (e2e only): Playwright page.evaluate callbacks execute
  *   in the BROWSER where document/getComputedStyle are globals
  * - max-nested-calls (tests only): expect(...) around builders/Array.from is
@@ -38,6 +42,7 @@ export default [
       "unicorn/no-null": "off",
       "unicorn/prefer-top-level-await": "off",
       "unicorn/no-array-reduce": "off",
+      "unicorn/single-line-block-comment-style": "off",
       "unicorn/filename-case": [
         "error",
         {

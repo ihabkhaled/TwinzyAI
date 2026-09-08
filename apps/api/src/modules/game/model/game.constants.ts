@@ -31,10 +31,24 @@ export const CANCEL_THROTTLE = {
  */
 export { UPLOAD_TRANSPORT_HARD_CAP_BYTES as UPLOAD_HARD_CAP_BYTES } from '@twinzy/shared';
 
-/** Exactly one file per request; extras are rejected at the transport edge. */
+/**
+Exactly one file per request; the parser rejects the second file itself.
+*/
 export const UPLOAD_MAX_FILES = 1;
 
-/** Transport-level cap on the free-form languageCode multipart field. */
+/**
+ * One slot of headroom above {@link UPLOAD_MAX_FILES} for the transport guard.
+ * @fastify/multipart destroys the in-flight file stream the moment its own
+ * files limit trips, so the parser would only ever see ERR_STREAM_PREMATURE_CLOSE
+ * instead of the extra part — and answer 500 rather than MULTIPLE_FILES_NOT_ALLOWED.
+ * With the headroom the second part reaches the parser, which rejects it before
+ * buffering a single byte of it; this stays the outer backstop for the rest.
+ */
+export const UPLOAD_TRANSPORT_MAX_FILES = UPLOAD_MAX_FILES + 1;
+
+/**
+Transport-level cap on the free-form languageCode multipart field.
+*/
 export const LANGUAGE_CODE_MAX_LENGTH = 35;
 
 /**
@@ -48,5 +62,7 @@ export const GAME_ROUTE_ANALYZE_STREAM = 'analyze/stream';
 export const GAME_ROUTE_CANCEL = 'cancel';
 export const GAME_ROUTE_TRANSLATE_RESULT = 'translate-result';
 
-/** Interval between keep-alive heartbeats while the pipeline runs. */
+/**
+Interval between keep-alive heartbeats while the pipeline runs.
+*/
 export const STREAM_HEARTBEAT_INTERVAL_MS = 10_000;

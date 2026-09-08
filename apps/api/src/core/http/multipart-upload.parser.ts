@@ -112,18 +112,42 @@ const collectPart = async (
   collectFieldPart(part, state);
 };
 
+/**
+ * Streams the parts, remembering the first rejection instead of throwing it
+ * out of the loop. Breaking out of a `for await` asks the iterator to clean
+ * up, and the multipart stream reports that teardown as ERR_STREAM_PREMATURE_CLOSE
+ * — which would otherwise replace the real reason (multiple files, oversize
+ * file, missing consent) and surface as a 500 instead of its own envelope.
+ */
 const collectParts = async (request: MultipartRequestLike): Promise<UploadedImagePayload> => {
   const state: MultipartCollectionState = { file: undefined, hasConsent: false, body: {} };
+  let collectionError: Error | undefined;
 
   try {
     for await (const part of request.parts()) {
-      await collectPart(part, state);
+      try {
+        await collectPart(part, state);
+      } catch (error: unknown) {
+        if (!(error instanceof Error)) {
+          throw error;
+        }
+        collectionError = error;
+        break;
+      }
     }
-    return { file: state.file, body: state.body };
   } catch (error: unknown) {
     state.file?.buffer.fill(0);
+    if (collectionError !== undefined) {
+      throw collectionError;
+    }
     throw error;
   }
+
+  if (collectionError !== undefined) {
+    state.file?.buffer.fill(0);
+    throw collectionError;
+  }
+  return { file: state.file, body: state.body };
 };
 
 /**

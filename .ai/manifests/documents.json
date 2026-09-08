@@ -5588,7 +5588,7 @@
       "contextTier": 3,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "a98cdb4d97b906f783d4d42fc22939c8534c2e908cf5a0c153f4ad2782a8ec9e",
+      "hash": "9516df9c6c09cda26210b754099c8123f1911224233b6706761b198ffd4a297c",
       "headings": [
         "ESLint Architecture",
         "Rule catalog (all error-level, applied to apps/** and packages/** TS files)",
@@ -5617,7 +5617,7 @@
       ],
       "summary": "Flat config split by concern under /eslint, composed in eslint/index.mjs (prettier last), root",
       "title": "ESLint Architecture",
-      "tokens": 1925,
+      "tokens": 1991,
       "type": "doc"
     },
     {
@@ -21577,7 +21577,7 @@
       "contextTier": 2,
       "generated": false,
       "hasFrontmatter": false,
-      "hash": "2dd6c6b7f71d9737d31bbe72b72128ae7d7b4234014a15636b9c9a28901c3c58",
+      "hash": "868ed62eb0adad67fb2c3620cf5ef845b7dc9e3bbedd41f5f52e0080333f3f69",
       "headings": [
         "Known Pitfalls",
         "A. Strict-TypeScript traps",
@@ -21632,7 +21632,7 @@
       ],
       "summary": "> The running log of recurring mistakes and their fixes. **Read before writing code.** These",
       "title": "Known Pitfalls",
-      "tokens": 8357,
+      "tokens": 8685,
       "type": "memory"
     },
     {

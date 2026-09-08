@@ -607,3 +607,20 @@
 - **Fix (2026-08-08):** locale-prefixed editorial pages may use full navigation, but non-editorial game
   routes must write the locale cookie and call `router.refresh()` inside a React transition. Keep an E2E
   translation test that proves the result remains visible and no image is re-uploaded.
+
+### M7. Throwing out of a multipart `for await` loses the real rejection
+
+- **Symptom:** uploading two files answers 500 INTERNAL_ERROR instead of 400
+  MULTIPLE_FILES_NOT_ALLOWED; the log shows `ERR_STREAM_PREMATURE_CLOSE` / "Premature close".
+- **Cause:** two compounding effects in @fastify/multipart v10. Breaking or throwing out of
+  `request.parts()` asks the iterator to tear the stream down, and that teardown rejection
+  replaces the domain error that caused it. Separately, the plugin destroys the in-flight file
+  stream the instant its own `limits.files` trips, so with `files: 1` the parser never receives
+  the second part at all — `toBuffer()` on the FIRST file rejects with premature close and
+  `FST_FILES_LIMIT` is only recorded in a closure the app cannot read.
+- **Fix (2026-09-08):** `collectParts` remembers the first rejection and rethrows it after the
+  loop unwinds, so teardown noise can never mask it; and the transport guard runs at
+  `UPLOAD_TRANSPORT_MAX_FILES` (= `UPLOAD_MAX_FILES + 1`) so the extra part reaches the parser,
+  which rejects it before buffering a byte. `UPLOAD_MAX_FILES` stays the one-file domain rule.
+  Keep the "rejects a second file on the upload field" integration test — it is the only thing
+  that catches this class of regression on a multipart bump.
