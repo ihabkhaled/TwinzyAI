@@ -6185,20 +6185,16 @@
         },
         {
           "kind": "const",
-          "name": "UPLOAD_MAX_FILES"
-        },
-        {
-          "kind": "const",
           "name": "UPLOAD_TRANSPORT_MAX_FILES"
         }
       ],
-      "hash": "a234da2e9944597d7a80ef9c43ef6c9514f86ec57a9a7bae151946aa0779eb06",
+      "hash": "1b4b526a714169a6e02696251025f77c12a2853e698c8342ca796d84baf4c794",
       "imports": [
         "@twinzy/shared"
       ],
       "isTest": false,
       "layer": "model",
-      "loc": 69,
+      "loc": 63,
       "module": "api:game",
       "path": "apps/api/src/modules/game/model/game.constants.ts"
     },

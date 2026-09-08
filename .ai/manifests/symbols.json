@@ -1,5 +1,5 @@
 {
-  "count": 1822,
+  "count": 1821,
   "symbols": [
     {
       "kind": "const",
@@ -11893,13 +11893,6 @@
       "module": "web:game",
       "name": "UPLOAD_INPUT_ACCEPT",
       "path": "apps/web/src/modules/game/model/game.constants.ts"
-    },
-    {
-      "kind": "const",
-      "layer": "model",
-      "module": "api:game",
-      "name": "UPLOAD_MAX_FILES",
-      "path": "apps/api/src/modules/game/model/game.constants.ts"
     },
     {
       "kind": "const",

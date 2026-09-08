@@ -4782,9 +4782,6 @@
   "UPLOAD_INPUT_ACCEPT": [
     "apps/web/src/modules/game/model/game.constants.ts"
   ],
-  "UPLOAD_MAX_FILES": [
-    "apps/api/src/modules/game/model/game.constants.ts"
-  ],
   "UPLOAD_TRANSPORT_HARD_CAP_BYTES": [
     "packages/shared/src/constants/upload.constants.ts"
   ],

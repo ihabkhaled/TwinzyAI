@@ -31,10 +31,8 @@ export const CANCEL_THROTTLE = {
  */
 export { UPLOAD_TRANSPORT_HARD_CAP_BYTES as UPLOAD_HARD_CAP_BYTES } from '@twinzy/shared';
 
-/**
-Exactly one file per request; the parser rejects the second file itself.
-*/
-export const UPLOAD_MAX_FILES = 1;
+/** Exactly one file per request; the parser rejects the second file itself. */
+const UPLOAD_MAX_FILES = 1;
 
 /**
  * One slot of headroom above {@link UPLOAD_MAX_FILES} for the transport guard.
@@ -46,9 +44,7 @@ export const UPLOAD_MAX_FILES = 1;
  */
 export const UPLOAD_TRANSPORT_MAX_FILES = UPLOAD_MAX_FILES + 1;
 
-/**
-Transport-level cap on the free-form languageCode multipart field.
-*/
+/** Transport-level cap on the free-form languageCode multipart field. */
 export const LANGUAGE_CODE_MAX_LENGTH = 35;
 
 /**
@@ -62,7 +58,5 @@ export const GAME_ROUTE_ANALYZE_STREAM = 'analyze/stream';
 export const GAME_ROUTE_CANCEL = 'cancel';
 export const GAME_ROUTE_TRANSLATE_RESULT = 'translate-result';
 
-/**
-Interval between keep-alive heartbeats while the pipeline runs.
-*/
+/** Interval between keep-alive heartbeats while the pipeline runs. */
 export const STREAM_HEARTBEAT_INTERVAL_MS = 10_000;
