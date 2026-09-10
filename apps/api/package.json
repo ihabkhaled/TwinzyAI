@@ -16,7 +16,7 @@
     "@fastify/multipart": "^10.1.1",
     "@fastify/static": "^10.1.2",
     "@google/genai": "^2.19.0",
-    "@nestjs/cli": "^11.0.24",
+    "@nestjs/cli": "^12.0.0",
     "@nestjs/common": "^11.1.28",
     "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.1.28",
