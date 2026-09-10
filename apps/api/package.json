@@ -17,7 +17,7 @@
     "@fastify/static": "^10.1.2",
     "@google/genai": "^2.19.0",
     "@nestjs/cli": "^11.0.24",
-    "@nestjs/common": "^11.1.28",
+    "@nestjs/common": "^12.0.1",
     "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.1.28",
     "@nestjs/platform-fastify": "^11.1.28",
