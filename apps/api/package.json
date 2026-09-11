@@ -26,7 +26,7 @@
     "@twinzy/shared": "*",
     "fastify": "^5.12.1",
     "nestjs-pino": "^4.6.1",
-    "nodemailer": "^9.1.0",
+    "nodemailer": "^9.1.1",
     "pino": "^10.3.1",
     "pino-http": "^11.0.0",
     "reflect-metadata": "^0.2.2",
